@@ -1,0 +1,11 @@
+@import '_variables';
+
+html, body{
+	width: 100vw;
+	height: 100vh;
+
+	background-color: $color-grayscale-10;
+	background: linear-gradient(145deg, $color-grayscale-10, $color-grayscale-9);
+
+	color: $color-grayscale-1;
+}
