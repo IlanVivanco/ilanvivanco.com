@@ -1,38 +1,50 @@
 <template>
 	<div class="page">
-		<el-container>
-			<el-row>
-				<el-col :span="2">2</el-col>
-				<el-col :span="10">10</el-col>
-				<el-col :span="12">12</el-col>
-			</el-row>
-		</el-container>
-
 		<div class="container">
-			<div>
-				<h1 class="title">
-					ilanvivanco.com
-				</h1>
-				<div class="links">
-					<el-button v-for="post in posts" :key="post.slug" type="primary">
-						<a :href="`/blog/${post.slug}`">{{ post.title }}</a>
-					</el-button>
-					<el-button
-						type="primary"
-						icon="el-icon-edit"
-						plain
-						circle
-					></el-button>
-				</div>
+			<el-row>
+				<el-col :span="2">
+					<MainNav />
+				</el-col>
+				<el-col :span="10">
+					<nuxt-link
+						v-for="locale in availableLocales"
+						:key="locale.code"
+						:to="switchLocalePath(locale.code)"
+						>{{ locale.name }}</nuxt-link
+					>
+				</el-col>
+				<el-col :span="12" class="main">
+					<div class="container" id="sobre-mi">
+						<div>
+							<h1 class="title">{{ $t('greeting') }}</h1>
+							<div class="links">
+								<el-button
+									v-for="post in posts"
+									:key="post.slug"
+									type="primary"
+								>
+									<a :href="`/blog/${post.slug}`">{{ post.title }}</a>
+								</el-button>
+								<el-button
+									type="primary"
+									icon="el-icon-edit"
+									plain
+									circle
+								></el-button>
+							</div>
 
-				<Cv lang="es" />
-			</div>
+							<Cv lang="es" />
+						</div>
+					</div>
+				</el-col>
+			</el-row>
 		</div>
 	</div>
 </template>
 
 <script>
 import Cv from '@/components/CV'
+import MainNav from '@/components/homepage/nav'
 
 export default {
 	head() {
@@ -47,8 +59,17 @@ export default {
 			posts,
 		}
 	},
+	mounted() {
+		console.log(this.$route)
+	},
 	components: {
 		Cv,
+		MainNav,
+	},
+	computed: {
+		availableLocales() {
+			return this.$i18n.locales.filter((i) => i.code !== this.$i18n.locale)
+		},
 	},
 }
 </script>
@@ -57,9 +78,16 @@ export default {
 @import '@/assets/css/variables';
 
 .page {
-	max-width: 1200px;
-	margin: 0 auto;
-	height: 90vh;
-	background: $color-grayscale-1;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	> .container {
+		width: 100%;
+		max-width: 1200px;
+		background: $color-grayscale-1;
+	}
 }
 </style>
