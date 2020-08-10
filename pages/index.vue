@@ -6,12 +6,7 @@
 					<MainNav />
 				</el-col>
 				<el-col :span="10">
-					<nuxt-link
-						v-for="locale in availableLocales"
-						:key="locale.code"
-						:to="switchLocalePath(locale.code)"
-						>{{ locale.name }}</nuxt-link
-					>
+					<LangSwitcher />
 				</el-col>
 				<el-col :span="12" class="main">
 					<div class="container" id="sobre-mi">
@@ -45,6 +40,7 @@
 <script>
 import Cv from '@/components/CV'
 import MainNav from '@/components/homepage/nav'
+import LangSwitcher from '@/components/LangSwitcher'
 
 export default {
 	head() {
@@ -65,6 +61,7 @@ export default {
 	components: {
 		Cv,
 		MainNav,
+		LangSwitcher,
 	},
 	computed: {
 		availableLocales() {
@@ -75,8 +72,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@/assets/css/variables';
-
 .page {
 	width: 100vw;
 	height: 100vh;
