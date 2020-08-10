@@ -31,8 +31,14 @@ export default {
 	css: [
 		'element-ui/lib/theme-chalk/index.css',
 		'@/assets/css/theme.css',
-		'@/assets/css/main.scss',
+		'@/assets/scss/main.scss',
 	],
+	/*
+	** Load SCSS globally
+	*/
+	styleResources: {
+		scss: ['./assets/scss/main.scss']
+	},
 	/*
 	** Plugins to load before mounting the App
 	** https://nuxtjs.org/guide/plugins
@@ -51,6 +57,7 @@ export default {
 	buildModules: [
 		// Doc https://github.com/nuxt-community/dotenv-module
 		'@nuxtjs/dotenv',
+		'@nuxtjs/style-resources'
 	],
 	/*
 	** Nuxt.js modules
