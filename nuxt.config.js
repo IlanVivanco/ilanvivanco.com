@@ -1,3 +1,5 @@
+import I18N from './locales/i18n.config';
+
 export default {
 	/*
 	** Nuxt rendering mode
@@ -67,33 +69,7 @@ export default {
 		'@nuxtjs/axios',
 		// Doc: https://github.com/nuxt/content
 		'@nuxt/content',
-		[
-			'nuxt-i18n',
-			{
-				locales: [
-					{
-						code: 'en',
-						name: 'English'
-					},
-					{
-						code: 'es',
-						name: 'Español'
-					}
-				],
-				defaultLocale: 'en',
-				vueI18n: {
-					fallbackLocale: 'en',
-					messages: {
-						en: {
-							greeting: 'Hello world!'
-						},
-						es: {
-							greeting: '¡Hola mundo!'
-						}
-					}
-				}
-			}
-		]
+		['nuxt-i18n', I18N],
 	],
 	/*
 	** Axios module configuration
