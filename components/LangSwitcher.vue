@@ -1,56 +1,61 @@
 <template>
-	<select v-model="selected" @change="changeLocale()" class="lang-switcher">
-		<option :value="selected" selected>{{ $i18n.locale }}</option>
-		<option
-			v-for="locale in $i18n.locales"
-			v-if="locale.code !== $i18n.locale"
+	<div class="lang-switcher">
+		<el-tooltip
+			v-for="locale in availableLocales"
 			:key="locale.code"
+			:content="locale.name"
+			placement="bottom"
 		>
-			{{ locale.code }}
-		</option>
-	</select>
+			<img
+				@click="changeLocale(locale.code)"
+				:src="locale.icon"
+				:alt="`locale.name flag`"
+				class="flag"
+			/>
+		</el-tooltip>
+	</div>
 </template>
 
 <script>
 export default {
 	name: 'LangSwitcher',
-	data() {
-		return {
-			selected: '',
-		}
-	},
 	methods: {
-		changeLocale() {
-			this.$router.push(this.switchLocalePath(this.selected))
+		changeLocale(lang) {
+			this.$router.push(this.switchLocalePath(lang))
+		},
+	},
+	computed: {
+		availableLocales() {
+			return this.$i18n.locales.filter(
+				(locale) => locale.code !== this.$i18n.locale
+			)
 		},
 	},
 }
 </script>
 
 <style lang="scss">
-select {
-	border-radius: 0;
-	color: $color-teal;
-	padding: 1rem 3rem 1rem 1rem;
-	border: 1px solid transparent;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
-	background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 50'><polygon fill='rgb(108, 92, 255)' points='0,0 100,0 50,50'/></svg>")
-		no-repeat;
-	background-size: 12px;
-	background-position: calc(100% - 1rem) center;
-	background-repeat: no-repeat;
+.lang-switcher {
+	position: fixed;
+	right: 0;
+	top: 0;
+	padding: 0.5rem;
+	color: $color-grayscale-6;
 	text-transform: uppercase;
-	transition: border-color 0.3s;
-	cursor: pointer;
 
-	&:hover {
-		border-color: $color-teal-dark;
-	}
+	.flag {
+		width: 20px;
+		height: 20px;
+		cursor: pointer;
+		transition: all ease 0.4s;
 
-	&:focus {
-		outline: none;
+		&:not(:last-child) {
+			margin-right: 0.5rem;
+		}
+
+		&:hover {
+			transform: scale(1.1);
+		}
 	}
 }
 </style>
