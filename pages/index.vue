@@ -39,8 +39,7 @@
 
 <script>
 import Cv from '@/components/CV'
-import MainNav from '@/components/homepage/nav'
-import LangSwitcher from '@/components/LangSwitcher'
+import MainNav from '@/components/global/nav'
 
 export default {
 	head() {
@@ -55,14 +54,7 @@ export default {
 			posts,
 		}
 	},
-	mounted() {
-		console.log(this.$route)
-	},
-	components: {
-		Cv,
-		MainNav,
-		LangSwitcher,
-	},
+	components: { Cv, MainNav },
 	computed: {
 		availableLocales() {
 			return this.$i18n.locales.filter((i) => i.code !== this.$i18n.locale)
