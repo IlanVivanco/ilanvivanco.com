@@ -69,6 +69,7 @@ export default {
 		'@nuxtjs/axios',
 		// Doc: https://github.com/nuxt/content
 		'@nuxt/content',
+		// Doc https://i18n.nuxtjs.org/
 		['nuxt-i18n', I18N],
 	],
 	/*

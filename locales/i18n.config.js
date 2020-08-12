@@ -1,23 +1,29 @@
+import es from './es_ES';
+import en from './en_US';
+
 export default {
-	defaultLocale: 'en',
 	locales: [
-		{
-			code: 'en',
-			iso: 'en-US',
-			name: 'English',
-			file: 'en/general.js'
-		},
 		{
 			code: 'es',
 			iso: 'es-ES',
 			name: 'Español',
-			file: 'es/general.js'
-		}
+			icon: 'images/flag-es.svg'
+		},
+		{
+			code: 'en',
+			iso: 'en-US',
+			name: 'English',
+			icon: 'images/flag-en.svg'
+		},
 	],
-	lazy: true,
-	langDir: '/locales/',
+	defaultLocale: 'es',
 	seo: false,
-	parsePages: false,
-	// useCookie: false,
-	// alwaysRedirect: true,
+	detectBrowserLanguage: {
+		useCookie: true,
+		alwaysRedirect: true,
+	},
+	vueI18n: {
+		fallbackLocale: 'es',
+		messages: { en, es }
+	}
 }
