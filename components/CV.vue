@@ -12,6 +12,7 @@
 import CV from '@/content/cv.js'
 
 export default {
+	name: 'CV',
 	props: {
 		lang: {
 			type: String,
