@@ -1,0 +1,5 @@
+// Custom timing for transitions
+.animate__animated.animate__fadeInLeft,
+.animate__animated.animate__fadeOutLeft {
+	--animate-duration: .3s;
+ }

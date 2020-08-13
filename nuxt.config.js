@@ -32,6 +32,7 @@ export default {
 	*/
 	css: [
 		'element-ui/lib/theme-chalk/index.css',
+		'animate.css/animate.min.css',
 		'@/assets/css/theme.css',
 		'@/assets/scss/main.scss',
 	],
@@ -88,5 +89,11 @@ export default {
 	*/
 	build: {
 		transpile: [/^element-ui/],
-	}
+	},
+	/* Page Transitions */
+	pageTransition: {
+		// mode: 'in-out',
+		leaveActiveClass: 'animate__animated animate__fadeOutLeft',
+		enterActiveClass: 'animate__animated animate__fadeInLeft',
+	},
 }
