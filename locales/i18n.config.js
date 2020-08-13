@@ -7,13 +7,13 @@ export default {
 			code: 'es',
 			iso: 'es-ES',
 			name: 'Español',
-			icon: 'images/flag-es.svg'
+			icon: '/images/flag-es.svg'
 		},
 		{
 			code: 'en',
 			iso: 'en-US',
 			name: 'English',
-			icon: 'images/flag-en.svg'
+			icon: '/images/flag-en.svg'
 		},
 	],
 	defaultLocale: 'es',
@@ -25,5 +25,5 @@ export default {
 	vueI18n: {
 		fallbackLocale: 'es',
 		messages: { en, es }
-	}
+	},
 }
