@@ -1,0 +1,13 @@
+@mixin border-radius($place: all) {
+	border-radius: 0.3em;
+
+	@if $place == right {
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0;
+	}
+
+	@if $place == left {
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+}

@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'mixins';
 @import 'animations';
 
 html {
@@ -27,18 +28,4 @@ html, body{
 *::after {
 	box-sizing: border-box;
 	margin: 0;
-}
-
-.page {
-	width: 100vw;
-	height: 100vh;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-
-	> .container {
-		width: 100%;
-		max-width: 1200px;
-		background: $color-grayscale-1;
-	}
 }
