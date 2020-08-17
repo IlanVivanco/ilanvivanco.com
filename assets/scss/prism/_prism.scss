@@ -1,0 +1,172 @@
+/**
+ * Prism base code highlighter theme using Sass
+ *
+ * @author @MoOx
+ */
+
+// prism selector
+$code-selector: 'code[class*="language-"], pre[class*="language-"]';
+$code-selector-block: 'pre[class*="language-"]';
+$code-selector-inline: ':not(pre) > code';
+
+$code-font-family: 'Fira Code', 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace !default;
+$code-font-size: 1rem !default;
+$code-line-height: 1.4em !default;
+
+$code-tab-size: 4 !default;
+$code-hyphens: none !default;
+
+$code-block-padding: 1rem !default;
+$code-inline-padding: 2px 6px !default;
+$code-border-radius: 0.3rem !default;
+
+$code-border: 1px solid #1e1e1e !default;
+$code-background: #2a2a2a !default;
+$code-background-inline: #b8c0c2 !default;
+$code-color: #f9f9f9 !default;
+$code-color-fade: #bebec5 !default;
+$code-text-shadow: 0 1px 0 #000 !default;
+$code-box-shadow: 1px 1px 10px -3px rgba(0, 0, 0, 0.1) inset;
+
+// prism tokens
+$code-color-comment: null !default;
+$code-color-keyword: null !default;
+$code-color-value: null !default;
+$code-color-string: null !default;
+$code-color-name: null !default;
+$code-color-number: null !default;
+$code-color-variable: null !default;
+$code-color-selector: null !default;
+$code-color-debug: null !default;
+$code-color-param: null !default;
+$code-color-punctuation: null !default;
+
+@if $code-selector != null {
+	#{$code-selector} {
+		-moz-tab-size: $code-tab-size;
+		-o-tab-size: $code-tab-size;
+		tab-size: $code-tab-size;
+
+		-webkit-hyphens: $code-hyphens;
+		-moz-hyphens: $code-hyphens;
+		-ms-hyphens: $code-hyphens;
+		hyphens: $code-hyphens;
+
+		white-space: pre; // fallback
+		white-space: pre-wrap;
+		word-break: break-all;
+		word-wrap: break-word;
+
+		font-family: $code-font-family;
+		font-size: $code-font-size;
+		line-height: $code-line-height;
+
+		color: $code-color;
+		text-shadow: $code-text-shadow;
+		background: $code-background;
+	}
+}
+
+%code-background {
+	border-radius: $code-border-radius;
+	border: $code-border;
+	box-shadow: $code-box-shadow;
+}
+
+@if $code-selector-block != null {
+	#{$code-selector-block} {
+		@extend %code-background;
+		padding: $code-block-padding;
+	}
+}
+
+@if $code-selector-inline != null {
+	#{$code-selector-inline} {
+		@extend %code-background;
+		padding: $code-inline-padding;
+		background: $code-background-inline;
+		box-shadow: none;
+	}
+}
+
+#{$code-selector} {
+	.namespace {
+		opacity: 0.7;
+	}
+
+	.token {
+		&.comment,
+		&.prolog,
+		&.punctuation,
+		&.doctype,
+		&.cdata {
+			color: $code-color-comment;
+		}
+
+		&.null,
+		&.boolean,
+		&.number {
+			color: $code-color-number;
+		}
+
+		&.attr-name,
+		&.string,
+		&.entity,
+		&.url,
+		.language-css &.string,
+		.style &.string {
+			color: $code-color-string;
+		}
+
+		&.selector,
+		&.function {
+			color: $code-color-selector;
+		}
+
+		&.atrule,
+		&.attr-value,
+		&.keyword,
+		&.console,
+		&.control,
+		&.directive,
+		&.important,
+		&.unit {
+			color: $code-color-keyword;
+		}
+
+		&.regex,
+		&.statement {
+			color: $code-color-value;
+		}
+
+		&.placeholder,
+		&.module,
+		&.operator,
+		&.variable {
+			color: $code-color-variable;
+		}
+
+		&.parameter {
+			color: $code-color-param;
+		}
+
+		&.debug {
+			color: $code-color-debug;
+		}
+
+		&.property,
+		&.keyword:not(.module),
+		&.tag {
+			font-style: italic;
+		}
+
+		&.important,
+		&.statement {
+			font-weight: bold;
+		}
+
+		&.entity {
+			cursor: help;
+		}
+	}
+}
