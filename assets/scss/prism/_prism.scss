@@ -23,6 +23,7 @@ $code-border-radius: 0.3rem !default;
 $code-border: 1px solid #1e1e1e !default;
 $code-background: #2a2a2a !default;
 $code-background-inline: #b8c0c2 !default;
+$code-border-inline: #b8c0c2 !default;
 $code-color: #f9f9f9 !default;
 $code-color-fade: #bebec5 !default;
 $code-text-shadow: 0 1px 0 #000 !default;
@@ -77,6 +78,7 @@ $code-color-punctuation: null !default;
 	#{$code-selector-block} {
 		@extend %code-background;
 		padding: $code-block-padding;
+		border: $code-border-inline;
 	}
 }
 
