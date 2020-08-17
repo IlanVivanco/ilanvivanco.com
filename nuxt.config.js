@@ -24,7 +24,11 @@ export default {
 			{ hid: 'description', name: 'description', content: '' }
 		],
 		link: [
-			{ rel: 'icon', type: 'image/png', href: '/favicon.png' }
+			{ rel: 'icon', type: 'image/png', href: '/favicon.png' },
+			{ rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,900;1,400;1,900&display=swap' }, // Titles
+			{ rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,400;0,600;1,400;1,600&display=swap' }, // Body
+			// { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Economica:ital,wght@0,400;0,600;1,400;1,600&display=swap' }, // Alt titles
+			// { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Fira+Code&display=swap' }, // Monospace
 		]
 	},
 	/*
@@ -37,10 +41,13 @@ export default {
 		'@/assets/scss/main.scss',
 	],
 	/*
-	** Load SCSS globally
+	** Load SCSS globally for components
 	*/
 	styleResources: {
-		scss: ['./assets/scss/main.scss']
+		scss: [
+			'./assets/scss/_variables.scss',
+			'./assets/scss/_mixins.scss',
+		]
 	},
 	/*
 	** Plugins to load before mounting the App
