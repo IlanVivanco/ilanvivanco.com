@@ -20,11 +20,12 @@ $code-block-padding: 1rem !default;
 $code-inline-padding: 2px 6px !default;
 $code-border-radius: 0.3rem !default;
 
-$code-border: 1px solid #1e1e1e !default;
 $code-background: #2a2a2a !default;
+$code-border: 1px solid #1e1e1e !default;
+$code-color: #f9f9f9 !default;
 $code-background-inline: #b8c0c2 !default;
 $code-border-inline: #b8c0c2 !default;
-$code-color: #f9f9f9 !default;
+$code-color-inline: #686868 !default;
 $code-color-fade: #bebec5 !default;
 $code-text-shadow: 0 1px 0 #000 !default;
 $code-box-shadow: 1px 1px 10px -3px rgba(0, 0, 0, 0.1) inset;
@@ -78,7 +79,6 @@ $code-color-punctuation: null !default;
 	#{$code-selector-block} {
 		@extend %code-background;
 		padding: $code-block-padding;
-		border: $code-border-inline;
 	}
 }
 
@@ -87,6 +87,8 @@ $code-color-punctuation: null !default;
 		@extend %code-background;
 		padding: $code-inline-padding;
 		background: $code-background-inline;
+		border: $code-border-inline;
+		color: $code-color-inline;
 		box-shadow: none;
 	}
 }
