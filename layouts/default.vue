@@ -100,6 +100,7 @@ export default {
 	&__inner {
 		height: 75vh;
 		overflow-y: auto;
+		overflow-x: hidden;
 		padding: 2rem;
 		background: $color-grayscale-1;
 	}
