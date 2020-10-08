@@ -1,17 +1,7 @@
 <template>
 	<div class="lang-switcher">
-		<el-tooltip
-			v-for="locale in availableLocales"
-			:key="locale.code"
-			:content="locale.name"
-			placement="bottom"
-		>
-			<img
-				@click="changeLocale(locale.code)"
-				:src="locale.icon"
-				:alt="`locale.name flag`"
-				class="flag"
-			/>
+		<el-tooltip v-for="locale in availableLocales" :key="locale.code" :content="locale.name" placement="bottom">
+			<img @click="changeLocale(locale.code)" :src="locale.icon" :alt="`locale.name flag`" class="flag" />
 		</el-tooltip>
 	</div>
 </template>
@@ -26,9 +16,7 @@ export default {
 	},
 	computed: {
 		availableLocales() {
-			return this.$i18n.locales.filter(
-				(locale) => locale.code !== this.$i18n.locale
-			)
+			return this.$i18n.locales.filter((locale) => locale.code !== this.$i18n.locale)
 		},
 	},
 }
