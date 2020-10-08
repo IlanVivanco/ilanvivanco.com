@@ -1,9 +1,9 @@
-import cvData from '../content/en/cv'
+import cvData from '../content/es/cv'
 
 export default {
 	greeting: "Hola mundo desde I18N!",
 	another: "Más datos desde I18N!",
-	taglines: ['WordPress developer', 'backend developer', 'frontend developer', 'web developer', 'photographer', 'father', 'geek'],
+	taglines: ['programador WordPress', 'programador backend', 'programador frontend', 'programador web', 'fotógrafo', 'padre', 'geek'],
 	cv: {
 		data: cvData,
 		age: "años",
