@@ -16,7 +16,7 @@ html {
 	box-sizing: border-box;
 
 	background-color: $color-grayscale-10;
-	background: linear-gradient(145deg, $color-grayscale-10, $color-grayscale-9);
+	background: linear-gradient(160deg, $color-blue-dark, $color-blue);
 	color: $color-grayscale-10;
 }
 
@@ -25,6 +25,10 @@ body {
 	width: 100vw;
 	height: 100vh;
 }
+
+// *{
+// 	font-family: 'Fira Sans', 'Source Sans Pro', 'Roboto', 'Helvetica Neue', 'Arial', -apple-system, sans-serif;
+// }
 
 *,
 *::before,
