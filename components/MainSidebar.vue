@@ -1,23 +1,21 @@
 <template>
 	<aside class="about-me">
-		<div class="about-me__image">
-			<img src="/images/ilan-vivanco.jpg" alt="Ilán Vivanco" />
-		</div>
+		<header class="about-me__image">
+			<img src="/images/ilan-vivanco-duo-yellow.jpg" alt="Ilán Vivanco" />
+		</header>
 		<div class="about-me__data">
 			<div class="about-me__title">
-				<h1>Ilán Vivanco</h1>
-				<h2>Web developer</h2>
+				<logo />
+				<tagline />
+				<social-links />
 			</div>
-			<ul class="about-me__social">
-				<li>Twitter</li>
-				<li>Instagram</li>
-			</ul>
+
 			<footer class="about-me__footer">
 				<nuxt-link :to="localePath('index')">
-					Download CV
+					<el-button type="warning" icon="el-icon-tickets" round>CV</el-button>
 				</nuxt-link>
 				<nuxt-link :to="localePath('contact-me')">
-					Contactame
+					<el-button type="primary" icon="el-icon-chat-round" round>Contactame</el-button>
 				</nuxt-link>
 			</footer>
 		</div>
@@ -25,8 +23,13 @@
 </template>
 
 <script>
+import Logo from '@/components/Logo'
+import SocialLinks from '@/components/SocialLinks'
+import Tagline from '@/components/Tagline'
+
 export default {
 	name: 'MainSidebar',
+	components: { Logo, SocialLinks, Tagline },
 }
 </script>
 
@@ -50,30 +53,17 @@ export default {
 		object-fit: cover;
 		z-index: 0;
 	}
-
-	&::before,
-	&::after {
-		content: '';
-		position: absolute;
-		display: block;
-		bottom: 0;
-		left: 0;
-		width: 100%;
-		height: 50px;
-		background: $color-grayscale-1;
-		z-index: 1;
-	}
-
-	&::before {
-		transform: rotate(10deg) translate(-50px, 40px);
-	}
-
-	&::after {
-		transform: rotate(-10deg) translate(50px, 40px);
-	}
 }
 
 .about-me__data {
 	padding: 1rem;
+}
+
+.about-me__footer {
+	position: absolute;
+	right: 0;
+	left: 0;
+	bottom: 1.5em;
+	text-align: center;
 }
 </style>
