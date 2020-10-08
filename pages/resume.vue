@@ -1,15 +1,12 @@
 <template>
-	<div class="container">
-		<h1 class="title">Curriculum</h1>
-
-		Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos natus
-		reprehenderit sunt obcaecati distinctio molestias aliquid, deleniti,
-		magnam perspiciatis expedita quia. Necessitatibus adipisci voluptas totam!
-		Repellat ullam ut repudiandae cumque.
+	<div class="container resume">
+		<cv />
 	</div>
 </template>
 
 <script>
+import Cv from '@/components/cv/Cv'
+
 export default {
 	head() {
 		return {
@@ -22,7 +19,7 @@ export default {
 			es: '/curriculum',
 		},
 	},
-	components: {},
+	components: { Cv },
 }
 </script>
 
