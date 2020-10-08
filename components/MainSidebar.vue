@@ -42,7 +42,10 @@ export default {
 	position: relative;
 	overflow: hidden;
 	padding-top: calc(100% / 4 * 3);
-	// padding-top: calc(((100vh - 100%) / 2) + (100% / 16 * 9));
+
+	@media screen and (max-width: 1220px) {
+		padding-top: calc(100% / 16 * 9);
+	}
 
 	img {
 		position: absolute;

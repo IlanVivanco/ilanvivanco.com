@@ -75,7 +75,7 @@ export default {
 .tagline {
 	font-size: 1.3rem;
 	font-weight: normal;
-	margin-bottom: 2rem;
+	margin-bottom: 3rem;
 	position: relative;
 	line-height: 1.2em;
 	color: $color-blue-dark;

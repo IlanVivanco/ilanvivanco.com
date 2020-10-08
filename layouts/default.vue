@@ -3,8 +3,8 @@
 		<LangSwitcher />
 		<div class="page">
 			<div class="container main-container">
-				<el-row align="middle" type="flex">
-					<el-col :span="1" class="navbar">
+				<el-row align="middle" type="flex" class="main-row">
+					<el-col :span="2" class="navbar">
 						<div class="navbar__inner">
 							<main-nav />
 						</div>
@@ -14,7 +14,7 @@
 							<main-sidebar />
 						</div>
 					</el-col>
-					<el-col :span="16" class="main">
+					<el-col :span="15" class="main">
 						<Nuxt class="main__inner" />
 					</el-col>
 				</el-row>
@@ -43,16 +43,38 @@ export default {
 	align-items: center;
 	justify-content: center;
 
+	@media screen and (max-width: 1220px) {
+		height: auto;
+		padding-top: 2.5vh;
+		align-items: flex-start;
+
+		.main-row {
+			flex-wrap: wrap;
+		}
+	}
+
 	.main-container {
 		width: 100%;
 		max-width: 1200px;
+
+		@media screen and (max-width: 1220px) {
+			max-width: 600px;
+			position: relative;
+			left: calc( 75px / 2);
+		}
 	}
 }
 
 .navbar {
-	width: 64px;
+	width: 75px;
 	align-self: flex-start;
 	margin-top: 2.5vh;
+
+	@media screen and (max-width: 1220px) {
+		margin-top: 0;
+		position: fixed;
+		left: calc(((100vw - 600px) / 2) - (75px / 2) - 20px); //75px .navbar width
+	}
 
 	&__inner {
 		@include border-radius();
@@ -65,6 +87,14 @@ export default {
 	padding-left: 1rem;
 	position: relative;
 	z-index: 1;
+
+	@media screen and (max-width: 1220px) {
+		@include border-radius();
+
+		width: 100%;
+		padding-left: 0;
+		margin-bottom: 2.5vh;
+	}
 
 	&::before {
 		@include border-radius();
@@ -98,12 +128,25 @@ export default {
 	height: 75vh;
 	overflow: hidden;
 
+	@media screen and (max-width: 1220px) {
+		@include border-radius();
+
+		width: 100%;
+		height: auto;
+		margin-bottom: 2.5vh;
+	}
+
 	&__inner {
 		height: 75vh;
 		overflow-y: auto;
 		overflow-x: hidden;
 		padding: 2rem;
 		background: $color-grayscale-1;
+
+		@media screen and (max-width: 1220px) {
+			height: auto;
+			overflow-y: visible;
+		}
 	}
 
 	::-webkit-scrollbar {
