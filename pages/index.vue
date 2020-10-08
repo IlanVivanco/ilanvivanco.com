@@ -5,52 +5,39 @@
 
 			<div class="links">
 				<el-button v-for="post in posts" :key="post.slug" type="primary">
-					<a :href="`/blog/${post.slug}`">{{ post.title }}</a>
+					<nuxt-link :to="localePath(`/blog/${post.slug}`)">{{ post.title }}</nuxt-link>
 				</el-button>
-				<el-button
-					type="primary"
-					icon="el-icon-edit"
-					plain
-					circle
-				></el-button>
+				<el-button type="primary" icon="el-icon-edit" plain circle></el-button>
 			</div>
 
-			<Cv lang="es" />
-
 			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae iste
-				inventore consectetur aut laudantium mollitia sint aliquid nulla
-				asperiores assumenda recusandae similique, non perferendis fugit
-				reprehenderit cum debitis? Fuga, adipisci!
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae iste inventore consectetur aut laudantium
+				mollitia sint aliquid nulla asperiores assumenda recusandae similique, non perferendis fugit reprehenderit
+				cum debitis? Fuga, adipisci!
 			</p>
 
 			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae iste
-				inventore consectetur aut laudantium mollitia sint aliquid nulla
-				asperiores assumenda recusandae similique, non perferendis fugit
-				reprehenderit cum debitis? Fuga, adipisci!
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae iste inventore consectetur aut laudantium
+				mollitia sint aliquid nulla asperiores assumenda recusandae similique, non perferendis fugit reprehenderit
+				cum debitis? Fuga, adipisci!
 			</p>
 
 			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae iste
-				inventore consectetur aut laudantium mollitia sint aliquid nulla
-				asperiores assumenda recusandae similique, non perferendis fugit
-				reprehenderit cum debitis? Fuga, adipisci!
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae iste inventore consectetur aut laudantium
+				mollitia sint aliquid nulla asperiores assumenda recusandae similique, non perferendis fugit reprehenderit
+				cum debitis? Fuga, adipisci!
 			</p>
 
 			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae iste
-				inventore consectetur aut laudantium mollitia sint aliquid nulla
-				asperiores assumenda recusandae similique, non perferendis fugit
-				reprehenderit cum debitis? Fuga, adipisci!
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae iste inventore consectetur aut laudantium
+				mollitia sint aliquid nulla asperiores assumenda recusandae similique, non perferendis fugit reprehenderit
+				cum debitis? Fuga, adipisci!
 			</p>
 		</div>
 	</div>
 </template>
 
 <script>
-import Cv from '@/components/CV'
-
 export default {
 	head() {
 		return {
@@ -64,7 +51,7 @@ export default {
 			posts,
 		}
 	},
-	components: { Cv },
+	components: {},
 }
 </script>
 

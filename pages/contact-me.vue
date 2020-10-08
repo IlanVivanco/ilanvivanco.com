@@ -2,16 +2,13 @@
 	<div class="container">
 		<h1 class="title">Contactame</h1>
 
-		Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos natus
-		reprehenderit sunt obcaecati distinctio molestias aliquid, deleniti,
-		magnam perspiciatis expedita quia. Necessitatibus adipisci voluptas totam!
-		Repellat ullam ut repudiandae cumque.
+		Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos natus reprehenderit sunt obcaecati distinctio
+		molestias aliquid, deleniti, magnam perspiciatis expedita quia. Necessitatibus adipisci voluptas totam! Repellat
+		ullam ut repudiandae cumque.
 	</div>
 </template>
 
 <script>
-import MainNav from '@/components/global/nav'
-
 export default {
 	head() {
 		return {
@@ -23,9 +20,6 @@ export default {
 			es: '/contactame',
 			en: '/contact-me',
 		},
-	},
-	components: {
-		MainNav,
 	},
 }
 </script>
