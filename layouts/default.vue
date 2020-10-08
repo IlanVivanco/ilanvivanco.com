@@ -3,18 +3,18 @@
 		<LangSwitcher />
 		<div class="page">
 			<div class="container main-container">
-				<el-row align="middle">
+				<el-row align="middle" type="flex">
 					<el-col :span="1" class="navbar">
 						<div class="navbar__inner">
-							<MainNav />
+							<main-nav />
 						</div>
 					</el-col>
 					<el-col :span="7" class="sidebar">
 						<div class="sidebar__inner">
-							<MainSidebar />
+							<main-sidebar />
 						</div>
 					</el-col>
-					<el-col :span="14" class="main">
+					<el-col :span="16" class="main">
 						<Nuxt class="main__inner" />
 					</el-col>
 				</el-row>
@@ -26,7 +26,7 @@
 <script>
 import LangSwitcher from '@/components/LangSwitcher'
 import MainSidebar from '@/components/MainSidebar'
-import MainNav from '@/components/global/nav'
+import MainNav from '@/components/global/Nav'
 
 export default {
 	name: 'DefaultLayout',
@@ -51,6 +51,8 @@ export default {
 
 .navbar {
 	width: 64px;
+	align-self: flex-start;
+	margin-top: 2.5vh;
 
 	&__inner {
 		@include border-radius();
@@ -63,7 +65,6 @@ export default {
 	padding-left: 1rem;
 	position: relative;
 	z-index: 1;
-	box-shadow: 5px 0px 10px 2px rgba(black, 0.1), 5px 0px 5px rgba(black, 0.05);
 
 	&::before {
 		@include border-radius();
@@ -74,7 +75,7 @@ export default {
 		height: 100%;
 		top: -3%;
 		left: -5%;
-		background: rgba(white, 0.08);
+		background: rgba(white, 0.03);
 		z-index: -1;
 		filter: blur(3px);
 	}
@@ -83,17 +84,17 @@ export default {
 		@include border-radius();
 
 		height: 80vh;
+		position: relative;
 		overflow: hidden;
 		background: $color-grayscale-1;
 		text-align: center;
+		box-shadow: 5px 0px 10px 2px rgba(black, 0.1), 5px 0px 5px rgba(black, 0.05);
 	}
 }
 
 .main {
 	@include border-radius(right);
 
-	width: calc(70.83333% - 64px);
-	transform: translateY(2.5vh);
 	height: 75vh;
 	overflow: hidden;
 
