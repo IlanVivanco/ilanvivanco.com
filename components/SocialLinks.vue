@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import socials from '@/content/es/socials'
+import socials from '@/locales/es/socials'
 
 export default {
 	name: 'SocialLinks',

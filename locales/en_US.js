@@ -1,4 +1,4 @@
-import cvData from '../content/en/cv'
+import cvData from './en/cv'
 
 export default {
 	greeting: "Hello world from I18N!",
