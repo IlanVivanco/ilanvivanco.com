@@ -8,6 +8,7 @@
 import Cv from '@/components/cv/Cv'
 
 export default {
+	scrollToTop: false,
 	head() {
 		return {
 			title: 'Curricullum title',

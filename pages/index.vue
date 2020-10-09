@@ -39,6 +39,7 @@
 
 <script>
 export default {
+	scrollToTop: false,
 	head() {
 		return {
 			title: 'My Index title',
