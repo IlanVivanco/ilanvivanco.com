@@ -73,7 +73,8 @@ export default {
 
 <style lang="scss" scoped>
 .tagline {
-	font-size: 1.3rem;
+	font-family: $code-font;
+	font-size: 1.1rem;
 	font-weight: normal;
 	margin-bottom: 3rem;
 	position: relative;

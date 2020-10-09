@@ -26,10 +26,6 @@ body {
 	min-height: 100vh;
 }
 
-// *{
-// 	font-family: 'Fira Sans', 'Source Sans Pro', 'Roboto', 'Helvetica Neue', 'Arial', -apple-system, sans-serif;
-// }
-
 *,
 *::before,
 *::after {
@@ -41,14 +37,14 @@ h1,
 h2,
 h3{
 	font-weight: 900;
-	font-family: 'Lato', 'Source Sans Pro', 'Roboto', 'Helvetica Neue', 'Arial', -apple-system, sans-serif;
+	font-family: $primary-font;
 }
 
 h4,
 h5,
 h6{
 	font-weight: 400;
-	font-family: 'Economica', 'Source Sans Pro', 'Roboto', 'Helvetica Neue', 'Arial', -apple-system, sans-serif;
+	font-family: $secondary-font;
 }
 
 h1 {
