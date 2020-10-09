@@ -5,8 +5,8 @@
  */
 
 // prism selector
-$code-selector: 'code[class*="language-"], pre[class*="language-"]';
-$code-selector-block: 'pre[class*="language-"]';
+$code-selector: 'code, pre';
+$code-selector-block: 'code[class*="language-"], pre[class*="language-"]';
 $code-selector-inline: ':not(pre) > code';
 
 $code-font-family: 'Fira Code', 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace !default;
