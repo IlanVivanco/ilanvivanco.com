@@ -3,7 +3,7 @@
 @import 'animations';
 
 html {
-	font-family: 'Fira Sans', 'Source Sans Pro', 'Roboto', 'Helvetica Neue', 'Arial', -apple-system, sans-serif;
+	font-family: $secondary-font;
 	font-size: 16px;
 	font-weight: normal;
 	word-spacing: 0;
@@ -44,7 +44,7 @@ h4,
 h5,
 h6{
 	font-weight: 400;
-	font-family: $secondary-font;
+	font-family: $primary-alt-font;
 }
 
 h1 {

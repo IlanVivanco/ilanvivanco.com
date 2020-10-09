@@ -1,5 +1,24 @@
 // Custom timing for transitions
-.animate__animated.animate__fadeInLeft,
-.animate__animated.animate__fadeOutLeft {
-	--animate-duration: .3s;
- }
+.animate__animated {
+	--animate-duration: 0.3s;
+}
+
+.animate__pageOut {
+	-webkit-animation-name: fadeOutLeft;
+	animation-name: fadeOutLeft;
+
+	@media screen and (max-width: 1220px) {
+		-webkit-animation-name: fadeOutUp;
+		animation-name: fadeOutUp;
+	}
+}
+
+.animate__pageIn {
+	-webkit-animation-name: fadeInLeft;
+	animation-name: fadeInLeft;
+
+	@media screen and (max-width: 1220px) {
+		-webkit-animation-name: fadeInDown;
+		animation-name: fadeInDown;
+	}
+}
