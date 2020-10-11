@@ -1,4 +1,4 @@
-import socialsData from './socials'
+import socialsData from '../general/socials'
 
 export default {
 	name: "Ilán Vivanco",
