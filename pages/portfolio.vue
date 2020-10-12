@@ -11,6 +11,7 @@
 
 <script>
 export default {
+	name: 'Portfolio',
 	scrollToTop: false,
 	head() {
 		return {

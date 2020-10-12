@@ -10,6 +10,7 @@
 
 <script>
 export default {
+	name: 'ContactMe',
 	scrollToTop: false,
 	head() {
 		return {

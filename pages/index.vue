@@ -39,6 +39,7 @@
 
 <script>
 export default {
+	name: 'Index',
 	scrollToTop: false,
 	head() {
 		return {

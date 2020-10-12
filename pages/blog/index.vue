@@ -11,6 +11,7 @@
 
 <script>
 export default {
+	name: 'Blog',
 	scrollToTop: false,
 	head() {
 		return {
