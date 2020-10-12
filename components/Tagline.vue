@@ -88,7 +88,7 @@ export default {
 		content: '\00a0 ';
 		width: 2px;
 		background: $color-blue-dark;
-		transform: translateX(-3px);
+		transform: translateX(-9px);
 		animation: blink 800ms infinite;
 	}
 

@@ -14,7 +14,7 @@
 							<main-sidebar />
 						</div>
 					</el-col>
-					<el-col :span="15" class="main">
+					<el-col :span="16" class="main">
 						<Nuxt class="main__inner" />
 					</el-col>
 				</el-row>
@@ -66,20 +66,17 @@ export default {
 }
 
 .navbar {
+	@include border-radius();
+
 	width: 75px;
 	align-self: flex-start;
 	margin-top: 2.5vh;
+	overflow: hidden;
 
 	@media screen and (max-width: 1220px) {
 		margin-top: 0;
 		position: fixed;
 		left: calc(((100vw - 600px) / 2) - (75px / 2) - 20px); //75px .navbar width
-	}
-
-	&__inner {
-		@include border-radius();
-
-		overflow: hidden;
 	}
 }
 
