@@ -16,14 +16,24 @@ html {
 	box-sizing: border-box;
 
 	background-color: $color-grayscale-10;
-	background: linear-gradient(160deg, $color-blue-dark, $color-blue);
 	color: $color-grayscale-10;
+
+	&::before{
+		content: '';
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: linear-gradient(160deg, $color-blue-dark, $color-blue);
+	}
 }
 
 html,
 body {
-	width: 100vw;
+	width: 100%;
 	min-height: 100vh;
+	overflow-x: hidden;
 }
 
 *,

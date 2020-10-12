@@ -60,7 +60,7 @@ export default {
 		@media screen and (max-width: $small-desktop-break) {
 			max-width: 600px;
 			position: relative;
-			left: calc( 75px / 2);
+			left: calc(75px / 2);
 		}
 	}
 }
@@ -116,6 +116,12 @@ export default {
 		background: $color-grayscale-1;
 		text-align: center;
 		box-shadow: 5px 0px 10px 2px rgba(black, 0.1), 5px 0px 5px rgba(black, 0.05);
+
+
+
+		@media screen and (max-width: $small-desktop-break) {
+			height: 40vh;
+		}
 	}
 }
 

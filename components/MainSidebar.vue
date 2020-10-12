@@ -38,35 +38,47 @@ export default {
 	outline: none;
 }
 
-.about-me__image {
-	position: relative;
-	overflow: hidden;
-	padding-top: calc(100% / 4 * 3);
-
+.about-me {
 	@media screen and (max-width: $small-desktop-break) {
-		padding-top: calc(100% / 16 * 9);
+		display: flex;
 	}
 
-	img {
+	&__image {
+		position: relative;
+		overflow: hidden;
+		padding-top: calc(100% / 4 * 3);
+
+		@media screen and (max-width: $small-desktop-break) {
+			padding-top: 40vh; //Same as parent
+			width: 50%;
+		}
+
+		img {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			z-index: 0;
+		}
+	}
+
+	&__data {
+		padding: 1rem;
+
+		@media screen and (max-width: $small-desktop-break) {
+			position: relative;
+			width: 50%;
+		}
+	}
+
+	&__footer {
 		position: absolute;
-		top: 0;
+		right: 0;
 		left: 0;
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		z-index: 0;
+		bottom: 1.5em;
+		text-align: center;
 	}
-}
-
-.about-me__data {
-	padding: 1rem;
-}
-
-.about-me__footer {
-	position: absolute;
-	right: 0;
-	left: 0;
-	bottom: 1.5em;
-	text-align: center;
 }
 </style>
