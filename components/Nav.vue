@@ -43,6 +43,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.el-menu {
+	@include breakpoint('small') {
+		display: flex;
+	}
+}
+
 .el-menu-item {
 	line-height: 1;
 	width: 100%;

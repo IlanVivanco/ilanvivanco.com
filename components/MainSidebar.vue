@@ -39,7 +39,7 @@ export default {
 }
 
 .about-me {
-	@media screen and (max-width: $small-desktop-break) {
+	@include breakpoint('medium') {
 		display: flex;
 	}
 
@@ -48,7 +48,7 @@ export default {
 		overflow: hidden;
 		padding-top: calc(100% / 4 * 3);
 
-		@media screen and (max-width: $small-desktop-break) {
+		@include breakpoint('medium') {
 			padding-top: 40vh; //Same as parent
 			width: 50%;
 		}
@@ -67,7 +67,7 @@ export default {
 	&__data {
 		padding: 1rem;
 
-		@media screen and (max-width: $small-desktop-break) {
+		@include breakpoint('medium') {
 			position: relative;
 			width: 50%;
 		}

@@ -3,7 +3,6 @@ $primary-alt-font: 'Economica', 'Source Sans Pro', 'Roboto', 'Helvetica Neue', '
 $secondary-font: 'Fira Sans', 'Source Sans Pro', 'Roboto', 'Helvetica Neue', 'Arial', -apple-system, sans-serif;
 $code-font: 'Fira Code', 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace;
 
-
 $color-blue: #475b7d;
 $color-blue-light: #5c6c89;
 $color-blue-dark: #202e49;
@@ -53,5 +52,7 @@ $border-color-light: $color-grayscale-3;
 $border-color-lighter: $color-grayscale-2;
 $border-color-extra-light: $color-grayscale-1;
 
-$small-desktop-break: 1220px;
-$tablet-break: 800px;
+$breakpoints: (
+	'medium': 1200px,
+	'small': 768px,
+) !default;

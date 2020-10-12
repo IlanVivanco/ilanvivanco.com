@@ -31,6 +31,15 @@ export default {
 	color: $color-grayscale-6;
 	text-transform: uppercase;
 
+	@include breakpoint('medium') {
+		right: 1vw;
+	}
+
+	@include breakpoint('small') {
+		top: auto;
+		bottom: 0;
+	}
+
 	.flag {
 		width: 20px;
 		height: 20px;

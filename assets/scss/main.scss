@@ -18,7 +18,7 @@ html {
 	background-color: $color-grayscale-10;
 	color: $color-grayscale-10;
 
-	&::before{
+	&::before {
 		content: '';
 		position: fixed;
 		top: 0;
@@ -26,6 +26,7 @@ html {
 		right: 0;
 		bottom: 0;
 		background: linear-gradient(160deg, $color-blue-dark, $color-blue);
+		z-index: -1;
 	}
 }
 
@@ -33,7 +34,7 @@ html,
 body {
 	width: 100%;
 	min-height: 100vh;
-	overflow-x: hidden;
+	overflow: hidden;
 }
 
 *,
@@ -45,14 +46,14 @@ body {
 
 h1,
 h2,
-h3{
+h3 {
 	font-weight: 900;
 	font-family: $primary-font;
 }
 
 h4,
 h5,
-h6{
+h6 {
 	font-weight: 400;
 	font-family: $primary-alt-font;
 }
@@ -78,13 +79,13 @@ h5 {
 }
 
 h6 {
-	font-size: .95rem;
+	font-size: 0.95rem;
 }
 
-p:not(:last-child){
+p:not(:last-child) {
 	margin-bottom: 1em;
 }
 
-p img{
+p img {
 	max-width: 100%;
 }
