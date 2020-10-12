@@ -43,7 +43,7 @@ export default {
 	overflow: hidden;
 	padding-top: calc(100% / 4 * 3);
 
-	@media screen and (max-width: 1220px) {
+	@media screen and (max-width: $small-desktop-break) {
 		padding-top: calc(100% / 16 * 9);
 	}
 

@@ -43,7 +43,7 @@ export default {
 	align-items: center;
 	justify-content: center;
 
-	@media screen and (max-width: 1220px) {
+	@media screen and (max-width: $small-desktop-break) {
 		height: auto;
 		padding-top: 2.5vh;
 		align-items: flex-start;
@@ -57,7 +57,7 @@ export default {
 		width: 100%;
 		max-width: 1200px;
 
-		@media screen and (max-width: 1220px) {
+		@media screen and (max-width: $small-desktop-break) {
 			max-width: 600px;
 			position: relative;
 			left: calc( 75px / 2);
@@ -73,7 +73,7 @@ export default {
 	margin-top: 2.5vh;
 	overflow: hidden;
 
-	@media screen and (max-width: 1220px) {
+	@media screen and (max-width: $small-desktop-break) {
 		margin-top: 0;
 		position: fixed;
 		left: calc(((100vw - 600px) / 2) - (75px / 2) - 20px); //75px .navbar width
@@ -85,7 +85,7 @@ export default {
 	position: relative;
 	z-index: 1;
 
-	@media screen and (max-width: 1220px) {
+	@media screen and (max-width: $small-desktop-break) {
 		@include border-radius();
 
 		width: 100%;
@@ -125,7 +125,7 @@ export default {
 	height: 75vh;
 	overflow: hidden;
 
-	@media screen and (max-width: 1220px) {
+	@media screen and (max-width: $small-desktop-break) {
 		@include border-radius();
 
 		width: 100%;
@@ -140,7 +140,7 @@ export default {
 		padding: 2rem;
 		background: $color-grayscale-1;
 
-		@media screen and (max-width: 1220px) {
+		@media screen and (max-width: $small-desktop-break) {
 			height: auto;
 			overflow-y: visible;
 		}

@@ -7,7 +7,7 @@
 	-webkit-animation-name: fadeOutLeft;
 	animation-name: fadeOutLeft;
 
-	@media screen and (max-width: 1220px) {
+	@media screen and (max-width: $small-desktop-break) {
 		-webkit-animation-name: fadeOutUp;
 		animation-name: fadeOutUp;
 	}
@@ -17,7 +17,7 @@
 	-webkit-animation-name: fadeInLeft;
 	animation-name: fadeInLeft;
 
-	@media screen and (max-width: 1220px) {
+	@media screen and (max-width: $small-desktop-break) {
 		-webkit-animation-name: fadeInDown;
 		animation-name: fadeInDown;
 	}
