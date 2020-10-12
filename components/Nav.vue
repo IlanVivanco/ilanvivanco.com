@@ -1,9 +1,9 @@
 <template>
 	<div>
 		<el-menu :default-active="$route.path" mode="vertical" :collapse="false" :router="true">
-			<el-menu-item v-for="(item, key) of menuItems" :key="key" :index="localePath(key)">
-				<i :class="item.icon"></i>
-				<span slot="title">{{item.name}}</span>
+			<el-menu-item v-for="(menu, key) of menuItems" :key="key" :index="localePath(menu.slug)">
+				<i :class="menu.icon"></i>
+				<span slot="title">{{ menu.name }}</span>
 			</el-menu-item>
 		</el-menu>
 	</div>
@@ -31,10 +31,14 @@ export default {
 		}
 	},
 	computed: {
-		menuItems(){
-			return this.menus[this.$i18n.locale]
-		}
-	}
+		localizedMenu() {
+			return this.menus[this.$i18n.locale] || []
+		},
+
+		menuItems() {
+			return this.localizedMenu.filter((menu) => menu.show)
+		},
+	},
 }
 </script>
 

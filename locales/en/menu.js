@@ -1,22 +1,32 @@
-export default {
-	index: {
+export default [
+	{
+		show: true,
+		slug: 'index',
 		name: "About me",
 		icon: "el-icon-user",
 	},
-	resume: {
+	{
+		show: true,
+		slug: 'resume',
 		name: "My resume",
 		icon: "el-icon-tickets",
 	},
-	portfolio: {
+	{
+		show: true,
+		slug: 'portfolio',
 		name: "Works",
 		icon: "el-icon-monitor",
 	},
-	blog: {
+	{
+		show: true,
+		slug: 'blog',
 		name: "Blog",
 		icon: "el-icon-notebook-1",
 	},
-	contact: {
+	{
+		show: true,
+		slug: 'contact',
 		name: "Contact",
 		icon: "el-icon-chat-round",
 	},
-}
+]
