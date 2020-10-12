@@ -58,7 +58,7 @@ export default {
 		}
 
 		&::-webkit-scrollbar-thumb {
-			background: $color-blue-dark;
+			background: $color-grayscale-6;
 		}
 
 		.main-row {
@@ -191,8 +191,7 @@ export default {
 		}
 
 		&::-webkit-scrollbar-thumb {
-			@include border-radius();
-			background: $color-blue-dark;
+			background: $color-grayscale-6;
 		}
 	}
 }
