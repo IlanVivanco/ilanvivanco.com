@@ -85,6 +85,10 @@ export default {
 			max-width: 85vw;
 			left: 0;
 		}
+
+		@include breakpoint('tiny') {
+			max-width: 80vw;
+		}
 	}
 }
 
@@ -152,6 +156,10 @@ export default {
 
 		@include breakpoint('medium') {
 			height: 40vh;
+		}
+
+		@include breakpoint('tiny') {
+			height: auto;
 		}
 	}
 }

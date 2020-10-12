@@ -80,8 +80,10 @@ export default {
 	position: relative;
 	line-height: 1.2em;
 	color: $color-blue-dark;
-	padding: 0 1em;
-	// text-align: left;
+
+	@include breakpoint('small') {
+		margin-bottom: 2rem;
+	}
 
 	&::after {
 		display: inline-block;

@@ -43,6 +43,11 @@ export default {
 		display: flex;
 	}
 
+	@include breakpoint('tiny') {
+		flex-wrap: wrap;
+		padding: 1.5rem 0;
+	}
+
 	&__image {
 		position: relative;
 		overflow: hidden;
@@ -53,6 +58,15 @@ export default {
 			width: 50%;
 		}
 
+		@include breakpoint('tiny') {
+			padding-top: 0;
+			width: 120px;
+			height: 120px;
+			border-radius: 50%;
+			overflow: hidden;
+			margin: 0 auto;
+		}
+
 		img {
 			position: absolute;
 			top: 0;
@@ -61,6 +75,11 @@ export default {
 			height: 100%;
 			object-fit: cover;
 			z-index: 0;
+			object-position: 30%;
+
+			@include breakpoint('tiny') {
+				object-position: 10%;
+			}
 		}
 	}
 
@@ -70,6 +89,12 @@ export default {
 		@include breakpoint('medium') {
 			position: relative;
 			width: 50%;
+			min-width: 280px;
+		}
+
+		@include breakpoint('tiny') {
+			width: 100%;
+			padding: 0;
 		}
 	}
 
@@ -79,6 +104,10 @@ export default {
 		left: 0;
 		bottom: 1.5em;
 		text-align: center;
+
+		@include breakpoint('tiny') {
+			position: static;
+		}
 	}
 }
 </style>

@@ -32,6 +32,10 @@ export default {
 	margin: 0;
 	list-style: none;
 
+	@include breakpoint('tiny') {
+		margin-bottom: 1.5rem;
+	}
+
 	&__item {
 		display: inline-block;
 
