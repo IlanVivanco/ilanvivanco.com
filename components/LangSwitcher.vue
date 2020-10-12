@@ -36,8 +36,7 @@ export default {
 	}
 
 	@include breakpoint('small') {
-		top: auto;
-		bottom: 0;
+		top: 65px;
 	}
 
 	.flag {
