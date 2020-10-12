@@ -54,15 +54,11 @@ export default {
 	}
 
 	span {
-		// display: none;
-
-		// @media screen and (max-width: 1220px) {
 		display: block;
 		width: 100%;
 		text-align: center;
 		text-transform: uppercase;
 		font-size: 10px;
-		// }
 	}
 }
 </style>
