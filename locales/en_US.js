@@ -6,8 +6,9 @@ export default {
 	taglines: ['WordPress developer', 'backend developer', 'frontend developer', 'web developer', 'photographer', 'father', 'geek'],
 	cv: {
 		data: cvData,
-		age: "años",
-		present: "Presente",
+		date_format: "MM/DD/YYYY",
+		age: "years old",
+		present: "Present",
 		tooltips: {
 			web: "Sitio",
 			mail: "E-mail",

@@ -1,9 +1,9 @@
 import es_cv from '../es/cv.js';
 import _ from 'lodash';
 
-const en_cv = _.merge(es_cv, {
+const en_cv = _.merge({}, es_cv, {
+	lang: "EN",
 	job_title: "Full stack web developer",
-	birth_date: "1988/06/17",
 	languages: {
 		es: { lang: "Spanish", },
 		en: { lang: "English", },

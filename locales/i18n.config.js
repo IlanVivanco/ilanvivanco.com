@@ -24,6 +24,9 @@ export default {
 	},
 	vueI18n: {
 		fallbackLocale: 'es',
-		messages: { en: en_US, es: es_AR }
+		messages: {
+			en: en_US,
+			es: es_AR
+		}
 	},
 }
