@@ -92,9 +92,10 @@ export default {
 
 			&--alt {
 				opacity: 0;
+				filter: grayscale(.25);
 
 				@include breakpoint('tiny') {
-					opacity: 0 !important;
+					display: none;
 				}
 			}
 		}
