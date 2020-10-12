@@ -26,7 +26,7 @@
 <script>
 import LangSwitcher from '@/components/LangSwitcher'
 import MainSidebar from '@/components/MainSidebar'
-import MainNav from '@/components/global/Nav'
+import MainNav from '@/components/Nav'
 
 export default {
 	name: 'DefaultLayout',
