@@ -1,7 +1,12 @@
 <template>
 	<aside class="about-me">
 		<header class="about-me__image">
-			<img src="/images/ilan-vivanco-duo-yellow.jpg" alt="Ilán Vivanco" />
+			<img class="about-me__image-img" src="/images/ilan-vivanco-duo-yellow.jpg" alt="Ilán Vivanco" />
+			<img
+				:src="altBannerImg"
+				class="about-me__image-img about-me__image-img--alt animate__animated"
+				:class="{ animate__fadeIn: altBannerImg, animate__fadeOut: altBannerLeave }"
+			/>
 		</header>
 		<div class="about-me__data">
 			<div class="about-me__title">
@@ -30,6 +35,10 @@ import Tagline from '@/components/Tagline'
 export default {
 	name: 'MainSidebar',
 	components: { Logo, SocialLinks, Tagline },
+	props: {
+		altBannerLeave: Boolean,
+		altBannerImg: String,
+	},
 }
 </script>
 
@@ -51,7 +60,7 @@ export default {
 	&__image {
 		position: relative;
 		overflow: hidden;
-		padding-top: calc(100% / 4 * 3);
+		padding-top: 235px;
 
 		@include breakpoint('medium') {
 			padding-top: 40vh; //Same as parent
@@ -67,7 +76,7 @@ export default {
 			margin: 0 auto;
 		}
 
-		img {
+		&-img {
 			position: absolute;
 			top: 0;
 			left: 0;
@@ -80,30 +89,44 @@ export default {
 			@include breakpoint('tiny') {
 				object-position: 10%;
 			}
+
+			&--alt {
+				opacity: 0;
+
+				@include breakpoint('tiny') {
+					opacity: 0 !important;
+				}
+			}
 		}
 	}
 
 	&__data {
 		padding: 1rem;
+		display: flex;
+		flex-flow: column nowrap;
+		height: calc(80vh - 235px);
 
 		@include breakpoint('medium') {
 			position: relative;
 			width: 50%;
 			min-width: 280px;
+			height: 40vh;
 		}
 
 		@include breakpoint('tiny') {
 			width: 100%;
+			height: auto;
 			padding: 0;
 		}
 	}
 
 	&__footer {
-		position: absolute;
-		right: 0;
-		left: 0;
-		bottom: 1.5em;
+		// position: absolute;
+		// right: 0;
+		// left: 0;
+		// bottom: 1.5em;
 		text-align: center;
+		margin-top: auto;
 
 		@include breakpoint('tiny') {
 			position: static;

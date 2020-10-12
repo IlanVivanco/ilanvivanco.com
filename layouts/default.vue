@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div :class="currentPathSlug">
 		<LangSwitcher />
 		<div class="page">
 			<div class="container main-container">
@@ -11,7 +11,7 @@
 					</el-col>
 					<el-col :span="7" class="sidebar">
 						<div class="sidebar__inner">
-							<main-sidebar />
+							<main-sidebar :alt-banner-img="altBannerImage" :alt-banner-leave="altBannerLeave" />
 						</div>
 					</el-col>
 					<el-col :span="16" class="main">
@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import eventHub from '@/plugins/eventHub'
 import LangSwitcher from '@/components/LangSwitcher'
 import MainSidebar from '@/components/MainSidebar'
 import MainNav from '@/components/Nav'
@@ -32,6 +33,32 @@ export default {
 	name: 'DefaultLayout',
 	components: { LangSwitcher, MainNav, MainSidebar },
 	transition: { mode: '' },
+	data() {
+		return {
+			altBannerImage: null,
+			altBannerLeave: false,
+		}
+	},
+	created() {
+		eventHub.$on('updateBannerImage', this.changeAltBannerImage)
+	},
+	watch: {
+		$route(to, from) {
+			this.altBannerLeave = true
+		},
+	},
+	methods: {
+		changeAltBannerImage(image) {
+			this.altBannerLeave = false
+			this.altBannerImage = image
+		},
+	},
+	computed: {
+		currentPathSlug() {
+			let slug = this.$route.name.match(/^(.*?)__.{2}/)
+			return slug[1] != 'index' ? slug[1] : 'home'
+		},
+	},
 }
 </script>
 
@@ -44,9 +71,8 @@ export default {
 	justify-content: center;
 
 	@include breakpoint('medium') {
-		height: auto;
-		max-height: 100vh;
-		overflow-y: auto;
+		height: 100vh;
+		overflow-y: scroll;
 		align-items: flex-start;
 
 		&::-webkit-scrollbar {
