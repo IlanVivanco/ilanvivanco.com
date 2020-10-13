@@ -75,113 +75,32 @@ export default {
 			to: "2007-12",
 		},
 	],
-	skills: {
-		wp: {
-			cat: "WordPress",
-			skill: "WordPress",
-			level: 7
-		},
-		wp_t: {
-			cat: "WordPress",
-			skill: "WP Themes",
-			level: 7
-		},
-		wp_t: {
-			cat: "WordPress",
-			skill: "WP Plugins",
-			level: 6
-		},
-		wp_m: {
-			cat: "WordPress",
-			skill: "Migraciones WP",
-			level: 7
-		},
-		wp_w: {
-			cat: "WordPress",
-			skill: "WooCommerce",
-			level: 5
-		},
-		php: {
-			cat: "Languages",
-			skill: "PHP",
-			level: 7
-		},
-		mysql: {
-			cat: "Languages",
-			skill: "MySQL",
-			level: 5
-		},
-		html: {
-			cat: "Languages",
-			skill: "HTML5",
-			level: 7
-		},
-		css: {
-			cat: "Languages",
-			skill: "CSS3",
-			level: 7
-		},
-		js: {
-			cat: "Languages",
-			skill: "JS",
-			level: 6
-		},
-		jquery: {
-			cat: "Languages",
-			skill: "jQuery",
-			level: 6
-		},
-		vue: {
-			cat: "Languages",
-			skill: "Vue",
-			level: 3
-		},
-		laravel: {
-			cat: "Languages",
-			skill: "Laravel",
-			level: 3
-		},
-		node: {
-			cat: "Languages",
-			skill: "NodeJS",
-			level: 4
-		},
-		bash: {
-			cat: "Languages",
-			skill: "Bash",
-			level: 3
-		},
-		git: {
-			cat: "Extras",
-			skill: "Git",
-			level: 6
-		},
-		sass: {
-			cat: "Extras",
-			skill: "Sass",
-			level: 6
-		},
-		linux: {
-			cat: "Extras",
-			skill: "Servers",
-			level: 4
-		},
-		ps: {
-			cat: "Software",
-			skill: "Photoshop",
-			level: 7
-		},
-		ai: {
-			cat: "Software",
-			skill: "Illustrator",
-			level: 7
-		},
-		id: {
-			cat: "Software",
-			skill: "InDesign",
-			level: 7
-		},
-	},
+	skills: [
+		{ name: "WordPress", level: 7 },
+		{ name: "WP Themes", level: 7 },
+		{ name: "WP Plugins", level: 6 },
+		{ name: "Migraciones WP", level: 7 },
+		{ name: "WooCommerce", level: 5 },
+		{ spacer: true },
+		{ name: "PHP", level: 7 },
+		{ name: "MySQL", level: 5 },
+		{ name: "HTML5", level: 7 },
+		{ name: "CSS3", level: 7 },
+		{ name: "JavaScript", level: 6 },
+		{ name: "jQuery", level: 6 },
+		{ name: "Vue", level: 3 },
+		{ name: "Laravel", level: 3 },
+		{ spacer: true },
+		{ name: "NodeJS", level: 4 },
+		{ name: "Bash", level: 3 },
+		{ name: "Git", level: 6 },
+		{ name: "Sass", level: 6 },
+		{ name: "Servers", level: 4 },
+		{ spacer: true },
+		{ name: "Photoshop", level: 7 },
+		{ name: "Illustrator", level: 7 },
+		{ name: "InDesign", level: 7 },
+	],
 	education: [
 		{
 			from: "2007",
@@ -196,16 +115,10 @@ export default {
 			titles: ["Diseñador gráfico", "Técnico en comunicación publicitaria"]
 		},
 	],
-	languages: {
-		es: {
-			lang: "Español",
-			level: 7,
-		},
-		en: {
-			lang: "Inglés",
-			level: 6,
-		},
-	},
+	languages: [
+		{ name: "Español", level: 7, },
+		{ name: "Inglés", level: 6, },
+	],
 	courses: {
 		udm: {
 			place: "Udemy",
