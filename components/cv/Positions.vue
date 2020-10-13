@@ -138,5 +138,9 @@ export default {
 	& /deep/ .el-timeline-item__tail {
 		border-left-color: $color-blue-dark;
 	}
+
+	&.active /deep/ .el-timeline-item__tail {
+		border-left-color: $color-teal-dark;
+	}
 }
 </style>
