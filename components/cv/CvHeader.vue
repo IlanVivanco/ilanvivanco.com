@@ -64,7 +64,7 @@ export default {
 		height: 90px;
 		border-radius: 50%;
 		overflow: hidden;
-		box-shadow: 0 0 0 5px $color-blue-dark;
+		box-shadow: 0 0 0 3px $color-blue-dark;
 		margin-right: 1.5em;
 
 		@include breakpoint('medium') {

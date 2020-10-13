@@ -19,18 +19,12 @@
 				<aside class="resume-section__aside-wrapper">
 					<div class="resume-section__group">
 						<section-header :title="cv.headers.languages" :icon="cv.icons.languages" />
-						<div>
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi in minus cumque quia, iusto deserunt
-							incidunt excepturi.
-						</div>
+						<ratings :data="cv.data.languages" />
 					</div>
 
 					<div class="resume-section__group">
 						<section-header :title="cv.headers.skills" :icon="cv.icons.skills" />
-						<div>
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi in minus cumque quia, iusto deserunt
-							incidunt excepturi.
-						</div>
+						<ratings :data="cv.data.skills" />
 					</div>
 
 					<div class="resume-section__group">
@@ -57,6 +51,7 @@
 <script>
 import CvHeader from '@/components/cv/CvHeader'
 import Positions from '@/components/cv/Positions'
+import Ratings from '@/components/cv/Ratings'
 import SectionHeader from '@/components/cv/SectionHeader'
 import Studies from '@/components/cv/Studies'
 
@@ -65,6 +60,7 @@ export default {
 	components: {
 		CvHeader,
 		Positions,
+		Ratings,
 		SectionHeader,
 		Studies,
 	},
