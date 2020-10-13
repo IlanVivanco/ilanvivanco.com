@@ -3,7 +3,7 @@
 		<el-timeline-item
 			v-for="(position, index) in orderedPositions"
 			:key="index"
-			:color="is_active(position) ? '#2c979f' : '#919699'"
+			:color="is_active(position) ? '#2c979f' : '#475b7d'"
 			:class="['position', is_active(position) ? 'active' : '']"
 		>
 			<div class="position__date">
@@ -15,8 +15,12 @@
 					{{ format_date(position.to) }}
 				</time>
 			</div>
-			<h2 class="position__company">{{ position.company }}</h2>
-			<h3 class="position__name">{{ position.name }}</h3>
+
+			<header class="position__header">
+				<h2 class="position__company">{{ position.company }}</h2>
+				<h3 class="position__name">{{ position.name }}</h3>
+			</header>
+
 			<div class="position__excerpt">{{ position.excerpt }}</div>
 		</el-timeline-item>
 	</el-timeline>
@@ -58,24 +62,39 @@ export default {
 
 <style lang="scss" scoped>
 .el-timeline {
-	padding: 0;
+	margin-top: 1.5em;
+	padding: 0 0 0 0.5em;
 }
 
 .position {
-	--active-color: #{$color-grayscale-6};
+	--active-color: #{$color-blue};
 	color: $color-text-regular;
 	line-height: 1.4em;
 	font-size: 1rem;
 
+	&:last-child {
+		padding: 0;
+	}
+
 	&.active {
 		--active-color: #{$color-teal-dark};
+	}
+
+	&__content {
+		font-size: 0.9em;
+		line-height: 1.3;
+	}
+
+	&__header {
+		line-height: 1.2;
 	}
 
 	&__company {
 		color: $color-text-primary;
 		font-weight: bold;
 		text-transform: uppercase;
-		font-size: 1em;
+		font-size: 0.9em;
+		margin-top: 0.5em;
 	}
 
 	&__date {
@@ -105,20 +124,19 @@ export default {
 
 	&__name {
 		font-size: 0.9em;
-		font-weight: bold;
+		font-weight: normal;
+		margin-bottom: 0.5em;
+		color: $color-teal-dark;
 	}
 
 	&__excerpt {
 		font-size: 0.9em;
 		font-style: italic;
+		line-height: 1.3em;
 	}
 
 	& /deep/ .el-timeline-item__tail {
-		border-left-color: $color-grayscale-6;
-	}
-
-	&.active /deep/ .el-timeline-item__tail {
-		border-left-color: $color-teal-dark;
+		border-left-color: $color-blue-dark;
 	}
 }
 </style>
