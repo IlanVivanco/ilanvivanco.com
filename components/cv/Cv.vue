@@ -29,10 +29,7 @@
 
 					<div class="resume-section__group">
 						<section-header :title="cv.headers.courses" :icon="cv.icons.courses" />
-						<div>
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi in minus cumque quia, iusto deserunt
-							incidunt excepturi.
-						</div>
+						<studies :data="cv.data.courses" />
 					</div>
 
 					<div class="resume-section__group">
