@@ -75,6 +75,20 @@ export default {
 			to: "2007-12",
 		},
 	],
+	education: [
+		{
+			from: "2007",
+			to: "2009",
+			place: "Escuela de Fotografía de Andy Goldstein",
+			titles: ["Técnico en fotografía"]
+		},
+		{
+			from: "2001",
+			to: "2006",
+			place: "Escuelas Técnicas Raggio",
+			titles: ["Diseñador gráfico", "Técnico en comunicación publicitaria"]
+		},
+	],
 	skills: [
 		{ name: "WordPress", level: 7 },
 		{ name: "WP Themes", level: 7 },
@@ -88,7 +102,7 @@ export default {
 		{ name: "CSS3", level: 7 },
 		{ name: "JavaScript", level: 6 },
 		{ name: "jQuery", level: 6 },
-		{ name: "Vue", level: 3 },
+		{ name: "Vue", level: 4 },
 		{ name: "Laravel", level: 3 },
 		{ spacer: true },
 		{ name: "NodeJS", level: 4 },
@@ -99,126 +113,89 @@ export default {
 		{ spacer: true },
 		{ name: "Photoshop", level: 7 },
 		{ name: "Illustrator", level: 7 },
-		{ name: "InDesign", level: 7 },
-	],
-	education: [
-		{
-			from: "2007",
-			to: "2009",
-			school: "Escuela de Fotografía de Andy Goldstein",
-			titles: ["Técnico en fotografía"]
-		},
-		{
-			from: "2001",
-			to: "2006",
-			school: "Escuelas Técnicas Raggio",
-			titles: ["Diseñador gráfico", "Técnico en comunicación publicitaria"]
-		},
+		{ name: "Adobe XD", level: 6 },
+		{ name: "InDesign", level: 4 },
 	],
 	languages: [
 		{ name: "Español", level: 7, },
 		{ name: "Inglés", level: 6, },
 	],
-	courses: {
-		udm: {
+	courses: [
+		{
+			place: "Wmedia",
+			from: "2020",
+			to: "",
+			titles: [
+				"Vue.js desde cero",
+			]
+		},
+		{
 			place: "Udemy",
-			from: "2020",
+			from: "2019",
 			to: "",
-			courses: {
-				vue: "VueJS",
-			}
+			titles: [
+				"VueJS",
+				"Laravel 7",
+			]
 		},
-		wes: {
+		{
 			place: "WesBos",
-			from: "2020",
+			from: "2019",
 			to: "",
-			courses: {
-				md: "Mastering Markdown",
-				flex: "CSS Flexbox",
-				grid: "CSS Grid",
-				linux: "Command Line",
-				es6: "ES6 for everyone",
-				js30: "Javascript 30",
-			}
+			titles: [
+				"Mastering Markdown",
+				"CSS Flexbox",
+				"CSS Grid",
+				"Command Line",
+				"ES6 for everyone",
+				"Javascript 30",
+			]
 		},
-		plz: {
+		{
 			place: "Platzi",
 			from: "2015",
-			to: "2019",
-			courses: {
-				github: "Git y Github",
-				js: "Javascript ES6",
-				wp: "Themes y Plugins WordPress",
-				regex: "Expresiones regulares",
-				node: "NodeJS",
-				bash: "Bash",
-				php: "PHP Laravel",
-			}
+			to: "2020",
+			titles: [
+				"Git y Github",
+				"Javascript ES6",
+				"Themes y Plugins WordPress",
+				"Expresiones regulares",
+				"NodeJS",
+				"Bash",
+				"PHP Laravel",
+			]
 		},
-		eit: {
+		{
 			place: "Educación IT",
 			from: "2010",
 			to: "2013",
-			courses: {
-				html: "HTML5 y CSS3",
-				resp: "Diseño Responsive",
-				php: "PHP y MySQL",
-				phpopp: "PHP OOP y MVC",
-				ajax: "Ajax y jQuery"
-			}
+			titles: [
+				"HTML5 y CSS3",
+				"Diseño Responsive",
+				"PHP y MySQL",
+				"PHP OOP y MVC",
+				"Ajax y jQuery"
+			]
 		},
-	},
-	references: {
-		ntm: {
+	],
+	references: [
+		{
 			name: "Roni Kripper",
 			email: "ronikripper@gmail.com",
 			phone: "(+1) 617 717 9656"
 		}
-	},
-	hobbies: {
-		games: {
-			name: "Juegos de mesa",
-			icon: "/images/cv/hobbies/dice.svg"
-		},
-		camping: {
-			name: "Camping",
-			icon: "/images/cv/hobbies/tent.svg"
-		},
-		pc: {
-			name: "Juegos PC",
-			icon: "/images/cv/hobbies/joystick.svg"
-		},
-		photo: {
-			name: "Fotografía",
-			icon: "/images/cv/hobbies/camera.svg"
-		},
-		family: {
-			name: "Familia",
-			icon: "/images/cv/hobbies/family.svg"
-		},
-		movies: {
-			name: "Series y películas",
-			icon: "/images/cv/hobbies/tv.svg"
-		},
-		space: {
-			name: "Astronomía",
-			icon: "/images/cv/hobbies/telescope.svg"
-		},
-		music: {
-			name: "Música",
-			icon: "/images/cv/hobbies/headphones.svg"
-		},
-		read: {
-			name: "Leer",
-			icon: "/images/cv/hobbies/reading.svg"
-		},
-		culture: {
-			name: "Cultura",
-			icon: "/images/cv/hobbies/globe.svg"
-		},
-		travel: {
-			name: "Viajar",
-			icon: "/images/cv/hobbies/plane.svg"
-		},
-	},
+	],
+	hobbies: [
+		{ name: "Juegos de mesa", icon: "/images/cv/hobbies/dice.svg" },
+		{ name: "Camping", icon: "/images/cv/hobbies/tent.svg" },
+		{ name: "Juegos PC", icon: "/images/cv/hobbies/joystick.svg" },
+		{ name: "Fotografía", icon: "/images/cv/hobbies/camera.svg" },
+		{ name: "Familia", icon: "/images/cv/hobbies/family.svg" },
+		{ name: "Series y películas", icon: "/images/cv/hobbies/tv.svg" },
+		{ name: "Astronomía", icon: "/images/cv/hobbies/telescope.svg" },
+		{ name: "Música", icon: "/images/cv/hobbies/headphones.svg" },
+		{ name: "Leer", icon: "/images/cv/hobbies/reading.svg" },
+		{ name: "Cultura", icon: "/images/cv/hobbies/globe.svg" },
+		{ name: "Viajar", icon: "/images/cv/hobbies/plane.svg" },
+	],
 }
