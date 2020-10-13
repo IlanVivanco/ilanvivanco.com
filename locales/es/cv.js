@@ -2,7 +2,7 @@ import socialsData from '../general/socials'
 
 export default {
 	lang: "ES",
-	name: "Ilán Vivanco",
+	name: "ilán vivanco",
 	job_title: "Programador web full stack",
 	website: "ilanvivanco.com",
 	email: "ilanvivanco@gmail.com",
@@ -182,20 +182,20 @@ export default {
 			level: 7
 		},
 	},
-	education: {
-		gst: {
+	education: [
+		{
 			from: "2007",
 			to: "2009",
 			school: "Escuela de Fotografía de Andy Goldstein",
 			titles: ["Técnico en fotografía"]
 		},
-		rag: {
+		{
 			from: "2001",
 			to: "2006",
 			school: "Escuelas Técnicas Raggio",
 			titles: ["Diseñador gráfico", "Técnico en comunicación publicitaria"]
 		},
-	},
+	],
 	languages: {
 		es: {
 			lang: "Español",
