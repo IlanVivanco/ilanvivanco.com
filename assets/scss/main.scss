@@ -89,3 +89,7 @@ p:not(:last-child) {
 p img {
 	max-width: 100%;
 }
+
+.el-tooltip__popper {
+	padding: 0.5em !important;
+}
