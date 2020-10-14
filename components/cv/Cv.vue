@@ -13,6 +13,11 @@
 					<section-header :title="cv.headers.studies" :icon="cv.icons.studies" />
 					<studies :data="cv.data.education" />
 				</div>
+
+				<div class="resume-section__group">
+					<section-header :title="cv.headers.stack" :icon="cv.icons.stack" />
+					<icons-grid :data="cv.data.stack" size="medium" />
+				</div>
 			</el-col>
 
 			<el-col :span="8" class="resume-section__aside">
@@ -34,10 +39,7 @@
 
 					<div class="resume-section__group">
 						<section-header :title="cv.headers.hobbies" :icon="cv.icons.hobbies" />
-						<div>
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi in minus cumque quia, iusto deserunt
-							incidunt excepturi.
-						</div>
+						<cloud :data="cv.data.hobbies" />
 					</div>
 				</aside>
 			</el-col>
@@ -46,7 +48,9 @@
 </template>
 
 <script>
+import Cloud from '@/components/cv/Cloud'
 import CvHeader from '@/components/cv/CvHeader'
+import IconsGrid from '@/components/cv/IconsGrid'
 import Positions from '@/components/cv/Positions'
 import Ratings from '@/components/cv/Ratings'
 import SectionHeader from '@/components/cv/SectionHeader'
@@ -55,7 +59,9 @@ import Studies from '@/components/cv/Studies'
 export default {
 	name: 'CV',
 	components: {
+		Cloud,
 		CvHeader,
+		IconsGrid,
 		Positions,
 		Ratings,
 		SectionHeader,
