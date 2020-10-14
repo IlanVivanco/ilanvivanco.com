@@ -16,6 +16,9 @@ export default {
 	head() {
 		return {
 			title: 'Blog',
+			link:[
+				{ rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Fira+Code&display=swap' }
+			]
 		}
 	},
 	components: {},

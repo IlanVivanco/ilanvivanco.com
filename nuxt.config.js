@@ -28,7 +28,7 @@ export default {
 			{ rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,900;1,400;1,900&display=swap' }, // Titles
 			{ rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Economica:ital,wght@0,400;0,600;1,400;1,600&display=swap' }, // Alt titles
 			{ rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,400;0,600;1,400;1,600&display=swap' }, // Body
-			{ rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Fira+Code&display=swap' }, // Monospace
+			// { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Fira+Code&display=swap' }, // Monospace
 		]
 	},
 	/*
