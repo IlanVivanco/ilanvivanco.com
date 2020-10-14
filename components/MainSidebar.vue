@@ -16,7 +16,7 @@
 			</div>
 
 			<footer class="about-me__footer">
-				<nuxt-link :to="localePath('index')">
+				<nuxt-link :to="localePath('resume')">
 					<el-button type="warning" icon="el-icon-tickets" round>CV</el-button>
 				</nuxt-link>
 				<nuxt-link :to="localePath('contact-me')">
