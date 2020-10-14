@@ -15,8 +15,8 @@
 				</div>
 
 				<div class="resume-section__group">
-					<section-header :title="cv.headers.stack" :icon="cv.icons.stack" />
-					<icons-grid :data="cv.data.stack" size="medium" />
+					<section-header :title="cv.headers.tech" :icon="cv.icons.tech" />
+					<icons-grid :data="cv.data.tech" size="medium" />
 				</div>
 			</el-col>
 
