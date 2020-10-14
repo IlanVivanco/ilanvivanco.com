@@ -61,6 +61,10 @@ export default {
 	line-height: 1.4em;
 	font-size: 1rem;
 
+	&:last-child {
+		padding: 0;
+	}
+
 	&__place {
 		color: $color-text-primary;
 		font-weight: bold;
