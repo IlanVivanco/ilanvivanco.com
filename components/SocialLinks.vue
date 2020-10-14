@@ -1,7 +1,7 @@
 <template>
 	<ul class="social-links">
 		<li v-for="(social, i) in socials" :key="i" class="social-links__item">
-			<el-tooltip effect="dark" placement="bottom" :content="social.name" :open-delay="200">
+			<el-tooltip effect="dark" placement="bottom" :content="social.name" :open-delay="200" :enterable="false">
 				<a :href="social.link" target="_blanck">
 					<img :src="social.logo" :alt="social.name" class="social-links__logo" />
 				</a>

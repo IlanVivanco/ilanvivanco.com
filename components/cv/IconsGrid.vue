@@ -4,7 +4,7 @@
 			<el-tooltip
 				placement="top"
 				popper-class="icon-popper"
-				:enterable="true"
+				:enterable="false"
 				:content="item.name"
 				:key="item.name"
 				:open-delay="200"
