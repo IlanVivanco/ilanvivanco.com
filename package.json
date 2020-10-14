@@ -16,7 +16,8 @@
 		"lodash": "^4.17.20",
 		"moment": "^2.27.0",
 		"nuxt": "^2.14.0",
-		"nuxt-i18n": "^6.13.7"
+		"nuxt-i18n": "^6.13.7",
+		"vuewordcloud": "^18.7.12"
 	},
 	"devDependencies": {
 		"@nuxtjs/dotenv": "^1.4.1",
