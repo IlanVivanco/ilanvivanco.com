@@ -36,6 +36,7 @@ export default {
 			courses: "el-icon-tickets",
 			hobbies: "el-icon-camera",
 			studies: "el-icon-reading",
+			stack: "el-icon-copy-document",
 		},
 		headers: {
 			languages: "Idiomas",
@@ -45,6 +46,7 @@ export default {
 			hobbies: "Hobbies",
 			studies: "Estudios",
 			portfolio: "Trabajos",
+			stack: "Stack",
 		},
 		ratings: {
 			high: "alto",
