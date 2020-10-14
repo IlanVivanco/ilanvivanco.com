@@ -1,0 +1,27 @@
+export default [
+   { weight: 3, rotation: 0, text: "Familia" },
+   { weight: 3, rotation: 90, text: "Fotografía" },
+   { weight: 3, rotation: 0, text: "Programación" },
+   { weight: 3, rotation: 90, text: "Tecnología" },
+
+   { weight: 2, rotation: 90, text: "Camping" },
+   { weight: 2, rotation: 90, text: "Diseño" },
+   { weight: 2, rotation: 0, text: "Música" },
+   { weight: 2, rotation: 90, text: "Paisajes" },
+   { weight: 2, rotation: 90, text: "Series" },
+   { weight: 2, rotation: 0, text: "Viajes" },
+   { weight: 2, rotation: 0, text: "Aprender" },
+
+   { weight: 1, rotation: 0, text: "Astronomía" },
+   { weight: 1, rotation: 90, text: "Arduino" },
+   { weight: 1, rotation: 90, text: "Aviones" },
+   { weight: 1, rotation: 0, text: "Cultura" },
+   { weight: 1, rotation: 90, text: "Drones" },
+   { weight: 1, rotation: 0, text: "Idiomas" },
+   { weight: 1, rotation: 0, text: "Juegos de mesa" },
+   { weight: 1, rotation: 90, text: "Videojuegos" },
+   { weight: 1, rotation: 90, text: "Libros" },
+   { weight: 1, rotation: 0, text: "Películas" },
+   { weight: 1, rotation: 0, text: "Treking" },
+   { weight: 1, rotation: 0, text: "Couchsurfing" },
+]

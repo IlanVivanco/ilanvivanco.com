@@ -1,4 +1,10 @@
-import socialsData from '../general/socials'
+import courses from './courses'
+import education from './education'
+import hobbies from './hobbies'
+import positions from './positions'
+import skills from './skills'
+import socials from '../general/socials'
+import stack from './stack'
 
 export default {
 	lang: "ES",
@@ -9,174 +15,9 @@ export default {
 	phone: "(+54) 11.5982.6302",
 	birth_date: "1988-06-17",
 	location: "Puerto Madryn, Argentina",
-	socials: socialsData,
-	positions: [
-		{
-			company: "Delicious Brains",
-			name: "Programador web senior",
-			excerpt: "Tareas de desarollo de producto para el plugin de	WordPress WP Offload Media Pro/Lite. Atención a	soporte. Actualización de blog posts.",
-			from: "2020-04",
-			to: "2020-08",
-		},
-		{
-			company: "Networks That Matter",
-			name: "Programador web senior y líder de proyectos",
-			excerpt: "Coordinación de tareas y manejo de equipo de trabajo. Comunicación con el cliente. Programación de sitios web WordPress. Migración de sitios web a WordPress y realización de themes y plugins hechos a medida.",
-			from: "2015-10",
-			to: "",
-		},
-		{
-			company: "Explore & Share",
-			name: "Programador web senior y líder de proyectos",
-			excerpt: "Desarrollo y mantenimiento de explore-share.com Migración del sitio antiguo a WordPress y creación del theme y plugins personalizados.",
-			from: "2016-12",
-			to: "2018-07",
-		},
-		{
-			company: "Magissim",
-			name: "Programador web senior",
-			excerpt: "Diseño y programación de sitios web. Desarrollo de sitios web realizados WordPress, Prestashop y Laravel.",
-			from: "2014-08",
-			to: "2017-02",
-		},
-		{
-			company: "Activar Comunicación",
-			name: "Diseñador gráfico y programador web",
-			excerpt: "Diseño y programación de sitios web personalizados y administración de sitios web WordPress. Desarrollo de entornos backend a medida en PHP.",
-			from: "2013-03",
-			to: "2014-06",
-		},
-		{
-			company: "Mendióroz Diseño",
-			name: "Diseñador gráfico",
-			excerpt: "Diseño y documentación de la señalética para Aeropuertos Argentina 2000 e Inframérica. Armado de renders.",
-			from: "2011-03",
-			to: "2013-02",
-		},
-		{
-			company: "Exastudio",
-			name: "Diseñador gráfico y programador web",
-			excerpt: "Diseño y programación desitiospáginas web (Flash, HTML, PHP, AS3). Avisos para diarios y revistas. Imagen corporativa. Fotografía y retoques.",
-			from: "2008-04",
-			to: "2010-05",
-		},
-		{
-			company: "Trabajos Freelance",
-			name: "Programador web y diseñador gráfico",
-			excerpt: "Emprendimiento personal para trabajos freelance. Atención de clientes. Desarrollo integral de sitios web. Administración de sitios WordPress. Fotografía y retoques.",
-			from: "2005-12",
-			to: "",
-		},
-		{
-			company: "Gilardoni & Asoc",
-			name: "Ayundate de fotografía y diseñador gráfico",
-			excerpt: "Retoques fotográficos. Armado de folletos, logos, packaging, carteles y anuncios publicitarios. Armado de páginas web (PHP, HTML, CSS).",
-			from: "2005-06",
-			to: "2007-12",
-		},
-	],
-	education: [
-		{
-			from: "2007",
-			to: "2009",
-			place: "Escuela de Fotografía de Andy Goldstein",
-			titles: ["Técnico en fotografía"]
-		},
-		{
-			from: "2001",
-			to: "2006",
-			place: "Escuelas Técnicas Raggio",
-			titles: ["Diseñador gráfico", "Técnico en comunicación publicitaria"]
-		},
-	],
-	skills: [
-		{ name: "WordPress", level: 7 },
-		{ name: "WP Themes", level: 7 },
-		{ name: "WP Plugins", level: 6 },
-		{ name: "Migraciones WP", level: 7 },
-		{ name: "WooCommerce", level: 5 },
-		{ spacer: true },
-		{ name: "PHP", level: 7 },
-		{ name: "MySQL", level: 5 },
-		{ name: "HTML5", level: 7 },
-		{ name: "CSS3", level: 7 },
-		{ name: "JavaScript", level: 6 },
-		{ name: "jQuery", level: 6 },
-		{ name: "Vue", level: 4 },
-		{ name: "Laravel", level: 3 },
-		{ spacer: true },
-		{ name: "NodeJS", level: 4 },
-		{ name: "Bash", level: 3 },
-		{ name: "Git", level: 6 },
-		{ name: "Sass", level: 6 },
-		{ name: "Servers", level: 4 },
-		{ spacer: true },
-		{ name: "Photoshop", level: 7 },
-		{ name: "Illustrator", level: 7 },
-		{ name: "Adobe XD", level: 6 },
-		{ name: "InDesign", level: 4 },
-	],
 	languages: [
 		{ name: "Español", level: 7, },
 		{ name: "Inglés", level: 6, },
-	],
-	courses: [
-		{
-			place: "Wmedia",
-			from: "2020",
-			to: "",
-			titles: [
-				"Vue.js desde cero",
-			]
-		},
-		{
-			place: "Udemy",
-			from: "2019",
-			to: "",
-			titles: [
-				"VueJS",
-				"Laravel 7",
-			]
-		},
-		{
-			place: "WesBos",
-			from: "2019",
-			to: "",
-			titles: [
-				"Mastering Markdown",
-				"CSS Flexbox",
-				"CSS Grid",
-				"Command Line",
-				"ES6 for everyone",
-				"Javascript 30",
-			]
-		},
-		{
-			place: "Platzi",
-			from: "2015",
-			to: "2020",
-			titles: [
-				"Git y Github",
-				"Javascript ES6",
-				"Themes y Plugins WordPress",
-				"Expresiones regulares",
-				"NodeJS",
-				"Bash",
-				"PHP Laravel",
-			]
-		},
-		{
-			place: "Educación IT",
-			from: "2010",
-			to: "2013",
-			titles: [
-				"HTML5 y CSS3",
-				"Diseño Responsive",
-				"PHP y MySQL",
-				"PHP OOP y MVC",
-				"Ajax y jQuery"
-			]
-		},
 	],
 	references: [
 		{
@@ -185,97 +26,11 @@ export default {
 			phone: "(+1) 617 717 9656"
 		}
 	],
-	hobbies: [
-		{ weight: 3, rotation: 0, text: "Familia" },
-		{ weight: 3, rotation: 90, text: "Fotografía" },
-		{ weight: 3, rotation: 0, text: "Programación" },
-		{ weight: 3, rotation: 90, text: "Tecnología" },
-
-		{ weight: 2, rotation: 90, text: "Camping" },
-		{ weight: 2, rotation: 90, text: "Diseño" },
-		{ weight: 2, rotation: 0, text: "Música" },
-		{ weight: 2, rotation: 90, text: "Paisajes" },
-		{ weight: 2, rotation: 90, text: "Series" },
-		{ weight: 2, rotation: 0, text: "Viajes" },
-		{ weight: 2, rotation: 0, text: "Aprender" },
-
-		{ weight: 1, rotation: 0, text: "Astronomía" },
-		{ weight: 1, rotation: 90, text: "Arduino" },
-		{ weight: 1, rotation: 90, text: "Aviones" },
-		{ weight: 1, rotation: 0, text: "Cultura" },
-		{ weight: 1, rotation: 90, text: "Drones" },
-		{ weight: 1, rotation: 0, text: "Idiomas" },
-		{ weight: 1, rotation: 0, text: "Juegos de mesa" },
-		{ weight: 1, rotation: 90, text: "Videojuegos" },
-		{ weight: 1, rotation: 90, text: "Libros" },
-		{ weight: 1, rotation: 0, text: "Películas" },
-		{ weight: 1, rotation: 0, text: "Treking" },
-		{ weight: 1, rotation: 0, text: "Couchsurfing" },
-	],
-	stack: [
-		{ show: true, color: "#777BB4", name: 'PHP', icon: "/images/svg/stack/php.svg" },
-		{ show: true, color: "#4479A1", name: 'MySQL', icon: "/images/svg/stack/mysql.svg" },
-		{ show: true, color: "#E34F26", name: 'HTML5', icon: "/images/svg/stack/html5.svg" },
-		{ show: true, color: "#1572B6", name: 'CCS3', icon: "/images/svg/stack/css3.svg" },
-		{ show: true, color: "#CC6699", name: 'Sass', icon: "/images/svg/stack/sass.svg" },
-		{ show: true, color: "#F7DF1E", name: 'Javascript', icon: "/images/svg/stack/javascript.svg" },
-		{ show: true, color: "#F05032", name: 'Git', icon: "/images/svg/stack/git.svg" },
-		{ show: true, color: "#4EAA25", name: 'Bash', icon: "/images/svg/stack/bash.svg" },
-		{ show: true, color: "#000000", name: 'JSON', icon: "/images/svg/stack/json.svg" },
-		{ show: true, color: "#000000", name: 'Markdown', icon: "/images/svg/stack/markdown.svg" },
-
-		{ show: true, color: "#21759B", name: 'WordPress', icon: "/images/svg/stack/wordpress.svg" },
-		{ show: true, color: "#96588A", name: 'WooCommerce', icon: "/images/svg/stack/woo.svg" },
-		{ show: true, color: "#FF2D20", name: 'Laravel', icon: "/images/svg/stack/laravel.svg" },
-		{ show: true, color: "#0769AD", name: 'jQuery', icon: "/images/svg/stack/jquery.svg" },
-		{ show: true, color: "#4FC08D", name: 'Vue.js', icon: "/images/svg/stack/vue.svg" },
-		{ show: true, color: "#00C58E", name: 'Nuxt.js', icon: "/images/svg/stack/nuxt.svg" },
-		{ show: true, color: "#61DAFB", name: 'React', icon: "/images/svg/stack/react.svg" },
-		{ show: true, color: "#663399", name: 'Gatsby', icon: "/images/svg/stack/gatsby.svg" },
-		{ show: true, color: "#FF4088", name: 'Hugo', icon: "/images/svg/stack/hugo.svg" },
-		{ show: true, color: "#FF7A59", name: 'Hubspot', icon: "/images/svg/stack/hubspot.svg" },
-		{ show: true, color: "#008CDD", name: 'Stripe', icon: "/images/svg/stack/stripe.svg" },
-		{ show: true, color: "#00457C", name: 'Paypal', icon: "/images/svg/stack/paypal.svg" },
-
-		{ show: true, color: "#563D7C", name: 'Bootstrap', icon: "/images/svg/stack/bootstrap.svg" },
-		{ show: true, color: "#00D1B2", name: 'Bulma', icon: "/images/svg/stack/bulma.svg" },
-		{ show: true, color: "#38B2AC", name: 'Tailwind CSS', icon: "/images/svg/stack/tailwindcss.svg" },
-
-		{ show: true, color: "#181717", name: 'Github', icon: "/images/svg/stack/github.svg" },
-		{ show: true, color: "#2088FF", name: 'Github Actions', icon: "/images/svg/stack/githubactions.svg" },
-		{ show: true, color: "#FCA121", name: 'Gitlab', icon: "/images/svg/stack/gitlab.svg" },
-
-		{ show: true, color: "#885630", name: 'Composer', icon: "/images/svg/stack/composer.svg" },
-		{ show: true, color: "#339933", name: 'Node.js', icon: "/images/svg/stack/nodejs.svg" },
-		{ show: true, color: "#CB3837", name: 'NPM', icon: "/images/svg/stack/npm.svg" },
-		{ show: true, color: "#2C8EBB", name: 'Yarn', icon: "/images/svg/stack/yarn.svg" },
-		{ show: true, color: "#CF4647", name: 'Gulp', icon: "/images/svg/stack/gulp.svg" },
-		{ show: true, color: "#FBA919", name: 'Grunt', icon: "/images/svg/stack/grunt.svg" },
-		{ show: true, color: "#F9DC3E", name: 'Babel', icon: "/images/svg/stack/babel.svg" },
-		{ show: true, color: "#2496ED", name: 'Docker', icon: "/images/svg/stack/docker.svg" },
-		{ show: true, color: "#FF6C37", name: 'Postman', icon: "/images/svg/stack/postman.svg" },
-		{ show: true, color: "#1563FF", name: 'Vagrant', icon: "/images/svg/stack/vagrant.svg" },
-		{ show: true, color: "#8DD6F9", name: 'Webpack', icon: "/images/svg/stack/webpack.svg" },
-
-		{ show: true, color: "#D22128", name: 'Apache', icon: "/images/svg/stack/apache.svg" },
-		{ show: true, color: "#232F3E", name: 'Amazon AWS', icon: "/images/svg/stack/aws.svg" },
-
-		{ show: true, color: "#40BAC8", name: 'WP Engine', icon: "/images/svg/stack/wpengine.svg" },
-		{ show: true, color: "#0080FF", name: 'DigitalOcean', icon: "/images/svg/stack/digitalocean.svg" },
-		{ show: true, color: "#EFD01B", name: 'Pantheon', icon: "/images/svg/stack/pantheon.svg" },
-		{ show: true, color: "#FF6C2C", name: 'cPanel', icon: "/images/svg/stack/cpanel.svg" },
-		{ show: true, color: "#00C7B7", name: 'Netlify', icon: "/images/svg/stack/netlify.svg" },
-		{ show: true, color: "#F38020", name: 'Cloudflare', icon: "/images/svg/stack/cloudflare.svg" },
-
-		{ show: true, color: "#4285F4", name: 'Chrome', icon: "/images/svg/stack/chrome.svg" },
-		{ show: true, color: "#FF7139", name: 'Firefox', icon: "/images/svg/stack/firefox.svg" },
-		{ show: true, color: "#0078D7", name: 'Microsoft Edge', icon: "/images/svg/stack/microsoftedge.svg" },
-		{ show: true, color: "#31A8FF", name: 'Adobe Photoshop', icon: "/images/svg/stack/photoshop.svg" },
-		{ show: false, color: "#31A8FF", name: 'Adobe Lightroom', icon: "/images/svg/stack/lightroom.svg" },
-		{ show: true, color: "#FF26BE", name: 'Adobe XD', icon: "/images/svg/stack/xd.svg" },
-		{ show: true, color: "#FF9A00", name: 'Adobe Illustrator', icon: "/images/svg/stack/illustrator.svg" },
-
-		{ show: true, color: "#E95420", name: 'Ubuntu', icon: "/images/svg/stack/ubuntu.svg" },
-		{ show: true, color: "#0078D6", name: 'Windows', icon: "/images/svg/stack/windows.svg" },
-	]
+	socials,
+	positions,
+	courses,
+	education,
+	skills,
+	hobbies,
+	stack,
 }
