@@ -17,17 +17,6 @@ html {
 
 	background-color: $color-grayscale-10;
 	color: $color-grayscale-10;
-
-	&::before {
-		content: '';
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background: linear-gradient(160deg, $color-blue-dark, $color-blue);
-		z-index: -1;
-	}
 }
 
 html,

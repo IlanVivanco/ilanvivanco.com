@@ -1,6 +1,8 @@
 <template>
-	<div :class="currentPathSlug">
-		<LangSwitcher />
+	<div class="main-layout" :class="currentPathSlug">
+		<lang-switcher />
+		<animated-background />
+
 		<div class="page">
 			<div class="container main-container">
 				<el-row align="middle" type="flex" class="main-row">
@@ -25,13 +27,20 @@
 
 <script>
 import eventHub from '@/plugins/eventHub'
+
+import AnimatedBackground from '@/components/AnimatedBackground'
 import LangSwitcher from '@/components/LangSwitcher'
 import MainSidebar from '@/components/MainSidebar'
 import MainNav from '@/components/Nav'
 
 export default {
 	name: 'DefaultLayout',
-	components: { LangSwitcher, MainNav, MainSidebar },
+	components: {
+		AnimatedBackground,
+		LangSwitcher,
+		MainNav,
+		MainSidebar,
+	},
 	transition: { mode: '' },
 	data() {
 		return {
@@ -63,6 +72,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.main-layout {
+	position: relative;
+}
+
 .page {
 	width: 100vw;
 	height: 100vh;
