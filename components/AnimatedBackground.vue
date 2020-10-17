@@ -241,5 +241,10 @@ export default {
 		background: linear-gradient(160deg, $color-blue-dark, $color-blue);
 		z-index: -1;
 	}
+
+	&__canvas{
+		height: 100vh;
+		width: 100vw;
+	}
 }
 </style>
