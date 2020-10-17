@@ -125,6 +125,7 @@ export default {
 	align-self: flex-start;
 	margin-top: 2.5vh;
 	overflow: hidden;
+	box-shadow: 0 0 10px 2px rgba(black, 0.1);
 
 	@include breakpoint('medium') {
 		margin-top: 2.5vh;
@@ -156,20 +157,6 @@ export default {
 		margin: 2.5vh 0;
 	}
 
-	&::before {
-		@include border-radius();
-
-		content: '';
-		position: absolute;
-		width: 95%;
-		height: 100%;
-		top: -3%;
-		left: -5%;
-		background: rgba(white, 0.03);
-		z-index: -1;
-		filter: blur(3px);
-	}
-
 	&__inner {
 		@include border-radius();
 
@@ -178,7 +165,7 @@ export default {
 		overflow: hidden;
 		background: $color-grayscale-1;
 		text-align: center;
-		box-shadow: 5px 0px 10px 2px rgba(black, 0.1), 5px 0px 5px rgba(black, 0.05);
+		box-shadow: 0 0 10px 2px rgba(black, 0.1), 5px 0px 5px rgba(black, 0.05);
 
 		@include breakpoint('medium') {
 			height: 40vh;
@@ -195,6 +182,7 @@ export default {
 
 	height: 75vh;
 	overflow: hidden;
+	box-shadow: 0 0 10px 2px rgba(black, 0.1);
 
 	@include breakpoint('medium') {
 		@include border-radius();
