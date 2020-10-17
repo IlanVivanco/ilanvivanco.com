@@ -10,7 +10,7 @@
 				</div>
 
 				<div class="resume-section__group">
-					<section-header :title="cv.headers.studies" :icon="cv.icons.studies" />
+					<section-header :title="cv.headers.education" :icon="cv.icons.education" />
 					<studies :data="cv.data.education" />
 				</div>
 

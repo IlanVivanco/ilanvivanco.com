@@ -20,7 +20,7 @@ export default {
 		positions: "el-icon-suitcase",
 		courses: "el-icon-tickets",
 		hobbies: "el-icon-camera",
-		studies: "el-icon-reading",
+		education: "el-icon-reading",
 		tech: "el-icon-copy-document",
 	},
 	headers: {
@@ -29,7 +29,7 @@ export default {
 		positions: "Experiencia",
 		courses: "Cursos",
 		hobbies: "Hobbies",
-		studies: "Estudios",
+		education: "Educación",
 		portfolio: "Trabajos",
 		tech: "Tecnologías",
 	},

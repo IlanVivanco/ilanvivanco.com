@@ -15,6 +15,8 @@ export default [
    { weight: 1, rotation: 0, text: "Astronomía" },
    { weight: 1, rotation: 90, text: "Arduino" },
    { weight: 1, rotation: 90, text: "Aviones" },
+	{ weight: 1, rotation: 0, text: "Café" },
+	{ weight: 1, rotation: 90, text: "Cocina" },
    { weight: 1, rotation: 0, text: "Cultura" },
    { weight: 1, rotation: 90, text: "Drones" },
    { weight: 1, rotation: 0, text: "Idiomas" },
