@@ -12,66 +12,54 @@ export default {
 	name: 'AnimatedBackground',
 	layout: 'bg',
 	data() {
-		return {
-			width: null,
-			height: null,
-			segments: null,
-			bg: null,
-			canvas: null,
-			ctx: null,
-			points: null,
-			target: null,
-			main_color: null,
-			animateHeader: true,
-		}
+		return {}
 	},
 	mounted() {
 		this.bg = document.querySelector('.bg')
 		this.canvas = document.querySelector('.bg__canvas')
-
-
-		this.width = window.innerWidth
-		this.height = window.innerHeight
-		this.bg.style.height = this.height + 'px'
-
-		this.canvas.width = this.width
-		this.canvas.height = this.height
-
 		this.ctx = this.canvas.getContext('2d')
 
-		this.initHeader()
+		this.initBackground()
 		this.initAnimation()
 		this.addListeners()
 	},
 	methods: {
-		initHeader() {
+		initBackground() {
 			this.width = window.innerWidth
 			this.height = window.innerHeight
-			this.segments = 15
+			this.bg.style.height = this.height + 'px'
+			this.canvas.width = this.width
+			this.canvas.height = this.height
+
+			this.grid = 15
+			this.closestPoints = 5
+			this.moveOffset = 50
 			this.target = { x: this.width / 2, y: this.height / 2 }
-			this.main_color = '154, 223, 228'
+			this.drawColor = '154, 223, 228'
 
 			// create points
 			this.points = []
-			for (let x = 0; x < this.width; x = x + this.width / this.segments) {
-				for (let y = 0; y < this.height; y = y + this.height / this.segments) {
-					let px = x + (Math.random() * this.width) / this.segments
-					let py = y + (Math.random() * this.height) / this.segments
+			for (let x = 0; x < this.width; x = x + this.width / this.grid) {
+				for (let y = 0; y < this.height; y = y + this.height / this.grid) {
+					let px = x + (Math.random() * this.width) / this.grid
+					let py = y + (Math.random() * this.height) / this.grid
 					let p = { x: px, originX: px, y: py, originY: py }
 					this.points.push(p)
 				}
 			}
 
-			// for each point find the 5 closest points
+			// for each point find the closest points
 			for (let i = 0; i < this.points.length; i++) {
 				let closest = []
 				let p1 = this.points[i]
 
 				for (let j = 0; j < this.points.length; j++) {
 					let p2 = this.points[j]
-					if (!(p1 == p2)) {
+
+					if (p1 != p2) {
 						let placed = false
-						for (let k = 0; k < 5; k++) {
+
+						for (let k = 0; k < this.closestPoints; k++) {
 							if (!placed) {
 								if (closest[k] == undefined) {
 									closest[k] = p2
@@ -80,7 +68,7 @@ export default {
 							}
 						}
 
-						for (let k = 0; k < 5; k++) {
+						for (let k = 0; k < this.closestPoints; k++) {
 							if (!placed) {
 								if (this.getDistance(p1, p2) < this.getDistance(p1, closest[k])) {
 									closest[k] = p2
@@ -96,7 +84,7 @@ export default {
 
 			// assign a circle to each point
 			for (let i in this.points) {
-				let c = new this.Circle(this.points[i], 2 + Math.random() * 2, 'rgba(255,255,255,0.3)', this)
+				let c = new this.Circle(this.points[i], 2 + Math.random() * 2, this)
 				this.points[i].circle = c
 			}
 		},
@@ -105,8 +93,8 @@ export default {
 			if (!('ontouchstart' in window)) {
 				window.addEventListener('mousemove', this.mouseMove)
 			}
-			window.addEventListener('scroll', this.scrollCheck)
-			window.addEventListener('resize', this.resize)
+
+			window.addEventListener('resize', this.resetAnimation)
 		},
 
 		mouseMove(e) {
@@ -120,53 +108,36 @@ export default {
 				posx = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft
 				posy = e.clientY + document.body.scrollTop + document.documentElement.scrollTop
 			}
+
 			this.target.x = posx
 			this.target.y = posy
 		},
 
-		scrollCheck() {
-			if (document.body.scrollTop > this.height) this.animateHeader = false
-			else this.animateHeader = true
-		},
-
-		resize() {
-			this.width = window.innerWidth
-			this.height = window.innerHeight
-			this.bg.style.height = this.height + 'px'
-			this.canvas.width = this.width
-			this.canvas.height = this.height
+		resetAnimation() {
+			this.initBackground()
+			this.initAnimation()
 		},
 
 		initAnimation() {
 			this.animate()
+
 			for (let i in this.points) {
 				this.shiftPoint(this.points[i])
 			}
 		},
 
 		animate() {
-			if (this.animateHeader) {
-				this.ctx.clearRect(0, 0, this.width, this.height)
+			this.ctx.clearRect(0, 0, this.width, this.height)
 
-				for (let i in this.points) {
-					// detect points in range
-					if (Math.abs(this.getDistance(this.target, this.points[i])) < 50000) {
-						this.points[i].active = 0.1
-						this.points[i].circle.active = 0.2
-					} else if (Math.abs(this.getDistance(this.target, this.points[i])) < 200000) {
-						this.points[i].active = 0.08
-						this.points[i].circle.active = 0.1
-					} else if (Math.abs(this.getDistance(this.target, this.points[i])) < 500000) {
-						this.points[i].active = 0.05
-						this.points[i].circle.active = 0.07
-					} else {
-						this.points[i].active = 0
-						this.points[i].circle.active = 0
-					}
+			for (let i in this.points) {
+				let distance = this.getDistance(this.target, this.points[i])
 
-					this.drawLines(this.points[i])
-					this.points[i].circle.draw()
-				}
+				// Set alpha upon distance
+				this.points[i].alpha = this.mapDistance(distance)
+				this.points[i].circle.alpha = this.mapDistance(distance) * 1.2
+
+				this.drawLines(this.points[i])
+				this.points[i].circle.draw()
 			}
 
 			requestAnimationFrame(this.animate)
@@ -174,8 +145,8 @@ export default {
 
 		shiftPoint(p) {
 			gsap.to(p, 1 + 1 * Math.random(), {
-				x: p.originX - 50 + Math.random() * 100,
-				y: p.originY - 50 + Math.random() * 100,
+				x: p.originX - this.moveOffset / 2 + Math.random() * this.moveOffset,
+				y: p.originY - this.moveOffset / 2 + Math.random() * this.moveOffset,
 				ease: 'circ.easeInOut',
 				onComplete: () => {
 					this.shiftPoint(p)
@@ -185,41 +156,45 @@ export default {
 
 		// Canvas manipulation
 		drawLines(p) {
-			if (!p.active) return
+			if (!p.alpha) return
 
 			for (let i in p.closest) {
 				this.ctx.beginPath()
 				this.ctx.moveTo(p.x, p.y)
 				this.ctx.lineTo(p.closest[i].x, p.closest[i].y)
-				this.ctx.strokeStyle = `rgba(${this.main_color}, ${p.active})`
+				this.ctx.strokeStyle = `rgba(${this.drawColor}, ${p.alpha})`
 				this.ctx.stroke()
-			}
-		},
-
-		Circle(pos, rad, color, that) {
-			let _this = this
-			// console.log(this)
-
-			// constructor
-			;(function () {
-				_this.pos = pos || null
-				_this.radius = rad || null
-				_this.color = color || null
-			})()
-
-			this.draw = function () {
-				if (!_this.active) return
-
-				that.ctx.beginPath()
-				that.ctx.arc(_this.pos.x, _this.pos.y, _this.radius, 0, 4 * Math.PI, false)
-				that.ctx.fillStyle = `rgba(${that.main_color}, ${_this.active})`
-				that.ctx.fill()
 			}
 		},
 
 		// Util
 		getDistance(p1, p2) {
-			return Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2)
+			return Math.abs((Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2)) / 1000)
+		},
+
+		mapDistance(num) {
+			const in_min = 0
+			const in_max = 750
+			const out_max = 0.1
+			const out_min = out_max / 4
+
+			if (num > in_max) return out_min
+
+			return Math.abs(((num - in_min) * (out_min - out_max)) / (in_max - in_min) + out_max)
+		},
+
+		Circle(pos, rad, that) {
+			this.pos = pos || null
+			this.radius = rad || null
+
+			this.draw = function () {
+				if (!this.alpha) return
+
+				that.ctx.beginPath()
+				that.ctx.arc(this.pos.x, this.pos.y, this.radius, 0, 4 * Math.PI, false)
+				that.ctx.fillStyle = `rgba(${that.drawColor}, ${this.alpha})`
+				that.ctx.fill()
+			}
 		},
 	},
 }
@@ -242,7 +217,7 @@ export default {
 		z-index: -1;
 	}
 
-	&__canvas{
+	&__canvas {
 		height: 100vh;
 		width: 100vw;
 	}
