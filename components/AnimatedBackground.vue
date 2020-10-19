@@ -12,7 +12,9 @@ export default {
 	name: 'AnimatedBackground',
 	layout: 'bg',
 	data() {
-		return {}
+		return {
+			resize_event: null,
+		}
 	},
 	mounted() {
 		this.bg = document.querySelector('.bg')
@@ -94,7 +96,7 @@ export default {
 				window.addEventListener('mousemove', this.mouseMove)
 			}
 
-			window.addEventListener('resize', this.resetAnimation)
+			window.addEventListener('resize', this.watchResize)
 		},
 
 		mouseMove(e) {
@@ -111,6 +113,11 @@ export default {
 
 			this.target.x = posx
 			this.target.y = posy
+		},
+
+		watchResize() {
+			clearTimeout(this.resize_event)
+			this.resize_event = setTimeout(this.resetAnimation, 200)
 		},
 
 		resetAnimation() {
