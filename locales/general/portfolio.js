@@ -3,6 +3,8 @@ export default [
 		company: "Ilán Vivanco",
 		image: "/images/portfolio/ilan-vivanco.jpg",
 		website: "https://www.ilanvivanco.com/",
+		technologies: ['vue', 'nuxt', 'javascript'],
+		date: "2020/10"
 	},
 	{
 		company: "Camunda",
