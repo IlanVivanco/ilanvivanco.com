@@ -30,6 +30,7 @@ export default {
 	padding: 0.5rem;
 	color: $color-grayscale-6;
 	text-transform: uppercase;
+	z-index: 1;
 
 	@include breakpoint('medium') {
 		right: 1vw;
