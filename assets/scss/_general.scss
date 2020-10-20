@@ -1,0 +1,76 @@
+html {
+	font-family: $secondary-font;
+	font-size: 16px;
+	font-weight: normal;
+	word-spacing: 0;
+	letter-spacing: 0;
+	line-height: 1.618;
+	-ms-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	box-sizing: border-box;
+
+	background-color: $color-grayscale-10;
+	color: $color-grayscale-10;
+}
+
+html,
+body {
+	width: 100%;
+	min-height: 100vh;
+	overflow: hidden;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+}
+
+h1,
+h2,
+h3 {
+	font-weight: 900;
+	font-family: $primary-font;
+}
+
+h4,
+h5,
+h6 {
+	font-weight: 400;
+	font-family: $primary-alt-font;
+}
+
+h1 {
+	font-size: 2.197rem;
+}
+
+h2 {
+	font-size: 1.69rem;
+}
+
+h3 {
+	font-size: 1.3rem;
+}
+
+h4 {
+	font-size: 1.3rem;
+}
+
+h5 {
+	font-size: 1.11rem;
+}
+
+h6 {
+	font-size: 0.95rem;
+}
+
+p:not(:last-child) {
+	margin-bottom: 1em;
+}
+
+p img {
+	max-width: 100%;
+}
