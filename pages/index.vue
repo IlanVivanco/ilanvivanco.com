@@ -1,7 +1,10 @@
 <template>
 	<div class="container" id="sobre-mi">
 		<div>
-			<h1 class="title">{{ $t('greeting') }}</h1>
+			<section-title
+				title="Hola"
+				description=""
+			/>
 
 			<div class="links">
 				<el-button v-for="post in posts" :key="post.slug" type="primary">
@@ -38,6 +41,8 @@
 </template>
 
 <script>
+import SectionTitle from '@/components/global/SectionTitle'
+
 export default {
 	name: 'Index',
 	scrollToTop: false,
@@ -53,7 +58,7 @@ export default {
 			posts,
 		}
 	},
-	components: {},
+	components: {SectionTitle},
 }
 </script>
 

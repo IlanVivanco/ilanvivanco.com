@@ -1,6 +1,9 @@
 <template>
 	<div class="container">
-		<h1 class="title">Contactame</h1>
+		<section-title
+			title="Contactame"
+			description="Podés encontrarme en cualquiera de mis redes sociales o, si lo preferís, llenar el siguiente formulario."
+		/>
 
 		Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos natus reprehenderit sunt obcaecati distinctio
 		molestias aliquid, deleniti, magnam perspiciatis expedita quia. Necessitatibus adipisci voluptas totam! Repellat
@@ -9,6 +12,8 @@
 </template>
 
 <script>
+import SectionTitle from '@/components/global/SectionTitle'
+
 export default {
 	name: 'ContactMe',
 	scrollToTop: false,
@@ -23,6 +28,7 @@ export default {
 			en: '/contact-me',
 		},
 	},
+	components: {SectionTitle},
 }
 </script>
 

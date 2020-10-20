@@ -1,6 +1,10 @@
 <template>
 	<div class="container">
-		<h1 class="title">Blog</h1>
+
+		<section-title
+			title="Últimos artículos"
+			description=""
+		/>
 
 		Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos natus
 		reprehenderit sunt obcaecati distinctio molestias aliquid, deleniti,
@@ -10,6 +14,8 @@
 </template>
 
 <script>
+import SectionTitle from '@/components/global/SectionTitle'
+
 export default {
 	name: 'Blog',
 	scrollToTop: false,
@@ -21,7 +27,7 @@ export default {
 			]
 		}
 	},
-	components: {},
+	components: {SectionTitle},
 }
 </script>
 
