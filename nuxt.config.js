@@ -54,7 +54,8 @@ export default {
 	** https://nuxtjs.org/guide/plugins
 	*/
 	plugins: [
-		'@/plugins/element-ui'
+		'@/plugins/eventHub',
+		'@/plugins/element-ui',
 	],
 	/*
 	** Auto import components

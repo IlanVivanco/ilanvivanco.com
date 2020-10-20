@@ -1,2 +1,6 @@
 import Vue from 'vue'
-export default new Vue()
+
+export default ({ app }, inject) => {
+	const eventHub = new Vue();
+	inject('eventHub', eventHub)
+}
