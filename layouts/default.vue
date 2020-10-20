@@ -1,7 +1,7 @@
 <template>
 	<div class="main-layout" :class="currentPathSlug">
-		<lang-switcher />
 		<animated-background />
+		<lang-switcher />
 
 		<div class="page">
 			<div class="container main-container">
@@ -26,8 +26,6 @@
 </template>
 
 <script>
-import eventHub from '@/plugins/eventHub'
-
 import AnimatedBackground from '@/components/AnimatedBackground'
 import LangSwitcher from '@/components/LangSwitcher'
 import MainSidebar from '@/components/MainSidebar'
@@ -49,7 +47,7 @@ export default {
 		}
 	},
 	created() {
-		eventHub.$on('updateBannerImage', this.changeAltBannerImage)
+		this.$eventHub.$on('updateBannerImage', this.changeAltBannerImage)
 	},
 	watch: {
 		$route(to, from) {
@@ -195,7 +193,7 @@ export default {
 
 	height: 75vh;
 	overflow: hidden;
-	box-shadow: 0 0 10px 2px rgba(black, 0.1);
+	// box-shadow: 0 0 10px 2px rgba(black, 0.1);
 
 	@include breakpoint('medium') {
 		@include border-radius();
@@ -215,6 +213,7 @@ export default {
 		@include breakpoint('medium') {
 			height: auto;
 			overflow-y: visible;
+			padding: 1.5em;
 		}
 
 		&::-webkit-scrollbar {

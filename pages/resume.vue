@@ -1,12 +1,11 @@
 <template>
-	<div class="container resume">
+	<div class="container">
 		<cv />
 	</div>
 </template>
 
 <script>
 import Cv from '@/components/cv/Cv'
-import eventHub from '@/plugins/eventHub'
 
 export default {
 	name: 'Resume',
@@ -17,7 +16,7 @@ export default {
 		}
 	},
 	mounted() {
-		eventHub.$emit('updateBannerImage', '/images/banner.jpg')
+		this.$eventHub.$emit('updateBannerImage', '/images/banner.jpg')
 	},
 	nuxtI18n: {
 		paths: {
