@@ -1,24 +1,26 @@
 <template>
-	<header class="header-cv-section">
+	<header class="header">
 		<el-row align="middle" :gutter="30">
-			<el-col :span="16">
-				<div class="header-cv">
-					<div class="header-cv__image">
+			<el-col :span="16" class="header__person">
+				<div class="header__person-wrapper">
+					<div class="header__image">
 						<img src="/images/ilan-vivanco.jpg" :alt="cv.data.name" />
 					</div>
-					<div class="header-cv__data">
+					<div class="header__data">
 						<h1>{{ cv.data.name }}</h1>
 						<h2>{{ cv.data.job_title }}</h2>
 					</div>
 				</div>
 			</el-col>
 
-			<el-col :span="8">
-				<ul class="metadata">
-					<li class="metadata__item"><i :class="cv.icons.location"></i>{{ cv.data.location }}</li>
-					<li class="metadata__item"><i :class="cv.icons.email"></i>{{ cv.data.email }}</li>
-					<li class="metadata__item"><i :class="cv.icons.phone"></i>{{ cv.data.phone }}</li>
-					<li class="metadata__item"><i :class="cv.icons.age"></i>{{ formatted_dob }} {{ years_old }}</li>
+			<el-col :span="8" class="header__metadata">
+				<ul class="header__metadata-list">
+					<li class="header__metadata-list-item"><i :class="cv.icons.location"></i>{{ cv.data.location }}</li>
+					<li class="header__metadata-list-item"><i :class="cv.icons.email"></i>{{ cv.data.email }}</li>
+					<li class="header__metadata-list-item"><i :class="cv.icons.phone"></i>{{ cv.data.phone }}</li>
+					<li class="header__metadata-list-item">
+						<i :class="cv.icons.age"></i>{{ formatted_dob }} {{ years_old }}
+					</li>
 				</ul>
 			</el-col>
 		</el-row>
@@ -51,13 +53,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.header-cv-section {
+.header {
 	margin-bottom: 3rem;
-}
 
-.header-cv {
-	display: flex;
-	align-items: center;
+	@include breakpoint('medium') {
+		margin-bottom: 2em;
+	}
+
+	&__person {
+		@include breakpoint('medium') {
+			width: 100%;
+			margin-bottom: 2em;
+		}
+
+		@include breakpoint('tiny') {
+			display: none;
+		}
+	}
+
+	&__person-wrapper {
+		display: flex;
+		align-items: center;
+	}
 
 	&__image {
 		width: 90px;
@@ -106,15 +123,38 @@ export default {
 			}
 		}
 	}
-}
 
-.metadata {
-	padding: 0;
-	list-style: none;
-	color: $color-blue-dark;
+	&__metadata {
+		@include breakpoint('medium') {
+			width: 100%;
+		}
+	}
 
-	&__item i {
-		margin-right: 0.5em;
+	&__metadata-list {
+		padding: 0;
+		list-style: none;
+		color: $color-blue-dark;
+
+		@include breakpoint('medium') {
+			display: flex;
+			flex-wrap: wrap;
+		}
+	}
+
+	&__metadata-list-item {
+		@include breakpoint('medium') {
+			width: 50%;
+			padding-right: 0.5em;
+		}
+
+		@include breakpoint('tiny') {
+			width: 100%;
+			padding-right: 0;
+		}
+
+		i {
+			margin-right: 0.5em;
+		}
 	}
 }
 </style>

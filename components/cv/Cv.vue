@@ -23,11 +23,6 @@
 			<el-col :span="8" class="resume-section__aside">
 				<aside class="resume-section__aside-wrapper">
 					<div class="resume-section__group">
-						<section-header :title="cv.headers.languages" :icon="cv.icons.languages" />
-						<ratings :data="cv.data.languages" />
-					</div>
-
-					<div class="resume-section__group">
 						<section-header :title="cv.headers.skills" :icon="cv.icons.skills" />
 						<ratings :data="cv.data.skills" />
 					</div>
@@ -35,6 +30,11 @@
 					<div class="resume-section__group">
 						<section-header :title="cv.headers.courses" :icon="cv.icons.courses" />
 						<studies :data="cv.data.courses" />
+					</div>
+
+					<div class="resume-section__group">
+						<section-header :title="cv.headers.languages" :icon="cv.icons.languages" />
+						<ratings :data="cv.data.languages" />
 					</div>
 
 					<div class="resume-section__group">
@@ -78,9 +78,59 @@ export default {
 <style lang="scss" scoped>
 .resume-section {
 	font-size: 0.9rem;
-}
 
-.resume-section__group {
-	margin-bottom: 2em;
+	&__main {
+		@include breakpoint('medium') {
+			width: 60%;
+		}
+
+		@include breakpoint('small') {
+			width: 100%;
+		}
+	}
+
+	&__aside {
+		@include breakpoint('medium') {
+			width: 40%;
+		}
+
+		@include breakpoint('small') {
+			width: 100%;
+		}
+	}
+
+	&__aside-wrapper {
+		@include breakpoint('small') {
+			display: flex;
+			flex-wrap: wrap;
+		}
+	}
+
+	&__group {
+		margin-bottom: 2em;
+
+		@include breakpoint('small') {
+			width: 100%;
+
+			.resume-section__aside & {
+				width: calc((100% - 2em) / 2);
+				margin-bottom: 1em;
+
+				&:nth-child(2n-1) {
+					margin-right: 2em;
+				}
+			}
+		}
+
+		@include breakpoint('tiny') {
+			.resume-section__aside & {
+				width: 100%;
+
+				&:nth-child(1n) {
+					margin-right: 0;
+				}
+			}
+		}
+	}
 }
 </style>
