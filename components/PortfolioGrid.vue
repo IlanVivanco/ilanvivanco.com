@@ -1,15 +1,15 @@
 <template>
 	<el-row :gutter="20">
-		<el-col :span="8" v-for="(o, index) in items" :key="o" class="portfolio__item">
+		<el-col :span="8" v-for="item in items" :key="item.slug" class="portfolio__item">
 			<article>
-				<a href="#">
+				<nuxt-link :to="localePath(`/portfolio/${item.slug}`)">
 					<el-card shadow="hover">
 						<img :src="`https://source.unsplash.com/random/640x480?id=${index}`" />
 						<div class="portfolio__data">
-							<h1>Yummy hamburger</h1>
+							<h1>{{ item.title }}</h1>
 							<div>
-								<time class="time">{{ currentDate }}</time>
-								<el-button type="text" class="button">Small description</el-button>
+								<time class="time">{{ item.date }}</time>
+								<el-button type="text" class="button">{{ item.description }}</el-button>
 							</div>
 							<el-tag size="mini" effect="dark" color="#4FC08D">
 								<img src="/images/svg/stack/vue.svg" alt="Vue" />
@@ -17,7 +17,7 @@
 							</el-tag>
 						</div>
 					</el-card>
-				</a>
+				</nuxt-link>
 			</article>
 		</el-col>
 	</el-row>
@@ -31,8 +31,7 @@ export default {
 	},
 	computed: {
 		items() {
-			// return this.data.filter((item) => item.show)
-			return this.data
+			return this.data.filter((item) => item.show)
 		},
 	},
 }
