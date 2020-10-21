@@ -14,7 +14,7 @@ import PortfolioGrid from '@/components/PortfolioGrid'
 import SectionTitle from '@/components/global/SectionTitle'
 
 export default {
-	name: 'Portfolio',
+	name: 'PortfolioPage',
 	scrollToTop: false,
 	head() {
 		return {

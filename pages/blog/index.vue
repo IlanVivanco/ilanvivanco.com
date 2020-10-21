@@ -15,7 +15,7 @@
 import SectionTitle from '@/components/global/SectionTitle'
 
 export default {
-	name: 'Blog',
+	name: 'BlogPage',
 	scrollToTop: false,
 	head() {
 		return {

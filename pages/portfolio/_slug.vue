@@ -13,7 +13,7 @@
 
 <script>
 export default {
-	name: 'PortfolioSlug',
+	name: 'PortfolioItems',
 	head() {
 		return {}
 	},

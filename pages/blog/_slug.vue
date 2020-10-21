@@ -15,7 +15,7 @@
 import SectionTitle from '@/components/global/SectionTitle'
 
 export default {
-	name: 'BlogSlug',
+	name: 'BlogItems',
 	head() {
 		return {}
 	},
