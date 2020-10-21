@@ -1,10 +1,15 @@
 <template>
 	<div class="container">
+		<section-title
+			title="Mi historial"
+			description="A lo largo de los años acumulé experiencia en varios ámbitos."
+		/>
 		<cv />
 	</div>
 </template>
 
 <script>
+import SectionTitle from '@/components/global/SectionTitle'
 import Cv from '@/components/cv/Cv'
 
 export default {
@@ -24,7 +29,7 @@ export default {
 			es: '/curriculum',
 		},
 	},
-	components: { Cv },
+	components: { Cv, SectionTitle },
 }
 </script>
 

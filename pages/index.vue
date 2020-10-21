@@ -2,7 +2,7 @@
 	<div class="container" id="sobre-mi">
 		<div>
 			<section-title
-				title="Hola"
+				title="Hola Mundo"
 				description=""
 			/>
 

@@ -1,15 +1,10 @@
 <template>
 	<div class="container">
+		<section-title title="Últimos artículos" description="" />
 
-		<section-title
-			title="Últimos artículos"
-			description=""
-		/>
-
-		Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos natus
-		reprehenderit sunt obcaecati distinctio molestias aliquid, deleniti,
-		magnam perspiciatis expedita quia. Necessitatibus adipisci voluptas totam!
-		Repellat ullam ut repudiandae cumque.
+		Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos natus reprehenderit sunt obcaecati distinctio
+		molestias aliquid, deleniti, magnam perspiciatis expedita quia. Necessitatibus adipisci voluptas totam! Repellat
+		ullam ut repudiandae cumque.
 	</div>
 </template>
 
@@ -22,12 +17,9 @@ export default {
 	head() {
 		return {
 			title: 'Blog',
-			link:[
-				{ rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Fira+Code&display=swap' }
-			]
 		}
 	},
-	components: {SectionTitle},
+	components: { SectionTitle },
 }
 </script>
 
