@@ -1,6 +1,11 @@
 <template>
 	<header class="section-header">
-		<h1 v-if="title" class="section-header__title">{{ snakeCase(title) }}</h1>
+		<h1 v-if="title" class="section-header__title">
+			<span class="section-header__arrow">-></span>
+			{{ snakeCase(title) }}
+			<span class="section-header__brackets">()</span>
+			<span class="section-header__semicolon">;</span>
+		</h1>
 		<p v-if="description" class="section-header__description">{{ description }}</p>
 	</header>
 </template>
@@ -27,16 +32,19 @@ export default {
 		font-size: 1.8rem;
 		font-weight: normal;
 		color: $color-blue-dark;
+		display: flex;
+	}
 
-		&::before {
-			content: '->';
-			color: $color-cyan-dark;
-		}
+	&__arrow {
+		color: $color-cyan-dark;
+	}
 
-		&::after {
-			content: '()';
-			color: $color-red-dark;
-		}
+	&__brackets {
+		color: $color-red-dark;
+	}
+
+	&__semicolon {
+		color: $color-grayscale-5;
 	}
 
 	&__description {
