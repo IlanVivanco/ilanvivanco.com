@@ -2,9 +2,12 @@
 	<div class="container">
 		<section-title title="Últimos artículos" description="" />
 
-		Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos natus reprehenderit sunt obcaecati distinctio
-		molestias aliquid, deleniti, magnam perspiciatis expedita quia. Necessitatibus adipisci voluptas totam! Repellat
-		ullam ut repudiandae cumque.
+		<div class="links">
+			<el-button v-for="post in posts" :key="post.slug" type="primary">
+				<nuxt-link :to="localePath(`/blog/${post.slug}`)">{{ post.title }}</nuxt-link>
+			</el-button>
+			<el-button type="primary" icon="el-icon-edit" plain circle></el-button>
+		</div>
 	</div>
 </template>
 
@@ -17,6 +20,13 @@ export default {
 	head() {
 		return {
 			title: 'Blog',
+		}
+	},
+	async asyncData({ $content }) {
+		const posts = await $content('posts').fetch()
+
+		return {
+			posts,
 		}
 	},
 	components: { SectionTitle },

@@ -1,29 +1,23 @@
 <template>
-	<div>
-		<h1>
-			{{ post.title }}
-		</h1>
-		<h2>{{ post.description }}</h2>
+	<section class="container">
+		<el-breadcrumb separator="/">
+			<el-breadcrumb-item :to="{ path: '/blog' }"><i class="el-icon-back"></i> Volver</el-breadcrumb-item>
+			<el-breadcrumb-item>Blog</el-breadcrumb-item>
+			<el-breadcrumb-item>{{ post.title }}</el-breadcrumb-item>
+		</el-breadcrumb>
+
+		<section-title :title="post.title" :description="post.description" />
 		<nuxt-content :document="post" />
-	</div>
+	</section>
 </template>
 
 <script>
+import SectionTitle from '@/components/global/SectionTitle'
+
 export default {
+	name: 'BlogSlug',
 	head() {
-		return {
-			link: [
-				{
-					rel: 'stylesheet',
-					href:
-						'https://fonts.googleapis.com/css2?family=Economica:ital,wght@0,400;0,600;1,400;1,600&display=swap',
-				},
-				{
-					rel: 'stylesheet',
-					href: 'https://fonts.googleapis.com/css2?family=Fira+Code&display=swap',
-				},
-			],
-		}
+		return {}
 	},
 	async asyncData({ $content, params, error }) {
 		const post = await $content('posts/', params.slug)
@@ -36,5 +30,6 @@ export default {
 			post,
 		}
 	},
+	components: { SectionTitle },
 }
 </script>
