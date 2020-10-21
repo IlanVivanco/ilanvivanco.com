@@ -5,7 +5,7 @@
 			description="Estos son algunos de los trabajos que realicé en los últimos años."
 		/>
 
-		<portfolio-grid :data="3" />
+		<portfolio-grid :data="portfolio" />
 	</section>
 </template>
 
@@ -19,6 +19,13 @@ export default {
 	head() {
 		return {
 			title: 'Protfolio title',
+		}
+	},
+	async asyncData({ $content }) {
+		const portfolio = await $content('portfolio').fetch()
+
+		return {
+			portfolio,
 		}
 	},
 	components: { PortfolioGrid, SectionTitle },
