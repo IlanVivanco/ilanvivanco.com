@@ -16,7 +16,7 @@
 							<main-sidebar :alt-banner-img="altBannerImage" :alt-banner-leave="altBannerLeave" />
 						</div>
 					</el-col>
-					<el-col :span="16" class="main">
+					<el-col tag="main" :span="16" class="main">
 						<Nuxt class="main__inner" />
 					</el-col>
 				</el-row>
