@@ -16,16 +16,17 @@ export default {
 	head() {
 		return {}
 	},
-	async asyncData({ $content, params, error }) {
+	async asyncData({ $content, params, error, redirect }) {
 		const post = await $content('portfolio/', params.slug)
 			.fetch()
 			.catch((err) => {
 				error({ statusCode: 404, message: 'Página no encontrada' })
 			})
 
-		return {
-			post,
-		}
+		// Redirect if not single available
+		if ( post && !post.has_single) redirect('/portfolio')
+
+		return { post }
 	},
 	components: { SectionTitle, BackLink },
 }

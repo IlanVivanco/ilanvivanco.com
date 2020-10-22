@@ -37,7 +37,6 @@ export default {
 	},
 	methods: {
 		linkArgs(item) {
-			console.log(item.createdAt)
 			if (item.has_single)
 				return {
 					is: 'nuxt-link',
