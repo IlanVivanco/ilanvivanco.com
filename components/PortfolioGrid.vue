@@ -3,9 +3,8 @@
 		<el-col tag="article" :span="8" v-for="item in items" :key="item.slug" class="portfolio__item-wrapper">
 			<el-card shadow="hover" class="portfolio__item">
 				<div class="portfolio__thumb">
-					<img :src="item.thumbnail" :alt="item.title" />
-
 					<component :is="'nuxt-link'" v-bind="linkArgs(item)" class="portfolio__link">
+						<img :src="item.thumbnail" :alt="item.title" />
 						<el-button
 							class="portfolio__more"
 							size="small"
@@ -66,6 +65,14 @@ export default {
 
 .portfolio__item-wrapper {
 	margin-bottom: 20px;
+
+	@include breakpoint('medium'){
+		width: 50%;
+	}
+
+	@include breakpoint('tiny'){
+		width: 100%;
+	}
 }
 
 /deep/ .el-card__body {
@@ -75,8 +82,15 @@ export default {
 
 .portfolio__item {
 	--thumb-height: 160px;
-
 	height: 100%;
+
+	@include breakpoint('small'){
+	--thumb-height: 20vw;
+	}
+
+	@include breakpoint('tiny'){
+	--thumb-height: 40vw;
+	}
 }
 
 .portfolio__thumb {
@@ -90,7 +104,7 @@ export default {
 		max-width: 100%;
 		object-fit: cover;
 		display: block;
-		transition: all .8s ease;
+		transition: all 0.8s ease;
 		filter: saturate(50%);
 
 		.portfolio__item:hover & {
@@ -101,13 +115,13 @@ export default {
 }
 
 .portfolio__link {
+}
+
+.portfolio__more {
 	text-decoration: none;
 	position: absolute;
 	bottom: 1em;
 	right: 1em;
-}
-
-.portfolio__more {
 	background: $color-red-dark;
 	color: $color-grayscale-1;
 	border-color: $color-red-dark;
