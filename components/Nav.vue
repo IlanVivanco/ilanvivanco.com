@@ -58,9 +58,15 @@ export default {
 	justify-content: center;
 	padding: 1em 0.8em !important;
 
+
+	&:hover {
+		color: $color-teal-dark;
+	}
+
 	[class^='el-icon'] {
 		margin: 0;
 		margin-bottom: 0.5em;
+		color: inherit
 	}
 
 	span {
