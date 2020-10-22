@@ -1,10 +1,6 @@
 <template>
 	<section class="container">
-		<el-breadcrumb separator="/">
-			<el-breadcrumb-item :to="{ path: '/portfolio' }"><i class="el-icon-back"></i> Volver</el-breadcrumb-item>
-			<el-breadcrumb-item>Trabajos</el-breadcrumb-item>
-			<el-breadcrumb-item>{{ post.title }}</el-breadcrumb-item>
-		</el-breadcrumb>
+		<back-link :to="{ path: '/portfolio' }" />
 
 		<section-title :title="post.title" :description="post.description" />
 		<nuxt-content :document="post" />
@@ -12,6 +8,9 @@
 </template>
 
 <script>
+import SectionTitle from '@/components/global/SectionTitle'
+import BackLink from '@/components/global/BackLink'
+
 export default {
 	name: 'PortfolioItems',
 	head() {
@@ -28,5 +27,6 @@ export default {
 			post,
 		}
 	},
+	components: { SectionTitle, BackLink },
 }
 </script>

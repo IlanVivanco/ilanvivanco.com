@@ -22,7 +22,9 @@ export default {
 		}
 	},
 	async asyncData({ $content }) {
-		const portfolio = await $content('portfolio').fetch()
+		const portfolio = await $content('portfolio')
+			.sortBy('createdAt', 'desc')
+			.fetch()
 
 		return {
 			portfolio,
