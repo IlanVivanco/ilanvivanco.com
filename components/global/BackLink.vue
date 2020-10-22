@@ -13,8 +13,15 @@ export default {
 
 <style lang="scss" scoped>
 .back-link {
+	display: block;
 	text-decoration: none;
-	color: $color-grayscale-7;
 	font-weight: 400;
+	font-size: 0.8rem;
+	color: $color-grayscale-7;
+	margin-bottom: 0.8em;
+
+	&:hover {
+		color: $color-teal-dark;
+	}
 }
 </style>
