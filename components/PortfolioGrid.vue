@@ -1,23 +1,30 @@
 <template>
 	<el-row :gutter="20" type="flex" class="portfolio">
-		<el-col tag="article" :span="12" v-for="item in items" :key="item.slug" class="portfolio__item-wrapper">
-			<component :is="'nuxt-link'" v-bind="linkArgs(item)" class="portfolio__link">
-				<el-card shadow="hover" class="portfolio__item">
-					<div class="portfolio__thumb">
-						<img :src="item.thumbnail" :alt="item.title" />
+		<el-col tag="article" :span="8" v-for="item in items" :key="item.slug" class="portfolio__item-wrapper">
+			<el-card shadow="hover" class="portfolio__item">
+				<div class="portfolio__thumb">
+					<img :src="item.thumbnail" :alt="item.title" />
+
+					<component :is="'nuxt-link'" v-bind="linkArgs(item)" class="portfolio__link">
+						<el-button
+							class="portfolio__more"
+							size="small"
+							:icon="item.has_single ? 'el-icon-plus' : 'el-icon-link'"
+							circle
+						></el-button>
+					</component>
+				</div>
+				<div class="portfolio__data">
+					<time class="portfolio__date">{{ item.date }}</time>
+					<h1 class="portfolio__title">{{ item.title }}</h1>
+					<div class="portfolio__description">{{ item.description }}</div>
+					<div class="portfolio__tags">
+						<el-tag class="portfolio__tag" size="small" v-for="(tag, index) in item.tags" :key="index">
+							{{ tag }}
+						</el-tag>
 					</div>
-					<div class="portfolio__data">
-						<time class="portfolio__date">{{ item.date }}</time>
-						<h1 class="portfolio__title">{{ item.title }}</h1>
-						<div class="portfolio__description">{{ item.description }}</div>
-						<div class="portfolio__tags">
-							<el-tag class="portfolio__tag" size="small" v-for="(tag, index) in item.tags" :key="index">
-								{{ tag }}
-							</el-tag>
-						</div>
-					</div>
-				</el-card>
-			</component>
+				</div>
+			</el-card>
 		</el-col>
 	</el-row>
 </template>
@@ -62,25 +69,21 @@ export default {
 	margin-bottom: 20px;
 }
 
-.portfolio__link {
-	height: 100%;
-	text-decoration: none;
-	display: block;
-}
-
 /deep/ .el-card__body {
 	height: 100%;
 	padding: 0;
 }
 
-.portfolio__item{
-	--thumb-height: 200px;
+.portfolio__item {
+	--thumb-height: 160px;
 
 	height: 100%;
 }
 
 .portfolio__thumb {
 	height: var(--thumb-height);
+	position: relative;
+	overflow: hidden;
 
 	img {
 		width: 100%;
@@ -88,6 +91,32 @@ export default {
 		max-width: 100%;
 		object-fit: cover;
 		display: block;
+		transition: all .8s ease;
+		filter: saturate(50%);
+
+		.portfolio__item:hover & {
+			transform: scale(1.05);
+			filter: saturate(100%);
+		}
+	}
+}
+
+.portfolio__link {
+	text-decoration: none;
+	position: absolute;
+	bottom: 1em;
+	right: 1em;
+}
+
+.portfolio__more {
+	background: $color-red-dark;
+	color: $color-grayscale-1;
+	border-color: $color-red-dark;
+
+	.portfolio__link:hover & {
+		color: $color-red-dark;
+		background: $color-grayscale-1;
+		border-color: $color-grayscale-2;
 	}
 }
 
@@ -105,17 +134,19 @@ export default {
 }
 
 .portfolio__title {
-	font-size: 1.2rem;
+	font-size: 1.1rem;
 	color: $color-blue-dark;
-	line-height: 1.4;
 	margin-bottom: 0.5em;
 }
 
 .portfolio__description {
 	flex-grow: 1;
-	line-height: 1.4em;
-	min-height: 4.2em;
 	color: $color-blue;
+	font-size: 0.8em;
+	line-height: 1.3em;
+	min-height: 4.2em;
+	font-style: italic;
+	margin-bottom: 0.5em;
 }
 
 .portfolio__tags {
@@ -123,6 +154,13 @@ export default {
 }
 
 /deep/ .el-tag {
+	height: auto;
+	font-size: 0.6rem;
 	margin-right: 0.5em;
+	line-height: 1;
+	padding: 0.5em 0.6em;
+	margin-top: 0.5em;
+	background-color: $color-grayscale-2;
+	border-color: $color-grayscale-3;
 }
 </style>

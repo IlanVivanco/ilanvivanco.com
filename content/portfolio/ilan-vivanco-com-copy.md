@@ -1,10 +1,10 @@
 ---
-title: Skillsoft
-external_link: https://www.skillsoft.com/
+title: ilanvivanco.com
+external_link: https://www.ilanvivanco.com/
 description: Desarrollo de sitio personal
-thumbnail: '/images/portfolio/skillsoft.jpg'
-tags: ['WordPress', 'Custom Theme', 'WP Plugin']
-date: 10/2018
+thumbnail: '/images/portfolio/ilan-vivanco.jpg'
+tags: ['Vue', 'Nuxt']
+date: 10/2020
 show: true
 has_single: true
 ---

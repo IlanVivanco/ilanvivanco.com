@@ -1,9 +1,9 @@
 ---
 title: Sumtotal
 external_link: https://www.sumtotal.com/
-description: WordPress site migration
+description: Lorem ipsum dolor sit amet. Necat tarofi singat pac son aet.
 thumbnail: '/images/portfolio/sumtotal.jpg'
-tags: ['WordPress', 'Custom theme', 'Custom plugin']
+tags: ['WordPress', 'Custom Theme', 'WP Plugin']
 date: 10/2018
 show: true
 has_single: false
