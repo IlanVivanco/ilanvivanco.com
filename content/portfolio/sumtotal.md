@@ -1,8 +1,8 @@
 ---
-title: Skillsoft
-external_link: https://www.skillsoft.com/
-description: Desarrollo de sitio personal
-thumbnail: '/images/portfolio/skillsoft.jpg'
+title: Sumtotal
+external_link: https://www.sumtotal.com/
+description: WordPress site migration
+thumbnail: '/images/portfolio/sumtotal.jpg'
 tags: ['WordPress', 'Custom theme', 'Custom plugin']
 date: 10/2018
 show: true
