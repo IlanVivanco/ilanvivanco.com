@@ -6,7 +6,12 @@
 export default {
 	name: 'BackLink',
 	props: {
-		to: String,
+		to: {
+			type: Object,
+			default() {
+				return { path: '/' }
+			},
+		},
 	},
 }
 </script>
