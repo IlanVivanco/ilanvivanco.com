@@ -1,7 +1,7 @@
 <template>
 	<el-row :gutter="20">
 		<el-col tag="article" :span="8" v-for="item in items" :key="item.slug" class="portfolio__item">
-			<component :is="linkType(item)" v-bind="linkArgs(item)">
+			<component :is="'nuxt-link'" v-bind="linkArgs(item)">
 				<el-card shadow="hover">
 					<img :src="item.thumbnail" />
 					<div class="portfolio__data">
@@ -28,18 +28,18 @@ export default {
 		data: Array,
 	},
 	methods: {
-		linkType(item) {
-			return item.has_single ? 'nuxt-link' : ''
-		},
 		linkArgs(item) {
+			console.log(this.$attrs)
 			if (item.has_single)
 				return {
+					is: 'nuxt-link',
 					to: this.localePath(`/portfolio/${item.slug}`),
 					class: 'portfolio__link',
 				}
 
 			if (item.external_link)
 				return {
+					is: 'a',
 					href: item.external_link,
 					class: 'portfolio__link',
 					target: '_blank',
