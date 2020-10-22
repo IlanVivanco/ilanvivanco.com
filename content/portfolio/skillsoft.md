@@ -1,12 +1,12 @@
 ---
-title: ilanvivanco.com
-external_link: https://www.ilanvivanco.com/
+title: Skillsoft
+external_link: https://www.skillsoft.com/
 description: Desarrollo de sitio personal
-thumbnail: '/images/portfolio/altura.jpg'
-tags: ['Vue', 'Nuxt']
+thumbnail: '/images/portfolio/skillsoft.jpg'
+tags: ['WordPress', 'Custom theme', 'Custom plugin']
 date: 10/2020
 show: true
-has_single: true
+has_single: false
 ---
 
 Sit porro aut tempora eius expedita autem. Facilis hic non et minus tenetur sunt et omnis aperiam. Quos veniam iure eos. Facere nihil nesciunt cum aspernatur autem excepturi. Minima unde libero quo et debitis. Modi sit eum quo.
