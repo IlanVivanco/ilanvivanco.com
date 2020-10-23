@@ -11,15 +11,17 @@
 </template>
 
 <script>
-import utils from '@/mixins/Utils'
-
 export default {
 	name: 'SectionTitle',
 	props: {
 		title: String,
 		description: String,
 	},
-	mixins: [utils],
+	methods: {
+		snakeCase(text) {
+			return text.replace(/[\s]/, '_').toLowerCase()
+		},
+	},
 }
 </script>
 
