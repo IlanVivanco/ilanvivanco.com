@@ -41,7 +41,7 @@ export default {
 		formattedDob() {
 			moment.locale(this.$i18n.locale)
 
-			return moment(this.cv.data.birth_date).format(this.cv.date_format)
+			return moment(this.cv.data.birth_date).format('L')
 		},
 		yearsOld() {
 			moment.locale(this.$i18n.locale)
