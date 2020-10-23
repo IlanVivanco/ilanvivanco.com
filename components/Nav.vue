@@ -1,12 +1,12 @@
 <template>
-	<div>
+	<nav>
 		<el-menu :default-active="$route.path" mode="vertical" :collapse="false" :router="true">
 			<el-menu-item v-for="(menu, key) of menuItems" :key="key" :index="localePath(menu.slug)">
 				<i :class="menu.icon"></i>
 				<span slot="title">{{ menu.name }}</span>
 			</el-menu-item>
 		</el-menu>
-	</div>
+	</nav>
 </template>
 
 <script>
