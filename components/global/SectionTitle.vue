@@ -1,6 +1,6 @@
 <template>
 	<header class="section-header">
-		<h1 v-if="title" class="section-header__title">
+		<h1 v-if="title" class="section-header__title" :class="{ [size]: size }">
 			<span class="section-header__arrow">-></span>
 			{{ snakeCase(title) }}
 			<span class="section-header__brackets">()</span>
@@ -16,6 +16,7 @@ export default {
 	props: {
 		title: String,
 		description: String,
+		size: String,
 	},
 	methods: {
 		snakeCase(text) {
@@ -37,6 +38,10 @@ export default {
 		display: flex;
 	}
 
+	&__title.small {
+		font-size: 1.4rem;
+	}
+
 	&__arrow {
 		color: $color-cyan-dark;
 	}
@@ -50,7 +55,10 @@ export default {
 	}
 
 	&__description {
-		color: $color-grayscale-7;
+		color: $color-blue;
+		line-height: 1.3em;
+		font-style: italic;
+		margin-left: 0.2em;
 	}
 }
 </style>
