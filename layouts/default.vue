@@ -62,6 +62,8 @@ export default {
 	},
 	computed: {
 		currentPathSlug() {
+			if (!this.$route.name) return ''
+
 			let slug = this.$route.name.match(/^(.*?)__.{2}/)
 			return slug[1] != 'index' ? slug[1] : 'home'
 		},
