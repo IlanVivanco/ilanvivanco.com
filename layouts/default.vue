@@ -43,6 +43,7 @@ export default {
 	data() {
 		return {
 			altBannerImage: null,
+			bannerChanged: false,
 			altBannerLeave: false,
 		}
 	},
@@ -51,7 +52,14 @@ export default {
 	},
 	watch: {
 		$route(to, from) {
-			this.altBannerLeave = true
+			const stripLocale = (name) => {
+				const routeSeperator = '__'
+				return name.substring(0, name.indexOf(routeSeperator))
+			}
+
+			if (from && to && from.name && to.name && stripLocale(from.name) !== stripLocale(to.name)) {
+				this.altBannerLeave = true
+			}
 		},
 	},
 	methods: {
