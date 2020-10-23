@@ -1,7 +1,7 @@
 <template>
 	<div class="section-header" v-if="title">
 		<div v-if="icon" class="section-header__icon"><i :class="icon"></i></div>
-		<h6 class="section-header__title">{{ title }}</h6>
+		<h2 class="section-header__title">{{ title }}</h2>
 	</div>
 </template>
 
@@ -41,5 +41,6 @@ export default {
 	text-transform: uppercase;
 	font-weight: 600;
 	font-size: 0.9rem;
+	font-family: $primary-alt-font;
 }
 </style>
