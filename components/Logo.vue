@@ -12,10 +12,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.logo.text {
+.logo{
 	margin: 0;
 	line-height: 40px;
 	margin: 1rem 0 0.5rem;
+	font-size: 2.1rem;
+	line-height: 1.1em;
 
 	& .logo__iso {
 		vertical-align: bottom;
