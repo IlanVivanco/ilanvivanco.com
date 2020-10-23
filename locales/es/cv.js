@@ -7,7 +7,6 @@ import socials from '../general/socials'
 import tech from './tech'
 
 export default {
-	date_format: "DD/MM/YYYY",
 	age: "años",
 	present: "Presente",
 	icons: {

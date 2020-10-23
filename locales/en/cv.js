@@ -2,7 +2,6 @@ import es_cv from '../es/cv.js';
 import _ from 'lodash';
 
 const en_cv = _.merge({}, es_cv, {
-	date_format: "MM/DD/YYYY",
 	age: "years old",
 	present: "Present",
 	headers: {
