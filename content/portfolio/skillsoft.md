@@ -4,7 +4,7 @@ external_link: https://www.skillsoft.com/
 description: Desarrollo de sitio personal
 thumbnail: '/images/portfolio/skillsoft.jpg'
 tags: ['WordPress', 'Custom Theme', 'WP Plugin']
-date: 10/2018
+date: 2018-10
 show: true
 has_single: true
 ---
