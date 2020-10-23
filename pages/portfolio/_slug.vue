@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import Transitions from '@/mixins/Transitions'
 import SectionTitle from '@/components/global/SectionTitle'
 import BackLink from '@/components/global/BackLink'
 
@@ -29,5 +30,6 @@ export default {
 		return { post }
 	},
 	components: { SectionTitle, BackLink },
+	mixins: [Transitions],
 }
 </script>

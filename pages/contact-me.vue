@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import Transitions from '@/mixins/Transitions'
 import SectionTitle from '@/components/global/SectionTitle'
 
 export default {
@@ -29,6 +30,7 @@ export default {
 		},
 	},
 	components: {SectionTitle},
+	mixins: [Transitions],
 }
 </script>
 

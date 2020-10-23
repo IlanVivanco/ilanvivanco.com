@@ -104,10 +104,4 @@ export default {
 	build: {
 		transpile: [/^element-ui/, 'gsap'],
 	},
-	/* Page Transitions */
-	pageTransition: {
-		// mode: 'in-out',
-		leaveActiveClass: 'animate__animated animate__pageOut',
-		enterActiveClass: 'animate__animated animate__pageIn',
-	},
 }

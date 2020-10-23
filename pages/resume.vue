@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import Transitions from '@/mixins/Transitions'
 import SectionTitle from '@/components/global/SectionTitle'
 import Cv from '@/components/cv/Cv'
 
@@ -30,6 +31,7 @@ export default {
 		},
 	},
 	components: { Cv, SectionTitle },
+	mixins: [Transitions],
 }
 </script>
 

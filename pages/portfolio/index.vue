@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import Transitions from '@/mixins/Transitions'
 import PortfolioGrid from '@/components/PortfolioGrid'
 import SectionTitle from '@/components/global/SectionTitle'
 
@@ -26,6 +27,7 @@ export default {
 		return { portfolio }
 	},
 	components: { PortfolioGrid, SectionTitle },
+	mixins: [Transitions],
 }
 </script>
 

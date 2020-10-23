@@ -1,10 +1,7 @@
 <template>
 	<div class="container" id="sobre-mi">
 		<div>
-			<section-title
-				title="Hola Mundo"
-				description=""
-			/>
+			<section-title title="Hola Mundo" description="" />
 
 			<p>
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae iste inventore consectetur aut laudantium
@@ -34,6 +31,7 @@
 </template>
 
 <script>
+import Transitions from '@/mixins/Transitions'
 import SectionTitle from '@/components/global/SectionTitle'
 
 export default {
@@ -44,7 +42,8 @@ export default {
 			title: 'My Index title',
 		}
 	},
-	components: {SectionTitle},
+	components: { SectionTitle },
+	mixins: [Transitions],
 }
 </script>
 
