@@ -14,7 +14,7 @@
 					</component>
 				</div>
 				<div class="portfolio__data">
-					<time class="portfolio__date">{{ item.date }}</time>
+					<time class="portfolio__date">{{ formatDate(item.date) }}</time>
 					<h1 class="portfolio__title">{{ item.title }}</h1>
 					<div class="portfolio__description">{{ item.description }}</div>
 					<div class="portfolio__tags">
@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
 	name: 'PortfolioGrid',
 	props: {
@@ -49,6 +51,13 @@ export default {
 					target: '_blank',
 				}
 		},
+		formatDate(date) {
+			moment.locale(this.$i18n.locale)
+
+			if (!date) return ''
+
+			return moment(date).format('MMM YYYY')
+		},
 	},
 	computed: {
 		items() {
@@ -66,11 +75,11 @@ export default {
 .portfolio__item-wrapper {
 	margin-bottom: 20px;
 
-	@include breakpoint('medium'){
+	@include breakpoint('medium') {
 		width: 50%;
 	}
 
-	@include breakpoint('tiny'){
+	@include breakpoint('tiny') {
 		width: 100%;
 	}
 }
@@ -84,12 +93,12 @@ export default {
 	--thumb-height: 160px;
 	height: 100%;
 
-	@include breakpoint('small'){
-	--thumb-height: 20vw;
+	@include breakpoint('small') {
+		--thumb-height: 20vw;
 	}
 
-	@include breakpoint('tiny'){
-	--thumb-height: 40vw;
+	@include breakpoint('tiny') {
+		--thumb-height: 40vw;
 	}
 }
 

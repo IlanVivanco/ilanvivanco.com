@@ -7,12 +7,12 @@
 			:class="['position', is_active(position) ? 'active' : '']"
 		>
 			<div class="position__date">
-				<time :datetime="format_datetime(position.from)">
-					{{ format_date(position.from) }}
+				<time :datetime="formatDatetime(position.from)">
+					{{ formatDate(position.from) }}
 				</time>
 				-
-				<time :datetime="format_datetime(position.to)">
-					{{ format_date(position.to) }}
+				<time :datetime="formatDatetime(position.to)">
+					{{ formatDate(position.to) }}
 				</time>
 			</div>
 
@@ -38,17 +38,21 @@ export default {
 		is_active(position) {
 			return position.to === ''
 		},
-		format_date(date) {
+		formatDate(date) {
+			moment.locale(this.$i18n.locale)
+
 			if (!date) return this.$t('cv.present')
 
 			return moment(date).format('MM/YYYY')
 		},
-		format_datetime(date) {
+		formatDatetime(date) {
 			return date ? date : moment().format('YYYY-MM')
 		},
 	},
 	computed: {
 		orderedPositions() {
+			moment.locale(this.$i18n.locale)
+
 			return this.data.concat().sort((a, b) => {
 				let aTo = a.to ? moment(a.to) : moment()
 				let bTo = b.to ? moment(b.to) : moment()

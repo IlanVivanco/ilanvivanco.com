@@ -3,9 +3,9 @@
 		<el-timeline-item v-for="(study, index) in orderedStudies" :key="index" class="institution" :color="'#475b7d'">
 			<h1 class="institution__place">{{ study.place }}</h1>
 			<div class="institution__date">
-				(<time :datetime="format_datetime(study.from)">{{ format_date(study.from) }}</time>
+				(<time :datetime="formatDatetime(study.from)">{{ formatDate(study.from) }}</time>
 				-
-				<time :datetime="format_datetime(study.to)">{{ format_date(study.to) }}</time
+				<time :datetime="formatDatetime(study.to)">{{ formatDate(study.to) }}</time
 				>)
 			</div>
 			<ul class="institution__list">
@@ -24,20 +24,26 @@ export default {
 		data: Array,
 	},
 	methods: {
-		is_active(position) {
+		isActive(position) {
 			return position.to === ''
 		},
-		format_date(date) {
+		formatDate(date) {
+			moment.locale(this.$i18n.locale)
+
 			if (!date) return this.$t('cv.present')
 
 			return moment(date).format('YYYY')
 		},
-		format_datetime(date) {
+		formatDatetime(date) {
+			moment.locale(this.$i18n.locale)
+
 			return date ? date : moment().format('YYYY')
 		},
 	},
 	computed: {
 		orderedStudies() {
+			moment.locale(this.$i18n.locale)
+
 			return this.data.concat().sort((a, b) => {
 				let aTo = a.to ? moment(a.to) : moment()
 				let bTo = b.to ? moment(b.to) : moment()

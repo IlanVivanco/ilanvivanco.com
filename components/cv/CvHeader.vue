@@ -19,7 +19,7 @@
 					<li class="header__metadata-list-item"><i :class="cv.icons.email"></i>{{ cv.data.email }}</li>
 					<li class="header__metadata-list-item"><i :class="cv.icons.phone"></i>{{ cv.data.phone }}</li>
 					<li class="header__metadata-list-item">
-						<i :class="cv.icons.age"></i>{{ formatted_dob }} {{ years_old }}
+						<i :class="cv.icons.age"></i>{{ formattedDob }} {{ yearsOld }}
 					</li>
 				</ul>
 			</el-col>
@@ -38,10 +38,14 @@ export default {
 		cv() {
 			return this.$t('cv')
 		},
-		formatted_dob() {
+		formattedDob() {
+			moment.locale(this.$i18n.locale)
+
 			return moment(this.cv.data.birth_date).format(this.cv.date_format)
 		},
-		years_old() {
+		yearsOld() {
+			moment.locale(this.$i18n.locale)
+
 			let dob = moment(this.cv.data.birth_date)
 			let today = moment()
 			let age = today.diff(dob, 'years')

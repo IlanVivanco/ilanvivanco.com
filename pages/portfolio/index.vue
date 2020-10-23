@@ -1,8 +1,8 @@
 <template>
 	<section class="container">
 		<section-title
-			title="Trabajos realizados"
-			description="Estos son algunos de los trabajos que realicé en los últimos años."
+			title="Mis trabajos"
+			description="En estos útimos 15 años programé una gran variedad de sitios web. <br> Estos son sólo algunos de mis favoritos."
 		/>
 
 		<portfolio-grid :data="portfolio" />
@@ -22,13 +22,8 @@ export default {
 		}
 	},
 	async asyncData({ $content }) {
-		const portfolio = await $content('portfolio')
-			.sortBy('date', 'desc')
-			.fetch()
-
-		return {
-			portfolio,
-		}
+		const portfolio = await $content('portfolio').sortBy('date', 'desc').fetch()
+		return { portfolio }
 	},
 	components: { PortfolioGrid, SectionTitle },
 }

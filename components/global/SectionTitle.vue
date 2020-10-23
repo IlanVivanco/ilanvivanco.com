@@ -6,7 +6,7 @@
 			<span class="section-header__brackets">()</span>
 			<span class="section-header__semicolon">;</span>
 		</h1>
-		<p v-if="description" class="section-header__description">{{ description }}</p>
+		<p v-if="description" class="section-header__description" v-html="description"></p>
 	</header>
 </template>
 
