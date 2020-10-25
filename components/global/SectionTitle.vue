@@ -1,11 +1,11 @@
 <template>
-	<header class="section-header">
-		<h1 v-if="title" class="section-header__title" :class="{ [size]: size }">
+	<header class="section-header" :class="{ small: type == 'h2' }">
+		<component :is="titleType" v-if="title" class="section-header__title">
 			<span class="section-header__arrow">-></span>
 			{{ snakeCase(title) }}
 			<span class="section-header__brackets">()</span>
 			<span class="section-header__semicolon">;</span>
-		</h1>
+		</component>
 		<p v-if="description" class="section-header__description" v-html="description"></p>
 	</header>
 </template>
@@ -16,11 +16,16 @@ export default {
 	props: {
 		title: String,
 		description: String,
-		size: String,
+		type: String,
 	},
 	methods: {
 		snakeCase(text) {
 			return text.replace(/[\s]/, '_').toLowerCase()
+		},
+	},
+	computed: {
+		titleType() {
+			return this.type ? this.type : 'h1'
 		},
 	},
 }
@@ -30,6 +35,10 @@ export default {
 .section-header {
 	margin-bottom: 2.5rem;
 
+	&.small {
+		margin-bottom: 0.6em;
+	}
+
 	&__title {
 		font-family: $code-font;
 		font-size: 1.8rem;
@@ -38,8 +47,8 @@ export default {
 		display: flex;
 	}
 
-	&__title.small {
-		font-size: 1.4rem;
+	h2#{&}__title {
+		font-size: 1.2rem;
 	}
 
 	&__arrow {

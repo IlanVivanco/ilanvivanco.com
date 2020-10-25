@@ -46,7 +46,7 @@ h6 {
 }
 
 h1 {
-	font-size: 2rem;
+	font-size: 2.1rem;
 }
 
 h2 {
@@ -69,8 +69,13 @@ h6 {
 	font-size: 0.95rem;
 }
 
-p:not(:last-child) {
-	margin-bottom: 1em;
+p {
+	color: $color-blue-dark;
+	line-height: 1.45;
+
+	&:not(:last-child) {
+		margin-bottom: 1.5em;
+	}
 }
 
 p img {
