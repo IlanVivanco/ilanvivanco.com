@@ -92,7 +92,8 @@ export default {
 
 			&--alt {
 				opacity: 0;
-				filter: grayscale(.25);
+				filter: saturate(0.9);
+				object-position: left;
 
 				@include breakpoint('tiny') {
 					display: none;
