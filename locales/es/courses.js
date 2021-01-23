@@ -32,7 +32,7 @@ export default [
    {
       place: "Platzi",
       from: "2015",
-      to: "2020",
+		to: "",
       titles: [
          "Git y Github",
          "Javascript ES6",

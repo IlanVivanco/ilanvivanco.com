@@ -42,9 +42,9 @@ export default {
 		job_title: "Programador web full stack",
 		website: "ilanvivanco.com",
 		email: "ilanvivanco@gmail.com",
-		phone: "(+54) 11.5982.6302",
+		phone: "(+34) 623 021 789",
 		birth_date: "1988-06-17",
-		location: "Puerto Madryn, Argentina",
+		location: "Santander, España",
 		languages: [
 			{ name: "Español", level: 7, },
 			{ name: "Inglés", level: 6, },
