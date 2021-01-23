@@ -20,7 +20,7 @@ export default {
 	},
 	methods: {
 		snakeCase(text) {
-			return text.replace(/[\s]/, '_').toLowerCase()
+			return text.replace(/[\s]/g, '_').toLowerCase()
 		},
 	},
 	computed: {
