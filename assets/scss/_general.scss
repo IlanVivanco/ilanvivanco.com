@@ -74,7 +74,7 @@ p {
 	line-height: 1.45;
 
 	&:not(:last-child) {
-		margin-bottom: 1.5em;
+		@extend .mb3;
 	}
 }
 

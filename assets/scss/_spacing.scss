@@ -1,0 +1,36 @@
+$sizeUnit: rem;
+$marginKey: 'm';
+$paddingKey: 'p';
+$separator: '';
+$sizes: (('0', 0), ('1', 0.25), ('2', 0.5), ('3', 1), ('4', 2), ('5', 4), ('6', 8), ('7', 16));
+$positions: (('t', 'top'), ('r', 'right'), ('b', 'bottom'), ('l', 'left'));
+
+@function sizeValue($key, $value) {
+	@return if($key == 'none', 0, $value + $sizeUnit);
+}
+
+@each $size in $sizes {
+	$sizeKey: nth($size, 1);
+	$sizeValue: nth($size, 2);
+
+	.#{$marginKey}a#{$separator}#{$sizeKey} {
+		margin: sizeValue($sizeKey, $sizeValue);
+	}
+
+	.#{$paddingKey}a#{$separator}#{$sizeKey} {
+		padding: sizeValue($sizeKey, $sizeValue);
+	}
+
+	@each $position in $positions {
+		$posKey: nth($position, 1);
+		$posValue: nth($position, 2);
+
+		.#{$marginKey}#{$separator}#{$posKey}#{$separator}#{$sizeKey} {
+			margin-#{$posValue}: sizeValue($sizeKey, $sizeValue);
+		}
+
+		.#{$paddingKey}#{$separator}#{$posKey}#{$separator}#{$sizeKey} {
+			padding-#{$posValue}: sizeValue($sizeKey, $sizeValue);
+		}
+	}
+}
