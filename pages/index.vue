@@ -7,30 +7,97 @@
 				<h2>Desarrollador web full stack.</h2>
 
 				<p>
-					Soy desarrollador web full stack experto en WordPress trabajando en remoto como freelancer para empresas
-					internacionales desde Argentina. Especializado en el armado —y muy ocasionalmente diseñando— de sitios
-					web hechos a medida en WordPress.
+					Actualmente radicado en Santander, España, trabajo en remoto como freelancer para empresas
+					internacionales desde hace más de 5 años. Especializado en el armado —y muy ocasionalmente diseño— de
+					themes y plugins hechos a medida en WordPress.
 				</p>
 			</el-col>
 		</el-row>
 
-		<el-row align="middle" :gutter="30" type="flex">
-			<el-col :span="12" class="about__data">
+		<el-row :gutter="30" type="flex" class="mb4">
+			<el-col :span="15" class="about__info">
 				<section-title title="sobre mi" type="h2" />
-
 				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur, nihil qui sunt at dolorem officia
-					sed vitae. Hic ad aspernatur voluptas magni itaque exercitationem sint doloremque consequatur corporis!
-					Maiores, dignissimos.
+					Nací en Buenos Aires allá por 1988. Estudié comunicación publicitaria y diseño gráfico, para luego
+					orientarme por la fotografía. Sin embargo, trabajo desde 2005 en todo lo que es diseño (?) web.
+				</p>
+				<p>
+					Soy autodidacta, proactivo y me encanta trabajar en equipos motivados. Apacionado por el mundo de la
+					programación. Aunque comencé mi carrera por el lado artísico, de a poco me fui metiendo en la parte
+					lógica, hasta que, ya no pude dar marcha atrás.
+				</p>
+				<p>
+					Algunas personas dicen que soy demasiado perfeccionista, y aunque a veces puede ser algo negativo, a mi
+					me gusta serlo. Soy un fiel creedor que las cosas se tienen que hacer bien, o al menos se debería dar lo
+					mejor que se pueda para hacerlo.
+				</p>
+				<p>
+					Me encanta aprender, y trato de nunca dejar de hacerlo. Más en este rubro en donde todo cambia 180 grados
+					cada 3 ó 4 años. Cada nuevo proyecto es una excusa para encarar alguna nueva tecnología/metodología
+					—Siempre tratando de ajustalo, lo mejor posible a cada necesidad—.
+				</p>
+				<p>
+					En los últimos años aprendí también que disfruto enseñar, así que espero pronto poder realizar algún
+					proyecto en el cual pueda explorar esto.
+				</p>
+				<p>
+					En mi tiempo libre, me encanta viajar con mi esposa, Gise Haag, y nuestra pequeña hija de 4 años. Amo la
+					fotografía y realmente disfruto cada momento de proceso, desde la captura hasta la edición.
 				</p>
 			</el-col>
-			<el-col :span="12" class="about__data">
-				<section-title title="mucho más" type="h2" />
+			<el-col :span="9" class="about__pictures">
+				<section-title title="últimas fotos" type="h2" />
+
+				<ul class="about__photo-grid">
+					<li>
+						<img src="https://source.unsplash.com/featured/400x400/?nature&sig=121" />
+					</li>
+					<li>
+						<img src="https://source.unsplash.com/featured/400x400/?nature&sig=122" />
+					</li>
+					<li>
+						<img src="https://source.unsplash.com/featured/400x400/?nature&sig=123" />
+					</li>
+					<li>
+						<img src="https://source.unsplash.com/featured/400x400/?nature&sig=124" />
+					</li>
+					<li>
+						<img src="https://source.unsplash.com/featured/400x400/?nature&sig=125" />
+					</li>
+					<li>
+						<img src="https://source.unsplash.com/featured/400x400/?nature&sig=126" />
+					</li>
+					<li>
+						<img src="https://source.unsplash.com/featured/400x400/?nature&sig=127" />
+					</li>
+					<li>
+						<img src="https://source.unsplash.com/featured/400x400/?nature&sig=128" />
+					</li>
+				</ul>
+			</el-col>
+		</el-row>
+
+		<el-row :gutter="30" type="flex">
+			<el-col :span="24" class="about__info">
+				<section-title title="cómo llegué hasta acá" type="h2" />
 
 				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur, nihil qui sunt at dolorem officia
-					sed vitae. Hic ad aspernatur voluptas magni itaque exercitationem sint doloremque consequatur corporis!
-					Maiores, dignissimos.
+					Por ese entonces diseñando y animando sitios con Adobe Flash. Con cada nuevo proyecto fui incorporando
+					algo de programación, usando ActionScript 2 y 3, para así poder darle vida a esos sitios estáticos.
+					Aunque una vez que conocí el lado del código me enamoré y me fui alejando cada vez más del diseño, hasta
+					dejarlo casi por completo.
+				</p>
+				<p>
+					Luego de Flash, quise hacer cosas más avanzadas y comencé a estudiar PHP y MySQL, de la mano de HTML,
+					Javascript y CSS, por supuesto. Hasta que finalmente por el 2010, un día me crucé WordPress -no sin antes
+					haber intentado con Joomla y algunos otros- y ya me fue difícil alejarme. Desde ese entonces he realizado
+					todo tipo de trabajos, desde los más simples y mundanos, hasta proyectos monumentales como migraciones de
+					bases de datos externas adaptándolas a WordPress.
+				</p>
+				<p>
+					En el camino también me topé y muchas otras tecnologías -como pueden ser WooCommerce, NodeJS, Laravel,
+					etc- las cuales fui tratando de incluir en los proyectos en los cuales fueran necesarias. A día de hoy,
+					trato de mantenerme al corriente y no paro aprender cosas nuevas siempre que puedo.
 				</p>
 			</el-col>
 		</el-row>
@@ -56,7 +123,7 @@ export default {
 
 <style lang="scss">
 .about__intro {
-	margin-bottom: 2rem;
+	@extend .mb4;
 
 	h1 {
 		line-height: 1.2;
@@ -76,8 +143,31 @@ export default {
 
 	p {
 		margin-top: 1rem;
+		font-size: 1.1rem;
 		font-style: italic;
 		line-height: 1.4;
+	}
+}
+
+.about__info {
+	p {
+		line-height: 1.4;
+	}
+}
+
+.about__photo-grid {
+	margin: 0;
+	padding: 0;
+	display: grid;
+	list-style: none;
+	gap: 5px;
+	grid-template-columns: repeat(2, 1fr);
+	grid-auto-rows: minmax(75px, 115px);
+
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
 	}
 }
 </style>
