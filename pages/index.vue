@@ -4,7 +4,7 @@
 			<el-col :span="24" class="about__intro">
 				<h3>¡Hola! Mi nombre es</h3>
 				<h1>Ilán Vivanco.</h1>
-				<h2>Desarrollador web full stack.</h2>
+				<h2>Soy desarrollador web full stack.</h2>
 
 				<p>
 					Actualmente radicado en Santander, España, trabajo en remoto como freelancer para empresas
@@ -48,32 +48,7 @@
 			<el-col :span="9" class="about__pictures">
 				<section-title title="últimas fotos" type="h2" />
 
-				<ul class="about__photo-grid">
-					<li>
-						<img src="https://source.unsplash.com/featured/400x400/?nature&sig=121" />
-					</li>
-					<li>
-						<img src="https://source.unsplash.com/featured/400x400/?nature&sig=122" />
-					</li>
-					<li>
-						<img src="https://source.unsplash.com/featured/400x400/?nature&sig=123" />
-					</li>
-					<li>
-						<img src="https://source.unsplash.com/featured/400x400/?nature&sig=124" />
-					</li>
-					<li>
-						<img src="https://source.unsplash.com/featured/400x400/?nature&sig=125" />
-					</li>
-					<li>
-						<img src="https://source.unsplash.com/featured/400x400/?nature&sig=126" />
-					</li>
-					<li>
-						<img src="https://source.unsplash.com/featured/400x400/?nature&sig=127" />
-					</li>
-					<li>
-						<img src="https://source.unsplash.com/featured/400x400/?nature&sig=128" />
-					</li>
-				</ul>
+				<feed-instagram :count="10" />
 			</el-col>
 		</el-row>
 
@@ -107,6 +82,7 @@
 <script>
 import Transitions from '@/mixins/Transitions'
 import SectionTitle from '@/components/global/SectionTitle'
+import FeedInstagram from '@/components/FeedInstagram'
 
 export default {
 	name: 'Index',
@@ -116,7 +92,7 @@ export default {
 			title: 'My Index title',
 		}
 	},
-	components: { SectionTitle },
+	components: { SectionTitle, FeedInstagram },
 	mixins: [Transitions],
 }
 </script>
@@ -152,22 +128,6 @@ export default {
 .about__info {
 	p {
 		line-height: 1.4;
-	}
-}
-
-.about__photo-grid {
-	margin: 0;
-	padding: 0;
-	display: grid;
-	list-style: none;
-	gap: 5px;
-	grid-template-columns: repeat(2, 1fr);
-	grid-auto-rows: minmax(75px, 115px);
-
-	img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
 	}
 }
 </style>
