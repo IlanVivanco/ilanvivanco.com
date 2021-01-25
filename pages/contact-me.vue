@@ -1,13 +1,14 @@
 <template>
 	<div class="container">
 		<section-title
-			title="Contactame"
-			description="Podés encontrarme en cualquiera de mis redes sociales o, si lo preferís, llenar el siguiente formulario."
+			:title="this.$t('contact_me.titles.section')"
+			:description="this.$t('contact_me.copy.lead')"
 		/>
-
-		Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos natus reprehenderit sunt obcaecati distinctio
-		molestias aliquid, deleniti, magnam perspiciatis expedita quia. Necessitatibus adipisci voluptas totam! Repellat
-		ullam ut repudiandae cumque.
+		<p>
+			Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos natus reprehenderit sunt obcaecati distinctio
+			molestias aliquid, deleniti, magnam perspiciatis expedita quia. Necessitatibus adipisci voluptas totam! Repellat
+			ullam ut repudiandae cumque.
+		</p>
 	</div>
 </template>
 

@@ -2,78 +2,29 @@
 	<div class="container about">
 		<el-row align="middle" :gutter="30">
 			<el-col :span="24" class="about__intro">
-				<h3>¡Hola! Mi nombre es</h3>
-				<h1>Ilán Vivanco.</h1>
-				<h2>Soy desarrollador web full stack.</h2>
-
-				<p>
-					Actualmente radicado en Santander, España, trabajo en remoto como freelancer para empresas
-					internacionales desde hace más de 5 años. Especializado en el armado —y muy ocasionalmente diseño— de
-					themes y plugins hechos a medida en WordPress.
-				</p>
+				<h3>{{ this.$t('index.copy.intro') }}</h3>
+				<h1>{{ this.$t('index.copy.name') }}</h1>
+				<h2>{{ this.$t('index.copy.position') }}</h2>
+				<p>{{ this.$t('index.copy.lead') }}</p>
 			</el-col>
 		</el-row>
 
 		<el-row :gutter="30" type="flex" class="mb4">
 			<el-col :span="15" class="about__info">
-				<section-title title="sobre mi" type="h2" />
-				<p>
-					Nací en Buenos Aires allá por 1988. Estudié comunicación publicitaria y diseño gráfico, para luego
-					orientarme por la fotografía. Sin embargo, trabajo desde 2005 en todo lo que es diseño (?) web.
-				</p>
-				<p>
-					Soy autodidacta, proactivo y me encanta trabajar en equipos motivados. Apacionado por el mundo de la
-					programación. Aunque comencé mi carrera por el lado artísico, de a poco me fui metiendo en la parte
-					lógica, hasta que, ya no pude dar marcha atrás.
-				</p>
-				<p>
-					Algunas personas dicen que soy demasiado perfeccionista, y aunque a veces puede ser algo negativo, a mi
-					me gusta serlo. Soy un fiel creedor que las cosas se tienen que hacer bien, o al menos se debería dar lo
-					mejor que se pueda para hacerlo.
-				</p>
-				<p>
-					Me encanta aprender, y trato de nunca dejar de hacerlo. Más en este rubro en donde todo cambia 180 grados
-					cada 3 ó 4 años. Cada nuevo proyecto es una excusa para encarar alguna nueva tecnología/metodología
-					—Siempre tratando de ajustalo, lo mejor posible a cada necesidad—.
-				</p>
-				<p>
-					En los últimos años aprendí también que disfruto enseñar, así que espero pronto poder realizar algún
-					proyecto en el cual pueda explorar esto.
-				</p>
-				<p>
-					En mi tiempo libre, me encanta viajar con mi esposa, Gise Haag, y nuestra pequeña hija de 4 años. Amo la
-					fotografía y realmente disfruto cada momento de proceso, desde la captura hasta la edición.
-				</p>
+				<section-title :title="this.$t('index.titles.about')" type="h2" />
+				<p v-for="(paragraph, i) in this.$t('index.copy.about')" :key="i">{{ paragraph }}</p>
 			</el-col>
-			<el-col :span="9" class="about__pictures">
-				<section-title title="últimas fotos" type="h2" />
 
+			<el-col :span="9" class="about__pictures">
+				<section-title :title="this.$t('index.titles.latest_pictures')" type="h2" />
 				<feed-instagram :count="10" />
 			</el-col>
 		</el-row>
 
 		<el-row :gutter="30" type="flex">
 			<el-col :span="24" class="about__info">
-				<section-title title="cómo llegué hasta acá" type="h2" />
-
-				<p>
-					Por ese entonces diseñando y animando sitios con Adobe Flash. Con cada nuevo proyecto fui incorporando
-					algo de programación, usando ActionScript 2 y 3, para así poder darle vida a esos sitios estáticos.
-					Aunque una vez que conocí el lado del código me enamoré y me fui alejando cada vez más del diseño, hasta
-					dejarlo casi por completo.
-				</p>
-				<p>
-					Luego de Flash, quise hacer cosas más avanzadas y comencé a estudiar PHP y MySQL, de la mano de HTML,
-					Javascript y CSS, por supuesto. Hasta que finalmente por el 2010, un día me crucé WordPress -no sin antes
-					haber intentado con Joomla y algunos otros- y ya me fue difícil alejarme. Desde ese entonces he realizado
-					todo tipo de trabajos, desde los más simples y mundanos, hasta proyectos monumentales como migraciones de
-					bases de datos externas adaptándolas a WordPress.
-				</p>
-				<p>
-					En el camino también me topé y muchas otras tecnologías -como pueden ser WooCommerce, NodeJS, Laravel,
-					etc- las cuales fui tratando de incluir en los proyectos en los cuales fueran necesarias. A día de hoy,
-					trato de mantenerme al corriente y no paro aprender cosas nuevas siempre que puedo.
-				</p>
+				<section-title :title="this.$t('index.titles.history')" type="h2" />
+				<p v-for="(paragraph, i) in this.$t('index.copy.history')" :key="i">{{ paragraph }}</p>
 			</el-col>
 		</el-row>
 	</div>

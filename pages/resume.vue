@@ -1,8 +1,8 @@
 <template>
 	<div class="container">
 		<section-title
-			title="Mi historial"
-			description="A lo largo de los años acumulé experiencia en varios ámbitos."
+			:title="this.$t('resume.titles.section')"
+			:description="this.$t('resume.copy.lead')"
 		/>
 		<cv />
 	</div>

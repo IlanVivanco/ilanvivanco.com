@@ -1,10 +1,9 @@
 <template>
 	<section class="container">
 		<section-title
-			title="Mis trabajos"
-			description="En estos útimos 15 años programé una gran variedad de sitios web. <br> Estos son sólo algunos de mis favoritos."
+			:title="this.$t('portfolio.titles.section')"
+			:description="this.$t('portfolio.copy.lead')"
 		/>
-
 		<portfolio-grid :data="portfolio" />
 	</section>
 </template>
