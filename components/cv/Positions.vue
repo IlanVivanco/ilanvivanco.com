@@ -104,7 +104,7 @@ export default {
 	&__date {
 		display: inline-block;
 		background: var(--active-color);
-		padding: 0.2em 0.6em;
+		padding: 0 0.6em;
 		border-radius: 0.2em;
 		position: relative;
 		transform: translateY(-3px);
@@ -131,6 +131,7 @@ export default {
 		font-weight: normal;
 		margin-bottom: 0.5em;
 		color: $color-teal-dark;
+		font-style: italic;
 	}
 
 	&__excerpt {
