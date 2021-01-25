@@ -15,7 +15,7 @@ export default {
 	],
 	index: {
 		titles: {
-			about: 'sobre mi',
+			about: 'sobre mí',
 			latest_pictures: 'últimas fotos',
 			history: 'cómo llegué hasta acá',
 		},
@@ -36,7 +36,7 @@ export default {
 				'En mi tiempo libre, me encanta viajar y conocer lugares nuevos junto a mi esposa, Gise Haag, y nuestra pequeña hija de 4 años, Olivia. Amo la fotografía y realmente disfruto de cada momento del proceso, desde la idea y captura, hasta la edición.',
 			],
 			history: [
-				'Nací en Buenos Aires, allá por 1988. Estudié comunicación publicitaria y diseño gráfico, para luego orientarme por la fotografía. Sin embargo, desde hace 15 años, trabajo en proyectos relacionados con el diseño y la programación web.',
+				'Nací en Buenos Aires, Argentina, allá por 1988. Estudié comunicación publicitaria y diseño gráfico, para luego orientarme por la fotografía. Sin embargo, desde hace 15 años, trabajo en proyectos relacionados con el diseño y la programación web.',
 
 				'Por aquel entonces diseñaba y animaba sitios con Adobe Flash. Con el tiempo fui incorporando algo de programación, usando ActionScript 2 y 3, para así poder darle vida a esos sitios que en un principio eran muy estáticos. Aunque una vez que conocí el lado del código, me enamoré y me fui alejando cada vez más del diseño, hasta dejarlo casi por completo —siempre quedan algunas manías y TOCs—.',
 
