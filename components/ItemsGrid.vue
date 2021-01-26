@@ -49,11 +49,15 @@ export default {
 	},
 	methods: {
 		linkArgs(item) {
-			console.log(item)
+			const routes = {
+				'/portfolio': '/portfolio',
+				'/posts': '/blog',
+			}
+
 			if (item.has_single || item.dir.indexOf('posts'))
 				return {
 					is: 'nuxt-link',
-					to: this.localePath(`${item.dir}/${item.slug}`),
+					to: this.localePath(`${routes[item.dir]}/${item.slug}`),
 				}
 
 			if (item.external_link)
