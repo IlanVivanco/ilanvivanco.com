@@ -67,6 +67,7 @@ export default {
 					target: '_blank',
 				}
 		},
+
 		formatDate(date) {
 			moment.locale(this.$i18n.locale)
 
@@ -74,7 +75,8 @@ export default {
 
 			return moment(date).format(this.dateFormat)
 		},
-		calcRows(i) {
+
+		calcRows() {
 			const TOTALCOLS = 24
 			return Math.floor(TOTALCOLS / this.rows)
 		},
