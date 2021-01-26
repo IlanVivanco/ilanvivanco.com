@@ -20,7 +20,7 @@ export default {
 		}
 	},
 	async asyncData({ $content }) {
-		const posts = await $content('posts').sortBy('createdAt', 'desc').fetch()
+		const posts = await $content('posts').sortBy('date', 'desc').fetch()
 
 		console.log(posts);
 		return {

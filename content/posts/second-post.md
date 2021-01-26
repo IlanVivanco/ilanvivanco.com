@@ -3,7 +3,7 @@ title: Segunda entrada
 description: Este es mi primer acercamiento a la escritura. Vamos a ver qué tal me sale...
 thumbnail: '/images/blog/mi-primer-entrada.jpg'
 tags: ['Vue', 'Nuxt', 'Blog']
-date: 2020-10
+date: 2020-11-01
 show: true
 ---
 

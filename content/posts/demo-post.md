@@ -1,9 +1,9 @@
 ---
 title: Demo post
-description: Post de pruebas para revisar estilos y formatos.
+description: a Post de pruebas para revisar estilos y formatos.
 thumbnail: '/images/blog/mi-primer-entrada.jpg'
 tags: ['Testing']
-date: 2020-10
+date: 2020-09-01
 show: true
 ---
 
