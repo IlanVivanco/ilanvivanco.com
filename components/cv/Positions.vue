@@ -18,7 +18,7 @@
 
 			<header class="position__header">
 				<h2 class="position__company">{{ position.company }}</h2>
-				<h3 class="position__name">{{ position.name }}</h3>
+				<h3 class="position__name">{{ position.position }}</h3>
 			</header>
 
 			<div class="position__excerpt">{{ position.excerpt }}</div>

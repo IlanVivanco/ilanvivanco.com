@@ -51,7 +51,7 @@ export default {
 			section: 'mi historial',
 		},
 		copy: {
-			lead: 'A lo largo de todos estos años acumulé experiencia en varios ámbitos que detallo acá abajo.'
+			lead: 'A lo largo de estos años acumulé experiencia en varios ámbitos que detallo acá abajo.'
 		},
 	},
 	contact_me: {
