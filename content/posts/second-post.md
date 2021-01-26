@@ -1,6 +1,10 @@
 ---
-title: My second post
-description: 'Lorem ipsum dolor sit amet.'
+title: Segunda entrada
+description: Este es mi primer acercamiento a la escritura. Vamos a ver qué tal me sale...
+thumbnail: '/images/blog/mi-primer-entrada.jpg'
+tags: ['Vue', 'Nuxt', 'Blog']
+date: 2020-10
+show: true
 ---
 
 Sit porro aut tempora eius expedita autem. Facilis hic non et minus tenetur sunt et omnis aperiam. Quos veniam iure eos. Facere nihil nesciunt cum aspernatur autem excepturi. Minima unde libero quo et debitis. Modi sit eum quo.

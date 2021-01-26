@@ -1,7 +1,12 @@
 ---
 title: Demo post
-description: 'Demo lorem ipsum dolor sit amet.'
+description: Post de pruebas para revisar estilos y formatos.
+thumbnail: '/images/blog/mi-primer-entrada.jpg'
+tags: ['Testing']
+date: 2020-10
+show: true
 ---
+
 
 # h1 Heading
 ## h2 Heading
