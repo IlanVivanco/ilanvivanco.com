@@ -4,13 +4,13 @@
 			:title="this.$t('portfolio.titles.section')"
 			:description="this.$t('portfolio.copy.lead')"
 		/>
-		<portfolio-grid :data="portfolio" />
+		<items-grid :data="portfolio" />
 	</section>
 </template>
 
 <script>
 import Transitions from '@/mixins/Transitions'
-import PortfolioGrid from '@/components/PortfolioGrid'
+import ItemsGrid from '@/components/ItemsGrid'
 import SectionTitle from '@/components/global/SectionTitle'
 
 export default {
@@ -25,7 +25,7 @@ export default {
 		const portfolio = await $content('portfolio').sortBy('date', 'desc').fetch()
 		return { portfolio }
 	},
-	components: { PortfolioGrid, SectionTitle },
+	components: { ItemsGrid, SectionTitle },
 	mixins: [Transitions],
 }
 </script>

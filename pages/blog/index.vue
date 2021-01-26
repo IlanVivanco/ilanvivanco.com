@@ -2,18 +2,14 @@
 	<div class="container">
 		<section-title title="Últimos artículos" description="" />
 
-		<div class="links">
-			<el-button v-for="post in posts" :key="post.slug" type="primary">
-				<nuxt-link :to="localePath(`/blog/${post.slug}`)">{{ post.title }}</nuxt-link>
-			</el-button>
-			<el-button type="primary" icon="el-icon-edit" plain circle></el-button>
-		</div>
+		<items-grid :data="posts" date-format="ll" :rows="2" />
 	</div>
 </template>
 
 <script>
 import Transitions from '@/mixins/Transitions'
 import SectionTitle from '@/components/global/SectionTitle'
+import ItemsGrid from '@/components/ItemsGrid'
 
 export default {
 	name: 'BlogPage',
@@ -24,15 +20,14 @@ export default {
 		}
 	},
 	async asyncData({ $content }) {
-		const posts = await $content('posts')
-			.sortBy('createdAt', 'desc')
-			.fetch()
+		const posts = await $content('posts').sortBy('createdAt', 'desc').fetch()
 
+		console.log(posts);
 		return {
 			posts,
 		}
 	},
-	components: { SectionTitle },
+	components: { SectionTitle, ItemsGrid },
 	mixins: [Transitions],
 }
 </script>

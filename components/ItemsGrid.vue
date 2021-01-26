@@ -1,24 +1,24 @@
 <template>
-	<el-row :gutter="20" type="flex" class="portfolio">
-		<el-col tag="article" :span="8" v-for="item in items" :key="item.slug" class="portfolio__item-wrapper">
-			<el-card shadow="hover" class="portfolio__item">
-				<div class="portfolio__thumb">
-					<component :is="'nuxt-link'" v-bind="linkArgs(item)" class="portfolio__link">
+	<el-row :gutter="20" type="flex" class="grid">
+		<el-col tag="article" :span="calcRows()" v-for="item in items" :key="item.slug" class="grid__item-wrapper">
+			<el-card shadow="hover" class="grid__item">
+				<div class="grid__thumb">
+					<component :is="'nuxt-link'" v-bind="linkArgs(item)" class="grid__link">
 						<img :src="item.thumbnail" :alt="item.title" />
 						<el-button
-							class="portfolio__more"
+							class="grid__more"
 							size="small"
 							:icon="item.has_single ? 'el-icon-plus' : 'el-icon-link'"
 							circle
 						></el-button>
 					</component>
 				</div>
-				<div class="portfolio__data">
-					<time class="portfolio__date">{{ formatDate(item.date) }}</time>
-					<h1 class="portfolio__title">{{ item.title }}</h1>
-					<div class="portfolio__description">{{ item.description }}</div>
-					<div class="portfolio__tags">
-						<el-tag class="portfolio__tag" size="small" v-for="(tag, index) in item.tags" :key="index">
+				<div class="grid__data">
+					<time class="grid__date">{{ formatDate(item.date) }}</time>
+					<h1 class="grid__title">{{ item.title }}</h1>
+					<div class="grid__description">{{ item.description }}</div>
+					<div class="grid__tags">
+						<el-tag class="grid__tag" size="small" v-for="(tag, index) in item.tags" :key="index">
 							{{ tag }}
 						</el-tag>
 					</div>
@@ -32,16 +32,28 @@
 import moment from 'moment'
 
 export default {
-	name: 'PortfolioGrid',
+	name: 'ItemsGrid',
 	props: {
-		data: Array,
+		data: {
+			type: Array,
+			default: [],
+		},
+		dateFormat: {
+			type: String,
+			default: 'MMM YYYY',
+		},
+		rows: {
+			type: Number,
+			default: 3,
+		},
 	},
 	methods: {
 		linkArgs(item) {
-			if (item.has_single)
+			console.log(item)
+			if (item.has_single || item.dir.indexOf('posts'))
 				return {
 					is: 'nuxt-link',
-					to: this.localePath(`/portfolio/${item.slug}`),
+					to: this.localePath(`${item.dir}/${item.slug}`),
 				}
 
 			if (item.external_link)
@@ -56,7 +68,11 @@ export default {
 
 			if (!date) return ''
 
-			return moment(date).format('MMM YYYY')
+			return moment(date).format(this.dateFormat)
+		},
+		calcRows(i) {
+			const TOTALCOLS = 24
+			return Math.floor(TOTALCOLS / this.rows)
 		},
 	},
 	computed: {
@@ -68,11 +84,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.portfolio {
+.grid {
 	flex-wrap: wrap;
 }
 
-.portfolio__item-wrapper {
+.grid__item-wrapper {
 	margin-bottom: 20px;
 
 	@include breakpoint('medium') {
@@ -89,7 +105,7 @@ export default {
 	padding: 0;
 }
 
-.portfolio__item {
+.grid__item {
 	--thumb-height: 160px;
 	height: 100%;
 
@@ -102,7 +118,7 @@ export default {
 	}
 }
 
-.portfolio__thumb {
+.grid__thumb {
 	height: var(--thumb-height);
 	position: relative;
 	overflow: hidden;
@@ -116,17 +132,17 @@ export default {
 		transition: all 0.8s ease;
 		filter: saturate(50%);
 
-		.portfolio__item:hover & {
+		.grid__item:hover & {
 			transform: scale(1.05);
 			filter: saturate(100%);
 		}
 	}
 }
 
-.portfolio__link {
+.grid__link {
 }
 
-.portfolio__more {
+.grid__more {
 	text-decoration: none;
 	position: absolute;
 	bottom: 1em;
@@ -135,14 +151,14 @@ export default {
 	color: $color-grayscale-1;
 	border-color: $color-red-dark;
 
-	.portfolio__link:hover & {
+	.grid__link:hover & {
 		color: $color-red-dark;
 		background: $color-grayscale-1;
 		border-color: $color-grayscale-2;
 	}
 }
 
-.portfolio__data {
+.grid__data {
 	padding: 1em;
 	line-height: 1.2em;
 	height: calc(100% - var(--thumb-height));
@@ -150,18 +166,18 @@ export default {
 	flex-direction: column;
 }
 
-.portfolio__date {
+.grid__date {
 	font-size: 0.8rem;
 	color: $color-grayscale-5;
 }
 
-.portfolio__title {
+.grid__title {
 	font-size: 1.1rem;
 	color: $color-blue-dark;
 	margin-bottom: 0.5em;
 }
 
-.portfolio__description {
+.grid__description {
 	flex-grow: 1;
 	color: $color-blue;
 	font-size: 0.8em;
@@ -171,7 +187,7 @@ export default {
 	margin-bottom: 0.5em;
 }
 
-.portfolio__tags {
+.grid__tags {
 	display: inline-block;
 }
 
