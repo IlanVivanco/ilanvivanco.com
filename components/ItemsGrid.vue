@@ -8,7 +8,7 @@
 						<el-button
 							class="grid__more"
 							size="small"
-							:icon="item.has_single ? 'el-icon-plus' : 'el-icon-link'"
+							:icon="isInternalLink(item) ? 'el-icon-plus' : 'el-icon-link'"
 							circle
 						></el-button>
 					</component>
@@ -54,7 +54,7 @@ export default {
 				'/posts': '/blog',
 			}
 
-			if (item.has_single || item.dir.indexOf('posts'))
+			if (this.isInternalLink(item))
 				return {
 					is: 'nuxt-link',
 					to: this.localePath(`${routes[item.dir]}/${item.slug}`),
@@ -66,6 +66,10 @@ export default {
 					href: item.external_link,
 					target: '_blank',
 				}
+		},
+
+		isInternalLink(item) {
+			return item.has_single || item.dir.indexOf('posts') > 0
 		},
 
 		formatDate(date) {
