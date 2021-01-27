@@ -1,10 +1,12 @@
 <template>
-	<div class="container">
-		<section-title
-			:title="this.$t('resume.titles.section')"
-			:description="this.$t('resume.copy.lead')"
-		/>
-		<cv />
+	<div class="container resume">
+		<header class="main-header">
+			<section-title :title="this.$t('resume.titles.section')" :description="this.$t('resume.copy.lead')" />
+		</header>
+
+		<section class="main-content">
+			<cv />
+		</section>
 	</div>
 </template>
 

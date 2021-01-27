@@ -1,9 +1,13 @@
 <template>
 	<section class="container">
-		<back-link :to="{ path: '/portfolio' }" />
+		<header class="main-header">
+			<back-link :to="{ path: '/portfolio' }" />
+			<section-title :title="post.title" :description="post.description" />
+		</header>
 
-		<section-title :title="post.title" :description="post.description" />
-		<nuxt-content :document="post" />
+		<section class="main-content">
+			<nuxt-content :document="post" />
+		</section>
 	</section>
 </template>
 
@@ -25,7 +29,7 @@ export default {
 			})
 
 		// Redirect if not single available
-		if ( post && !post.has_single) redirect('/portfolio')
+		if (post && !post.has_single) redirect('/portfolio')
 
 		return { post }
 	},

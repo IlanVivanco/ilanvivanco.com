@@ -1,9 +1,13 @@
 <template>
 	<section class="container">
-		<back-link :to="{ path: '/blog' }" />
+		<header class="main-header">
+			<back-link :to="{ path: '/blog' }" />
+			<section-title :title="post.title" :description="post.description" />
+		</header>
 
-		<section-title :title="post.title" :description="post.description" />
-		<nuxt-content :document="post" />
+		<section class="main-content">
+			<nuxt-content :document="post" />
+		</section>
 	</section>
 </template>
 
@@ -11,7 +15,6 @@
 import Transitions from '@/mixins/Transitions'
 import SectionTitle from '@/components/global/SectionTitle'
 import BackLink from '@/components/global/BackLink'
-
 
 export default {
 	name: 'BlogItems',

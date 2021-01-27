@@ -1,32 +1,36 @@
 <template>
 	<div class="container about">
-		<el-row align="middle" :gutter="30">
-			<el-col :span="24" class="about__intro">
-				<span class="intro">{{ this.$t('index.copy.intro') }}</span>
-				<h1>{{ this.$t('index.copy.name') }}</h1>
-				<h2>{{ this.$t('index.copy.position') }}</h2>
-				<p class="lead">{{ this.$t('index.copy.lead') }}</p>
-			</el-col>
-		</el-row>
+		<header class="main-header">
+			<el-row align="middle" :gutter="30">
+				<el-col :span="24" class="about__intro">
+					<span class="intro">{{ this.$t('index.copy.intro') }}</span>
+					<h1>{{ this.$t('index.copy.name') }}</h1>
+					<h2>{{ this.$t('index.copy.position') }}</h2>
+					<p class="lead">{{ this.$t('index.copy.lead') }}</p>
+				</el-col>
+			</el-row>
+		</header>
 
-		<el-row :gutter="30" type="flex" class="mb4">
-			<el-col :span="15" class="about__info">
-				<section-title :title="this.$t('index.titles.about')" type="h2" />
-				<p v-for="(paragraph, i) in this.$t('index.copy.about')" :key="i">{{ paragraph }}</p>
-			</el-col>
+		<section class="main-content">
+			<el-row :gutter="30" type="flex" class="mb4">
+				<el-col :span="15" class="about__info">
+					<section-title :title="this.$t('index.titles.about')" type="h2" />
+					<p v-for="(paragraph, i) in this.$t('index.copy.about')" :key="i">{{ paragraph }}</p>
+				</el-col>
 
-			<el-col :span="9" class="about__insta-feed">
-				<section-title :title="this.$t('index.titles.latest_pictures')" type="h2" />
-				<feed-instagram :count="10" />
-			</el-col>
-		</el-row>
+				<el-col :span="9" class="about__insta-feed">
+					<section-title :title="this.$t('index.titles.latest_pictures')" type="h2" />
+					<feed-instagram :count="10" />
+				</el-col>
+			</el-row>
 
-		<el-row :gutter="30" type="flex">
-			<el-col :span="24" class="about__info">
-				<section-title :title="this.$t('index.titles.history')" type="h2" />
-				<p v-for="(paragraph, i) in this.$t('index.copy.history')" :key="i">{{ paragraph }}</p>
-			</el-col>
-		</el-row>
+			<el-row :gutter="30" type="flex">
+				<el-col :span="24" class="about__info">
+					<section-title :title="this.$t('index.titles.history')" type="h2" :margin-bottom="true" />
+					<p v-for="(paragraph, i) in this.$t('index.copy.history')" :key="i">{{ paragraph }}</p>
+				</el-col>
+			</el-row>
+		</section>
 	</div>
 </template>
 
@@ -50,7 +54,6 @@ export default {
 
 <style lang="scss">
 .about__intro {
-	@extend .mb4;
 	line-height: 1.2;
 
 	h1 {

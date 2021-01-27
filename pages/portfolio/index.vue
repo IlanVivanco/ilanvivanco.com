@@ -1,10 +1,12 @@
 <template>
 	<section class="container">
-		<section-title
-			:title="this.$t('portfolio.titles.section')"
-			:description="this.$t('portfolio.copy.lead')"
-		/>
-		<items-grid :data="portfolio" />
+		<header class="main-header">
+			<section-title :title="this.$t('portfolio.titles.section')" :description="this.$t('portfolio.copy.lead')" />
+		</header>
+
+		<section class="main-content">
+			<items-grid :data="portfolio" />
+		</section>
 	</section>
 </template>
 

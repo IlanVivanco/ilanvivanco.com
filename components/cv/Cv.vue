@@ -1,5 +1,5 @@
 <template>
-	<section class="resume-section">
+	<div class="resume-section">
 		<cv-header></cv-header>
 
 		<el-row align="middle" :gutter="30">
@@ -44,7 +44,7 @@
 				</aside>
 			</el-col>
 		</el-row>
-	</section>
+	</div>
 </template>
 
 <script>

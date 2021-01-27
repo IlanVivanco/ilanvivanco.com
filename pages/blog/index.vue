@@ -1,8 +1,12 @@
 <template>
 	<div class="container">
-		<section-title title="Últimos artículos" description="" />
+		<header class="main-header">
+			<section-title title="Últimos artículos" description="" />
+		</header>
 
-		<items-grid :data="posts" date-format="ll" :rows="2" />
+		<section class="main-content">
+			<items-grid :data="posts" date-format="ll" :rows="2" />
+		</section>
 	</div>
 </template>
 
@@ -22,7 +26,7 @@ export default {
 	async asyncData({ $content }) {
 		const posts = await $content('posts').sortBy('date', 'desc').fetch()
 
-		console.log(posts);
+		console.log(posts)
 		return {
 			posts,
 		}

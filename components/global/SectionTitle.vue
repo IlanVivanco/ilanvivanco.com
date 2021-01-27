@@ -1,5 +1,5 @@
 <template>
-	<header class="section-header" :class="{ small: type == 'h2' }">
+	<div class="section-header" :class="{ small: type == 'h2' }">
 		<component :is="titleType" v-if="title" class="section-header__title">
 			<span class="section-header__arrow">-></span>
 			{{ snakeCase(title) }}
@@ -7,7 +7,7 @@
 			<span class="section-header__semicolon">;</span>
 		</component>
 		<p v-if="description" class="section-header__description" v-html="description"></p>
-	</header>
+	</div>
 </template>
 
 <script>
@@ -33,8 +33,6 @@ export default {
 
 <style lang="scss" scoped>
 .section-header {
-	margin-bottom: 2.5rem;
-
 	&.small {
 		margin-bottom: 0.6em;
 	}

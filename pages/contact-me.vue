@@ -1,14 +1,16 @@
 <template>
 	<div class="container">
-		<section-title
-			:title="this.$t('contact_me.titles.section')"
-			:description="this.$t('contact_me.copy.lead')"
-		/>
-		<p>
-			Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos natus reprehenderit sunt obcaecati distinctio
-			molestias aliquid, deleniti, magnam perspiciatis expedita quia. Necessitatibus adipisci voluptas totam! Repellat
-			ullam ut repudiandae cumque.
-		</p>
+		<header class="main-header">
+			<section-title :title="this.$t('contact_me.titles.section')" :description="this.$t('contact_me.copy.lead')" />
+		</header>
+
+		<section class="main-content">
+			<p>
+				Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos natus reprehenderit sunt obcaecati distinctio
+				molestias aliquid, deleniti, magnam perspiciatis expedita quia. Necessitatibus adipisci voluptas totam!
+				Repellat ullam ut repudiandae cumque.
+			</p>
+		</section>
 	</div>
 </template>
 
@@ -30,7 +32,7 @@ export default {
 			en: '/contact-me',
 		},
 	},
-	components: {SectionTitle},
+	components: { SectionTitle },
 	mixins: [Transitions],
 }
 </script>

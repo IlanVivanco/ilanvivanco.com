@@ -217,7 +217,7 @@ export default {
 		height: 75vh;
 		overflow-y: auto;
 		overflow-x: hidden;
-		padding: 2rem;
+		// padding: 2rem;
 		background: $color-grayscale-1;
 
 		@include breakpoint('medium') {
