@@ -1,6 +1,41 @@
 .main-header {
-	background: linear-gradient(135deg, $color-grayscale-3, $color-grayscale-4);
+	background:
+		repeating-linear-gradient(
+			45deg,
+			transparent,
+			transparent 2px,
+			rgba(0,0,0,.03) 2px,
+			rgba(0,0,0,.03) 4px
+		),
+		linear-gradient(
+			135deg,
+			$color-grayscale-1,
+			$color-white
+		);
 	padding: 2rem;
+	position: relative;
+	box-shadow:
+		0 1px 1px rgba(0, 0, 0, 0.025),
+		0 2px 2px rgba(0, 0, 0, 0.025),
+		0 4px 4px rgba(0, 0, 0, 0.025),
+		0 8px 8px rgba(0, 0, 0, 0.025),
+		0 16px 16px rgba(0, 0, 0, 0.025);
+
+	&.light{
+		background:
+			repeating-linear-gradient(
+				45deg,
+				transparent,
+				transparent 2px,
+				rgba(0,0,0,.1) 2px,
+				rgba(0,0,0,.1) 4px
+			),
+			linear-gradient(
+				135deg,
+				$color-blue-dark,
+				$color-blue-light
+			);
+	}
 }
 
 .main-content {
