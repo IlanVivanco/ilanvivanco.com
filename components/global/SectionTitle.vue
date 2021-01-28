@@ -73,7 +73,7 @@ export default {
 		color: $color-grayscale-5;
 
 		.light & {
-			color: $color-grayscale-3;
+			color: $color-grayscale-4;
 		}
 	}
 
@@ -84,7 +84,7 @@ export default {
 		margin-left: 0.2em;
 
 		.light & {
-			color: $color-grayscale-4;
+			color: $color-grayscale-2;
 		}
 	}
 }
