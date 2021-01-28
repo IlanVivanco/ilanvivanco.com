@@ -43,6 +43,10 @@ export default {
 		font-weight: normal;
 		color: $color-blue-dark;
 		display: flex;
+
+		.light & {
+			color: $color-grayscale-2;
+		}
 	}
 
 	h2#{&}__title {
@@ -51,14 +55,26 @@ export default {
 
 	&__arrow {
 		color: $color-cyan-dark;
+
+		.light & {
+			color: $color-teal-light;
+		}
 	}
 
 	&__brackets {
 		color: $color-red-dark;
+
+		.light & {
+			color: $color-red-light;
+		}
 	}
 
 	&__semicolon {
 		color: $color-grayscale-5;
+
+		.light & {
+			color: $color-grayscale-3;
+		}
 	}
 
 	&__description {
@@ -66,6 +82,10 @@ export default {
 		line-height: 1.3em;
 		font-style: italic;
 		margin-left: 0.2em;
+
+		.light & {
+			color: $color-grayscale-4;
+		}
 	}
 }
 </style>

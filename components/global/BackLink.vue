@@ -25,6 +25,10 @@ export default {
 	color: $color-grayscale-7;
 	margin-bottom: 0.8em;
 
+	.light &{
+		color: $color-grayscale-3;
+	}
+
 	&:hover {
 		color: $color-teal-dark;
 	}
