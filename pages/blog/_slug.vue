@@ -6,7 +6,7 @@
 		</header>
 
 		<section class="main-content">
-			<post-header />
+			<post-header :img="post.thumbnail" :alt="post.title" />
 			<nuxt-content :document="post" />
 		</section>
 	</section>

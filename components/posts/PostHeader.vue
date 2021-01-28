@@ -1,5 +1,5 @@
 <template>
-	<header class="post-header" :class="{ small: size }">
+	<header class="post-header" :class="{ small }">
 		<img :src="img" :alt="alt" />
 	</header>
 </template>
@@ -16,7 +16,7 @@ export default {
 			type: String,
 			default: 'My title',
 		},
-		size: {
+		small: {
 			type: Boolean,
 			default: true,
 		},
