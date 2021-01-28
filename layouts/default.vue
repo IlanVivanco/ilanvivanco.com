@@ -217,25 +217,23 @@ export default {
 		height: 75vh;
 		overflow-y: auto;
 		overflow-x: hidden;
-		// padding: 2rem;
 		background: $color-grayscale-1;
 
 		@include breakpoint('medium') {
 			height: auto;
 			overflow-y: visible;
-			padding: 1.5em;
 		}
 
 		&::-webkit-scrollbar {
-			width: 0.5rem;
+			width: 2px;
 		}
 
 		&::-webkit-scrollbar-track {
-			background: $color-grayscale-4;
+			background: $color-blue;
 		}
 
 		&::-webkit-scrollbar-thumb {
-			background: $color-grayscale-6;
+			background: $color-grayscale-5;
 		}
 	}
 }
