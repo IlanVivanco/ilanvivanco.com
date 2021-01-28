@@ -1,11 +1,12 @@
 <template>
 	<section class="container">
-		<header class="main-header">
+		<header class="main-header light">
 			<back-link :to="{ path: '/blog' }" />
 			<section-title :title="post.title" :description="post.description" />
 		</header>
 
 		<section class="main-content">
+			<post-header />
 			<nuxt-content :document="post" />
 		</section>
 	</section>
@@ -15,6 +16,7 @@
 import Transitions from '@/mixins/Transitions'
 import SectionTitle from '@/components/global/SectionTitle'
 import BackLink from '@/components/global/BackLink'
+import PostHeader from '~/components/posts/PostHeader.vue'
 
 export default {
 	name: 'BlogItems',
@@ -32,7 +34,13 @@ export default {
 			post,
 		}
 	},
-	components: { SectionTitle, BackLink },
+	components: { SectionTitle, BackLink, PostHeader },
 	mixins: [Transitions],
 }
 </script>
+
+<style lang="scss" scoped>
+/deep/ img {
+	max-width: 100%;
+}
+</style>

@@ -94,9 +94,9 @@ export default {
 	content: {
 		markdown: {
 			prism: {
-			  theme: '@/assets/scss/prism/monokai-cotalpa.scss'
+				theme: '@/assets/scss/prism/monokai-cotalpa.scss'
 			}
-		 }
+		},
 	},
 	/*
 	** Build configuration
