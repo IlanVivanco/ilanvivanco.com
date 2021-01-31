@@ -4,13 +4,14 @@ export default {
 	greeting: "Hola mundo desde I18N!",
 	another: "Más datos desde I18N!",
 	taglines: [
-		'programador WordPress',
+		'desarrollador WordPress',
 		'programador backend',
 		'programador frontend',
 		'programador full-stack',
 		'líder de proyectos',
 		'fotógrafo',
 		'papá de Oli',
+		'esposo',
 		'geek'
 	],
 	index: {
@@ -59,7 +60,7 @@ export default {
 			section: 'contactame',
 		},
 		copy: {
-			lead: 'Podés encontrarme en cualquiera de mis redes sociales o, si lo preferís, enviarme un mensaje desde el siguiente formulario.'
+			lead: 'Enviame un mensaje desde el siguiente formulario y empecemos a hacer algo juntos.'
 		},
 	},
 	portfolio: {
@@ -67,7 +68,15 @@ export default {
 			section: 'portfolio',
 		},
 		copy: {
-			lead: 'En los últimos 15 años programé una gran variedad de sitios web, estos son algunos de mis favoritos.'
+			lead: 'Estos son algunos de mis sitios favoritos en los que trabajé.'
+		},
+	},
+	blog: {
+		titles: {
+			section: 'blog',
+		},
+		copy: {
+			lead: 'Recién estoy empezando, pero esto es lo que tengo para contarte.'
 		},
 	},
 	cv
