@@ -6,7 +6,8 @@
 		"dev": "nuxt",
 		"build": "nuxt build",
 		"start": "nuxt start",
-		"generate": "nuxt generate"
+		"generate": "nuxt generate",
+		"instagram:get": "curl --request GET --url \"https://instagram40.p.rapidapi.com/account-feed?username=ilanvivanco\" --header \"x-rapidapi-host: instagram40.p.rapidapi.com\" --header \"x-rapidapi-key: $npm_config_rapid_key\" > assets/instagram.json"
 	},
 	"dependencies": {
 		"@nuxt/content": "^1.10.0",
