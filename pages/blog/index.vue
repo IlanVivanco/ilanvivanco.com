@@ -1,7 +1,7 @@
 <template>
 	<div class="container">
 		<header class="main-header">
-			<section-title title="Últimos artículos" description="" />
+			<section-title :title="this.$t('blog.titles.section')" :description="this.$t('blog.copy.lead')" />
 		</header>
 
 		<section class="main-content">
