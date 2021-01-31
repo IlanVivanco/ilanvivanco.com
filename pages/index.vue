@@ -13,16 +13,24 @@
 
 		<section class="main-content">
 			<el-row :gutter="30" type="flex" class="mb4">
-				<el-col :span="15" class="about__info">
+				<el-col :span="24" class="about__info">
 					<section-title :title="this.$t('index.titles.about')" type="h2" />
+					<img
+						class="about__image"
+						src="https://images.unsplash.com/photo-1575318634028-6a0cfcb60c59?auto=format&fit=crop&w=933&q=80"
+						alt="Workspace"
+					/>
 					<p v-for="(paragraph, i) in this.$t('index.copy.about')" :key="i">{{ paragraph }}</p>
 				</el-col>
-
-				<el-col :span="9" class="about__insta-feed">
-					<section-title :title="this.$t('index.titles.latest_pictures')" type="h2" />
-					<feed-instagram :count="10" />
-				</el-col>
 			</el-row>
+
+			<aside class="about__insta-feed">
+				<el-row :gutter="30" type="flex" class="mb4">
+					<el-col :span="24">
+						<instagram-feed :count="5" :gap="2" />
+					</el-col>
+				</el-row>
+			</aside>
 
 			<el-row :gutter="30" type="flex">
 				<el-col :span="24" class="about__info">
@@ -37,7 +45,7 @@
 <script>
 import Transitions from '@/mixins/Transitions'
 import SectionTitle from '@/components/global/SectionTitle'
-import FeedInstagram from '@/components/FeedInstagram'
+import InstagramFeed from '@/components/InstagramFeed'
 
 export default {
 	name: 'Index',
@@ -47,7 +55,7 @@ export default {
 			title: 'My Index title',
 		}
 	},
-	components: { SectionTitle, FeedInstagram },
+	components: { SectionTitle, InstagramFeed },
 	mixins: [Transitions],
 }
 </script>
@@ -81,9 +89,20 @@ export default {
 	}
 }
 
+.about__image {
+	max-width: 39%;
+	margin-bottom: 1rem;
+	margin-left: 1rem;
+	float: right;
+}
+
 .about__info {
 	p {
 		line-height: 1.4;
 	}
+}
+
+.about__insta-feed {
+	margin: 0 -2rem;
 }
 </style>
