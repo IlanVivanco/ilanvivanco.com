@@ -55,6 +55,7 @@ export default {
 
 	&__arrow {
 		color: $color-cyan-dark;
+		white-space: nowrap;
 
 		.light & {
 			color: $color-teal-light;
@@ -63,6 +64,7 @@ export default {
 
 	&__brackets {
 		color: $color-red-dark;
+		white-space: nowrap;
 
 		.light & {
 			color: $color-red-light;
