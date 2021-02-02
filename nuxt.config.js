@@ -1,23 +1,16 @@
 import I18N from './locales/i18n.config';
 
 export default {
-	/*
-	** Nuxt rendering mode
-	** See https://nuxtjs.org/api/configuration-mode
-	*/
-	mode: 'universal',
-	/*
-	** Nuxt target
-	** See https://nuxtjs.org/api/configuration-target
-	*/
+	// Target: https://go.nuxtjs.dev/config-target
 	target: 'static',
-	/*
-	** Headers of the page
-	** See https://nuxtjs.org/api/configuration-head
-	*/
+
+	// Global page headers: https://go.nuxtjs.dev/config-head
 	head: {
 		titleTemplate: '%s - Ilán Vivanco',
 		title: 'Full Stack Developer',
+		htmlAttrs: {
+			lang: 'es'
+		},
 		meta: [
 			{ charset: 'utf-8' },
 			{ name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -31,18 +24,16 @@ export default {
 			{ rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Fira+Code&display=swap' }, // Monospace
 		]
 	},
-	/*
-	** Global CSS
-	*/
+
+	// Global CSS: https://go.nuxtjs.dev/config-css
 	css: [
 		'element-ui/lib/theme-chalk/index.css',
 		'animate.css/animate.min.css',
 		'@/assets/css/theme.css',
 		'@/assets/scss/main.scss',
 	],
-	/*
-	** Load SCSS globally for components
-	*/
+
+	// Load SCSS globally for components
 	styleResources: {
 		scss: [
 			'./assets/scss/_variables.scss',
@@ -50,30 +41,24 @@ export default {
 			'./assets/scss/_mixins.scss',
 		]
 	},
-	/*
-	** Plugins to load before mounting the App
-	** https://nuxtjs.org/guide/plugins
-	*/
+
+	// Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
 	plugins: [
 		'@/plugins/eventHub',
 		'@/plugins/element-ui',
 	],
-	/*
-	** Auto import components
-	** See https://nuxtjs.org/api/configuration-components
-	*/
+
+	// Auto import components: https://go.nuxtjs.dev/config-components
 	components: true,
-	/*
-	** Nuxt.js dev-modules
-	*/
+
+	// Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
 	buildModules: [
 		// Doc https://github.com/nuxt-community/dotenv-module
 		'@nuxtjs/dotenv',
 		'@nuxtjs/style-resources'
 	],
-	/*
-	** Nuxt.js modules
-	*/
+
+	// Modules: https://go.nuxtjs.dev/config-modules
 	modules: [
 		// Doc: https://axios.nuxtjs.org/usage
 		'@nuxtjs/axios',
@@ -82,15 +67,11 @@ export default {
 		// Doc https://i18n.nuxtjs.org/
 		['nuxt-i18n', I18N],
 	],
-	/*
-	** Axios module configuration
-	** See https://axios.nuxtjs.org/options
-	*/
+
+	// Axios module configuration: https://axios.nuxtjs.org/options
 	axios: {},
-	/*
-	** Content module configuration
-	** See https://content.nuxtjs.org/configuration
-	*/
+
+	// Content module configuration: https://content.nuxtjs.org/configuration
 	content: {
 		markdown: {
 			prism: {
@@ -98,11 +79,14 @@ export default {
 			}
 		},
 	},
-	/*
-	** Build configuration
-	** See https://nuxtjs.org/api/configuration-build/
-	*/
+
+	// Build Configuration: https://go.nuxtjs.dev/config-build
 	build: {
 		transpile: [/^element-ui/, 'gsap'],
 	},
+
+	// Netlify client side rendering issue: https://nuxtjs.org/docs/2.x/deployment/netlify-deployment#for-client-side-rendering-only
+	generate: {
+		fallback: true
+	}
 }
