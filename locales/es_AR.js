@@ -58,9 +58,16 @@ export default {
 	contact_me: {
 		titles: {
 			section: 'contactame',
+			name: 'Nombre',
+			email: 'Email',
+			message: 'Mensaje',
+			send: 'Enviar',
 		},
 		copy: {
-			lead: 'Enviame un mensaje desde el siguiente formulario y empecemos a hacer algo juntos.'
+			lead: 'Enviame un mensaje desde el siguiente formulario y empecemos a hacer algo juntos.',
+			name_placeholder: 'Tu nombre va acá...',
+			email_placeholder: 'Acá va tu email...',
+			message_placeholder: 'Y acá ponés cualquier cosa que quieras contarme o preguntarme...',
 		},
 	},
 	portfolio: {
@@ -76,7 +83,8 @@ export default {
 			section: 'blog',
 		},
 		copy: {
-			lead: 'Recién estoy empezando, pero esto es lo que tengo para contarte.'
+			lead: 'Recién estoy empezando, pero esto es lo que tengo para contarte.',
+			posted_by: 'Por Ilán Vivanco'
 		},
 	},
 	cv

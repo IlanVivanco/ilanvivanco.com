@@ -5,11 +5,7 @@
 		</header>
 
 		<section class="main-content">
-			<p>
-				Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos natus reprehenderit sunt obcaecati distinctio
-				molestias aliquid, deleniti, magnam perspiciatis expedita quia. Necessitatibus adipisci voluptas totam!
-				Repellat ullam ut repudiandae cumque.
-			</p>
+			<contact-form netlify />
 		</section>
 	</div>
 </template>
@@ -17,6 +13,7 @@
 <script>
 import Transitions from '@/mixins/Transitions'
 import SectionTitle from '@/components/global/SectionTitle'
+import ContactForm from '@/components/ContactForm'
 
 export default {
 	name: 'ContactMe',
@@ -32,7 +29,7 @@ export default {
 			en: '/contact-me',
 		},
 	},
-	components: { SectionTitle },
+	components: { SectionTitle, ContactForm },
 	mixins: [Transitions],
 }
 </script>
