@@ -53,6 +53,7 @@ $border-color-lighter: $color-grayscale-2;
 $border-color-extra-light: $color-grayscale-1;
 
 $breakpoints: (
+	'big': 1600px,
 	'medium': 1200px,
 	'small': 768px,
 	'tiny': 520px,

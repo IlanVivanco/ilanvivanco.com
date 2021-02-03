@@ -120,7 +120,11 @@ export default {
 
 	.main-container {
 		width: 100%;
-		max-width: calc(#{map-get($breakpoints, 'medium')} - 40px);
+		max-width: calc(#{map-get($breakpoints, 'big')} - 40px);
+
+		@include breakpoint('big') {
+			max-width: calc(#{map-get($breakpoints, 'medium')} - 40px);
+		}
 
 		@include breakpoint('medium') {
 			max-width: 600px;
@@ -169,21 +173,29 @@ export default {
 	padding-left: 1rem;
 	position: relative;
 	z-index: 1;
+	height: 70vh;
+
+	@include breakpoint('big') {
+		height: 80vh;
+	}
 
 	@include breakpoint('medium') {
-		@include border-radius();
-
 		width: 100%;
+		height: auto;
 		padding-left: 0;
 		margin: 2.5vh 0;
 	}
 
 	&__inner {
-		@include border-radius();
+		@include border-radius(left);
 
-		height: 80vh;
+		@include breakpoint('big') {
+			@include border-radius();
+		}
+
 		position: relative;
 		overflow: hidden;
+		height: 100%;
 		background: $color-grayscale-1;
 		text-align: center;
 		box-shadow: 0 0 10px 2px rgba(black, 0.1), 5px 0px 5px rgba(black, 0.05);
@@ -199,11 +211,15 @@ export default {
 }
 
 .main {
-	@include border-radius(right);
+	@include border-radius();
 
 	height: 75vh;
 	overflow: hidden;
-	// box-shadow: 0 0 10px 2px rgba(black, 0.1);
+	@include border-radius();
+
+	@include breakpoint('big') {
+		@include border-radius(right);
+	}
 
 	@include breakpoint('medium') {
 		@include border-radius();

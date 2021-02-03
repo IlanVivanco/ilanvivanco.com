@@ -48,8 +48,12 @@ export default {
 }
 
 .about-me {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+
 	@include breakpoint('medium') {
-		display: flex;
+		flex-direction: row;
 	}
 
 	@include breakpoint('tiny') {
@@ -60,10 +64,10 @@ export default {
 	&__image {
 		position: relative;
 		overflow: hidden;
-		padding-top: 235px;
+		padding-top: 80%;
 
 		@include breakpoint('medium') {
-			padding-top: 40vh; //Same as parent
+			padding-top: 0;
 			width: 50%;
 		}
 
@@ -106,7 +110,8 @@ export default {
 		padding: 1rem;
 		display: flex;
 		flex-flow: column nowrap;
-		height: calc(80vh - 235px);
+		height: 100%;
+		flex-grow: 1;
 
 		@include breakpoint('medium') {
 			position: relative;
@@ -123,10 +128,6 @@ export default {
 	}
 
 	&__footer {
-		// position: absolute;
-		// right: 0;
-		// left: 0;
-		// bottom: 1.5em;
 		text-align: center;
 		margin-top: auto;
 
