@@ -19,4 +19,9 @@ export default [
 		logo: "/images/svg/social/twitter.svg",
 		link: "https://twitter.com/IlanVivanco",
 	},
+	{
+		name: "Whatsapp",
+		logo: "/images/svg/social/whatsapp.svg",
+		link: "https://wa.me/+34623021789",
+	},
 ]
