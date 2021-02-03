@@ -1,51 +1,54 @@
 <template>
-	<el-form
-		name="contact-form"
-		class="contact-form"
-		:model="contactForm"
-		:rules="rules"
-		ref="contact-form"
-		label-width="auto"
-		label-position="right"
-		data-netlify="true"
-		netlify-honeypot="bot-field"
-		status-icon
-	>
-		<input type="hidden" name="form-name" value="contact-form" />
+	<div class="contact-form">
+		<el-form
+			name="contact-form"
+			:model="contactForm"
+			:rules="rules"
+			ref="contact-form"
+			label-width="auto"
+			label-position="right"
+			data-netlify="true"
+			netlify-honeypot="fake"
+			status-icon
+			v-show="!formSent"
+		>
+			<input type="hidden" name="form-name" value="contact-form" />
+			<input v-show="false" name="fake" />
 
-		<el-form-item :label="this.$t('contact_me.titles.name')" prop="name">
-			<el-input
-				name="name"
-				v-model="contactForm.name"
-				:placeholder="this.$t('contact_me.copy.name_placeholder')"
-			></el-input>
-		</el-form-item>
+			<el-form-item :label="this.$t('contact_me.form.fields.name')" prop="name">
+				<el-input
+					name="name"
+					v-model="contactForm.name"
+					:placeholder="this.$t('contact_me.form.placeholders.name')"
+				></el-input>
+			</el-form-item>
 
-		<el-form-item :label="this.$t('contact_me.titles.email')" prop="email">
-			<el-input
-				name="email"
-				v-model="contactForm.email"
-				type="email"
-				:placeholder="this.$t('contact_me.copy.email_placeholder')"
-			></el-input>
-		</el-form-item>
+			<el-form-item :label="this.$t('contact_me.form.fields.email')" prop="email">
+				<el-input
+					name="email"
+					v-model="contactForm.email"
+					type="email"
+					:placeholder="this.$t('contact_me.form.placeholders.email')"
+				></el-input>
+			</el-form-item>
 
-		<el-form-item :label="this.$t('contact_me.titles.message')" prop="message">
-			<el-input
-				name="message"
-				type="textarea"
-				v-model="contactForm.message"
-				:placeholder="this.$t('contact_me.copy.message_placeholder')"
-				:rows="4"
-			></el-input>
-		</el-form-item>
+			<el-form-item :label="this.$t('contact_me.form.fields.message')" prop="message">
+				<el-input
+					name="message"
+					type="textarea"
+					v-model="contactForm.message"
+					:placeholder="this.$t('contact_me.form.placeholders.message')"
+					:rows="4"
+				></el-input>
+			</el-form-item>
 
-		<el-form-item>
-			<el-button type="primary" @click.prevent="maybeSubmitForm" icon="el-icon-s-promotion">
-				{{ this.$t('contact_me.titles.send') }}
-			</el-button>
-		</el-form-item>
-	</el-form>
+			<el-form-item>
+				<el-button type="primary" @click.prevent="maybeSubmitForm" icon="el-icon-s-promotion">
+					{{ this.$t('contact_me.form.fields.send') }}
+				</el-button>
+			</el-form-item>
+		</el-form>
+	</div>
 </template>
 
 <script>
@@ -55,24 +58,29 @@ export default {
 	name: 'ContactForm',
 	data() {
 		return {
+			formSent: false,
 			contactForm: {
 				name: '',
 				email: '',
 				message: '',
+				fake: '',
 			},
 			rules: {
 				name: [
-					{ required: true, message: '¡Sin un nombre, no sé a quién dirigirme!', trigger: 'blur' },
-					{ min: 3, message: 'Un poco corto, ¿no te parece?', trigger: 'blur' },
-					{ max: 20, message: '¡Un nombre tan largo no sé ni cómo agendarlo!', trigger: 'blur' },
+					{ required: true, message: this.$t('contact_me.form.messages.name_empty'), trigger: 'blur' },
+					{ min: 3, message: this.$t('contact_me.form.messages.name_short'), trigger: 'blur' },
 				],
 				email: [
-					{ required: true, message: 'Si no me ponés tu email, ¿cómo te respondo?', trigger: 'blur' },
-					{ pattern: /[^@\s]+@[^@\s]+\.[^@\s]+/, message: '¿Estás seguro que ese es tu correo?', trigger: 'blur' },
+					{ required: true, message: this.$t('contact_me.form.messages.email_empty'), trigger: 'blur' },
+					{
+						pattern: /[^@\s]+@[^@\s]+\.[^@\s]+/,
+						message: this.$t('contact_me.form.messages.email_wrong'),
+						trigger: 'blur',
+					},
 				],
 				message: [
-					{ required: true, message: '¡Si no me escribís nada, no sé qué responderte!', trigger: 'blur' },
-					{ min: 20, message: 'Seguro tenés algo más para contarme... ¡Ánimo!', trigger: 'blur' },
+					{ required: true, message: this.$t('contact_me.form.messages.message_empty'), trigger: 'blur' },
+					{ min: 20, message: this.$t('contact_me.form.messages.message_short'), trigger: 'blur' },
 				],
 			},
 		}
@@ -100,18 +108,35 @@ export default {
 
 			axios
 				.post(location.href, formData, axiosConfig)
-				.then(() => console.log('yay!'))
-				.catch((error) => console.error(error))
+				.then(() => {
+					this.formSubmitted()
+				})
+				.catch((error) => {
+					this.$notify({
+						title: this.$t('contact_me.titles.form_error'),
+						message: this.$t('contact_me.copy.form_error'),
+						type: 'error',
+						position: 'bottom-right',
+					})
+				})
 		},
 
 		maybeSubmitForm() {
 			this.$refs['contact-form'].validate((valid) => {
-				if (!valid) {
-					console.error('There was a problem!')
-					return false
-				}
+				if (!valid) return false
 
 				this.submitForm()
+			})
+		},
+
+		formSubmitted() {
+			this.$refs['contact-form'].resetFields()
+
+			this.$notify({
+				title: this.$t('contact_me.titles.form_success'),
+				message: this.$t('contact_me.copy.form_success'),
+				type: 'success',
+				position: 'bottom-right',
 			})
 		},
 	},
@@ -122,5 +147,16 @@ export default {
 .contact-form {
 	max-width: 80%;
 	margin: 2rem auto 0;
+
+	@include breakpoint('medium') {
+		max-width: none;
+	}
+
+	@include breakpoint('small') {
+		/deep/ .el-form-item > * {
+			float: none !important;
+			margin-left: 0 !important;
+		}
+	}
 }
 </style>

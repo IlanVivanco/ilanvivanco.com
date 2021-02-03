@@ -58,17 +58,35 @@ export default {
 	contact_me: {
 		titles: {
 			section: 'contactame',
-			name: 'Nombre',
-			email: 'Email',
-			message: 'Mensaje',
-			send: 'Enviar',
+			form_success: '¡Mensaje enviado!',
+			form_error: '¡Error al enviar tu mensaje!',
 		},
 		copy: {
 			lead: 'Enviame un mensaje desde el siguiente formulario y empecemos a hacer algo juntos.',
-			name_placeholder: 'Tu nombre va acá...',
-			email_placeholder: 'Acá va tu email...',
-			message_placeholder: 'Y acá ponés cualquier cosa que quieras contarme o preguntarme...',
+			form_success: 'Gracias por contactarte, en breve me comunicaré contigo.',
+			form_error: 'Por favor intentalo nuevamente.',
 		},
+		form: {
+			fields: {
+				name: 'Nombre',
+				email: 'Email',
+				message: 'Mensaje',
+				send: 'Enviar',
+			},
+			placeholders: {
+				name: 'Tu nombre va acá...',
+				email: 'Acá va tu email...',
+				message: 'Y acá ponés cualquier cosa que quieras contarme o preguntarme...',
+			},
+			messages: {
+				name_empty: '¡Sin un nombre, no sé a quién dirigirme!',
+				name_short: 'Un poco corto, ¿no te parece?',
+				email_empty: 'Si no me ponés tu email, ¿cómo te respondo?',
+				email_wrong: '¿Estás seguro que ese es tu correo?',
+				message_empty: '¡Si no me escribís nada, no sé qué responderte!',
+				message_short: 'Seguro tenés algo más para contarme... ¡Ánimo!',
+			}
+		}
 	},
 	portfolio: {
 		titles: {
