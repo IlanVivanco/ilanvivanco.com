@@ -18,7 +18,7 @@
 					<h1 class="grid__title">{{ item.title }}</h1>
 					<div class="grid__description">{{ item.description }}</div>
 					<div class="grid__tags">
-						<el-tag class="grid__tag" size="small" v-for="(tag, index) in item.tags" :key="index">
+						<el-tag class="grid__tag mr2" size="small" v-for="(tag, index) in item.tags" :key="index">
 							{{ tag }}
 						</el-tag>
 					</div>
@@ -40,7 +40,7 @@ export default {
 		},
 		dateFormat: {
 			type: String,
-			default: 'MMM YYYY',
+			default: 'll',
 		},
 		rows: {
 			type: Number,
@@ -49,15 +49,10 @@ export default {
 	},
 	methods: {
 		linkArgs(item) {
-			const routes = {
-				'/portfolio': '/portfolio',
-				'/posts': '/blog',
-			}
-
 			if (this.isInternalLink(item))
 				return {
 					is: 'nuxt-link',
-					to: this.localePath(`${routes[item.dir]}/${item.slug}`),
+					to: item.path.replace(`/${this.$i18n.defaultLocale}`, ''),
 				}
 
 			if (item.external_link)
@@ -69,7 +64,7 @@ export default {
 		},
 
 		isInternalLink(item) {
-			return item.has_single || item.dir.indexOf('posts') > 0
+			return item.has_single || item.dir.indexOf('blog') > 0
 		},
 
 		formatDate(date) {
@@ -149,9 +144,6 @@ export default {
 	}
 }
 
-.grid__link {
-}
-
 .grid__more {
 	text-decoration: none;
 	position: absolute;
@@ -197,14 +189,9 @@ export default {
 	margin-bottom: 0.5em;
 }
 
-.grid__tags {
-	display: inline-block;
-}
-
 /deep/ .el-tag {
 	height: auto;
 	font-size: 0.6rem;
-	margin-right: 0.5em;
 	line-height: 1;
 	padding: 0.5em 0.6em;
 	margin-top: 0.5em;
