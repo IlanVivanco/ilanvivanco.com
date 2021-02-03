@@ -27,17 +27,25 @@
 			<aside class="about__insta-feed">
 				<el-row :gutter="30" type="flex" class="mb4">
 					<el-col :span="24">
-						<instagram-feed :count="5" :gap="2" />
+						<instagram-feed :count="6" :gap="2" />
 					</el-col>
 				</el-row>
 			</aside>
 
-			<el-row :gutter="30" type="flex">
+			<el-row :gutter="30" type="flex" class="mb4">
 				<el-col :span="24" class="about__info">
 					<section-title :title="this.$t('index.titles.history')" type="h2" :margin-bottom="true" />
 					<p v-for="(paragraph, i) in this.$t('index.copy.history')" :key="i">{{ paragraph }}</p>
 				</el-col>
 			</el-row>
+
+			<aside class="about__insta-feed">
+				<el-row :gutter="30" type="flex" class="mb4">
+					<el-col :span="24">
+						<instagram-feed :count="6" :offset="6" :gap="2" />
+					</el-col>
+				</el-row>
+			</aside>
 		</section>
 	</div>
 </template>

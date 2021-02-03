@@ -2,7 +2,11 @@
 	<ul class="insta-feed" :style="{ '--cols': count, '--mobile-cols': mobileCols, '--gap': gap }">
 		<li class="insta-feed__box" v-for="(photo, index) in this.images" :key="index">
 			<a :href="`https://www.instagram.com/p/${photo.node.shortcode}/`" target="__blank">
-				<img class="insta-feed__image" :src="photo.node.thumbnail_resources[2].src" :alt="photo.node.accessibility_caption" />
+				<img
+					class="insta-feed__image"
+					:src="photo.node.thumbnail_resources[2].src"
+					:alt="photo.node.accessibility_caption"
+				/>
 				<div class="insta-feed__hashtags">{{ getHashtags(photo) }}</div>
 			</a>
 		</li>
@@ -19,6 +23,10 @@ export default {
 			type: Number,
 			default: 4,
 		},
+		offset: {
+			type: Number,
+			default: 0,
+		},
 		gap: {
 			type: Number,
 			default: 5,
@@ -30,7 +38,9 @@ export default {
 		}
 	},
 	mounted() {
-		this.images = instagramData.splice(0, this.count)
+		console.log(instagramData.length)
+
+		this.images = [...instagramData].splice(this.offset, this.count)
 	},
 	computed: {
 		mobileCols() {
@@ -39,7 +49,7 @@ export default {
 	},
 	methods: {
 		getHashtags(item) {
-			const WORD_LIMIT = 4
+			const WORD_LIMIT = 2
 			const caption = item.node.edge_media_to_caption.edges[0].node.text
 			const hashtags = caption
 				.split(' ')
@@ -55,10 +65,11 @@ export default {
 <style lang="scss" scoped>
 .insta-feed {
 	margin: 0;
+	margin-bottom: calc(var(--gap, 0) * 1px);
 	padding: 0;
 	display: grid;
 	list-style: none;
-	gap: calc(var(--gap) * 1px);
+	gap: calc(var(--gap, 0) * 1px);
 	grid-template-columns: repeat(var(--cols), 1fr);
 	grid-auto-rows: 1fr;
 
@@ -159,6 +170,7 @@ export default {
 		opacity: 0;
 		line-height: 1.4;
 		transition: all ease 0.4s;
+		width: 100%;
 	}
 }
 </style>
