@@ -31,7 +31,6 @@ export default {
 	},
 	mounted() {
 		this.images = instagramData.splice(0, this.count)
-		console.info(this.images[0].node)
 	},
 	computed: {
 		mobileCols() {
@@ -40,7 +39,6 @@ export default {
 	},
 	methods: {
 		getHashtags(item) {
-			console.log(item)
 			const WORD_LIMIT = 4
 			const caption = item.node.edge_media_to_caption.edges[0].node.text
 			const hashtags = caption
