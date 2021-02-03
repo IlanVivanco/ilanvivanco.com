@@ -1,30 +1,32 @@
 <template>
 	<section class="container">
 		<header class="main-header light">
-			<back-link :to="{ path: '/blog' }" />
-			<section-title :title="post.title" :description="post.description" />
+			<back-link :to="{ path: localePath('/blog') }" />
+			<blog-title :title="post.title" :description="post.description" />
 		</header>
 
 		<section class="main-content">
-			<post-header v-if="post.show_thumbnail" :img="post.thumbnail" :alt="post.title" />
+			<blog-thumbnail :post="post" />
 			<nuxt-content :document="post" />
+			<blog-footer :post="post"></blog-footer>
 		</section>
 	</section>
 </template>
 
 <script>
 import Transitions from '@/mixins/Transitions'
-import SectionTitle from '@/components/global/SectionTitle'
 import BackLink from '@/components/global/BackLink'
-import PostHeader from '~/components/posts/PostHeader.vue'
+import BlogTitle from '@/components/blog/BlogTitle'
+import BlogThumbnail from '@/components/blog/BlogThumbnail.vue'
+import BlogFooter from '@/components/blog/BlogFooter.vue'
 
 export default {
 	name: 'BlogItems',
 	head() {
 		return {}
 	},
-	async asyncData({ $content, params, error }) {
-		const post = await $content('posts/', params.slug)
+	async asyncData({ app, $content, params, error }) {
+		const post = await $content(`${app.i18n.locale}/blog`, params.slug)
 			.fetch()
 			.catch((err) => {
 				error({ statusCode: 404, message: 'Página no encontrada' })
@@ -34,7 +36,7 @@ export default {
 			post,
 		}
 	},
-	components: { SectionTitle, BackLink, PostHeader },
+	components: { BlogTitle, BackLink, BlogThumbnail, BlogFooter },
 	mixins: [Transitions],
 }
 </script>
