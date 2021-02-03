@@ -5,7 +5,7 @@
 		</header>
 
 		<section class="main-content">
-			<items-grid :data="posts" date-format="ll" :rows="2" />
+			<items-grid :data="posts" :rows="2" />
 		</section>
 	</div>
 </template>
@@ -23,10 +23,9 @@ export default {
 			title: 'Blog',
 		}
 	},
-	async asyncData({ $content }) {
-		const posts = await $content('posts').sortBy('date', 'desc').fetch()
+	async asyncData({ app, $content }) {
+		const posts = await $content(`${app.i18n.locale}/blog`).sortBy('date', 'desc').fetch()
 
-		console.log(posts)
 		return {
 			posts,
 		}
