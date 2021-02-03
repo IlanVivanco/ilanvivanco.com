@@ -1,7 +1,7 @@
 <template>
 	<section class="container">
 		<header class="main-header light">
-			<back-link :to="{ path: '/portfolio' }" />
+			<back-link :to="{ path: localePath('/portfolio') }" />
 			<section-title :title="post.title" :description="post.description" />
 		</header>
 
@@ -15,7 +15,6 @@
 import Transitions from '@/mixins/Transitions'
 import SectionTitle from '@/components/global/SectionTitle'
 import BackLink from '@/components/global/BackLink'
-import PostHeader from '@/components/posts/PostHeader'
 
 export default {
 	name: 'PortfolioItems',
@@ -34,7 +33,7 @@ export default {
 
 		return { post }
 	},
-	components: { SectionTitle, BackLink, PostHeader },
+	components: { SectionTitle, BackLink },
 	mixins: [Transitions],
 }
 </script>
