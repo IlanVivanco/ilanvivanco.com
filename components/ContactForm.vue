@@ -15,14 +15,15 @@
 
 		<el-form-item :label="this.$t('contact_me.titles.name')" prop="name">
 			<el-input
+				name="name"
 				v-model="contactForm.name"
 				:placeholder="this.$t('contact_me.copy.name_placeholder')"
-				required
 			></el-input>
 		</el-form-item>
 
 		<el-form-item :label="this.$t('contact_me.titles.email')" prop="email">
 			<el-input
+				name="email"
 				v-model="contactForm.email"
 				type="email"
 				:placeholder="this.$t('contact_me.copy.email_placeholder')"
@@ -31,6 +32,7 @@
 
 		<el-form-item :label="this.$t('contact_me.titles.message')" prop="message">
 			<el-input
+				name="message"
 				type="textarea"
 				v-model="contactForm.message"
 				:placeholder="this.$t('contact_me.copy.message_placeholder')"
@@ -77,25 +79,29 @@ export default {
 	},
 	methods: {
 		encode(data) {
-			return Object.keys(data)
-				.map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
-				.join('&')
+			const formData = new FormData()
+
+			for (const key of Object.keys(data)) {
+				formData.append(key, data[key])
+			}
+
+			return formData
 		},
 
 		submitForm() {
+			const axiosConfig = {
+				header: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			}
+
 			const formData = this.encode({
 				'form-name': 'contact-form',
 				...this.contactForm,
 			})
 
 			axios
-				.post('/', {
-					method: 'POST',
-					headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-					body: formData,
-				})
+				.post(location.href, formData, axiosConfig)
 				.then(() => console.log('yay!'))
-				.catch((error) => alert(error))
+				.catch((error) => console.error(error))
 		},
 
 		maybeSubmitForm() {
