@@ -22,8 +22,8 @@ export default {
 		},
 		copy: {
 			intro: '¡Hola! Mi nombre es',
-			name: 'Ilán Vivanco.',
-			position: 'Soy desarrollador web full stack.',
+			name: 'Ilán Vivanco',
+			position: 'Soy desarrollador web full stack',
 			lead: 'Desde hace unos pocos meses, vivo en Santander, España. Tengo más de quince años de experiencia; los últimos cinco trabajando en remoto como freelancer para empresas internacionales. Me especializo en el armado —y muy ocasionalmente, el diseño— de themes y plugins hechos a medida para WordPress.',
 			about: [
 				'Soy una persona autodidacta, proactiva y apasionada por el mundo de la programación. Me encanta trabajar en equipos motivados. Si bien mi carrera comenzó por el lado artístico, de a poco, me fui metiendo en la parte lógica, hasta que esta me atrapó y ya no pude dar marcha atrás.',
@@ -52,7 +52,7 @@ export default {
 			section: 'mi historial',
 		},
 		copy: {
-			lead: 'A lo largo de estos años acumulé experiencia en varios ámbitos que detallo acá abajo.'
+			lead: 'En todos estos años acumulé experiencia en varios ámbitos que detallo acá abajo.'
 		},
 	},
 	contact_me: {
@@ -62,7 +62,7 @@ export default {
 			form_error: '¡Error al enviar tu mensaje!',
 		},
 		copy: {
-			lead: 'Enviame un mensaje desde el siguiente formulario y empecemos a hacer algo juntos.',
+			lead: '¿Qué te parece si hacemos algo juntos?',
 			form_success: 'Gracias por contactarte, en breve me comunicaré contigo.',
 			form_error: 'Por favor intentalo nuevamente.',
 		},
