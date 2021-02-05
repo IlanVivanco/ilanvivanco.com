@@ -17,8 +17,8 @@
 					<section-title :title="this.$t('index.titles.about')" type="h2" />
 					<img
 						class="about__image"
-						src="https://images.unsplash.com/photo-1575318634028-6a0cfcb60c59?auto=format&fit=crop&w=933&q=80"
-						alt="Workspace"
+						src="/images/ilan-workspace.jpg"
+						alt="My workspace"
 					/>
 					<p v-for="(paragraph, i) in this.$t('index.copy.about')" :key="i">{{ paragraph }}</p>
 				</el-col>
@@ -99,6 +99,7 @@ export default {
 
 .about__image {
 	max-width: 39%;
+	max-height: 450px;
 	margin-bottom: 1rem;
 	margin-left: 1rem;
 	float: right;
