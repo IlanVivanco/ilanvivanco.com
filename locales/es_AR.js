@@ -14,6 +14,10 @@ export default {
 		'esposo',
 		'geek'
 	],
+	general: {
+		not_found: "¡Nada por aquí!",
+		error: "¡Algo salió mal!",
+	},
 	index: {
 		titles: {
 			about: 'sobre mí',
@@ -63,6 +67,7 @@ export default {
 		},
 		copy: {
 			lead: '¿Qué te parece si hacemos algo juntos?',
+			intro: 'Podés contactarte conmigo por cualquiera de mis redes sociales o usando este formulario.',
 			form_success: 'Gracias por contactarte, en breve me comunicaré contigo.',
 			form_error: 'Por favor intentalo nuevamente.',
 		},

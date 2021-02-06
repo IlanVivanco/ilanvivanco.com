@@ -145,9 +145,6 @@ export default {
 
 <style lang="scss" scoped>
 .contact-form {
-	max-width: 80%;
-	margin: 2rem auto 0;
-
 	@include breakpoint('medium') {
 		max-width: none;
 	}

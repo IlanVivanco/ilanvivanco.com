@@ -16,8 +16,14 @@
 			<el-col :span="8" class="header__metadata">
 				<ul class="header__metadata-list">
 					<li class="header__metadata-list-item"><i :class="cv.icons.location"></i>{{ cv.data.location }}</li>
-					<li class="header__metadata-list-item"><i :class="cv.icons.email"></i>{{ cv.data.email }}</li>
-					<li class="header__metadata-list-item"><i :class="cv.icons.phone"></i>{{ cv.data.phone }}</li>
+					<li class="header__metadata-list-item">
+						<i :class="cv.icons.email"></i>
+						<span v-html="obfuscatedEmail"></span>
+					</li>
+					<li class="header__metadata-list-item">
+						<i :class="cv.icons.phone"></i>
+						<span v-html="obfuscatedPhone"></span>
+					</li>
 					<li class="header__metadata-list-item">
 						<i :class="cv.icons.age"></i>{{ formattedDob }} {{ yearsOld }}
 					</li>
@@ -51,6 +57,18 @@ export default {
 			let age = today.diff(dob, 'years')
 
 			return `(${age} ${this.cv.age})`
+		},
+		obfuscatedEmail(e) {
+			return this.cv.data.email
+				.split('')
+				.map((i) => i + `<i style="display:none">no-no</i>`)
+				.join('')
+		},
+		obfuscatedPhone(e) {
+			return this.cv.data.phone
+				.split('')
+				.map((i) => i + `<i style="display:none">no-no</i>`)
+				.join('')
 		},
 	},
 }
