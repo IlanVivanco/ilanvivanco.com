@@ -1,5 +1,5 @@
-import es_AR from './es_AR';
-import en_US from './en_US';
+import esAR from './es_AR';
+import enUS from './en_US';
 
 export default {
 	locales: [
@@ -25,8 +25,8 @@ export default {
 	vueI18n: {
 		fallbackLocale: 'es',
 		messages: {
-			en: en_US,
-			es: es_AR
+			en: enUS,
+			es: esAR
 		}
 	},
 }

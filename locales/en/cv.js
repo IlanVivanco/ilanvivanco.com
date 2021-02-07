@@ -1,7 +1,7 @@
-import es_cv from '../es/cv.js';
+import esCv from '../es/cv.js';
 import _ from 'lodash';
 
-const en_cv = _.merge({}, es_cv, {
+const enCv = _.merge({}, esCv, {
 	age: "years old",
 	present: "Present",
 	headers: {
@@ -29,4 +29,4 @@ const en_cv = _.merge({}, es_cv, {
 	},
 });
 
-export default en_cv
+export default enCv
