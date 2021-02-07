@@ -2,18 +2,20 @@
 	<footer class="blog-footer">
 		<div class="blog-footer__meta">
 			<el-row align="middle" type="flex">
-				<el-col :span="2" class="blog-footer__avatar">
-					<el-avatar src="/images/ilan-vivanco.jpg"></el-avatar>
-				</el-col>
+				<el-col :span="12">
+					<div class="blog-footer__author">
+						<el-avatar class="blog-footer__avatar" src="/images/ilan-vivanco.jpg"></el-avatar>
 
-				<el-col :span="5" class="blog-footer__info">
-					<div class="blog-footer__by">{{ this.$t('blog.copy.posted_by') }}</div>
-					<div class="blog-footer__date">
-						<time :datetime="post.date">{{ formatDate(post.date) }}</time>
+						<div class="blog-footer__data">
+							<div class="blog-footer__by">{{ this.$t('blog.copy.posted_by') }}</div>
+							<div class="blog-footer__date">
+								<time :datetime="post.date">{{ formatDate(post.date) }}</time>
+							</div>
+						</div>
 					</div>
 				</el-col>
 
-				<el-col :span="17" class="blog-footer__tags">
+				<el-col :span="12" class="blog-footer__tags">
 					<el-tag class="mr2" size="small" v-for="(tag, index) in post.tags" :key="index">{{ tag }}</el-tag>
 				</el-col>
 			</el-row>
@@ -49,34 +51,50 @@ export default {
 	@extend .mt4;
 	background: $color-grayscale-2;
 	padding: 1rem;
-	box-shadow:
-		0 1px 1px rgba(0, 0, 0, 0.04),
-		0 2px 2px rgba(0, 0, 0, 0.04),
-		0 4px 4px rgba(0, 0, 0, 0.04),
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04), 0 2px 2px rgba(0, 0, 0, 0.04), 0 4px 4px rgba(0, 0, 0, 0.04),
 		0 8px 8px rgba(0, 0, 0, 0.04);
 
+	&__author {
+		display: flex;
+		align-items: center;
+
+		@include breakpoint('small') {
+			margin-bottom: 1rem;
+		}
+	}
+
 	&__avatar {
-		text-align: center;
+		width: 40px;
+		margin-right: 0.5rem;
 
 		/deep/ img {
 			object-position: 0;
 		}
 	}
 
-	&__info {
-		font-size: 0.9rem;
-		line-height: 1.3;
-		color: $color-grayscale-7;
-	}
-
 	&__date {
 		font-style: italic;
 		color: $color-grayscale-6;
 		font-size: 0.8rem;
+		line-height: 1;
 	}
 
 	&__tags {
 		text-align: right;
+
+		@include breakpoint('small') {
+			text-align: left;
+		}
+	}
+
+	@include breakpoint('small') {
+		.el-row {
+			flex-wrap: wrap;
+		}
+
+		.el-col {
+			width: 100%;
+		}
 	}
 }
 

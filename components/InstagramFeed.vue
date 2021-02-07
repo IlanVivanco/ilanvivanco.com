@@ -1,5 +1,5 @@
 <template>
-	<ul class="insta-feed" :style="{ '--cols': count, '--mobile-cols': mobileCols, '--gap': gap }">
+	<ul v-if="images.length" class="insta-feed" :style="{ '--cols': count, '--mobile-cols': mobileCols, '--gap': gap }">
 		<li class="insta-feed__box" v-for="(photo, index) in this.images" :key="index">
 			<a :href="`https://www.instagram.com/p/${photo.node.shortcode}/`" target="__blank">
 				<img

@@ -13,6 +13,10 @@ html {
 
 	background-color: $color-grayscale-10;
 	color: $color-grayscale-10;
+
+	@include breakpoint('small'){
+		font-size: 14px;
+	}
 }
 
 html,

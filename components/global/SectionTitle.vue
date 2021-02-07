@@ -39,7 +39,7 @@ export default {
 
 	&__title {
 		font-family: $code-font;
-		font-size: 1.8rem;
+		font-size: 1.5rem;
 		font-weight: normal;
 		color: $color-blue-dark;
 		display: flex;

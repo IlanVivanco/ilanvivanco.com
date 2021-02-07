@@ -229,6 +229,10 @@ export default {
 		margin-bottom: 2.5vh;
 	}
 
+	@include breakpoint('small') {
+		margin-bottom: 5vh;
+	}
+
 	&__inner {
 		height: 75vh;
 		overflow-y: auto;
