@@ -51,9 +51,9 @@
 </template>
 
 <script>
-import Transitions from '@/mixins/Transitions'
-import SectionTitle from '@/components/global/SectionTitle'
-import InstagramFeed from '@/components/InstagramFeed'
+import Transitions from '~/mixins/Transitions'
+import SectionTitle from '~/components/global/SectionTitle'
+import InstagramFeed from '~/components/InstagramFeed'
 
 export default {
 	name: 'Index',

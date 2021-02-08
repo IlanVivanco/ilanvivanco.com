@@ -11,9 +11,9 @@
 </template>
 
 <script>
-import Transitions from '@/mixins/Transitions'
-import SectionTitle from '@/components/global/SectionTitle'
-import ItemsGrid from '@/components/ItemsGrid'
+import Transitions from '~/mixins/Transitions'
+import SectionTitle from '~/components/global/SectionTitle'
+import ItemsGrid from '~/components/ItemsGrid'
 
 export default {
 	name: 'BlogPage',

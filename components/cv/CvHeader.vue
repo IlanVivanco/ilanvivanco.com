@@ -35,8 +35,8 @@
 
 <script>
 import moment from 'moment'
-import es_cv from '@/locales/es/cv'
-import en_cv from '@/locales/en/cv'
+import es_cv from '~/locales/es/cv'
+import en_cv from '~/locales/en/cv'
 
 export default {
 	name: 'CVHeader',

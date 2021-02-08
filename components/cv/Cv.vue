@@ -48,13 +48,13 @@
 </template>
 
 <script>
-import Cloud from '@/components/cv/Cloud'
-import CvHeader from '@/components/cv/CvHeader'
-import IconsGrid from '@/components/cv/IconsGrid'
-import Positions from '@/components/cv/Positions'
-import Ratings from '@/components/cv/Ratings'
-import SectionHeader from '@/components/cv/SectionHeader'
-import Studies from '@/components/cv/Studies'
+import Cloud from '~/components/cv/Cloud'
+import CvHeader from '~/components/cv/CvHeader'
+import IconsGrid from '~/components/cv/IconsGrid'
+import Positions from '~/components/cv/Positions'
+import Ratings from '~/components/cv/Ratings'
+import SectionHeader from '~/components/cv/SectionHeader'
+import Studies from '~/components/cv/Studies'
 
 export default {
 	name: 'CV',

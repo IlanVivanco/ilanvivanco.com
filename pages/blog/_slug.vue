@@ -14,11 +14,11 @@
 </template>
 
 <script>
-import Transitions from '@/mixins/Transitions'
-import BackLink from '@/components/global/BackLink'
-import BlogTitle from '@/components/blog/BlogTitle'
-import BlogThumbnail from '@/components/blog/BlogThumbnail.vue'
-import BlogFooter from '@/components/blog/BlogFooter.vue'
+import Transitions from '~/mixins/Transitions'
+import BackLink from '~/components/global/BackLink'
+import BlogTitle from '~/components/blog/BlogTitle'
+import BlogThumbnail from '~/components/blog/BlogThumbnail.vue'
+import BlogFooter from '~/components/blog/BlogFooter.vue'
 
 export default {
 	name: 'BlogItems',

@@ -28,9 +28,9 @@
 </template>
 
 <script>
-import Logo from '@/components/Logo'
-import SocialLinks from '@/components/SocialLinks'
-import Tagline from '@/components/Tagline'
+import Logo from '~/components/Logo'
+import SocialLinks from '~/components/SocialLinks'
+import Tagline from '~/components/Tagline'
 
 export default {
 	name: 'MainSidebar',

@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import es_menu from '@/locales/es/menu'
-import en_menu from '@/locales/en/menu'
+import es_menu from '~/locales/es/menu'
+import en_menu from '~/locales/en/menu'
 
 export default {
 	data() {

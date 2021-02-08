@@ -30,9 +30,9 @@
 </template>
 
 <script>
-import Transitions from '@/mixins/Transitions'
-import SectionTitle from '@/components/global/SectionTitle'
-import ContactForm from '@/components/ContactForm'
+import Transitions from '~/mixins/Transitions'
+import SectionTitle from '~/components/global/SectionTitle'
+import ContactForm from '~/components/ContactForm'
 
 export default {
 	name: 'ContactMe',

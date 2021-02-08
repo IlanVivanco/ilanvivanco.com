@@ -11,9 +11,9 @@
 </template>
 
 <script>
-import Transitions from '@/mixins/Transitions'
-import ItemsGrid from '@/components/ItemsGrid'
-import SectionTitle from '@/components/global/SectionTitle'
+import Transitions from '~/mixins/Transitions'
+import ItemsGrid from '~/components/ItemsGrid'
+import SectionTitle from '~/components/global/SectionTitle'
 
 export default {
 	name: 'PortfolioPage',

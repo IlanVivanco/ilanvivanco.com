@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import Transitions from '@/mixins/Transitions'
-import SectionTitle from '@/components/global/SectionTitle'
+import Transitions from '~/mixins/Transitions'
+import SectionTitle from '~/components/global/SectionTitle'
 
 export default {
 	name: 'About',

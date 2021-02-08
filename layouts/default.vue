@@ -26,10 +26,10 @@
 </template>
 
 <script>
-import AnimatedBackground from '@/components/AnimatedBackground'
-import LangSwitcher from '@/components/LangSwitcher'
-import MainSidebar from '@/components/MainSidebar'
-import MainNav from '@/components/Nav'
+import AnimatedBackground from '~/components/AnimatedBackground'
+import LangSwitcher from '~/components/LangSwitcher'
+import MainSidebar from '~/components/MainSidebar'
+import MainNav from '~/components/Nav'
 
 export default {
 	name: 'DefaultLayout',

@@ -11,9 +11,9 @@
 </template>
 
 <script>
-import Transitions from '@/mixins/Transitions'
-import SectionTitle from '@/components/global/SectionTitle'
-import Cv from '@/components/cv/Cv'
+import Transitions from '~/mixins/Transitions'
+import SectionTitle from '~/components/global/SectionTitle'
+import Cv from '~/components/cv/Cv'
 
 export default {
 	name: 'Resume',
