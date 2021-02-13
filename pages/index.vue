@@ -15,11 +15,7 @@
 			<el-row :gutter="30" type="flex" class="mb4">
 				<el-col :span="24" class="about__info">
 					<section-title :title="this.$t('index.titles.about')" type="h2" />
-					<img
-						class="about__image"
-						src="/images/ilan-workspace.jpg"
-						alt="My workspace"
-					/>
+					<img class="about__image" src="/images/ilan-workspace.jpg" alt="My workspace" />
 					<p v-for="(paragraph, i) in this.$t('index.copy.about')" :key="i">{{ paragraph }}</p>
 				</el-col>
 			</el-row>
@@ -103,6 +99,15 @@ export default {
 	margin-bottom: 1rem;
 	margin-left: 1rem;
 	float: right;
+
+	@include breakpoint('small') {
+		max-width: none;
+		max-height: 300px;
+		width: 100%;
+		margin-left: 0;
+		object-fit: cover;
+		float: none;
+	}
 }
 
 .about__info {
