@@ -6,6 +6,9 @@ tags: ['Vue', 'Nuxt', 'Blog']
 date: 2020-10-01
 show: true
 show_thumbnail: true
+languages:
+- locale: en
+  path: /en/blog/my-first-post
 ---
 
 Sit porro aut tempora eius expedita autem. Facilis hic non et minus tenetur sunt et omnis aperiam. Quos veniam iure eos. Facere nihil nesciunt cum aspernatur autem excepturi. Minima unde libero quo et debitis. Modi sit eum quo.

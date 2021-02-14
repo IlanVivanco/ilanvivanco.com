@@ -1,5 +1,5 @@
 <template>
-	<div class="lang-switcher">
+	<div class="lang-switcher" v-if="!isContentPage">
 		<el-tooltip v-for="locale in availableLocales" :key="locale.code" :content="locale.name" placement="bottom">
 			<img @click="changeLocale(locale.code)" :src="locale.icon" :alt="`locale.name flag`" class="flag" />
 		</el-tooltip>
@@ -15,6 +15,9 @@ export default {
 		},
 	},
 	computed: {
+		isContentPage() {
+			return this.$route.name.includes('slug')
+		},
 		availableLocales() {
 			return this.$i18n.locales.filter((locale) => locale.code !== this.$i18n.locale)
 		},

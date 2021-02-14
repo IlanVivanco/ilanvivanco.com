@@ -107,7 +107,8 @@ export default {
 		},
 		copy: {
 			lead: 'Recién estoy empezando, pero esto es lo que tengo para contarte.',
-			posted_by: 'Por Ilán Vivanco'
+			posted_by: 'Por Ilán Vivanco',
+			also_in: 'Read in'
 		},
 	},
 	cv

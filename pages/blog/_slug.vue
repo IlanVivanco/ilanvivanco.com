@@ -1,7 +1,10 @@
 <template>
 	<section class="container">
 		<header class="main-header light">
-			<back-link :to="{ path: localePath('/blog') }" />
+			<nav class="main-header__nav">
+				<back-link :to="{ path: localePath('/blog') }" />
+				<blog-lang-switcher :locales="languages" />
+			</nav>
 			<blog-title :title="post.title" :description="post.description" />
 		</header>
 
@@ -25,6 +28,11 @@ export default {
 	head() {
 		return {}
 	},
+	computed: {
+		languages() {
+			return this.post.languages || []
+		},
+	},
 	async asyncData({ app, $content, params, error }) {
 		const post = await $content(`${app.i18n.locale}/blog`, params.slug)
 			.fetch()
@@ -42,6 +50,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.main-header__nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
 /deep/ img {
 	max-width: 100%;
 }
