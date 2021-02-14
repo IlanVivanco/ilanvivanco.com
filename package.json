@@ -7,8 +7,7 @@
 		"build": "nuxt build",
 		"start": "nuxt start",
 		"generate": "nuxt generate",
-		"netlify:env": "node netlify-create-env.js",
-		"netlify:generate": "netlify:env && instagram:get && npm run generate",
+		"netlify:generate": "node netlify-create-env.js && instagram:get && npm run generate",
 		"instagram:get": "npm run instagram:rapid --$(cat .env | grep rapid_key)",
 		"instagram:rapid": "curl --request GET --url \"https://instagram40.p.rapidapi.com/account-feed?username=ilanvivanco\" --header \"x-rapidapi-host: instagram40.p.rapidapi.com\" --header \"x-rapidapi-key: $npm_config_rapid_key\" > static/instagram.json"
 	},
