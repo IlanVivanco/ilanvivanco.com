@@ -16,7 +16,7 @@
 		"@nuxtjs/axios": "^5.12.2",
 		"animate.css": "^4.1.1",
 		"element-ui": "^2.13.2",
-		"gsap": "^3.5.1",
+		"gsap": "^3.6.0",
 		"lodash": "^4.17.20",
 		"moment": "^2.29.1",
 		"nuxt": "^2.14.7",
