@@ -6,8 +6,11 @@
 		"dev": "nuxt",
 		"build": "nuxt build",
 		"start": "nuxt start",
-		"generate": "npm run instagram:get && nuxt generate",
-		"instagram:get": "curl --request GET --url \"https://instagram40.p.rapidapi.com/account-feed?username=ilanvivanco\" --header \"x-rapidapi-host: instagram40.p.rapidapi.com\" --header \"x-rapidapi-key: $npm_config_rapid_key\" > static/instagram.json"
+		"generate": "nuxt generate",
+		"netlify:env": "node netlify-create-env.js",
+		"netlify:generate": "netlify:env && instagram:get && npm run generate",
+		"instagram:get": "npm run instagram:rapid --$(cat .env | grep rapid_key)",
+		"instagram:rapid": "curl --request GET --url \"https://instagram40.p.rapidapi.com/account-feed?username=ilanvivanco\" --header \"x-rapidapi-host: instagram40.p.rapidapi.com\" --header \"x-rapidapi-key: $npm_config_rapid_key\" > static/instagram.json"
 	},
 	"dependencies": {
 		"@nuxt/content": "^1.10.0",
