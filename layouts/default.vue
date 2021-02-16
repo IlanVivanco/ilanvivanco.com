@@ -40,6 +40,15 @@ export default {
 		MainSidebar,
 	},
 	transition: { mode: '' },
+	head() {
+		return {
+			titleTemplate: `%s ${this.$t('meta.title')} - ${this.$t('meta.name')}`,
+			meta: [{ hid: 'description', name: 'description', content: this.$t('meta.description') }],
+			htmlAttrs: {
+				lang: this.$i18n.locale,
+			},
+		}
+	},
 	data() {
 		return {
 			altBannerImage: null,

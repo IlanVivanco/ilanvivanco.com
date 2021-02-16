@@ -20,7 +20,7 @@ export default {
 	scrollToTop: false,
 	head() {
 		return {
-			title: 'Blog',
+			title: this.$t('meta.blog_title'),
 		}
 	},
 	async asyncData({ app, $content }) {

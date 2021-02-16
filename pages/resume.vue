@@ -18,11 +18,6 @@ import Cv from '~/components/cv/Cv'
 export default {
 	name: 'Resume',
 	scrollToTop: false,
-	head() {
-		return {
-			title: 'Curricullum title',
-		}
-	},
 	mounted() {
 		this.$eventHub.$emit('updateBannerImage', require('~/assets/images/banner.jpg'))
 	},

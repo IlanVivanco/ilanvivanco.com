@@ -54,11 +54,6 @@ import InstagramFeed from '~/components/InstagramFeed'
 export default {
 	name: 'Index',
 	scrollToTop: false,
-	head() {
-		return {
-			title: 'My Index title',
-		}
-	},
 	components: { SectionTitle, InstagramFeed },
 	mixins: [Transitions],
 }

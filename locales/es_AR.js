@@ -3,6 +3,13 @@ import cv from './es/cv'
 export default {
 	greeting: "Hola mundo desde I18N!",
 	another: "Más datos desde I18N!",
+	meta: {
+		name: 'Ilán Vivanco',
+		title: 'Desarrollador web full stack',
+		description: 'Tengo más de quince años de experiencia; los últimos cinco trabajando en remoto como freelancer para empresas internacionales. Me especializo en el armado —y muy ocasionalmente, el diseño— de themes y plugins hechos a medida para WordPress. Desde hace unos pocos meses, vivo en Santander, España.',
+		blog_title: 'Blog -',
+		portfolio_title: 'Portfolio -',
+	},
 	taglines: [
 		'desarrollador WordPress',
 		'programador backend',
@@ -12,7 +19,7 @@ export default {
 		'fotógrafo',
 		'papá de Oli',
 		'esposo',
-		'geek'
+		'geek',
 	],
 	general: {
 		not_found: "¡Nada por aquí!",
@@ -28,7 +35,7 @@ export default {
 			intro: '¡Hola! Mi nombre es',
 			name: 'Ilán Vivanco',
 			position: 'Soy desarrollador web full stack',
-			lead: 'Desde hace unos pocos meses, vivo en Santander, España. Tengo más de quince años de experiencia; los últimos cinco trabajando en remoto como freelancer para empresas internacionales. Me especializo en el armado —y muy ocasionalmente, el diseño— de themes y plugins hechos a medida para WordPress.',
+			lead: 'Tengo más de quince años de experiencia; los últimos cinco trabajando en remoto como freelancer para empresas internacionales. Me especializo en el armado —y muy ocasionalmente, el diseño— de themes y plugins hechos a medida para WordPress. Desde hace unos pocos meses, vivo en Santander, España.',
 			about: [
 				'Soy una persona autodidacta, proactiva y apasionada por el mundo de la programación. Me encanta trabajar en equipos motivados. Si bien mi carrera comenzó por el lado artístico, de a poco, me fui metiendo en la parte lógica, hasta que esta me atrapó y ya no pude dar marcha atrás.',
 

@@ -20,7 +20,7 @@ export default {
 	scrollToTop: false,
 	head() {
 		return {
-			title: 'Protfolio title',
+			title: this.$t('meta.portfolio_title'),
 		}
 	},
 	async asyncData({ $content }) {

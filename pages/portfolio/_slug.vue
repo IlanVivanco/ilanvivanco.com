@@ -19,7 +19,9 @@ import BackLink from '~/components/global/BackLink'
 export default {
 	name: 'PortfolioItems',
 	head() {
-		return {}
+		return {
+			title: this.$t('meta.portfolio_title'),
+		}
 	},
 	async asyncData({ $content, params, error, redirect, app }) {
 		const post = await $content('portfolio/', params.slug)

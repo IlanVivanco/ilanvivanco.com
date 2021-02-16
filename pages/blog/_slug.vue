@@ -26,7 +26,9 @@ import BlogFooter from '~/components/blog/BlogFooter.vue'
 export default {
 	name: 'BlogItems',
 	head() {
-		return {}
+		return {
+			title: this.$t('meta.blog_title'),
+		}
 	},
 	computed: {
 		languages() {

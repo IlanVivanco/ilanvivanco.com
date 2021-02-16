@@ -21,11 +21,6 @@ import SectionTitle from '~/components/global/SectionTitle'
 export default {
 	name: 'About',
 	scrollToTop: false,
-	head() {
-		return {
-			title: 'About title',
-		}
-	},
 	nuxtI18n: {
 		paths: {
 			es: '/sobre-mi',

@@ -37,11 +37,6 @@ import ContactForm from '~/components/ContactForm'
 export default {
 	name: 'ContactMe',
 	scrollToTop: false,
-	head() {
-		return {
-			title: 'Contact title',
-		}
-	},
 	methods: {
 		addMailto(e) {
 			e.currentTarget.href = `mailto:${this.$t('cv.data.email')}`
