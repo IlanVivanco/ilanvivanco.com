@@ -1,23 +1,12 @@
 # ilanvivanco.com
 
-Personal website repository.
+My personal website repository. 🚀
 
 
-## Build Setup
+## Stack
 
-```bash
-# install dependencies
-$ npm install
+I started to learn <img src="assets/images/global/vue.png" height="15px" /> Vue.js and decided to give it a go for this website.
+I also used the <img src="assets/images/global/nuxt.png" height="15px" /> Nuxt.js framework to serve static pages and load content from `.md` files.
 
-# serve with hot reload at localhost:3000
-$ npm run dev
+<p align="center"><img src="https://media.giphy.com/media/3o84U6421OOWegpQhq/giphy.gif" alt="Like magic!" /></p>
 
-# build for production and launch server
-$ npm run build
-$ npm run start
-
-# generate static project
-$ npm run generate
-```
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
