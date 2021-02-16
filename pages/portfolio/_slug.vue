@@ -21,7 +21,7 @@ export default {
 	head() {
 		return {}
 	},
-	async asyncData({ $content, params, error, redirect }) {
+	async asyncData({ $content, params, error, redirect, app }) {
 		const post = await $content('portfolio/', params.slug)
 			.fetch()
 			.catch((err) => {
@@ -29,7 +29,7 @@ export default {
 			})
 
 		// Redirect if not single available
-		if (post && !post.has_single) redirect('/portfolio')
+		if (!post.has_single) redirect({ path: app.localePath('/portfolio') })
 
 		return { post }
 	},

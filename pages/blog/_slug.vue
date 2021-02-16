@@ -33,16 +33,18 @@ export default {
 			return this.post.languages || []
 		},
 	},
-	async asyncData({ app, $content, params, error }) {
+	async asyncData({ app, redirect, $content, params, error }) {
 		const post = await $content(`${app.i18n.locale}/blog`, params.slug)
 			.fetch()
 			.catch((err) => {
 				error({ statusCode: 404, message: 'Página no encontrada' })
 			})
 
-		return {
-			post,
-		}
+		// Redirect if single is not visible
+		if (!post.show && process.env.NODE_ENV != 'development')
+			redirect({ path: app.localePath('/blog') })
+
+		return { post }
 	},
 	components: { BlogTitle, BackLink, BlogThumbnail, BlogFooter },
 	mixins: [Transitions],
