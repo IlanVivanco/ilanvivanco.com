@@ -31,6 +31,9 @@ export default {
 		// Redirect if not single available
 		if (post && !post.has_single) redirect({ path: app.localePath('/portfolio') })
 
+		// Require post image
+		if (post.thumbnail) post.thumbnail = require(`~/assets/${post.thumbnail}`)
+
 		return { post }
 	},
 	components: { SectionTitle, BackLink },

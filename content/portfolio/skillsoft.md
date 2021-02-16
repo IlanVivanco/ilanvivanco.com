@@ -2,7 +2,7 @@
 title: Skillsoft
 external_link: https://www.skillsoft.com/
 description: Desarrollo de sitio personal
-thumbnail: '/images/portfolio/skillsoft.jpg'
+thumbnail: 'images/portfolio/skillsoft.jpg'
 tags: ['WordPress', 'Custom Theme', 'WP Plugin']
 date: 2018-10
 show: true

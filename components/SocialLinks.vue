@@ -20,8 +20,13 @@ export default {
 			socials: [],
 		}
 	},
-	mounted() {
-		this.socials = socials
+	created() {
+		this.socials = socials.map((social) => {
+			// Require socials image
+			if (social.logo) social.logo = require(`~/assets/${social.logo}`)
+
+			return social
+		})
 	},
 }
 </script>

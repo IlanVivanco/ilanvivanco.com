@@ -2,7 +2,7 @@
 title: ilanvivanco.com
 external_link: https://www.ilanvivanco.com/
 description: Desarrollo de sitio personal
-thumbnail: '/images/portfolio/ilan-vivanco.jpg'
+thumbnail: 'images/portfolio/ilan-vivanco.jpg'
 tags: ['Vue', 'Nuxt']
 date: 2020-01
 show: true

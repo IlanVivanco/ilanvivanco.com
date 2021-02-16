@@ -4,7 +4,7 @@
 			<el-col :span="16" class="header__person">
 				<div class="header__person-wrapper">
 					<div class="header__image">
-						<img src="/images/ilan-vivanco.jpg" :alt="cv.data.name" />
+						<img src="~/assets/images/ilan-vivanco.jpg" :alt="cv.data.name" />
 					</div>
 					<div class="header__data">
 						<h1>{{ cv.data.name }}</h1>

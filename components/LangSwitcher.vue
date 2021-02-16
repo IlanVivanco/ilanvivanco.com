@@ -14,12 +14,25 @@ export default {
 			this.$router.push(this.switchLocalePath(lang))
 		},
 	},
+	data() {
+		return {
+			locales: null,
+		}
+	},
+	created() {
+		this.locales = this.$i18n.locales.map((locale) => {
+			// Require lang image
+			if (locale.icon) locale.icon = require(`~/assets/${locale.icon}`)
+
+			return locale
+		})
+	},
 	computed: {
 		isContentPage() {
 			return this.$route.name?.includes('slug')
 		},
 		availableLocales() {
-			return this.$i18n.locales.filter((locale) => locale.code !== this.$i18n.locale)
+			return this.locales.filter((locale) => locale.code !== this.$i18n.locale)
 		},
 	},
 }

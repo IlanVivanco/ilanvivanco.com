@@ -3,7 +3,7 @@
 		<div class="error-404__message">
 			<div class="robot-wrapper">
 				<h2>{{ error.statusCode }}</h2>
-				<img src="/images/404.png" alt="Not found" />
+				<img src="~/assets/images/404.png" alt="Not found" />
 			</div>
 
 			<h1 v-if="error.statusCode === 404">{{ $t('general.not_found') }}</h1>

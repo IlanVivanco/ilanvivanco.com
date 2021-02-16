@@ -25,7 +25,14 @@ export default {
 	},
 	async asyncData({ $content }) {
 		const portfolio = await $content('portfolio').sortBy('date', 'desc').fetch()
-		return { portfolio }
+		return {
+			portfolio: portfolio.map((item) => {
+				// Require post image
+				if (item.thumbnail) item.thumbnail = require(`~/assets/${item.thumbnail}`)
+
+				return item
+			}),
+		}
 	},
 	components: { ItemsGrid, SectionTitle },
 	mixins: [Transitions],

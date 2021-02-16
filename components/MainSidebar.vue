@@ -1,7 +1,7 @@
 <template>
 	<aside class="about-me">
 		<header class="about-me__image">
-			<img class="about-me__image-img" src="/images/ilan-vivanco-duo-yellow.jpg" alt="Ilán Vivanco" />
+			<img class="about-me__image-img" src="~/assets/images/ilan-vivanco-duo-yellow.jpg" alt="Ilán Vivanco" />
 			<img
 				:src="altBannerImg"
 				class="about-me__image-img about-me__image-img--alt animate__animated"

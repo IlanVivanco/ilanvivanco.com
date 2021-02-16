@@ -7,13 +7,13 @@ export default {
 			code: 'es',
 			iso: 'es-ES',
 			name: 'Español',
-			icon: '/images/svg/flag-es.svg'
+			icon: 'images/svg/flag-es.svg'
 		},
 		{
 			code: 'en',
 			iso: 'en-US',
 			name: 'English',
-			icon: '/images/svg/flag-en.svg'
+			icon: 'images/svg/flag-en.svg'
 		},
 	],
 	defaultLocale: 'es',

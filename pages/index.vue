@@ -15,7 +15,7 @@
 			<el-row :gutter="30" type="flex" class="mb4">
 				<el-col :span="24" class="about__info">
 					<section-title :title="this.$t('index.titles.about')" type="h2" />
-					<img class="about__image" src="/images/ilan-workspace.jpg" alt="My workspace" />
+					<img class="about__image" src="~/assets/images/ilan-workspace.jpg" alt="My workspace" />
 					<p v-for="(paragraph, i) in this.$t('index.copy.about')" :key="i">{{ paragraph }}</p>
 				</el-col>
 			</el-row>

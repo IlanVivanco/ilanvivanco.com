@@ -43,6 +43,9 @@ export default {
 		// Redirect if single is not visible
 		if (post && !post.show && process.env.NODE_ENV != 'development') redirect({ path: app.localePath('/blog') })
 
+		// Require post image
+		if (post.thumbnail) post.thumbnail = require(`~/assets/${post.thumbnail}`)
+
 		return { post }
 	},
 	components: { BlogTitle, BackLink, BlogThumbnail, BlogFooter },

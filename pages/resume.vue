@@ -24,7 +24,7 @@ export default {
 		}
 	},
 	mounted() {
-		this.$eventHub.$emit('updateBannerImage', '/images/banner.jpg')
+		this.$eventHub.$emit('updateBannerImage', require('~/assets/images/banner.jpg'))
 	},
 	nuxtI18n: {
 		paths: {

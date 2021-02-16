@@ -2,7 +2,7 @@
 title: Sumtotal
 external_link: https://www.sumtotal.com/
 description: Lorem ipsum dolor sit amet. Necat tarofi singat pac son aet.
-thumbnail: '/images/portfolio/sumtotal.jpg'
+thumbnail: 'images/portfolio/sumtotal.jpg'
 tags: ['WordPress', 'Custom Theme', 'WP Plugin']
 date: 2018-10
 show: true

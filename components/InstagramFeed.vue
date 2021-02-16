@@ -113,7 +113,7 @@ export default {
 
 		&::after {
 			content: '';
-			background: url('~static/images/svg/social/instagram.svg');
+			background: url('~assets/images/svg/social/instagram.svg');
 			top: 50%;
 			left: 50%;
 			width: 1.5rem;

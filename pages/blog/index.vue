@@ -27,7 +27,12 @@ export default {
 		const posts = await $content(`${app.i18n.locale}/blog`).sortBy('date', 'desc').fetch()
 
 		return {
-			posts,
+			posts: posts.map((post) => {
+				// Require post image
+				if (post.thumbnail) post.thumbnail = require(`~/assets/${post.thumbnail}`)
+
+				return post
+			}),
 		}
 	},
 	components: { SectionTitle, ItemsGrid },

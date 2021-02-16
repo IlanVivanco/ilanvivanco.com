@@ -1,6 +1,6 @@
 <template>
 	<h1 title="Ilán Vivanco" class="logo text">
-		<img src="@/static/images/svg/ilan-vivanco-iso.svg" alt="Ilán Vivanco" class="logo__iso" />
+		<img src="@/assets/images/svg/ilan-vivanco-iso.svg" alt="Ilán Vivanco" class="logo__iso" />
 		<span class="logo__name">ilán vivanco</span>
 	</h1>
 </template>

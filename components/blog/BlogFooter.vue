@@ -4,7 +4,7 @@
 			<el-row align="middle" type="flex">
 				<el-col :span="12">
 					<div class="blog-footer__author">
-						<el-avatar class="blog-footer__avatar" src="/images/ilan-vivanco.jpg"></el-avatar>
+						<el-avatar class="blog-footer__avatar" :src="require(`~/assets/images/ilan-vivanco.jpg`)"></el-avatar>
 
 						<div class="blog-footer__data">
 							<div class="blog-footer__by">{{ this.$t('blog.copy.posted_by') }}</div>

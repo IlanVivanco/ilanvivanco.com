@@ -1,10 +1,14 @@
 ---
-title: Demo post
-description: Post de pruebas para revisar estilos y formatos.
-thumbnail: '/images/blog/mi-primer-entrada.jpg'
-tags: ['Testing']
-date: 2020-09-01
+title: Example post!
+description: This post is for testing purposes.
+thumbnail: 'images/blog/mi-primer-entrada.jpg'
+tags: ['Vue', 'Nuxt', 'Blog']
+date: 2020-10-01
 show: true
+show_thumbnail: true
+languages:
+- locale: es
+  path: /blog/mi-primer-entrada
 ---
 
 # h1 Heading
@@ -19,7 +23,9 @@ show: true
 
 ###### h6 Heading
 
-## Horizontal Rules
+
+
+#### Horizontal Rules
 
 ---
 
@@ -151,8 +157,8 @@ Autoconverted link https://github.com/nodeca/pica (enable linkify to see)
 
 ## Images
 
-![Minion](https://octodex.github.com/images/minion.png)
-![Stormtroopocat](https://octodex.github.com/images/stormtroopocat.jpg 'The Stormtroopocat')
+![Minion](https://octodex.github.com/assets/images/minion.png)
+![Stormtroopocat](https://octodex.github.com/assets/images/stormtroopocat.jpg 'The Stormtroopocat')
 
 Like links, Images also have a footnote style syntax
 
@@ -160,7 +166,7 @@ Like links, Images also have a footnote style syntax
 
 With a reference later in the document defining the URL location:
 
-[id]: https://octodex.github.com/images/dojocat.jpg 'The Dojocat'
+[id]: https://octodex.github.com/assets/images/dojocat.jpg 'The Dojocat'
 
 ## Plugins
 
