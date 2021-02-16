@@ -43,6 +43,7 @@ export default {
 	plugins: [
 		'@/plugins/eventHub',
 		'@/plugins/element-ui',
+		'@/plugins/gtag',
 	],
 
 	// Auto import components: https://go.nuxtjs.dev/config-components
