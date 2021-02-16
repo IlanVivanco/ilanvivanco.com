@@ -16,7 +16,7 @@ export default {
 	},
 	computed: {
 		isContentPage() {
-			return this.$route.name.includes('slug')
+			return this.$route.name?.includes('slug')
 		},
 		availableLocales() {
 			return this.$i18n.locales.filter((locale) => locale.code !== this.$i18n.locale)
