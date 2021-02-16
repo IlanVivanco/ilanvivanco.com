@@ -25,11 +25,11 @@ export default {
 		const post = await $content('portfolio/', params.slug)
 			.fetch()
 			.catch((err) => {
-				error({ statusCode: 404, message: 'Página no encontrada' })
+				error({ statusCode: 404 })
 			})
 
 		// Redirect if not single available
-		if (!post.has_single) redirect({ path: app.localePath('/portfolio') })
+		if (post && !post.has_single) redirect({ path: app.localePath('/portfolio') })
 
 		return { post }
 	},

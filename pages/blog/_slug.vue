@@ -37,12 +37,11 @@ export default {
 		const post = await $content(`${app.i18n.locale}/blog`, params.slug)
 			.fetch()
 			.catch((err) => {
-				error({ statusCode: 404, message: 'Página no encontrada' })
+				error({ statusCode: 404 })
 			})
 
 		// Redirect if single is not visible
-		if (!post.show && process.env.NODE_ENV != 'development')
-			redirect({ path: app.localePath('/blog') })
+		if (post && !post.show && process.env.NODE_ENV != 'development') redirect({ path: app.localePath('/blog') })
 
 		return { post }
 	},

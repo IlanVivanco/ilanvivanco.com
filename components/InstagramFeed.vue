@@ -38,8 +38,6 @@ export default {
 		}
 	},
 	mounted() {
-		console.log(instagramData.length)
-
 		this.images = [...instagramData].splice(this.offset, this.count)
 	},
 	computed: {
