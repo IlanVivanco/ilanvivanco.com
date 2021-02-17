@@ -5,7 +5,7 @@
 		</header>
 
 		<section class="main-content">
-			<items-grid :data="portfolio" />
+			<items-grid :data="portfolio" date-format="MMM YYYY" />
 		</section>
 	</section>
 </template>
