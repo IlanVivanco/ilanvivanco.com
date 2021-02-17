@@ -8,7 +8,7 @@ show: false
 show_thumbnail: true
 languages:
 - locale: es
-  path: /blog/mi-primer-entrada
+  path: /blog/entrada-de-ejemplo
 ---
 
 # h1 Heading

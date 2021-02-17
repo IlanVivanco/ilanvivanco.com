@@ -5,6 +5,9 @@ thumbnail: 'images/blog/snippet.png'
 tags: ['Testing']
 date: 2021-01-01
 show: false
+languages:
+   - locale: en
+     path: /en/portfolio/example-portfolio
 ---
 
 <style>

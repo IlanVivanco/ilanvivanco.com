@@ -23,8 +23,9 @@ export default {
 			title: this.$t('meta.portfolio_title'),
 		}
 	},
-	async asyncData({ $content }) {
-		const portfolio = await $content('portfolio').sortBy('date', 'desc').fetch()
+	async asyncData({ app, $content }) {
+		const portfolio = await $content(`${app.i18n.locale}/portfolio`).sortBy('date', 'desc').fetch()
+
 		return {
 			portfolio: portfolio.map((item) => {
 				// Require post image

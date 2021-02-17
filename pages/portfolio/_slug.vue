@@ -1,8 +1,11 @@
 <template>
 	<section class="container">
 		<header class="main-header light">
-			<back-link :to="{ path: localePath('/portfolio') }" />
-			<section-title :title="post.title" :description="post.description" />
+			<nav class="main-header__nav">
+				<back-link :to="{ path: localePath('/portfolio') }" />
+				<blog-lang-switcher :locales="languages" />
+			</nav>
+			<blog-title :title="post.title" :description="post.description" />
 		</header>
 
 		<section class="main-content">
@@ -13,7 +16,7 @@
 
 <script>
 import Transitions from '~/mixins/Transitions'
-import SectionTitle from '~/components/global/SectionTitle'
+import BlogTitle from '~/components/blog/BlogTitle'
 import BackLink from '~/components/global/BackLink'
 
 export default {
@@ -36,8 +39,13 @@ export default {
 			],
 		}
 	},
-	async asyncData({ $content, params, error, redirect, app }) {
-		const post = await $content('portfolio/', params.slug)
+	computed: {
+		languages() {
+			return this.post.languages || []
+		},
+	},
+	async asyncData({ app, $content, params, error, redirect }) {
+		const post = await $content(`${app.i18n.locale}/portfolio`, params.slug)
 			.fetch()
 			.catch((err) => {
 				error({ statusCode: 404 })
@@ -47,16 +55,22 @@ export default {
 		if (post && !post.has_single) redirect({ path: app.localePath('/portfolio') })
 
 		// Require post image
-		if (post.thumbnail) post.thumbnail = require(`~/assets/${post.thumbnail}`)
+		if (post && post.thumbnail) post.thumbnail = require(`~/assets/${post.thumbnail}`)
 
 		return { post }
 	},
-	components: { SectionTitle, BackLink },
+	components: { BlogTitle, BackLink },
 	mixins: [Transitions],
 }
 </script>
 
 <style lang="scss" scoped>
+.main-header__nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
 /deep/ img {
 	max-width: 100%;
 }

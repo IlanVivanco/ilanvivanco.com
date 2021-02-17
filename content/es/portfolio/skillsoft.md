@@ -6,7 +6,7 @@ thumbnail: 'images/portfolio/skillsoft.jpg'
 tags: ['WordPress', 'Custom Theme', 'WP Plugin']
 date: 2018-10
 show: true
-has_single: true
+has_single: false
 ---
 
 Sit porro aut tempora eius expedita autem. Facilis hic non et minus tenetur sunt et omnis aperiam. Quos veniam iure eos. Facere nihil nesciunt cum aspernatur autem excepturi. Minima unde libero quo et debitis. Modi sit eum quo.

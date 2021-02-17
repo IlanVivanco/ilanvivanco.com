@@ -126,7 +126,7 @@ export default {
 	}
 
 	&.post-hidden {
-		opacity: 0.75;
+		opacity: 0.5;
 	}
 }
 
