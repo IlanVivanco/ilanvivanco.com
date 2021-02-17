@@ -1,5 +1,5 @@
 <template>
-	<div class="lang-switcher" v-if="!isContentPage">
+	<div class="lang-switcher" v-if="!isContentPage && false">
 		<el-tooltip v-for="locale in availableLocales" :key="locale.code" :content="locale.name" placement="bottom">
 			<img @click="changeLocale(locale.code)" :src="locale.icon" :alt="`locale.name flag`" class="flag" />
 		</el-tooltip>
