@@ -4,7 +4,7 @@ description: Esta es la entrada para prubeas.
 thumbnail: 'images/blog/mi-primer-entrada.jpg'
 tags: ['Vue', 'Nuxt', 'Blog']
 date: 2020-10-01
-show: true
+show: false
 show_thumbnail: true
 languages:
    - locale: en

@@ -4,7 +4,7 @@ description: Post de pruebas.
 thumbnail: 'images/blog/snippet.png'
 tags: ['Testing']
 date: 2021-01-01
-show: true
+show: false
 ---
 
 <style>

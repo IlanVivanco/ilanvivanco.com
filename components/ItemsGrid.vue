@@ -1,7 +1,7 @@
 <template>
 	<el-row :gutter="20" type="flex" class="grid">
 		<el-col tag="article" :span="calcRows()" v-for="item in items" :key="item.slug" class="grid__item-wrapper">
-			<el-card shadow="hover" class="grid__item">
+			<el-card shadow="hover" class="grid__item" :class="{ 'post-hidden': !item.show }">
 				<div class="grid__thumb">
 					<component :is="'nuxt-link'" v-bind="linkArgs(item)" class="grid__link">
 						<img :src="item.thumbnail" :alt="item.title" />
@@ -82,6 +82,9 @@ export default {
 	},
 	computed: {
 		items() {
+			// Show all posts in dev
+			if (process.env.NODE_ENV == 'development') return this.data
+
 			return this.data.filter((item) => item.show)
 		},
 	},
@@ -120,6 +123,10 @@ export default {
 
 	@include breakpoint('tiny') {
 		--thumb-height: 40vw;
+	}
+
+	&.post-hidden {
+		opacity: 0.75;
 	}
 }
 
