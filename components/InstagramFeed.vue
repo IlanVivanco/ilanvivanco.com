@@ -38,7 +38,7 @@ export default {
 		}
 	},
 	mounted() {
-		this.images = [...instagramData].splice(this.offset, this.count)
+		this.images = [...instagramData.data].splice(this.offset, this.count)
 	},
 	computed: {
 		mobileCols() {
