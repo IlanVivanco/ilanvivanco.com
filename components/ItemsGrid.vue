@@ -196,6 +196,10 @@ export default {
 	margin-bottom: 0.5em;
 }
 
+.grid__tags{
+	margin-top: .5rem;
+}
+
 /deep/ .el-tag {
 	height: auto;
 	font-size: 0.6rem;
