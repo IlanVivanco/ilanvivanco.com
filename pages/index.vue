@@ -15,8 +15,11 @@
 			<el-row :gutter="30" type="flex" class="mb4">
 				<el-col :span="24" class="about__info">
 					<section-title :title="this.$t('index.titles.about')" type="h2" />
-					<img class="about__image" src="~/assets/images/ilan-workspace.jpg" alt="My workspace" />
-					<p v-for="(paragraph, i) in this.$t('index.copy.about')" :key="i">{{ paragraph }}</p>
+					<div>
+						<p v-for="(paragraph, i) in splitAboutParagraphs[0]" :key="i">{{ paragraph }}</p>
+						<img class="about__image" src="~/assets/images/ilan-workspace.jpg" alt="My workspace" />
+						<p v-for="(paragraph, i) in splitAboutParagraphs[1]" :key="i">{{ paragraph }}</p>
+					</div>
 				</el-col>
 			</el-row>
 
@@ -31,7 +34,9 @@
 			<el-row :gutter="30" type="flex" class="mb4">
 				<el-col :span="24" class="about__info">
 					<section-title :title="this.$t('index.titles.history')" type="h2" :margin-bottom="true" />
-					<p v-for="(paragraph, i) in this.$t('index.copy.history')" :key="i">{{ paragraph }}</p>
+					<div>
+						<p v-for="(paragraph, i) in this.$t('index.copy.history')" :key="i">{{ paragraph }}</p>
+					</div>
 				</el-col>
 			</el-row>
 
@@ -56,6 +61,12 @@ export default {
 	scrollToTop: false,
 	components: { SectionTitle, InstagramFeed },
 	mixins: [Transitions],
+	computed: {
+		splitAboutParagraphs() {
+			const [first, ...rest] = this.$t('index.copy.about')
+			return [[first], rest]
+		},
+	},
 }
 </script>
 
@@ -108,6 +119,16 @@ export default {
 .about__info {
 	p {
 		line-height: 1.4;
+
+		&:first-child {
+			float: left;
+			width: 61%;
+
+			@include breakpoint('small') {
+				width: 100%;
+				float: none;
+			}
+		}
 	}
 }
 
