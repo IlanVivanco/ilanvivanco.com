@@ -1,7 +1,7 @@
 ---
 title: Example post!
 description: This post is for testing purposes.
-thumbnail: 'images/blog/mi-primer-entrada.jpg'
+thumbnail: 'blog/mi-primer-entrada.jpg'
 tags: ['Vue', 'Nuxt', 'Blog']
 date: 2020-10-01
 show: false

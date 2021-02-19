@@ -2,7 +2,7 @@
 title: Example Portfolio
 external_link: https://www.ilanvivanco.com/
 description: Sit aut tempora eius expedita autem
-thumbnail: 'images/portfolio/ilan-vivanco.jpg'
+thumbnail: 'portfolio/ilan-vivanco.jpg'
 tags: ['Vue', 'Nuxt']
 date: 2020-01
 show: false

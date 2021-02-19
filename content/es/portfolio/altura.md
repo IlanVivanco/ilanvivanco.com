@@ -2,7 +2,7 @@
 title: Altura Periodontics
 external_link: http://yourdentalimplants.com/
 description: Diseño y programación de un theme de Wordpress personalizado.
-thumbnail: 'images/portfolio/altura.jpg'
+thumbnail: 'portfolio/altura.jpg'
 tags: ['WordPress', 'WP Theme', 'Responsive Design', 'Web Design']
 date: 2015-11
 show: true
