@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import DynamicImages from '~/mixins/DynamicImages'
 import Transitions from '~/mixins/Transitions'
 import BackLink from '~/components/global/BackLink'
 import BlogTitle from '~/components/blog/BlogTitle'
@@ -59,7 +60,7 @@ export default {
 		if (post && !post.show && process.env.NODE_ENV != 'development') redirect({ path: app.localePath('/blog') })
 
 		// Require post image
-		if (post && post.thumbnail) post.thumbnail = require(`~/assets/${post.thumbnail}`)
+		if (post && post.thumbnail) post.thumbnail = DynamicImages.methods.responsiveImageAttr(post.thumbnail)
 
 		return { post }
 	},

@@ -19,7 +19,7 @@ export default {
 	name: 'Resume',
 	scrollToTop: false,
 	mounted() {
-		this.$eventHub.$emit('updateBannerImage', require('~/assets/images/banner.jpg'))
+		this.$eventHub.$emit('updateBannerImage', 'banner.jpg')
 	},
 	nuxtI18n: {
 		paths: {

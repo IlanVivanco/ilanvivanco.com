@@ -1,7 +1,7 @@
 <template>
-	<div class="lang-switcher" v-if="!isContentPage && false">
+	<div class="lang-switcher" v-if="!isContentPage">
 		<el-tooltip v-for="locale in availableLocales" :key="locale.code" :content="locale.name" placement="bottom">
-			<img @click="changeLocale(locale.code)" :src="locale.icon" :alt="`locale.name flag`" class="flag" />
+			<img @click="changeLocale(locale.code)" v-bind="responsiveImageAttr(locale.icon)" :alt="`locale.name flag`" class="flag" />
 		</el-tooltip>
 	</div>
 </template>
@@ -20,12 +20,7 @@ export default {
 		}
 	},
 	created() {
-		this.locales = this.$i18n.locales.map((locale) => {
-			// Require lang image
-			if (locale.icon) locale.icon = require(`~/assets/${locale.icon}`)
-
-			return locale
-		})
+		this.locales = this.$i18n.locales
 	},
 	computed: {
 		isContentPage() {

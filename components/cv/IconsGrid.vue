@@ -9,7 +9,7 @@
 				:key="item.name"
 				:open-delay="200"
 			>
-				<li :style="`--bg: ${item.color}`"><img :src="require(`~/assets/${item.icon}`)" :alt="item.name" /></li>
+				<li :style="`--bg: ${item.color}`"><img v-bind="responsiveImageAttr(item.icon)" :alt="item.name" /></li>
 			</el-tooltip>
 		</template>
 	</ul>

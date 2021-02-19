@@ -1,11 +1,15 @@
 <template>
 	<aside class="about-me">
 		<header class="about-me__image">
-			<img class="about-me__image-img" src="~/assets/images/ilan-vivanco-duo-yellow.jpg" alt="Ilán Vivanco" />
 			<img
-				:src="altBannerImg"
+				class="about-me__image-img"
+				v-bind="responsiveImageAttr('ilan-vivanco-duo-yellow.jpg')"
+				alt="Ilán Vivanco"
+			/>
+			<img
 				class="about-me__image-img about-me__image-img--alt animate__animated"
 				:class="{ animate__fadeIn: altBannerImg, animate__fadeOut: altBannerLeave }"
+				v-bind="responsiveImageAttr(altBannerImg)"
 			/>
 		</header>
 		<div class="about-me__data">

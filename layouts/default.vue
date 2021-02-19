@@ -1,7 +1,7 @@
 <template>
 	<div class="main-layout" :class="currentPathSlug">
 		<animated-background />
-		<lang-switcher />
+		<!-- <lang-switcher /> -->
 
 		<div class="page">
 			<div class="container main-container">

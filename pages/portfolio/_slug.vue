@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import DynamicImages from '~/mixins/DynamicImages'
 import Transitions from '~/mixins/Transitions'
 import BlogTitle from '~/components/blog/BlogTitle'
 import BackLink from '~/components/global/BackLink'
@@ -55,7 +56,7 @@ export default {
 		if (post && !post.has_single) redirect({ path: app.localePath('/portfolio') })
 
 		// Require post image
-		if (post && post.thumbnail) post.thumbnail = require(`~/assets/${post.thumbnail}`)
+		if (post && post.thumbnail) post.thumbnail = DynamicImages.methods.responsiveImageAttr(post.thumbnail)
 
 		return { post }
 	},

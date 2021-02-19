@@ -1,6 +1,6 @@
 <template>
 	<header v-if="post.show_thumbnail" class="post-header" :class="{ small }">
-		<img :src="post.thumbnail" :alt="post.title" />
+		<img v-bind="post.thumbnail" :alt="post.title" />
 	</header>
 </template>
 

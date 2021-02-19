@@ -4,7 +4,7 @@
 			<el-card shadow="hover" class="grid__item" :class="{ 'post-hidden': !item.show }">
 				<div class="grid__thumb">
 					<component :is="'nuxt-link'" v-bind="linkArgs(item)" class="grid__link">
-						<img :src="item.thumbnail" :alt="item.title" />
+						<img v-bind="item.thumbnail" :alt="item.title" />
 						<el-button
 							class="grid__more"
 							size="small"

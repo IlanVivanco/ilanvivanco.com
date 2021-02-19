@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import DynamicImages from '~/mixins/DynamicImages'
 import Transitions from '~/mixins/Transitions'
 import SectionTitle from '~/components/global/SectionTitle'
 import ItemsGrid from '~/components/ItemsGrid'
@@ -29,7 +30,8 @@ export default {
 		return {
 			posts: posts.map((post) => {
 				// Require post image
-				if (post.thumbnail) post.thumbnail = require(`~/assets/${post.thumbnail}`)
+				if (post.thumbnail) post.thumbnail = DynamicImages.methods.responsiveImageAttr(post.thumbnail)
+
 
 				return post
 			}),
