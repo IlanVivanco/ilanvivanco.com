@@ -16,13 +16,13 @@
 				<el-col :span="24" class="about__info">
 					<section-title :title="this.$t('index.titles.about')" type="h2" />
 					<div>
-						<p v-for="paragraph in splitAboutParagraphs[0]" :key="paragraph">{{ paragraph }}</p>
+						<p v-for="(paragraph, i) in splitAboutParagraphs[0]" :key="i">{{ paragraph }}</p>
 						<img
 							class="about__image"
 							v-bind="responsiveImageAttr('ilan-workspace.jpg')"
 							alt="My workspace"
 						/>
-						<p v-for="paragraph in splitAboutParagraphs[1]" :key="paragraph">{{ paragraph }}</p>
+						<p v-for="(paragraph, i) in splitAboutParagraphs[1]" :key="i">{{ paragraph }}</p>
 					</div>
 				</el-col>
 			</el-row>
@@ -39,7 +39,7 @@
 				<el-col :span="24" class="about__info">
 					<section-title :title="this.$t('index.titles.history')" type="h2" :margin-bottom="true" />
 					<div>
-						<p v-for="paragraph in this.$t('index.copy.history')" :key="paragraph">{{ paragraph }}</p>
+						<p v-for="(paragraph, i) in this.$t('index.copy.history')" :key="i">{{ paragraph }}</p>
 					</div>
 				</el-col>
 			</el-row>
@@ -104,7 +104,7 @@ export default {
 }
 
 .about__image {
-	max-width: 39%;
+	max-width: calc(39% - 1rem);
 	max-height: 450px;
 	margin-bottom: 1rem;
 	margin-left: 1rem;
