@@ -20,6 +20,8 @@
 		"moment": "^2.29.1",
 		"nuxt": "^2.14.7",
 		"nuxt-i18n": "^6.13.7",
+		"nuxt-responsive-loader": "^2.0.1",
+		"sharp": "^0.27.1",
 		"vue-gtag": "^1.11.0",
 		"vuewordcloud": "^18.7.12"
 	},

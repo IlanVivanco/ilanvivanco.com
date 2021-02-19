@@ -44,6 +44,7 @@ export default {
 		'@/plugins/eventHub',
 		'@/plugins/element-ui',
 		'@/plugins/gtag',
+		'@/plugins/dynamicImageLoader',
 	],
 
 	// Auto import components: https://go.nuxtjs.dev/config-components
@@ -64,6 +65,8 @@ export default {
 		'@nuxt/content',
 		// Doc https://i18n.nuxtjs.org/
 		['nuxt-i18n', I18N],
+		// https://github.com/geeogi/nuxt-responsive-loader
+		'nuxt-responsive-loader',
 	],
 
 	// Axios module configuration: https://axios.nuxtjs.org/options
@@ -86,5 +89,17 @@ export default {
 	// Netlify client side rendering issue: https://nuxtjs.org/docs/2.x/deployment/netlify-deployment#for-client-side-rendering-only
 	generate: {
 		fallback: true
-	}
+	},
+
+	// Responsive Loader config
+	responsiveLoader: {
+		// disable: (process.env.NODE_ENV == 'development'),
+		adapter: require('responsive-loader/sharp'),
+		name: 'img/[name]-[hash:5]-[width].[ext]',
+		min: 320,
+		max: 1920,
+		steps: 5,
+		placeholder: true,
+		placeholderSize: 60,
+	},
 }
