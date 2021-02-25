@@ -18,10 +18,7 @@ export default {
 	],
 	defaultLocale: 'es',
 	seo: false,
-	detectBrowserLanguage: {
-		useCookie: true,
-		alwaysRedirect: true,
-	},
+	detectBrowserLanguage: false,
 	vueI18n: {
 		fallbackLocale: 'es',
 		messages: {
