@@ -10,8 +10,7 @@ export default {
 		htmlAttrs: { lang: 'es' },
 		meta: [
 			{ charset: 'utf-8' },
-			{ name: 'viewport', content: 'width=device-width, initial-scale=1' },
-			{ hid: 'description', name: 'description', content: '' }
+			{ name: 'viewport', content: 'width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=3.0"' },
 		],
 		link: [
 			{ rel: 'icon', type: 'image/png', href: '/favicon.png' },

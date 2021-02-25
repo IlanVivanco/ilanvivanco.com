@@ -6,7 +6,7 @@ export default {
 	meta: {
 		name: 'Ilán Vivanco',
 		title: 'Desarrollador web full stack',
-		description: 'Tengo más de quince años de experiencia; los últimos cinco trabajando en remoto como freelancer para empresas internacionales. Me especializo en el armado —y muy ocasionalmente, el diseño— de themes y plugins hechos a medida para WordPress. Desde hace unos pocos meses, vivo en Santander, España.',
+		description: 'Soy Ilán Vivanco, desarrollador WordPress full stack con más de quince años de experiencia. Me especializo en el armado —y muy ocasionalmente, el diseño— de themes y plugins hechos a medida.',
 		blog_title: 'Blog -',
 		portfolio_title: 'Portfolio -',
 	},

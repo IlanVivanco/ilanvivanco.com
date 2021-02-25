@@ -31,6 +31,8 @@ import LangSwitcher from '~/components/LangSwitcher'
 import MainSidebar from '~/components/MainSidebar'
 import MainNav from '~/components/Nav'
 
+const thumb = require('~/assets/images/ilan-vivanco.jpg')
+
 export default {
 	name: 'DefaultLayout',
 	components: {
@@ -44,16 +46,18 @@ export default {
 		return {
 			titleTemplate: `%s ${this.$t('meta.title')} - ${this.$t('meta.name')}`,
 			meta: [
+				{ hid: 'description', name: 'description', content: this.$t('meta.description') },
+
 				{ hid: 'twitter:title', name: 'twitter:title', content: this.$t('meta.title') },
 				{ hid: 'twitter:description', name: 'twitter:description', content: this.$t('meta.description') },
-				{ hid: 'twitter:image', name: 'twitter:image', content: require('~/assets/images/ilan-vivanco.jpg') },
+				{ hid: 'twitter:image', name: 'twitter:image', content: `https://ilanvivanco.com${thumb}` },
 				{ hid: 'twitter:image:alt', name: 'twitter:image:alt', content: this.$t('meta.name') },
 
 				{ hid: 'og:type', property: 'og:type', content: 'website' },
 				{ hid: 'og:site_name', property: 'og:site_name', content: this.$t('meta.name') },
 				{ hid: 'og:title', property: 'og:title', content: this.$t('meta.title') },
 				{ hid: 'og:description', property: 'og:description', content: this.$t('meta.description') },
-				{ hid: 'og:image', property: 'og:image', content: require('~/assets/images/ilan-vivanco.jpg') },
+				{ hid: 'og:image', property: 'og:image', content: `https://ilanvivanco.com${thumb}` },
 				{ hid: 'og:image:alt', property: 'og:image:alt', content: this.$t('meta.name') },
 			],
 			htmlAttrs: {
