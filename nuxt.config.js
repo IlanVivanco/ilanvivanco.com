@@ -13,7 +13,7 @@ export default {
 			{ name: 'viewport', content: 'width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=3.0"' },
 		],
 		link: [
-			{ rel: 'icon', type: 'image/png', href: '/favicon.png' },
+			{ rel: 'icon', type: 'image/png', href: '/images/favicon.png' },
 		]
 	},
 
