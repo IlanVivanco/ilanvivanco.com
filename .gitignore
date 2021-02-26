@@ -88,6 +88,3 @@ sw.*
 
 # Vim swap files
 *.swp
-
-# Instagram data
-static/data/instagram.json
