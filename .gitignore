@@ -90,4 +90,4 @@ sw.*
 *.swp
 
 # Instagram data
-static/instagram.json
+static/data/instagram.json

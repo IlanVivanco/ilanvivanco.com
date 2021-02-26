@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import instagramData from '~/static/instagram'
+import instagramData from '~/static/data/instagram'
 
 export default {
 	name: 'FeedInstagram',
