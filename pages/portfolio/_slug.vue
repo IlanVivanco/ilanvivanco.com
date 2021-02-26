@@ -24,19 +24,32 @@ export default {
 	name: 'PortfolioItems',
 	head() {
 		return {
-			title: this.$t('meta.portfolio_title'),
+			title: this.post.title,
+			titleTemplate: `%s - ${this.$t('meta.name')}`,
 			meta: [
+				{ hid: 'description', name: 'description', content: this.post.description },
+
+				{ hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' },
 				{ hid: 'twitter:title', name: 'twitter:title', content: this.post.title },
 				{ hid: 'twitter:description', name: 'twitter:description', content: this.post.description },
-				{ hid: 'twitter:image', name: 'twitter:image', content: this.post.thumbnail },
 				{ hid: 'twitter:image:alt', name: 'twitter:image:alt', content: this.post.title },
+				{ hid: 'twitter:creator', name: 'twitter:creator', content: this.$t('meta.twitter') },
+				{
+					hid: 'twitter:image',
+					name: 'twitter:image',
+					content: `https://ilanvivanco.com${this.post.thumbnail.meta_src}`,
+				},
 
 				{ hid: 'og:type', property: 'og:type', content: 'article' },
 				{ hid: 'og:site_name', property: 'og:site_name', content: this.$t('meta.name') },
 				{ hid: 'og:title', property: 'og:title', content: this.post.title },
 				{ hid: 'og:description', property: 'og:description', content: this.post.description },
-				{ hid: 'og:image', property: 'og:image', content: this.post.thumbnail },
 				{ hid: 'og:image:alt', property: 'og:image:alt', content: this.post.title },
+				{
+					hid: 'og:image',
+					property: 'og:image',
+					content: `https://ilanvivanco.com${this.post.thumbnail.meta_src}`,
+				},
 			],
 		}
 	},

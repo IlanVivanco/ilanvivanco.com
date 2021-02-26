@@ -44,21 +44,23 @@ export default {
 	transition: { mode: '' },
 	head() {
 		return {
-			titleTemplate: `%s ${this.$t('meta.title')} - ${this.$t('meta.name')}`,
+			titleTemplate: `${this.currentTitle} - ${this.$t('meta.name')}`,
 			meta: [
 				{ hid: 'description', name: 'description', content: this.$t('meta.description') },
 
+				{ hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' },
 				{ hid: 'twitter:title', name: 'twitter:title', content: this.$t('meta.title') },
 				{ hid: 'twitter:description', name: 'twitter:description', content: this.$t('meta.description') },
-				{ hid: 'twitter:image', name: 'twitter:image', content: `https://ilanvivanco.com${thumb}` },
 				{ hid: 'twitter:image:alt', name: 'twitter:image:alt', content: this.$t('meta.name') },
+				{ hid: 'twitter:creator', name: 'twitter:creator', content: this.$t('meta.twitter') },
+				{ hid: 'twitter:image', name: 'twitter:image', content: `https://ilanvivanco.com${thumb}` },
 
 				{ hid: 'og:type', property: 'og:type', content: 'website' },
 				{ hid: 'og:site_name', property: 'og:site_name', content: this.$t('meta.name') },
 				{ hid: 'og:title', property: 'og:title', content: this.$t('meta.title') },
 				{ hid: 'og:description', property: 'og:description', content: this.$t('meta.description') },
-				{ hid: 'og:image', property: 'og:image', content: `https://ilanvivanco.com${thumb}` },
 				{ hid: 'og:image:alt', property: 'og:image:alt', content: this.$t('meta.name') },
+				{ hid: 'og:image', property: 'og:image', content: `https://ilanvivanco.com${thumb}` },
 			],
 			htmlAttrs: {
 				lang: this.$i18n.locale,
@@ -96,9 +98,19 @@ export default {
 	computed: {
 		currentPathSlug() {
 			if (!this.$route.name) return ''
-
 			let slug = this.$route.name.match(/^(.*?)__.{2}/)
-			return slug[1] != 'index' ? slug[1] : 'home'
+
+			switch (slug[1]) {
+				case 'index':
+					return 'home'
+				case 'blog-slug':
+					return 'blog_single'
+				default:
+					return slug[1]
+			}
+		},
+		currentTitle() {
+			return this.$t(`meta.${this.currentPathSlug}_title`)
 		},
 	},
 }

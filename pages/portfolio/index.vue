@@ -19,11 +19,6 @@ import SectionTitle from '~/components/global/SectionTitle'
 export default {
 	name: 'PortfolioPage',
 	scrollToTop: false,
-	head() {
-		return {
-			title: this.$t('meta.portfolio_title'),
-		}
-	},
 	async asyncData({ app, $content }) {
 		const portfolio = await $content(`${app.i18n.locale}/portfolio`).sortBy('date', 'desc').fetch()
 

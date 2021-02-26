@@ -13,7 +13,8 @@ export default {
 				width: image.width,
 				width: image.width,
 				height: image.height,
-				sizes: image.sizes,
+				images: image.images,
+				meta_src: image.images.slice(-1)[0].path,
 				style: {
 					backgroundSize: "cover",
 					backgroundImage: 'url("' + image.placeholder + '")',

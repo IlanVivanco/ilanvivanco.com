@@ -19,11 +19,6 @@ import ItemsGrid from '~/components/ItemsGrid'
 export default {
 	name: 'BlogPage',
 	scrollToTop: false,
-	head() {
-		return {
-			title: this.$t('meta.blog_title'),
-		}
-	},
 	async asyncData({ app, $content }) {
 		const posts = await $content(`${app.i18n.locale}/blog`).sortBy('date', 'desc').fetch()
 
