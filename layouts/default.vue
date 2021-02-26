@@ -64,6 +64,7 @@ export default {
 			htmlAttrs: {
 				lang: this.$i18n.locale,
 			},
+			script: [{ type: 'application/ld+json', json: this.structuredData }],
 		}
 	},
 	data() {
@@ -71,6 +72,67 @@ export default {
 			altBannerImage: null,
 			bannerChanged: false,
 			altBannerLeave: false,
+			structuredData: {
+				'@context': 'https://schema.org',
+				'@graph': [
+					{
+						'@type': 'Person',
+						'@id': 'https://ilanvivanco.com/#person',
+						name: 'Ilán Vivanco',
+						url: 'https://ilanvivanco.com/',
+						image: {
+							'@type': 'ImageObject',
+							'@id': 'https://ilanvivanco.com/#personimage',
+							url: 'https://ilanvivanco.com/images/ilan-vivanco.jpg',
+							width: 1440,
+							height: 1080,
+							caption: 'Ilán Vivanco',
+						},
+						sameAs: [
+							'https://www.linkedin.com/in/ilanvivanco/',
+							'https://twitter.com/IlanVivanco',
+							'https://github.com/IlanVivanco',
+							'https://www.instagram.com/ilanvivanco/',
+							'https://ilanvivanco.com/',
+						],
+						description: 'Desarrollador web full stack con más de quince años de experiencia.',
+					},
+					{
+						'@type': 'WebSite',
+						'@id': 'https://ilanvivanco.com/#website',
+						url: 'https://ilanvivanco.com/',
+						name: 'Ilán Vivanco - Desarrollador web full stack',
+						description:
+							'Soy Ilán Vivanco, desarrollador WordPress full stack con más de quince años de experiencia. Me especializo en el armado —y muy ocasionalmente, el diseño— de themes y plugins hechos a medida.',
+						publisher: { '@id': 'https://ilanvivanco.com/#person' },
+						inLanguage: 'en-US',
+						logo: {
+							'@type': 'ImageObject',
+							'@id': 'https://ilanvivanco.com/#personlogo',
+							url: 'https://ilanvivanco.com/images/ilan-vivanco-logo.png',
+							width: 600,
+							height: 100,
+							caption: 'Ilán Vivanco',
+						},
+					},
+					{
+						'@type': 'BreadcrumbList',
+						'@id': 'https://ilanvivanco.com/#breadcrumb',
+						itemListElement: [
+							{
+								'@type': 'ListItem',
+								position: 1,
+								item: {
+									'@type': 'WebPage',
+									'@id': 'https://ilanvivanco.com/',
+									url: 'https://ilanvivanco.com/',
+									name: 'Home',
+								},
+							},
+						],
+					},
+				],
+			},
 		}
 	},
 	created() {
