@@ -45,6 +45,7 @@ export default {
 
 	&__message {
 		width: 50%;
+		text-align: center;
 
 		h1 {
 			text-align: center;
