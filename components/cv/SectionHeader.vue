@@ -40,7 +40,7 @@ export default {
 	color: $color-blue-dark;
 	text-transform: uppercase;
 	font-weight: 600;
-	font-size: 0.9rem;
-	font-family: $primary-alt-font;
+	font-size: 0.65rem;
+	letter-spacing: 0.5px;
 }
 </style>

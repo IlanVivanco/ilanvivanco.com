@@ -1,7 +1,12 @@
-$primary-font: 'Lato', 'Source Sans Pro', 'Roboto', 'Helvetica Neue', 'Arial', -apple-system, sans-serif;
-$primary-alt-font: 'Economica', 'Source Sans Pro', 'Roboto', 'Helvetica Neue', 'Arial', -apple-system, sans-serif;
-$secondary-font: 'Fira Sans', 'Source Sans Pro', 'Roboto', 'Helvetica Neue', 'Arial', -apple-system, sans-serif;
-$code-font: 'Fira Code', 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace;
+$lato-font: 'Lato', 'Source Sans Pro', 'Roboto', 'Helvetica Neue', 'Arial', -apple-system, sans-serif;
+$economica-font: 'Economica', 'Fira Sans', 'Source Sans Pro', 'Roboto', 'Helvetica Neue', 'Arial', -apple-system, sans-serif;
+$fira-sans-font: 'Fira Sans', 'Source Sans Pro', 'Roboto', 'Helvetica Neue', 'Arial', -apple-system, sans-serif;
+$fira-code-font: 'Fira Code', 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace;
+
+$primary-font: $lato-font;
+$primary-alt-font: $economica-font;
+$secondary-font: $fira-sans-font;
+$code-font: $fira-code-font;
 
 $color-blue: #475b7d;
 $color-blue-light: #5c6c89;
