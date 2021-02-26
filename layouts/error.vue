@@ -16,6 +16,11 @@
 export default {
 	name: 'ErrorPage',
 	props: ['error'],
+	head() {
+		return {
+			titleTemplate: `${this.$t('general.error')} - ${this.$t('meta.name')}`,
+		}
+	},
 }
 </script>
 
