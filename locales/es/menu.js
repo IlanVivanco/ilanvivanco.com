@@ -25,7 +25,7 @@ export default [
 	// },
 	{
 		show: true,
-		slug: 'contact-me',
+		slug: 'contact',
 		name: "Contacto",
 		icon: "el-icon-chat-round",
 	},

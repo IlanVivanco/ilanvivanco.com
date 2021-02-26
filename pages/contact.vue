@@ -35,7 +35,7 @@ import SectionTitle from '~/components/global/SectionTitle'
 import ContactForm from '~/components/ContactForm'
 
 export default {
-	name: 'ContactMe',
+	name: 'Contact',
 	scrollToTop: false,
 	methods: {
 		addMailto(e) {
@@ -62,7 +62,7 @@ export default {
 	nuxtI18n: {
 		paths: {
 			es: '/contacto',
-			en: '/contact-me',
+			en: '/contact',
 		},
 	},
 	components: { SectionTitle, ContactForm },

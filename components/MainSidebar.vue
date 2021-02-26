@@ -23,7 +23,7 @@
 				<nuxt-link :to="localePath('resume')">
 					<el-button type="warning" icon="el-icon-tickets" round>CV</el-button>
 				</nuxt-link>
-				<nuxt-link :to="localePath('contact-me')">
+				<nuxt-link :to="localePath('contact')">
 					<el-button type="primary" icon="el-icon-chat-round" round>Contactame</el-button>
 				</nuxt-link>
 			</footer>
