@@ -76,6 +76,19 @@ export default {
 				'@context': 'https://schema.org',
 				'@graph': [
 					{
+						'@type': 'Organization',
+						'@id': 'https://ilanvivanco.com/#organization',
+						url: 'https://ilanvivanco.com/',
+						logo: {
+							'@type': 'ImageObject',
+							'@id': 'https://ilanvivanco.com/#personlogo',
+							url: 'https://ilanvivanco.com/images/ilan-vivanco-logo.png',
+							width: 600,
+							height: 100,
+							caption: 'Ilán Vivanco',
+						},
+					},
+					{
 						'@type': 'Person',
 						'@id': 'https://ilanvivanco.com/#person',
 						name: 'Ilán Vivanco',
@@ -106,14 +119,6 @@ export default {
 							'Soy Ilán Vivanco, desarrollador WordPress full stack con más de quince años de experiencia. Me especializo en el armado —y muy ocasionalmente, el diseño— de themes y plugins hechos a medida.',
 						publisher: { '@id': 'https://ilanvivanco.com/#person' },
 						inLanguage: 'en-US',
-						logo: {
-							'@type': 'ImageObject',
-							'@id': 'https://ilanvivanco.com/#personlogo',
-							url: 'https://ilanvivanco.com/images/ilan-vivanco-logo.png',
-							width: 600,
-							height: 100,
-							caption: 'Ilán Vivanco',
-						},
 					},
 					{
 						'@type': 'BreadcrumbList',
