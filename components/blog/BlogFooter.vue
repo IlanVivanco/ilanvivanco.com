@@ -66,10 +66,6 @@ export default {
 	&__avatar {
 		width: 40px;
 		margin-right: 0.5rem;
-
-		/deep/ img {
-			object-position: 0;
-		}
 	}
 
 	&__date {
