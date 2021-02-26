@@ -63,6 +63,8 @@ export default {
 		['nuxt-i18n', I18N],
 		// https://github.com/geeogi/nuxt-responsive-loader
 		'nuxt-responsive-loader',
+		// https://sitemap.nuxtjs.org/
+		'@nuxtjs/sitemap',
 	],
 
 	// Axios module configuration: https://axios.nuxtjs.org/options
@@ -98,4 +100,12 @@ export default {
 		placeholder: true,
 		placeholderSize: 60,
 	},
+
+	// Sitemap
+	sitemap: {
+		hostname: 'https://ilanvivanco.com',
+		gzip: true,
+		exclude: [],
+		routes: []
+	}
 }
