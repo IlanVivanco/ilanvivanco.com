@@ -110,6 +110,22 @@ export default {
 								inLanguage: this.currentISOLocale,
 							},
 							{
+								'@type': 'WebPage',
+								'@id': `${this.$t('meta.url')}/#webpage`,
+								url: `${this.$t('meta.url')}/blog/${this.post.slug}`,
+								name: this.post.title,
+								description: this.post.description,
+								isPartOf: { '@id': `${this.$t('meta.url')}/#website` },
+								primaryImageOfPage: { '@id': `${this.$t('meta.url')}/blog/${this.post.slug}/#primary-image` },
+								datePublished: this.post.createdAt,
+								dateModified: this.post.updatedAt,
+								breadcrumb: { '@id': `${this.$t('meta.url')}/#breadcrumb` },
+								inLanguage: this.currentISOLocale,
+								potentialAction: [
+									{ '@type': 'ReadAction', target: [`${this.$t('meta.url')}/blog/${this.post.slug}`] },
+								],
+							},
+							{
 								'@type': 'BreadcrumbList',
 								'@id': `${this.$t('meta.url')}/#breadcrumb`,
 								itemListElement: [
@@ -118,9 +134,9 @@ export default {
 										position: 1,
 										item: {
 											'@type': 'WebPage',
-											'@id': `${this.$t('meta.url')}/#webpage`,
+											'@id': `${this.$t('meta.url')}/#homepage`,
 											url: this.$t('meta.url'),
-											name: `${this.$t('meta.home_title')} - ${this.$t('meta.name')}`,
+											name: this.$t('meta.home_title'),
 										},
 									},
 									{
@@ -130,7 +146,7 @@ export default {
 											'@type': 'WebPage',
 											'@id': `${this.$t('meta.url')}/blog/#blogpage`,
 											url: `${this.$t('meta.url')}/blog`,
-											name: `${this.currentTitle} - ${this.$t('meta.name')}`,
+											name: this.currentTitle,
 										},
 									},
 									{
@@ -140,7 +156,7 @@ export default {
 											'@type': 'WebPage',
 											'@id': `${this.$t('meta.url')}/blog/${this.post.slug}/#article`,
 											url: `${this.$t('meta.url')}/blog/${this.post.slug}`,
-											name: `${this.post.title} - ${this.$t('meta.name')}`,
+											name: this.post.title,
 										},
 									},
 								],
@@ -168,22 +184,6 @@ export default {
 								image: { '@id': `${this.$t('meta.url')}/blog/${this.post.slug}/#primary-image` },
 								keywords: this.post.tags.join(', '),
 								inLanguage: this.currentISOLocale,
-							},
-							{
-								'@type': 'WebPage',
-								'@id': `${this.$t('meta.url')}/#webpage`,
-								url: `${this.$t('meta.url')}/blog/${this.post.slug}`,
-								name: this.post.title,
-								isPartOf: { '@id': `${this.$t('meta.url')}/#website` },
-								primaryImageOfPage: { '@id': `${this.$t('meta.url')}/blog/${this.post.slug}/#primary-image` },
-								datePublished: this.post.createdAt,
-								dateModified: this.post.updatedAt,
-								description: this.post.description,
-								breadcrumb: { '@id': `${this.$t('meta.url')}/#breadcrumb` },
-								inLanguage: this.currentISOLocale,
-								potentialAction: [
-									{ '@type': 'ReadAction', target: [`${this.$t('meta.url')}/blog/${this.post.slug}`] },
-								],
 							},
 						],
 					},
@@ -228,7 +228,6 @@ export default {
 		// Require post image
 		if (post && post.thumbnail) post.thumbnail = DynamicImages.methods.responsiveImageAttr(post.thumbnail)
 
-		console.log(post)
 		return { post }
 	},
 	components: { BlogTitle, BackLink, BlogThumbnail, BlogFooter },

@@ -119,20 +119,19 @@ export default {
 								inLanguage: this.currentISOLocale,
 							},
 							{
+								'@type': 'WebPage',
+								'@id': `${this.$t('meta.url') + this.$route.path}#webpage`,
+								url: this.$t('meta.url') + this.$route.path,
+								name: this.currentTitle,
+								description: this.$t('meta.description'),
+								isPartOf: { '@id': `${this.$t('meta.url')}/#website` },
+								breadcrumb: { '@id': `${this.$t('meta.url')}/#breadcrumb` },
+								inLanguage: this.currentISOLocale,
+							},
+							{
 								'@type': 'BreadcrumbList',
 								'@id': `${this.$t('meta.url')}/#breadcrumb`,
-								itemListElement: [
-									{
-										'@type': 'ListItem',
-										position: 1,
-										item: {
-											'@type': 'WebPage',
-											'@id': `${this.$t('meta.url')}/#webpage`,
-											url: this.$t('meta.url'),
-											name: `${this.currentTitle} - ${this.$t('meta.name')}`,
-										},
-									},
-								],
+								itemListElement: this.breadcrumbElements,
 							},
 						],
 					},
@@ -187,6 +186,34 @@ export default {
 		},
 		currentISOLocale() {
 			return this.$i18n.locales.filter((locale) => locale.code === this.$i18n.locale).pop().iso
+		},
+		breadcrumbElements() {
+			const breadcrumbs = []
+			breadcrumbs.push({
+				'@type': 'ListItem',
+				position: 1,
+				item: {
+					'@type': 'WebPage',
+					'@id': `${this.$t('meta.url')}/#homepage`,
+					url: this.$t('meta.url'),
+					name: this.$t('meta.home_title'),
+				},
+			})
+
+			if (this.$route.path != '/') {
+				breadcrumbs.push({
+					'@type': 'ListItem',
+					position: 2,
+					item: {
+						'@type': 'WebPage',
+						'@id': `${this.$t('meta.url') + this.$route.path}/#${this.$route.path.slice(1)}`,
+						url: this.$t('meta.url') + this.$route.path,
+						name: this.currentTitle,
+					},
+				})
+			}
+
+			return breadcrumbs
 		},
 	},
 }
