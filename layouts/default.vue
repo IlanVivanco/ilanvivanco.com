@@ -84,7 +84,6 @@ export default {
 									height: 100,
 									caption: this.$t('meta.name'),
 								},
-								inLanguage: this.currentISOLocale,
 							},
 							{
 								'@type': 'Person',
@@ -107,7 +106,6 @@ export default {
 									this.$t('meta.url'),
 								],
 								description: this.$t('meta.name'),
-								inLanguage: this.currentISOLocale,
 							},
 							{
 								'@type': 'WebSite',
