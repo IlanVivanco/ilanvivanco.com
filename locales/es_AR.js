@@ -4,6 +4,7 @@ export default {
 	greeting: "Hola mundo desde I18N!",
 	another: "Más datos desde I18N!",
 	meta: {
+		url: 'https://ilanvivanco.com',
 		name: 'Ilán Vivanco',
 		title: 'Desarrollador web full stack',
 		description: 'Soy Ilán Vivanco, desarrollador WordPress full stack con más de quince años de experiencia. Me especializo en el armado —y muy ocasionalmente, el diseño— de themes y plugins hechos a medida.',

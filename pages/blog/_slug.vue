@@ -41,7 +41,7 @@ export default {
 				{
 					hid: 'twitter:image',
 					name: 'twitter:image',
-					content: `https://ilanvivanco.com${this.post.thumbnail.meta_src}`,
+					content: `${this.$t('meta.url')}/${this.post.thumbnail.meta_src}`,
 				},
 
 				{ hid: 'og:type', property: 'og:type', content: 'article' },
@@ -52,7 +52,141 @@ export default {
 				{
 					hid: 'og:image',
 					property: 'og:image',
-					content: `https://ilanvivanco.com${this.post.thumbnail.meta_src}`,
+					content: `${this.$t('meta.url')}/${this.post.thumbnail.meta_src}`,
+				},
+			],
+			script: [
+				{
+					type: 'application/ld+json',
+					hid: 'schema',
+					json: {
+						'@context': 'https://schema.org',
+						'@graph': [
+							{
+								'@type': 'Organization',
+								'@id': `${this.$t('meta.url')}/#organization`,
+								founder: { '@id': `${this.$t('meta.url')}/#person` },
+								url: this.$t('meta.url'),
+								logo: {
+									'@type': 'ImageObject',
+									'@id': `${this.$t('meta.url')}/#personlogo`,
+									url: 'https://ilanvivanco.com/images/ilan-vivanco-logo.png',
+									width: 600,
+									height: 100,
+									caption: this.$t('meta.name'),
+								},
+								inLanguage: this.currentISOLocale,
+							},
+							{
+								'@type': 'Person',
+								'@id': `${this.$t('meta.url')}/#person`,
+								name: this.$t('meta.name'),
+								url: this.$t('meta.url'),
+								image: {
+									'@type': 'ImageObject',
+									'@id': `${this.$t('meta.url')}/#personimage`,
+									url: 'https://ilanvivanco.com/images/ilan-vivanco.jpg',
+									width: 1440,
+									height: 1080,
+									caption: this.$t('meta.name'),
+								},
+								sameAs: [
+									'https://www.linkedin.com/in/ilanvivanco',
+									'https://twitter.com/IlanVivanco',
+									'https://github.com/IlanVivanco',
+									'https://www.instagram.com/ilanvivanco',
+									this.$t('meta.url'),
+								],
+								description: this.$t('meta.name'),
+								inLanguage: this.currentISOLocale,
+							},
+							{
+								'@type': 'WebSite',
+								'@id': `${this.$t('meta.url')}/#website`,
+								url: this.$t('meta.url'),
+								name: `${this.currentTitle} - ${this.$t('meta.name')}`,
+								description: this.$t('meta.name'),
+								publisher: { '@id': `${this.$t('meta.url')}/#person` },
+								inLanguage: this.currentISOLocale,
+							},
+							{
+								'@type': 'BreadcrumbList',
+								'@id': `${this.$t('meta.url')}/#breadcrumb`,
+								itemListElement: [
+									{
+										'@type': 'ListItem',
+										position: 1,
+										item: {
+											'@type': 'WebPage',
+											'@id': `${this.$t('meta.url')}/#webpage`,
+											url: this.$t('meta.url'),
+											name: `${this.$t('meta.home_title')} - ${this.$t('meta.name')}`,
+										},
+									},
+									{
+										'@type': 'ListItem',
+										position: 2,
+										item: {
+											'@type': 'WebPage',
+											'@id': `${this.$t('meta.url')}/blog/#blogpage`,
+											url: `${this.$t('meta.url')}/blog`,
+											name: `${this.currentTitle} - ${this.$t('meta.name')}`,
+										},
+									},
+									{
+										'@type': 'ListItem',
+										position: 3,
+										item: {
+											'@type': 'WebPage',
+											'@id': `${this.$t('meta.url')}/blog/${this.post.slug}/#article`,
+											url: `${this.$t('meta.url')}/blog/${this.post.slug}`,
+											name: `${this.post.title} - ${this.$t('meta.name')}`,
+										},
+									},
+								],
+							},
+							{
+								'@type': 'ImageObject',
+								'@id': `${this.$t('meta.url')}/blog/${this.post.slug}/#primary-image`,
+								url: this.$t('meta.url') + this.post.thumbnail.images.slice(-1)[0].path,
+								width: this.post.thumbnail.images.slice(-1)[0].width,
+								height: this.post.thumbnail.images.slice(-1)[0].height,
+								caption: this.post.title,
+								inLanguage: this.currentISOLocale,
+							},
+							{
+								'@type': 'Article',
+								'@id': `${this.$t('meta.url')}/blog/${this.post.slug}/#article`,
+								isPartOf: { '@id': `${this.$t('meta.url')}/#webpage` },
+								author: { '@id': `${this.$t('meta.url')}/#person` },
+								headline: this.post.title,
+								datePublished: this.post.createdAt,
+								dateModified: this.post.updatedAt,
+								mainEntityOfPage: { '@id': `${this.$t('meta.url')}/#webpage` },
+								commentCount: 0,
+								publisher: { '@id': `${this.$t('meta.url')}/#person` },
+								image: { '@id': `${this.$t('meta.url')}/blog/${this.post.slug}/#primary-image` },
+								keywords: this.post.tags.join(', '),
+								inLanguage: this.currentISOLocale,
+							},
+							{
+								'@type': 'WebPage',
+								'@id': `${this.$t('meta.url')}/#webpage`,
+								url: `${this.$t('meta.url')}/blog/${this.post.slug}`,
+								name: this.post.title,
+								isPartOf: { '@id': `${this.$t('meta.url')}/#website` },
+								primaryImageOfPage: { '@id': `${this.$t('meta.url')}/blog/${this.post.slug}/#primary-image` },
+								datePublished: this.post.createdAt,
+								dateModified: this.post.updatedAt,
+								description: this.post.description,
+								breadcrumb: { '@id': `${this.$t('meta.url')}/#breadcrumb` },
+								inLanguage: this.currentISOLocale,
+								potentialAction: [
+									{ '@type': 'ReadAction', target: [`${this.$t('meta.url')}/blog/${this.post.slug}`] },
+								],
+							},
+						],
+					},
 				},
 			],
 		}
@@ -60,6 +194,25 @@ export default {
 	computed: {
 		languages() {
 			return this.post.languages || []
+		},
+		currentPathSlug() {
+			if (!this.$route.name) return ''
+			let slug = this.$route.name.match(/^(.*?)__.{2}/)
+
+			switch (slug[1]) {
+				case 'index':
+					return 'home'
+				case 'blog-slug':
+					return 'blog_single'
+				default:
+					return slug[1]
+			}
+		},
+		currentTitle() {
+			return this.$t(`meta.${this.currentPathSlug}_title`)
+		},
+		currentISOLocale() {
+			return this.$i18n.locales.filter((locale) => locale.code === this.$i18n.locale).pop().iso
 		},
 	},
 	async asyncData({ app, redirect, $content, params, error }) {
@@ -75,6 +228,7 @@ export default {
 		// Require post image
 		if (post && post.thumbnail) post.thumbnail = DynamicImages.methods.responsiveImageAttr(post.thumbnail)
 
+		console.log(post)
 		return { post }
 	},
 	components: { BlogTitle, BackLink, BlogThumbnail, BlogFooter },

@@ -64,7 +64,80 @@ export default {
 			htmlAttrs: {
 				lang: this.$i18n.locale,
 			},
-			script: [{ type: 'application/ld+json', json: this.structuredData }],
+			script: [
+				{
+					type: 'application/ld+json',
+					hid: 'schema',
+					json: {
+						'@context': 'https://schema.org',
+						'@graph': [
+							{
+								'@type': 'Organization',
+								'@id': `${this.$t('meta.url')}/#organization`,
+								founder: { '@id': `${this.$t('meta.url')}/#person` },
+								url: this.$t('meta.url'),
+								logo: {
+									'@type': 'ImageObject',
+									'@id': `${this.$t('meta.url')}/#personlogo`,
+									url: 'https://ilanvivanco.com/images/ilan-vivanco-logo.png',
+									width: 600,
+									height: 100,
+									caption: this.$t('meta.name'),
+								},
+								inLanguage: this.currentISOLocale,
+							},
+							{
+								'@type': 'Person',
+								'@id': `${this.$t('meta.url')}/#person`,
+								name: this.$t('meta.name'),
+								url: this.$t('meta.url'),
+								image: {
+									'@type': 'ImageObject',
+									'@id': `${this.$t('meta.url')}/#personimage`,
+									url: 'https://ilanvivanco.com/images/ilan-vivanco.jpg',
+									width: 1440,
+									height: 1080,
+									caption: this.$t('meta.name'),
+								},
+								sameAs: [
+									'https://www.linkedin.com/in/ilanvivanco',
+									'https://twitter.com/IlanVivanco',
+									'https://github.com/IlanVivanco',
+									'https://www.instagram.com/ilanvivanco',
+									this.$t('meta.url'),
+								],
+								description: this.$t('meta.name'),
+								inLanguage: this.currentISOLocale,
+							},
+							{
+								'@type': 'WebSite',
+								'@id': `${this.$t('meta.url')}/#website`,
+								url: this.$t('meta.url'),
+								name: `${this.currentTitle} - ${this.$t('meta.name')}`,
+								description: this.$t('meta.name'),
+								publisher: { '@id': `${this.$t('meta.url')}/#person` },
+								inLanguage: this.currentISOLocale,
+							},
+							{
+								'@type': 'BreadcrumbList',
+								'@id': `${this.$t('meta.url')}/#breadcrumb`,
+								itemListElement: [
+									{
+										'@type': 'ListItem',
+										position: 1,
+										item: {
+											'@type': 'WebPage',
+											'@id': `${this.$t('meta.url')}/#webpage`,
+											url: this.$t('meta.url'),
+											name: `${this.currentTitle} - ${this.$t('meta.name')}`,
+										},
+									},
+								],
+							},
+						],
+					},
+				},
+			],
 		}
 	},
 	data() {
@@ -72,72 +145,6 @@ export default {
 			altBannerImage: null,
 			bannerChanged: false,
 			altBannerLeave: false,
-			structuredData: {
-				'@context': 'https://schema.org',
-				'@graph': [
-					{
-						'@type': 'Organization',
-						'@id': 'https://ilanvivanco.com/#organization',
-						url: 'https://ilanvivanco.com/',
-						logo: {
-							'@type': 'ImageObject',
-							'@id': 'https://ilanvivanco.com/#personlogo',
-							url: 'https://ilanvivanco.com/images/ilan-vivanco-logo.png',
-							width: 600,
-							height: 100,
-							caption: 'Ilán Vivanco',
-						},
-					},
-					{
-						'@type': 'Person',
-						'@id': 'https://ilanvivanco.com/#person',
-						name: 'Ilán Vivanco',
-						url: 'https://ilanvivanco.com/',
-						image: {
-							'@type': 'ImageObject',
-							'@id': 'https://ilanvivanco.com/#personimage',
-							url: 'https://ilanvivanco.com/images/ilan-vivanco.jpg',
-							width: 1440,
-							height: 1080,
-							caption: 'Ilán Vivanco',
-						},
-						sameAs: [
-							'https://www.linkedin.com/in/ilanvivanco/',
-							'https://twitter.com/IlanVivanco',
-							'https://github.com/IlanVivanco',
-							'https://www.instagram.com/ilanvivanco/',
-							'https://ilanvivanco.com/',
-						],
-						description: 'Desarrollador web full stack con más de quince años de experiencia.',
-					},
-					{
-						'@type': 'WebSite',
-						'@id': 'https://ilanvivanco.com/#website',
-						url: 'https://ilanvivanco.com/',
-						name: 'Ilán Vivanco - Desarrollador web full stack',
-						description:
-							'Soy Ilán Vivanco, desarrollador WordPress full stack con más de quince años de experiencia. Me especializo en el armado —y muy ocasionalmente, el diseño— de themes y plugins hechos a medida.',
-						publisher: { '@id': 'https://ilanvivanco.com/#person' },
-						inLanguage: 'en-US',
-					},
-					{
-						'@type': 'BreadcrumbList',
-						'@id': 'https://ilanvivanco.com/#breadcrumb',
-						itemListElement: [
-							{
-								'@type': 'ListItem',
-								position: 1,
-								item: {
-									'@type': 'WebPage',
-									'@id': 'https://ilanvivanco.com/',
-									url: 'https://ilanvivanco.com/',
-									name: 'Home',
-								},
-							},
-						],
-					},
-				],
-			},
 		}
 	},
 	created() {
@@ -177,6 +184,9 @@ export default {
 		},
 		currentTitle() {
 			return this.$t(`meta.${this.currentPathSlug}_title`)
+		},
+		currentISOLocale() {
+			return this.$i18n.locales.filter((locale) => locale.code === this.$i18n.locale).pop().iso
 		},
 	},
 }
