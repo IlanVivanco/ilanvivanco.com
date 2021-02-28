@@ -1,6 +1,7 @@
 require('dotenv').config()
 
 module.exports = {
+	base_url: process.env.BASE_URL,
 	instagram: {
 		url: process.env.INSTAGRAM_URL,
 		host: process.env.INSTAGRAM_HOST,
