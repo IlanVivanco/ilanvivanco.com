@@ -3,7 +3,7 @@
 		<li v-for="(social, i) in socials" :key="i" class="social-links__item">
 			<el-tooltip effect="dark" placement="bottom" :content="social.name" :open-delay="200" :enterable="false">
 				<a :href="social.link" target="_blanck">
-					<img v-bind="responsiveImageAttr(social.logo)" :alt="social.name" class="social-links__logo" />
+					<img v-bind="responsiveImageAttr(social.logo)" width="20" height="20" :alt="social.name" class="social-links__logo" />
 				</a>
 			</el-tooltip>
 		</li>

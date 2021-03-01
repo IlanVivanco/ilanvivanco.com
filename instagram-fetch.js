@@ -34,7 +34,12 @@ async function maybeFetchInstagramData() {
 	const shouldFetch = await shouldFetchData();
 
 	// Fetch only once a day
-	if (!shouldFetch) return;
+	if (!shouldFetch) {
+		console.log('Instagram data is up-to-date.');
+		return;
+	}
+
+	console.log('Fetching new instagram data...');
 
 	try {
 		const instaData = await axios.request({
