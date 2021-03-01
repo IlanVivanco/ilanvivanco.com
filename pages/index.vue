@@ -16,19 +16,15 @@
 				<el-col :span="24" class="about__info">
 					<section-title :title="this.$t('index.titles.about')" type="h2" />
 					<div>
-						<p v-for="(paragraph, i) in splitAboutParagraphs[0]" :key="i">{{ paragraph }}</p>
-						<img
-							class="about__image"
-							v-bind="responsiveImageAttr('ilan-workspace.jpg')"
-							alt="My workspace"
-						/>
-						<p v-for="(paragraph, i) in splitAboutParagraphs[1]" :key="i">{{ paragraph }}</p>
+						<p v-for="(paragraph, i) in splitAboutParagraphs[0]" :key="`about_${i}`">{{ paragraph }}</p>
+						<img class="about__image" v-bind="responsiveImageAttr('ilan-workspace.jpg')" alt="My workspace" />
+						<p v-for="(paragraph, i) in splitAboutParagraphs[1]" :key="`about_2_${i}`">{{ paragraph }}</p>
 					</div>
 				</el-col>
 			</el-row>
 
-			<aside class="about__insta-feed">
-				<el-row :gutter="30" type="flex" class="mb4">
+			<aside class="about__insta-feed mb4">
+				<el-row :gutter="30" type="flex">
 					<el-col :span="24">
 						<instagram-feed :count="6" :gap="2" />
 					</el-col>
@@ -36,16 +32,16 @@
 			</aside>
 
 			<el-row :gutter="30" type="flex" class="mb4">
-				<el-col :span="24" class="about__info">
+				<el-col :span="24" class="history__info">
 					<section-title :title="this.$t('index.titles.history')" type="h2" :margin-bottom="true" />
 					<div>
-						<p v-for="(paragraph, i) in this.$t('index.copy.history')" :key="i">{{ paragraph }}</p>
+						<p v-for="(paragraph, i) in this.$t('index.copy.history')" :key="`history_${i}`">{{ paragraph }}</p>
 					</div>
 				</el-col>
 			</el-row>
 
 			<aside class="about__insta-feed">
-				<el-row :gutter="30" type="flex" class="mb4">
+				<el-row :gutter="30" type="flex">
 					<el-col :span="24">
 						<instagram-feed :count="6" :offset="6" :gap="2" />
 					</el-col>
@@ -137,6 +133,11 @@ export default {
 }
 
 .about__insta-feed {
-	margin: 0 -2rem;
+	margin-left: -2rem;
+	margin-right: -2rem;
+
+	&:last-child{
+		margin-bottom: -2rem;
+	}
 }
 </style>
