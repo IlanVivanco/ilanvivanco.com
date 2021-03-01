@@ -3,8 +3,8 @@
 		<li class="insta-feed__box" v-for="(photo, index) in this.images" :key="index">
 			<a :href="`https://www.instagram.com/p/${photo.node.shortcode}/`" target="__blank">
 				<img
-					class="insta-feed__image"
-					:src="photo.node.thumbnail_resources[0].src"
+					class="insta-feed__image lazyload"
+					:data-src="photo.node.thumbnail_resources[0].src"
 					:srcset="getSrcSet(photo.node.thumbnail_resources)"
 					:alt="photo.node.accessibility_caption"
 				/>

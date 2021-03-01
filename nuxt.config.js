@@ -42,6 +42,7 @@ export default {
 		'@/plugins/element-ui',
 		'@/plugins/gtag',
 		'@/plugins/dynamicImageLoader',
+		'@/plugins/lazySizes',
 	],
 
 	// Auto import components: https://go.nuxtjs.dev/config-components
@@ -83,6 +84,12 @@ export default {
 	// Build Configuration: https://go.nuxtjs.dev/config-build
 	build: {
 		transpile: [/^element-ui/, 'gsap'],
+		extend(config, { isDev, isClient, loaders: { vue } }) {
+			if (isClient) {
+				vue.transformAssetUrls.img = ['data-src', 'src']
+				vue.transformAssetUrls.source = ['data-srcset', 'srcset']
+			}
+		}
 	},
 
 	// Netlify client side rendering issue: https://nuxtjs.org/docs/2.x/deployment/netlify-deployment#for-client-side-rendering-only
