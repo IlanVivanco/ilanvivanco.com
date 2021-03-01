@@ -69,7 +69,7 @@ export default {
 		if (post && !post.has_single) redirect({ path: app.localePath('/portfolio') })
 
 		// Require post image
-		if (post && post.thumbnail) post.thumbnail = DynamicImages.methods.responsiveImageAttr(post.thumbnail)
+		if (post && post.thumbnail) post.thumbnail = DynamicImages.methods.fetchImageAttr(post.thumbnail)
 
 		return { post }
 	},
