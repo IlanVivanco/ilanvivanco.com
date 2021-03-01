@@ -6,6 +6,7 @@
 					class="insta-feed__image lazyload"
 					:data-src="photo.node.thumbnail_resources[0].src"
 					:srcset="getSrcSet(photo.node.thumbnail_resources)"
+					sizes="(max-width: 768px) 30vw, (max-width: 1200px) 100px, (max-width: 1600px) 125px, 170px"
 					:alt="photo.node.accessibility_caption"
 				/>
 				<div class="insta-feed__hashtags">{{ getHashtags(photo) }}</div>
