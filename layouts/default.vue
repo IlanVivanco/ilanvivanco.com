@@ -31,7 +31,6 @@ import LangSwitcher from '~/components/LangSwitcher'
 import MainSidebar from '~/components/MainSidebar'
 import MainNav from '~/components/Nav'
 
-const thumb = require('~/assets/images/ilan-vivanco.jpg')
 
 export default {
 	name: 'DefaultLayout',
@@ -43,11 +42,14 @@ export default {
 	},
 	transition: { mode: '' },
 	head() {
+		const thumb = '/images/ilan-vivanco-social-card.png'
+
 		return {
 			titleTemplate: `${this.currentTitle} - ${this.$t('meta.name')}`,
 			meta: [
 				{ hid: 'description', name: 'description', content: this.$t('meta.description') },
 
+				{ hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' },
 				{ hid: 'twitter:title', name: 'twitter:title', content: this.$t('meta.name') },
 				{ hid: 'twitter:description', name: 'twitter:description', content: this.$t('meta.description') },
 				{ hid: 'twitter:image:alt', name: 'twitter:image:alt', content: this.$t('meta.name') },
