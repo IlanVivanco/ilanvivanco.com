@@ -41,7 +41,11 @@ export default {
 		font-style: italic;
 
 		span:not(:last-child) {
-			margin-right: 1em;
+			margin-right: 1.2em;
+
+			@include breakpoint('tiny') {
+				margin-right: 2.2em;
+			}
 		}
 	}
 
