@@ -14,7 +14,7 @@
 					<studies :data="cv.data.education" />
 				</div>
 
-				<div class="resume-section__group">
+				<div class="resume-section__group hidden-xs-only">
 					<section-header :title="cv.headers.tech" :icon="cv.icons.tech" />
 					<icons-grid :data="cv.data.tech" size="medium" />
 				</div>
@@ -23,8 +23,8 @@
 			<el-col :span="8" class="resume-section__aside">
 				<aside class="resume-section__aside-wrapper">
 					<div class="resume-section__group">
-						<section-header :title="cv.headers.skills" :icon="cv.icons.skills" />
-						<ratings :data="cv.data.skills" />
+						<section-header :title="cv.headers.languages" :icon="cv.icons.languages" />
+						<ratings :data="cv.data.languages" />
 					</div>
 
 					<div class="resume-section__group">
@@ -33,11 +33,11 @@
 					</div>
 
 					<div class="resume-section__group">
-						<section-header :title="cv.headers.languages" :icon="cv.icons.languages" />
-						<ratings :data="cv.data.languages" />
+						<section-header :title="cv.headers.skills" :icon="cv.icons.skills" />
+						<ratings :data="cv.data.skills" />
 					</div>
 
-					<div class="resume-section__group">
+					<div class="resume-section__group hidden-xs-only">
 						<section-header :title="cv.headers.hobbies" :icon="cv.icons.hobbies" />
 						<cloud :data="cv.data.hobbies" />
 					</div>
@@ -76,6 +76,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import 'element-ui/lib/theme-chalk/display.css';
+
 .resume-section {
 	font-size: 0.9rem;
 
@@ -103,6 +105,10 @@ export default {
 		@include breakpoint('small') {
 			display: flex;
 			flex-wrap: wrap;
+		}
+
+		@include breakpoint('tiny') {
+			flex-direction: column-reverse;
 		}
 	}
 
