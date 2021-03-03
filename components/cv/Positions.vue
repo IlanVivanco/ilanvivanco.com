@@ -21,7 +21,9 @@
 				<h3 class="position__name">{{ position.position }}</h3>
 			</header>
 
-			<div class="position__excerpt">{{ position.excerpt }}</div>
+			<ul class="position__details">
+				<li v-for="(item, i) of position.details" :key="i">{{ item }}</li>
+			</ul>
 		</el-timeline-item>
 	</el-timeline>
 </template>
@@ -134,10 +136,31 @@ export default {
 		font-style: italic;
 	}
 
-	&__excerpt {
+	&__details {
 		font-size: 0.9em;
 		font-style: italic;
 		line-height: 1.3em;
+		padding-left: 1em;
+		list-style: none;
+
+		li {
+			position: relative;
+			line-height: 1.2;
+			margin-bottom: 0.2em;
+
+			&::before {
+				content: '';
+				width: 0.3em;
+				height: 0.3em;
+				position: absolute;
+				display: block;
+				border-radius: 50%;
+				border: 1px solid $color-teal-dark;
+				top: 50%;
+				left: -0.7em;
+				transform: translateY(-50%);
+			}
+		}
 	}
 
 	& /deep/ .el-timeline-item__tail {
