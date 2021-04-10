@@ -26,7 +26,7 @@ async function shouldFetchData() {
 	const nextRun = lastRun + DAY_IN_SECONDS
 	const now = new Date().getTime()
 
-	console.log(`Last ran was on: ${new Date(lastRun)}`)
+	console.log(`Data fetched on: ${new Date(lastRun)}`)
 
 	return nextRun < now
 }
@@ -44,13 +44,11 @@ async function maybeFetchInstagramData() {
 	console.log('Fetching new instagram data...')
 
 	try {
-		const instaData = await axios.request({
+		const instaData = await axios({
 			method: 'GET',
 			url: ENV.instagram.url,
-			params: { username: ENV.instagram.user },
-			headers: {
-				'x-rapidapi-key': ENV.instagram.key,
-				'x-rapidapi-host': ENV.instagram.host,
+			params: {
+				limit: 12,
 			},
 		})
 
@@ -63,7 +61,7 @@ async function maybeFetchInstagramData() {
 function saveTheData(data) {
 	const instagram = {
 		last_run: new Date().getTime(),
-		data: data,
+		data: data.data,
 	}
 
 	fs.writeFileSync(ENV.instagram.dest, JSON.stringify(instagram))

@@ -42,10 +42,9 @@ export default {
 		try {
 			const photos = await axios({
 				method: 'GET',
-				url: process.env.NOCODE_URL,
-				params: {
-					limit: 12,
-				},
+				url: `${
+					process.env.NODE_ENV === 'production' ? process.env.BASE_URL : 'http://localhost:3000'
+				}/data/instagram.json`,
 			}).then((response) => response.data)
 
 			this.images = [...photos.data].splice(this.offset, this.count)
