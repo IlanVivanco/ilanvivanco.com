@@ -16,7 +16,8 @@
 </template>
 
 <script>
-import instagramData from '~/static/data/instagram'
+const getPhotos = () => import('~/static/data/instagram').then((m) => console.log(m))
+import instagramPhotos from '~/static/data/instagram'
 
 export default {
 	name: 'FeedInstagram',
@@ -39,8 +40,8 @@ export default {
 			images: [],
 		}
 	},
-	mounted() {
-		this.images = [...instagramData.data].splice(this.offset, this.count)
+	async mounted() {
+		this.images = [...instagramPhotos.data].splice(this.offset, this.count)
 	},
 	computed: {
 		mobileCols() {
@@ -58,9 +59,9 @@ export default {
 
 			return hashtags.join(' ')
 		},
-		getSrcSet(photos){
-			return photos.map(photo => `${photo.src} ${photo.config_width}w`).join(',');
-		}
+		getSrcSet(photos) {
+			return photos.map((photo) => `${photo.src} ${photo.config_width}w`).join(',')
+		},
 	},
 }
 </script>
