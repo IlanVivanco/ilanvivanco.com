@@ -13,11 +13,8 @@ export default {
 			{ charset: 'utf-8' },
 			{ name: 'viewport', content: 'width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=3.0' },
 		],
-		link: [
-			{ rel: 'icon', type: 'image/png', href: '/images/favicon.png' },
-		]
+		link: [{ rel: 'icon', type: 'image/png', href: '/images/favicon.png' }],
 	},
-
 
 	// Global CSS: https://go.nuxtjs.dev/config-css
 	css: [
@@ -29,11 +26,7 @@ export default {
 
 	// Load SCSS globally for components
 	styleResources: {
-		scss: [
-			'./assets/scss/_variables.scss',
-			'./assets/scss/_spacing.scss',
-			'./assets/scss/_mixins.scss',
-		]
+		scss: ['./assets/scss/_variables.scss', './assets/scss/_spacing.scss', './assets/scss/_mixins.scss'],
 	},
 
 	// Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -52,7 +45,7 @@ export default {
 	buildModules: [
 		// Doc https://github.com/nuxt-community/dotenv-module
 		'@nuxtjs/dotenv',
-		'@nuxtjs/style-resources'
+		'@nuxtjs/style-resources',
 	],
 
 	// Modules: https://go.nuxtjs.dev/config-modules
@@ -76,8 +69,8 @@ export default {
 	content: {
 		markdown: {
 			prism: {
-				theme: '@/assets/scss/prism/monokai-cotalpa.scss'
-			}
+				theme: '@/assets/scss/prism/monokai-cotalpa.scss',
+			},
 		},
 	},
 
@@ -89,12 +82,12 @@ export default {
 				vue.transformAssetUrls.img = ['data-src', 'src']
 				vue.transformAssetUrls.source = ['data-srcset', 'srcset']
 			}
-		}
+		},
 	},
 
 	// Netlify client side rendering issue: https://nuxtjs.org/docs/2.x/deployment/netlify-deployment#for-client-side-rendering-only
 	generate: {
-		fallback: true
+		fallback: true,
 	},
 
 	// Responsive Loader config
@@ -112,17 +105,14 @@ export default {
 	// i18n config
 	i18n: I18N,
 
+	env: ENV,
+
 	// Sitemap
 	sitemap: {
 		hostname: ENV.base_url,
 		gzip: true,
 		// i18n: true,
-		exclude: [
-			'/blog',
-			'/about',
-			'/resume',
-			'/contact',
-		],
+		exclude: ['/blog', '/about', '/resume', '/contact'],
 
 		i18n: true,
 		routes: async () => {
@@ -162,5 +152,5 @@ export default {
 		// 		}
 		// 	})
 		// }
-	}
+	},
 }

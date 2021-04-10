@@ -1,23 +1,21 @@
 <template>
 	<ul v-if="images.length" class="insta-feed" :style="{ '--cols': count, '--mobile-cols': mobileCols, '--gap': gap }">
 		<li class="insta-feed__box" v-for="(photo, index) in this.images" :key="index">
-			<a :href="`https://www.instagram.com/p/${photo.node.shortcode}/`" target="__blank">
+			<a :href="photo.permalink" target="__blank">
 				<img
 					class="insta-feed__image lazyload"
-					:data-src="photo.node.thumbnail_resources[0].src"
-					:srcset="getSrcSet(photo.node.thumbnail_resources)"
-					sizes="(max-width: 768px) 30vw, (max-width: 1200px) 100px, (max-width: 1600px) 125px, 170px"
-					:alt="photo.node.accessibility_caption"
+					:data-src="photo.media_url"
+					:alt="`Ilán Vivanco's Instagram photo from ${new Date(photo.timestamp).toDateString()}`"
 				/>
-				<div class="insta-feed__hashtags">{{ getHashtags(photo) }}</div>
+				<div class="insta-feed__hashtags">{{ getHashtags(photo.caption) }}</div>
 			</a>
 		</li>
 	</ul>
 </template>
 
 <script>
-const getPhotos = () => import('~/static/data/instagram').then((m) => console.log(m))
 import instagramPhotos from '~/static/data/instagram'
+import axios from 'axios'
 
 export default {
 	name: 'FeedInstagram',
@@ -41,7 +39,19 @@ export default {
 		}
 	},
 	async mounted() {
-		this.images = [...instagramPhotos.data].splice(this.offset, this.count)
+		try {
+			const photos = await axios({
+				method: 'GET',
+				url: process.env.NOCODE_URL,
+				params: {
+					limit: 12,
+				},
+			}).then((response) => response.data)
+
+			this.images = [...photos.data].splice(this.offset, this.count)
+		} catch (error) {
+			console.error(error)
+		}
 	},
 	computed: {
 		mobileCols() {
@@ -49,9 +59,8 @@ export default {
 		},
 	},
 	methods: {
-		getHashtags(item) {
+		getHashtags(caption) {
 			const WORD_LIMIT = 2
-			const caption = item.node.edge_media_to_caption.edges[0].node.text
 			const hashtags = caption
 				.split(' ')
 				.filter((el) => el[0] == '#')
@@ -75,9 +84,10 @@ export default {
 	list-style: none;
 	gap: calc(var(--gap, 0) * 1px);
 	grid-template-columns: repeat(var(--cols), 1fr);
-	grid-auto-rows: 1fr;
+	grid-auto-rows: 120px;
 
 	@include breakpoint('small') {
+		grid-auto-rows: 105px;
 		grid-template-columns: repeat(var(--mobile-cols), 1fr);
 	}
 
