@@ -1,5 +1,5 @@
-import I18N from './locales/i18n.config';
-import ENV from './env';
+import { I18N, mapBlogPosts } from './locales/i18n.config'
+import ENV from './env'
 
 export default {
 	// Target: https://go.nuxtjs.dev/config-target
@@ -56,9 +56,9 @@ export default {
 		'@nuxtjs/axios',
 		// Doc: https://github.com/nuxt/content
 		'@nuxt/content',
-		// https://github.com/geeogi/nuxt-responsive-loader
+		// Doc https://github.com/geeogi/nuxt-responsive-loader
 		'nuxt-responsive-loader',
-		// https://sitemap.nuxtjs.org/
+		// Doc https://sitemap.nuxtjs.org/
 		'@nuxtjs/sitemap',
 	],
 
@@ -110,47 +110,19 @@ export default {
 	// Sitemap
 	sitemap: {
 		hostname: ENV.base_url,
-		gzip: true,
-		// i18n: true,
-		exclude: ['/blog', '/about', '/resume', '/contact'],
+		exclude: ['/blog', '/en', '/en/blog', '/en/portfolio', '/en/about', '/en/resume', '/en/contact'],
 
-		i18n: true,
+		i18n: {
+			locales: ['en', 'es'],
+			defaultLocale: 'es',
+		},
+
 		routes: async () => {
 			const { $content } = require('@nuxt/content')
-			const postsES = await $content(`es/blog`).only(['path', 'slug', 'show']).fetch()
-			const postsEN = await $content(`en/blog`).only(['path', 'slug', 'show']).fetch()
-			const posts = [...postsES, ...postsEN]
+			const postsES = await $content(`es/blog`).only(['path', 'slug', 'languages']).where({ show: true }).fetch()
+			const postsEN = await $content(`en/blog`).only(['path', 'slug', 'languages']).where({ show: true }).fetch()
 
-			return [
-				'curriculum',
-				'contacto',
-				// ...posts.map((article) => {
-				// 	if (article.show) {
-				// 		return {
-				// 			url: article.path.split('/')[1] === 'es' ? `blog/${article.slug}` : article.path,
-				// 			// links: [
-				// 			// 	{ lang: 'es', url: `blog/article.slug` },
-				// 			// 	{ lang: 'en', url: `blog/en/${article.slug}` }
-				// 			// ]
-				// 		}
-				// 	}
-				// })
-			]
+			return [...mapBlogPosts(postsES, 'es'), ...mapBlogPosts(postsEN, 'en')]
 		},
-		// filter({ routes }) {
-		// 	return routes.map((route) => {
-		// 		if (!route.name) return route
-		// 		const page = route.name.split('__')[0]
-		// 		return {
-		// 			url: route.url,
-		// 			links: route.links.concat([
-		// 				{
-		// 					lang: 'x-default',
-		// 					url: page === 'index' ? '/' : page
-		// 				}
-		// 			])
-		// 		}
-		// 	})
-		// }
 	},
 }
