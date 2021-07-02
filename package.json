@@ -11,29 +11,29 @@
 		"instagram:get": "node instagram-fetch.js"
 	},
 	"dependencies": {
-		"@nuxt/content": "^1.10.0",
-		"@nuxtjs/axios": "^5.13.1",
+		"@nuxt/content": "^1.14.0",
+		"@nuxtjs/axios": "^5.13.6",
 		"@nuxtjs/sitemap": "^2.4.0",
 		"animate.css": "^4.1.1",
-		"element-ui": "^2.13.2",
-		"gsap": "^3.6.0",
-		"lazysizes": "^5.3.0",
-		"lodash": "^4.17.20",
+		"element-ui": "^2.15.3",
+		"gsap": "^3.7.0",
+		"lazysizes": "^5.3.2",
+		"lodash": "^4.17.21",
 		"moment": "^2.29.1",
 		"nuxt": "^2.14.7",
-		"nuxt-i18n": "^6.13.7",
+		"nuxt-i18n": "^6.27.2",
 		"nuxt-responsive-loader": "^2.0.1",
-		"sharp": "^0.27.1",
-		"vue-gtag": "^1.11.0",
+		"sharp": "^0.28.3",
+		"vue-gtag": "^1.16.1",
 		"vuewordcloud": "^18.7.12"
 	},
 	"devDependencies": {
 		"@nuxtjs/dotenv": "^1.4.1",
-		"@nuxtjs/style-resources": "^1.0.0",
+		"@nuxtjs/style-resources": "^1.2.0",
 		"eslint-config-prettier": "^6.14.0",
 		"eslint-plugin-prettier": "^3.1.4",
 		"node-sass": "^4.14.1",
 		"prettier": "^2.1.2",
-		"sass-loader": "^9.0.3"
+		"sass-loader": "^10.1.1"
 	}
 }
