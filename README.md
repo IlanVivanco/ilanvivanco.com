@@ -20,3 +20,11 @@ I started to learn <img src="assets/images/global/vue.png" height="15px" /> Vue.
 I also used the <img src="assets/images/global/nuxt.png" height="15px" /> Nuxt.js framework to serve static pages and load content from `.md` files.
 
 <p align="center"><img src="https://media.giphy.com/media/3o84U6421OOWegpQhq/giphy.gif" alt="Like magic!" /></p>
+
+
+## Installation
+
+- Clone this repo locally.
+- Duplicate `.env.sample` as `.env` and modify the data as needed.
+- Install dependencies by `npm install`.
+- Run `npm run dev`.
