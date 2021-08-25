@@ -46,7 +46,7 @@ async function maybeFetchInstagramData() {
 	try {
 		const instaData = await axios({
 			method: 'GET',
-			url: ENV.instagram.url,
+			url: `${ENV.instagram.url}?date=${Date.now()}`,
 			params: {
 				limit: 12,
 			},
