@@ -21,14 +21,20 @@ async function fetchLastRun() {
 
 // Should we fetch new data or not?
 async function shouldFetchData() {
-	const DAY_IN_SECONDS = 60 * 60 * 24 * 1000
+	// const DAY_IN_MILISECONDS = 60 * 60 * 24 * 1000
+	const DAY_IN_MILISECONDS = 1000 * 1000
 	const lastRun = await fetchLastRun()
-	const nextRun = lastRun + DAY_IN_SECONDS
+	const nextRun = lastRun + DAY_IN_MILISECONDS
 	const now = new Date().getTime()
+	const shouldFetch = now > nextRun
 
-	console.log(`Data fetched on: ${new Date(lastRun)}`)
+	if (shouldFetch) {
+		console.log(`Fetching new data. Latest was from: ${new Date(lastRun)}`)
+	} else {
+		console.log(`Not fetching data. Next time will run on: ${new Date(nextRun)}`)
+	}
 
-	return nextRun < now
+	return shouldFetch
 }
 
 // Maybe fetch new data
@@ -36,31 +42,30 @@ async function maybeFetchInstagramData() {
 	const shouldFetch = await shouldFetchData()
 
 	// Fetch only once a day
-	if (!shouldFetch) {
-		console.log('Instagram data is up-to-date.')
-		return
-	}
+	if (shouldFetch) {
+		try {
+			const options = {
+				method: 'GET',
+				url: ENV.instagram.url,
+				params: {
+					limit: 12,
+					date: Date.now(),
+				},
+			}
 
-	console.log('Fetching new instagram data...')
+			const instaData = await axios(options)
 
-	try {
-		const instaData = await axios({
-			method: 'GET',
-			url: `${ENV.instagram.url}?date=${Date.now()}`,
-			params: {
-				limit: 12,
-			},
-		})
-
-		saveTheData(instaData.data)
-	} catch (error) {
-		console.error(error)
+			saveTheData(instaData.data)
+		} catch (error) {
+			console.error(error)
+		}
 	}
 }
 
 function saveTheData(data) {
 	const instagram = {
 		last_run: new Date().getTime(),
+		last_run_formatted: new Date(),
 		data: data.data,
 	}
 
