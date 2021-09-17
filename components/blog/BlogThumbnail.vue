@@ -25,11 +25,11 @@ export default {
 <style lang="scss" scoped>
 .post-header {
 	position: relative;
-	padding-top: (100% / 16 * 9);
+	padding-top: calc(100% / 16 * 9);
 	margin-bottom: 2rem;
 
 	&.small {
-		padding-top: (100% / 30 * 9);
+		padding-top: calc(100% / 30 * 9);
 	}
 
 	img {
