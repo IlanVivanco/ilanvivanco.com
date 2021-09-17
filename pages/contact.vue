@@ -12,11 +12,11 @@
 					<ul class="contact-info-list">
 						<li class="contact-info-list__item">
 							<i :class="$t('cv.icons.email')"></i>
-							<a @mouseover="addMailto"><span v-html="obfuscatedEmail"></span></a>
+							<a @mouseover="addMailto" @mouseout="removeHref"><span v-html="obfuscatedEmail"></span></a>
 						</li>
 						<li class="contact-info-list__item">
 							<i :class="$t('cv.icons.phone')"></i>
-							<a @mouseover="addTel"><span v-html="obfuscatedPhone"></span></a>
+							<a @mouseover="addTel" @mouseout="removeHref"><span v-html="obfuscatedPhone"></span></a>
 						</li>
 					</ul>
 				</el-col>
@@ -38,6 +38,9 @@ export default {
 	name: 'Contact',
 	scrollToTop: false,
 	methods: {
+		removeHref(e) {
+			e.currentTarget.removeAttribute('href')
+		},
 		addMailto(e) {
 			e.currentTarget.href = `mailto:${this.$t('cv.data.email')}`
 		},
@@ -49,13 +52,19 @@ export default {
 		obfuscatedEmail(e) {
 			return this.$t('cv.data.email')
 				.split('')
-				.map((i) => i + `<i style="display:none">no-no</i>`)
+				.map((i) => {
+					const randChar = Math.random().toString(36).charAt(8);
+					return i + `<i style="font-size:0">${randChar}</i>`
+				})
 				.join('')
 		},
 		obfuscatedPhone(e) {
 			return this.$t('cv.data.phone')
 				.split('')
-				.map((i) => i + `<i style="display:none">no-no</i>`)
+				.map((i) => {
+					const randChar = Math.random().toString(36).charAt(8);
+					return i + `<i style="font-size:0">${randChar}</i>`
+				})
 				.join('')
 		},
 	},
