@@ -240,7 +240,7 @@ export default {
 	align-items: center;
 }
 
-/deep/ img {
+::v-deep img {
 	max-width: 100%;
 }
 </style>

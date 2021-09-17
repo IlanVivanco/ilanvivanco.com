@@ -110,7 +110,7 @@ export default {
 		}
 	}
 
-	& /deep/ .el-timeline-item__tail {
+	& ::v-deep .el-timeline-item__tail {
 		border-left-color: $color-blue-dark;
 	}
 }

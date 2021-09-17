@@ -108,7 +108,7 @@ export default {
 	}
 }
 
-/deep/ .el-card__body {
+::v-deep .el-card__body {
 	height: 100%;
 	padding: 0;
 }
@@ -196,11 +196,11 @@ export default {
 	margin-bottom: 0.5em;
 }
 
-.grid__tags{
-	margin-top: .5rem;
+.grid__tags {
+	margin-top: 0.5rem;
 }
 
-/deep/ .el-tag {
+::v-deep .el-tag {
 	height: auto;
 	font-size: 0.6rem;
 	line-height: 1;

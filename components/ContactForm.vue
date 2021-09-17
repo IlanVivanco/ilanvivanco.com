@@ -150,7 +150,7 @@ export default {
 	}
 
 	@include breakpoint('small') {
-		/deep/ .el-form-item > * {
+		::v-deep .el-form-item > * {
 			float: none !important;
 			margin-left: 0 !important;
 		}
