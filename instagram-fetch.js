@@ -2,7 +2,15 @@ const ENV = require('./env.js')
 const axios = require('axios')
 const fs = require('fs')
 
-// Fetch last run from prod site
+// Fetching params
+const [force] = process.argv.slice(2)
+
+const DAY_IN_MILISECONDS = 60 * 60 * 24 * 1000
+const now = new Date()
+let lastRun = null
+let nextRun = null
+
+// Fetch the last run unix time from prod site
 async function fetchLastRun() {
 	try {
 		const instagramJSON = await axios.request({
@@ -15,61 +23,48 @@ async function fetchLastRun() {
 		console.error(error)
 	}
 
-	// If nothing's found let's fetch it
 	return 0
 }
 
-// Should we fetch new data or not?
-async function shouldFetchData() {
-	// const DAY_IN_MILISECONDS = 60 * 60 * 24 * 1000
-	const DAY_IN_MILISECONDS = 1000 * 1000
-	const lastRun = await fetchLastRun()
-	const nextRun = lastRun + DAY_IN_MILISECONDS
-	const now = new Date().getTime()
-	const shouldFetch = now > nextRun
+// Fetch only once a day or if force is passed
+async function maybeFetchInstagramData(force = false) {
+	lastRun = await fetchLastRun()
+	nextRun = lastRun + DAY_IN_MILISECONDS
 
+	const shouldFetch = force || now.getTime() > nextRun
+
+	// Should we fetch new data or not?
 	if (shouldFetch) {
-		console.log(`Fetching new data. Latest was from: ${new Date(lastRun)}`)
-	} else {
-		console.log(`Not fetching data. Next time will run on: ${new Date(nextRun)}`)
-	}
+		console.info(`Fetching new data. Latest was from: ${new Date(lastRun)}`)
 
-	return shouldFetch
-}
-
-// Maybe fetch new data
-async function maybeFetchInstagramData() {
-	const shouldFetch = await shouldFetchData()
-
-	// Fetch only once a day
-	if (shouldFetch) {
 		try {
-			const options = {
+			const instaData = await axios({
 				method: 'GET',
 				url: ENV.instagram.url,
 				params: {
 					limit: 12,
 					date: Date.now(),
 				},
-			}
-
-			const instaData = await axios(options)
+			})
 
 			saveTheData(instaData.data)
 		} catch (error) {
 			console.error(error)
 		}
+	} else {
+		console.info(`Not fetching data. Next update will be on: ${new Date(nextRun)}`)
 	}
 }
 
+// Save the data to the file
 function saveTheData(data) {
 	const instagram = {
-		last_run: new Date().getTime(),
-		last_run_formatted: new Date(),
+		last_run: now.getTime(),
+		last_run_on: now.toLocaleString(),
 		data: data.data,
 	}
 
 	fs.writeFileSync(ENV.instagram.dest, JSON.stringify(instagram))
 }
 
-maybeFetchInstagramData()
+maybeFetchInstagramData(force)
