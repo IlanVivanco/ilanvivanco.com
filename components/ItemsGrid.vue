@@ -16,6 +16,10 @@
 				<div class="grid__data">
 					<time class="grid__date">{{ formatDate(item.date) }}</time>
 					<h1 class="grid__title">{{ item.title }}</h1>
+					<div class="grid__for" v-if="item.job_for">
+						{{ $t('portfolio.titles.for') }}
+						<a :href="item.job_for.link" target="_blank" rel="nofollow">{{ item.job_for.name }}</a>
+					</div>
 					<div class="grid__description">{{ item.description }}</div>
 					<div class="grid__tags">
 						<el-tag class="grid__tag mr2" size="small" v-for="(tag, index) in item.tags" :key="index">
@@ -194,6 +198,18 @@ export default {
 	min-height: 4.2em;
 	font-style: italic;
 	margin-bottom: 0.5em;
+}
+
+.grid__for {
+	color: $color-blue;
+	font-size: 0.8em;
+	line-height: 1.3em;
+	font-style: italic;
+	margin-bottom: 1em;
+
+	a {
+		color: inherit;
+	}
 }
 
 .grid__tags {
