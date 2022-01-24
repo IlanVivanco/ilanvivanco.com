@@ -1,5 +1,4 @@
 import { I18N, mapBlogPosts } from './locales/i18n.config'
-import ENV from './env'
 
 export default {
 	// Target: https://go.nuxtjs.dev/config-target
@@ -42,11 +41,7 @@ export default {
 	components: true,
 
 	// Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-	buildModules: [
-		// Doc https://github.com/nuxt-community/dotenv-module
-		'@nuxtjs/dotenv',
-		'@nuxtjs/style-resources',
-	],
+	buildModules: ['@nuxtjs/style-resources'],
 
 	// Modules: https://go.nuxtjs.dev/config-modules
 	modules: [
@@ -105,11 +100,9 @@ export default {
 	// i18n config
 	i18n: I18N,
 
-	env: ENV,
-
 	// Sitemap
 	sitemap: {
-		hostname: ENV.base_url,
+		hostname: process.env.URL,
 		exclude: ['/blog', '/en', '/en/blog', '/en/portfolio', '/en/about', '/en/resume', '/en/contact'],
 
 		i18n: {
