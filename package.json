@@ -6,10 +6,7 @@
 		"dev": "nuxt",
 		"build": "nuxt build",
 		"start": "nuxt start",
-		"generate": "nuxt generate",
-		"netlify:generate": "npm run instagram:get && npm run generate",
-		"instagram:get": "node instagram-fetch.js",
-		"instagram:force": "node instagram-fetch.js true"
+		"generate": "nuxt generate"
 	},
 	"dependencies": {
 		"@nuxt/content": "^1.14.0",
