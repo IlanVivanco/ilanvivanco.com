@@ -31,7 +31,6 @@ import LangSwitcher from '~/components/LangSwitcher'
 import MainSidebar from '~/components/MainSidebar'
 import MainNav from '~/components/Nav'
 
-
 export default {
 	name: 'DefaultLayout',
 	components: {
@@ -182,7 +181,7 @@ export default {
 			}
 		},
 		currentTitle() {
-			return this.$t(`meta.${this.currentPathSlug}_title`)
+			if (this.currentPathSlug) return this.$t(`meta.${this.currentPathSlug}_title`)
 		},
 		currentISOLocale() {
 			return this.$i18n.locales.filter((locale) => locale.code === this.$i18n.locale).pop().iso

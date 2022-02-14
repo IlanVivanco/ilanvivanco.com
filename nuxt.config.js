@@ -1,5 +1,4 @@
 import { I18N, mapBlogPosts } from './locales/i18n.config'
-import ENV from './env'
 
 export default {
 	// Target: https://go.nuxtjs.dev/config-target
@@ -11,9 +10,9 @@ export default {
 		htmlAttrs: { lang: 'es' },
 		meta: [
 			{ charset: 'utf-8' },
-			{ name: 'viewport', content: 'width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=3.0' },
+			{ name: 'viewport', content: 'width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=3.0' }
 		],
-		link: [{ rel: 'icon', type: 'image/png', href: '/images/favicon.png' }],
+		link: [{ rel: 'icon', type: 'image/png', href: '/images/favicon.png' }]
 	},
 
 	// Global CSS: https://go.nuxtjs.dev/config-css
@@ -21,12 +20,12 @@ export default {
 		'element-ui/lib/theme-chalk/index.css',
 		'animate.css/animate.min.css',
 		'@/assets/css/theme.css',
-		'@/assets/scss/main.scss',
+		'@/assets/scss/main.scss'
 	],
 
 	// Load SCSS globally for components
 	styleResources: {
-		scss: ['./assets/scss/_variables.scss', './assets/scss/_spacing.scss', './assets/scss/_mixins.scss'],
+		scss: ['./assets/scss/_variables.scss', './assets/scss/_spacing.scss', './assets/scss/_mixins.scss']
 	},
 
 	// Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -35,18 +34,14 @@ export default {
 		'@/plugins/element-ui',
 		'@/plugins/gtag',
 		'@/plugins/dynamicImageLoader',
-		'@/plugins/lazySizes',
+		'@/plugins/lazySizes'
 	],
 
 	// Auto import components: https://go.nuxtjs.dev/config-components
 	components: true,
 
 	// Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-	buildModules: [
-		// Doc https://github.com/nuxt-community/dotenv-module
-		'@nuxtjs/dotenv',
-		'@nuxtjs/style-resources',
-	],
+	buildModules: ['@nuxtjs/style-resources'],
 
 	// Modules: https://go.nuxtjs.dev/config-modules
 	modules: [
@@ -59,7 +54,7 @@ export default {
 		// Doc https://github.com/geeogi/nuxt-responsive-loader
 		'nuxt-responsive-loader',
 		// Doc https://sitemap.nuxtjs.org/
-		'@nuxtjs/sitemap',
+		'@nuxtjs/sitemap'
 	],
 
 	// Axios module configuration: https://axios.nuxtjs.org/options
@@ -69,9 +64,9 @@ export default {
 	content: {
 		markdown: {
 			prism: {
-				theme: '@/assets/scss/prism/monokai-cotalpa.scss',
-			},
-		},
+				theme: '@/assets/scss/prism/monokai-cotalpa.scss'
+			}
+		}
 	},
 
 	// Build Configuration: https://go.nuxtjs.dev/config-build
@@ -82,12 +77,12 @@ export default {
 				vue.transformAssetUrls.img = ['data-src', 'src']
 				vue.transformAssetUrls.source = ['data-srcset', 'srcset']
 			}
-		},
+		}
 	},
 
 	// Netlify client side rendering issue: https://nuxtjs.org/docs/2.x/deployment/netlify-deployment#for-client-side-rendering-only
 	generate: {
-		fallback: true,
+		fallback: true
 	},
 
 	// Responsive Loader config
@@ -99,30 +94,34 @@ export default {
 		max: 1920,
 		steps: 5,
 		placeholder: true,
-		placeholderSize: 60,
+		placeholderSize: 60
 	},
 
 	// i18n config
 	i18n: I18N,
 
-	env: ENV,
-
 	// Sitemap
 	sitemap: {
-		hostname: ENV.base_url,
+		hostname: process.env.URL,
 		exclude: ['/blog', '/en', '/en/blog', '/en/portfolio', '/en/about', '/en/resume', '/en/contact'],
 
 		i18n: {
 			locales: ['en', 'es'],
-			defaultLocale: 'es',
+			defaultLocale: 'es'
 		},
 
 		routes: async () => {
 			const { $content } = require('@nuxt/content')
-			const postsES = await $content(`es/blog`).only(['path', 'slug', 'languages']).where({ show: true }).fetch()
-			const postsEN = await $content(`en/blog`).only(['path', 'slug', 'languages']).where({ show: true }).fetch()
+			const postsES = await $content(`es/blog`)
+				.only(['path', 'slug', 'languages'])
+				.where({ show: true })
+				.fetch()
+			const postsEN = await $content(`en/blog`)
+				.only(['path', 'slug', 'languages'])
+				.where({ show: true })
+				.fetch()
 
 			return [...mapBlogPosts(postsES, 'es'), ...mapBlogPosts(postsEN, 'en')]
-		},
-	},
+		}
+	}
 }

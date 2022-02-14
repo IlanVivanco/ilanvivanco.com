@@ -6,6 +6,7 @@
 					class="insta-feed__image lazyload"
 					:data-src="photo.media_url"
 					:alt="`Ilán Vivanco's Instagram photo from ${new Date(photo.timestamp).toDateString()}`"
+					onerror="this.parentNode.parentNode.classList.add('error');"
 				/>
 				<div class="insta-feed__hashtags">{{ getHashtags(photo.caption) }}</div>
 			</a>
@@ -14,7 +15,6 @@
 </template>
 
 <script>
-import instagramPhotos from '~/static/data/instagram'
 import axios from 'axios'
 
 export default {
@@ -42,8 +42,10 @@ export default {
 		try {
 			const photos = await axios({
 				method: 'GET',
-				url: '/data/instagram.json',
+				url: 'api/instagram',
 			}).then((response) => response.data)
+
+			console.log(photos);
 
 			this.images = [...photos.data].splice(this.offset, this.count)
 		} catch (error) {
@@ -117,8 +119,7 @@ export default {
 			height: 100%;
 			position: absolute;
 			display: block;
-			opacity: 0;
-			mix-blend-mode: multiply;
+			opacity: 0.08;
 			transition: all ease-in-out 0.2s;
 			z-index: 1;
 			pointer-events: none;
@@ -136,19 +137,21 @@ export default {
 			display: block;
 			opacity: 0;
 			transition: all ease-in-out 0.3s;
-			filter: brightness(10);
+			filter: saturate(0) brightness(0) opacity(0.1);
 			z-index: 1;
 			pointer-events: none;
 		}
 
-		&:hover {
+		&:not(.error):hover {
 			&::before {
 				opacity: 0.7;
+				// mix-blend-mode: multiply;
 			}
 
 			&::after {
-				opacity: 0.9;
-				transition: all ease-in-out 0.3s 0.1s;
+				filter: saturate(0) brightness(5);
+				opacity: 0.7;
+				transition: all ease-in-out 0.3s;
 			}
 
 			.insta-feed__image {
@@ -158,6 +161,34 @@ export default {
 
 			.insta-feed__hashtags {
 				opacity: 0.9;
+			}
+		}
+
+		&.error {
+			@keyframes loadingOpacity {
+				0% {
+					opacity: 0.3;
+				}
+				50% {
+					opacity: 0.9;
+				}
+				100% {
+					opacity: 0.3;
+				}
+			}
+
+			img {
+				display: none;
+			}
+
+			&::before {
+				opacity: 0.08;
+			}
+
+			&::after {
+				opacity: 0.9;
+				filter: saturate(0) brightness(0) opacity(0.1);
+				animation: loadingOpacity 2s infinite;
 			}
 		}
 	}

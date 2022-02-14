@@ -6,10 +6,7 @@
 		"dev": "nuxt",
 		"build": "nuxt build",
 		"start": "nuxt start",
-		"generate": "nuxt generate",
-		"netlify:generate": "npm run instagram:get && npm run generate",
-		"instagram:get": "node instagram-fetch.js",
-		"instagram:force": "node instagram-fetch.js true"
+		"generate": "nuxt generate"
 	},
 	"dependencies": {
 		"@nuxt/content": "^1.14.0",
@@ -30,7 +27,6 @@
 		"vuewordcloud": "^18.7.12"
 	},
 	"devDependencies": {
-		"@nuxtjs/dotenv": "^1.4.1",
 		"@nuxtjs/style-resources": "^1.2.0",
 		"fibers": "^5.0.0",
 		"sass": "^1.41.1",

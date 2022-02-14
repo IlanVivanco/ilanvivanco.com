@@ -25,6 +25,5 @@ I also used the <img src="assets/images/global/nuxt.png" height="15px" /> Nuxt.j
 ## Installation
 
 - Clone this repo locally.
-- Duplicate `.env.sample` as `.env` and modify the data as needed.
 - Install dependencies by `npm install`.
 - Run `npm run dev`.
