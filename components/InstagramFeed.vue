@@ -15,7 +15,6 @@
 </template>
 
 <script>
-import instagramPhotos from '~/static/data/instagram'
 import axios from 'axios'
 
 export default {
@@ -45,6 +44,8 @@ export default {
 				method: 'GET',
 				url: 'api/instagram',
 			}).then((response) => response.data)
+
+			console.log(photos);
 
 			this.images = [...photos.data].splice(this.offset, this.count)
 		} catch (error) {
