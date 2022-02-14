@@ -25,7 +25,7 @@ exports.handler = async function(event, context) {
 // Fetch new data only once a day or if force is passed.
 async function getInstagramData(force = false) {
 	const dayInMillliseconds = 60 * 60 * 24 * 1000
-	const lastRun = await fetchLastRun()
+	const lastRun = await fetchLastRun() | 0
 	const nextRun = lastRun + dayInMillliseconds
 	const shouldFetch = force || now.getTime() > nextRun
 	let instaData = undefined
@@ -88,7 +88,7 @@ async function fetchData() {
 async function fetchLastRun() {
 	try {
 		const instagramJSON = await readFile()
-		return instagramJSON.updated_unix
+		return instagramJSON?.updated_unix
 	} catch (error) {
 		console.error(error)
 	}
