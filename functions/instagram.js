@@ -34,7 +34,9 @@ async function getInstagramData(force = false) {
 		console.info(`Fetching new data. Latest was from: ${new Date(lastRun)}`)
 
 		try {
-			instaData = await fetchData().then(({ data }) => data)
+			fetchInstaData = await fetchData().then(({ data }) => data)
+			instaData = addTimestamps(fetchInstaData)
+
 			saveFile(instaData)
 		} catch (error) {
 			console.error(error)
@@ -52,14 +54,16 @@ async function getInstagramData(force = false) {
 	return instaData
 }
 
-function saveFile({ data }) {
-	const instagram = {
+function saveFile(data) {
+	fs.writeFile(instagramDataFile, JSON.stringify(data))
+}
+
+function addTimestamps({ data }) {
+	return {
 		updated_unix: now.getTime(),
 		updated_at: now.toLocaleString(),
 		data
 	}
-
-	fs.writeFile(instagramDataFile, JSON.stringify(instagram))
 }
 
 async function readFile() {
