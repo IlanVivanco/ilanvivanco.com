@@ -1,23 +1,24 @@
-const fs = require('fs').promises
 const axios = require('axios')
+const { createClient } = require('@supabase/supabase-js')
+const { INSTAGRAM_URL, SUPABASE_URL, SUPABASE_KEY } = process.env
 const now = new Date()
-const instagramDataFile = 'static/data/instagram.json'
-const { INSTAGRAM_URL: instagramURL } = process.env
+const table = 'options'
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 
-exports.handler = async function(event, context) {
+exports.handler = async function (event, context) {
 	try {
 		const instaData = await getInstagramData()
 
 		return {
 			statusCode: 200,
-			body: JSON.stringify(instaData)
+			body: JSON.stringify(instaData),
 		}
 	} catch (error) {
 		console.error(error)
 
 		return {
 			statusCode: 500,
-			body: JSON.stringify({ msg: error.message })
+			body: JSON.stringify({ msg: error.message }),
 		}
 	}
 }
@@ -34,10 +35,9 @@ async function getInstagramData(force = false) {
 		console.info(`Fetching new data. Latest was from: ${new Date(lastRun)}`)
 
 		try {
-			fetchInstaData = await fetchData().then(({ data }) => data)
-			instaData = addTimestamps(fetchInstaData)
+			instaData = await fetchData().then(({ data }) => data)
 
-			saveFile(instaData)
+			saveData(instaData)
 		} catch (error) {
 			console.error(error)
 		}
@@ -45,7 +45,7 @@ async function getInstagramData(force = false) {
 		console.info(`Serving cached data. Next update will be on: ${new Date(nextRun)}`)
 
 		try {
-			instaData = await readFile()
+			instaData = await readData()
 		} catch (error) {
 			console.error(error)
 		}
@@ -54,23 +54,35 @@ async function getInstagramData(force = false) {
 	return instaData
 }
 
-function saveFile(data) {
-	fs.writeFile(instagramDataFile, JSON.stringify(data))
-}
+async function saveData(content) {
+	try {
+		const { data, error } = await supabase.from(table).upsert(
+			[
+				{ name: 'instagram_last_run', value: getTimestamps() },
+				{ name: 'instagram', value: content },
+			],
+			{ onConflict: 'name' }
+		)
 
-function addTimestamps({ data }) {
-	return {
-		updated_unix: now.getTime(),
-		updated_at: now.toLocaleString(),
-		data
+		if (error) throw new Error(error.message)
+	} catch (error) {
+		console.error(error)
 	}
 }
 
-async function readFile() {
+function getTimestamps() {
+	return {
+		updated_unix: now.getTime(),
+		updated_at: now.toLocaleString(),
+	}
+}
+
+async function readData() {
 	try {
-		return await fs.readFile(instagramDataFile).then(JSON.parse)
+		const data = await fetchOption('instagram')
+		return data || {}
 	} catch (error) {
-		console.info(error)
+		console.error(error)
 	}
 }
 
@@ -78,11 +90,11 @@ async function fetchData() {
 	try {
 		return await axios({
 			method: 'GET',
-			url: instagramURL,
+			url: INSTAGRAM_URL,
 			params: {
 				limit: 12,
-				date: Date.now()
-			}
+				date: Date.now(),
+			},
 		})
 	} catch (error) {
 		console.error(error)
@@ -91,12 +103,22 @@ async function fetchData() {
 
 async function fetchLastRun() {
 	try {
-		const instagramJSON = await readFile()
-
-		return instagramJSON?.updated_unix || 0
+		const data = await fetchOption('instagram_last_run')
+		return data?.updated_unix || 0
 	} catch (error) {
 		console.error(error)
 	}
+}
 
-	return 0
+async function fetchOption(name) {
+	if (!name) return null
+
+	try {
+		const { data, error } = await supabase.from(table).select('*').eq('name', name)
+		if (error) throw new Error(error.message)
+
+		return data?.pop()?.value || null
+	} catch (error) {
+		console.error(error)
+	}
 }
