@@ -100,11 +100,9 @@ export default {
 }
 
 .about__image {
-	max-width: calc(39% - 1rem);
+	max-width: 40%;
 	max-height: 350px;
-	margin-bottom: 1rem;
-	margin-left: 1rem;
-	float: right;
+	margin: -2rem 0 1rem 1rem;
 
 	@include breakpoint('small') {
 		max-width: none;
@@ -113,7 +111,8 @@ export default {
 		margin-left: 0;
 		margin-top: 1rem;
 		object-fit: cover;
-		float: none;
+	}
+}
 	}
 }
 
