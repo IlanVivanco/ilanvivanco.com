@@ -25,7 +25,11 @@
 					<section-title :title="this.$t('index.titles.about')" type="h2" />
 					<div class="about__row">
 						<div class="about__content">
-							<p v-for="(paragraph, i) in this.$t('index.copy.about')" :key="`about_${i}`">{{ paragraph }}</p>
+							<p
+								v-for="(paragraph, i) in this.$t('index.copy.about')"
+								:key="`about_${i}`"
+								v-html="paragraph"
+							></p>
 						</div>
 						<img class="about__image" v-bind="responsiveImageAttr('ilan-workspace.jpg')" alt="My workspace" />
 					</div>
@@ -113,6 +117,10 @@ export default {
 		object-fit: cover;
 	}
 }
+
+.about__content {
+	a {
+		color: $color-blue;
 	}
 }
 
