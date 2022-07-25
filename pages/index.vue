@@ -12,17 +12,6 @@
 		</header>
 
 		<section class="main-content">
-			<el-row :gutter="30" type="flex" class="mb4">
-				<el-col :span="24" class="about__info">
-					<section-title :title="this.$t('index.titles.about')" type="h2" />
-					<div>
-						<p v-for="(paragraph, i) in splitAboutParagraphs[0]" :key="`about_${i}`">{{ paragraph }}</p>
-						<img class="about__image" v-bind="responsiveImageAttr('ilan-workspace.jpg')" alt="My workspace" />
-						<p v-for="(paragraph, i) in splitAboutParagraphs[1]" :key="`about_2_${i}`">{{ paragraph }}</p>
-					</div>
-				</el-col>
-			</el-row>
-
 			<aside class="about__insta-feed mb4">
 				<el-row :gutter="30" type="flex">
 					<el-col :span="24">
@@ -32,10 +21,13 @@
 			</aside>
 
 			<el-row :gutter="30" type="flex" class="mb4">
-				<el-col :span="24" class="history__info">
-					<section-title :title="this.$t('index.titles.history')" type="h2" :margin-bottom="true" />
-					<div>
-						<p v-for="(paragraph, i) in this.$t('index.copy.history')" :key="`history_${i}`">{{ paragraph }}</p>
+				<el-col :span="24" class="about__info">
+					<section-title :title="this.$t('index.titles.about')" type="h2" />
+					<div class="about__row">
+						<div class="about__content">
+							<p v-for="(paragraph, i) in this.$t('index.copy.about')" :key="`about_${i}`">{{ paragraph }}</p>
+						</div>
+						<img class="about__image" v-bind="responsiveImageAttr('ilan-workspace.jpg')" alt="My workspace" />
 					</div>
 				</el-col>
 			</el-row>
@@ -99,9 +91,17 @@ export default {
 	}
 }
 
+.about__row {
+	display: flex;
+
+	@include breakpoint('small') {
+		display: block;
+	}
+}
+
 .about__image {
 	max-width: calc(39% - 1rem);
-	max-height: 450px;
+	max-height: 350px;
 	margin-bottom: 1rem;
 	margin-left: 1rem;
 	float: right;
@@ -111,6 +111,7 @@ export default {
 		max-height: 300px;
 		width: 100%;
 		margin-left: 0;
+		margin-top: 1rem;
 		object-fit: cover;
 		float: none;
 	}
@@ -119,16 +120,6 @@ export default {
 .about__info {
 	p {
 		line-height: 1.4;
-
-		&:first-child {
-			float: left;
-			width: 61%;
-
-			@include breakpoint('small') {
-				width: 100%;
-				float: none;
-			}
-		}
 	}
 }
 
@@ -136,7 +127,11 @@ export default {
 	margin-left: -2rem;
 	margin-right: -2rem;
 
-	&:last-child{
+	&:first-child {
+		margin-top: -2rem;
+	}
+
+	&:last-child {
 		margin-bottom: -2rem;
 	}
 }

@@ -76,8 +76,7 @@ export default {
 
 <style lang="scss" scoped>
 .insta-feed {
-	margin: 0;
-	margin-bottom: calc(var(--gap, 0) * 1px);
+	margin: calc(var(--gap, 0) / 2 * 1px) 0;
 	padding: 0;
 	display: grid;
 	list-style: none;

@@ -127,6 +127,7 @@ export default {
 		@include breakpoint('tiny') {
 			width: 100%;
 			height: auto;
+			min-width: 200px;
 			padding: 0;
 		}
 	}
