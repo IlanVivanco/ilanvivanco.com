@@ -42,8 +42,11 @@ export default {
 	transition: { mode: '' },
 	head() {
 		const thumb = '/images/ilan-vivanco-social-card.png'
+		const baseDomainUrl = this.$t('meta.url')
+		let routePath = this.$route.path !== '/' ? this.$route.path : ''
+		let canonicalUrl = (baseDomainUrl + routePath).replace(/\/$/, '')
 
-		return {
+		const head = {
 			titleTemplate: `${this.currentTitle} - ${this.$t('meta.name')}`,
 			meta: [
 				{ hid: 'description', name: 'description', content: this.$t('meta.description') },
@@ -137,6 +140,12 @@ export default {
 				},
 			],
 		}
+
+		if( process.browser && window.location.origin !== baseDomainUrl){
+			head.meta.push({ rel: 'canonical', href: canonicalUrl })
+		}
+
+		return head
 	},
 	data() {
 		return {
