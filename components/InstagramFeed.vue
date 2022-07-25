@@ -1,17 +1,26 @@
 <template>
-	<ul v-if="images.length" class="insta-feed" :style="{ '--cols': count, '--mobile-cols': mobileCols, '--gap': gap }">
-		<li class="insta-feed__box" v-for="(photo, index) in this.images" :key="index">
-			<a :href="photo.permalink" target="__blank">
-				<img
-					class="insta-feed__image lazyload"
-					:data-src="photo.media_url"
-					:alt="`Ilán Vivanco's Instagram photo from ${new Date(photo.timestamp).toDateString()}`"
-					onerror="this.parentNode.parentNode.classList.add('error');"
-				/>
-				<div class="insta-feed__hashtags">{{ getHashtags(photo.caption) }}</div>
-			</a>
-		</li>
-	</ul>
+	<div>
+		<ul
+			v-if="images.length"
+			class="insta-feed"
+			:style="{ '--cols': count, '--mobile-cols': mobileCols, '--gap': gap }"
+		>
+			<li class="insta-feed__box" v-for="(photo, index) in this.images" :key="index">
+				<a :href="photo.permalink" target="__blank">
+					<img
+						class="insta-feed__image lazyload"
+						:data-src="photo.media_url"
+						:alt="`Ilán Vivanco's Instagram photo from ${new Date(photo.timestamp).toDateString()}`"
+						onerror="this.parentNode.parentNode.classList.add('error');"
+					/>
+					<div class="insta-feed__hashtags">{{ getHashtags(photo.caption) }}</div>
+				</a>
+			</li>
+		</ul>
+		<ul v-else class="insta-fake" :style="{ '--gap': gap }">
+			<li class="insta-fake__box" v-for="i in this.placeholders" :key="i"></li>
+		</ul>
+	</div>
 </template>
 
 <script>
@@ -36,6 +45,7 @@ export default {
 	data() {
 		return {
 			images: [],
+			placeholders: Array.from(Array(6)),
 		}
 	},
 	async mounted() {
@@ -45,7 +55,7 @@ export default {
 				url: 'api/instagram',
 			}).then((response) => response.data)
 
-			console.log(photos);
+			console.log(photos)
 
 			this.images = [...photos.data].splice(this.offset, this.count)
 		} catch (error) {
@@ -144,7 +154,6 @@ export default {
 		&:not(.error):hover {
 			&::before {
 				opacity: 0.7;
-				// mix-blend-mode: multiply;
 			}
 
 			&::after {
@@ -212,6 +221,35 @@ export default {
 		line-height: 1.4;
 		transition: all ease 0.4s;
 		width: 100%;
+	}
+}
+
+.insta-fake {
+	padding: 0;
+	display: flex;
+	list-style: none;
+	gap: calc(var(--gap, 0) * 1px);
+
+	&__box {
+		width: 100%;
+		height: 120px;
+		opacity: 0.5;
+
+		background: linear-gradient(-45deg, $color-blue-dark, $color-blue-light, $color-blue);
+		background-size: 400% 400%;
+		animation: gradient 15s linear infinite;
+	}
+
+	@keyframes gradient {
+		0% {
+			background-position: 0% 50%;
+		}
+		50% {
+			background-position: 100% 50%;
+		}
+		100% {
+			background-position: 0% 50%;
+		}
 	}
 }
 </style>
