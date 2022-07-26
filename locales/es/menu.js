@@ -2,20 +2,20 @@ export default [
 	{
 		show: true,
 		slug: 'index',
-		name: "Sobre mi",
-		icon: "el-icon-user",
+		name: '¡Hola!',
+		icon: 'el-icon-user',
 	},
 	{
 		show: true,
 		slug: 'resume',
-		name: "Mi CV",
-		icon: "el-icon-tickets",
+		name: 'Mi CV',
+		icon: 'el-icon-tickets',
 	},
 	{
 		show: true,
 		slug: 'portfolio',
-		name: "Trabajos",
-		icon: "el-icon-monitor",
+		name: 'Trabajos',
+		icon: 'el-icon-monitor',
 	},
 	// {
 	// 	show: true,
@@ -26,7 +26,7 @@ export default [
 	{
 		show: true,
 		slug: 'contact',
-		name: "Contacto",
-		icon: "el-icon-chat-round",
+		name: 'Contacto',
+		icon: 'el-icon-chat-round',
 	},
 ]
