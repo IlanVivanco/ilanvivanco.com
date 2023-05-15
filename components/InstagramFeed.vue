@@ -233,7 +233,7 @@ export default {
 	&__box {
 		width: 100%;
 		height: 120px;
-		opacity: 0.5;
+		opacity: 0.15;
 
 		background: linear-gradient(-45deg, $color-blue-dark, $color-blue-light, $color-blue);
 		background-size: 400% 400%;
