@@ -11,7 +11,7 @@
 			</el-row>
 		</header>
 
-		<section class="main-content">
+		<main class="main-content">
 			<aside class="about__insta-feed mb4">
 				<el-row :gutter="30" type="flex">
 					<el-col :span="24">
@@ -43,7 +43,7 @@
 					</el-col>
 				</el-row>
 			</aside>
-		</section>
+		</main>
 	</div>
 </template>
 
@@ -57,12 +57,7 @@ export default {
 	scrollToTop: false,
 	components: { SectionTitle, InstagramFeed },
 	mixins: [Transitions],
-	computed: {
-		splitAboutParagraphs() {
-			const [first, ...rest] = this.$t('index.copy.about')
-			return [[first], rest]
-		},
-	},
+	computed: {},
 }
 </script>
 
