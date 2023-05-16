@@ -49,7 +49,14 @@ export default {
 	scrollToTop: false,
 	components: { SectionTitle, InstagramFeed },
 	mixins: [Transitions],
-	computed: {},
+	mounted() {
+		document.querySelectorAll('.about__content a').forEach((link) => {
+			link.addEventListener('click', (e) => {
+				e.preventDefault()
+				this.$router.push(link.getAttribute('href'))
+			})
+		})
+	},
 }
 </script>
 
