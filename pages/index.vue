@@ -12,12 +12,8 @@
 		</header>
 
 		<main class="main-content">
-			<aside class="about__insta-feed mb4">
-				<el-row :gutter="30" type="flex">
-					<el-col :span="24">
-						<instagram-feed :count="6" :gap="2" />
-					</el-col>
-				</el-row>
+			<aside class="mb4">
+				<instagram-feed :count="6" :gap="2" />
 			</aside>
 
 			<el-row :gutter="30" type="flex" class="mb4">
@@ -36,12 +32,8 @@
 				</el-col>
 			</el-row>
 
-			<aside class="about__insta-feed">
-				<el-row :gutter="30" type="flex">
-					<el-col :span="24">
-						<instagram-feed :count="6" :offset="6" :gap="2" />
-					</el-col>
-				</el-row>
+			<aside>
+				<instagram-feed :count="6" :offset="6" :gap="2" />
 			</aside>
 		</main>
 	</div>
@@ -122,19 +114,6 @@ export default {
 .about__info {
 	p {
 		line-height: 1.4;
-	}
-}
-
-.about__insta-feed {
-	margin-left: -2rem;
-	margin-right: -2rem;
-
-	&:first-child {
-		margin-top: -2rem;
-	}
-
-	&:last-child {
-		margin-bottom: -2rem;
 	}
 }
 </style>

@@ -5,12 +5,8 @@
 		</header>
 
 		<main class="main-content">
-			<aside class="about__insta-feed mb4">
-				<el-row :gutter="30" type="flex">
-					<el-col :span="24">
-						<instagram-feed :count="6" :gap="2" />
-					</el-col>
-				</el-row>
+			<aside class="mb4">
+				<instagram-feed :count="6" :gap="2" />
 			</aside>
 
 			<div>
@@ -47,18 +43,5 @@ export default {
 	display: block;
 	object-fit: cover;
 	margin-top: 1.5rem;
-}
-
-.about__insta-feed {
-	margin-left: -2rem;
-	margin-right: -2rem;
-
-	&:first-child {
-		margin-top: -2rem;
-	}
-
-	&:last-child {
-		margin-bottom: -2rem;
-	}
 }
 </style>

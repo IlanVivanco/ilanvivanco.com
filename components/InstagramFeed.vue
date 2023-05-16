@@ -1,25 +1,29 @@
 <template>
-	<div>
-		<ul
-			v-if="images.length"
-			class="insta-feed"
-			:style="{ '--cols': count, '--mobile-cols': mobileCols, '--gap': gap }"
-		>
-			<li class="insta-feed__box" v-for="(photo, index) in this.images" :key="index">
-				<a :href="photo.permalink" target="__blank">
-					<img
-						class="insta-feed__image lazyload"
-						:data-src="photo.media_url"
-						:alt="`Ilán Vivanco's Instagram photo from ${new Date(photo.timestamp).toDateString()}`"
-						onerror="this.parentNode.parentNode.classList.add('error');"
-					/>
-					<div class="insta-feed__hashtags">{{ getHashtags(photo.caption) }}</div>
-				</a>
-			</li>
-		</ul>
-		<ul v-else class="insta-fake" :style="{ '--gap': gap }">
-			<li class="insta-fake__box" v-for="i in this.placeholders" :key="i"></li>
-		</ul>
+	<div class="about__insta-feed">
+		<el-row :gutter="30" type="flex">
+			<el-col :span="24">
+				<ul
+					v-if="images.length"
+					class="insta-feed"
+					:style="{ '--cols': count, '--mobile-cols': mobileCols, '--gap': gap }"
+				>
+					<li class="insta-feed__box" v-for="(photo, index) in this.images" :key="index">
+						<a :href="photo.permalink" target="__blank">
+							<img
+								class="insta-feed__image lazyload"
+								:data-src="photo.media_url"
+								:alt="`Ilán Vivanco's Instagram photo from ${new Date(photo.timestamp).toDateString()}`"
+								onerror="this.parentNode.parentNode.classList.add('error');"
+							/>
+							<div class="insta-feed__hashtags">{{ getHashtags(photo.caption) }}</div>
+						</a>
+					</li>
+				</ul>
+				<ul v-else class="insta-fake" :style="{ '--gap': gap }">
+					<li class="insta-fake__box" v-for="i in this.placeholders" :key="i"></li>
+				</ul>
+			</el-col>
+		</el-row>
 	</div>
 </template>
 
@@ -250,6 +254,19 @@ export default {
 		100% {
 			background-position: 0% 50%;
 		}
+	}
+}
+
+.about__insta-feed {
+	margin-left: -2rem;
+	margin-right: -2rem;
+
+	&:first-child {
+		margin-top: -2rem;
+	}
+
+	&:last-child {
+		margin-bottom: -2rem;
 	}
 }
 </style>
