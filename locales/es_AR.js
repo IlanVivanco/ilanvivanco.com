@@ -51,7 +51,7 @@ export default {
 
 				'Cuando no estoy sumergido en el mundo del código, disfruto mucho viajando con mi esposa, <a href="https://github.com/gisehaag" target="_blank">Gise Haag</a>, y nuestra adorable hija, Olivia. Nos encanta descubrir nuevos lugares y capturar con nuestra cámara los rincones que nos dejan sin aliento.',
 
-				'Si llegaste hasta acá, y todavía no te aburriste, podés conocer más sobre mí <a href="/sobre-mi">acá</a>.',
+				'Si llegaste hasta acá, y todavía no te aburriste, podés conocer aún más <a href="/sobre-mi">sobre mí</a>.',
 			],
 		},
 	},
