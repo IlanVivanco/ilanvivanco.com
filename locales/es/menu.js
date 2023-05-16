@@ -17,12 +17,12 @@ export default [
 		name: 'Trabajos',
 		icon: 'el-icon-monitor',
 	},
-	// {
-	// 	show: true,
-	// 	slug: 'blog',
-	// 	name: "Blog",
-	// 	icon: "el-icon-notebook-1",
-	// },
+	{
+		show: false,
+		slug: 'blog',
+		name: 'Blog',
+		icon: 'el-icon-notebook-1',
+	},
 	{
 		show: true,
 		slug: 'contact',

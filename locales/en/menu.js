@@ -18,7 +18,7 @@ export default [
 		icon: 'el-icon-monitor',
 	},
 	{
-		show: true,
+		show: false,
 		slug: 'blog',
 		name: 'Blog',
 		icon: 'el-icon-notebook-1',
