@@ -67,18 +67,23 @@ export default {
 		}
 	},
 	async mounted() {
-		try {
-			const photos = await axios({
-				method: 'GET',
-				url: 'api/instagram',
-			}).then((response) => response.data)
+		let savedPhotos = JSON.parse(localStorage.getItem('instagram'))
 
-			console.log(photos)
+		if (!savedPhotos) {
+			try {
+				const photos = await axios({
+					method: 'GET',
+					url: 'api/instagram',
+				}).then((response) => response.data)
 
-			this.images = [...photos.data].splice(this.offset, this.count)
-		} catch (error) {
-			console.error(error)
+				localStorage.setItem('instagram', JSON.stringify(photos.data))
+				savedPhotos = photos.data
+			} catch (error) {
+				console.error(error)
+			}
 		}
+
+		this.images = [...savedPhotos].splice(this.offset, this.count)
 	},
 	computed: {
 		mobileCols() {
