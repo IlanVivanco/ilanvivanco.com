@@ -6,7 +6,7 @@
 
 		<main class="main-content">
 			<aside class="mb4">
-				<instagram-feed :count="6" :gap="2" />
+				<instagram-feed :count="6" :gap="2" :m-bottom="true" />
 			</aside>
 
 			<div>

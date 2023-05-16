@@ -1,10 +1,16 @@
 <template>
-	<div class="about__insta-feed">
+	<div
+		class="insta-feed"
+		:class="{
+			top: !mTop,
+			bottom: !mBottom,
+		}"
+	>
 		<el-row :gutter="30" type="flex">
 			<el-col :span="24">
 				<ul
 					v-if="images.length"
-					class="insta-feed"
+					class="insta-feed__list"
 					:style="{ '--cols': count, '--mobile-cols': mobileCols, '--gap': gap }"
 				>
 					<li class="insta-feed__box" v-for="(photo, index) in this.images" :key="index">
@@ -44,6 +50,14 @@ export default {
 		gap: {
 			type: Number,
 			default: 5,
+		},
+		'm-bottom': {
+			type: Boolean,
+			default: false,
+		},
+		'm-top': {
+			type: Boolean,
+			default: false,
 		},
 	},
 	data() {
@@ -90,31 +104,44 @@ export default {
 
 <style lang="scss" scoped>
 .insta-feed {
-	margin: calc(var(--gap, 0) / 2 * 1px) 0;
-	padding: 0;
-	display: grid;
-	list-style: none;
-	gap: calc(var(--gap, 0) * 1px);
-	grid-template-columns: repeat(var(--cols), 1fr);
-	grid-auto-rows: 120px;
+	margin-left: -2rem;
+	margin-right: -2rem;
 
-	@include breakpoint('small') {
-		grid-auto-rows: 105px;
-		grid-template-columns: repeat(var(--mobile-cols), 1fr);
+	&.top:first-child {
+		margin-top: -2rem;
 	}
 
-	// Trick for making the grid squared
-	&::before {
-		content: '';
-		width: 0;
-		padding-bottom: 100%;
-		grid-row: 1 / 1;
-		grid-column: 1 / 1;
+	&.bottom:last-child {
+		margin-bottom: -2rem;
 	}
 
-	& > *:first-child {
-		grid-row: 1 / 1;
-		grid-column: 1 / 1;
+	&__list {
+		margin: calc(var(--gap, 0) / 2 * 1px) 0;
+		padding: 0;
+		display: grid;
+		list-style: none;
+		gap: calc(var(--gap, 0) * 1px);
+		grid-template-columns: repeat(var(--cols), 1fr);
+		grid-auto-rows: 120px;
+
+		@include breakpoint('small') {
+			grid-auto-rows: 105px;
+			grid-template-columns: repeat(var(--mobile-cols), 1fr);
+		}
+
+		// Trick for making the grid squared
+		&::before {
+			content: '';
+			width: 0;
+			padding-bottom: 100%;
+			grid-row: 1 / 1;
+			grid-column: 1 / 1;
+		}
+
+		& > *:first-child {
+			grid-row: 1 / 1;
+			grid-column: 1 / 1;
+		}
 	}
 
 	&__box {
@@ -254,19 +281,6 @@ export default {
 		100% {
 			background-position: 0% 50%;
 		}
-	}
-}
-
-.about__insta-feed {
-	margin-left: -2rem;
-	margin-right: -2rem;
-
-	&:first-child {
-		margin-top: -2rem;
-	}
-
-	&:last-child {
-		margin-bottom: -2rem;
 	}
 }
 </style>

@@ -13,7 +13,7 @@
 
 		<main class="main-content">
 			<aside class="mb4">
-				<instagram-feed :count="6" :gap="2" />
+				<instagram-feed :count="6" :gap="2" :m-bottom="true" />
 			</aside>
 
 			<el-row :gutter="30" type="flex" class="mb4">
@@ -33,7 +33,7 @@
 			</el-row>
 
 			<aside>
-				<instagram-feed :count="6" :offset="6" :gap="2" />
+				<instagram-feed :count="6" :offset="6" :gap="2" :m-top="true" />
 			</aside>
 		</main>
 	</div>
