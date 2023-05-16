@@ -11,7 +11,7 @@
 
 			<div>
 				<p v-for="(paragraph, i) in this.$t('about.copy.history')" :key="`about_${i}`" v-html="paragraph"></p>
-				<img class="about__image" v-bind="responsiveImageAttr('paisaje.jpg')" alt="Interlaken, Switzerland" />
+				<img class="landscape__image" v-bind="responsiveImageAttr('paisaje.jpg')" alt="Interlaken, Switzerland" />
 			</div>
 		</main>
 	</div>
@@ -27,8 +27,8 @@ export default {
 	scrollToTop: false,
 	nuxtI18n: {
 		paths: {
-			es: '/sobre-mi',
 			en: '/about',
+			es: '/sobre-mi',
 		},
 	},
 	components: { SectionTitle, InstagramFeed },
@@ -37,7 +37,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.about__image {
+.landscape__image {
 	width: 100%;
 	min-height: 320px;
 	display: block;
