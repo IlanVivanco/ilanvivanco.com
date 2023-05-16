@@ -10,6 +10,7 @@ export default {
 		description:
 			'Soy Ilán Vivanco, desarrollador WordPress full stack con más de quince años de experiencia. Me especializo en el armado de themes y plugins hechos a medida.',
 		home_title: 'Desarrollador web full stack',
+		about_title: 'Más info sobre mí',
 		resume_title: 'Mi CV',
 		contact_title: 'Contactame',
 		blog_title: 'Blog',
@@ -39,37 +40,35 @@ export default {
 			history: 'cómo llegué hasta acá',
 		},
 		copy: {
-			intro: '¡Hola! Mi nombre es',
+			intro: '¡Saludos! Me llamo',
 			name: 'Ilán Vivanco',
 			position: 'Soy desarrollador web full stack',
-			lead: 'Tengo más de quince años de experiencia; los últimos siete trabajando en remoto como freelancer para empresas internacionales. Me especializo en el armado —y muy ocasionalmente, el diseño— de themes y plugins hechos a medida para WordPress. Mudado recientemente a Santander, España.',
+			lead: 'Con más de quince años navegando por el mundo de los unos y ceros, los últimos ocho los he dedicado a trabajar de manera remota como freelancer para empresas a nivel global. Me especializo en la creación, y en ocasiones el diseño, de themes y plugins a medida para WordPress. Desde Santander, España, estoy listo para colaborar contigo. ¡Hagamos algo increíble juntos!',
 			about: [
-				'Soy una persona autodidacta, proactiva y apasionada por el mundo de la programación. Me encanta trabajar en equipos motivados. Si bien mi carrera comenzó por el lado artístico, de a poco me fui metiendo en la parte lógica hasta que me atrapó y ya no pude dar marcha atrás.',
+				'Mi trayectoria inicialmente se inclinaba hacia el lado artístico, pero la lógica y la programación me atraparon y desde entonces no he mirado atrás. Como autodidacta apasionado, estoy en constante búsqueda de nuevas formas de expandir mis horizontes.',
 
-				'Me encanta aprender y trato de no dejar de hacerlo nunca. Sobre todo en este rubro donde todo cambia 180 grados en relativamente poco tiempo. Cada nuevo proyecto me sirve como excusa para aplicar alguna nueva tecnología o metodología, pero siempre ajustándome a cada necesidad.',
+				'Cada nuevo proyecto me ofrece la oportunidad de explorar y aplicar nuevas tecnologías o metodologías, siempre con el objetivo de satisfacer las necesidades específicas del caso. Mi pasión por el aprendizaje nunca se apaga.',
 
-				'En mi tiempo libre me encanta viajar junto a mi esposa, <a href="https://github.com/gisehaag" target="blank">Gise Haag</a>, y nuestra pequeña hija de 5 años, Olivia. Disfrutamos conociendo nuevos lugares y tomar fotografías de aquellos lugares que nos maravillan.',
+				'Cuando no estoy sumergido en el mundo del código, disfruto mucho viajando con mi esposa, <a href="https://github.com/gisehaag" target="_blank">Gise Haag</a>, y nuestra adorable hija, Olivia. Nos encanta descubrir nuevos lugares y capturar con nuestra cámara los rincones que nos dejan sin aliento.',
 
-				'Si querés conocer más sobre mi y ver algunos datos extra, podés hacer click <a href="/sobre-mi">acá</a>.',
+				'Si llegaste hasta acá, y todavía no te aburriste, podés conocer más sobre mí <a href="/sobre-mi">acá</a>.',
 			],
 		},
 	},
 	about: {
 		titles: {
-			who_am_i: 'quien_es_ilan_vivanco',
+			more_about_me: 'Más info sobre mí',
 		},
 		copy: {
+			intro: 'Un poco más que unos y ceros...',
 			history: [
-				'Nací en Buenos Aires, Argentina, allá por 1988. Estudié comunicación publicitaria y diseño gráfico, para luego orientarme por la fotografía. Sin embargo, desde hace más de 15 años, trabajo en proyectos relacionados con el diseño y la programación web.',
+				'Nací en Buenos Aires en 1988 y, aunque estudié comunicación publicitaria, diseño gráfico y fotografía, la programación web se ha convertido en mi verdadero amor durante los últimos 15 años.',
 
-				'Por aquel entonces comencé diseñando y animanado sitios con Adobe Flash. Con el tiempo fui incorporando algunos pequeños scripts de programación, usando ActionScript 2 y 3, para así poder darle vida a esos sitios que eran muy estáticos. Aunque una vez que conocí el lado del código, me enamoré y me fui alejando cada vez más del diseño, hasta dejarlo casi por completo —siempre quedan algunas manías y TOCs—.',
+				'Mis primeras aventuras en diseño y animación de sitios web las realicé con Adobe Flash, jugando con pequeños scripts de ActionScript. Pero, ¿quién podría resistirse al encanto del código? Así que me sumergí en él, aunque siempre manteniendo ciertos "TOCs" de diseñador.',
 
-				'Más tarde, quise aprender cosas más avanzadas y comencé a estudiar PHP y MySQL, de la mano de HTML, CSS, Javascript —principalmente jQuery—. Hasta que finalmente en el 2010, un día me crucé con WordPress y desde ese momento, fue difícil alejarme. En todos estos años he realizado una infinidad de trabajos, desde los más simples y mundanos, como instalaciones y customizaciones de themes pagos, hasta proyectos de gran envergadura, como migraciones de bases de datos externas, para integrarlas a la estructura de WordPress.',
+				'Luego decidí que era el momento de aprender algo más avanzado y me aventuré en PHP, MySQL, HTML, CSS y JavaScript. Allá por 2010, me encontré con WordPress y, desde entonces, hemos sido inseparables. A lo largo de estos años, he trabajado en todo tipo de proyectos, desde la personalización de themes hasta migraciones de bases de datos de gran envergadura.',
 
-				'En el camino también me topé con otras tecnologías —WooCommerce, NodeJS, Laravel, etc.—, las cuales traté de incluir, en la medida de lo posible. En la actualidad, me mantengo siempre informado y no dejo de aprender cosas nuevas siempre que puedo. Así lo hice para realizar este sitio, que decidí arrancarlo con Vue.JS y creo que no me quedó nada mal.',
-			],
-			more: [
-				'Algunas personas dicen que soy demasiado perfeccionista y, aunque podría considerarse como algo negativo, a mí me gusta serlo. Estoy convencido de que las cosas se tienen que hacer bien, o al menos se debería dar lo mejor para que así suceda.',
+				'En el camino también me he cruzado con diversas tecnologías y siempre estoy dispuesto a aprender algo nuevo. De hecho, construí este sitio con Vue.JS, ¡y creo que ha quedado bastante bien!',
 			],
 		},
 	},
