@@ -77,7 +77,7 @@ export default {
 			section: 'mi historial',
 		},
 		copy: {
-			lead: 'A lo largo de los años, he tenido el privilegio de adquirir experiencia en diversos campos, los cuales detallo a continuación.',
+			lead: 'Especializado en la creación de temas y plugins personalizados para WordPress, he demostrado la capacidad de liderar equipos de trabajo, manteniendo siempre un enfoque centrado en la calidad y la experiencia de usuario.',
 		},
 	},
 	contact_me: {
