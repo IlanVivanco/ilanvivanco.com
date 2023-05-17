@@ -95,6 +95,10 @@ export default {
 		align-items: center;
 		margin-top: 0.5em;
 		margin-bottom: 0.5em;
+
+		@include breakpoint('big') {
+			display: block;
+		}
 	}
 
 	&__company {
@@ -106,6 +110,10 @@ export default {
 		&::after {
 			content: ' — ';
 			font-weight: normal;
+
+			@include breakpoint('big') {
+				display: none;
+			}
 		}
 	}
 
