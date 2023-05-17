@@ -11,13 +11,9 @@
 			</el-row>
 		</header>
 
-		<section class="main-content">
-			<aside class="about__insta-feed mb4">
-				<el-row :gutter="30" type="flex">
-					<el-col :span="24">
-						<instagram-feed :count="6" :gap="2" />
-					</el-col>
-				</el-row>
+		<main class="main-content">
+			<aside class="mb4">
+				<instagram-feed :count="6" :gap="2" :m-bottom="true" />
 			</aside>
 
 			<el-row :gutter="30" type="flex" class="mb4">
@@ -25,21 +21,21 @@
 					<section-title :title="this.$t('index.titles.about')" type="h2" />
 					<div class="about__row">
 						<div class="about__content">
-							<p v-for="(paragraph, i) in this.$t('index.copy.about')" :key="`about_${i}`">{{ paragraph }}</p>
+							<p
+								v-for="(paragraph, i) in this.$t('index.copy.about')"
+								:key="`about_${i}`"
+								v-html="paragraph"
+							></p>
 						</div>
 						<img class="about__image" v-bind="responsiveImageAttr('ilan-workspace.jpg')" alt="My workspace" />
 					</div>
 				</el-col>
 			</el-row>
 
-			<aside class="about__insta-feed">
-				<el-row :gutter="30" type="flex">
-					<el-col :span="24">
-						<instagram-feed :count="6" :offset="6" :gap="2" />
-					</el-col>
-				</el-row>
+			<aside>
+				<instagram-feed :count="6" :offset="6" :gap="2" :m-top="true" />
 			</aside>
-		</section>
+		</main>
 	</div>
 </template>
 
@@ -53,11 +49,13 @@ export default {
 	scrollToTop: false,
 	components: { SectionTitle, InstagramFeed },
 	mixins: [Transitions],
-	computed: {
-		splitAboutParagraphs() {
-			const [first, ...rest] = this.$t('index.copy.about')
-			return [[first], rest]
-		},
+	mounted() {
+		document.querySelectorAll('.about__content a').forEach((link) => {
+			link.addEventListener('click', (e) => {
+				e.preventDefault()
+				this.$router.push(link.getAttribute('href'))
+			})
+		})
 	},
 }
 </script>
@@ -100,11 +98,9 @@ export default {
 }
 
 .about__image {
-	max-width: calc(39% - 1rem);
+	max-width: 40%;
 	max-height: 350px;
-	margin-bottom: 1rem;
-	margin-left: 1rem;
-	float: right;
+	margin: -2rem 0 1rem 1rem;
 
 	@include breakpoint('small') {
 		max-width: none;
@@ -113,26 +109,18 @@ export default {
 		margin-left: 0;
 		margin-top: 1rem;
 		object-fit: cover;
-		float: none;
+	}
+}
+
+.about__content {
+	a {
+		color: $color-blue;
 	}
 }
 
 .about__info {
 	p {
 		line-height: 1.4;
-	}
-}
-
-.about__insta-feed {
-	margin-left: -2rem;
-	margin-right: -2rem;
-
-	&:first-child {
-		margin-top: -2rem;
-	}
-
-	&:last-child {
-		margin-bottom: -2rem;
 	}
 }
 </style>

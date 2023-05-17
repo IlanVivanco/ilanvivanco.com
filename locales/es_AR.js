@@ -8,13 +8,14 @@ export default {
 		name: 'Ilán Vivanco',
 		title: 'Desarrollador web full stack',
 		description:
-			'Soy Ilán Vivanco, desarrollador WordPress full stack con más de quince años de experiencia. Me especializo en el armado —y muy ocasionalmente, el diseño— de themes y plugins hechos a medida.',
-		home_title: 'Desarrollador web full stack',
-		resume_title: 'Mi CV',
-		contact_title: 'Contactame',
-		blog_title: 'Blog',
+			'Soy Ilán Vivanco, desarrollador WordPress full stack con más de quince años de experiencia. Me especializo en el armado de themes y plugins hechos a medida.',
+		home_title: 'Desarrollador web full stack — Santander, España',
+		about_title: 'Más info sobre mí — Ilán Vivanco',
+		resume_title: 'Mi CV — Ilán Vivanco',
+		contact_title: 'Contactame — Ilán Vivanco',
+		blog_title: 'Blog — Ilán Vivanco',
 		blog_single_title: 'Blog',
-		portfolio_title: 'Mi portfolio',
+		portfolio_title: 'Mi portfolio — Ilán Vivanco',
 		twitter: '@IlanVivanco	',
 	},
 	taglines: [
@@ -39,37 +40,35 @@ export default {
 			history: 'cómo llegué hasta acá',
 		},
 		copy: {
-			intro: '¡Hola! Mi nombre es',
+			intro: '¡Saludos! Me llamo',
 			name: 'Ilán Vivanco',
 			position: 'Soy desarrollador web full stack',
-			lead: 'Tengo más de quince años de experiencia; los últimos cinco trabajando en remoto como freelancer para empresas internacionales. Me especializo en el armado —y muy ocasionalmente, el diseño— de themes y plugins hechos a medida para WordPress. Desde hace unos pocos meses, vivo en Santander, España.',
+			lead: 'Con más de quince años de experiencia en desarrollo y diseño web, me he especializado en trabajar remotamente para empresas internacionales, creando temas y plugins personalizados para WordPress. Desde Santander, España, estoy listo para emprender nuevos desafíos y colaborar contigo. ¡Hagamos algo verdaderamente excepcional!',
 			about: [
-				'Soy una persona autodidacta, proactiva y apasionada por el mundo de la programación. Me encanta trabajar en equipos motivados. Si bien mi carrera comenzó por el lado artístico, de a poco, me fui metiendo en la parte lógica, hasta que esta me atrapó y ya no pude dar marcha atrás.',
+				'Comencé mi trayectoria inicialmente por el lado artístico, pero la lógica y la programación me atraparon y desde entonces no he mirado atrás. Como autodidacta apasionado, estoy en constante búsqueda de nuevas formas de expandir mis horizontes.',
 
-				'Me encanta aprender y trato de no dejar de hacerlo nunca. Sobre todo en este rubro, en donde todo cambia 180 grados en relativamente poco tiempo. Cada nuevo proyecto me sirve como excusa para aplicar alguna nueva tecnología o metodología, pero siempre ajustándose a cada necesidad.',
+				'Cada nuevo proyecto me ofrece la oportunidad de explorar y aplicar nuevas tecnologías o metodologías, siempre con el objetivo de satisfacer las necesidades específicas del caso. Mi pasión por el aprendizaje nunca se apaga.',
 
-				'En mi tiempo libre, me encanta viajar y conocer lugares nuevos junto a mi esposa, Gise Haag, y nuestra pequeña hija de 5 años, Olivia. Amo la fotografía y realmente disfruto de cada momento del proceso, desde la idea y captura, hasta la edición.',
+				'Cuando no estoy sumergido en el mundo del código, disfruto mucho viajando con mi esposa, <a href="https://github.com/gisehaag" target="_blank">Gise Haag</a>, y nuestra adorable hija, Olivia. Nos encanta descubrir nuevos lugares y capturar con nuestra cámara los rincones que nos dejan sin aliento.',
+
+				'Si llegaste hasta acá, y todavía no te aburriste, podés conocer aún más <a href="/sobre-mi">sobre mí</a>.',
 			],
 		},
 	},
 	about: {
 		titles: {
-			about: 'sobre mí',
-			latest_pictures: 'últimas fotos',
-			history: 'cómo llegué hasta acá',
+			more_about_me: 'Más info sobre mí',
 		},
 		copy: {
+			intro: 'Qué hay debajo de esta máscara de unos y ceros...',
 			history: [
-				'Nací en Buenos Aires, Argentina, allá por 1988. Estudié comunicación publicitaria y diseño gráfico, para luego orientarme por la fotografía. Sin embargo, desde hace 15 años, trabajo en proyectos relacionados con el diseño y la programación web.',
+				'Nací en Buenos Aires en 1988 y, aunque estudié comunicación publicitaria, diseño gráfico y fotografía, la programación web se ha convertido en mi verdadero amor durante los últimos 15 años.',
 
-				'Por aquel entonces diseñaba y animaba sitios con Adobe Flash. Con el tiempo fui incorporando algo de programación, usando ActionScript 2 y 3, para así poder darle vida a esos sitios que en un principio eran muy estáticos. Aunque una vez que conocí el lado del código, me enamoré y me fui alejando cada vez más del diseño, hasta dejarlo casi por completo —siempre quedan algunas manías y TOCs—.',
+				'Mis primeras aventuras en diseño y animación de sitios web las realicé con Adobe Flash, jugando con pequeños scripts de ActionScript. Pero, ¿quién podría resistirse al encanto del código? Así que me sumergí en él, aunque siempre manteniendo ciertos "TOCs" de diseñador.',
 
-				'Más tarde, quise aprender cosas más avanzadas y comencé a estudiar PHP y MySQL, de la mano de HTML, CSS, Javascript —principalmente jQuery—. Hasta que finalmente en el 2010, un día me crucé con WordPress, no sin antes haber intentado con Joomla, Prestashop y algunos otros. Desde ese momento, fue difícil alejarme. En todo este tiempo he realizado todo tipo de trabajos, desde los más simples y mundanos, como instalaciones y customizaciones de themes pagos, hasta proyectos de gran envergadura, como migraciones de bases de datos externas, adaptadas a la estructura de WordPress.',
+				'Luego decidí que era el momento de aprender algo más avanzado y me aventuré en PHP, MySQL, HTML, CSS y JavaScript. Allá por 2010, me encontré con WordPress y, desde entonces, hemos sido inseparables. A lo largo de estos años, he trabajado en todo tipo de proyectos, desde la personalización de themes hasta migraciones de bases de datos de gran envergadura.',
 
-				'En el camino también me topé con otras tecnologías —WooCommerce, NodeJS, Laravel, etc.—, las cuales traté de incluir, en la medida de lo posible. En la actualidad, me mantengo siempre informado y no dejo de aprender cosas nuevas siempre que puedo. Así lo hice para realizar este sitio, que decidí arrancarlo con Vue.JS y creo que no me quedó nada mal.',
-			],
-			more: [
-				'Algunas personas dicen que soy demasiado perfeccionista y, aunque podría considerarse como algo negativo, a mí me gusta serlo. Estoy convencido de que las cosas se tienen que hacer bien, o al menos se debería dar lo mejor para que así suceda.',
+				'En el camino también me he cruzado con diversas tecnologías y siempre estoy dispuesto a aprender algo nuevo. De hecho, construí este sitio con Vue.JS, ¡y creo que ha quedado bastante bien!',
 			],
 		},
 	},
@@ -78,7 +77,7 @@ export default {
 			section: 'mi historial',
 		},
 		copy: {
-			lead: 'En todos estos años acumulé experiencia en varios ámbitos que detallo acá abajo.',
+			lead: 'Especializado en la creación de temas y plugins personalizados para WordPress, he demostrado la capacidad de liderar equipos de trabajo, manteniendo siempre un enfoque centrado en la calidad y la experiencia de usuario.',
 		},
 	},
 	contact_me: {

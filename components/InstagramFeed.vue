@@ -1,17 +1,36 @@
 <template>
-	<ul v-if="images.length" class="insta-feed" :style="{ '--cols': count, '--mobile-cols': mobileCols, '--gap': gap }">
-		<li class="insta-feed__box" v-for="(photo, index) in this.images" :key="index">
-			<a :href="photo.permalink" target="__blank">
-				<img
-					class="insta-feed__image lazyload"
-					:data-src="photo.media_url"
-					:alt="`Ilán Vivanco's Instagram photo from ${new Date(photo.timestamp).toDateString()}`"
-					onerror="this.parentNode.parentNode.classList.add('error');"
-				/>
-				<div class="insta-feed__hashtags">{{ getHashtags(photo.caption) }}</div>
-			</a>
-		</li>
-	</ul>
+	<div
+		class="insta-feed"
+		:class="{
+			top: !mTop,
+			bottom: !mBottom,
+		}"
+	>
+		<el-row :gutter="30" type="flex">
+			<el-col :span="24">
+				<ul
+					v-if="images.length"
+					class="insta-feed__list"
+					:style="{ '--cols': count, '--mobile-cols': mobileCols, '--gap': gap }"
+				>
+					<li class="insta-feed__box" v-for="(photo, index) in this.images" :key="index">
+						<a :href="photo.permalink" target="__blank">
+							<img
+								class="insta-feed__image lazyload"
+								:data-src="photo.media_url"
+								:alt="`Ilán Vivanco's Instagram photo from ${new Date(photo.timestamp).toDateString()}`"
+								onerror="this.parentNode.parentNode.classList.add('error');"
+							/>
+							<div class="insta-feed__hashtags">{{ getHashtags(photo.caption) }}</div>
+						</a>
+					</li>
+				</ul>
+				<ul v-else class="insta-fake" :style="{ '--gap': gap }">
+					<li class="insta-fake__box" v-for="i in this.placeholders" :key="i"></li>
+				</ul>
+			</el-col>
+		</el-row>
+	</div>
 </template>
 
 <script>
@@ -32,25 +51,39 @@ export default {
 			type: Number,
 			default: 5,
 		},
+		'm-bottom': {
+			type: Boolean,
+			default: false,
+		},
+		'm-top': {
+			type: Boolean,
+			default: false,
+		},
 	},
 	data() {
 		return {
 			images: [],
+			placeholders: Array.from(Array(6)),
 		}
 	},
 	async mounted() {
-		try {
-			const photos = await axios({
-				method: 'GET',
-				url: 'api/instagram',
-			}).then((response) => response.data)
+		let savedPhotos = JSON.parse(localStorage.getItem('instagram'))
 
-			console.log(photos);
+		if (!savedPhotos) {
+			try {
+				const photos = await axios({
+					method: 'GET',
+					url: 'api/instagram',
+				}).then((response) => response.data)
 
-			this.images = [...photos.data].splice(this.offset, this.count)
-		} catch (error) {
-			console.error(error)
+				localStorage.setItem('instagram', JSON.stringify(photos.data))
+				savedPhotos = photos.data
+			} catch (error) {
+				console.error(error)
+			}
 		}
+
+		this.images = [...savedPhotos].splice(this.offset, this.count)
 	},
 	computed: {
 		mobileCols() {
@@ -76,31 +109,44 @@ export default {
 
 <style lang="scss" scoped>
 .insta-feed {
-	margin: calc(var(--gap, 0) / 2 * 1px) 0;
-	padding: 0;
-	display: grid;
-	list-style: none;
-	gap: calc(var(--gap, 0) * 1px);
-	grid-template-columns: repeat(var(--cols), 1fr);
-	grid-auto-rows: 120px;
+	margin-left: -2rem;
+	margin-right: -2rem;
 
-	@include breakpoint('small') {
-		grid-auto-rows: 105px;
-		grid-template-columns: repeat(var(--mobile-cols), 1fr);
+	&.top:first-child {
+		margin-top: -2rem;
 	}
 
-	// Trick for making the grid squared
-	&::before {
-		content: '';
-		width: 0;
-		padding-bottom: 100%;
-		grid-row: 1 / 1;
-		grid-column: 1 / 1;
+	&.bottom:last-child {
+		margin-bottom: -2rem;
 	}
 
-	& > *:first-child {
-		grid-row: 1 / 1;
-		grid-column: 1 / 1;
+	&__list {
+		margin: calc(var(--gap, 0) / 2 * 1px) 0;
+		padding: 0;
+		display: grid;
+		list-style: none;
+		gap: calc(var(--gap, 0) * 1px);
+		grid-template-columns: repeat(var(--cols), 1fr);
+		grid-auto-rows: 120px;
+
+		@include breakpoint('small') {
+			grid-auto-rows: 105px;
+			grid-template-columns: repeat(var(--mobile-cols), 1fr);
+		}
+
+		// Trick for making the grid squared
+		&::before {
+			content: '';
+			width: 0;
+			padding-bottom: 100%;
+			grid-row: 1 / 1;
+			grid-column: 1 / 1;
+		}
+
+		& > *:first-child {
+			grid-row: 1 / 1;
+			grid-column: 1 / 1;
+		}
 	}
 
 	&__box {
@@ -144,7 +190,6 @@ export default {
 		&:not(.error):hover {
 			&::before {
 				opacity: 0.7;
-				// mix-blend-mode: multiply;
 			}
 
 			&::after {
@@ -212,6 +257,35 @@ export default {
 		line-height: 1.4;
 		transition: all ease 0.4s;
 		width: 100%;
+	}
+}
+
+.insta-fake {
+	padding: 0;
+	display: flex;
+	list-style: none;
+	gap: calc(var(--gap, 0) * 1px);
+
+	&__box {
+		width: 100%;
+		height: 120px;
+		opacity: 0.15;
+
+		background: linear-gradient(-45deg, $color-blue-dark, $color-blue-light, $color-blue);
+		background-size: 400% 400%;
+		animation: gradient 15s linear infinite;
+	}
+
+	@keyframes gradient {
+		0% {
+			background-position: 0% 50%;
+		}
+		50% {
+			background-position: 100% 50%;
+		}
+		100% {
+			background-position: 0% 50%;
+		}
 	}
 }
 </style>
