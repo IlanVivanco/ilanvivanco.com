@@ -24,7 +24,6 @@
 		"nuxt-i18n": "^6.27.2",
 		"nuxt-responsive-loader": "^2.0.1",
 		"sharp": "^0.32.1",
-		"vue-gtag": "^1.16.1",
 		"vuewordcloud": "^18.7.11"
 	},
 	"devDependencies": {
