@@ -10,12 +10,12 @@ export default {
 		description:
 			'Soy Ilán Vivanco, desarrollador WordPress full stack con más de quince años de experiencia. Me especializo en el armado de themes y plugins hechos a medida.',
 		home_title: 'Desarrollador web full stack — Santander, España',
-		about_title: 'Más info sobre mí — Ilán Vivanco',
-		resume_title: 'Mi CV — Ilán Vivanco',
-		contact_title: 'Contactame — Ilán Vivanco',
-		blog_title: 'Blog — Ilán Vivanco',
+		about_title: 'Más info sobre mí',
+		resume_title: 'Mi CV',
+		contact_title: 'Contactame',
+		blog_title: 'Blog',
 		blog_single_title: 'Blog',
-		portfolio_title: 'Mi portfolio — Ilán Vivanco',
+		portfolio_title: 'Mi portfolio',
 		twitter: '@IlanVivanco	',
 	},
 	taglines: [

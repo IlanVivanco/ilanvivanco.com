@@ -44,7 +44,7 @@ export default {
 		const thumb = '/images/ilan-vivanco-social-card.png'
 
 		return {
-			titleTemplate: `${this.currentTitle} - ${this.$t('meta.name')}`,
+			titleTemplate: `${this.currentTitle} — ${this.$t('meta.name')}`,
 			meta: [
 				{ hid: 'description', name: 'description', content: this.$t('meta.description') },
 
