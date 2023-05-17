@@ -67,6 +67,11 @@ export default {
 			},
 			script: [
 				{
+					src: 'https://www.googletagmanager.com/gtag/js?id=G-7CJGME4GRL',
+					async: true,
+				},
+				{ src: '/js/gtag.js' },
+				{
 					type: 'application/ld+json',
 					hid: 'schema',
 					json: {
