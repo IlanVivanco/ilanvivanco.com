@@ -9,7 +9,7 @@
 		"generate": "nuxt generate"
 	},
 	"dependencies": {
-		"@nuxt/content": "^2.6.0",
+		"@nuxt/content": "^1.15.1",
 		"@nuxtjs/axios": "^5.13.6",
 		"@nuxtjs/sitemap": "^2.4.0",
 		"@supabase/supabase-js": "^2.22.0",
