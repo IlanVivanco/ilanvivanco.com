@@ -65,7 +65,7 @@ export default [
 	},
 	{
 		company: 'Gilardoni & Asoc',
-		position: 'Ayundate de fotografía, diseñador gráfico y web.',
+		position: 'Ayundate de fotografía. Diseñador gráfico y web.',
 		details:
 			'Comencé mi carrera retocando imágenes, diseñando <b>piezas gráficas</b> (folletos, logos, packaging y anuncios publicitarios), así como también desarrollando <b>páginas web</b> simples con <b>HTML</b> y <b>CSS</b>.',
 		from: '2005-06',
