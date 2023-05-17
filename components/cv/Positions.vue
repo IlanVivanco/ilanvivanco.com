@@ -21,9 +21,7 @@
 				<h3 class="position__name">{{ position.position }}</h3>
 			</header>
 
-			<ul class="position__details">
-				<li v-for="(item, i) of position.details" :key="i">{{ item }}</li>
-			</ul>
+			<p class="position__details" v-html="position.details"></p>
 		</el-timeline-item>
 	</el-timeline>
 </template>
@@ -93,14 +91,29 @@ export default {
 
 	&__header {
 		line-height: 1.2;
+		display: flex;
+		align-items: center;
+		margin-top: 0.5em;
+		margin-bottom: 0.5em;
 	}
 
 	&__company {
 		color: $color-text-primary;
 		font-weight: bold;
-		text-transform: uppercase;
-		font-size: 0.9em;
-		margin-top: 0.5em;
+		font-size: 1em;
+		margin-right: 0.2em;
+
+		&::after {
+			content: ' — ';
+			font-weight: normal;
+		}
+	}
+
+	&__name {
+		font-size: 1em;
+		font-weight: normal;
+		color: $color-teal-dark;
+		font-style: italic;
 	}
 
 	&__date {
@@ -128,39 +141,11 @@ export default {
 		}
 	}
 
-	&__name {
-		font-size: 0.9em;
-		font-weight: normal;
-		margin-bottom: 0.5em;
-		color: $color-teal-dark;
-		font-style: italic;
-	}
-
 	&__details {
 		font-size: 0.9em;
 		font-style: italic;
 		line-height: 1.3em;
-		padding-left: 1em;
 		list-style: none;
-
-		li {
-			position: relative;
-			line-height: 1.2;
-			margin-bottom: 0.2em;
-
-			&::before {
-				content: '';
-				width: 0.3em;
-				height: 0.3em;
-				position: absolute;
-				display: block;
-				border-radius: 50%;
-				border: 1px solid $color-teal-dark;
-				top: 50%;
-				left: -0.7em;
-				transform: translateY(-50%);
-			}
-		}
 	}
 
 	& ::v-deep .el-timeline-item__tail {
