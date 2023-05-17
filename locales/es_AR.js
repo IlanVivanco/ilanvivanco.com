@@ -9,13 +9,13 @@ export default {
 		title: 'Desarrollador web full stack',
 		description:
 			'Soy Ilán Vivanco, desarrollador WordPress full stack con más de quince años de experiencia. Me especializo en el armado de themes y plugins hechos a medida.',
-		home_title: 'Desarrollador web full stack',
-		about_title: 'Más info sobre mí',
-		resume_title: 'Mi CV',
-		contact_title: 'Contactame',
-		blog_title: 'Blog',
+		home_title: 'Desarrollador web full stack — Santander, España',
+		about_title: 'Más info sobre mí — Ilán Vivanco',
+		resume_title: 'Mi CV — Ilán Vivanco',
+		contact_title: 'Contactame — Ilán Vivanco',
+		blog_title: 'Blog — Ilán Vivanco',
 		blog_single_title: 'Blog',
-		portfolio_title: 'Mi portfolio',
+		portfolio_title: 'Mi portfolio — Ilán Vivanco',
 		twitter: '@IlanVivanco	',
 	},
 	taglines: [
@@ -43,9 +43,9 @@ export default {
 			intro: '¡Saludos! Me llamo',
 			name: 'Ilán Vivanco',
 			position: 'Soy desarrollador web full stack',
-			lead: 'Con más de quince años navegando por el mundo de los unos y ceros, los últimos ocho los he dedicado a trabajar de manera remota como freelancer para empresas a nivel global. Me especializo en la creación, y en ocasiones el diseño, de themes y plugins a medida para WordPress. Desde Santander, España, estoy listo para colaborar contigo. ¡Hagamos algo increíble juntos!',
+			lead: 'Con más de quince años de experiencia en desarrollo y diseño web, me he especializado en trabajar remotamente para empresas internacionales, creando temas y plugins personalizados para WordPress. Desde Santander, España, estoy listo para emprender nuevos desafíos y colaborar contigo. ¡Hagamos algo verdaderamente excepcional!',
 			about: [
-				'Mi trayectoria inicialmente se inclinaba hacia el lado artístico, pero la lógica y la programación me atraparon y desde entonces no he mirado atrás. Como autodidacta apasionado, estoy en constante búsqueda de nuevas formas de expandir mis horizontes.',
+				'Comencé mi trayectoria inicialmente por el lado artístico, pero la lógica y la programación me atraparon y desde entonces no he mirado atrás. Como autodidacta apasionado, estoy en constante búsqueda de nuevas formas de expandir mis horizontes.',
 
 				'Cada nuevo proyecto me ofrece la oportunidad de explorar y aplicar nuevas tecnologías o metodologías, siempre con el objetivo de satisfacer las necesidades específicas del caso. Mi pasión por el aprendizaje nunca se apaga.',
 
@@ -60,7 +60,7 @@ export default {
 			more_about_me: 'Más info sobre mí',
 		},
 		copy: {
-			intro: 'Un poco más que unos y ceros...',
+			intro: 'Qué hay debajo de esta máscara de unos y ceros...',
 			history: [
 				'Nací en Buenos Aires en 1988 y, aunque estudié comunicación publicitaria, diseño gráfico y fotografía, la programación web se ha convertido en mi verdadero amor durante los últimos 15 años.',
 
@@ -77,7 +77,7 @@ export default {
 			section: 'mi historial',
 		},
 		copy: {
-			lead: 'En todos estos años acumulé experiencia en varios ámbitos que detallo acá abajo.',
+			lead: 'A lo largo de los años, he tenido el privilegio de adquirir experiencia en diversos campos, los cuales detallo a continuación.',
 		},
 	},
 	contact_me: {
