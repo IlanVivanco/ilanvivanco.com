@@ -8,3 +8,9 @@ force = true
 from = "/api/*"
 status = 200
 to = "/.netlify/functions/:splat"
+
+[[redirects]]
+from = "/aniversario"
+to = "https://aniversario.ilanvivanco.com/"
+status = 301
+force = true
