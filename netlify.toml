@@ -11,6 +11,6 @@ to = "/.netlify/functions/:splat"
 
 [[redirects]]
 from = "/aniversario"
-to = "https://open.spotify.com/playlist/29o9DvGmZujM294sTbQqoh"
+to = "https://gifrases.ilanvivanco.com/"
 status = 301
 force = true
