@@ -26,7 +26,9 @@ export async function runFormChecks(ctx, base, email, log) {
   await ok.page.getByText('200 OK').waitFor({ timeout: 5000 });
   const sent = new URLSearchParams(ok.posts[0]?.body ?? '');
   log(ok.posts.length === 1 && ok.posts[0].type === 'application/x-www-form-urlencoded', 'form: un POST urlencoded a /');
-  log(sent.get('form-name') === 'contact-form' && sent.get('name') === 'Ada Lovelace' && sent.get('email') === 'ada@example.com' && sent.get('message') === 'Mensaje de prueba' && !!sent.get('tema') && sent.get('fake') === '', 'form: campos del POST');
+  const topic = sent.get('subject')?.split(' · ')[1];
+  log(sent.get('form-name') === 'contact-form' && sent.get('email') === 'ada@example.com' && sent.get('subject') === `Ada Lovelace · ${topic}` && !!topic && sent.get('fake') === '', 'form: campos del POST');
+  log(sent.get('message') === `Ada Lovelace (ada@example.com) te escribe sobre: ${topic}\n\nMensaje de prueba` && !sent.has('name') && !sent.has('tema'), 'form: la notificación llega como un solo mensaje');
   await ok.page.close();
 
   const failed = await submit(ctx, base, 500);

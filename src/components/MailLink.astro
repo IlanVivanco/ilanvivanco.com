@@ -1,0 +1,47 @@
+---
+// Email ofuscado en el HTML: se arma al cargar y el click lo copia (si no hay permiso, sigue el mailto).
+import { site } from '../data/site';
+import { encodeMail } from '../lib/mail';
+
+interface Props { class?: string; }
+const { class: className = '' } = Astro.props;
+---
+<a class:list={['link', 'mail-link', className]} href="/contacto" data-mail={encodeMail(site.email)}>
+  <span data-mail-text>[email protegido]</span>
+  <span class="mail-tip mono" data-copy-tip aria-live="polite"></span>
+</a>
+
+<script>
+  import { decodeMail } from '../lib/mail';
+
+  document.querySelectorAll<HTMLAnchorElement>('a.mail-link[data-mail]').forEach((a) => {
+    const email = decodeMail(a.dataset.mail || '');
+    const tip = a.querySelector<HTMLElement>('[data-copy-tip]')!;
+    a.href = `mailto:${email}`;
+    a.querySelector('[data-mail-text]')!.textContent = email;
+    let t = 0;
+    a.addEventListener('click', async (e) => {
+      e.preventDefault();
+      try {
+        await navigator.clipboard.writeText(email);
+        a.classList.add('is-copied');
+        tip.textContent = 'copiado';
+        clearTimeout(t);
+        t = window.setTimeout(() => { a.classList.remove('is-copied'); tip.textContent = ''; }, 1600);
+      } catch { location.href = a.href; }
+    });
+  });
+</script>
+
+<style>
+  .mail-link { position: relative; display: inline-block; cursor: copy; }
+  .mail-tip {
+    position: absolute; left: 100%; top: 50%; margin-left: 14px; translate: 0 -50%;
+    display: inline-flex; align-items: center; min-height: 26px; padding: 0 10px; border-radius: 999px;
+    background: var(--teal-hi); color: #0A111F; font-size: 0.75rem; font-weight: 500; letter-spacing: 0; white-space: nowrap;
+    opacity: 0; scale: 0.8; transition: opacity 0.2s, scale 0.35s var(--ease-spring); pointer-events: none;
+  }
+  .mail-tip:empty { padding: 0; }
+  .mail-link.is-copied .mail-tip { opacity: 1; scale: 1; }
+  @media (max-width: 900px) { .mail-tip { left: auto; right: 0; top: -22px; translate: 0 0; margin: 0; } }
+</style>

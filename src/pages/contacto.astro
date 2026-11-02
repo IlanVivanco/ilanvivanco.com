@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Fn from '../components/Fn.astro';
 import Icon from '../components/Icon.astro';
+import MailLink from '../components/MailLink.astro';
 import { site } from '../data/site';
 import { encodeMail } from '../lib/mail';
 
@@ -19,15 +20,12 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 
         <div class="mail" data-reveal data-delay="0.1">
           <span class="mono mail-label">email</span>
-          <a class="mail-link" href="#contacto" data-mail={mail}>
-            <span data-mail-text>[email protegido]</span>
-            <span class="mail-tip mono" data-copy-tip aria-live="polite"></span>
-          </a>
+          <MailLink class="mail-big" />
         </div>
 
         <ul class="elsewhere" role="list" data-reveal data-delay="0.15">
-          <li><a class="link-arrow" href="https://www.linkedin.com/in/ilanvivanco/" rel="noopener">LinkedIn <Icon name="arrow-up-right" size={16} /></a></li>
-          <li><a class="link-arrow" href="https://github.com/IlanVivanco" rel="noopener">GitHub <Icon name="arrow-up-right" size={16} /></a></li>
+          <li><a class="link-arrow" href="https://www.linkedin.com/in/ilanvivanco/" target="_blank" rel="noopener">LinkedIn <Icon name="arrow-up-right" size={16} /></a></li>
+          <li><a class="link-arrow" href="https://github.com/IlanVivanco" target="_blank" rel="noopener">GitHub <Icon name="arrow-up-right" size={16} /></a></li>
         </ul>
 
         <p class="clock mono" data-reveal data-delay="0.2">
@@ -39,14 +37,15 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
       <!-- Formulario como consola. Sin JS se ve como un formulario normal con todos los campos. -->
       <form class="console" name={site.formName} method="POST" action="/contacto" data-netlify="true" netlify-honeypot="fake" data-console data-mail={mail} data-reveal data-delay="0.1" aria-labelledby="con-title">
         <input type="hidden" name="form-name" value={site.formName} />
+        <input type="hidden" name="subject" data-remove-prefix value="Mensaje desde ilanvivanco.com" />
         <div class="con-bar">
           <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
           <h2 id="con-title" class="sr-only">Formulario de contacto</h2>
-          <div class="con-tabs" role="group" aria-label="Preguntas" data-tabs>
+          <ol class="con-steps" role="list" aria-label="Pasos" data-steps>
             {['nombre', 'email', 'tema', 'mensaje'].map((t, i) => (
-              <button type="button" class="con-tab" data-tab={i} aria-current={i === 0 ? 'step' : undefined} disabled={i > 0}>{t}</button>
+              <li class="con-stp" data-state={i === 0 ? 'current' : 'pending'} aria-current={i === 0 ? 'step' : undefined}><span class="stp-mark" aria-hidden="true">{i + 1}</span><span class="stp-txt">{t}</span></li>
             ))}
-          </div>
+          </ol>
           <span class="con-step" data-step-label aria-hidden="true"></span>
         </div>
         <div hidden><span data-progress></span></div>
@@ -58,19 +57,21 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
           <ol class="con-log" role="list" data-log aria-label="Tus respuestas"></ol>
 
           <div class="q is-current" data-step="name">
-            <label class="q-label" for="f-name"><span class="q-mark" aria-hidden="true">?</span> ¿Cómo te llamás?</label>
+            <p class="q-label" id="q-name"><span class="q-mark" aria-hidden="true">?</span> ¿Cómo te llamás?</p>
             <div class="q-field">
+              <label class="sr-only" for="f-name">Nombre</label>
               <span class="q-caret" aria-hidden="true">›</span>
-              <input id="f-name" name="name" type="text" autocomplete="name" required spellcheck="false" />
+              <input id="f-name" aria-labelledby="q-name" name="name" type="text" autocomplete="name" required spellcheck="false" />
               <button type="button" class="q-enter" data-next aria-label="Confirmar y seguir">↵</button>
             </div>
           </div>
 
           <div class="q" data-step="email">
-            <label class="q-label" for="f-email" data-email-label><span class="q-mark" aria-hidden="true">?</span> ¿A qué email te respondo?</label>
+            <p class="q-label" id="q-email" data-email-label><span class="q-mark" aria-hidden="true">?</span> ¿A qué email te respondo?</p>
             <div class="q-field">
+              <label class="sr-only" for="f-email">Email</label>
               <span class="q-caret" aria-hidden="true">›</span>
-              <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required spellcheck="false" aria-describedby="f-email-err" />
+              <input id="f-email" aria-labelledby="q-email" name="email" type="email" autocomplete="email" inputmode="email" required spellcheck="false" aria-describedby="f-email-err" />
               <button type="button" class="q-enter" data-next aria-label="Confirmar y seguir">↵</button>
             </div>
             <p class="q-error" id="f-email-err" data-error></p>
@@ -90,8 +91,9 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
           </fieldset>
 
           <div class="q" data-step="message">
-            <label class="q-label" for="f-msg"><span class="q-mark" aria-hidden="true">?</span> Contame un poco más <span class="q-help">(Enter envía · Shift+Enter, nueva línea)</span></label>
-            <textarea id="f-msg" name="message" rows="4" required spellcheck="true" data-autogrow></textarea>
+            <p class="q-label" id="q-msg"><span class="q-mark" aria-hidden="true">?</span> Contame un poco más <span class="q-help">(Enter envía · Shift+Enter, nueva línea)</span></p>
+            <label class="sr-only" for="f-msg">Mensaje</label>
+            <textarea id="f-msg" aria-labelledby="q-msg" name="message" rows="4" required spellcheck="true" data-autogrow></textarea>
             <div class="q-foot">
               <span class="c-m q-count" data-count aria-hidden="true">0 caracteres</span>
               <button class="cli-btn" type="submit">[ <span data-submit-label>enviar</span> ↵ ]</button>
@@ -116,29 +118,6 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 
   <script>
     import { decodeMail } from '../lib/mail';
-
-    /* ---------- Email: se arma al cargar (ofuscado en el HTML) y el click lo copia ---------- */
-    document.querySelectorAll<HTMLAnchorElement>('a[data-mail]').forEach((a) => {
-      const email = decodeMail(a.dataset.mail || '');
-      a.href = `mailto:${email}`;
-      a.dataset.copy = email;
-      const text = a.querySelector('[data-mail-text]');
-      if (text) text.textContent = email;
-    });
-    document.querySelectorAll<HTMLAnchorElement>('[data-copy]').forEach((a) => {
-      const tip = a.querySelector<HTMLElement>('[data-copy-tip]');
-      let t = 0;
-      a.addEventListener('click', async (e) => {
-        try {
-          await navigator.clipboard.writeText(a.dataset.copy || '');
-          e.preventDefault();
-          a.classList.add('is-copied');
-          if (tip) tip.textContent = 'copiado';
-          clearTimeout(t);
-          t = window.setTimeout(() => { a.classList.remove('is-copied'); if (tip) tip.textContent = ''; }, 1600);
-        } catch { /* sin permiso: sigue el mailto */ }
-      });
-    });
 
     /* ---------- Hora local ---------- */
     const clock = document.querySelector<HTMLTimeElement>('[data-clock]');
@@ -166,8 +145,7 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
       const counter = form.querySelector<HTMLElement>('[data-count]')!;
       const submitLabel = form.querySelector<HTMLElement>('[data-submit-label]')!;
       const restartWrap = form.querySelector<HTMLElement>('[data-restart-wrap]')!;
-      const tabs = [...form.querySelectorAll<HTMLButtonElement>('[data-tab]')];
-      let reached = 0; // pregunta más lejana a la que se llegó
+      const stepEls = [...form.querySelectorAll<HTMLElement>('[data-steps] li')];
       const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
       const questions = steps.map((s) => (s.querySelector('.q-label')?.textContent || '').replace('?', '').replace(/\(.*\)/, '').trim());
       let current = 0;
@@ -183,12 +161,13 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
       const short = (v: string) => (v.length > 42 ? v.slice(0, 40) + '…' : v);
 
       const render = (focus = true) => {
-        reached = Math.max(reached, Math.min(current, steps.length - 1));
         steps.forEach((s, i) => s.classList.toggle('is-current', i === current));
-        tabs.forEach((t, i) => {
-          t.disabled = i > reached || form.classList.contains('is-sending');
-          if (i === current) t.setAttribute('aria-current', 'step');
-          else t.removeAttribute('aria-current');
+        stepEls.forEach((el, i) => {
+          const state = i < current ? 'done' : i === current ? 'current' : 'pending';
+          el.dataset.state = state;
+          el.querySelector('.stp-mark')!.textContent = state === 'done' ? '✓' : String(i + 1);
+          if (state === 'current') el.setAttribute('aria-current', 'step');
+          else el.removeAttribute('aria-current');
         });
         label.textContent = `[${current + 1}/${steps.length}]`;
         progress.style.transform = `scaleX(${current / steps.length})`;
@@ -201,7 +180,8 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
           btn.type = 'button';
           btn.className = 'log-line';
           btn.setAttribute('aria-label', `Editar: ${questions[i]} ${valueOf(s)}`);
-          btn.innerHTML = `<span class="c-ok">✓</span> <span class="c-q"></span> <span class="c-m">·</span> <span class="c-a"></span>`;
+          btn.disabled = form.classList.contains('is-sending');
+          btn.innerHTML = `<span class="c-ok">✓</span> <span class="c-m c-q"></span> <span class="c-y c-a"></span>`;
           btn.querySelector('.c-q')!.textContent = questions[i];
           btn.querySelector('.c-a')!.textContent = short(valueOf(s));
           btn.addEventListener('click', () => { current = i; render(); });
@@ -238,13 +218,6 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
       };
 
       form.querySelectorAll<HTMLButtonElement>('[data-next]').forEach((b) => b.addEventListener('click', next));
-      tabs.forEach((t, i) => t.addEventListener('click', () => {
-        if (i > reached) return;
-        // Para avanzar hay que validar lo que hay en el medio; para volver, no
-        if (i > current) { for (let k = current; k < i; k++) if (!validate(k)) { current = k; render(); return; } }
-        current = i;
-        render();
-      }));
       form.addEventListener('keydown', (e) => {
         const t = e.target as HTMLInputElement;
         if (e.key === 'Enter' && (t.matches('input[type=text], input[type=email], input[type=radio]'))) { e.preventDefault(); next(); }
@@ -278,6 +251,16 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
         const data = new FormData(form);
         if (data.get('fake')) return;
         const email = valueOf(steps[1]);
+        const name = valueOf(steps[0]);
+        const topic = valueOf(steps[2]);
+        // Netlify arma la notificación con los campos que llegan: va un solo texto, y `email` para el Reply-To
+        const composed = new URLSearchParams({
+          'form-name': String(data.get('form-name')),
+          subject: `${name} · ${topic}`,
+          email,
+          message: `${name} (${email}) te escribe sobre: ${topic}\n\n${valueOf(steps[3])}`,
+          fake: '',
+        });
 
         // Todo pasa al historial y la consola "ejecuta"
         form.classList.add('is-sending');
@@ -287,22 +270,23 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
         label.textContent = '[ok]';
         out.innerHTML = '';
 
-        await print(`<span class="c-m">→ preparando mensaje (${textarea.value.length} caracteres)…</span>`, 150);
-        await print(`<span class="c-m">→ POST /mensajes</span>`, 300);
+        await print(`<span class="c-v">→</span> <span class="c-m">preparando mensaje</span> <span class="c-w">${textarea.value.length}</span> <span class="c-m">caracteres…</span>`, 150);
+        await print(`<span class="c-v">→</span> <span class="c-pr">POST</span> <span class="c-w">/mensajes</span>`, 300);
         try {
           // Netlify Forms recibe el POST urlencoded en cualquier ruta estática
           const res = await fetch('/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: new URLSearchParams(data as unknown as Record<string, string>).toString(),
+            body: composed.toString(),
           });
           if (!res.ok) throw new Error(String(res.status));
-          await print(`<span class="c-ok">✓ ${res.status} OK</span>`, 250);
-          await print(`¡Gracias, ${esc(firstName())}! Ahora la pelota está de mi lado: te respondo a <span class="c-a">${esc(email)}</span> en uno o dos días hábiles.`, 350);
+          await print(`<span class="c-badge c-badge-ok">${res.status} OK</span>`, 250);
+          await print(`<div class="con-note"><strong class="c-w">¡Gracias, ${esc(firstName())}!</strong><br />Ahora la pelota está de mi lado: te respondo a <span class="c-y">${esc(email)}</span> en uno o dos días hábiles.</div>`, 350);
           announce.textContent = `Mensaje enviado. Te respondo a ${email}.`;
         } catch {
           const mail = esc(decodeMail(form.dataset.mail || ''));
-          await print(`<span class="c-err">✗ Algo falló.</span> No fue tu culpa (probablemente). Probá de nuevo o escribime a <a href="mailto:${mail}">${mail}</a>.`, 300);
+          await print(`<span class="c-badge c-badge-err">ERROR</span>`, 250);
+          await print(`<div class="con-note con-note-err"><strong class="c-err">Algo falló.</strong> No fue tu culpa (probablemente).<br />Probá de nuevo o escribime a <a href="mailto:${mail}">${mail}</a>.</div>`, 200);
           announce.textContent = `No se pudo enviar. Probá de nuevo o escribime a ${mail}.`;
           form.classList.remove('is-sending');
           current = steps.length - 1;
@@ -317,11 +301,9 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
         form.reset();
         grow();
         current = 0;
-        reached = 0;
         out.innerHTML = '';
         restartWrap.hidden = true;
         form.classList.remove('is-sending');
-        tabs.forEach((t) => (t.disabled = false));
         emailLabel.lastChild!.textContent = ' ¿A qué email te respondo?';
         submitLabel.textContent = 'enviar';
         render();
@@ -339,21 +321,7 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
   /* Email */
   .mail { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
   .mail-label { font-size: 0.8125rem; color: var(--muted); }
-  .mail-link {
-    position: relative; align-self: flex-start; display: inline-flex; align-items: center; min-height: 44px;
-    font-size: clamp(1.375rem, 2.6vw, 1.875rem); font-weight: 500; letter-spacing: -0.02em; text-decoration: none; cursor: copy;
-    background: linear-gradient(var(--yellow), var(--yellow)) 0 100% / 0 2px no-repeat, linear-gradient(var(--line-strong), var(--line-strong)) 0 100% / 100% 1px no-repeat;
-    transition: background-size 0.45s var(--ease-out), color 0.2s;
-  }
-  .mail-link:hover, .mail-link:focus-visible { color: var(--yellow-hi); background-size: 100% 2px, 100% 1px; }
-  .mail-tip {
-    position: absolute; left: 100%; top: 50%; margin-left: 14px; translate: 0 -50%;
-    display: inline-flex; align-items: center; min-height: 26px; padding: 0 10px; border-radius: 999px;
-    background: var(--teal-hi); color: #0A111F; font-size: 0.75rem; font-weight: 500; letter-spacing: 0; white-space: nowrap;
-    opacity: 0; scale: 0.8; transition: opacity 0.2s, scale 0.35s var(--ease-spring); pointer-events: none;
-  }
-  .mail-tip:empty { padding: 0; }
-  .mail-link.is-copied .mail-tip { opacity: 1; scale: 1; }
+  .mail :global(.mail-big) { align-self: flex-start; font-size: clamp(1.375rem, 2.6vw, 1.875rem); font-weight: 500; letter-spacing: -0.02em; line-height: 1.5; }
 
   .elsewhere { display: flex; flex-wrap: wrap; gap: 4px 24px; margin: 0; padding: 0; }
   .clock { display: inline-flex; align-items: center; gap: 10px; font-size: 0.875rem; color: var(--muted); }
@@ -373,26 +341,32 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
   .dots i:nth-child(1) { background: var(--orange); }
   .dots i:nth-child(2) { background: var(--yellow); }
   .dots i:nth-child(3) { background: var(--teal); }
-  .con-tabs { display: flex; gap: 2px; min-width: 0; overflow-x: auto; scrollbar-width: none; }
-  .con-tab {
-    position: relative; flex: none; min-height: 44px; padding: 0 10px; border: 0; background: transparent; cursor: pointer;
-    color: var(--muted); font: 400 0.8125rem/1 var(--font-mono); transition: color 0.2s;
-  }
-  .con-tab:not(:disabled):hover { color: var(--text); }
-  .con-tab:disabled { cursor: default; color: color-mix(in oklab, var(--muted) 55%, transparent); }
-  .con-tab[aria-current='step'] { color: var(--text); }
-  .con-tab[aria-current='step']::after { content: ''; position: absolute; left: 8px; right: 8px; bottom: -1px; height: 2px; background: var(--yellow); }
-  .con-tab:focus-visible { outline: 1px solid var(--text-soft); outline-offset: -6px; border-radius: 0; }
+  /* Pasos: indicador lineal, no se puede hacer click */
+  .con-steps { display: flex; align-items: center; min-width: 0; margin: 0; font-size: 0.8125rem; color: var(--muted); }
+  .con-stp { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+  .con-stp + .con-stp::before { content: '›'; margin-inline: 8px; color: var(--line-strong); }
+  .stp-mark { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; border: 1px solid var(--line-hi); font-size: 0.6875rem; line-height: 1; }
+  .con-stp[data-state='done'] { color: var(--text-soft); }
+  .con-stp[data-state='done'] .stp-mark { border-color: transparent; color: var(--teal-hi); font-size: 0.8125rem; }
+  .con-stp[data-state='current'] { color: var(--text); }
+  .con-stp[data-state='current'] .stp-mark { border-color: var(--yellow); background: var(--yellow); color: #070C17; font-weight: 600; }
   .con-step { margin-left: auto; flex: none; font-size: 0.8125rem; color: var(--muted); }
 
-  .con-body { display: flex; flex-direction: column; gap: 10px; padding: 20px 24px 24px; min-height: 340px; line-height: 1.7; }
+  .con-body { --pad: 24px; display: flex; flex-direction: column; gap: 14px; padding: 20px var(--pad) 24px; min-height: 340px; line-height: 1.7; }
   .con-line { margin: 0; }
   :global(.console .c-pr), :global(.console .c-ok) { color: var(--teal-hi); }
-  :global(.console .c-w), :global(.console .c-q), :global(.console .c-a) { color: var(--text); }
+  :global(.console .c-w) { color: var(--text); }
+  :global(.console .c-y) { color: var(--yellow-hi); }
+  :global(.console .c-v) { color: var(--violet); }
   :global(.console .c-m) { color: var(--muted); }
   :global(.console .c-err) { color: var(--orange-hi); }
+  :global(.console .c-badge) { display: inline-block; padding: 0 8px; font-weight: 600; line-height: 1.6; color: #070C17; }
+  :global(.console .c-badge-ok) { background: var(--teal-hi); }
+  :global(.console .c-badge-err) { background: var(--orange-hi); }
+  :global(.console .con-note) { margin-top: 8px; padding: 2px 0 2px 14px; border-left: 2px solid var(--teal-hi); color: var(--text-soft); }
+  :global(.console .con-note-err) { border-left-color: var(--orange-hi); }
 
-  .con-log, .con-out { display: flex; flex-direction: column; margin: 0; padding: 0; }
+  .con-log, .con-out { display: flex; flex-direction: column; gap: 6px; margin: 0; padding: 0; }
   .con-log:empty, .con-out:empty { display: none; }
   .con-log :global(li), .con-out :global(li) { animation: line-in 0.25s steps(3, end) both; }
   @keyframes line-in { from { opacity: 0; } }
@@ -400,10 +374,21 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
     display: block; width: 100%; min-height: 28px; padding: 0; border: 0; background: transparent;
     color: inherit; font: inherit; text-align: left; cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   }
-  .con-log :global(.log-line:hover .c-a), .con-log :global(.log-line:focus-visible .c-a) { text-decoration: underline; text-underline-offset: 3px; }
+  .con-log :global(.log-line:disabled) { cursor: default; }
+  .con-log :global(.log-line:not(:disabled):hover .c-a), .con-log :global(.log-line:focus-visible .c-a) { text-decoration: underline; text-underline-offset: 3px; }
 
-  .q { margin: 0; padding: 0; border: 0; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+  .q { margin: 0; padding: 0; border: 0; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+  /* La línea en la que está el usuario, de borde a borde */
+  :global(html.js) .console .q.is-current {
+    margin-inline: calc(var(--pad) * -1); padding: 12px var(--pad) 12px calc(var(--pad) - 2px);
+    border-left: 2px solid var(--yellow); background: color-mix(in oklab, var(--surface) 75%, transparent);
+    transition: background-color 0.15s;
+  }
+  :global(html.js) .console .q.is-current:focus-within { background: var(--surface); }
+  /* legend flotada: si no, el navegador la monta sobre el borde del fieldset y se sale del resaltado */
   .q-label { padding: 0; color: var(--text); font-weight: 400; }
+  legend.q-label { float: left; width: 100%; }
+  legend.q-label + .opts { clear: both; }
   .q-mark { color: var(--teal-hi); }
   .q-help { color: var(--muted); font-size: 0.8125rem; }
   .q-field { display: flex; align-items: center; gap: 10px; }
@@ -418,7 +403,7 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
   .console :focus-visible { border-radius: 0; }
   .q-enter { flex: none; min-width: 40px; min-height: 40px; padding: 0 8px; border: 0; background: transparent; color: var(--muted); font: inherit; cursor: pointer; }
   .q-enter:hover, .q-enter:focus-visible { color: var(--text); }
-  .q-enter:focus-visible, .cli-btn:focus-visible, .restart:focus-visible, .con-log :global(.log-line:focus-visible) { outline: 1px solid var(--text-soft); outline-offset: 2px; }
+  .q-enter:focus-visible, .cli-btn:focus-visible, .restart:focus-visible, .con-log :global(.log-line:focus-visible) { outline: 1px solid var(--line-strong); outline-offset: 2px; }
   .q-error { margin: 0; font-size: 0.875rem; color: var(--orange-hi); }
   .q-error:empty { display: none; }
   input[aria-invalid='true'] { color: var(--orange-hi); }
@@ -447,10 +432,10 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
   .cli-btn { min-height: 40px; padding: 0 8px; border: 0; border-radius: 2px; background: transparent; color: var(--text); font: inherit; cursor: pointer; white-space: nowrap; }
   .cli-btn:hover, .cli-btn:focus-visible { background: var(--text); color: #070C17; }
 
-  .con-restart { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+  .con-restart { display: flex; align-items: center; gap: 8px; margin-top: 4px; }
   .con-restart[hidden] { display: none; }
   .restart { min-height: 36px; padding: 0 4px; border: 0; border-radius: 2px; background: transparent; color: var(--text); font: inherit; cursor: pointer; }
-  .restart:hover, .restart:focus-visible { background: var(--text); color: #070C17; }
+  .restart:hover { background: var(--text); color: #070C17; }
   .restart::after { content: ''; display: inline-block; width: 0.6em; height: 1.1em; margin-left: 4px; vertical-align: -0.2em; background: var(--text-soft); animation: blink 1.05s steps(1) infinite; }
   @keyframes blink { 50% { opacity: 0; } }
 
@@ -460,12 +445,17 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
   :global(form.is-stepped) .q.is-current { animation: line-in 0.25s steps(3, end) both; }
   :global(form.is-stepped) .q.is-shake { animation: shake 0.3s steps(4, end); }
   @keyframes shake { 25% { translate: -4px 0; } 50% { translate: 4px 0; } 75% { translate: -2px 0; } }
-  :global(html:not(.js)) .console:not(.is-stepped) .q-enter, :global(html:not(.js)) .console:not(.is-stepped) .con-step, :global(html:not(.js)) .console:not(.is-stepped) .con-tabs { display: none; }
+  :global(html:not(.js)) .console:not(.is-stepped) .q-enter, :global(html:not(.js)) .console:not(.is-stepped) .con-step, :global(html:not(.js)) .console:not(.is-stepped) .con-steps { display: none; }
 
   @media (max-width: 900px) {
     .ct-grid { grid-template-columns: minmax(0, 1fr); }
     .console { position: static; }
-    .con-body { padding: 18px 16px 22px; }
-    .mail-tip { left: auto; right: 0; top: -22px; translate: 0 0; margin: 0; }
+    .con-body { --pad: 16px; padding: 18px var(--pad) 22px; }
+  }
+  /* En mobile, de los pasos solo se nombra el actual */
+  @media (max-width: 480px) {
+    .dots { display: none; }
+    .con-stp:not([data-state='current']) .stp-txt { display: none; }
+    .q-help { display: none; }
   }
 </style>
