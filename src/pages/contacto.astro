@@ -37,7 +37,8 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
       </div>
 
       <!-- Formulario como consola. Sin JS se ve como un formulario normal con todos los campos. -->
-      <form class="console" data-console novalidate data-endpoint={site.formEndpoint} data-mail={mail} data-reveal data-delay="0.1" aria-labelledby="con-title">
+      <form class="console" name={site.formName} method="POST" action="/contacto" data-netlify="true" netlify-honeypot="fake" data-console data-mail={mail} data-reveal data-delay="0.1" aria-labelledby="con-title">
+        <input type="hidden" name="form-name" value={site.formName} />
         <div class="con-bar">
           <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
           <h2 id="con-title" class="sr-only">Formulario de contacto</h2>
@@ -56,11 +57,11 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 
           <ol class="con-log" role="list" data-log aria-label="Tus respuestas"></ol>
 
-          <div class="q" data-step="nombre">
+          <div class="q" data-step="name">
             <label class="q-label" for="f-name"><span class="q-mark" aria-hidden="true">?</span> ¿Cómo te llamás?</label>
             <div class="q-field">
               <span class="q-caret" aria-hidden="true">›</span>
-              <input id="f-name" name="nombre" type="text" autocomplete="name" required spellcheck="false" />
+              <input id="f-name" name="name" type="text" autocomplete="name" required spellcheck="false" />
               <button type="button" class="q-enter" data-next aria-label="Confirmar y seguir">↵</button>
             </div>
           </div>
@@ -88,9 +89,9 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
             </div>
           </fieldset>
 
-          <div class="q" data-step="mensaje">
+          <div class="q" data-step="message">
             <label class="q-label" for="f-msg"><span class="q-mark" aria-hidden="true">?</span> Contame un poco más <span class="q-help">(Enter envía · Shift+Enter, nueva línea)</span></label>
-            <textarea id="f-msg" name="mensaje" rows="4" required spellcheck="true" data-autogrow></textarea>
+            <textarea id="f-msg" name="message" rows="4" required spellcheck="true" data-autogrow></textarea>
             <div class="q-foot">
               <span class="c-m q-count" data-count aria-hidden="true">0 caracteres</span>
               <button class="cli-btn" type="submit">[ <span data-submit-label>enviar</span> ↵ ]</button>
@@ -98,7 +99,9 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
           </div>
 
           <!-- honeypot -->
-          <div class="sr-only" aria-hidden="true"><label for="f-web">Web</label><input id="f-web" name="_gotcha" type="text" tabindex="-1" autocomplete="off" /></div>
+          <div class="sr-only" aria-hidden="true"><label for="f-web">Web</label><input id="f-web" name="fake" type="text" tabindex="-1" autocomplete="off" /></div>
+
+          <p class="con-privacy c-m">tus datos solo se usan para responderte · <a href="/privacidad">privacidad</a></p>
 
           <ol class="con-out" role="list" data-out></ol>
           <div class="con-restart" data-restart-wrap hidden>
@@ -168,6 +171,7 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
       const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
       const questions = steps.map((s) => (s.querySelector('.q-label')?.textContent || '').replace('?', '').replace(/\(.*\)/, '').trim());
       let current = 0;
+      form.noValidate = true; // Sin JS valida el navegador; con JS, la consola
 
       form.classList.add('is-stepped');
 
@@ -272,8 +276,7 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
           if (!validate(i)) { current = i; render(); return; }
         }
         const data = new FormData(form);
-        if (data.get('_gotcha')) return;
-        const endpoint = form.dataset.endpoint;
+        if (data.get('fake')) return;
         const email = valueOf(steps[1]);
 
         // Todo pasa al historial y la consola "ejecuta"
@@ -285,29 +288,26 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
         out.innerHTML = '';
 
         await print(`<span class="c-m">→ preparando mensaje (${textarea.value.length} caracteres)…</span>`, 150);
-        if (!endpoint) {
-          const subject = encodeURIComponent(`${data.get('tema')} — ${data.get('nombre')}`);
-          const body = encodeURIComponent(`${data.get('mensaje')}\n\n— ${data.get('nombre')} (${email})`);
-          await print(`<span class="c-m">→ abriendo tu cliente de correo…</span>`, 400);
-          location.href = `mailto:${decodeMail(form.dataset.mail || '')}?subject=${subject}&body=${body}`;
-          await print(`<span class="c-ok">✓</span> Listo, ${esc(firstName())}. Solo te queda enviarlo desde tu correo.`, 500);
-          announce.textContent = 'Se abrió tu cliente de correo con el mensaje listo para enviar.';
-        } else {
-          await print(`<span class="c-m">→ POST /mensajes</span>`, 300);
-          try {
-            const res = await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
-            if (!res.ok) throw new Error(String(res.status));
-            await print(`<span class="c-ok">✓ ${res.status} OK</span>`, 250);
-            await print(`¡Gracias, ${esc(firstName())}! Ahora la pelota está de mi lado: te respondo a <span class="c-a">${esc(email)}</span> en uno o dos días hábiles.`, 350);
-            announce.textContent = `Mensaje enviado. Te respondo a ${email}.`;
-          } catch {
-            await print(`<span class="c-err">✗ Algo falló.</span> No fue tu culpa (probablemente). Probá de nuevo o escribime por email.`, 300);
-            announce.textContent = 'No se pudo enviar. Probá de nuevo o escribime por email.';
-            form.classList.remove('is-sending');
-            current = steps.length - 1;
-            render();
-            return;
-          }
+        await print(`<span class="c-m">→ POST /mensajes</span>`, 300);
+        try {
+          // Netlify Forms recibe el POST urlencoded en cualquier ruta estática
+          const res = await fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(data as unknown as Record<string, string>).toString(),
+          });
+          if (!res.ok) throw new Error(String(res.status));
+          await print(`<span class="c-ok">✓ ${res.status} OK</span>`, 250);
+          await print(`¡Gracias, ${esc(firstName())}! Ahora la pelota está de mi lado: te respondo a <span class="c-a">${esc(email)}</span> en uno o dos días hábiles.`, 350);
+          announce.textContent = `Mensaje enviado. Te respondo a ${email}.`;
+        } catch {
+          const mail = esc(decodeMail(form.dataset.mail || ''));
+          await print(`<span class="c-err">✗ Algo falló.</span> No fue tu culpa (probablemente). Probá de nuevo o escribime a <a href="mailto:${mail}">${mail}</a>.`, 300);
+          announce.textContent = `No se pudo enviar. Probá de nuevo o escribime a ${mail}.`;
+          form.classList.remove('is-sending');
+          current = steps.length - 1;
+          render();
+          return;
         }
         restartWrap.hidden = false;
         form.querySelector<HTMLButtonElement>('[data-restart]')?.focus();
@@ -438,6 +438,10 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
     background: transparent; color: var(--text); caret-color: var(--yellow); font: 400 0.9375rem/1.7 var(--font-mono); outline: none;
   }
   textarea:focus, textarea:focus-visible { outline: none; border-left-color: var(--yellow); }
+  .con-privacy { margin: 14px 0 0; font-size: 0.8125rem; }
+  .con-privacy a, :global(.con-out a) { display: inline-block; min-height: 24px; color: var(--text-soft); text-decoration: underline; text-underline-offset: 3px; }
+  .con-privacy a:hover, :global(.con-out a:hover) { color: var(--yellow-hi); }
+  :global(.console.is-sending) .con-privacy { display: none; }
   .q-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 6px; }
   .q-count { font-size: 0.8125rem; }
   .cli-btn { min-height: 40px; padding: 0 8px; border: 0; border-radius: 2px; background: transparent; color: var(--text); font: inherit; cursor: pointer; white-space: nowrap; }
