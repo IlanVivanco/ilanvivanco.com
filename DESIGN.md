@@ -211,7 +211,7 @@ Mono 0.8125rem, borde `--line-hi` y radio 999px. En el CV entran escalonados.
 | Hero | "Construyendo para la web desde 2005, cuando todavía se maquetaba con tablas." |
 | Stats | Pantalla `// datos que nadie pidió`; "7,5 KB de JavaScript propio en la home (sí, los conté)" |
 | Terminal | `combustible: ['mate', 'café']`; commits `login: de un .txt a MySQL`, `init: diseño, fotos y <table>` |
-| 404 | "Esta página se fue a producción sin tests." / "O el link es viejo, o alguien hizo deploy un viernes." |
+| 404 | "Esta página llegó a producción sin tests." / "O el link es viejo, o alguien hizo deploy un viernes." |
 | Formulario | "respondo en 1–2 días hábiles, mate mediante"; éxito: "Ahora la pelota está de mi lado" |
 | Footer | "hecho en Santander con Astro, mate y café" |
 
