@@ -153,6 +153,7 @@ const range = `${Math.min(...years)}–${Math.max(...years)}`
 
 		/* ---------- Filtro ---------- */
 		let typing = 0
+		let lastFilter = 0
 		const typeArg = async (text: string) => {
 			if (!arg) return
 			const id = ++typing
@@ -188,8 +189,11 @@ const range = `${Math.min(...years)}–${Math.max(...years)}`
 				const tag = b.dataset.filter || ''
 				if (b.getAttribute('aria-pressed') === 'true') return
 				buttons.forEach((x) => x.setAttribute('aria-pressed', String(x === b)))
+				const id = ++lastFilter
 				// 1) se "tipea" el comando  2) se ejecuta: la lista se reordena
 				await typeArg(tag ? ` --type=${b.dataset.label}` : '')
+				// Si mientras tanto se eligió otro filtro, gana ese
+				if (id !== lastFilter) return
 				// Solo se animan las filas: una View Transition congela toda la página, nav incluido
 				const before = new Map(items.filter((li) => !li.hidden).map((li) => [li, li.getBoundingClientRect().top]))
 				apply(tag)
