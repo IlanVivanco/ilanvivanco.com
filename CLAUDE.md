@@ -17,6 +17,7 @@ Sitio personal de Ilán Vivanco (CTO / Director of Engineering en EpicDevs, Sant
 npm install
 npm run dev        # http://localhost:4321
 npm run build      # dist/ + CV en PDF + imágenes OG
+npm run instagram  # trae las últimas fotos de Instagram (también corre en el build)
 npm run cv:pdf     # regenera el PDF sobre el último build
 npm run og:images  # regenera las imágenes OG sobre el último build
 npm run preview    # sirve dist/
@@ -37,10 +38,11 @@ src/
   scripts/ui.ts       revelado, tarjetas (glow, proximidad, perspectiva), header, menú
   scripts/terminal.ts escenas de la terminal del hero
   layouts/Base.astro  <head>, SEO, JSON-LD, speculation rules, header y footer
-  components/         Header, Footer, Socials, MailLink, Logo, Fn, Icon, ProjectCard, Terminal, Stats, Analytics, CvAts
+  components/         Header, Footer, Socials, MailLink, InstagramGrid, Logo, Fn, Icon, ProjectCard, Terminal, Stats, Analytics, CvAts
   pages/              /, /curriculum, /portfolio, /contacto, /sobre-mi, /privacidad, /cv/es, 404, sitemap.xml
 public/               fonts, img, favicon.svg, og.png, robots.txt (cv/ y og/ se generan, no se versionan)
-scripts/build/        CV en PDF e imágenes OG
+scripts/build/        fotos de Instagram, CV en PDF e imágenes OG
+netlify/functions/    rebuild semanal
 scripts/qa/           chequeos automáticos
 netlify.toml          build, redirects y cabeceras
 ```
@@ -63,9 +65,10 @@ netlify.toml          build, redirects y cabeceras
 10. **La terminal del hero usa siempre `~/ilan`.** El contenido de las escenas sale del CV real.
 11. **Privacidad:** el email nunca va en texto plano en el HTML (usar `encodeMail`/`decodeMail` de `src/lib/mail.ts`). Solo el PDF del CV lo lleva en claro. Sin nombres de familiares en el sitio. Analytics solo sin cookies (Cloudflare Web Analytics): sin GA y sin banner.
 12. **Formulario:** el `name` del form (`contact-form`) y sus campos (`name`, `email`, `tema`, `message`, `subject`, `fake`) coinciden con los de Netlify. `data-step` usa el mismo nombre que el campo. Con JS, `subject` se arma con el nombre y el tema. Netlify titula cada campo con su `<label>`: por eso es oculto y corto, y la pregunta visible se asocia con `aria-labelledby`.
-13. **CSS:** no usar `-webkit-backdrop-filter` junto a `backdrop-filter`: el minificador deja solo el prefijado y Chrome pierde el blur.
-14. **Links externos:** siempre con `target="_blank" rel="noopener"` (lo valida el QA).
-15. **CV:** `/curriculum` y el PDF salen de `src/data/cv.ts`. El PDF se edita en `components/CvAts.astro`, con una columna y máximo 2 páginas: el QA valida orden de lectura y fuentes. Reglas en `DESIGN.md`.
+13. **Prettier y espacios:** el plugin de Astro separa elementos en línea, y esos espacios se ven. Lo que deba quedar pegado va en un contenedor `display: flex` o con `<!-- prettier-ignore -->`.
+14. **CSS:** no usar `-webkit-backdrop-filter` junto a `backdrop-filter`: el minificador deja solo el prefijado y Chrome pierde el blur.
+15. **Links externos:** siempre con `target="_blank" rel="noopener"` (lo valida el QA).
+16. **CV:** `/curriculum` y el PDF salen de `src/data/cv.ts`. El PDF se edita en `components/CvAts.astro`, con una columna y máximo 2 páginas: el QA valida orden de lectura y fuentes. Reglas en `DESIGN.md`.
 
 ## Verificación antes de dar algo por terminado
 
@@ -85,5 +88,5 @@ netlify.toml          build, redirects y cabeceras
 ## Pendientes conocidos
 
 - Cargar `PUBLIC_CF_BEACON_TOKEN` en Netlify al lanzar y revisar la configuración de Cloudflare (ver `MIGRATION.md`).
-- **Fase 1B:** feed de Instagram (primero un plan aprobado: `PLAN-instagram.md`).
+- Crear el build hook de producción y cargarlo en `REBUILD_HOOK_URL` al lanzar (ver `PLAN-instagram.md`).
 - **Fase 2:** sitio y CV en inglés, blog, y portfolio actualizado con clientes actuales de EpicDevs y capturas nuevas.

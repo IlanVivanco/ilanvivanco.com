@@ -324,6 +324,9 @@ const cards = statScreens[0].items.map((_, i) => i)
 		transition-duration: 0.35s, 0.5s;
 	}
 	.stat-value {
+		/* Flex: los espacios entre prefijo, número y sufijo no se ven, aunque el formateador los agregue */
+		display: flex;
+		align-items: baseline;
 		font-size: clamp(2.25rem, 3.6vw, 3rem);
 		font-weight: 600;
 		letter-spacing: -0.045em;
@@ -331,6 +334,8 @@ const cards = statScreens[0].items.map((_, i) => i)
 		font-variant-numeric: tabular-nums;
 	}
 	.affix {
+		/* Conserva el espacio de sufijos como " KB" dentro del flex */
+		white-space: pre;
 		color: var(--yellow);
 	}
 	.stat-label {

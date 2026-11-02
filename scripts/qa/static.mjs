@@ -109,6 +109,23 @@ export async function runStaticChecks(log) {
 		`links externos con target=_blank y noopener${sameTab.length ? ': ' + sameTab.join(', ') : ''}`
 	)
 
+	// Instagram: fotos propias, sin requests a terceros desde el navegador
+	const about = read('sobre-mi.html')
+	const remote = htmlFiles().filter(
+		(f) => /<img\b[^>]*\bsrc="https?:/.test(read(f)) || /behold\.pictures|cdninstagram/.test(read(f))
+	)
+	log(remote.length === 0, `sin imágenes de terceros${remote.length ? ': ' + remote.join(', ') : ''}`)
+	const igPhotos = [...about.matchAll(/src="(\/img\/instagram\/[^"]+)"/g)].map((m) => m[1])
+	log(
+		igPhotos.every((src) => existsSync(join(DIST, src))),
+		`las ${igPhotos.length} fotos de Instagram existen en dist`
+	)
+	if (igPhotos.length === 0) console.warn('⚠ /sobre-mi se generó sin fotos de Instagram')
+
+	// Un formateador puede separar un link de su puntuación ("EpicDevs .")
+	const spaced = htmlFiles().filter((f) => !f.startsWith('cv/') && /<\/a>\s+[.,;:]/.test(read(f)))
+	log(spaced.length === 0, `links pegados a su puntuación${spaced.length ? ': ' + spaced.join(', ') : ''}`)
+
 	// SEO
 	const sitemap = read('sitemap.xml')
 	log(
