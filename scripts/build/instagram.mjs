@@ -3,6 +3,7 @@
 import { mkdir, rm, writeFile } from 'node:fs/promises'
 import sharp from 'sharp'
 import { site } from '../../src/data/site.ts'
+import { parsePost } from '../lib/instagram-post.mjs'
 
 const FEED = process.env.INSTAGRAM_FEED_URL ?? site.instagramFeed
 const IMG_DIR = 'public/img/instagram'
@@ -16,27 +17,17 @@ const get = async (url) => {
 	return res
 }
 
-// El feed es contenido de afuera: solo se usan campos conocidos y links de Instagram.
-const isPost = (p) => p.sizes?.medium?.mediaUrl && /^https:\/\/www\.instagram\.com\//.test(p.permalink ?? '')
-
 const posts = []
 await rm(IMG_DIR, { recursive: true, force: true })
 await mkdir(IMG_DIR, { recursive: true })
 try {
 	const feed = await (await get(FEED)).json()
-	for (const p of feed.posts.filter(isPost).slice(0, 6)) {
+	for (const p of feed.posts.map(parsePost).filter(Boolean).slice(0, 6)) {
 		try {
-			const photo = Buffer.from(await (await get(p.sizes.medium.mediaUrl)).arrayBuffer())
-			const file = `${p.id.replace(/\D/g, '')}.webp`
+			const photo = Buffer.from(await (await get(p.image)).arrayBuffer())
+			const file = `${p.id}.webp`
 			await sharp(photo).resize(SIZE, SIZE, { fit: 'cover' }).webp({ quality: 72 }).toFile(`${IMG_DIR}/${file}`)
-			posts.push({
-				src: `/img/instagram/${file}`,
-				url: p.permalink,
-				date: p.timestamp,
-				alt: p.altText ?? null,
-				// Solo hashtags, no el caption: se publica sin revisión y podría nombrar a alguien de la familia.
-				tags: (p.hashtags ?? []).slice(0, 2),
-			})
+			posts.push({ src: `/img/instagram/${file}`, url: p.url, date: p.date, alt: p.alt, tags: p.tags })
 		} catch (error) {
 			console.warn(`Instagram: se omite el post ${p.id} (${error.message})`)
 		}
