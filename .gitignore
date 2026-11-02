@@ -7,3 +7,5 @@ dist
 .netlify
 .lighthouseci
 *.log
+public/cv
+public/og

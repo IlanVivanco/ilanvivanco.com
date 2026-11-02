@@ -1,0 +1,85 @@
+---
+// CV para ATS: una columna, sin tablas, íconos ni imágenes, y texto real. No reutiliza el diseño de /curriculum.
+import { atsPeriod, cv, cvLabels } from '../data/cv';
+import { site } from '../data/site';
+import { encodeMail } from '../lib/mail';
+
+interface Props {
+  lang: 'es';
+}
+const { lang } = Astro.props;
+const data = cv[lang];
+const labels = cvLabels[lang];
+const linkedin = site.socials.find((s) => s.label === 'LinkedIn')!.href;
+const bare = (url: string) => url.replace(/^https:\/\/(www\.)?/, '').replace(/\/$/, '');
+---
+<!doctype html>
+<html lang={labels.htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="author" content={site.name} />
+    <title>{`${site.name} — CV — ${labels.title}`}</title>
+    <style is:inline>
+      @page { size: A4; margin: 14mm 16mm; }
+      html { background: #fff; color: #000; }
+      body { margin: 0 auto; max-width: 176mm; font: 9.5pt/1.3 Arial, Helvetica, sans-serif; font-variant-ligatures: none; color: #000; }
+      a { color: #000; text-decoration: none; }
+      h1 { margin: 0; font-size: 20pt; line-height: 1.15; }
+      h2 { margin: 9pt 0 3pt; padding-bottom: 1pt; border-bottom: 0.75pt solid #000; font-size: 11pt; }
+      h3 { margin: 6pt 0 0; font-size: 9.5pt; break-after: avoid; }
+      p { margin: 0; }
+      ul { margin: 2pt 0 0; padding-left: 13pt; }
+      .role { break-inside: avoid; }
+      .title { font-size: 11pt; }
+    </style>
+  </head>
+  <body>
+    <h1>{site.name}</h1>
+    <p class="title">{labels.title}</p>
+    <p>{labels.location} | <a data-mail={encodeMail(site.email)} href="#">[email]</a> | <a href={linkedin}>{bare(linkedin)}</a> | <a href={site.url}>{bare(site.url)}</a></p>
+
+    <h2>{labels.headings.summary}</h2>
+    <p>{data.summary}</p>
+
+    <h2>{labels.headings.experience}</h2>
+    {data.experience.flatMap((job) => job.roles.map((role) => (
+      <div class="role">
+        <h3>{role.title}</h3>
+        <p>{job.org}{job.formerly && ` (antes ${job.formerly})`}</p>
+        <p>{role.place ?? job.location} | {atsPeriod(role, labels.present)}</p>
+        <ul>{role.highlights.map((h) => <li>{h}</li>)}</ul>
+      </div>
+    )))}
+    {data.earlier.map((job) => (
+      <div class="role">
+        <h3>{job.title}</h3>
+        <p>{job.org}</p>
+        <p>{job.location} | {atsPeriod(job, labels.present)}</p>
+        <ul><li>{job.text}</li></ul>
+      </div>
+    ))}
+
+    <h2>{labels.headings.skills}</h2>
+    {data.stack.map((g) => <p>{g.group}: {g.items.join(', ')}</p>)}
+
+    <h2>{labels.headings.education}</h2>
+    {data.education.map((e) => <p>{e.title}, {e.org} | {e.period.replace(' — ', ' – ')}</p>)}
+
+    <h2>{labels.headings.courses}</h2>
+    {data.courses.map((c) => <p>{c.org}: {c.items.join(', ')} | {c.period.replace(' — ', ' – ')}</p>)}
+
+    <h2>{labels.headings.languages}</h2>
+    {data.languages.map((l) => <p>{l.name}: {l.level}</p>)}
+
+    <script is:inline>
+      // El email nunca va en texto plano en el HTML: se arma al cargar. El PDF se genera después, con el texto ya armado.
+      document.querySelectorAll('a[data-mail]').forEach(function (a) {
+        var email = atob(a.dataset.mail).split('').reverse().join('');
+        a.href = 'mailto:' + email;
+        a.textContent = email;
+      });
+    </script>
+  </body>
+</html>
