@@ -53,7 +53,7 @@ netlify.toml          build, redirects y cabeceras
    - JS propio ≤ 10 KB gz por página (hoy, 7,5 KB en la home). El beacon de Cloudflare es de terceros, pesa unos 10 KB gz y se carga diferido.
    - CLS 0.
    - `npm run qa` en verde.
-3. **Accesibilidad:** elementos semánticos reales, foco visible, contraste medido con los tokens, `prefers-reduced-motion` respetado, contenido que rota con pausa (WCAG 2.2.2). Checklist en `DESIGN.md §9`.
+3. **Accesibilidad:** elementos semánticos reales, foco visible, contraste medido con los tokens, `prefers-reduced-motion` respetado, contenido que rota con forma de pausarlo (WCAG 2.2.2). Checklist en `DESIGN.md §9`.
 4. **Animaciones de entrada con la propiedad `translate`**, nunca `transform`, sobre elementos que puedan ser `.card` (la perspectiva usa `transform`).
 5. **Botones:** nunca pisar `.btn` desde estilos locales. En prosa, usar `a:not(.btn)`.
 6. **Dependencias:** no sumar librerías de UI ni de animación sin justificar su peso contra el presupuesto. Primero CSS y APIs nativas (View Transitions, popover, `<details>`, IntersectionObserver).
@@ -62,7 +62,7 @@ netlify.toml          build, redirects y cabeceras
 9. **Rutas:** las URLs públicas son contrato (`/`, `/curriculum`, `/portfolio`, `/contacto`, `/sobre-mi`, más lo que defina `netlify.toml`). Cambiar una ruta implica un redirect 301. Si cambia una página pública, se actualiza `src/data/pages.ts`.
 10. **La terminal del hero usa siempre `~/ilan`.** El contenido de las escenas sale del CV real.
 11. **Privacidad:** el email nunca va en texto plano en el HTML (usar `encodeMail`/`decodeMail` de `src/lib/mail.ts`). Solo el PDF del CV lo lleva en claro. Sin nombres de familiares en el sitio. Analytics solo sin cookies (Cloudflare Web Analytics): sin GA y sin banner.
-12. **Formulario:** el `name` del form (`contact-form`) y sus campos (`name`, `email`, `tema`, `message`, `subject`, `fake`) coinciden con los de Netlify. `data-step` usa el mismo nombre que el campo. Con JS, el POST manda `subject`, `email` y un `message` compuesto, para que la notificación sea un solo texto. Netlify titula cada campo con su `<label>`: por eso es oculto y corto, y la pregunta visible se asocia con `aria-labelledby`.
+12. **Formulario:** el `name` del form (`contact-form`) y sus campos (`name`, `email`, `tema`, `message`, `subject`, `fake`) coinciden con los de Netlify. `data-step` usa el mismo nombre que el campo. Con JS, `subject` se arma con el nombre y el tema. Netlify titula cada campo con su `<label>`: por eso es oculto y corto, y la pregunta visible se asocia con `aria-labelledby`.
 13. **CSS:** no usar `-webkit-backdrop-filter` junto a `backdrop-filter`: el minificador deja solo el prefijado y Chrome pierde el blur.
 14. **Links externos:** siempre con `target="_blank" rel="noopener"` (lo valida el QA).
 15. **CV:** `/curriculum` y el PDF salen de `src/data/cv.ts`. El PDF se edita en `components/CvAts.astro`, con una columna y máximo 2 páginas: el QA valida orden de lectura y fuentes. Reglas en `DESIGN.md`.

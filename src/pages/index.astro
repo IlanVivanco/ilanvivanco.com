@@ -43,10 +43,12 @@ const focusIcons = { wordpress: 'layers', js: 'code', ai: 'spark', api: 'plug', 
 						<p class="eyebrow">¡Hola! Me llamo</p>
 						<h1 class="display">Ilán Vivanco</h1>
 						<p class="role mono">
-							CTO en{' '}
-							<a class="link" href="https://epicdevs.com" target="_blank" rel="noopener">
-								EpicDevs
-							</a>
+							<span>
+								CTO en{' '}
+								<a class="link" href="https://epicdevs.com" target="_blank" rel="noopener">
+									EpicDevs
+								</a>
+							</span>
 							<span class="where">
 								<span class="live" aria-hidden="true"></span>Santander
 							</span>
@@ -240,9 +242,6 @@ const focusIcons = { wordpress: 'layers', js: 'code', ai: 'spark', api: 'plug', 
 		gap: 6px 14px;
 		font-size: clamp(0.9375rem, 1.3vw, 1.0625rem);
 		color: var(--text);
-	}
-	.role a {
-		color: var(--yellow);
 	}
 	.where {
 		display: inline-flex;

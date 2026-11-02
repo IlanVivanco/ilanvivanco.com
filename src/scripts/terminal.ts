@@ -319,11 +319,13 @@ export function initTerminal(root: HTMLElement) {
 			for (let c = instant + 1; c <= len; c++) {
 				if (!(await tick((line.speed ?? 30) + Math.random() * 18, id))) return
 				out!.innerHTML = done.join('') + `<span class="t-line">${tokHtml(line.t, c)}${cursor}</span>`
+				scrollEnd()
 			}
 			done.push(`<span class="t-line">${tokHtml(line.t)}</span>`)
 			if (!(await tick(90, id))) return
 		}
 		out!.innerHTML = done.join('') + `<span class="t-line">${cursor}</span>`
+		scrollEnd()
 
 		// Pausa con la barra de progreso de la pestaña, y siguiente escena
 		tabs[i].classList.add('is-holding')

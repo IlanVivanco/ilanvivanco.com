@@ -272,18 +272,24 @@ const bare = (url: string) => url.replace(/^https:\/\/(www\.)?/, '').replace(/\/
 			<h2>{labels.headings.education}</h2>
 			<div class="rows">
 				{data.education.map((e) => (
-					<p>
-						<b>{e.title}</b>, {e.org} | {e.period.replace(' — ', ' – ')}
-					</p>
+					<div class="head">
+						<p>
+							<b>{e.title}</b>, {e.org}
+						</p>
+						<p class="when">{e.period.replace(' — ', ' – ')}</p>
+					</div>
 				))}
 			</div>
 
 			<h2>{labels.headings.courses}</h2>
 			<div class="rows">
 				{data.courses.map((c) => (
-					<p>
-						<b>{c.org}:</b> {c.items.join(', ')} | {c.period.replace(' — ', ' – ')}
-					</p>
+					<div class="head">
+						<p>
+							<b>{c.org}:</b> {c.items.join(', ')}
+						</p>
+						<p class="when">{c.period.replace(' — ', ' – ')}</p>
+					</div>
 				))}
 			</div>
 

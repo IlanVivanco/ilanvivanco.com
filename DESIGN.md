@@ -114,8 +114,8 @@ Texto con flecha y el mismo subrayado que `.link` (todos los links de texto, ema
 ### Stats del home (`components/Stats.astro`)
 - **4 pantallas de 4 tarjetas** que rotan juntas: "mi trayectoria, en números", "mis números en el código", "datos que nadie pidió" (la pantalla con humor) y "este sitio, en números". Un valor puede ser texto fijo (`display: '∞'`), que no cuenta. Datos en `src/data/site.ts → statScreens`.
 - Transición tipo tablero de aeropuerto: la cifra saliente gira hacia arriba y la nueva entra desde abajo, en cascada de 80ms por tarjeta. Los números cuentan hacia arriba.
-- **Pausa y dots van juntos, arriba a la derecha** (en mobile, en su propia fila bajo el título), en un lugar fijo: el título que se tipea no los mueve. Los dots son a la vez navegación y timer: el activo se estira y se llena con el tiempo restante.
-- También pausan el hover, el foco de teclado y salir de pantalla.
+- **Los dots van arriba a la derecha** (en mobile, en su propia fila bajo el título), en un lugar fijo. Son a la vez navegación y timer: el activo se estira y se llena con el tiempo restante.
+- Sin botón de pausa: pausan el hover, el foco de teclado y salir de pantalla. En táctil, elegir un dot deja de rotar hasta salir de pantalla.
 - Cifras estimadas: `approx: true` y prefijo `~` o sufijo `+`. Nunca inventar precisión.
 
 ### Tarjeta de proyecto (`components/ProjectCard.astro`)
@@ -137,7 +137,7 @@ Círculo de 32px con borde `--line-strong`. Abierto: fondo amarillo, rota 180° 
 - El cuerpo corre `$ ./contacto.sh`.
 - Las preguntas usan `?` en teal; la respuesta va después de `›`, que se pone amarillo con foco (ese es el indicador de foco).
 - Las respondidas quedan como `✓ pregunta · respuesta` y se pueden editar con un click.
-- La barra muestra los pasos (`nombre › email › tema › mensaje`) como indicador lineal, sin click: ✓ hecho, número en amarillo el actual, número apagado el pendiente. Para corregir una respuesta se hace click en su línea del log.
+- La barra muestra los pasos (`nombre › email › tema › mensaje`) a medida que se llega a cada uno: nunca hay pasos sin visitar a la vista. Se pueden clickear, igual que las líneas del log; para avanzar se valida lo que hay en el medio. ✓ hecho, número en amarillo el actual.
 - La pregunta actual se resalta de borde a borde, con fondo `--surface` y filete amarillo.
 - El tema se elige con ↑↓ (radios nativos) y Enter; con mouse, el click avanza.
 - El mensaje se envía con **Enter** y Shift+Enter agrega línea. El botón es texto plano: `[ enviar ↵ ]`.
@@ -174,7 +174,7 @@ Mono 0.8125rem, borde `--line-hi` y radio 999px. En el CV entran escalonados.
 - **Revelado**: `[data-reveal]` hace opacity 0→1 y `translate` 14px→0 en 0.7s. Dentro de `[data-reveal-group]`, escalonado cada 70ms. Usa la propiedad `translate`, **no `transform`**, para no pisar la perspectiva de las tarjetas.
 - **Transiciones entre páginas**: cross-document View Transitions, sin JS. El header queda fijo, el contenido (`main`, nombre `page`) sale hacia arriba con un poco de blur y entra desde abajo; la pastilla del nav viaja.
 - Duraciones: micro 0.2–0.35s; entradas 0.5–0.7s; nada supera 1.1s, salvo los loops de ambiente.
-- **Contenido que rota solo** (terminal, stats): siempre con pausa visible + pausa fuera de pantalla (WCAG 2.2.2).
+- **Contenido que rota solo** (terminal, stats): siempre con una forma de pausar (WCAG 2.2.2) y pausa fuera de pantalla. Terminal: botón. Stats: hover, foco de teclado y, en táctil, elegir un dot.
 - `prefers-reduced-motion: reduce`: sin perspectiva, sin VT, sin tipeo (escena estática), stats con crossfade, duraciones a 0.01ms.
 - Librería: **Motion mini** (`motion/mini`, sobre WAAPI). Lo demás es CSS y APIs nativas (IntersectionObserver, View Transitions, popover, `<details>`). No sumar GSAP, Three.js, Lottie ni similares sin una razón que valga su peso.
 
