@@ -1,0 +1,102 @@
+---
+// Terminal animada del hero. El HTML inicial es la escena 1 completa (sin JS se ve igual).
+import Icon from './Icon.astro';
+const tabs = ['ilan.ts', 'git log', 'claude'];
+---
+<figure class="term" data-terminal>
+  <div class="term-bar">
+    <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+    <div class="term-tabs" role="group" aria-label="Escenas de la terminal">
+      {tabs.map((t, i) => (
+        <button type="button" class="term-tab mono" data-term-tab aria-pressed={i === 0 ? 'true' : 'false'}>
+          <span>{t}</span>
+          <span class="term-progress" aria-hidden="true"></span>
+        </button>
+      ))}
+    </div>
+    <button type="button" class="term-toggle" data-term-toggle aria-pressed="false" aria-label="Pausar la animación de la terminal">
+      <span class="when-playing"><Icon name="pause" size={14} /></span>
+      <span class="when-paused"><Icon name="play" size={14} /></span>
+    </button>
+  </div>
+  <pre class="term-body mono" aria-hidden="true"><code data-term-out><span class="t-line"><span class="t-k">const</span> ilan = &#123;</span><span class="t-line">  <span class="t-p">rol</span>: <span class="t-s">'CTO @ EpicDevs'</span>,</span><span class="t-line">  <span class="t-p">base</span>: <span class="t-s">'Santander, ES'</span>,</span><span class="t-line">  <span class="t-p">desde</span>: <span class="t-n">2005</span>,</span><span class="t-line">  <span class="t-p">stack</span>: [<span class="t-s">'WP'</span>, <span class="t-s">'Vue'</span>, <span class="t-s">'Astro'</span>, <span class="t-s">'Node'</span>],</span><span class="t-line">  <span class="t-p">foco</span>: [<span class="t-s">'arquitectura'</span>, <span class="t-s">'equipos'</span>, <span class="t-s">'IA'</span>],</span><span class="t-line">  <span class="t-p">remoto</span>: <span class="t-k">true</span>,</span><span class="t-line">  <span class="t-p">combustible</span>: [<span class="t-s">'mate'</span>, <span class="t-s">'café'</span>],</span><span class="t-line">&#125;;</span><span class="t-line"></span><span class="t-line"><span class="t-c">// ¿hacemos algo juntos?</span></span><span class="t-line">ilan.<span class="t-f">contactar</span>();</span></code></pre>
+  <figcaption class="sr-only">Terminal decorativa con tres escenas: un perfil de Ilán escrito como objeto de TypeScript, su carrera contada como un historial de git desde 2005 hasta CTO en EpicDevs en 2020, y un agente de IA que mejora el tiempo de carga de una página.</figcaption>
+</figure>
+
+<script>
+  import { initTerminal } from '../scripts/terminal';
+  document.querySelectorAll<HTMLElement>('[data-terminal]').forEach((el) => initTerminal(el));
+</script>
+
+<style>
+  .term {
+    margin: 0; overflow: hidden; border-radius: var(--radius);
+    background: color-mix(in oklab, #070C17 88%, transparent);
+    border: 1px solid var(--line-hi);
+    box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  }
+  .term-bar { display: flex; align-items: center; gap: 14px; padding: 0 8px 0 16px; border-bottom: 1px solid var(--line); background: rgba(20, 32, 54, 0.75); }
+  .dots { display: flex; gap: 6px; }
+  .dots i { width: 10px; height: 10px; border-radius: 50%; }
+  .dots i:nth-child(1) { background: var(--orange); }
+  .dots i:nth-child(2) { background: var(--yellow); }
+  .dots i:nth-child(3) { background: var(--teal); }
+  .term-tabs { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; }
+  .term-toggle {
+    margin-left: auto; flex: none; display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px;
+    border-radius: 8px; border: 1px solid transparent; background: transparent; color: var(--muted); cursor: pointer; transition: color 0.2s, border-color 0.2s;
+  }
+  .term-toggle:hover, .term-toggle:focus-visible { color: var(--text); border-color: var(--line-strong); }
+  .term-toggle .when-paused, .term-toggle[aria-pressed='true'] .when-playing { display: none; }
+  .term-toggle[aria-pressed='true'] .when-paused { display: inline-flex; }
+  .term-toggle[aria-pressed='true'] { color: var(--yellow); }
+  .term-tab {
+    position: relative; min-height: 44px; padding: 0 12px; border: 0; background: transparent; cursor: pointer; white-space: nowrap;
+    color: var(--muted); font-size: 0.8125rem; transition: color 0.2s;
+  }
+  .term-tab:hover { color: var(--text-soft); }
+  .term-tab[aria-pressed='true'] { color: var(--text); }
+  .term-progress { position: absolute; left: 10px; right: 10px; bottom: -1px; height: 2px; border-radius: 2px; background: var(--line-hi); opacity: 0; overflow: hidden; }
+  .term-tab[aria-pressed='true'] .term-progress { opacity: 1; }
+  .term-progress::after { content: ''; position: absolute; inset: 0; background: var(--yellow); transform-origin: left; transform: scaleX(0); }
+  .term-tab.is-holding .term-progress::after { animation: hold var(--hold, 4s) linear forwards; }
+  .term-tab.is-paused .term-progress::after { animation-play-state: paused; }
+  @keyframes hold { to { transform: scaleX(1); } }
+
+  .term-body {
+    margin: 0; padding: 22px 24px; height: 21.5em; overflow: hidden; scroll-behavior: smooth;
+    font-size: clamp(0.71875rem, 1.12vw, 0.96875rem); line-height: 1.75; color: var(--text-soft); tab-size: 2;
+  }
+  .term-body code { display: block; font: inherit; transition: opacity 0.18s; }
+  :global(html.js) [data-term-out] { opacity: 0; }
+  .term-body code.is-switching { opacity: 0 !important; }
+  .term-body :global(.t-line) { display: block; min-height: 1.75em; white-space: pre; }
+  .term-body :global(.t-k) { color: var(--orange-hi); }
+  .term-body :global(.t-p) { color: var(--teal-hi); }
+  .term-body :global(.t-s) { color: var(--yellow); }
+  .term-body :global(.t-n) { color: var(--violet); }
+  .term-body :global(.t-c) { color: var(--muted); font-style: italic; }
+  .term-body :global(.t-f) { color: var(--teal-hi); }
+  .term-body :global(.t-pr) { color: var(--teal-hi); }
+  .term-body :global(.t-m) { color: var(--muted); }
+  .term-body :global(.t-w) { color: var(--text); }
+  .term-body :global(.t-ok) { color: var(--teal-hi); }
+  .term-body :global(.t-y) { color: var(--yellow); }
+  .term-body :global(.t-h) { color: var(--yellow); }
+  .term-body :global(.t-br) { color: var(--teal-hi); }
+  .term-body :global(.t-o) { color: var(--orange-hi); }
+  .term-body :global(.t-line--del) { background: rgba(204, 79, 45, 0.14); margin: 0 -24px; padding: 0 24px; }
+  .term-body :global(.t-line--add) { background: rgba(44, 151, 159, 0.16); margin: 0 -24px; padding: 0 24px; }
+  .term-body :global(.t-bar) {
+    display: inline-block; width: 7em; height: 0.55em; margin-left: 0.6em; border-radius: 2px; vertical-align: 0.05em;
+    background: linear-gradient(var(--yellow), var(--yellow)) 0 0 / var(--w) 100% no-repeat, var(--line-hi);
+    animation: bar-in 0.7s var(--ease-out) both;
+  }
+  @keyframes bar-in { from { background-size: 0 100%, auto; } }
+  .term-body :global(.t-cursor) {
+    display: inline-block; width: 0.6em; height: 1.2em; vertical-align: -0.22em; margin-left: 1px;
+    background: var(--yellow); animation: blink 1.05s steps(1) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+</style>

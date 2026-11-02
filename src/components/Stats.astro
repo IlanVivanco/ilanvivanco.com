@@ -1,0 +1,199 @@
+---
+import { statScreens, type Stat } from '../data/site';
+import Icon from './Icon.astro';
+
+const num = (v: number) => (Number.isInteger(v) ? String(v) : v.toLocaleString('es-ES', { maximumFractionDigits: 1 }));
+const shown = (s: Stat) => s.display ?? num(s.value);
+const text = (s: Stat) => `${s.prefix ?? ''}${shown(s)}${s.suffix ?? ''} ${s.label}`;
+const cards = statScreens[0].items.map((_, i) => i);
+---
+<section class="stats" aria-labelledby="stats-title" data-stats>
+  <h2 id="stats-title" class="sr-only">En números</h2>
+  <div class="stats-head">
+    <p class="stats-title mono" aria-hidden="true">// <span data-screen-title>{statScreens[0].title}</span><span class="title-caret"></span></p>
+    <button type="button" class="stats-toggle" data-stats-toggle aria-pressed="false" aria-label="Pausar la rotación de cifras">
+      <span class="when-playing"><Icon name="pause" size={14} /></span>
+      <span class="when-paused"><Icon name="play" size={14} /></span>
+    </button>
+  </div>
+
+  <ul class="stats-grid" role="list" data-reveal-group aria-hidden="true">
+    {cards.map((c) => (
+      <li class="card stat" data-reveal style={`--d:${c * 80}ms`}>
+        <div class="stat-stage">
+          {statScreens.map((screen, s) => {
+            const st = screen.items[c];
+            return (
+              <div class:list={['stat-item', { 'is-active': s === 0 }]} data-stat-item data-screen={s} data-value={st.display ? undefined : st.value}>
+                <span class="stat-value">
+                  {st.prefix && <span class="affix">{st.prefix}</span>}<span data-num>{shown(st)}</span>{st.suffix && <span class="affix">{st.suffix}</span>}
+                </span>
+                <span class="stat-label">{st.label}</span>
+              </div>
+            );
+          })}
+        </div>
+      </li>
+    ))}
+  </ul>
+  <div class="screens" role="group" aria-label="Elegir grupo de cifras">
+    {statScreens.map((s, i) => (
+      <button type="button" class="screen-dot" data-screen-btn={i} aria-pressed={i === 0 ? 'true' : 'false'} aria-label={`Mostrar: ${s.title}`}><span class="dot-fill"></span></button>
+    ))}
+  </div>
+  <div class="sr-only">
+    {statScreens.map((s) => (
+      <ul role="list" aria-label={s.title}>
+        {s.items.map((st) => <li>{text(st)}</li>)}
+      </ul>
+    ))}
+  </div>
+</section>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-stats]');
+  if (root) {
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const titles = [...root.querySelectorAll<HTMLButtonElement>('[data-screen-btn]')].map((b) => (b.getAttribute('aria-label') || '').replace('Mostrar: ', ''));
+    const items = [...root.querySelectorAll<HTMLElement>('[data-stat-item]')];
+    const dots = [...root.querySelectorAll<HTMLButtonElement>('[data-screen-btn]')];
+    const toggle = root.querySelector<HTMLButtonElement>('[data-stats-toggle]')!;
+    const titleEl = root.querySelector<HTMLElement>('[data-screen-title]')!;
+    
+    const N = dots.length;
+    const INTERVAL = 5600;
+    let screen = 0;
+    let elapsed = 0;
+    let userPaused = false;
+    let hover = false;
+    let visible = false;
+    let started = false;
+
+    const fmt = (v: number, d: number) => v.toLocaleString('es-ES', { minimumFractionDigits: d, maximumFractionDigits: d });
+    const countUp = (item: HTMLElement, delay = 0) => {
+      const el = item.querySelector<HTMLElement>('[data-num]');
+      if (!el || item.dataset.value === undefined) return; // valores fijos (∞) no cuentan
+      const target = Number(item.dataset.value);
+      const d = Number.isInteger(target) ? 0 : 1;
+      if (reduce) { el.textContent = fmt(target, d); return; }
+      el.textContent = fmt(0, d);
+      setTimeout(() => {
+        const t0 = performance.now();
+        const step = (now: number) => {
+          const p = Math.min(1, (now - t0) / 1000);
+          el.textContent = fmt(target * (1 - Math.pow(1 - p, 4)), d);
+          if (p < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      }, delay);
+    };
+
+    let typing = 0;
+    const typeTitle = async (t: string) => {
+      const id = ++typing;
+      const wait = (ms: number) => new Promise((r) => setTimeout(r, reduce ? 0 : ms));
+      while (titleEl.textContent && id === typing) { titleEl.textContent = titleEl.textContent.slice(0, -1); await wait(18); }
+      for (let i = 1; i <= t.length && id === typing; i++) { titleEl.textContent = t.slice(0, i); await wait(40); }
+    };
+
+    const show = (next: number) => {
+      if (next === screen) return;
+      items.forEach((it) => {
+        const s = Number(it.dataset.screen);
+        it.classList.toggle('is-leaving', s === screen);
+        it.classList.toggle('is-active', s === next);
+      });
+      items.filter((it) => Number(it.dataset.screen) === next).forEach((it, i) => countUp(it, 120 + i * 80));
+      dots.forEach((d, i) => d.setAttribute('aria-pressed', String(i === next)));
+      typeTitle(titles[next]);
+      screen = next;
+      elapsed = 0;
+    };
+
+    const paused = () => userPaused || hover || document.hidden || !visible;
+    const syncUi = () => {
+      toggle.setAttribute('aria-pressed', String(userPaused));
+      toggle.setAttribute('aria-label', userPaused ? 'Reanudar la rotación de cifras' : 'Pausar la rotación de cifras');
+    };
+    toggle.addEventListener('click', () => { userPaused = !userPaused; syncUi(); });
+    dots.forEach((d, i) => d.addEventListener('click', () => show(i)));
+    root.addEventListener('pointerenter', () => (hover = true));
+    root.addEventListener('pointerleave', () => (hover = false));
+    root.addEventListener('focusin', () => (hover = true));
+    root.addEventListener('focusout', () => (hover = false));
+
+    new IntersectionObserver(([e]) => {
+      visible = e.isIntersecting;
+      if (visible && !started) {
+        started = true;
+        items.filter((it) => it.classList.contains('is-active')).forEach((it, i) => countUp(it, 200 + i * 80));
+      }
+    }, { threshold: 0.35 }).observe(root);
+
+    let last = performance.now();
+    setInterval(() => {
+      const now = performance.now();
+      if (!paused()) {
+        elapsed += now - last;
+        if (elapsed >= INTERVAL) show((screen + 1) % N);
+      }
+      root.style.setProperty('--p', Math.min(1, elapsed / INTERVAL).toFixed(3));
+      last = now;
+    }, 100);
+  }
+</script>
+
+<style>
+  .stats { margin-top: clamp(48px, 6vw, 80px); display: flex; flex-direction: column; gap: 14px; }
+  .stats-head { display: flex; align-items: center; gap: 8px; }
+  .stats-title { font-size: 0.875rem; color: var(--muted); display: inline-flex; align-items: center; }
+  .stats-title span[data-screen-title] { color: var(--text-soft); margin-left: 0.5ch; }
+  .title-caret { display: inline-block; width: 0.55em; height: 1.1em; margin-left: 2px; background: var(--teal-hi); opacity: 0.8; animation: blink 1.05s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* Pausa: solo el ícono, como en la terminal */
+  .stats-toggle {
+    display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; margin-left: 4px;
+    border: 1px solid transparent; border-radius: 8px; background: transparent; color: var(--muted); cursor: pointer; transition: color 0.2s, border-color 0.2s;
+  }
+  .stats-toggle:hover, .stats-toggle:focus-visible { color: var(--text); border-color: var(--line-strong); }
+  .stats-toggle .when-paused, .stats-toggle[aria-pressed='true'] .when-playing { display: none; }
+  .stats-toggle[aria-pressed='true'] .when-paused { display: inline-flex; }
+  .stats-toggle[aria-pressed='true'] { color: var(--yellow); }
+
+  /* Dots centrados abajo; el activo se estira y se llena con el tiempo restante */
+  .screens { display: flex; justify-content: center; gap: 2px; margin-top: 6px; }
+  .screen-dot { position: relative; width: 32px; height: 28px; border: 0; padding: 0; background: transparent; cursor: pointer; }
+  .screen-dot::before, .dot-fill { position: absolute; left: 50%; top: 50%; height: 6px; margin-top: -3px; border-radius: 3px; }
+  .screen-dot::before { content: ''; width: 6px; margin-left: -3px; background: var(--line-strong); transition: width 0.45s var(--ease-spring), margin 0.45s var(--ease-spring), background-color 0.3s; }
+  .screen-dot[aria-pressed='true']::before { width: 26px; margin-left: -13px; background: var(--line-hi); }
+  .dot-fill { width: 26px; margin-left: -13px; background: var(--yellow); transform-origin: left; transform: scaleX(0); opacity: 0; }
+  .screen-dot[aria-pressed='true'] .dot-fill { opacity: 1; transform: scaleX(var(--p, 0)); transition: transform 0.1s linear; }
+  .screen-dot:not([aria-pressed='true']):hover::before { background: var(--text-soft); }
+
+  .stats-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 6px 0 0; padding: 0; }
+  .stat { padding: 22px 22px 24px; min-height: 156px; display: flex; }
+  .stat-stage { display: grid; flex: 1; perspective: 700px; }
+
+  /* Tablero: la cifra saliente gira hacia arriba y la nueva entra desde abajo, en cascada por tarjeta */
+  .stat-item {
+    grid-area: 1 / 1; display: flex; flex-direction: column; justify-content: flex-end; gap: 8px;
+    opacity: 0; transform: rotateX(-75deg) translateY(30%); transform-origin: 50% 100%; backface-visibility: hidden;
+    transition: opacity 0.45s var(--ease-out), transform 0.7s var(--ease-out);
+  }
+  .stat-item.is-active { opacity: 1; transform: none; transition-delay: calc(var(--d) + 0.18s); }
+  .stat-item.is-leaving { opacity: 0; transform: rotateX(75deg) translateY(-30%); transform-origin: 50% 0; transition-delay: var(--d); transition-duration: 0.35s, 0.5s; }
+  .stat-value { font-size: clamp(2.25rem, 3.6vw, 3rem); font-weight: 600; letter-spacing: -0.045em; line-height: 1; font-variant-numeric: tabular-nums; }
+  .affix { color: var(--yellow); }
+  .stat-label { color: var(--text-soft); font-size: 0.9375rem; line-height: 1.4; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stat-item, .stat-item.is-leaving, .stat-item.is-active { transform: none; transition-delay: 0s; }
+  }
+  @media (max-width: 960px) { .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 480px) {
+    .stat { min-height: 140px; padding: 16px 16px 20px; }
+    .stat-value { font-size: 2rem; }
+    .stat-label { font-size: 0.875rem; }
+  }
+</style>

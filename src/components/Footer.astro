@@ -1,0 +1,29 @@
+---
+import { site } from '../data/site';
+import Logo from './Logo.astro';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="container foot">
+    <div class="foot-brand">
+      <Logo size={26} />
+      <span>© {year} Ilán Vivanco · hecho en Santander con Astro, mate y café</span>
+    </div>
+    <nav aria-label="Redes">
+      <ul role="list">
+        {site.socials.map((s) => (
+          <li><a href={s.href} rel="noopener">{s.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  .site-footer { border-top: 1px solid var(--line); }
+  .foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px; padding-block: 28px; font-family: var(--font-mono); font-size: 0.8125rem; color: var(--muted); }
+  .foot-brand { display: flex; align-items: center; gap: 12px; }
+  ul { display: flex; flex-wrap: wrap; gap: 4px 20px; margin: 0; }
+  a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; color: var(--text-soft); }
+  a:hover { color: var(--yellow-hi); }
+</style>

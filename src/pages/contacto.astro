@@ -1,0 +1,466 @@
+---
+import Base from '../layouts/Base.astro';
+import Fn from '../components/Fn.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+import { encodeMail } from '../lib/mail';
+
+const mail = encodeMail(site.email);
+
+const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'Consultoría', 'Otra cosa'];
+---
+<Base title="Contacto" description="¿Qué te parece si hacemos algo juntos? Escribime por email, LinkedIn o el formulario.">
+  <section class="section ct">
+    <div class="container ct-grid">
+      <div class="stack ct-copy" style="--gap: 24px">
+        <Fn name="contactame" as="p" />
+        <h1 class="display" data-reveal>¿Hacemos algo juntos?</h1>
+        <p class="lede" data-reveal data-delay="0.05">Contame en qué estás trabajando. Respondo en uno o dos días hábiles.</p>
+
+        <div class="mail" data-reveal data-delay="0.1">
+          <span class="mono mail-label">email</span>
+          <a class="mail-link" href="#contacto" data-mail={mail}>
+            <span data-mail-text>[email protegido]</span>
+            <span class="mail-tip mono" data-copy-tip aria-live="polite"></span>
+          </a>
+        </div>
+
+        <ul class="elsewhere" role="list" data-reveal data-delay="0.15">
+          <li><a class="link-arrow" href="https://www.linkedin.com/in/ilanvivanco/" rel="noopener">LinkedIn <Icon name="arrow-up-right" size={16} /></a></li>
+          <li><a class="link-arrow" href="https://github.com/IlanVivanco" rel="noopener">GitHub <Icon name="arrow-up-right" size={16} /></a></li>
+        </ul>
+
+        <p class="clock mono" data-reveal data-delay="0.2">
+          <span class="live" aria-hidden="true"></span>
+          <span>En Santander son las <time data-clock>—</time></span>
+        </p>
+      </div>
+
+      <!-- Formulario como consola. Sin JS se ve como un formulario normal con todos los campos. -->
+      <form class="console" data-console novalidate data-endpoint={site.formEndpoint} data-mail={mail} data-reveal data-delay="0.1" aria-labelledby="con-title">
+        <div class="con-bar">
+          <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <h2 id="con-title" class="sr-only">Formulario de contacto</h2>
+          <div class="con-tabs" role="group" aria-label="Preguntas" data-tabs>
+            {['nombre', 'email', 'tema', 'mensaje'].map((t, i) => (
+              <button type="button" class="con-tab" data-tab={i} aria-current={i === 0 ? 'step' : undefined} disabled={i > 0}>{t}</button>
+            ))}
+          </div>
+          <span class="con-step" data-step-label aria-hidden="true"></span>
+        </div>
+        <div hidden><span data-progress></span></div>
+
+        <div class="con-body">
+          <p class="con-line" aria-hidden="true"><span class="c-pr">$</span> <span class="c-w">./contacto.sh</span></p>
+          <p class="con-line c-m" aria-hidden="true">contacto v1.0 · respondo en 1–2 días hábiles, mate mediante</p>
+
+          <ol class="con-log" role="list" data-log aria-label="Tus respuestas"></ol>
+
+          <div class="q" data-step="nombre">
+            <label class="q-label" for="f-name"><span class="q-mark" aria-hidden="true">?</span> ¿Cómo te llamás?</label>
+            <div class="q-field">
+              <span class="q-caret" aria-hidden="true">›</span>
+              <input id="f-name" name="nombre" type="text" autocomplete="name" required spellcheck="false" />
+              <button type="button" class="q-enter" data-next aria-label="Confirmar y seguir">↵</button>
+            </div>
+          </div>
+
+          <div class="q" data-step="email">
+            <label class="q-label" for="f-email" data-email-label><span class="q-mark" aria-hidden="true">?</span> ¿A qué email te respondo?</label>
+            <div class="q-field">
+              <span class="q-caret" aria-hidden="true">›</span>
+              <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required spellcheck="false" aria-describedby="f-email-err" />
+              <button type="button" class="q-enter" data-next aria-label="Confirmar y seguir">↵</button>
+            </div>
+            <p class="q-error" id="f-email-err" data-error></p>
+          </div>
+
+          <fieldset class="q" data-step="tema">
+            <legend class="q-label"><span class="q-mark" aria-hidden="true">?</span> ¿Sobre qué querés hablar? <span class="q-help">(↑↓ y Enter)</span></legend>
+            <div class="opts">
+              {topics.map((t, i) => (
+                <label class="opt">
+                  <input type="radio" name="tema" value={t} required={i === 0} checked={i === 0} />
+                  <span class="opt-ptr" aria-hidden="true">›</span>
+                  <span class="opt-txt">{t}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+          <div class="q" data-step="mensaje">
+            <label class="q-label" for="f-msg"><span class="q-mark" aria-hidden="true">?</span> Contame un poco más <span class="q-help">(Enter envía · Shift+Enter, nueva línea)</span></label>
+            <textarea id="f-msg" name="mensaje" rows="4" required spellcheck="true" data-autogrow></textarea>
+            <div class="q-foot">
+              <span class="c-m q-count" data-count aria-hidden="true">0 caracteres</span>
+              <button class="cli-btn" type="submit">[ <span data-submit-label>enviar</span> ↵ ]</button>
+            </div>
+          </div>
+
+          <!-- honeypot -->
+          <div class="sr-only" aria-hidden="true"><label for="f-web">Web</label><input id="f-web" name="_gotcha" type="text" tabindex="-1" autocomplete="off" /></div>
+
+          <ol class="con-out" role="list" data-out></ol>
+          <div class="con-restart" data-restart-wrap hidden>
+            <span class="c-pr" aria-hidden="true">$</span>
+            <button type="button" class="restart" data-restart>./contacto.sh</button>
+          </div>
+        </div>
+        <p class="sr-only" role="status" aria-live="polite" data-announce></p>
+      </form>
+    </div>
+  </section>
+
+  <script>
+    import { decodeMail } from '../lib/mail';
+
+    /* ---------- Email: se arma al cargar (ofuscado en el HTML) y el click lo copia ---------- */
+    document.querySelectorAll<HTMLAnchorElement>('a[data-mail]').forEach((a) => {
+      const email = decodeMail(a.dataset.mail || '');
+      a.href = `mailto:${email}`;
+      a.dataset.copy = email;
+      const text = a.querySelector('[data-mail-text]');
+      if (text) text.textContent = email;
+    });
+    document.querySelectorAll<HTMLAnchorElement>('[data-copy]').forEach((a) => {
+      const tip = a.querySelector<HTMLElement>('[data-copy-tip]');
+      let t = 0;
+      a.addEventListener('click', async (e) => {
+        try {
+          await navigator.clipboard.writeText(a.dataset.copy || '');
+          e.preventDefault();
+          a.classList.add('is-copied');
+          if (tip) tip.textContent = 'copiado';
+          clearTimeout(t);
+          t = window.setTimeout(() => { a.classList.remove('is-copied'); if (tip) tip.textContent = ''; }, 1600);
+        } catch { /* sin permiso: sigue el mailto */ }
+      });
+    });
+
+    /* ---------- Hora local ---------- */
+    const clock = document.querySelector<HTMLTimeElement>('[data-clock]');
+    const tickClock = () => {
+      if (!clock) return;
+      const now = new Date();
+      clock.textContent = new Intl.DateTimeFormat('es-ES', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Madrid' }).format(now);
+      clock.dateTime = now.toISOString();
+    };
+    tickClock();
+    setInterval(tickClock, 30_000);
+
+    /* ---------- Formulario como consola ---------- */
+    const form = document.querySelector<HTMLFormElement>('[data-console]');
+    if (form) {
+      const steps = [...form.querySelectorAll<HTMLElement>('[data-step]')];
+      const log = form.querySelector<HTMLOListElement>('[data-log]')!;
+      const out = form.querySelector<HTMLOListElement>('[data-out]')!;
+      const label = form.querySelector<HTMLElement>('[data-step-label]')!;
+      const progress = form.querySelector<HTMLElement>('[data-progress]')!;
+      const announce = form.querySelector<HTMLElement>('[data-announce]')!;
+      const emailLabel = form.querySelector<HTMLElement>('[data-email-label]')!;
+      const emailErr = form.querySelector<HTMLElement>('[data-error]')!;
+      const textarea = form.querySelector<HTMLTextAreaElement>('textarea')!;
+      const counter = form.querySelector<HTMLElement>('[data-count]')!;
+      const submitLabel = form.querySelector<HTMLElement>('[data-submit-label]')!;
+      const restartWrap = form.querySelector<HTMLElement>('[data-restart-wrap]')!;
+      const tabs = [...form.querySelectorAll<HTMLButtonElement>('[data-tab]')];
+      let reached = 0; // pregunta más lejana a la que se llegó
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const questions = steps.map((s) => (s.querySelector('.q-label')?.textContent || '').replace('?', '').replace(/\(.*\)/, '').trim());
+      let current = 0;
+
+      form.classList.add('is-stepped');
+
+      const valueOf = (step: HTMLElement) => {
+        const el = form.elements.namedItem(step.dataset.step!) as HTMLInputElement | RadioNodeList | null;
+        return (el && 'value' in el ? el.value : '').trim();
+      };
+      const firstName = () => valueOf(steps[0]).split(/\s+/)[0];
+      const short = (v: string) => (v.length > 42 ? v.slice(0, 40) + '…' : v);
+
+      const render = (focus = true) => {
+        reached = Math.max(reached, Math.min(current, steps.length - 1));
+        steps.forEach((s, i) => s.classList.toggle('is-current', i === current));
+        tabs.forEach((t, i) => {
+          t.disabled = i > reached || form.classList.contains('is-sending');
+          if (i === current) t.setAttribute('aria-current', 'step');
+          else t.removeAttribute('aria-current');
+        });
+        label.textContent = `[${current + 1}/${steps.length}]`;
+        progress.style.transform = `scaleX(${current / steps.length})`;
+        if (firstName()) emailLabel.lastChild!.textContent = ` Un gusto, ${firstName()}. ¿A qué email te respondo?`;
+
+        log.innerHTML = '';
+        steps.slice(0, current).forEach((s, i) => {
+          const li = document.createElement('li');
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'log-line';
+          btn.setAttribute('aria-label', `Editar: ${questions[i]} ${valueOf(s)}`);
+          btn.innerHTML = `<span class="c-ok">✓</span> <span class="c-q"></span> <span class="c-m">·</span> <span class="c-a"></span>`;
+          btn.querySelector('.c-q')!.textContent = questions[i];
+          btn.querySelector('.c-a')!.textContent = short(valueOf(s));
+          btn.addEventListener('click', () => { current = i; render(); });
+          li.append(btn);
+          log.append(li);
+        });
+
+        if (focus) {
+          const q = steps[current];
+          const target = q.querySelector<HTMLElement>('input:checked') || q.querySelector<HTMLElement>('input:not([type=radio]), textarea');
+          requestAnimationFrame(() => target?.focus({ preventScroll: true }));
+          announce.textContent = questions[current];
+        }
+      };
+
+      const shake = (el: HTMLElement) => { el.classList.remove('is-shake'); void el.offsetWidth; el.classList.add('is-shake'); };
+      const validate = (i: number) => {
+        const s = steps[i];
+        const v = valueOf(s);
+        if (s.dataset.step === 'email') {
+          const input = s.querySelector('input')!;
+          const ok = input.checkValidity() && /\S+@\S+\.\S+/.test(v);
+          emailErr.textContent = ok ? '' : '✗ Ese email no parece válido. Probá de nuevo.';
+          input.setAttribute('aria-invalid', String(!ok));
+          if (!ok) shake(s);
+          return ok;
+        }
+        if (!v) shake(s);
+        return !!v;
+      };
+      const next = () => {
+        if (!validate(current)) return;
+        if (current < steps.length - 1) { current++; render(); }
+      };
+
+      form.querySelectorAll<HTMLButtonElement>('[data-next]').forEach((b) => b.addEventListener('click', next));
+      tabs.forEach((t, i) => t.addEventListener('click', () => {
+        if (i > reached) return;
+        // Para avanzar hay que validar lo que hay en el medio; para volver, no
+        if (i > current) { for (let k = current; k < i; k++) if (!validate(k)) { current = k; render(); return; } }
+        current = i;
+        render();
+      }));
+      form.addEventListener('keydown', (e) => {
+        const t = e.target as HTMLInputElement;
+        if (e.key === 'Enter' && (t.matches('input[type=text], input[type=email], input[type=radio]'))) { e.preventDefault(); next(); }
+        if (e.key === 'Enter' && !e.shiftKey && t === (textarea as unknown)) { e.preventDefault(); form.requestSubmit(); }
+      });
+      // Con mouse, elegir una opción avanza; con teclado se navega con flechas y se confirma con Enter
+      form.querySelectorAll<HTMLElement>('.opt').forEach((o) => o.addEventListener('pointerup', () => setTimeout(next, 180)));
+
+      const grow = () => {
+        textarea.style.height = 'auto';
+        textarea.style.height = `${Math.min(textarea.scrollHeight, 280)}px`;
+        const n = textarea.value.length;
+        counter.textContent = `${n} ${n === 1 ? 'carácter' : 'caracteres'}`;
+      };
+      textarea.addEventListener('input', grow);
+
+      const sleep = (ms: number) => new Promise((r) => setTimeout(r, reduce ? 0 : ms));
+      const print = async (html: string, wait = 300) => {
+        await sleep(wait);
+        const li = document.createElement('li');
+        li.innerHTML = html;
+        out.append(li);
+      };
+      const esc = (v: string) => v.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        for (let i = 0; i < steps.length; i++) {
+          if (!validate(i)) { current = i; render(); return; }
+        }
+        const data = new FormData(form);
+        if (data.get('_gotcha')) return;
+        const endpoint = form.dataset.endpoint;
+        const email = valueOf(steps[1]);
+
+        // Todo pasa al historial y la consola "ejecuta"
+        form.classList.add('is-sending');
+        current = steps.length;
+        render(false);
+        progress.style.transform = 'scaleX(1)';
+        label.textContent = '[ok]';
+        out.innerHTML = '';
+
+        await print(`<span class="c-m">→ preparando mensaje (${textarea.value.length} caracteres)…</span>`, 150);
+        if (!endpoint) {
+          const subject = encodeURIComponent(`${data.get('tema')} — ${data.get('nombre')}`);
+          const body = encodeURIComponent(`${data.get('mensaje')}\n\n— ${data.get('nombre')} (${email})`);
+          await print(`<span class="c-m">→ abriendo tu cliente de correo…</span>`, 400);
+          location.href = `mailto:${decodeMail(form.dataset.mail || '')}?subject=${subject}&body=${body}`;
+          await print(`<span class="c-ok">✓</span> Listo, ${esc(firstName())}. Solo te queda enviarlo desde tu correo.`, 500);
+          announce.textContent = 'Se abrió tu cliente de correo con el mensaje listo para enviar.';
+        } else {
+          await print(`<span class="c-m">→ POST /mensajes</span>`, 300);
+          try {
+            const res = await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+            if (!res.ok) throw new Error(String(res.status));
+            await print(`<span class="c-ok">✓ ${res.status} OK</span>`, 250);
+            await print(`¡Gracias, ${esc(firstName())}! Ahora la pelota está de mi lado: te respondo a <span class="c-a">${esc(email)}</span> en uno o dos días hábiles.`, 350);
+            announce.textContent = `Mensaje enviado. Te respondo a ${email}.`;
+          } catch {
+            await print(`<span class="c-err">✗ Algo falló.</span> No fue tu culpa (probablemente). Probá de nuevo o escribime por email.`, 300);
+            announce.textContent = 'No se pudo enviar. Probá de nuevo o escribime por email.';
+            form.classList.remove('is-sending');
+            current = steps.length - 1;
+            render();
+            return;
+          }
+        }
+        restartWrap.hidden = false;
+        form.querySelector<HTMLButtonElement>('[data-restart]')?.focus();
+      });
+
+      form.querySelector('[data-restart]')?.addEventListener('click', () => {
+        form.reset();
+        grow();
+        current = 0;
+        reached = 0;
+        out.innerHTML = '';
+        restartWrap.hidden = true;
+        form.classList.remove('is-sending');
+        tabs.forEach((t) => (t.disabled = false));
+        emailLabel.lastChild!.textContent = ' ¿A qué email te respondo?';
+        submitLabel.textContent = 'enviar';
+        render();
+      });
+
+      render(false);
+    }
+  </script>
+</Base>
+
+<style>
+  .ct { padding-top: clamp(40px, 7vw, 88px); }
+  .ct-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(40px, 6vw, 80px); align-items: start; }
+
+  /* Email */
+  .mail { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+  .mail-label { font-size: 0.8125rem; color: var(--muted); }
+  .mail-link {
+    position: relative; align-self: flex-start; display: inline-flex; align-items: center; min-height: 44px;
+    font-size: clamp(1.375rem, 2.6vw, 1.875rem); font-weight: 500; letter-spacing: -0.02em; text-decoration: none; cursor: copy;
+    background: linear-gradient(var(--yellow), var(--yellow)) 0 100% / 0 2px no-repeat, linear-gradient(var(--line-strong), var(--line-strong)) 0 100% / 100% 1px no-repeat;
+    transition: background-size 0.45s var(--ease-out), color 0.2s;
+  }
+  .mail-link:hover, .mail-link:focus-visible { color: var(--yellow-hi); background-size: 100% 2px, 100% 1px; }
+  .mail-tip {
+    position: absolute; left: 100%; top: 50%; margin-left: 14px; translate: 0 -50%;
+    display: inline-flex; align-items: center; min-height: 26px; padding: 0 10px; border-radius: 999px;
+    background: var(--teal-hi); color: #0A111F; font-size: 0.75rem; font-weight: 500; letter-spacing: 0; white-space: nowrap;
+    opacity: 0; scale: 0.8; transition: opacity 0.2s, scale 0.35s var(--ease-spring); pointer-events: none;
+  }
+  .mail-tip:empty { padding: 0; }
+  .mail-link.is-copied .mail-tip { opacity: 1; scale: 1; }
+
+  .elsewhere { display: flex; flex-wrap: wrap; gap: 4px 24px; margin: 0; padding: 0; }
+  .clock { display: inline-flex; align-items: center; gap: 10px; font-size: 0.875rem; color: var(--muted); }
+  .clock time { color: var(--text); }
+  .live { width: 7px; height: 7px; border-radius: 50%; background: var(--teal-hi); animation: pulse 2.2s infinite; }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(85, 201, 209, 0.6); } 70%, 100% { box-shadow: 0 0 0 7px rgba(85, 201, 209, 0); } }
+
+  /* Consola: estética CLI, casi monocromo */
+  .console {
+    position: sticky; top: calc(var(--header-h) + 24px); overflow: hidden; border-radius: var(--radius);
+    background: #070C17; border: 1px solid var(--line-hi); box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.8);
+    font-family: var(--font-mono); font-size: 0.9375rem; font-variant-ligatures: none; color: var(--text-soft);
+  }
+  .con-bar { display: flex; align-items: center; gap: 14px; min-height: 44px; padding: 0 16px; background: rgba(20, 32, 54, 0.75); border-bottom: 1px solid var(--line); }
+  .dots { display: flex; gap: 6px; }
+  .dots i { width: 10px; height: 10px; border-radius: 50%; }
+  .dots i:nth-child(1) { background: var(--orange); }
+  .dots i:nth-child(2) { background: var(--yellow); }
+  .dots i:nth-child(3) { background: var(--teal); }
+  .con-tabs { display: flex; gap: 2px; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+  .con-tab {
+    position: relative; flex: none; min-height: 44px; padding: 0 10px; border: 0; background: transparent; cursor: pointer;
+    color: var(--muted); font: 400 0.8125rem/1 var(--font-mono); transition: color 0.2s;
+  }
+  .con-tab:not(:disabled):hover { color: var(--text); }
+  .con-tab:disabled { cursor: default; color: color-mix(in oklab, var(--muted) 55%, transparent); }
+  .con-tab[aria-current='step'] { color: var(--text); }
+  .con-tab[aria-current='step']::after { content: ''; position: absolute; left: 8px; right: 8px; bottom: -1px; height: 2px; background: var(--yellow); }
+  .con-tab:focus-visible { outline: 1px solid var(--text-soft); outline-offset: -6px; border-radius: 0; }
+  .con-step { margin-left: auto; flex: none; font-size: 0.8125rem; color: var(--muted); }
+
+  .con-body { display: flex; flex-direction: column; gap: 10px; padding: 20px 24px 24px; min-height: 340px; line-height: 1.7; }
+  .con-line { margin: 0; }
+  :global(.console .c-pr), :global(.console .c-ok) { color: var(--teal-hi); }
+  :global(.console .c-w), :global(.console .c-q), :global(.console .c-a) { color: var(--text); }
+  :global(.console .c-m) { color: var(--muted); }
+  :global(.console .c-err) { color: var(--orange-hi); }
+
+  .con-log, .con-out { display: flex; flex-direction: column; margin: 0; padding: 0; }
+  .con-log:empty, .con-out:empty { display: none; }
+  .con-log :global(li), .con-out :global(li) { animation: line-in 0.25s steps(3, end) both; }
+  @keyframes line-in { from { opacity: 0; } }
+  .con-log :global(.log-line) {
+    display: block; width: 100%; min-height: 28px; padding: 0; border: 0; background: transparent;
+    color: inherit; font: inherit; text-align: left; cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .con-log :global(.log-line:hover .c-a), .con-log :global(.log-line:focus-visible .c-a) { text-decoration: underline; text-underline-offset: 3px; }
+
+  .q { margin: 0; padding: 0; border: 0; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+  .q-label { padding: 0; color: var(--text); font-weight: 400; }
+  .q-mark { color: var(--teal-hi); }
+  .q-help { color: var(--muted); font-size: 0.8125rem; }
+  .q-field { display: flex; align-items: center; gap: 10px; }
+  .q-caret { color: var(--muted); transition: color 0.15s; }
+  .q-field:focus-within .q-caret { color: var(--yellow); }
+  input[type='text'], input[type='email'] {
+    flex: 1; min-width: 0; min-height: 40px; padding: 0; border: 0; border-radius: 0; background: transparent;
+    color: var(--text); caret-color: var(--yellow); font: 400 0.9375rem/1.4 var(--font-mono); outline: none;
+  }
+  /* Foco "de consola": sin bordes ni radios; lo indica el prompt › en amarillo y el cursor */
+  input[type='text']:focus, input[type='email']:focus, input[type='text']:focus-visible, input[type='email']:focus-visible { outline: none; border-color: transparent; }
+  .console :focus-visible { border-radius: 0; }
+  .q-enter { flex: none; min-width: 40px; min-height: 40px; padding: 0 8px; border: 0; background: transparent; color: var(--muted); font: inherit; cursor: pointer; }
+  .q-enter:hover, .q-enter:focus-visible { color: var(--text); }
+  .q-enter:focus-visible, .cli-btn:focus-visible, .restart:focus-visible, .con-log :global(.log-line:focus-visible) { outline: 1px solid var(--text-soft); outline-offset: 2px; }
+  .q-error { margin: 0; font-size: 0.875rem; color: var(--orange-hi); }
+  .q-error:empty { display: none; }
+  input[aria-invalid='true'] { color: var(--orange-hi); }
+
+  .opts { display: flex; flex-direction: column; padding: 2px 0 0; }
+  .opt { position: relative; display: flex; align-items: center; gap: 1ch; min-height: 32px; cursor: pointer; color: var(--muted); }
+  .opt input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+  .opt-ptr { width: 1ch; color: var(--yellow); visibility: hidden; }
+  .opt:hover { color: var(--text-soft); }
+  .opt:has(input:checked) { color: var(--text); }
+  .opt:has(input:checked) .opt-ptr { visibility: visible; }
+  .opt:has(input:focus-visible) .opt-txt { text-decoration: underline; text-underline-offset: 3px; }
+  .opt input:focus-visible { outline: none; }
+
+  textarea {
+    width: 100%; min-height: 96px; margin-top: 4px; padding: 2px 0 2px 12px; resize: none; border: 0; border-left: 1px solid var(--line-strong); border-radius: 0;
+    background: transparent; color: var(--text); caret-color: var(--yellow); font: 400 0.9375rem/1.7 var(--font-mono); outline: none;
+  }
+  textarea:focus, textarea:focus-visible { outline: none; border-left-color: var(--yellow); }
+  .q-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 6px; }
+  .q-count { font-size: 0.8125rem; }
+  .cli-btn { min-height: 40px; padding: 0 8px; border: 0; border-radius: 2px; background: transparent; color: var(--text); font: inherit; cursor: pointer; white-space: nowrap; }
+  .cli-btn:hover, .cli-btn:focus-visible { background: var(--text); color: #070C17; }
+
+  .con-restart { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+  .con-restart[hidden] { display: none; }
+  .restart { min-height: 36px; padding: 0 4px; border: 0; border-radius: 2px; background: transparent; color: var(--text); font: inherit; cursor: pointer; }
+  .restart:hover, .restart:focus-visible { background: var(--text); color: #070C17; }
+  .restart::after { content: ''; display: inline-block; width: 0.6em; height: 1.1em; margin-left: 4px; vertical-align: -0.2em; background: var(--text-soft); animation: blink 1.05s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* Modo consola (con JS) */
+  :global(form.is-stepped) .q:not(.is-current) { display: none; }
+  :global(form.is-stepped) .q.is-current { animation: line-in 0.25s steps(3, end) both; }
+  :global(form.is-stepped) .q.is-shake { animation: shake 0.3s steps(4, end); }
+  @keyframes shake { 25% { translate: -4px 0; } 50% { translate: 4px 0; } 75% { translate: -2px 0; } }
+  .console:not(.is-stepped) .q-enter, .console:not(.is-stepped) .con-step, .console:not(.is-stepped) .con-tabs { display: none; }
+
+  @media (max-width: 900px) {
+    .ct-grid { grid-template-columns: minmax(0, 1fr); }
+    .console { position: static; }
+    .con-body { padding: 18px 16px 22px; }
+    .mail-tip { left: auto; right: 0; top: -22px; translate: 0 0; margin: 0; }
+  }
+</style>
