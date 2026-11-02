@@ -14,6 +14,7 @@ import { site } from '../../src/data/site.ts'
 import { serveDist } from '../lib/serve-dist.mjs'
 import { runAnalyticsChecks } from './analytics.mjs'
 import { runFormChecks } from './form.mjs'
+import { runInteractionChecks } from './interactions.mjs'
 import { runStaticChecks } from './static.mjs'
 
 const require = createRequire(import.meta.url)
@@ -75,6 +76,7 @@ try {
 		if (vp.name === 'desktop') await runFormChecks(ctx, BASE, site.email, log)
 		await ctx.close()
 	}
+	await runInteractionChecks(browser, BASE, axeSource, AXE_TAGS, log)
 	await runAnalyticsChecks(browser, log)
 	await browser.close()
 } catch (e) {

@@ -7,6 +7,7 @@ import { PDFDocument, PDFName } from 'pdf-lib'
 import { cv, cvLabels, atsPeriod } from '../../src/data/cv.ts'
 import { publicPages, ogPath } from '../../src/data/pages.ts'
 import { site, statScreens } from '../../src/data/site.ts'
+import { parsePost } from '../lib/instagram-post.mjs'
 
 const require = createRequire(import.meta.url)
 const { PDFParse } = require('pdf-parse')
@@ -110,6 +111,23 @@ export async function runStaticChecks(log) {
 	)
 
 	// Instagram: fotos propias, sin requests a terceros desde el navegador
+	const post = {
+		id: '123',
+		permalink: 'https://www.instagram.com/p/x/',
+		timestamp: '2024-10-03T07:41:47+0000',
+		sizes: { medium: { mediaUrl: 'https://example.com/a.jpg' } },
+		hashtags: ['Lago', '<b>', 'Andes', 'Extra'],
+	}
+	const parsed = parsePost(post)
+	log(
+		parsed?.date === '2024-10-03T07:41:47.000Z' && parsed.tags.join() === 'Lago,Andes',
+		'Instagram: normaliza fecha y hashtags'
+	)
+	const invalid = [{ timestamp: 'invalid-date' }, { id: '' }, { permalink: 'https://evil.example/' }, { sizes: {} }]
+	log(
+		invalid.every((bad) => parsePost({ ...post, ...bad }) === null) && parsePost(null) === null,
+		'Instagram: omite posts inválidos'
+	)
 	const about = read('sobre-mi.html')
 	const remote = htmlFiles().filter(
 		(f) => /<img\b[^>]*\bsrc="https?:/.test(read(f)) || /behold\.pictures|cdninstagram/.test(read(f))
