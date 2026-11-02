@@ -104,7 +104,7 @@ Texto con flecha y el mismo subrayado que `.link` (todos los links de texto, ema
 - En mobile: botón de menú con `popover` nativo, a pantalla completa, con los links grandes numerados y entrada escalonada.
 
 ### Terminal del hero (`components/Terminal.astro` + `scripts/terminal.ts`)
-- Ventana con 3 dots, pestañas (`ilan.ts`, `git log`, `claude`) con barra de progreso, botón de pausa (solo ícono) y cuerpo de alto fijo (sin CLS).
+- Barra estilo Windows Terminal: pestañas (`ilan.ts`, `git log`, `claude`) con barra de progreso a la izquierda, botón de pausa (solo ícono) y controles de ventana a la derecha (`WinControls`, decorativos). Cuerpo de alto fijo (sin CLS). Sin los 3 dots de Mac.
 - **Siempre `~/ilan`** como path.
 - Las escenas se "tipean": los prompts aparecen de una y se tipea solo el comando; las salidas se imprimen línea a línea. Hace auto-scroll como una terminal real.
 - Se pausa con el botón, fuera de pantalla o con la pestaña oculta. El hover no la pausa.
@@ -124,7 +124,7 @@ Texto con flecha y el mismo subrayado que `.link` (todos los links de texto, ema
 - Debajo: meta mono (fecha y "para EpicDevs" en teal), nombre, descripción y chips.
 
 ### Índice del portfolio (`pages/portfolio.astro`)
-- **Filtro como comando**: `$ ls trabajos --type=<tipo>`. Al tocar un filtro, primero se tipea el argumento y después se reordenan las filas con una View Transition local (`html.vt-local`, que no anima el resto de la página). Muestra el conteo y el rango de años.
+- **Filtro en una ventana de consola** (`~/ilan/trabajos`), con opciones rectas y sin bordes: `$ ls trabajos --type=<tipo>`. Al tocar un filtro, primero se tipea el argumento y después se reordenan las filas con una View Transition local (`html.vt-local`, que no anima el resto de la página). Muestra el conteo y el rango de años.
 - **Filas**: año · proyecto · stack · toggle `+`. Sin numeración. En hover, el fondo barre de izquierda a derecha **sin radio**, el nombre se desplaza 10px y el año se pone amarillo.
 - **Vista previa flotante** (solo con mouse): ventana con captura y caption `año · nombre`. Sigue al cursor con inercia, rota según la velocidad, la imagen entra desde arriba o abajo según la dirección y hace un zoom lento.
 - Las filas son `<details name="trabajos">` (acordeón exclusivo) con apertura animada (`::details-content`).
@@ -137,7 +137,7 @@ Círculo de 32px con borde `--line-strong`. Abierto: fondo amarillo, rota 180° 
 - El cuerpo corre `$ ./contacto.sh`.
 - Las preguntas usan `?` en teal; la respuesta va después de `›`, que se pone amarillo con foco (ese es el indicador de foco).
 - Las respondidas quedan como `✓ pregunta · respuesta` y se pueden editar con un click.
-- La barra muestra los pasos (`nombre › email › tema › mensaje`) a medida que se llega a cada uno: nunca hay pasos sin visitar a la vista. Se pueden clickear, igual que las líneas del log; para avanzar se valida lo que hay en el medio. ✓ hecho, número en amarillo el actual.
+- La barra de arriba muestra la ruta (`~/ilan/contacto`) y los controles de ventana. Los pasos (`nombre › email › tema › mensaje`) van en una barra de estado abajo y aparecen a medida que se llega a cada uno: nunca hay pasos sin visitar a la vista. Se pueden clickear, igual que las líneas del log; para avanzar se valida lo que hay en el medio. ✓ hecho, número en amarillo el actual.
 - La pregunta actual se resalta de borde a borde, con fondo `--surface` y filete amarillo.
 - El tema se elige con ↑↓ (radios nativos) y Enter; con mouse, el click avanza.
 - El mensaje se envía con **Enter** y Shift+Enter agrega línea. El botón es texto plano: `[ enviar ↵ ]`.
@@ -164,6 +164,8 @@ Con la identidad del sitio (banda navy, Space Grotesk y Fira Code, línea de tie
 Mismo estilo que `public/og.png`, la imagen de la home: logo, `->función();`, título y subtítulo en amarillo. Una por página, generadas desde `src/data/pages.ts`.
 
 ### Chips
+Solo para etiquetas de proyectos. El stack de `/curriculum` va como lista de texto: las pastillas parecían links o filtros.
+
 Mono 0.8125rem, borde `--line-hi` y radio 999px. En el CV entran escalonados.
 
 ## 6. Movimiento

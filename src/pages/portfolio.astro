@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro'
 import Fn from '../components/Fn.astro'
 import Icon from '../components/Icon.astro'
+import WinControls from '../components/WinControls.astro'
 import { projects, formatDate, imageFor } from '../data/projects'
 
 const filters = [
@@ -37,30 +38,36 @@ const range = `${Math.min(...years)}–${Math.max(...years)}`
 		<div class="container stack" style="--gap: 28px">
 			<!-- Filtro con forma de comando -->
 			<div class="cmd" data-reveal>
-				<p class="cmd-line mono" aria-hidden="true">
-					<span class="t-pr">$</span> ls trabajos<span class="cmd-arg" data-cmd-arg></span>
-					<span class="cmd-cursor"></span>
-				</p>
-				<div class="cmd-filters" role="group" aria-label="Filtrar proyectos">
-					{filters.map((f, i) => (
-						<button
-							type="button"
-							class="filter mono"
-							data-filter={f.tag}
-							data-label={f.label}
-							aria-pressed={i === 0 ? 'true' : 'false'}
-						>
-							{i > 0 && <span aria-hidden="true">--</span>}
-							{f.label}
-						</button>
-					))}
+				<div class="cmd-bar">
+					<span class="cmd-title mono" aria-hidden="true">
+						~/ilan/trabajos
+					</span>
+					<WinControls />
 				</div>
-				<p class="cmd-out mono" aria-live="polite">
-					<span class="t-ok" aria-hidden="true">
-						→
-					</span>{' '}
-					<strong data-count>{projects.length}</strong> proyectos · <span data-range>{range}</span>
-				</p>
+				<div class="cmd-body">
+					<!-- prettier-ignore -->
+					<p class="cmd-line mono" aria-hidden="true"><span class="t-pr">$</span> ls trabajos<span class="cmd-arg" data-cmd-arg></span><span class="cmd-cursor"></span></p>
+					<div class="cmd-filters" role="group" aria-label="Filtrar proyectos">
+						{filters.map((f, i) => (
+							<button
+								type="button"
+								class="filter mono"
+								data-filter={f.tag}
+								data-label={f.label}
+								aria-pressed={i === 0 ? 'true' : 'false'}
+							>
+								{i > 0 && <span aria-hidden="true">--</span>}
+								{f.label}
+							</button>
+						))}
+					</div>
+					<p class="cmd-out mono" aria-live="polite">
+						<span class="t-ok" aria-hidden="true">
+							→
+						</span>{' '}
+						<strong data-count>{projects.length}</strong> proyectos · <span data-range>{range}</span>
+					</p>
+				</div>
 			</div>
 
 			<!-- Índice -->
@@ -311,13 +318,30 @@ const range = `${Math.min(...years)}–${Math.max(...years)}`
 
 	/* Comando */
 	.cmd {
+		overflow: hidden;
+		border: 1px solid var(--line-hi);
+		border-radius: var(--radius);
+		background: #070c17;
+	}
+	.cmd-bar {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 14px;
+		min-height: 44px;
+		padding: 0 16px;
+		background: rgba(20, 32, 54, 0.75);
+		border-bottom: 1px solid var(--line);
+	}
+	.cmd-title {
+		font-size: 0.8125rem;
+		color: var(--text-soft);
+	}
+	.cmd-body {
 		display: flex;
 		flex-direction: column;
 		gap: 14px;
-		padding: 20px 22px;
-		border: 1px solid var(--line-hi);
-		border-radius: var(--radius);
-		background: var(--bg-raised);
+		padding: 20px 24px;
 	}
 	.cmd-line {
 		font-size: 0.9375rem;
@@ -349,37 +373,36 @@ const range = `${Math.min(...years)}–${Math.max(...years)}`
 	.cmd-filters {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 8px;
+		gap: 4px 6px;
+		margin-inline: -8px;
 	}
+	/* Opciones de comando: rectas y sin bordes, como el resto de las consolas */
 	.filter {
 		display: inline-flex;
 		align-items: center;
-		min-height: 40px;
-		padding: 0 14px;
-		border-radius: 8px;
-		border: 1px solid var(--line-strong);
+		min-height: 36px;
+		padding: 0 8px;
+		border: 0;
 		background: transparent;
-		color: var(--text-soft);
+		color: var(--muted);
 		font-size: 0.875rem;
 		cursor: pointer;
 		font-variant-ligatures: none;
 		transition:
-			background-color 0.2s,
-			color 0.2s,
-			border-color 0.2s,
-			transform 0.3s var(--ease-spring);
+			background-color 0.15s,
+			color 0.15s;
 	}
 	.filter:hover {
 		color: var(--text);
-		border-color: var(--text-soft);
 	}
-	.filter:active {
-		transform: scale(0.96);
+	.filter:focus-visible {
+		border-radius: 0;
+		outline: 1px solid var(--line-strong);
+		outline-offset: 0;
 	}
 	.filter[aria-pressed='true'] {
 		background: var(--yellow);
-		border-color: var(--yellow);
-		color: #0a111f;
+		color: #070c17;
 		font-weight: 500;
 	}
 	.cmd-out {
