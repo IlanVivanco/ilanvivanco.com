@@ -22,6 +22,17 @@ async function submit(ctx, base, status) {
 }
 
 export async function runFormChecks(ctx, base, email, log) {
+	const steps = await ctx.newPage()
+	await steps.goto(`${base}/contacto`, { waitUntil: 'networkidle' })
+	const visible = () => steps.locator('[data-steps] li:visible').count()
+	const first = await visible()
+	await answer(steps, '#f-name', 'Ada')
+	const second = await visible()
+	log(first === 1 && second === 2, 'form: los pasos aparecen al llegar a cada uno')
+	await steps.locator('[data-step-btn="0"]').click()
+	log(await steps.locator('#f-name').isVisible(), 'form: clickear un paso vuelve a esa pregunta')
+	await steps.close()
+
 	const ok = await submit(ctx, base, 200)
 	await ok.page.getByText('200 OK').waitFor({ timeout: 5000 })
 	const sent = new URLSearchParams(ok.posts[0]?.body ?? '')
@@ -39,10 +50,8 @@ export async function runFormChecks(ctx, base, email, log) {
 		'form: campos del POST'
 	)
 	log(
-		sent.get('message') === `Ada Lovelace (ada@example.com) te escribe sobre: ${topic}\n\nMensaje de prueba` &&
-			!sent.has('name') &&
-			!sent.has('tema'),
-		'form: la notificación llega como un solo mensaje'
+		sent.get('name') === 'Ada Lovelace' && sent.get('tema') === topic && sent.get('message') === 'Mensaje de prueba',
+		'form: la notificación lleva cada campo con su valor'
 	)
 	await ok.page.close()
 

@@ -28,7 +28,9 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 
 				<div class="mail" data-reveal data-delay="0.1">
 					<span class="mono mail-label">email</span>
-					<MailLink class="mail-big" />
+					<span class="mail-big">
+						<MailLink />
+					</span>
 				</div>
 
 				<ul class="elsewhere" role="list" data-reveal data-delay="0.15">
@@ -79,15 +81,18 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 					</h2>
 					<ol class="con-steps" role="list" aria-label="Pasos" data-steps>
 						{['nombre', 'email', 'tema', 'mensaje'].map((t, i) => (
-							<li
-								class="con-stp"
-								data-state={i === 0 ? 'current' : 'pending'}
-								aria-current={i === 0 ? 'step' : undefined}
-							>
-								<span class="stp-mark" aria-hidden="true">
-									{i + 1}
-								</span>
-								<span class="stp-txt">{t}</span>
+							<li class="con-stp" data-state={i === 0 ? 'current' : 'pending'} hidden={i > 0}>
+								<button
+									type="button"
+									class="stp-btn"
+									data-step-btn={i}
+									aria-current={i === 0 ? 'step' : undefined}
+								>
+									<span class="stp-mark" aria-hidden="true">
+										{i + 1}
+									</span>
+									<span class="stp-txt">{t}</span>
+								</button>
 							</li>
 						))}
 					</ol>
@@ -276,6 +281,7 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 			const submitLabel = form.querySelector<HTMLElement>('[data-submit-label]')!
 			const restartWrap = form.querySelector<HTMLElement>('[data-restart-wrap]')!
 			const stepEls = [...form.querySelectorAll<HTMLElement>('[data-steps] li')]
+			let reached = 0 // pregunta más lejana a la que se llegó
 			const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches
 			const questions = steps.map((s) =>
 				(s.querySelector('.q-label')?.textContent || '')
@@ -297,12 +303,17 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 
 			const render = (focus = true) => {
 				steps.forEach((s, i) => s.classList.toggle('is-current', i === current))
+				reached = Math.max(reached, Math.min(current, steps.length - 1))
+				const sending = form.classList.contains('is-sending')
 				stepEls.forEach((el, i) => {
-					const state = i < current ? 'done' : i === current ? 'current' : 'pending'
-					el.dataset.state = state
-					el.querySelector('.stp-mark')!.textContent = state === 'done' ? '✓' : String(i + 1)
-					if (state === 'current') el.setAttribute('aria-current', 'step')
-					else el.removeAttribute('aria-current')
+					const btn = el.querySelector('button')!
+					const done = sending || i < reached
+					el.hidden = i > reached
+					el.dataset.state = i === current ? 'current' : done ? 'done' : 'pending'
+					el.querySelector('.stp-mark')!.textContent = i !== current && done ? '✓' : String(i + 1)
+					btn.disabled = sending
+					if (i === current) btn.setAttribute('aria-current', 'step')
+					else btn.removeAttribute('aria-current')
 				})
 				label.textContent = `[${current + 1}/${steps.length}]`
 				progress.style.transform = `scaleX(${current / steps.length})`
@@ -365,6 +376,20 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 			}
 
 			form.querySelectorAll<HTMLButtonElement>('[data-next]').forEach((b) => b.addEventListener('click', next))
+			stepEls.forEach((el, i) =>
+				el.querySelector('button')!.addEventListener('click', () => {
+					// Para avanzar hay que validar lo que hay en el medio; para volver, no
+					for (let k = current; k < i; k++) {
+						if (!validate(k)) {
+							current = k
+							render()
+							return
+						}
+					}
+					current = i
+					render()
+				})
+			)
 			form.addEventListener('keydown', (e) => {
 				const t = e.target as HTMLInputElement
 				if (e.key === 'Enter' && t.matches('input[type=text], input[type=email], input[type=radio]')) {
@@ -411,16 +436,7 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 				const data = new FormData(form)
 				if (data.get('fake')) return
 				const email = valueOf(steps[1])
-				const name = valueOf(steps[0])
-				const topic = valueOf(steps[2])
-				// Netlify arma la notificación con los campos que llegan: va un solo texto, y `email` para el Reply-To
-				const composed = new URLSearchParams({
-					'form-name': String(data.get('form-name')),
-					'subject': `${name} · ${topic}`,
-					email,
-					'message': `${name} (${email}) te escribe sobre: ${topic}\n\n${valueOf(steps[3])}`,
-					'fake': '',
-				})
+				data.set('subject', `${valueOf(steps[0])} · ${valueOf(steps[2])}`)
 
 				// Todo pasa al historial y la consola "ejecuta"
 				form.classList.add('is-sending')
@@ -443,7 +459,7 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 					const res = await fetch('/', {
 						method: 'POST',
 						headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-						body: composed.toString(),
+						body: new URLSearchParams(data as unknown as Record<string, string>).toString(),
 					})
 					if (!res.ok) throw new Error(String(res.status))
 					await print(`<span class="c-badge c-badge-ok">${res.status} OK</span>`, 250)
@@ -473,6 +489,7 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 				form.reset()
 				grow()
 				current = 0
+				reached = 0
 				out.innerHTML = ''
 				restartWrap.hidden = true
 				form.classList.remove('is-sending')
@@ -508,8 +525,7 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 		font-size: 0.8125rem;
 		color: var(--muted);
 	}
-	.mail :global(.mail-big) {
-		align-self: flex-start;
+	.mail-big {
 		font-size: clamp(1.375rem, 2.6vw, 1.875rem);
 		font-weight: 500;
 		letter-spacing: -0.02em;
@@ -603,13 +619,39 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 	.con-stp {
 		display: flex;
 		align-items: center;
-		gap: 6px;
 		white-space: nowrap;
+		animation: line-in 0.25s steps(3, end) both;
+	}
+	.con-stp[hidden] {
+		display: none;
 	}
 	.con-stp + .con-stp::before {
 		content: '›';
-		margin-inline: 8px;
+		margin-inline: 4px;
 		color: var(--line-strong);
+	}
+	.stp-btn {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		min-height: 44px;
+		padding: 0 4px;
+		border: 0;
+		background: transparent;
+		color: inherit;
+		font: inherit;
+		cursor: pointer;
+		transition: color 0.15s;
+	}
+	.stp-btn:disabled {
+		cursor: default;
+	}
+	.stp-btn:not(:disabled):hover {
+		color: var(--yellow-hi);
+	}
+	.stp-btn:focus-visible {
+		outline: 1px solid var(--line-strong);
+		outline-offset: -6px;
 	}
 	.stp-mark {
 		display: inline-flex;
