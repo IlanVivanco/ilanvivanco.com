@@ -1,0 +1,81 @@
+---
+import Base from '../layouts/Base.astro';
+import Fn from '../components/Fn.astro';
+import { site } from '../data/site';
+import { encodeMail } from '../lib/mail';
+
+const mail = encodeMail(site.email);
+---
+<Base title="Privacidad y aviso legal" description="Política de privacidad y aviso legal de ilanvivanco.com: qué datos se recogen en el formulario, para qué se usan y cómo ejercer tus derechos.">
+  <section class="section legal">
+    <div class="container legal-body">
+      <Fn name="privacidad" as="p" />
+      <h1 class="display">Privacidad y aviso legal</h1>
+      <p class="lede">Este sitio recoge los datos justos para responder a quien escribe. No usa cookies ni publicidad.</p>
+      <p class="mono updated">Última actualización: noviembre de 2026</p>
+
+      <h2 class="h3">Responsable del tratamiento</h2>
+      <ul>
+        <li>Titular: Ilán Vivanco</li>
+        <li>NIF: [COMPLETAR]</li>
+        <li>Domicilio: [COMPLETAR], Santander, Cantabria, España</li>
+        <li>Email: <a data-mail={mail} href="/contacto">[email protegido]</a></li>
+      </ul>
+
+      <h2 class="h3">Qué datos se recogen</h2>
+      <p>El formulario de contacto pide tu nombre, tu email, el tema de la consulta y el mensaje. No hace falta dar ningún otro dato. Si escribís por email, se trata lo que incluyas en él.</p>
+
+      <h2 class="h3">Finalidad</h2>
+      <p>Tus datos solo se usan para leer tu consulta, responderte y mantener la conversación que inicies. No se usan para enviarte publicidad ni para elaborar perfiles, y no se toman decisiones automatizadas.</p>
+
+      <h2 class="h3">Base legal</h2>
+      <p>La base es tu consentimiento, que das al enviar el formulario (art. 6.1.a del RGPD). Si la consulta es sobre un posible proyecto, también lo son las medidas precontractuales que pidas (art. 6.1.b del RGPD). Podés retirar tu consentimiento en cualquier momento, sin que eso afecte a lo tratado antes.</p>
+
+      <h2 class="h3">Conservación</h2>
+      <p>Los mensajes se conservan mientras dure la conversación y hasta 12 meses después de la última respuesta. Si se inicia una relación profesional, se conservan durante los plazos legales que correspondan. Podés pedir que se borren antes.</p>
+
+      <h2 class="h3">Proveedores y transferencias internacionales</h2>
+      <p>Tus datos no se venden ni se ceden a terceros, salvo obligación legal. Estos proveedores los tratan por cuenta del responsable:</p>
+      <ul>
+        <li><strong>Netlify, Inc.</strong> (EE. UU.): alojamiento del sitio y recepción del formulario.</li>
+        <li><strong>Cloudflare, Inc.</strong> (EE. UU.): red de distribución, seguridad y estadísticas de visitas.</li>
+        <li><strong>Google LLC</strong> (EE. UU.): correo electrónico en el que se reciben y responden los mensajes.</li>
+      </ul>
+      <p>Las transferencias fuera del Espacio Económico Europeo se amparan en el Marco de Privacidad de Datos UE-EE. UU. o en las cláusulas contractuales tipo de la Comisión Europea, según el proveedor.</p>
+
+      <h2 class="h3">Tus derechos</h2>
+      <p>Podés ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación del tratamiento y portabilidad escribiendo al email de arriba. Si creés que no se atendieron bien, podés reclamar ante la <a href="https://www.aepd.es/" rel="noopener">Agencia Española de Protección de Datos</a>.</p>
+
+      <h2 class="h3">Cookies y estadísticas</h2>
+      <p>Este sitio no instala cookies. Para las estadísticas de visitas usa Cloudflare Web Analytics, que no usa cookies ni almacenamiento local y no identifica a quien visita el sitio. Por eso no hay banner de cookies.</p>
+
+      <h2 class="h3">Aviso legal</h2>
+      <p>Este sitio es la web personal y profesional de Ilán Vivanco, cuyos datos figuran arriba, y se ofrece en cumplimiento de la Ley 34/2002 de servicios de la sociedad de la información (LSSI).</p>
+      <p>Los textos, las fotografías y el diseño pertenecen a su titular, salvo indicación en contrario. Las marcas y capturas de proyectos de terceros pertenecen a sus dueños y se muestran como referencia de trabajos realizados. Para reutilizar contenido de este sitio, escribí antes.</p>
+      <p>El contenido es informativo. Se procura que sea correcto y esté actualizado, pero no se garantiza. Los enlaces externos llevan a sitios de terceros, de cuyo contenido el titular no es responsable.</p>
+      <p>Se aplica la legislación española.</p>
+    </div>
+  </section>
+
+  <script>
+    import { decodeMail } from '../lib/mail';
+
+    document.querySelectorAll<HTMLAnchorElement>('a[data-mail]').forEach((a) => {
+      const email = decodeMail(a.dataset.mail || '');
+      a.href = `mailto:${email}`;
+      a.textContent = email;
+    });
+  </script>
+</Base>
+
+<style>
+  .legal { padding-top: clamp(40px, 7vw, 88px); }
+  .legal-body { display: flex; flex-direction: column; gap: 16px; max-width: 760px; }
+  .legal-body h2 { margin-top: 24px; }
+  .legal-body p, .legal-body li { color: var(--text-soft); max-width: 70ch; }
+  .legal-body strong { color: var(--text); }
+  .legal-body ul { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
+  .legal-body a { color: var(--text); text-underline-offset: 3px; }
+  .legal-body a:hover { color: var(--yellow-hi); }
+  .updated { font-size: 0.8125rem; color: var(--muted) !important; }
+</style>
