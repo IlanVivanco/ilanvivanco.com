@@ -20,7 +20,6 @@ const { summary, experience, earlier, stack, education, courses, languages } = c
       </div>
       <div class="ctas no-print" data-reveal data-delay="0.15">
         <a class="btn btn-primary is-down" href={site.cvPdf} download>Descargar PDF <Icon name="download" /></a>
-        <button class="btn" type="button" onclick="window.print()"><Icon name="print" /> Imprimir</button>
       </div>
     </div>
   </section>
@@ -32,7 +31,7 @@ const { summary, experience, earlier, stack, education, courses, languages } = c
         {experience.map((job) => (
           <li class="job" data-reveal-group>
             <div class="job-head" data-reveal>
-              <h3>{job.url ? <a href={job.url} rel="noopener">{job.org}</a> : job.org}</h3>
+              <h3>{job.url ? <a class="link" href={job.url} target="_blank" rel="noopener">{job.org}</a> : job.org}</h3>
               {job.meta && <p class="mono job-meta">{job.meta}</p>}
             </div>
             <ol class="roles" role="list">
@@ -131,8 +130,6 @@ const { summary, experience, earlier, stack, education, courses, languages } = c
   .timeline { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 48px; }
   .job { display: flex; flex-direction: column; gap: 20px; }
   .job-head h3 { font-size: clamp(1.375rem, 2.2vw, 1.75rem); letter-spacing: -0.03em; }
-  .job-head h3 a { text-decoration: none; }
-  .job-head h3 a:hover { color: var(--yellow-hi); }
   .job-meta { font-size: 0.8125rem; color: var(--muted); margin-top: 6px; }
   .roles { margin: 0; padding: 0 0 0 22px; display: flex; flex-direction: column; gap: 24px; }
   .role { position: relative; display: flex; flex-direction: column; gap: 8px; }

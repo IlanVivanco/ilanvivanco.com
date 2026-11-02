@@ -73,8 +73,12 @@ export async function runStaticChecks(log) {
   // Formulario: Netlify lo detecta en el HTML estático
   const contact = read('contacto.html');
   log(/<form[^>]*name="?contact-form"?/.test(contact) && /data-netlify="?true"?/.test(contact) && /netlify-honeypot="?fake"?/.test(contact), 'form contact-form con data-netlify y honeypot en el HTML');
-  log(['form-name', 'name', 'email', 'tema', 'message', 'fake'].every((n) => new RegExp(`name="?${n}"?[\\s>/]`).test(contact)), 'campos del form con los nombres que espera Netlify');
+  log(['form-name', 'subject', 'name', 'email', 'tema', 'message', 'fake'].every((n) => new RegExp(`name="?${n}"?[\\s>/]`).test(contact)), 'campos del form con los nombres que espera Netlify');
   log(contact.includes('href="/privacidad"'), 'el form enlaza a /privacidad');
+
+  // Links externos en otra pestaña
+  const sameTab = htmlFiles().filter((f) => !f.startsWith('cv/')).flatMap((f) => [...read(f).matchAll(/<a\b[^>]*\bhref="https?:[^>]*>/g)].filter((m) => !/target="_blank"/.test(m[0]) || !/rel="noopener"/.test(m[0])).map((m) => `${f}: ${m[0]}`));
+  log(sameTab.length === 0, `links externos con target=_blank y noopener${sameTab.length ? ': ' + sameTab.join(', ') : ''}`);
 
   // SEO
   const sitemap = read('sitemap.xml');
@@ -132,6 +136,10 @@ async function checkPdf(lang, log) {
   ];
   const lost = roles.filter((r) => !flat.includes(r.title) || !flat.includes(r.org) || !flat.includes(r.when));
   log(lost.length === 0, `CV ${lang}: ${roles.length} cargos con empresa y fechas${lost.length ? '; faltan: ' + lost.map((r) => r.title).join(', ') : ''}`);
+
+  const lastRole = flat.lastIndexOf(data.earlier.at(-1).title);
+  log(lastRole >= 0 && lastRole < flat.indexOf(skills), `CV ${lang}: los cargos se leen antes que las habilidades`);
+  log(!bytes.includes('/Type3'), `CV ${lang}: fuentes embebidas, sin Type 3`);
 
   const pdf = await PDFDocument.load(bytes, { updateMetadata: false });
   log(!!pdf.catalog.get(PDFName.of('StructTreeRoot')), `CV ${lang}: PDF etiquetado`);

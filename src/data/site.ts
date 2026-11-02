@@ -18,19 +18,19 @@ export const site = {
   cvPdf: '/cv/ilan-vivanco-cv-es.pdf',
 
   socials: [
-    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/ilanvivanco/' },
-    { label: 'GitHub', href: 'https://github.com/IlanVivanco' },
-    { label: 'EpicDevs', href: 'https://epicdevs.com' },
+    { label: 'LinkedIn', icon: 'linkedin', href: 'https://www.linkedin.com/in/ilanvivanco/' },
+    { label: 'GitHub', icon: 'github', href: 'https://github.com/IlanVivanco' },
+    { label: 'Instagram', icon: 'instagram', href: 'https://www.instagram.com/ilanvivanco/' },
+    { label: 'X', icon: 'x', href: 'https://x.com/IlanVivanco' },
+    { label: 'EpicDevs', icon: 'code', href: 'https://epicdevs.com' },
   ],
-
-  // Perfiles que no se muestran en el sitio, pero identifican a la persona en el JSON-LD.
-  profiles: ['https://www.instagram.com/ilanvivanco/', 'https://twitter.com/IlanVivanco'],
 
   nav: [
     { label: 'Hola', href: '/' },
     { label: 'Mi CV', href: '/curriculum' },
     { label: 'Trabajos', href: '/portfolio' },
-    { label: 'Contacto', href: '/contacto' },
+    // En desktop lo cubre el botón Hablemos del header.
+    { label: 'Contacto', href: '/contacto', mobileOnly: true },
   ],
 };
 

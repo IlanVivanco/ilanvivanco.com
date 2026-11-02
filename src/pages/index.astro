@@ -34,7 +34,7 @@ const focusIcons = { wordpress: 'layers', js: 'code', ai: 'spark', api: 'plug', 
             <p class="eyebrow">¡Hola! Me llamo</p>
             <h1 class="display">Ilán Vivanco</h1>
             <p class="role mono">
-              CTO en <a href="https://epicdevs.com" rel="noopener">EpicDevs</a>
+              CTO en <a class="link" href="https://epicdevs.com" target="_blank" rel="noopener">EpicDevs</a>
               <span class="where"><span class="live" aria-hidden="true"></span>Santander</span>
             </p>
           </div>
@@ -111,7 +111,7 @@ const focusIcons = { wordpress: 'layers', js: 'code', ai: 'spark', api: 'plug', 
         <h2 id="cta" class="h2">¿Qué te parece si hacemos algo juntos?</h2>
         <div class="ctas">
           <a class="btn btn-primary" href="/contacto">Escribime <Icon name="arrow-up-right" /></a>
-          <a class="btn" href="https://www.linkedin.com/in/ilanvivanco/" rel="noopener"><Icon name="linkedin" /> LinkedIn</a>
+          <a class="btn" href="https://www.linkedin.com/in/ilanvivanco/" target="_blank" rel="noopener"><Icon name="linkedin" /> LinkedIn</a>
         </div>
       </div>
     </div>
@@ -139,8 +139,7 @@ const focusIcons = { wordpress: 'layers', js: 'code', ai: 'spark', api: 'plug', 
   .intro-text { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
   .intro .display { font-size: clamp(2.125rem, 4vw, 3.25rem); }
   .role { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; font-size: clamp(0.9375rem, 1.3vw, 1.0625rem); color: var(--text); }
-  .role a { color: var(--yellow); text-decoration: none; border-bottom: 1px solid color-mix(in oklab, var(--yellow) 45%, transparent); transition: color 0.2s, border-color 0.2s; }
-  .role a:hover { color: var(--yellow-hi); border-bottom-color: var(--yellow-hi); }
+  .role a { color: var(--yellow); }
   .where { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); }
   .live { width: 7px; height: 7px; border-radius: 50%; background: var(--teal-hi); animation: pulse 2.2s infinite; }
   @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(85, 201, 209, 0.6); } 70%, 100% { box-shadow: 0 0 0 7px rgba(85, 201, 209, 0); } }

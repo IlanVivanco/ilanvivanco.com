@@ -29,7 +29,7 @@ const route = [
       <div class="prose stack" style="--gap: 20px" data-reveal>
         <p>Empecé por el lado artístico, armando diseños y animaciones con Flash y ActionScript, y maquetando con tablas como se hacía entonces. La lógica me atrapó enseguida: mi primer panel de acceso validaba usuarios contra un archivo .txt, porque todavía no sabía que existía MySQL. Después llegaron PHP, MySQL, CSS y JavaScript, y nunca más miré atrás.</p>
         <p>Cerca de 2010 descubrí WordPress, y ahí encontré el núcleo de casi todo lo que hago: desde personalizar themes hasta migraciones de bases de datos a gran escala, plugins a medida e integraciones con todo tipo de APIs.</p>
-        <p>Hoy soy CTO y socio en <a href="https://epicdevs.com" rel="noopener">EpicDevs</a>. Mi trabajo es la arquitectura y el equipo detrás: decidir cómo se construye una plataforma, mantenerla rápida y mantenible a medida que crece, y sumar IA al flujo de trabajo del equipo (agentes de código, integraciones MCP, QA asistido) sin perder calidad.</p>
+        <p>Hoy soy CTO y socio en <a class="link" href="https://epicdevs.com" target="_blank" rel="noopener">EpicDevs</a>. Mi trabajo es la arquitectura y el equipo detrás: decidir cómo se construye una plataforma, mantenerla rápida y mantenible a medida que crece, y sumar IA al flujo de trabajo del equipo (agentes de código, integraciones MCP, QA asistido) sin perder calidad.</p>
         <p>Soy autodidacta y sigo aprendiendo todo el tiempo: cada proyecto nuevo es una excusa para probar una tecnología o una forma distinta de trabajar.</p>
       </div>
     </div>
@@ -88,8 +88,7 @@ const route = [
   .sm-grid { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 24px clamp(32px, 5vw, 72px); }
   .side { font-size: 0.875rem; font-weight: 500; color: var(--yellow); text-transform: uppercase; letter-spacing: 0.02em; position: sticky; top: calc(var(--header-h) + 24px); align-self: start; }
   .prose { max-width: 68ch; font-size: 1.125rem; color: var(--text-soft); }
-  .prose a:not(.btn) { color: var(--text); }
-  .prose a:not(.btn):hover { color: var(--yellow-hi); }
+  .prose a:not(.btn):not(:hover) { color: var(--text); }
   .ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
 
   .route { margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 16px; counter-reset: stop; }

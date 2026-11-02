@@ -28,7 +28,7 @@ const person = {
   jobTitle: 'CTO / Director of Engineering',
   worksFor: { '@type': 'Organization', name: 'EpicDevs', url: 'https://epicdevs.com' },
   address: { '@type': 'PostalAddress', addressLocality: 'Santander', addressRegion: 'Cantabria', addressCountry: 'ES' },
-  sameAs: [...site.socials.filter((s) => s.label !== 'EpicDevs').map((s) => s.href), ...site.profiles],
+  sameAs: site.socials.filter((s) => s.label !== 'EpicDevs').map((s) => s.href),
   knowsAbout: ['WordPress', 'JavaScript', 'Astro', 'Vue', 'React', 'Node.js', 'Arquitectura web', 'IA aplicada a la ingeniería'],
 };
 ---

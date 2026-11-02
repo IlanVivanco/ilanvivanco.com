@@ -1,5 +1,5 @@
 // Terminal del hero: tres escenas que se escriben solas y rotan.
-// Sin dependencias. Se pausa fuera de pantalla, con la pestaña oculta o con el mouse encima.
+// Sin dependencias. Se pausa con su botón, fuera de pantalla o con la pestaña oculta.
 
 type Tok = [cls: string, text: string];
 type Line = { t: Tok[]; mode?: 'type' | 'print'; wait?: number; speed?: number; bar?: number; kind?: 'add' | 'del' };
@@ -97,7 +97,6 @@ export function initTerminal(root: HTMLElement) {
   const HOLD = 4200;
   let run = 0;
   let current = 0;
-  let hovering = false;
   let visible = true;
 
   let userPaused = false;
@@ -106,11 +105,9 @@ export function initTerminal(root: HTMLElement) {
     userPaused = !userPaused;
     toggle.setAttribute('aria-pressed', String(userPaused));
   });
-  root.addEventListener('pointerenter', () => (hovering = true));
-  root.addEventListener('pointerleave', () => (hovering = false));
   new IntersectionObserver(([e]) => (visible = e.isIntersecting), { threshold: 0.2 }).observe(root);
 
-  const paused = () => userPaused || hovering || !visible || document.hidden;
+  const paused = () => userPaused || !visible || document.hidden;
   const waitActive = async (id: number) => {
     while (paused() && id === run) await sleep(150);
   };

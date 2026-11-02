@@ -80,6 +80,9 @@ html {
 
 body {
   margin: 0;
+  /* El main crece: en páginas cortas el footer queda abajo de todo */
+  display: flex;
+  flex-direction: column;
   min-height: 100dvh;
   background: var(--bg);
   color: var(--text);
@@ -93,6 +96,8 @@ body {
 }
 
 /* Fondo: grilla de puntos (guiño a la red del sitio anterior) */
+main { flex: 1 0 auto; }
+
 body::before {
   content: '';
   position: fixed;
@@ -165,12 +170,19 @@ a:hover .i-download, button:hover .i-download { transform: translateY(2px); }
 
 /* Link de texto con flecha (ancho propio: nunca se estira en un flex/grid) */
 .link-arrow {
+  --u-y: calc(50% + 0.85em);
   display: inline-flex; align-items: center; gap: 6px; min-height: 44px; width: fit-content; align-self: flex-start;
-  color: var(--text); text-decoration: none; font-weight: 500;
-  background: linear-gradient(currentColor, currentColor) 0 calc(50% + 0.8em) / 0 1px no-repeat;
-  transition: background-size 0.35s var(--ease-out), color 0.2s;
+  color: var(--text); font-weight: 500;
 }
-.link-arrow:hover, .link-arrow:focus-visible { background-size: calc(100% - 24px) 1px; color: var(--yellow-hi); }
+/* Links de texto: una línea fina en reposo que se llena de amarillo con el hover */
+.link, .link-arrow {
+  text-decoration: none;
+  background:
+    linear-gradient(var(--yellow), var(--yellow)) 0 var(--u-y, 100%) / 0 2px no-repeat,
+    linear-gradient(var(--line-strong), var(--line-strong)) 0 var(--u-y, 100%) / 100% 1px no-repeat;
+  transition: background-size 0.45s var(--ease-out), color 0.2s;
+}
+.link:hover, .link:focus-visible, .link-arrow:hover, .link-arrow:focus-visible { color: var(--yellow-hi); background-size: 100% 2px, 100% 1px; }
 
 /* ---------------------------------------------------------------
    Botones (hover idéntico en toda la web)

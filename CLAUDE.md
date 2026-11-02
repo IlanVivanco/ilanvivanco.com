@@ -36,7 +36,7 @@ src/
   scripts/ui.ts       revelado, tarjetas (glow, proximidad, perspectiva), header, menú
   scripts/terminal.ts escenas de la terminal del hero
   layouts/Base.astro  <head>, SEO, JSON-LD, speculation rules, header y footer
-  components/         Header, Footer, Logo, Fn, Icon, ProjectCard, Terminal, Stats, Analytics, CvAts
+  components/         Header, Footer, Socials, MailLink, Logo, Fn, Icon, ProjectCard, Terminal, Stats, Analytics, CvAts
   pages/              /, /curriculum, /portfolio, /contacto, /sobre-mi, /privacidad, /cv/es, 404, sitemap.xml
 public/               fonts, img, favicon.svg, og.png, robots.txt (cv/ y og/ se generan, no se versionan)
 scripts/build/        CV en PDF e imágenes OG
@@ -61,8 +61,10 @@ netlify.toml          build, redirects y cabeceras
 9. **Rutas:** las URLs públicas son contrato (`/`, `/curriculum`, `/portfolio`, `/contacto`, `/sobre-mi`, más lo que defina `netlify.toml`). Cambiar una ruta implica un redirect 301. Si cambia una página pública, se actualiza `src/data/pages.ts`.
 10. **La terminal del hero usa siempre `~/ilan`.** El contenido de las escenas sale del CV real.
 11. **Privacidad:** el email nunca va en texto plano en el HTML (usar `encodeMail`/`decodeMail` de `src/lib/mail.ts`). Solo el PDF del CV lo lleva en claro. Sin nombres de familiares en el sitio. Analytics solo sin cookies (Cloudflare Web Analytics): sin GA y sin banner.
-12. **Formulario:** el `name` del form (`contact-form`) y sus campos (`name`, `email`, `message`, `fake`) coinciden con los de Netlify. `data-step` usa el mismo nombre que el campo. Cambiarlos cambia las notificaciones y el historial de envíos.
-13. **CV:** `/curriculum` y el PDF salen de `src/data/cv.ts`. El PDF no usa el diseño del sitio: se edita en `components/CvAts.astro`, con una columna y máximo 2 páginas.
+12. **Formulario:** el `name` del form (`contact-form`) y sus campos (`name`, `email`, `tema`, `message`, `subject`, `fake`) coinciden con los de Netlify. `data-step` usa el mismo nombre que el campo. Con JS, el POST manda `subject`, `email` y un `message` compuesto, para que la notificación sea un solo texto. Netlify titula cada campo con su `<label>`: por eso es oculto y corto, y la pregunta visible se asocia con `aria-labelledby`.
+13. **CSS:** no usar `-webkit-backdrop-filter` junto a `backdrop-filter`: el minificador deja solo el prefijado y Chrome pierde el blur.
+14. **Links externos:** siempre con `target="_blank" rel="noopener"` (lo valida el QA).
+15. **CV:** `/curriculum` y el PDF salen de `src/data/cv.ts`. El PDF se edita en `components/CvAts.astro`, con una columna y máximo 2 páginas: el QA valida orden de lectura y fuentes. Reglas en `DESIGN.md`.
 
 ## Verificación antes de dar algo por terminado
 
@@ -80,7 +82,6 @@ netlify.toml          build, redirects y cabeceras
 
 ## Pendientes conocidos
 
-- Completar los `[COMPLETAR]` de `/privacidad` antes de publicar.
 - Cargar `PUBLIC_CF_BEACON_TOKEN` en Netlify al lanzar y revisar la configuración de Cloudflare (ver `MIGRATION.md`).
 - **Fase 1B:** feed de Instagram (primero un plan aprobado: `PLAN-instagram.md`).
 - **Fase 2:** sitio y CV en inglés, blog, y portfolio actualizado con clientes actuales de EpicDevs y capturas nuevas.

@@ -2,6 +2,7 @@
 import { site } from '../data/site';
 import Logo from './Logo.astro';
 import Icon from './Icon.astro';
+import Socials from './Socials.astro';
 
 const path = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '').replace(/\/$/, '') || '/';
 const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
@@ -15,7 +16,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
 
     <nav class="nav-desktop" aria-label="Principal">
       <ul role="list">
-        {site.nav.map((item, i) => (
+        {site.nav.filter((item) => !item.mobileOnly).map((item) => (
           <li>
             <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
               {isActive(item.href) && <span class="nav-pill" aria-hidden="true"></span>}
@@ -26,7 +27,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
       </ul>
     </nav>
 
-    <a href="/contacto" class="btn btn-primary btn-sm header-cta">
+    <a href="/contacto" class="btn btn-primary btn-sm header-cta" aria-current={isActive('/contacto') ? 'page' : undefined}>
       Hablemos
       <Icon name="arrow-up-right" />
     </a>
@@ -55,9 +56,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
         ))}
       </ul>
     </nav>
-    <div class="mobile-socials">
-      {site.socials.map((s) => <a href={s.href} rel="noopener">{s.label}</a>)}
-    </div>
+    <div class="mobile-socials"><Socials /></div>
   </div>
 </header>
 
@@ -69,9 +68,8 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
     transition: background-color 0.3s, border-color 0.3s, backdrop-filter 0.3s;
   }
   .site-header[data-scrolled] {
-    background: color-mix(in oklab, var(--bg) 78%, transparent);
-    backdrop-filter: blur(14px) saturate(140%);
-    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    background: color-mix(in oklab, var(--bg) 92%, transparent);
+    backdrop-filter: blur(18px) saturate(140%);
     border-bottom-color: var(--line);
   }
   .bar { height: 100%; display: flex; align-items: center; gap: 24px; }
@@ -121,8 +119,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
   .mobile-menu .idx { font-size: 0.8125rem; color: var(--muted); font-weight: 400; letter-spacing: 0; }
   .mobile-menu:popover-open li { animation: menu-in 0.5s var(--ease-out) both; animation-delay: calc(var(--i) * 50ms + 80ms); }
   @keyframes menu-in { from { opacity: 0; transform: translateY(10px); } }
-  .mobile-socials { margin-top: auto; display: flex; flex-wrap: wrap; gap: 8px 24px; font-family: var(--font-mono); font-size: 0.9375rem; color: var(--text-soft); }
-  .mobile-socials a { min-height: 44px; display: inline-flex; align-items: center; }
+  .mobile-socials { margin-top: auto; }
 
   @media (max-width: 860px) {
     .nav-desktop, .header-cta { display: none; }

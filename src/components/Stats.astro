@@ -11,10 +11,17 @@ const cards = statScreens[0].items.map((_, i) => i);
   <h2 id="stats-title" class="sr-only">En números</h2>
   <div class="stats-head">
     <p class="stats-title mono" aria-hidden="true">// <span data-screen-title>{statScreens[0].title}</span><span class="title-caret"></span></p>
-    <button type="button" class="stats-toggle" data-stats-toggle aria-pressed="false" aria-label="Pausar la rotación de cifras">
-      <span class="when-playing"><Icon name="pause" size={14} /></span>
-      <span class="when-paused"><Icon name="play" size={14} /></span>
-    </button>
+    <div class="stats-controls">
+      <button type="button" class="stats-toggle" data-stats-toggle aria-pressed="false" aria-label="Pausar la rotación de cifras">
+        <span class="when-playing"><Icon name="pause" size={14} /></span>
+        <span class="when-paused"><Icon name="play" size={14} /></span>
+      </button>
+      <div class="screens" role="group" aria-label="Elegir grupo de cifras">
+        {statScreens.map((s, i) => (
+          <button type="button" class="screen-dot" data-screen-btn={i} aria-pressed={i === 0 ? 'true' : 'false'} aria-label={`Mostrar: ${s.title}`}><span class="dot-fill"></span></button>
+        ))}
+      </div>
+    </div>
   </div>
 
   <ul class="stats-grid" role="list" data-reveal-group aria-hidden="true">
@@ -36,11 +43,6 @@ const cards = statScreens[0].items.map((_, i) => i);
       </li>
     ))}
   </ul>
-  <div class="screens" role="group" aria-label="Elegir grupo de cifras">
-    {statScreens.map((s, i) => (
-      <button type="button" class="screen-dot" data-screen-btn={i} aria-pressed={i === 0 ? 'true' : 'false'} aria-label={`Mostrar: ${s.title}`}><span class="dot-fill"></span></button>
-    ))}
-  </div>
   <div class="sr-only">
     {statScreens.map((s) => (
       <ul role="list" aria-label={s.title}>
@@ -119,7 +121,8 @@ const cards = statScreens[0].items.map((_, i) => i);
     dots.forEach((d, i) => d.addEventListener('click', () => show(i)));
     root.addEventListener('pointerenter', () => (hover = true));
     root.addEventListener('pointerleave', () => (hover = false));
-    root.addEventListener('focusin', () => (hover = true));
+    // Solo el foco de teclado pausa: un click en un punto no congela el tiempo
+    root.addEventListener('focusin', (e) => (hover = (e.target as HTMLElement).matches(':focus-visible')));
     root.addEventListener('focusout', () => (hover = false));
 
     new IntersectionObserver(([e]) => {
@@ -145,15 +148,16 @@ const cards = statScreens[0].items.map((_, i) => i);
 
 <style>
   .stats { margin-top: clamp(48px, 6vw, 80px); display: flex; flex-direction: column; gap: 14px; }
-  .stats-head { display: flex; align-items: center; gap: 8px; }
+  .stats-head { display: flex; align-items: center; justify-content: space-between; gap: 8px 24px; }
+  .stats-controls { flex: none; display: flex; align-items: center; gap: 6px; }
   .stats-title { font-size: 0.875rem; color: var(--muted); display: inline-flex; align-items: center; }
   .stats-title span[data-screen-title] { color: var(--text-soft); margin-left: 0.5ch; }
   .title-caret { display: inline-block; width: 0.55em; height: 1.1em; margin-left: 2px; background: var(--teal-hi); opacity: 0.8; animation: blink 1.05s steps(1) infinite; }
   @keyframes blink { 50% { opacity: 0; } }
 
-  /* Pausa: solo el ícono, como en la terminal */
+  /* Pausa: solo el ícono, como en la terminal. Va junto a los puntos: el título que se tipea ya no la mueve */
   .stats-toggle {
-    display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; margin-left: 4px;
+    display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px;
     border: 1px solid transparent; border-radius: 8px; background: transparent; color: var(--muted); cursor: pointer; transition: color 0.2s, border-color 0.2s;
   }
   .stats-toggle:hover, .stats-toggle:focus-visible { color: var(--text); border-color: var(--line-strong); }
@@ -161,8 +165,8 @@ const cards = statScreens[0].items.map((_, i) => i);
   .stats-toggle[aria-pressed='true'] .when-paused { display: inline-flex; }
   .stats-toggle[aria-pressed='true'] { color: var(--yellow); }
 
-  /* Dots centrados abajo; el activo se estira y se llena con el tiempo restante */
-  .screens { display: flex; justify-content: center; gap: 2px; margin-top: 6px; }
+  /* El punto activo se estira y se llena con el tiempo: es el timer */
+  .screens { display: flex; gap: 2px; }
   .screen-dot { position: relative; width: 32px; height: 28px; border: 0; padding: 0; background: transparent; cursor: pointer; }
   .screen-dot::before, .dot-fill { position: absolute; left: 50%; top: 50%; height: 6px; margin-top: -3px; border-radius: 3px; }
   .screen-dot::before { content: ''; width: 6px; margin-left: -3px; background: var(--line-strong); transition: width 0.45s var(--ease-spring), margin 0.45s var(--ease-spring), background-color 0.3s; }
@@ -191,6 +195,7 @@ const cards = statScreens[0].items.map((_, i) => i);
     .stat-item, .stat-item.is-leaving, .stat-item.is-active { transform: none; transition-delay: 0s; }
   }
   @media (max-width: 960px) { .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 640px) { .stats-head { flex-direction: column; align-items: flex-start; } }
   @media (max-width: 480px) {
     .stat { min-height: 140px; padding: 16px 16px 20px; }
     .stat-value { font-size: 2rem; }

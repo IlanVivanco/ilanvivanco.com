@@ -88,7 +88,7 @@ Reglas:
 - Los íconos son inline SVG de trazo (`components/Icon.astro`), con la clase `i-<nombre>`. Sin emojis ni librerías de íconos.
 
 ### Link con flecha (`.link-arrow`)
-Texto con subrayado que crece en hover y flecha. Usa `width: fit-content`: nunca se estira dentro de un flex o grid.
+Texto con flecha y el mismo subrayado que `.link` (todos los links de texto, email incluido): línea fina en reposo que se llena de amarillo en hover. Usa `width: fit-content`: nunca se estira dentro de un flex o grid.
 
 ### Tarjetas (`.card`)
 - Todas tienen tres efectos manejados por `scripts/ui.ts`:
@@ -107,15 +107,15 @@ Texto con subrayado que crece en hover y flecha. Usa `width: fit-content`: nunca
 - Ventana con 3 dots, pestañas (`ilan.ts`, `git log`, `claude`) con barra de progreso, botón de pausa (solo ícono) y cuerpo de alto fijo (sin CLS).
 - **Siempre `~/ilan`** como path.
 - Las escenas se "tipean": los prompts aparecen de una y se tipea solo el comando; las salidas se imprimen línea a línea. Hace auto-scroll como una terminal real.
-- Se pausa con hover, fuera de pantalla, con la pestaña oculta o con el botón.
+- Se pausa con el botón, fuera de pantalla o con la pestaña oculta. El hover no la pausa.
 - Colores de token: keyword naranja, prop/función teal, string amarillo, número violeta, comentario muted en itálica, diff `-` con fondo naranja al 14% y `+` con fondo teal al 16%.
 - Contenido real y verificable: la carrera en el `git log` sale del CV.
 
 ### Stats del home (`components/Stats.astro`)
 - **4 pantallas de 4 tarjetas** que rotan juntas: "mi trayectoria, en números", "mis números en el código", "datos que nadie pidió" (la pantalla con humor) y "este sitio, en números". Un valor puede ser texto fijo (`display: '∞'`), que no cuenta. Datos en `src/data/site.ts → statScreens`.
 - Transición tipo tablero de aeropuerto: la cifra saliente gira hacia arriba y la nueva entra desde abajo, en cascada de 80ms por tarjeta. Los números cuentan hacia arriba.
-- **Los dots, centrados debajo, son a la vez navegación y timer**: el activo se estira y se llena con el tiempo restante.
-- La pausa es solo un ícono, al lado del título. También pausan el hover, el foco y salir de pantalla.
+- **Pausa y dots van juntos, arriba a la derecha** (en mobile, en su propia fila bajo el título), en un lugar fijo: el título que se tipea no los mueve. Los dots son a la vez navegación y timer: el activo se estira y se llena con el tiempo restante.
+- También pausan el hover, el foco de teclado y salir de pantalla.
 - Cifras estimadas: `approx: true` y prefijo `~` o sufijo `+`. Nunca inventar precisión.
 
 ### Tarjeta de proyecto (`components/ProjectCard.astro`)
@@ -137,10 +137,11 @@ Círculo de 32px con borde `--line-strong`. Abierto: fondo amarillo, rota 180° 
 - El cuerpo corre `$ ./contacto.sh`.
 - Las preguntas usan `?` en teal; la respuesta va después de `›`, que se pone amarillo con foco (ese es el indicador de foco).
 - Las respondidas quedan como `✓ pregunta · respuesta` y se pueden editar con un click.
-- Las pestañas de la barra (`nombre · email · tema · mensaje`) navegan entre preguntas; las no alcanzadas quedan deshabilitadas.
+- La barra muestra los pasos (`nombre › email › tema › mensaje`) como indicador lineal, sin click: ✓ hecho, número en amarillo el actual, número apagado el pendiente. Para corregir una respuesta se hace click en su línea del log.
+- La pregunta actual se resalta de borde a borde, con fondo `--surface` y filete amarillo.
 - El tema se elige con ↑↓ (radios nativos) y Enter; con mouse, el click avanza.
 - El mensaje se envía con **Enter** y Shift+Enter agrega línea. El botón es texto plano: `[ enviar ↵ ]`.
-- Los errores van en naranja con `✗`. La salida del envío se imprime como log (`→ …`, `✓ 200 OK`). Si el envío falla, el mensaje ofrece el email como alternativa.
+- Los errores van en naranja con `✗`. La salida del envío se imprime como log con colores tipo ANSI (`→` violeta, `POST` teal, respuestas en amarillo, estado invertido `200 OK` o `ERROR`) y cierra con una nota con filete. Si el envío falla, el mensaje ofrece el email como alternativa.
 - Debajo de la pregunta actual va una línea en muted: "tus datos solo se usan para responderte · privacidad". Desaparece al enviar.
 - Sin JS es un formulario normal con todos los campos.
 
@@ -151,7 +152,10 @@ Display grande con `cursor: copy`. El click copia y muestra una pastilla "copiad
 Una columna de lectura, máximo 760px, con los mismos tokens. Sin humor ni animaciones. Enlazada desde el footer y el formulario.
 
 ### CV para ATS (`components/CvAts.astro`)
-**Fuera del sistema de diseño a propósito:** una columna, negro sobre blanco, Arial, sin íconos, tablas ni imágenes. No se enlaza desde el sitio: `/curriculum` baja el PDF.
+Con la identidad del sitio (banda navy, Space Grotesk y Fira Code, línea de tiempo), pero sobre papel blanco y con las reglas de un ATS: una columna, sin tablas ni imágenes, y el color y las formas solo en CSS, sin texto generado.
+- Fuentes estáticas de `public/fonts/cv/`: con las variables, Chromium embebe Type 3.
+- Sin `position` ni `transform` en bloques con texto: Chromium los escribe al final del PDF y se rompe el orden de lectura.
+- No se enlaza desde el sitio: `/curriculum` baja el PDF, sin botón de imprimir.
 
 ### Imágenes OG (`scripts/build/og-images.mjs`)
 Mismo estilo que `public/og.png`, la imagen de la home: logo, `->función();`, título y subtítulo en amarillo. Una por página, generadas desde `src/data/pages.ts`.
@@ -170,7 +174,7 @@ Mono 0.8125rem, borde `--line-hi` y radio 999px. En el CV entran escalonados.
 - **Revelado**: `[data-reveal]` hace opacity 0→1 y `translate` 14px→0 en 0.7s. Dentro de `[data-reveal-group]`, escalonado cada 70ms. Usa la propiedad `translate`, **no `transform`**, para no pisar la perspectiva de las tarjetas.
 - **Transiciones entre páginas**: cross-document View Transitions, sin JS. El header queda fijo, el contenido (`main`, nombre `page`) sale hacia arriba con un poco de blur y entra desde abajo; la pastilla del nav viaja.
 - Duraciones: micro 0.2–0.35s; entradas 0.5–0.7s; nada supera 1.1s, salvo los loops de ambiente.
-- **Contenido que rota solo** (terminal, stats): siempre con pausa visible + pausa en hover/focus + pausa fuera de pantalla (WCAG 2.2.2).
+- **Contenido que rota solo** (terminal, stats): siempre con pausa visible + pausa fuera de pantalla (WCAG 2.2.2).
 - `prefers-reduced-motion: reduce`: sin perspectiva, sin VT, sin tipeo (escena estática), stats con crossfade, duraciones a 0.01ms.
 - Librería: **Motion mini** (`motion/mini`, sobre WAAPI). Lo demás es CSS y APIs nativas (IntersectionObserver, View Transitions, popover, `<details>`). No sumar GSAP, Three.js, Lottie ni similares sin una razón que valga su peso.
 
@@ -221,7 +225,7 @@ Mono 0.8125rem, borde `--line-hi` y radio 999px. En el CV entran escalonados.
 - [ ] Foco visible: outline amarillo global; en superficies de consola, outline recto o el indicador `›`.
 - [ ] Contraste medido (sección 2).
 - [ ] Targets ≥ 44px (dots y toggles chicos ≥ 28px, con espacio).
-- [ ] `aria-pressed` en toggles, `aria-current` en nav y pestañas, `aria-live` para estados que cambian.
+- [ ] `aria-pressed` en toggles, `aria-current` en nav y pasos, `aria-live` para estados que cambian.
 - [ ] Contenido animado decorativo con `aria-hidden` + equivalente `sr-only`.
 - [ ] `npm run qa` en verde (axe WCAG 2.2 AA, sin scroll horizontal, consola limpia, desktop y mobile).
 
