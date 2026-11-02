@@ -1,26 +1,25 @@
 ---
 // Cloudflare Web Analytics: sin cookies. Solo en producción y con token.
-const token = import.meta.env.PROD ? import.meta.env.PUBLIC_CF_BEACON_TOKEN : '';
+const token = import.meta.env.PROD ? import.meta.env.PUBLIC_CF_BEACON_TOKEN : ''
 ---
-{token && (
-  <script is:inline define:vars={{ token }}>
-    function loadBeacon() {
-      var s = document.createElement('script');
-      s.defer = true;
-      s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
-      s.setAttribute('data-cf-beacon', JSON.stringify({ token: token }));
-      document.head.append(s);
-    }
-    // Diferido para no tocar el LCP ni el TBT
-    function whenIdle() {
-      (window.requestIdleCallback || setTimeout)(loadBeacon);
-    }
-    function schedule() {
-      if (document.readyState === 'complete') whenIdle();
-      else addEventListener('load', whenIdle, { once: true });
-    }
-    // Una página pre-renderizada por las Speculation Rules no cuenta hasta que se ve de verdad
-    if (document.prerendering) document.addEventListener('prerenderingchange', schedule, { once: true });
-    else schedule();
-  </script>
-)}
+
+{token && <script is:inline define:vars={{ token }}>
+	function loadBeacon() {
+		var s = document.createElement('script')
+		s.defer = true
+		s.src = 'https://static.cloudflareinsights.com/beacon.min.js'
+		s.setAttribute('data-cf-beacon', JSON.stringify({ token: token }))
+		document.head.append(s)
+	}
+	// Diferido para no tocar el LCP ni el TBT
+	function whenIdle() {
+		;(window.requestIdleCallback || setTimeout)(loadBeacon)
+	}
+	function schedule() {
+		if (document.readyState === 'complete') whenIdle()
+		else addEventListener('load', whenIdle, { once: true })
+	}
+	// Una página pre-renderizada por las Speculation Rules no cuenta hasta que se ve de verdad
+	if (document.prerendering) document.addEventListener('prerenderingchange', schedule, { once: true })
+	else schedule()
+</script>}

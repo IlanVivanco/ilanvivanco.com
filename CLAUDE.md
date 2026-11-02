@@ -20,6 +20,7 @@ npm run build      # dist/ + CV en PDF + imágenes OG
 npm run cv:pdf     # regenera el PDF sobre el último build
 npm run og:images  # regenera las imágenes OG sobre el último build
 npm run preview    # sirve dist/
+npm run format     # Prettier: todo el código, con la misma config que el editor
 npm run qa         # build + axe, overflow y consola (desktop y mobile) + email, form, redirects, SEO, peso, analytics y CV
 npx playwright install chromium   # una vez: lo usan el build y el QA
 ```
@@ -68,6 +69,7 @@ netlify.toml          build, redirects y cabeceras
 
 ## Verificación antes de dar algo por terminado
 
+0. `npm run format` (tabs de 3, sin punto y coma, comillas simples, 120 columnas; lo controla el CI).
 1. `npm run build` sin errores ni warnings nuevos.
 2. `npm run qa` en verde.
 3. Revisión visual en 1440 px y 390 px, con interacciones: hover de tarjetas, filtro del portfolio, formulario completo por teclado, cambio de página.

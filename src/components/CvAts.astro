@@ -1,113 +1,309 @@
 ---
 // CV para ATS con la identidad del sitio: una columna, sin tablas ni imágenes, y texto real en orden de lectura.
 // El color y las formas son solo CSS (nada de texto generado): lo que lee un ATS es lo mismo que sin estilos.
-import { atsPeriod, cv, cvLabels } from '../data/cv';
-import { site } from '../data/site';
-import { encodeMail } from '../lib/mail';
-import Logo from './Logo.astro';
+import { atsPeriod, cv, cvLabels } from '../data/cv'
+import { site } from '../data/site'
+import { encodeMail } from '../lib/mail'
+import Logo from './Logo.astro'
 
 interface Props {
-  lang: 'es';
+	lang: 'es'
 }
-const { lang } = Astro.props;
-const data = cv[lang];
-const labels = cvLabels[lang];
-const linkedin = site.socials.find((s) => s.label === 'LinkedIn')!.href;
-const bare = (url: string) => url.replace(/^https:\/\/(www\.)?/, '').replace(/\/$/, '');
+const { lang } = Astro.props
+const data = cv[lang]
+const labels = cvLabels[lang]
+const linkedin = site.socials.find((s) => s.label === 'LinkedIn')!.href
+const bare = (url: string) => url.replace(/^https:\/\/(www\.)?/, '').replace(/\/$/, '')
 ---
+
 <!doctype html>
 <html lang={labels.htmlLang}>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="robots" content="noindex, nofollow" />
-    <meta name="author" content={site.name} />
-    <title>{`${site.name} — CV — ${labels.title}`}</title>
-    <style is:inline>
-      /* Instancias estáticas: con las variables, Chromium embebe Type 3 y algunos parsers de ATS lo leen mal */
-      @font-face { font-family: 'Space Grotesk'; font-weight: 400; src: url('/fonts/cv/space-grotesk-400.woff2') format('woff2'); }
-      @font-face { font-family: 'Space Grotesk'; font-weight: 500; src: url('/fonts/cv/space-grotesk-500.woff2') format('woff2'); }
-      @font-face { font-family: 'Space Grotesk'; font-weight: 600; src: url('/fonts/cv/space-grotesk-600.woff2') format('woff2'); }
-      @font-face { font-family: 'Fira Code'; font-weight: 400; src: url('/fonts/cv/fira-code-400.woff2') format('woff2'); }
-      @font-face { font-family: 'Fira Code'; font-weight: 500; src: url('/fonts/cv/fira-code-500.woff2') format('woff2'); }
-      @page { size: A4; margin: 11mm 0; }
-      @page :first { margin-top: 0; }
-      * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      html { background: #fff; }
-      body { margin: 0 auto; max-width: 210mm; font: 9.75pt/1.38 'Space Grotesk', Arial, Helvetica, sans-serif; font-variant-ligatures: none; color: #1A2944; }
-      a { color: inherit; text-decoration: none; }
-      p { margin: 0; }
-      .band { display: flex; align-items: center; justify-content: space-between; gap: 10mm; padding: 11mm 16mm 8mm; background: #0A111F; color: #C3CDDF; }
-      h1 { margin: 0; color: #F4F9FC; font-size: 25pt; font-weight: 600; line-height: 1.1; letter-spacing: -0.03em; }
-      .title { margin: 2pt 0 5pt; color: #FFE356; font: 500 10.5pt/1.3 'Fira Code', monospace; }
-      .contact { font: 400 8pt/1.4 'Fira Code', monospace; }
-      main { padding: 0 16mm; }
-      h2 { display: flex; align-items: center; gap: 6pt; margin: 13pt 0 6pt; color: #17646B; font: 500 10.5pt/1.3 'Fira Code', monospace; break-after: avoid; }
-      h2::before { content: ''; flex: none; width: 7pt; height: 7pt; border-radius: 2pt; background: #D8BD2D; }
-      h2::after { content: ''; flex: 1; height: 0.75pt; background: #D5DCE8; }
-      /* Sin position ni transform: Chromium escribiría esos bloques al final del PDF y un ATS los leería desordenados */
-      .role { padding: 0 0 7.5pt 11pt; border-left: 0.75pt solid #D5DCE8; margin-left: 3pt; break-inside: avoid; }
-      .role::before { content: ''; float: left; width: 5.25pt; height: 5.25pt; margin: 3.5pt 0 0 -14pt; border-radius: 50%; background: #fff; border: 1pt solid #2C979F; }
-      .role.now::before { background: #D8BD2D; border-color: #D8BD2D; }
-      .head { display: flex; align-items: baseline; justify-content: space-between; gap: 10pt; }
-      h3 { margin: 0; color: #0A111F; font-size: 10.25pt; font-weight: 600; line-height: 1.3; break-after: avoid; }
-      .when { flex: none; color: #4A5875; font: 400 8.25pt/1.3 'Fira Code', monospace; }
-      .org { color: #17646B; font-weight: 500; }
-      ul { margin: 1.5pt 0 0; padding-left: 10pt; }
-      li::marker { color: #2C979F; }
-      .rows p { margin-top: 2.5pt; }
-      .rows b { color: #0A111F; font-weight: 600; }
-    </style>
-  </head>
-  <body>
-    <header class="band">
-      <div>
-      <h1>{site.name}</h1>
-      <p class="title">{labels.title}</p>
-      <p class="contact">{labels.location} | <a data-mail={encodeMail(site.email)} href="#">[email]</a> | <a href={linkedin}>{bare(linkedin)}</a> | <a href={site.url}>{bare(site.url)}</a></p>
-      </div>
-      <Logo size={62} />
-    </header>
-    <main>
-      <h2>{labels.headings.summary}</h2>
-      <p>{data.summary}</p>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="robots" content="noindex, nofollow" />
+		<meta name="author" content={site.name} />
+		<title>{`${site.name} — CV — ${labels.title}`}</title>
+		<style is:inline>
+			/* Instancias estáticas: con las variables, Chromium embebe Type 3 y algunos parsers de ATS lo leen mal */
+			@font-face {
+				font-family: 'Space Grotesk';
+				font-weight: 400;
+				src: url('/fonts/cv/space-grotesk-400.woff2') format('woff2');
+			}
+			@font-face {
+				font-family: 'Space Grotesk';
+				font-weight: 500;
+				src: url('/fonts/cv/space-grotesk-500.woff2') format('woff2');
+			}
+			@font-face {
+				font-family: 'Space Grotesk';
+				font-weight: 600;
+				src: url('/fonts/cv/space-grotesk-600.woff2') format('woff2');
+			}
+			@font-face {
+				font-family: 'Fira Code';
+				font-weight: 400;
+				src: url('/fonts/cv/fira-code-400.woff2') format('woff2');
+			}
+			@font-face {
+				font-family: 'Fira Code';
+				font-weight: 500;
+				src: url('/fonts/cv/fira-code-500.woff2') format('woff2');
+			}
+			@page {
+				size: A4;
+				margin: 11mm 0;
+			}
+			@page :first {
+				margin-top: 0;
+			}
+			* {
+				box-sizing: border-box;
+				-webkit-print-color-adjust: exact;
+				print-color-adjust: exact;
+			}
+			html {
+				background: #fff;
+			}
+			body {
+				margin: 0 auto;
+				max-width: 210mm;
+				font:
+					9.75pt/1.38 'Space Grotesk',
+					Arial,
+					Helvetica,
+					sans-serif;
+				font-variant-ligatures: none;
+				color: #1a2944;
+			}
+			a {
+				color: inherit;
+				text-decoration: none;
+			}
+			p {
+				margin: 0;
+			}
+			.band {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 10mm;
+				padding: 11mm 16mm 8mm;
+				background: #0a111f;
+				color: #c3cddf;
+			}
+			h1 {
+				margin: 0;
+				color: #f4f9fc;
+				font-size: 25pt;
+				font-weight: 600;
+				line-height: 1.1;
+				letter-spacing: -0.03em;
+			}
+			.title {
+				margin: 2pt 0 5pt;
+				color: #ffe356;
+				font:
+					500 10.5pt/1.3 'Fira Code',
+					monospace;
+			}
+			.contact {
+				font:
+					400 8pt/1.4 'Fira Code',
+					monospace;
+			}
+			main {
+				padding: 0 16mm;
+			}
+			h2 {
+				display: flex;
+				align-items: center;
+				gap: 6pt;
+				margin: 13pt 0 6pt;
+				color: #17646b;
+				font:
+					500 10.5pt/1.3 'Fira Code',
+					monospace;
+				break-after: avoid;
+			}
+			h2::before {
+				content: '';
+				flex: none;
+				width: 7pt;
+				height: 7pt;
+				border-radius: 2pt;
+				background: #d8bd2d;
+			}
+			h2::after {
+				content: '';
+				flex: 1;
+				height: 0.75pt;
+				background: #d5dce8;
+			}
+			/* Sin position ni transform: Chromium escribiría esos bloques al final del PDF y un ATS los leería desordenados */
+			.role {
+				padding: 0 0 7.5pt 11pt;
+				border-left: 0.75pt solid #d5dce8;
+				margin-left: 3pt;
+				break-inside: avoid;
+			}
+			.role::before {
+				content: '';
+				float: left;
+				width: 5.25pt;
+				height: 5.25pt;
+				margin: 3.5pt 0 0 -14pt;
+				border-radius: 50%;
+				background: #fff;
+				border: 1pt solid #2c979f;
+			}
+			.role.now::before {
+				background: #d8bd2d;
+				border-color: #d8bd2d;
+			}
+			.head {
+				display: flex;
+				align-items: baseline;
+				justify-content: space-between;
+				gap: 10pt;
+			}
+			h3 {
+				margin: 0;
+				color: #0a111f;
+				font-size: 10.25pt;
+				font-weight: 600;
+				line-height: 1.3;
+				break-after: avoid;
+			}
+			.when {
+				flex: none;
+				color: #4a5875;
+				font:
+					400 8.25pt/1.3 'Fira Code',
+					monospace;
+			}
+			.org {
+				color: #17646b;
+				font-weight: 500;
+			}
+			ul {
+				margin: 1.5pt 0 0;
+				padding-left: 10pt;
+			}
+			li::marker {
+				color: #2c979f;
+			}
+			.rows p {
+				margin-top: 2.5pt;
+			}
+			.rows b {
+				color: #0a111f;
+				font-weight: 600;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="band">
+			<div>
+				<h1>{site.name}</h1>
+				<p class="title">{labels.title}</p>
+				<p class="contact">
+					{labels.location} |{' '}
+					<a data-mail={encodeMail(site.email)} href="#">
+						[email]
+					</a>{' '}
+					| <a href={linkedin}>{bare(linkedin)}</a> | <a href={site.url}>{bare(site.url)}</a>
+				</p>
+			</div>
+			<Logo size={62} />
+		</header>
+		<main>
+			<h2>{labels.headings.summary}</h2>
+			<p>{data.summary}</p>
 
-      <h2>{labels.headings.experience}</h2>
-      {data.experience.flatMap((job) => job.roles.map((role) => (
-        <div class:list={['role', { now: !role.end }]}>
-          <div class="head"><h3>{role.title}</h3><p class="when">{atsPeriod(role, labels.present)}</p></div>
-          <p><span class="org">{job.org}{job.formerly && ` (antes ${job.formerly})`}</span> | {role.place ?? job.location}</p>
-          <ul>{role.highlights.map((h) => <li>{h}</li>)}</ul>
-        </div>
-      )))}
-      {data.earlier.map((job) => (
-        <div class="role">
-          <div class="head"><h3>{job.title}</h3><p class="when">{atsPeriod(job, labels.present)}</p></div>
-          <p><span class="org">{job.org}</span> | {job.location}</p>
-          <ul><li>{job.text}</li></ul>
-        </div>
-      ))}
+			<h2>{labels.headings.experience}</h2>
+			{data.experience.flatMap((job) =>
+				job.roles.map((role) => (
+					<div class:list={['role', { now: !role.end }]}>
+						<div class="head">
+							<h3>{role.title}</h3>
+							<p class="when">{atsPeriod(role, labels.present)}</p>
+						</div>
+						<p>
+							<span class="org">
+								{job.org}
+								{job.formerly && ` (antes ${job.formerly})`}
+							</span>{' '}
+							| {role.place ?? job.location}
+						</p>
+						<ul>
+							{role.highlights.map((h) => (
+								<li>{h}</li>
+							))}
+						</ul>
+					</div>
+				))
+			)}
+			{data.earlier.map((job) => (
+				<div class="role">
+					<div class="head">
+						<h3>{job.title}</h3>
+						<p class="when">{atsPeriod(job, labels.present)}</p>
+					</div>
+					<p>
+						<span class="org">{job.org}</span> | {job.location}
+					</p>
+					<ul>
+						<li>{job.text}</li>
+					</ul>
+				</div>
+			))}
 
-      <h2>{labels.headings.skills}</h2>
-      <div class="rows">{data.stack.map((g) => <p><b>{g.group}:</b> {g.items.join(', ')}</p>)}</div>
+			<h2>{labels.headings.skills}</h2>
+			<div class="rows">
+				{data.stack.map((g) => (
+					<p>
+						<b>{g.group}:</b> {g.items.join(', ')}
+					</p>
+				))}
+			</div>
 
-      <h2>{labels.headings.education}</h2>
-      <div class="rows">{data.education.map((e) => <p><b>{e.title}</b>, {e.org} | {e.period.replace(' — ', ' – ')}</p>)}</div>
+			<h2>{labels.headings.education}</h2>
+			<div class="rows">
+				{data.education.map((e) => (
+					<p>
+						<b>{e.title}</b>, {e.org} | {e.period.replace(' — ', ' – ')}
+					</p>
+				))}
+			</div>
 
-      <h2>{labels.headings.courses}</h2>
-      <div class="rows">{data.courses.map((c) => <p><b>{c.org}:</b> {c.items.join(', ')} | {c.period.replace(' — ', ' – ')}</p>)}</div>
+			<h2>{labels.headings.courses}</h2>
+			<div class="rows">
+				{data.courses.map((c) => (
+					<p>
+						<b>{c.org}:</b> {c.items.join(', ')} | {c.period.replace(' — ', ' – ')}
+					</p>
+				))}
+			</div>
 
-      <h2>{labels.headings.languages}</h2>
-      <div class="rows">{data.languages.map((l) => <p><b>{l.name}:</b> {l.level}</p>)}</div>
-    </main>
+			<h2>{labels.headings.languages}</h2>
+			<div class="rows">
+				{data.languages.map((l) => (
+					<p>
+						<b>{l.name}:</b> {l.level}
+					</p>
+				))}
+			</div>
+		</main>
 
-    <script is:inline>
-      // El email nunca va en texto plano en el HTML: se arma al cargar. El PDF se genera después, con el texto ya armado.
-      document.querySelectorAll('a[data-mail]').forEach(function (a) {
-        var email = atob(a.dataset.mail).split('').reverse().join('');
-        a.href = 'mailto:' + email;
-        a.textContent = email;
-      });
-    </script>
-  </body>
+		<script is:inline>
+			// El email nunca va en texto plano en el HTML: se arma al cargar. El PDF se genera después, con el texto ya armado.
+			document.querySelectorAll('a[data-mail]').forEach(function (a) {
+				var email = atob(a.dataset.mail).split('').reverse().join('')
+				a.href = 'mailto:' + email
+				a.textContent = email
+			})
+		</script>
+	</body>
 </html>

@@ -1,12 +1,12 @@
 // Genera una imagen OG por página, con el estilo de public/og.png.
 // Sale a public/og/ (para `astro dev`) y a dist/og/ (para este deploy).
-import { copyFile, mkdir, readFile } from 'node:fs/promises';
-import { chromium } from 'playwright';
-import { publicPages } from '../../src/data/pages.ts';
-import { serveDist } from '../lib/serve-dist.mjs';
+import { copyFile, mkdir, readFile } from 'node:fs/promises'
+import { chromium } from 'playwright'
+import { publicPages } from '../../src/data/pages.ts'
+import { serveDist } from '../lib/serve-dist.mjs'
 
-const esc = (v) => v.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
-const logo = await readFile('public/favicon.svg', 'utf8');
+const esc = (v) => v.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c])
+const logo = await readFile('public/favicon.svg', 'utf8')
 
 const html = ({ fn, title, subtitle }) => `<!doctype html><html lang="es"><meta charset="utf-8"><style>
   @font-face { font-family: 'Space Grotesk'; src: url('/fonts/space-grotesk.woff2') format('woff2'); font-weight: 300 700; }
@@ -28,23 +28,23 @@ const html = ({ fn, title, subtitle }) => `<!doctype html><html lang="es"><meta 
 <h1>${esc(title)}</h1>
 <p class="sub">${esc(subtitle)}</p>
 <div class="foot"><span>Ilán Vivanco · CTO en EpicDevs</span><span>ilanvivanco.com</span></div>
-</html>`;
+</html>`
 
-const server = await serveDist();
-const browser = await chromium.launch();
+const server = await serveDist()
+const browser = await chromium.launch()
 try {
-  await mkdir('public/og', { recursive: true });
-  await mkdir('dist/og', { recursive: true });
-  const page = await browser.newPage({ viewport: { width: 1200, height: 630 } });
-  await page.goto(`${server.url}/robots.txt`);
-  for (const p of publicPages.filter((p) => p.path !== '/')) {
-    await page.setContent(html(p), { waitUntil: 'networkidle' });
-    await page.evaluate(() => document.fonts.ready);
-    await page.screenshot({ path: `public/og/${p.slug}.png` });
-    await copyFile(`public/og/${p.slug}.png`, `dist/og/${p.slug}.png`);
-    console.log(`✓ public/og/${p.slug}.png`);
-  }
+	await mkdir('public/og', { recursive: true })
+	await mkdir('dist/og', { recursive: true })
+	const page = await browser.newPage({ viewport: { width: 1200, height: 630 } })
+	await page.goto(`${server.url}/robots.txt`)
+	for (const p of publicPages.filter((p) => p.path !== '/')) {
+		await page.setContent(html(p), { waitUntil: 'networkidle' })
+		await page.evaluate(() => document.fonts.ready)
+		await page.screenshot({ path: `public/og/${p.slug}.png` })
+		await copyFile(`public/og/${p.slug}.png`, `dist/og/${p.slug}.png`)
+		console.log(`✓ public/og/${p.slug}.png`)
+	}
 } finally {
-  await browser.close();
-  server.close();
+	await browser.close()
+	server.close()
 }

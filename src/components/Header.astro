@@ -1,128 +1,308 @@
 ---
-import { site } from '../data/site';
-import Logo from './Logo.astro';
-import Icon from './Icon.astro';
-import Socials from './Socials.astro';
+import { site } from '../data/site'
+import Logo from './Logo.astro'
+import Icon from './Icon.astro'
+import Socials from './Socials.astro'
 
-const path = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '').replace(/\/$/, '') || '/';
-const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+const path =
+	Astro.url.pathname
+		.replace(/\.html$/, '')
+		.replace(/\/index$/, '')
+		.replace(/\/$/, '') || '/'
+const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href))
 ---
+
 <header class="site-header" data-header>
-  <div class="container bar">
-    <a href="/" class="brand" aria-label="Ilán Vivanco, inicio">
-      <Logo size={30} />
-      <span class="brand-name">ilán vivanco</span>
-    </a>
+	<div class="container bar">
+		<a href="/" class="brand" aria-label="Ilán Vivanco, inicio">
+			<Logo size={30} />
+			<span class="brand-name">ilán vivanco</span>
+		</a>
 
-    <nav class="nav-desktop" aria-label="Principal">
-      <ul role="list">
-        {site.nav.filter((item) => !item.mobileOnly).map((item) => (
-          <li>
-            <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
-              {isActive(item.href) && <span class="nav-pill" aria-hidden="true"></span>}
-              <span class="nav-text"><span class="nav-dot" aria-hidden="true"></span>{item.label}</span>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
+		<nav class="nav-desktop" aria-label="Principal">
+			<ul role="list">
+				{site.nav
+					.filter((item) => !item.mobileOnly)
+					.map((item) => (
+						<li>
+							<a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+								{isActive(item.href) && <span class="nav-pill" aria-hidden="true"></span>}
+								<span class="nav-text">
+									<span class="nav-dot" aria-hidden="true"></span>
+									{item.label}
+								</span>
+							</a>
+						</li>
+					))}
+			</ul>
+		</nav>
 
-    <a href="/contacto" class="btn btn-primary btn-sm header-cta" aria-current={isActive('/contacto') ? 'page' : undefined}>
-      Hablemos
-      <Icon name="arrow-up-right" />
-    </a>
+		<a
+			href="/contacto"
+			class="btn btn-primary btn-sm header-cta"
+			aria-current={isActive('/contacto') ? 'page' : undefined}
+		>
+			Hablemos
+			<Icon name="arrow-up-right" />
+		</a>
 
-    <button class="menu-btn" type="button" popovertarget="mobile-menu" aria-label="Abrir menú">
-      <Icon name="menu" size={22} />
-    </button>
-  </div>
+		<button class="menu-btn" type="button" popovertarget="mobile-menu" aria-label="Abrir menú">
+			<Icon name="menu" size={22} />
+		</button>
+	</div>
 
-  <div id="mobile-menu" popover class="mobile-menu">
-    <div class="mobile-top">
-      <span class="eyebrow">menú</span>
-      <button class="menu-btn" type="button" popovertarget="mobile-menu" popovertargetaction="hide" aria-label="Cerrar menú">
-        <Icon name="close" size={22} />
-      </button>
-    </div>
-    <nav aria-label="Principal (móvil)">
-      <ul role="list">
-        {site.nav.map((item, i) => (
-          <li style={`--i:${i}`}>
-            <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
-              <span class="mono idx">0{i + 1}</span>
-              {item.label}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
-    <div class="mobile-socials"><Socials /></div>
-  </div>
+	<div id="mobile-menu" popover class="mobile-menu">
+		<div class="mobile-top">
+			<span class="eyebrow">menú</span>
+			<button
+				class="menu-btn"
+				type="button"
+				popovertarget="mobile-menu"
+				popovertargetaction="hide"
+				aria-label="Cerrar menú"
+			>
+				<Icon name="close" size={22} />
+			</button>
+		</div>
+		<nav aria-label="Principal (móvil)">
+			<ul role="list">
+				{site.nav.map((item, i) => (
+					<li style={`--i:${i}`}>
+						<a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+							<span class="mono idx">0{i + 1}</span>
+							{item.label}
+						</a>
+					</li>
+				))}
+			</ul>
+		</nav>
+		<div class="mobile-socials">
+			<Socials />
+		</div>
+	</div>
 </header>
 
 <style>
-  .site-header {
-    position: sticky; top: 0; z-index: 50;
-    height: var(--header-h);
-    border-bottom: 1px solid transparent;
-    transition: background-color 0.3s, border-color 0.3s, backdrop-filter 0.3s;
-  }
-  .site-header[data-scrolled] {
-    background: color-mix(in oklab, var(--bg) 92%, transparent);
-    backdrop-filter: blur(18px) saturate(140%);
-    border-bottom-color: var(--line);
-  }
-  .bar { height: 100%; display: flex; align-items: center; gap: 24px; }
-  .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; margin-right: auto; min-height: 44px; }
-  .brand-name { font-weight: 600; font-size: 1.125rem; letter-spacing: -0.02em; }
-  .brand :global(.logo) { transition: transform 0.5s var(--ease-out); }
-  .brand:hover :global(.logo) { transform: rotate(-6deg) scale(1.06); }
+	.site-header {
+		position: sticky;
+		top: 0;
+		z-index: 50;
+		height: var(--header-h);
+		border-bottom: 1px solid transparent;
+		transition:
+			background-color 0.3s,
+			border-color 0.3s,
+			backdrop-filter 0.3s;
+	}
+	.site-header[data-scrolled] {
+		background: color-mix(in oklab, var(--bg) 92%, transparent);
+		backdrop-filter: blur(18px) saturate(140%);
+		border-bottom-color: var(--line);
+	}
+	.bar {
+		height: 100%;
+		display: flex;
+		align-items: center;
+		gap: 24px;
+	}
+	.brand {
+		display: inline-flex;
+		align-items: center;
+		gap: 12px;
+		text-decoration: none;
+		margin-right: auto;
+		min-height: 44px;
+	}
+	.brand-name {
+		font-weight: 600;
+		font-size: 1.125rem;
+		letter-spacing: -0.02em;
+	}
+	.brand :global(.logo) {
+		transition: transform 0.5s var(--ease-out);
+	}
+	.brand:hover :global(.logo) {
+		transform: rotate(-6deg) scale(1.06);
+	}
 
-  .nav-desktop ul { display: flex; gap: 4px; padding: 4px; margin: 0; border: 1px solid var(--line); border-radius: 999px; background: color-mix(in oklab, var(--bg-raised) 70%, transparent); }
-  .nav-desktop a {
-    position: relative; isolation: isolate; display: inline-flex; align-items: center; min-height: 38px; padding: 0 14px;
-    border-radius: 999px; font-size: 0.9375rem; color: var(--text-soft); text-decoration: none;
-    transition: color 0.2s, padding 0.45s var(--ease-spring);
-  }
-  .nav-desktop a:hover { color: var(--text); }
-  .nav-desktop a:not([aria-current]):hover::before { content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; background: var(--surface); }
-  .nav-text { position: relative; z-index: 1; display: inline-flex; align-items: center; }
-  .nav-dot { width: 0; height: 6px; margin-right: 0; border-radius: 50%; background: var(--yellow); opacity: 0; transition: width 0.4s var(--ease-spring), margin 0.4s var(--ease-spring), opacity 0.3s; }
-  .nav-desktop a[aria-current='page'] { color: var(--text); padding: 0 18px 0 14px; }
-  .nav-desktop a[aria-current='page'] .nav-dot { width: 6px; margin-right: 8px; opacity: 1; box-shadow: 0 0 10px rgba(255, 227, 86, 0.6); }
-  /* La pastilla activa tiene nombre propio: entre páginas se desliza de un item al otro */
-  .nav-pill { position: absolute; inset: 0; z-index: 0; border-radius: 999px; background: var(--surface-hi); view-transition-name: nav-pill; }
+	.nav-desktop ul {
+		display: flex;
+		gap: 4px;
+		padding: 4px;
+		margin: 0;
+		border: 1px solid var(--line);
+		border-radius: 999px;
+		background: color-mix(in oklab, var(--bg-raised) 70%, transparent);
+	}
+	.nav-desktop a {
+		position: relative;
+		isolation: isolate;
+		display: inline-flex;
+		align-items: center;
+		min-height: 38px;
+		padding: 0 14px;
+		border-radius: 999px;
+		font-size: 0.9375rem;
+		color: var(--text-soft);
+		text-decoration: none;
+		transition:
+			color 0.2s,
+			padding 0.45s var(--ease-spring);
+	}
+	.nav-desktop a:hover {
+		color: var(--text);
+	}
+	.nav-desktop a:not([aria-current]):hover::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		border-radius: inherit;
+		background: var(--surface);
+	}
+	.nav-text {
+		position: relative;
+		z-index: 1;
+		display: inline-flex;
+		align-items: center;
+	}
+	.nav-dot {
+		width: 0;
+		height: 6px;
+		margin-right: 0;
+		border-radius: 50%;
+		background: var(--yellow);
+		opacity: 0;
+		transition:
+			width 0.4s var(--ease-spring),
+			margin 0.4s var(--ease-spring),
+			opacity 0.3s;
+	}
+	.nav-desktop a[aria-current='page'] {
+		color: var(--text);
+		padding: 0 18px 0 14px;
+	}
+	.nav-desktop a[aria-current='page'] .nav-dot {
+		width: 6px;
+		margin-right: 8px;
+		opacity: 1;
+		box-shadow: 0 0 10px rgba(255, 227, 86, 0.6);
+	}
+	/* La pastilla activa tiene nombre propio: entre páginas se desliza de un item al otro */
+	.nav-pill {
+		position: absolute;
+		inset: 0;
+		z-index: 0;
+		border-radius: 999px;
+		background: var(--surface-hi);
+		view-transition-name: nav-pill;
+	}
 
-  .menu-btn {
-    display: none; width: 44px; height: 44px; align-items: center; justify-content: center;
-    border-radius: 12px; border: 1px solid var(--line-strong); background: var(--bg-raised); color: var(--text); cursor: pointer;
-  }
+	.menu-btn {
+		display: none;
+		width: 44px;
+		height: 44px;
+		align-items: center;
+		justify-content: center;
+		border-radius: 12px;
+		border: 1px solid var(--line-strong);
+		background: var(--bg-raised);
+		color: var(--text);
+		cursor: pointer;
+	}
 
-  .mobile-menu {
-    position: fixed; inset: 0; width: 100%; height: 100dvh; max-width: none; max-height: none; margin: 0;
-    padding: 16px var(--gutter) 32px; border: 0; background: var(--bg); color: var(--text);
-    display: none; flex-direction: column; gap: 32px;
-    opacity: 0; transform: translateY(-8px);
-    transition: opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out), overlay 0.3s allow-discrete, display 0.3s allow-discrete;
-  }
-  .mobile-menu:popover-open { display: flex; opacity: 1; transform: none; }
-  @starting-style { .mobile-menu:popover-open { opacity: 0; transform: translateY(-8px); } }
-  .mobile-top { display: flex; align-items: center; justify-content: space-between; min-height: 44px; }
-  .mobile-top .menu-btn { display: inline-flex; }
-  .mobile-menu ul { margin: 0; padding: 0; display: flex; flex-direction: column; }
-  .mobile-menu li { border-bottom: 1px solid var(--line); }
-  .mobile-menu li a {
-    display: flex; align-items: baseline; gap: 16px; padding: 18px 0; text-decoration: none;
-    font-size: 2.25rem; font-weight: 600; letter-spacing: -0.03em;
-  }
-  .mobile-menu li a[aria-current='page'] { color: var(--yellow); }
-  .mobile-menu .idx { font-size: 0.8125rem; color: var(--muted); font-weight: 400; letter-spacing: 0; }
-  .mobile-menu:popover-open li { animation: menu-in 0.5s var(--ease-out) both; animation-delay: calc(var(--i) * 50ms + 80ms); }
-  @keyframes menu-in { from { opacity: 0; transform: translateY(10px); } }
-  .mobile-socials { margin-top: auto; }
+	.mobile-menu {
+		position: fixed;
+		inset: 0;
+		width: 100%;
+		height: 100dvh;
+		max-width: none;
+		max-height: none;
+		margin: 0;
+		padding: 16px var(--gutter) 32px;
+		border: 0;
+		background: var(--bg);
+		color: var(--text);
+		display: none;
+		flex-direction: column;
+		gap: 32px;
+		opacity: 0;
+		transform: translateY(-8px);
+		transition:
+			opacity 0.3s var(--ease-out),
+			transform 0.3s var(--ease-out),
+			overlay 0.3s allow-discrete,
+			display 0.3s allow-discrete;
+	}
+	.mobile-menu:popover-open {
+		display: flex;
+		opacity: 1;
+		transform: none;
+	}
+	@starting-style {
+		.mobile-menu:popover-open {
+			opacity: 0;
+			transform: translateY(-8px);
+		}
+	}
+	.mobile-top {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		min-height: 44px;
+	}
+	.mobile-top .menu-btn {
+		display: inline-flex;
+	}
+	.mobile-menu ul {
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+	}
+	.mobile-menu li {
+		border-bottom: 1px solid var(--line);
+	}
+	.mobile-menu li a {
+		display: flex;
+		align-items: baseline;
+		gap: 16px;
+		padding: 18px 0;
+		text-decoration: none;
+		font-size: 2.25rem;
+		font-weight: 600;
+		letter-spacing: -0.03em;
+	}
+	.mobile-menu li a[aria-current='page'] {
+		color: var(--yellow);
+	}
+	.mobile-menu .idx {
+		font-size: 0.8125rem;
+		color: var(--muted);
+		font-weight: 400;
+		letter-spacing: 0;
+	}
+	.mobile-menu:popover-open li {
+		animation: menu-in 0.5s var(--ease-out) both;
+		animation-delay: calc(var(--i) * 50ms + 80ms);
+	}
+	@keyframes menu-in {
+		from {
+			opacity: 0;
+			transform: translateY(10px);
+		}
+	}
+	.mobile-socials {
+		margin-top: auto;
+	}
 
-  @media (max-width: 860px) {
-    .nav-desktop, .header-cta { display: none; }
-    .menu-btn { display: inline-flex; }
-  }
+	@media (max-width: 860px) {
+		.nav-desktop,
+		.header-cta {
+			display: none;
+		}
+		.menu-btn {
+			display: inline-flex;
+		}
+	}
 </style>

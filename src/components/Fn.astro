@@ -1,8 +1,23 @@
 ---
 // Título con la firma del sitio: ->nombre();
-interface Props { name: string; as?: 'h1' | 'h2' | 'p' | 'span'; class?: string; id?: string; }
-const { name, as: Tag = 'h2', class: className = '', id } = Astro.props;
+interface Props {
+	name: string
+	as?: 'h1' | 'h2' | 'p' | 'span'
+	class?: string
+	id?: string
+}
+const { name, as: Tag = 'h2', class: className = '', id } = Astro.props
 ---
+
 <Tag class:list={['fn', className]} id={id}>
-  <span class="arrow" aria-hidden="true">-&gt;</span>{name}<span class="paren" aria-hidden="true">()</span><span class="semi" aria-hidden="true">;</span>
+	<span class="arrow" aria-hidden="true">
+		-&gt;
+	</span>
+	{name}
+	<span class="paren" aria-hidden="true">
+		()
+	</span>
+	<span class="semi" aria-hidden="true">
+		;
+	</span>
 </Tag>
