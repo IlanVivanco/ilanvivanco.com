@@ -132,6 +132,12 @@ function setupHeader() {
 /* 4. Cerrar el menú móvil al elegir un link. */
 function setupMenu() {
 	const menu = document.getElementById('mobile-menu') as (HTMLElement & { hidePopover?: () => void }) | null
+	// Tapa toda la pantalla: lo de atrás no recibe foco. Se libera antes de cerrar, para que el foco vuelva al botón
+	const behind = document.querySelectorAll<HTMLElement>('.skip-link, .site-header .bar, main, .site-footer')
+	menu?.addEventListener('beforetoggle', (e) => {
+		const open = (e as ToggleEvent).newState === 'open'
+		behind.forEach((el) => (el.inert = open))
+	})
 	menu?.addEventListener('click', (e) => {
 		if ((e.target as HTMLElement).closest('a')) menu.hidePopover?.()
 	})
