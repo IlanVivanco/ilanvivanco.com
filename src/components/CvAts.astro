@@ -23,7 +23,7 @@ const bare = (url: string) => url.replace(/^https:\/\/(www\.)?/, '').replace(/\/
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="robots" content="noindex, nofollow" />
 		<meta name="author" content={site.name} />
-		<title>{`${site.name} — CV — ${labels.title}`}</title>
+		<title>{`${site.name} | CV | ${labels.title}`}</title>
 		<style is:inline>
 			/* Instancias estáticas: con las variables, Chromium embebe Type 3 y algunos parsers de ATS lo leen mal */
 			@font-face {
@@ -276,21 +276,12 @@ const bare = (url: string) => url.replace(/^https:\/\/(www\.)?/, '').replace(/\/
 						<p>
 							<b>{e.title}</b>, {e.org}
 						</p>
-						<p class="when">{e.period.replace(' — ', ' – ')}</p>
+						<p class="when">{e.period}</p>
 					</div>
 				))}
-			</div>
-
-			<h2>{labels.headings.courses}</h2>
-			<div class="rows">
-				{data.courses.map((c) => (
-					<div class="head">
-						<p>
-							<b>{c.org}:</b> {c.items.join(', ')}
-						</p>
-						<p class="when">{c.period.replace(' — ', ' – ')}</p>
-					</div>
-				))}
+				<p>
+					<b>Cursos:</b> {data.courses.join(', ')}
+				</p>
 			</div>
 
 			<h2>{labels.headings.languages}</h2>

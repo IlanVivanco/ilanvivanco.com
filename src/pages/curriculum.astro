@@ -92,7 +92,7 @@ const { summary, experience, earlier, stack, education, courses, languages } = c
 						<li style={`--i:${i}`}>
 							<span class="mono period">{yearPeriod(e)}</span>
 							<span>
-								<strong>{e.org}</strong> — {e.title}. <span class="soft">{e.text}</span>
+								<strong>{e.org}</strong> · {e.title}. <span class="soft">{e.text}</span>
 							</span>
 						</li>
 					))}
@@ -106,20 +106,14 @@ const { summary, experience, earlier, stack, education, courses, languages } = c
 			<h2 id="stack" class="side-title mono">
 				Stack
 			</h2>
-			<div class="stack-groups" data-reveal-group>
+			<dl class="stack-list" data-reveal-group>
 				{stack.map((g) => (
-					<div class="stack-group" data-reveal>
-						<h3 class="mono">{g.group}</h3>
-						<ul class="chips" role="list">
-							{g.items.map((it, i) => (
-								<li class="chip" style={`--i:${i}`}>
-									{it}
-								</li>
-							))}
-						</ul>
+					<div class="stack-row" data-reveal>
+						<dt class="mono">{g.group}</dt>
+						<dd>{g.items.join(', ')}</dd>
 					</div>
 				))}
-			</div>
+			</dl>
 		</div>
 	</section>
 
@@ -145,29 +139,12 @@ const { summary, experience, earlier, stack, education, courses, languages } = c
 							<span class="soft">{l.level}</span>
 						</li>
 					))}
+					<li data-reveal>
+						<strong>Autodidacta</strong>
+						<span class="soft">Cursos de {courses.join(', ')}. Lo demás, trabajando.</span>
+					</li>
 				</ul>
 			</div>
-		</div>
-	</section>
-
-	<section class="section" aria-labelledby="cursos">
-		<div class="container cv-grid">
-			<h2 id="cursos" class="side-title mono">
-				Cursos
-			</h2>
-			<ul class="courses" role="list" data-reveal-group>
-				{courses.map((c) => (
-					<li class="course" data-reveal>
-						<span class="mono period">{c.period}</span>
-						<strong>{c.org}</strong>
-						<ul class="chips" role="list">
-							{c.items.map((it) => (
-								<li class="chip">{it}</li>
-							))}
-						</ul>
-					</li>
-				))}
-			</ul>
 		</div>
 	</section>
 </Base>
@@ -297,7 +274,7 @@ const { summary, experience, earlier, stack, education, courses, languages } = c
 		justify-content: space-between;
 		gap: 16px;
 		min-height: 60px;
-		padding: 0 22px;
+		padding: 14px 22px;
 		font-weight: 500;
 	}
 	.earlier summary::-webkit-details-marker {
@@ -406,24 +383,12 @@ const { summary, experience, earlier, stack, education, courses, languages } = c
 		}
 	}
 
-	/* Chips que entran escalonados */
-	:global(.stack-group.is-revealing) .chip {
-		animation: chip-in 0.45s var(--ease-out) both;
-		animation-delay: calc(0.15s + var(--i) * 40ms);
-	}
-	@keyframes chip-in {
-		from {
-			opacity: 0;
-			translate: 0 8px;
-			scale: 0.92;
-		}
-	}
 	.earlier ul {
 		margin: 0;
-		padding: 0 22px 22px;
+		padding: 4px 22px 22px;
 		display: flex;
 		flex-direction: column;
-		gap: 14px;
+		gap: 18px;
 	}
 	.earlier li {
 		display: grid;
@@ -436,58 +401,26 @@ const { summary, experience, earlier, stack, education, courses, languages } = c
 		color: var(--text-soft);
 	}
 
-	.stack-groups {
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
-		gap: 32px;
-	}
-	.stack-group h3 {
-		font-size: 0.875rem;
-		font-weight: 500;
-		color: var(--muted);
-		margin-bottom: 14px;
-	}
-	.chips {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 8px;
+	/* Stack como texto: las pastillas parecían links o filtros */
+	.stack-list {
 		margin: 0;
-		padding: 0;
-	}
-	.chips .chip {
-		min-height: 34px;
-		padding: 0 14px;
-		font-size: 0.875rem;
-		color: var(--text);
-		background: var(--bg-raised);
-		transition:
-			border-color 0.2s,
-			color 0.2s;
-	}
-	.chips .chip:hover {
-		border-color: var(--teal-hi);
-	}
-
-	.courses {
-		margin: 0;
-		padding: 0;
-		display: flex;
-		flex-direction: column;
-	}
-	.course {
-		display: grid;
-		grid-template-columns: 110px 130px minmax(0, 1fr);
-		gap: 6px 16px;
-		align-items: center;
-		padding-block: 14px;
 		border-top: 1px solid var(--line);
 	}
-	.course:first-child {
-		padding-top: 0;
-		border-top: 0;
+	.stack-row {
+		display: grid;
+		grid-template-columns: minmax(0, 220px) minmax(0, 1fr);
+		gap: 4px 24px;
+		padding-block: 14px;
+		border-bottom: 1px solid var(--line);
 	}
-	.course strong {
-		font-weight: 600;
+	.stack-row dt {
+		font-size: 0.875rem;
+		line-height: 1.9;
+		color: var(--muted);
+	}
+	.stack-row dd {
+		margin: 0;
+		color: var(--text-soft);
 	}
 	.two {
 		display: grid;
@@ -512,11 +445,8 @@ const { summary, experience, earlier, stack, education, courses, languages } = c
 	}
 
 	@media (max-width: 820px) {
-		.course {
-			grid-template-columns: auto minmax(0, 1fr);
-		}
-		.course .chips {
-			grid-column: 1 / -1;
+		.stack-row {
+			grid-template-columns: minmax(0, 1fr);
 		}
 		.cv-grid {
 			grid-template-columns: minmax(0, 1fr);
@@ -529,7 +459,7 @@ const { summary, experience, earlier, stack, education, courses, languages } = c
 		}
 		.earlier li {
 			grid-template-columns: minmax(0, 1fr);
-			gap: 2px;
+			gap: 4px;
 		}
 	}
 	@media print {

@@ -38,7 +38,7 @@ src/
   scripts/ui.ts       revelado, tarjetas (glow, proximidad, perspectiva), header, menú
   scripts/terminal.ts escenas de la terminal del hero
   layouts/Base.astro  <head>, SEO, JSON-LD, speculation rules, header y footer
-  components/         Header, Footer, Socials, MailLink, InstagramGrid, Logo, Fn, Icon, ProjectCard, Terminal, Stats, Analytics, CvAts
+  components/         Header, Footer, Socials, MailLink, InstagramGrid, WinControls, Logo, Fn, Icon, ProjectCard, Terminal, Stats, Analytics, CvAts
   pages/              /, /curriculum, /portfolio, /contacto, /sobre-mi, /privacidad, /cv/es, 404, sitemap.xml
 public/               fonts, img, favicon.svg, og.png, robots.txt (cv/ y og/ se generan, no se versionan)
 scripts/build/        fotos de Instagram, CV en PDF e imágenes OG
@@ -60,7 +60,7 @@ netlify.toml          build, redirects y cabeceras
 5. **Botones:** nunca pisar `.btn` desde estilos locales. En prosa, usar `a:not(.btn)`.
 6. **Dependencias:** no sumar librerías de UI ni de animación sin justificar su peso contra el presupuesto. Primero CSS y APIs nativas (View Transitions, popover, `<details>`, IntersectionObserver).
 7. **Imágenes:** WebP con tamaño fijo, `width`/`height` siempre, `loading="lazy"` fuera del primer viewport, `alt` descriptivo.
-8. **Copy y humor:** español rioplatense con voseo, primera persona, posicionamiento de liderazgo técnico, con humor técnico y autocrítico (un guiño por sección, como máximo; reglas en `DESIGN.md §8`). Las cifras y anécdotas son reales o se marcan como aproximadas (`approx: true`, `~`, `+`). Nunca inventar datos, anécdotas ni clientes. Sin humor en el CV para ATS ni en lo legal.
+8. **Copy y humor:** español rioplatense con voseo, primera persona, sin raya larga ni signos de apertura (`¿`, `¡`), sin frases hechas, posicionamiento de liderazgo técnico, con humor técnico y autocrítico (un guiño por sección, como máximo; reglas en `DESIGN.md §8`). Las cifras y anécdotas son reales o se marcan como aproximadas (`approx: true`, `~`, `+`). Nunca inventar datos, anécdotas ni clientes. Sin humor en el CV para ATS ni en lo legal.
 9. **Rutas:** las URLs públicas son contrato (`/`, `/curriculum`, `/portfolio`, `/contacto`, `/sobre-mi`, más lo que defina `netlify.toml`). Cambiar una ruta implica un redirect 301. Si cambia una página pública, se actualiza `src/data/pages.ts`.
 10. **La terminal del hero usa siempre `~/ilan`.** El contenido de las escenas sale del CV real.
 11. **Privacidad:** el email nunca va en texto plano en el HTML (usar `encodeMail`/`decodeMail` de `src/lib/mail.ts`). Solo el PDF del CV lo lleva en claro. Sin nombres de familiares en el sitio. Analytics solo sin cookies (Cloudflare Web Analytics): sin GA y sin banner.

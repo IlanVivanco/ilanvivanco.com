@@ -30,7 +30,7 @@ export const publicPages: PublicPage[] = [
 		path: '/contacto',
 		slug: 'contacto',
 		fn: 'contactame',
-		title: '¿Hacemos algo juntos?',
+		title: 'Hacemos algo juntos?',
 		subtitle: 'Respondo en uno o dos días hábiles',
 	},
 	{

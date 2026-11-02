@@ -13,7 +13,7 @@ interface Props {
 	noindex?: boolean
 }
 const { title, description = site.description, jsonLd, noindex = false } = Astro.props
-const pageTitle = title ? `${title} — Ilán Vivanco` : site.title
+const pageTitle = title ? `${title} | Ilán Vivanco` : site.title
 const pathname = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '/') || '/'
 const canonical = new URL(pathname, site.url).href
 const ogImage = new URL(ogPath(pathname), site.url).href

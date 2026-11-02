@@ -18,15 +18,13 @@ export type Job = {
 }
 export type EarlierJob = { org: string; title: string; start: string; end: string; location: string; text: string }
 export type Education = { org: string; title: string; period: string }
-export type Course = { org: string; period: string; items: string[] }
-
 export type Cv = {
 	summary: string
 	experience: Job[]
 	earlier: EarlierJob[]
 	stack: { group: string; items: string[] }[]
 	education: Education[]
-	courses: Course[]
+	courses: string[]
 	languages: { name: string; level: string }[]
 }
 
@@ -41,14 +39,13 @@ export type CvLabels = {
 		experience: string
 		skills: string
 		education: string
-		courses: string
 		languages: string
 	}
 }
 
 const es: Cv = {
 	summary:
-		'Lidero la ingeniería en EpicDevs, donde construimos y operamos plataformas web para empresas de tecnología, universidades y ONG. Mi trabajo es la arquitectura y el equipo detrás: decidir cómo se construye una plataforma, mantenerla rápida y mantenible mientras crece, y ayudar a un equipo repartido por el mundo a entregarla bien.',
+		'Lidero la ingeniería en EpicDevs, donde construimos y operamos plataformas web para empresas de tecnología, universidades y ONG. Me ocupo de la arquitectura y del equipo: decido cómo se construye cada plataforma, cuido que siga rápida y mantenible cuando crece, y coordino a un equipo remoto en varios países.',
 
 	experience: [
 		{
@@ -228,25 +225,15 @@ const es: Cv = {
 	],
 
 	education: [
-		{ org: 'Escuela de Fotografía Creativa Andy Goldstein', title: 'Técnico en Fotografía', period: '2007 — 2009' },
+		{ org: 'Escuela de Fotografía Creativa Andy Goldstein', title: 'Técnico en Fotografía', period: '2007 – 2009' },
 		{
 			org: 'Escuelas Técnicas Raggio',
 			title: 'Técnico en Comunicación Publicitaria y Diseñador Gráfico',
-			period: '2001 — 2006',
+			period: '2001 – 2006',
 		},
 	],
 
-	courses: [
-		{ org: 'Wmedia', period: '2020', items: ['Vue.js desde cero'] },
-		{ org: 'Wes Bos', period: '2019', items: ['ES6 for Everyone', 'JavaScript 30', 'CSS Grid', 'CSS Flexbox'] },
-		{ org: 'Udemy', period: '2019', items: ['Vue.js', 'Laravel'] },
-		{ org: 'Platzi', period: '2015', items: ['Git y GitHub', 'Node.js', 'Themes y plugins de WordPress', 'Laravel'] },
-		{
-			org: 'Educación IT',
-			period: '2010 — 2013',
-			items: ['PHP y MySQL', 'PHP OOP y MVC', 'HTML5 y CSS3', 'Diseño responsive'],
-		},
-	],
+	courses: ['Wes Bos', 'Platzi', 'Udemy', 'Wmedia', 'Educación IT'],
 
 	languages: [
 		{ name: 'Español', level: 'Nativo' },
@@ -268,7 +255,6 @@ export const cvLabels: { es: CvLabels; en?: CvLabels } = {
 			experience: 'Experiencia profesional',
 			skills: 'Habilidades',
 			education: 'Educación',
-			courses: 'Cursos',
 			languages: 'Idiomas',
 		},
 	},
@@ -280,10 +266,10 @@ const monthName = (ym: string) => {
 	return `${months[m - 1]} ${y}`
 }
 
-// Para /curriculum: "sep 2020 — hoy" y, en los cargos viejos, "2014 — 2018".
+// Para /curriculum: "sep 2020 – hoy" y, en los cargos viejos, "2014 – 2018".
 export const period = (r: { start: string; end?: string }) =>
-	`${monthName(r.start)} — ${r.end ? monthName(r.end) : 'hoy'}`
-export const yearPeriod = (r: { start: string; end: string }) => `${r.start.slice(0, 4)} — ${r.end.slice(0, 4)}`
+	`${monthName(r.start)} – ${r.end ? monthName(r.end) : 'hoy'}`
+export const yearPeriod = (r: { start: string; end: string }) => `${r.start.slice(0, 4)} – ${r.end.slice(0, 4)}`
 
 // Para el PDF: un único formato, "09/2020 – Actualidad".
 const numeric = (ym: string) => `${ym.slice(5, 7)}/${ym.slice(0, 4)}`

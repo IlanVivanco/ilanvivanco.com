@@ -2,9 +2,9 @@
 
 export const site = {
 	name: 'Ilán Vivanco',
-	title: 'Ilán Vivanco — CTO en EpicDevs',
+	title: 'Ilán Vivanco | CTO en EpicDevs',
 	description:
-		'CTO en EpicDevs. Arquitectura de plataformas web, WordPress, JavaScript moderno e IA aplicada a la ingeniería. Construyendo para la web desde 2005, desde Santander.',
+		'CTO en EpicDevs. Plataformas web, WordPress, JavaScript e IA en el trabajo diario del equipo. Hago sitios desde 2005 y vivo en Santander.',
 	url: 'https://ilanvivanco.com',
 	locale: 'es_ES',
 	location: 'Santander, Cantabria',
@@ -41,27 +41,27 @@ export const site = {
 export const focus = [
 	{
 		title: 'Arquitectura de plataformas web',
-		text: 'Cómo se construye una plataforma para que siga siendo rápida y mantenible a medida que crece, con WordPress como núcleo.',
+		text: 'WordPress como base y decisiones de arquitectura pensadas para que el sitio siga rápido cuando crece.',
 		tag: 'wordpress',
 	},
 	{
 		title: 'JavaScript moderno',
-		text: 'Vue, React, Astro y Node.js para interfaces, herramientas internas y sitios que vuelan.',
+		text: 'Vue, React, Astro y Node.js para interfaces, herramientas internas y sitios rápidos.',
 		tag: 'js',
 	},
 	{
-		title: 'IA en el flujo de ingeniería',
-		text: 'Agentes de código, integraciones MCP y QA asistido por IA dentro del día a día del equipo.',
+		title: 'IA en el trabajo diario',
+		text: 'Agentes de código, integraciones MCP y QA asistido, usados todos los días en el equipo.',
 		tag: 'ai',
 	},
 	{
 		title: 'Integraciones y migraciones',
-		text: 'APIs, sincronización de datos y migraciones complejas desde Drupal, Hugo, Craft o plataformas a medida.',
+		text: 'APIs, sincronización de datos y migraciones desde Drupal, Hugo, Craft o plataformas a medida.',
 		tag: 'api',
 	},
 	{
 		title: 'Liderazgo de equipos remotos',
-		text: 'Procesos, estándares y acompañamiento para que un equipo repartido por el mundo entregue bien.',
+		text: 'Procesos claros y estándares para que un equipo en varios países entregue bien.',
 		tag: 'team',
 	},
 ]
