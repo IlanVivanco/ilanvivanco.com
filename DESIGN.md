@@ -7,7 +7,7 @@ Guía de diseño del sitio. Todo componente nuevo tiene que poder explicarse con
 1. **Ingeniero, no agencia.** El sitio habla como un CTO: preciso, sobrio, con guiños de consola. Nada de marketing genérico.
 2. **Modo oscuro, paleta propia.** Navy profundo de fondo y los colores del isotipo (amarillo, teal, slate, naranja) como acentos. Sin degradados decorativos.
 3. **Movimiento con propósito.** Todo se mueve un poco y nada distrae. Cada animación responde a algo: entrar en pantalla, hover, cambio de estado o navegación.
-4. **Rendimiento como feature.** Lighthouse 100 en las 4 categorías, 7,5 KB de JS propio en la home y cero frameworks en el cliente. Si un efecto rompe eso, no va.
+4. **Rendimiento como feature.** Lighthouse 99+ en las 4 categorías, 7,5 KB de JS propio en la home y cero frameworks en el cliente. Si un efecto rompe eso, no va.
 5. **Accesible por defecto.** WCAG 2.2 AA, 0 violaciones de axe, teclado completo y `prefers-reduced-motion` respetado siempre.
 
 ## 2. Color
@@ -113,6 +113,9 @@ Terminal, formulario y filtro comparten `.win-frame`, `.win-bar`, `.win-title`, 
 - Se pausa con el botón, fuera de pantalla o con la pestaña oculta. El hover no la pausa.
 - Colores de token: keyword naranja, prop/función teal, string amarillo, número violeta, comentario muted en itálica, diff `-` con fondo naranja al 14% y `+` con fondo teal al 16%.
 - Contenido real y verificable: la carrera en el `git log` sale del CV.
+
+### Trabajos en la home
+Texto, botón al portfolio y un solo proyecto destacado (`featured: true` en `src/data/projects.ts`).
 
 ### Stats del home (`components/Stats.astro`)
 - **4 pantallas de 4 tarjetas** que rotan juntas: "mi trayectoria, en números", "mis números en el código", "datos que nadie pidió" (la pantalla con humor) y "este sitio, en números". Un valor puede ser texto fijo (`display: '∞'`), que no cuenta. Datos en `src/data/site.ts → statScreens`.

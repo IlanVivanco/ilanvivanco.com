@@ -8,7 +8,7 @@ export type Project = {
 	client?: string // para quién se hizo
 	description: string
 	tags: string[]
-	featured?: boolean
+	featured?: boolean // el que se destaca en la home
 	image?: string // por defecto /img/projects/<slug>.webp
 }
 
@@ -21,7 +21,6 @@ export const projects: Project[] = [
 		description:
 			'Migración del sitio de la ONGD de Drupal a WordPress para simplificar la gestión y mejorar la accesibilidad. Desarrollo y mantenimiento continuo.',
 		tags: ['WordPress', 'Migración', 'Drupal'],
-		featured: true,
 	},
 	{
 		slug: 'explo',
@@ -32,7 +31,6 @@ export const projects: Project[] = [
 		description:
 			'Renovación del theme existente con nuevas funcionalidades, optimización general de rendimiento y plugin de sincronización de datos con una API externa.',
 		tags: ['WordPress', 'WP Plugin', 'API', 'Rendimiento'],
-		featured: true,
 	},
 	{
 		slug: 'camunda',

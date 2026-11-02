@@ -8,7 +8,7 @@ import ProjectCard from '../components/ProjectCard.astro'
 import { focus } from '../data/site'
 import { projects } from '../data/projects'
 
-const featured = projects.filter((p) => p.featured).slice(0, 3)
+const featured = projects.find((p) => p.featured) ?? projects[0]
 const focusIcons = { wordpress: 'layers', js: 'code', ai: 'spark', api: 'plug', team: 'users' } as const
 ---
 
@@ -128,20 +128,20 @@ const focusIcons = { wordpress: 'layers', js: 'code', ai: 'spark', api: 'plug', 
 
 	<!-- TRABAJOS -->
 	<section class="section" aria-labelledby="trabajos">
-		<div class="container stack" style="--gap: 40px">
-			<header class="sec-head row" data-reveal>
+		<div class="container work">
+			<div class="stack work-copy" style="--gap: 20px" data-reveal>
 				<Fn name="trabajos" id="trabajos" />
-				<a class="link-arrow" href="/portfolio">
-					Ver todos <Icon name="arrow-right" size={18} />
+				<p class="lede">
+					Plataformas, plugins y migraciones en WordPress, la mayoría con el equipo de EpicDevs. Acá va uno; el
+					resto está en el portfolio.
+				</p>
+				<a class="btn work-cta" href="/portfolio">
+					Ver los {projects.length} trabajos <Icon name="arrow-right" />
 				</a>
-			</header>
-			<ul class="grid-3" role="list" data-reveal-group>
-				{featured.map((p) => (
-					<li>
-						<ProjectCard project={p} />
-					</li>
-				))}
-			</ul>
+			</div>
+			<div data-reveal data-delay="0.1">
+				<ProjectCard project={featured} />
+			</div>
 		</div>
 	</section>
 
@@ -280,13 +280,16 @@ const focusIcons = { wordpress: 'layers', js: 'code', ai: 'spark', api: 'plug', 
 		flex-direction: column;
 		gap: 14px;
 	}
-	.sec-head.row {
-		flex-direction: row;
-		flex-wrap: wrap;
-		align-items: center;
-		justify-content: space-between;
-	}
 
+	.work {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+		gap: 32px clamp(32px, 6vw, 96px);
+		align-items: center;
+	}
+	.work-cta {
+		align-self: flex-start;
+	}
 	.bento {
 		display: grid;
 		grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -337,15 +340,6 @@ const focusIcons = { wordpress: 'layers', js: 'code', ai: 'spark', api: 'plug', 
 		max-width: 62ch;
 	}
 
-	.grid-3 {
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
-		gap: 16px;
-		margin: 0;
-		padding: 0;
-		list-style: none;
-	}
-
 	.cta-sec {
 		border-top: 0 !important;
 		padding-top: 0;
@@ -362,6 +356,9 @@ const focusIcons = { wordpress: 'layers', js: 'code', ai: 'spark', api: 'plug', 
 	}
 
 	@media (max-width: 960px) {
+		.work {
+			grid-template-columns: minmax(0, 1fr);
+		}
 		.hero-grid {
 			grid-template-columns: minmax(0, 1fr);
 		}
