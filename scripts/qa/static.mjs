@@ -126,12 +126,9 @@ export async function runStaticChecks(log) {
 	const spaced = htmlFiles().filter((f) => !f.startsWith('cv/') && /<\/a>\s+[.,;:]/.test(read(f)))
 	log(spaced.length === 0, `links pegados a su puntuación${spaced.length ? ': ' + spaced.join(', ') : ''}`)
 
-	// Voz: sin raya larga ni signos de apertura en lo que se publica (reglas de ~/.claude/identity.md)
-	const offVoice = htmlFiles().filter((f) => /[—¿¡]/.test(read(f).replace(/<(script|style)\b[\s\S]*?<\/\1>/g, '')))
-	log(
-		offVoice.length === 0,
-		`sin raya larga ni signos de apertura${offVoice.length ? ': ' + offVoice.join(', ') : ''}`
-	)
+	// Voz: sin raya larga en lo que se publica
+	const offVoice = htmlFiles().filter((f) => /—/.test(read(f).replace(/<(script|style)\b[\s\S]*?<\/\1>/g, '')))
+	log(offVoice.length === 0, `sin raya larga${offVoice.length ? ': ' + offVoice.join(', ') : ''}`)
 
 	// SEO
 	const sitemap = read('sitemap.xml')

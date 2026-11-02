@@ -14,14 +14,14 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 
 <Base
 	title="Contacto"
-	description="Qué te parece si hacemos algo juntos? Escribime por email, LinkedIn o el formulario."
+	description="¿Qué te parece si hacemos algo juntos? Escribime por email, LinkedIn o el formulario."
 >
 	<section class="section ct">
 		<div class="container ct-grid">
 			<div class="stack ct-copy" style="--gap: 24px">
 				<Fn name="contactame" as="p" />
 				<h1 class="display" data-reveal>
-					Hacemos algo juntos?
+					¿Hacemos algo juntos?
 				</h1>
 				<p class="lede" data-reveal data-delay="0.05">
 					Contame en qué estás trabajando. Respondo en uno o dos días hábiles.
@@ -57,7 +57,7 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 
 			<!-- Formulario como consola. Sin JS se ve como un formulario normal con todos los campos. -->
 			<form
-				class="console"
+				class="console win-frame"
 				name={site.formName}
 				method="POST"
 				action="/contacto"
@@ -71,11 +71,11 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 			>
 				<input type="hidden" name="form-name" value={site.formName} />
 				<input type="hidden" name="subject" data-remove-prefix value="Mensaje desde ilanvivanco.com" />
-				<div class="con-bar">
+				<div class="win-bar">
 					<h2 id="con-title" class="sr-only">
 						Formulario de contacto
 					</h2>
-					<span class="con-title mono" aria-hidden="true">
+					<span class="win-title" aria-hidden="true">
 						~/ilan/contacto
 					</span>
 					<WinControls />
@@ -84,7 +84,7 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 					<span data-progress></span>
 				</div>
 
-				<div class="con-body">
+				<div class="con-body win-body">
 					<p class="con-line" aria-hidden="true">
 						<span class="c-pr">$</span> <span class="c-w">./contacto.sh</span>
 					</p>
@@ -99,7 +99,7 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 							<span class="q-mark" aria-hidden="true">
 								?
 							</span>{' '}
-							Cómo te llamás?
+							¿Cómo te llamás?
 						</p>
 						<div class="q-field">
 							<label class="sr-only" for="f-name">
@@ -128,7 +128,7 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 							<span class="q-mark" aria-hidden="true">
 								?
 							</span>{' '}
-							A qué email te respondo?
+							¿A qué email te respondo?
 						</p>
 						<div class="q-field">
 							<label class="sr-only" for="f-email">
@@ -160,7 +160,7 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 							<span class="q-mark" aria-hidden="true">
 								?
 							</span>{' '}
-							Sobre qué querés hablar? <span class="q-help">(↑↓ y Enter)</span>
+							¿Sobre qué querés hablar? <span class="q-help">(↑↓ y Enter)</span>
 						</legend>
 						<div class="opts">
 							{topics.map((t, i) => (
@@ -224,7 +224,7 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 						</button>
 					</div>
 				</div>
-				<div class="con-status">
+				<div class="con-status win-bar win-status">
 					<ol class="con-steps" role="list" aria-label="Pasos" data-steps>
 						{['nombre', 'email', 'tema', 'mensaje'].map((t, i) => (
 							<li class="con-stp" data-state={i === 0 ? 'current' : 'pending'} hidden={i > 0}>
@@ -319,7 +319,7 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 				})
 				label.textContent = `[${current + 1}/${steps.length}]`
 				progress.style.transform = `scaleX(${current / steps.length})`
-				if (firstName()) emailLabel.lastChild!.textContent = ` Un gusto, ${firstName()}. A qué email te respondo?`
+				if (firstName()) emailLabel.lastChild!.textContent = ` Un gusto, ${firstName()}. ¿A qué email te respondo?`
 
 				log.innerHTML = ''
 				steps.slice(0, current).forEach((s, i) => {
@@ -466,7 +466,7 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 					if (!res.ok) throw new Error(String(res.status))
 					await print(`<span class="c-badge c-badge-ok">${res.status} OK</span>`, 250)
 					await print(
-						`<div class="con-note"><strong class="c-w">Gracias, ${esc(firstName())}!</strong><br />Ahora la pelota está de mi lado: te respondo a <span class="c-y">${esc(email)}</span> en uno o dos días hábiles.</div>`,
+						`<div class="con-note"><strong class="c-w">¡Gracias, ${esc(firstName())}!</strong><br />Ahora la pelota está de mi lado: te respondo a <span class="c-y">${esc(email)}</span> en uno o dos días hábiles.</div>`,
 						350
 					)
 					announce.textContent = `Mensaje enviado. Te respondo a ${email}.`
@@ -495,7 +495,7 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 				out.innerHTML = ''
 				restartWrap.hidden = true
 				form.classList.remove('is-sending')
-				emailLabel.lastChild!.textContent = ' A qué email te respondo?'
+				emailLabel.lastChild!.textContent = ' ¿A qué email te respondo?'
 				submitLabel.textContent = 'enviar'
 				render()
 			})
@@ -572,44 +572,12 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 	.console {
 		position: sticky;
 		top: calc(var(--header-h) + 24px);
-		overflow: hidden;
-		border-radius: var(--radius);
-		background: #070c17;
-		border: 1px solid var(--line-hi);
-		box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.8);
-		font-family: var(--font-mono);
-		font-size: 0.9375rem;
-		font-variant-ligatures: none;
-		color: var(--text-soft);
-	}
-	.con-bar {
-		display: flex;
-		align-items: center;
-		gap: 14px;
-		min-height: 44px;
-		padding: 0 16px;
-		background: rgba(20, 32, 54, 0.75);
-		border-bottom: 1px solid var(--line);
 	}
 	/* Pasos: indicador lineal, no se puede hacer click */
-	.con-title {
-		font-size: 0.8125rem;
-		color: var(--text-soft);
-	}
-	.con-bar :global(.win) {
-		margin-left: auto;
-	}
 	/* Barra de estado: pasos y progreso */
-	.con-status {
-		display: flex;
-		align-items: center;
-		gap: 14px;
-		min-height: 44px;
-		padding: 0 16px;
-		background: rgba(20, 32, 54, 0.75);
-		border-top: 1px solid var(--line);
-	}
 	.con-steps {
+		/* Compensa el padding del botón: la marca queda alineada con el título de arriba */
+		margin-left: -4px;
 		display: flex;
 		align-items: center;
 		min-width: 0;
@@ -690,13 +658,10 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 	}
 
 	.con-body {
-		--pad: 24px;
 		display: flex;
 		flex-direction: column;
 		gap: 14px;
-		padding: 20px var(--pad) 24px;
 		min-height: 340px;
-		line-height: 1.7;
 	}
 	.con-line {
 		margin: 0;
@@ -1035,16 +1000,11 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 		content: '';
 		display: inline-block;
 		width: 0.6em;
-		height: 1.1em;
+		height: 1.2em;
 		margin-left: 4px;
-		vertical-align: -0.2em;
-		background: var(--text-soft);
-		animation: blink 1.05s steps(1) infinite;
-	}
-	@keyframes blink {
-		50% {
-			opacity: 0;
-		}
+		vertical-align: -0.22em;
+		background: var(--yellow);
+		animation: win-blink 1.05s steps(1) infinite;
 	}
 
 	/* Modo consola (con JS) */
@@ -1082,10 +1042,6 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 		}
 		.console {
 			position: static;
-		}
-		.con-body {
-			--pad: 16px;
-			padding: 18px var(--pad) 22px;
 		}
 	}
 	/* En mobile, de los pasos solo se nombra el actual */

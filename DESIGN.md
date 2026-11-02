@@ -103,6 +103,9 @@ Texto con flecha y el mismo subrayado que `.link` (todos los links de texto, ema
 - La pastilla tiene `view-transition-name: nav-pill`: entre páginas viaja con resorte y se estira y aplasta en el trayecto. El texto del nav aparece de inmediato; la pastilla se mezcla con `lighten` para no taparlo.
 - En mobile: botón de menú con `popover` nativo, a pantalla completa, con los links grandes numerados y entrada escalonada.
 
+### Consolas
+Terminal, formulario y filtro comparten `.win-frame`, `.win-bar`, `.win-title`, `.win-body` y `.win-cursor` (`global.css`) y `WinControls`: mismo marco, barra, tipografía, padding y cursor. Lo propio de cada una va en su componente.
+
 ### Terminal del hero (`components/Terminal.astro` + `scripts/terminal.ts`)
 - Barra estilo Windows Terminal: pestañas (`ilan.ts`, `git log`, `claude`) con barra de progreso a la izquierda, botón de pausa (solo ícono) y controles de ventana a la derecha (`WinControls`, decorativos). Cuerpo de alto fijo (sin CLS). Sin los 3 dots de Mac.
 - **Siempre `~/ilan`** como path.
@@ -124,7 +127,7 @@ Texto con flecha y el mismo subrayado que `.link` (todos los links de texto, ema
 - Debajo: meta mono (fecha y "para EpicDevs" en teal), nombre, descripción y chips.
 
 ### Índice del portfolio (`pages/portfolio.astro`)
-- **Filtro en una ventana de consola** (`~/ilan/trabajos`), con opciones rectas y sin bordes: `$ ls trabajos --type=<tipo>`. Al tocar un filtro, primero se tipea el argumento y después se reordenan las filas con una View Transition local (`html.vt-local`, que no anima el resto de la página). Muestra el conteo y el rango de años.
+- **Filtro en una ventana de consola** (`~/ilan/trabajos`), con opciones rectas y sin bordes. Las filas se animan con FLIP, sin View Transition, para no congelar el nav: `$ ls trabajos --type=<tipo>`. Al tocar un filtro, primero se tipea el argumento y después se reordenan las filas con una View Transition local (`html.vt-local`, que no anima el resto de la página). Muestra el conteo y el rango de años.
 - **Filas**: año · proyecto · stack · toggle `+`. Sin numeración. En hover, el fondo barre de izquierda a derecha **sin radio**, el nombre se desplaza 10px y el año se pone amarillo.
 - **Vista previa flotante** (solo con mouse): ventana con captura y caption `año · nombre`. Sigue al cursor con inercia, rota según la velocidad, la imagen entra desde arriba o abajo según la dirección y hace un zoom lento.
 - Las filas son `<details name="trabajos">` (acordeón exclusivo) con apertura animada (`::details-content`).

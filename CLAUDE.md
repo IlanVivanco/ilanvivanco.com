@@ -31,7 +31,7 @@ npx playwright install chromium   # una vez: lo usan el build y el QA
 ```
 src/
   data/site.ts        config global: email, form, redes, nav, áreas de foco, statScreens
-  data/cv.ts          experiencia, stack, formación, cursos, idiomas (fuente de /curriculum y del PDF)
+  data/cv.ts          experiencia, stack, formación, idiomas (fuente de /curriculum y del PDF)
   data/pages.ts       páginas públicas: alimenta el sitemap y las imágenes OG
   data/projects.ts    portfolio (captura en public/img/projects/<slug>.webp)
   styles/global.css   tokens, base, botones, tarjetas, flechas, View Transitions, print
@@ -60,7 +60,7 @@ netlify.toml          build, redirects y cabeceras
 5. **Botones:** nunca pisar `.btn` desde estilos locales. En prosa, usar `a:not(.btn)`.
 6. **Dependencias:** no sumar librerías de UI ni de animación sin justificar su peso contra el presupuesto. Primero CSS y APIs nativas (View Transitions, popover, `<details>`, IntersectionObserver).
 7. **Imágenes:** WebP con tamaño fijo, `width`/`height` siempre, `loading="lazy"` fuera del primer viewport, `alt` descriptivo.
-8. **Copy y humor:** español rioplatense con voseo, primera persona, sin raya larga ni signos de apertura (`¿`, `¡`), sin frases hechas, posicionamiento de liderazgo técnico, con humor técnico y autocrítico (un guiño por sección, como máximo; reglas en `DESIGN.md §8`). Las cifras y anécdotas son reales o se marcan como aproximadas (`approx: true`, `~`, `+`). Nunca inventar datos, anécdotas ni clientes. Sin humor en el CV para ATS ni en lo legal.
+8. **Copy y humor:** español rioplatense con voseo, primera persona, con signos de apertura (`¿`, `¡`), sin raya larga ni frases hechas, posicionamiento de liderazgo técnico, con humor técnico y autocrítico (un guiño por sección, como máximo; reglas en `DESIGN.md §8`). Las cifras y anécdotas son reales o se marcan como aproximadas (`approx: true`, `~`, `+`). Nunca inventar datos, anécdotas ni clientes. Sin humor en el CV para ATS ni en lo legal.
 9. **Rutas:** las URLs públicas son contrato (`/`, `/curriculum`, `/portfolio`, `/contacto`, `/sobre-mi`, más lo que defina `netlify.toml`). Cambiar una ruta implica un redirect 301. Si cambia una página pública, se actualiza `src/data/pages.ts`.
 10. **La terminal del hero usa siempre `~/ilan`.** El contenido de las escenas sale del CV real.
 11. **Privacidad:** el email nunca va en texto plano en el HTML (usar `encodeMail`/`decodeMail` de `src/lib/mail.ts`). Solo el PDF del CV lo lleva en claro. Sin nombres de familiares en el sitio. Analytics solo sin cookies (Cloudflare Web Analytics): sin GA y sin banner.
