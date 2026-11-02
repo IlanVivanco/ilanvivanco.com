@@ -25,7 +25,7 @@ const REDIRECTS = {
   '/resume': '/curriculum',
   '/contact': '/contacto',
   '/contact-me': '/contacto',
-  '/portfolio/*': '/portfolio',
+  '/portfolio/:slug': '/portfolio',
   '/blog': '/',
   '/blog/*': '/',
   '/en': '/',

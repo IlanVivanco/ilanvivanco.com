@@ -12,6 +12,7 @@ import { createRequire } from 'node:module';
 import { chromium } from 'playwright';
 import { site } from '../../src/data/site.ts';
 import { serveDist } from '../lib/serve-dist.mjs';
+import { runAnalyticsChecks } from './analytics.mjs';
 import { runFormChecks } from './form.mjs';
 import { runStaticChecks } from './static.mjs';
 
@@ -69,6 +70,7 @@ try {
     if (vp.name === 'desktop') await runFormChecks(ctx, BASE, site.email, log);
     await ctx.close();
   }
+  await runAnalyticsChecks(browser, log);
   await browser.close();
 } catch (e) {
   failures++;

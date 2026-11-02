@@ -16,7 +16,7 @@ X-Robots-Tag = "noindex"
 
 # Redirects: las URLs públicas son contrato. Inventario y motivos en MIGRATION.md.
 # Solo /aniversario lleva force: sin force, un archivo estático siempre gana,
-# por eso /portfolio/* no pisa a /portfolio.
+# /portfolio/:slug no coincide con /portfolio, así que no hay bucle.
 
 [[redirects]]
 from = "/aniversario"
@@ -46,7 +46,7 @@ to = "/contacto"
 status = 301
 
 [[redirects]]
-from = "/portfolio/*"
+from = "/portfolio/:slug"
 to = "/portfolio"
 status = 301
 

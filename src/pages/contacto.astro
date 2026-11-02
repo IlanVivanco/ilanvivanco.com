@@ -57,7 +57,7 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 
           <ol class="con-log" role="list" data-log aria-label="Tus respuestas"></ol>
 
-          <div class="q" data-step="name">
+          <div class="q is-current" data-step="name">
             <label class="q-label" for="f-name"><span class="q-mark" aria-hidden="true">?</span> ¿Cómo te llamás?</label>
             <div class="q-field">
               <span class="q-caret" aria-hidden="true">›</span>
@@ -455,11 +455,12 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
   @keyframes blink { 50% { opacity: 0; } }
 
   /* Modo consola (con JS) */
-  :global(form.is-stepped) .q:not(.is-current) { display: none; }
+  /* Se oculta antes del primer paint (html.js) para que el footer no salte al cargar: CLS 0 */
+  :global(html.js) .console .q:not(.is-current), :global(form.is-stepped) .q:not(.is-current) { display: none; }
   :global(form.is-stepped) .q.is-current { animation: line-in 0.25s steps(3, end) both; }
   :global(form.is-stepped) .q.is-shake { animation: shake 0.3s steps(4, end); }
   @keyframes shake { 25% { translate: -4px 0; } 50% { translate: 4px 0; } 75% { translate: -2px 0; } }
-  .console:not(.is-stepped) .q-enter, .console:not(.is-stepped) .con-step, .console:not(.is-stepped) .con-tabs { display: none; }
+  :global(html:not(.js)) .console:not(.is-stepped) .q-enter, :global(html:not(.js)) .console:not(.is-stepped) .con-step, :global(html:not(.js)) .console:not(.is-stepped) .con-tabs { display: none; }
 
   @media (max-width: 900px) {
     .ct-grid { grid-template-columns: minmax(0, 1fr); }
