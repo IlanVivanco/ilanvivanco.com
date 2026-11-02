@@ -101,7 +101,7 @@ const scenes: Scene[] = [
 					['v', 'ilan.'],
 					['f', 'contactar'],
 					['v', '();'],
-					['c', ' // hacemos algo juntos?'],
+					['c', ' // ¿hacemos algo juntos?'],
 				],
 				speed: 30,
 			},
@@ -136,7 +136,7 @@ const scenes: Scene[] = [
 				wait: 380,
 			},
 			{ t: [...P('~/ilan'), ['w', 'git commit -m "init"']], speed: 50 },
-			{ t: [['c', '# lo escribimos juntos?']], mode: 'print', wait: 420 },
+			{ t: [['c', '# ¿lo escribimos juntos?']], mode: 'print', wait: 420 },
 		],
 	},
 	{
@@ -281,7 +281,7 @@ export function initTerminal(root: HTMLElement) {
 		out!.classList.remove('is-switching')
 
 		const done: string[] = []
-		const cursor = '<span class="t-cursor"></span>'
+		const cursor = '<span class="win-cursor"></span>'
 		const scrollEnd = () => {
 			if (body) body.scrollTop = body.scrollHeight
 		}

@@ -416,6 +416,65 @@ button:hover .i-download {
 }
 
 /* ---------------------------------------------------------------
+   Consolas: terminal del hero, formulario y filtro del portfolio
+---------------------------------------------------------------- */
+.win-frame {
+	overflow: hidden;
+	border: 1px solid var(--line-hi);
+	border-radius: var(--radius);
+	background: #070c17;
+	box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.8);
+	color: var(--text-soft);
+	font-family: var(--font-mono);
+	font-variant-ligatures: none;
+}
+.win-bar {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	min-height: 44px;
+	padding: 0 16px;
+	background: rgba(20, 32, 54, 0.75);
+	border-bottom: 1px solid var(--line);
+}
+.win-bar > .win {
+	margin-left: auto;
+}
+.win-status {
+	border-top: 1px solid var(--line);
+	border-bottom: 0;
+}
+.win-title {
+	font-size: 0.8125rem;
+	color: var(--text-soft);
+}
+.win-body {
+	--pad: 24px;
+	padding: 20px var(--pad);
+	font-size: 0.9375rem;
+	line-height: 1.7;
+}
+.win-cursor {
+	display: inline-block;
+	width: 0.6em;
+	height: 1.2em;
+	margin-left: 1px;
+	vertical-align: -0.22em;
+	background: var(--yellow);
+	animation: win-blink 1.05s steps(1) infinite;
+}
+@keyframes win-blink {
+	50% {
+		opacity: 0;
+	}
+}
+@media (max-width: 900px) {
+	.win-body {
+		--pad: 16px;
+	}
+}
+
+/* ---------------------------------------------------------------
    Tarjetas: glow interior + borde iluminado por proximidad + perspectiva
    en TODAS las .card (las variables las maneja scripts/ui.ts)
 ---------------------------------------------------------------- */
@@ -571,20 +630,6 @@ main {
 /* La pastilla viaja por encima del header pero se mezcla en "lighten": el texto (más claro) queda siempre visible */
 ::view-transition-group(nav-pill) {
 	mix-blend-mode: lighten;
-}
-/* Transiciones locales (filtro del portfolio): solo se animan las filas */
-html.vt-local main,
-html.vt-local .site-header,
-html.vt-local .nav-pill {
-	view-transition-name: none;
-}
-html.vt-local::view-transition-group(*) {
-	animation-duration: 0.45s;
-	animation-timing-function: var(--ease-out);
-}
-html.vt-local::view-transition-old(root),
-html.vt-local::view-transition-new(root) {
-	animation: none;
 }
 @keyframes vt-page-out {
 	to {

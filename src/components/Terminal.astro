@@ -5,8 +5,8 @@ import WinControls from './WinControls.astro'
 const tabs = ['ilan.ts', 'git log', 'claude']
 ---
 
-<figure class="term" data-terminal>
-	<div class="term-bar">
+<figure class="term win-frame" data-terminal>
+	<div class="term-bar win-bar">
 		<div class="term-tabs" role="group" aria-label="Escenas de la terminal">
 			{tabs.map((t, i) => (
 				<button type="button" class="term-tab mono" data-term-tab aria-pressed={i === 0 ? 'true' : 'false'}>
@@ -32,9 +32,9 @@ const tabs = ['ilan.ts', 'git log', 'claude']
 		<WinControls />
 	</div>
 	<pre
-		class="term-body mono"
+		class="term-body win-body"
 		aria-hidden="true"
-	><code data-term-out><span class="t-line"><span class="t-k">const</span> ilan = &#123;</span><span class="t-line">  <span class="t-p">rol</span>: <span class="t-s">'CTO @ EpicDevs'</span>,</span><span class="t-line">  <span class="t-p">base</span>: <span class="t-s">'Santander, ES'</span>,</span><span class="t-line">  <span class="t-p">desde</span>: <span class="t-n">2005</span>,</span><span class="t-line">  <span class="t-p">stack</span>: [<span class="t-s">'WP'</span>, <span class="t-s">'Vue'</span>, <span class="t-s">'Astro'</span>, <span class="t-s">'Node'</span>],</span><span class="t-line">  <span class="t-p">foco</span>: [<span class="t-s">'arquitectura'</span>, <span class="t-s">'equipos'</span>, <span class="t-s">'IA'</span>],</span><span class="t-line">  <span class="t-p">remoto</span>: <span class="t-k">true</span>,</span><span class="t-line">  <span class="t-p">combustible</span>: [<span class="t-s">'mate'</span>, <span class="t-s">'café'</span>],</span><span class="t-line">&#125;;</span><span class="t-line"></span><span class="t-line"><span class="t-c">// hacemos algo juntos?</span></span><span class="t-line">ilan.<span class="t-f">contactar</span>();</span></code></pre>
+	><code data-term-out><span class="t-line"><span class="t-k">const</span> ilan = &#123;</span><span class="t-line">  <span class="t-p">rol</span>: <span class="t-s">'CTO @ EpicDevs'</span>,</span><span class="t-line">  <span class="t-p">base</span>: <span class="t-s">'Santander, ES'</span>,</span><span class="t-line">  <span class="t-p">desde</span>: <span class="t-n">2005</span>,</span><span class="t-line">  <span class="t-p">stack</span>: [<span class="t-s">'WP'</span>, <span class="t-s">'Vue'</span>, <span class="t-s">'Astro'</span>, <span class="t-s">'Node'</span>],</span><span class="t-line">  <span class="t-p">foco</span>: [<span class="t-s">'arquitectura'</span>, <span class="t-s">'equipos'</span>, <span class="t-s">'IA'</span>],</span><span class="t-line">  <span class="t-p">remoto</span>: <span class="t-k">true</span>,</span><span class="t-line">  <span class="t-p">combustible</span>: [<span class="t-s">'mate'</span>, <span class="t-s">'café'</span>],</span><span class="t-line">&#125;;</span><span class="t-line"></span><span class="t-line"><span class="t-c">// ¿hacemos algo juntos?</span></span><span class="t-line">ilan.<span class="t-f">contactar</span>();</span></code></pre>
 	<figcaption class="sr-only">
 		Terminal decorativa con tres escenas: un perfil de Ilán escrito como objeto de TypeScript, su carrera contada como
 		un historial de git desde 2005 hasta CTO en EpicDevs en 2020, y un agente de IA que mejora el tiempo de carga de
@@ -48,24 +48,19 @@ const tabs = ['ilan.ts', 'git log', 'claude']
 </script>
 
 <style>
-	.term {
-		margin: 0;
-		overflow: hidden;
-		border-radius: var(--radius);
-		background: color-mix(in oklab, #070c17 88%, transparent);
-		border: 1px solid var(--line-hi);
-		box-shadow:
-			0 40px 80px -30px rgba(0, 0, 0, 0.8),
-			0 0 0 1px rgba(255, 255, 255, 0.02) inset;
-		backdrop-filter: blur(10px);
-	}
 	.term-bar {
-		display: flex;
-		align-items: center;
-		gap: 14px;
-		padding: 0 16px 0 8px;
-		border-bottom: 1px solid var(--line);
-		background: rgba(20, 32, 54, 0.75);
+		/* Pestañas alineadas con el título de las otras consolas */
+		padding-left: 4px;
+	}
+	/* La pausa ya empuja a la derecha: los controles van pegados a ella */
+	.term-bar > :global(.win) {
+		margin-left: 0;
+	}
+	/* En mobile no entran junto a las tres pestañas */
+	@media (max-width: 480px) {
+		.term-bar > :global(.win) {
+			display: none;
+		}
 	}
 	.term-tabs {
 		display: flex;
@@ -107,7 +102,7 @@ const tabs = ['ilan.ts', 'git log', 'claude']
 	}
 	.term-tab {
 		position: relative;
-		min-height: 44px;
+		min-height: 43px;
 		padding: 0 12px;
 		border: 0;
 		background: transparent;
@@ -159,13 +154,10 @@ const tabs = ['ilan.ts', 'git log', 'claude']
 
 	.term-body {
 		margin: 0;
-		padding: 22px 24px;
 		height: 21.5em;
 		overflow: hidden;
 		scroll-behavior: smooth;
-		font-size: clamp(0.71875rem, 1.12vw, 0.96875rem);
-		line-height: 1.75;
-		color: var(--text-soft);
+		font-size: clamp(0.71875rem, 1.12vw, 0.9375rem);
 		tab-size: 2;
 	}
 	.term-body code {
@@ -181,7 +173,7 @@ const tabs = ['ilan.ts', 'git log', 'claude']
 	}
 	.term-body :global(.t-line) {
 		display: block;
-		min-height: 1.75em;
+		min-height: 1.7em;
 		white-space: pre;
 	}
 	.term-body :global(.t-k) {
@@ -229,13 +221,13 @@ const tabs = ['ilan.ts', 'git log', 'claude']
 	}
 	.term-body :global(.t-line--del) {
 		background: rgba(204, 79, 45, 0.14);
-		margin: 0 -24px;
-		padding: 0 24px;
+		margin: 0 calc(var(--pad) * -1);
+		padding: 0 var(--pad);
 	}
 	.term-body :global(.t-line--add) {
 		background: rgba(44, 151, 159, 0.16);
-		margin: 0 -24px;
-		padding: 0 24px;
+		margin: 0 calc(var(--pad) * -1);
+		padding: 0 var(--pad);
 	}
 	.term-body :global(.t-bar) {
 		display: inline-block;
@@ -254,20 +246,6 @@ const tabs = ['ilan.ts', 'git log', 'claude']
 			background-size:
 				0 100%,
 				auto;
-		}
-	}
-	.term-body :global(.t-cursor) {
-		display: inline-block;
-		width: 0.6em;
-		height: 1.2em;
-		vertical-align: -0.22em;
-		margin-left: 1px;
-		background: var(--yellow);
-		animation: blink 1.05s steps(1) infinite;
-	}
-	@keyframes blink {
-		50% {
-			opacity: 0;
 		}
 	}
 </style>

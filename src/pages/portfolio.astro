@@ -37,16 +37,16 @@ const range = `${Math.min(...years)}–${Math.max(...years)}`
 	<section class="pf" aria-label="Proyectos">
 		<div class="container stack" style="--gap: 28px">
 			<!-- Filtro con forma de comando -->
-			<div class="cmd" data-reveal>
-				<div class="cmd-bar">
-					<span class="cmd-title mono" aria-hidden="true">
+			<div class="cmd win-frame" data-reveal>
+				<div class="win-bar">
+					<span class="win-title" aria-hidden="true">
 						~/ilan/trabajos
 					</span>
 					<WinControls />
 				</div>
-				<div class="cmd-body">
+				<div class="cmd-body win-body">
 					<!-- prettier-ignore -->
-					<p class="cmd-line mono" aria-hidden="true"><span class="t-pr">$</span> ls trabajos<span class="cmd-arg" data-cmd-arg></span><span class="cmd-cursor"></span></p>
+					<p class="cmd-line mono" aria-hidden="true"><span class="t-pr">$</span> ls trabajos<span class="cmd-arg" data-cmd-arg></span><span class="win-cursor"></span></p>
 					<div class="cmd-filters" role="group" aria-label="Filtrar proyectos">
 						{filters.map((f, i) => (
 							<button
@@ -62,7 +62,7 @@ const range = `${Math.min(...years)}–${Math.max(...years)}`
 						))}
 					</div>
 					<p class="cmd-out mono" aria-live="polite">
-						<span class="t-ok" aria-hidden="true">
+						<span class="t-arrow" aria-hidden="true">
 							→
 						</span>{' '}
 						<strong data-count>{projects.length}</strong> proyectos · <span data-range>{range}</span>
@@ -190,17 +190,20 @@ const range = `${Math.min(...years)}–${Math.max(...years)}`
 				buttons.forEach((x) => x.setAttribute('aria-pressed', String(x === b)))
 				// 1) se "tipea" el comando  2) se ejecuta: la lista se reordena
 				await typeArg(tag ? ` --type=${b.dataset.label}` : '')
-				if (document.startViewTransition && !reduce) {
-					// Transición local: solo las filas. El contenido de la página (main) no se anima.
-					const root = document.documentElement
-					root.classList.add('vt-local')
-					items.forEach((li, i) => (li.style.viewTransitionName = `pf-${i}`))
-					const vt = document.startViewTransition(() => apply(tag))
-					vt.finished.finally(() => {
-						items.forEach((li) => (li.style.viewTransitionName = ''))
-						root.classList.remove('vt-local')
+				// Solo se animan las filas: una View Transition congela toda la página, nav incluido
+				const before = new Map(items.filter((li) => !li.hidden).map((li) => [li, li.getBoundingClientRect().top]))
+				apply(tag)
+				if (reduce) return
+				items
+					.filter((li) => !li.hidden)
+					.forEach((li) => {
+						const old = before.get(li)
+						const frames =
+							old === undefined
+								? [{ opacity: 0 }, { opacity: 1 }]
+								: [{ translate: `0 ${old - li.getBoundingClientRect().top}px` }, { translate: '0 0' }]
+						li.animate(frames, { duration: 450, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' })
 					})
-				} else apply(tag)
 			})
 		)
 
@@ -317,58 +320,23 @@ const range = `${Math.min(...years)}–${Math.max(...years)}`
 	}
 
 	/* Comando */
-	.cmd {
-		overflow: hidden;
-		border: 1px solid var(--line-hi);
-		border-radius: var(--radius);
-		background: #070c17;
-	}
-	.cmd-bar {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: 14px;
-		min-height: 44px;
-		padding: 0 16px;
-		background: rgba(20, 32, 54, 0.75);
-		border-bottom: 1px solid var(--line);
-	}
-	.cmd-title {
-		font-size: 0.8125rem;
-		color: var(--text-soft);
-	}
 	.cmd-body {
 		display: flex;
 		flex-direction: column;
 		gap: 14px;
-		padding: 20px 24px;
 	}
 	.cmd-line {
-		font-size: 0.9375rem;
 		color: var(--text);
-		font-variant-ligatures: none;
 	}
-	.t-pr,
-	.t-ok {
+	.t-pr {
 		color: var(--teal-hi);
+	}
+	.t-arrow {
+		color: var(--violet);
 	}
 	.cmd-arg {
 		color: var(--yellow);
 		white-space: pre;
-	}
-	.cmd-cursor {
-		display: inline-block;
-		width: 0.55em;
-		height: 1.1em;
-		margin-left: 2px;
-		vertical-align: -0.18em;
-		background: var(--yellow);
-		animation: blink 1.05s steps(1) infinite;
-	}
-	@keyframes blink {
-		50% {
-			opacity: 0;
-		}
 	}
 	.cmd-filters {
 		display: flex;
