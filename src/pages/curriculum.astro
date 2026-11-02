@@ -297,7 +297,7 @@ const { summary, experience, earlier, stack, education, courses, languages } = c
 		justify-content: space-between;
 		gap: 16px;
 		min-height: 60px;
-		padding: 0 14px 0 22px;
+		padding: 0 22px;
 		font-weight: 500;
 	}
 	.earlier summary::-webkit-details-marker {
@@ -429,6 +429,8 @@ const { summary, experience, earlier, stack, education, courses, languages } = c
 		display: grid;
 		grid-template-columns: 110px minmax(0, 1fr);
 		gap: 16px;
+		/* La fecha es más chica que el texto: se alinean por la línea base */
+		align-items: baseline;
 	}
 	.soft {
 		color: var(--text-soft);
