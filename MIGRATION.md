@@ -204,8 +204,9 @@ El sitio nuevo no incluye los nombres de familiares, la fecha de nacimiento, el 
 Quedan fuera de este PR porque son cambios en cuentas externas:
 
 - Cloudflare: crear el sitio en Web Analytics, cargar `PUBLIC_CF_BEACON_TOKEN` en Netlify, dejar apagada la inyección automática y revisar que Speed Brain no pise las Speculation Rules.
-- Netlify: borrar `INSTAGRAM_URL`, `SUPABASE_URL` y `SUPABASE_KEY` (tras la Fase 1B) y el form `form 1`.
-- Supabase: eliminar la tabla `options` o el proyecto (tras la Fase 1B).
+- Netlify: crear el build hook de producción y cargarlo en `REBUILD_HOOK_URL` (ver `PLAN-instagram.md`).
+- Netlify: borrar `INSTAGRAM_URL`, `SUPABASE_URL` y `SUPABASE_KEY` y el form `form 1`.
+- Supabase: eliminar la tabla `options` o el proyecto.
 - NoCodeAPI: dar de baja la integración si no se reutiliza.
 - Google Analytics: cerrar la propiedad `G-7CJGME4GRL`.
 - Search Console: enviar el sitemap nuevo y revisar los 404 durante unas semanas.

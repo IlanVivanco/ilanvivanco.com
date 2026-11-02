@@ -1,0 +1,98 @@
+---
+// Últimas fotos de Instagram, ya copiadas al sitio por scripts/build/instagram.mjs. Sin fotos, no se muestra.
+import { existsSync, readFileSync } from 'node:fs'
+import { site } from '../data/site'
+import Fn from './Fn.astro'
+import Icon from './Icon.astro'
+
+type Post = { src: string; url: string; date: string; alt: string | null; tags: string[] }
+
+const dataFile = 'src/data/instagram.generated.json'
+const posts: Post[] = existsSync(dataFile) ? JSON.parse(readFileSync(dataFile, 'utf8')) : []
+const profile = site.socials.find((s) => s.label === 'Instagram')!.href
+const when = (date: string) =>
+	new Intl.DateTimeFormat('es-ES', { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(date))
+---
+
+{posts.length > 0 && (
+	<div class="ig stack" style="--gap: 20px">
+		<Fn name="últimas_fotos" as="p" />
+		<ul class="ig-grid" role="list" data-reveal-group>
+			{posts.map((p) => (
+				<li data-reveal>
+					<a class="ig-post" href={p.url} target="_blank" rel="noopener">
+						<span class="ig-shot">
+							<img
+								src={p.src}
+								width="480"
+								height="480"
+								loading="lazy"
+								decoding="async"
+								alt={p.alt ?? `Foto de Instagram de ${when(p.date)}`}
+							/>
+						</span>
+						{p.tags.length > 0 && <span class="ig-tags mono">{p.tags.map((t) => `#${t}`).join(' ')}</span>}
+					</a>
+				</li>
+			))}
+		</ul>
+		<a class="link-arrow" href={profile} target="_blank" rel="noopener">
+			Más fotos en Instagram <Icon name="arrow-up-right" size={18} />
+		</a>
+	</div>
+)}
+
+<style>
+	.ig {
+		grid-column: 1 / -1;
+	}
+	.ig-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 16px;
+		margin: 0;
+	}
+	.ig-post {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+		color: var(--muted);
+		text-decoration: none;
+	}
+	.ig-shot {
+		display: block;
+		overflow: hidden;
+		border: 1px solid var(--line);
+		border-radius: 12px;
+		background: var(--surface);
+	}
+	.ig-shot img {
+		width: 100%;
+		filter: saturate(0.55);
+		transition:
+			filter 0.4s var(--ease-out),
+			transform 0.6s var(--ease-out);
+	}
+	.ig-post:hover .ig-shot img,
+	.ig-post:focus-visible .ig-shot img {
+		filter: none;
+		transform: scale(1.07);
+	}
+	.ig-tags {
+		overflow: hidden;
+		font-size: 0.75rem;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		transition: color 0.2s;
+	}
+	.ig-post:hover .ig-tags,
+	.ig-post:focus-visible .ig-tags {
+		color: var(--yellow-hi);
+	}
+	@media (max-width: 640px) {
+		.ig-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 12px;
+		}
+	}
+</style>

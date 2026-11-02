@@ -3,13 +3,14 @@
 	"version": "2.0.0",
 	"scripts": {
 		"dev": "astro dev",
-		"build": "astro build && npm run cv:pdf && npm run og:images",
+		"build": "npm run instagram && astro build && npm run cv:pdf && npm run og:images",
 		"preview": "astro preview",
 		"qa": "node scripts/qa/check.mjs",
 		"cv:pdf": "node scripts/build/cv-pdf.mjs",
 		"og:images": "node scripts/build/og-images.mjs",
 		"format": "prettier --write .",
-		"format:check": "prettier --check ."
+		"format:check": "prettier --check .",
+		"instagram": "node scripts/build/instagram.mjs"
 	},
 	"dependencies": {
 		"astro": "^7.4.4",
@@ -22,7 +23,8 @@
 		"pdf-parse": "^2.4.5",
 		"playwright": "^1.63.0",
 		"prettier": "3.9.10",
-		"prettier-plugin-astro": "1.1.2"
+		"prettier-plugin-astro": "1.1.2",
+		"sharp": "^0.35.5"
 	},
 	"private": true,
 	"engines": {

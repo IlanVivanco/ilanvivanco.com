@@ -14,6 +14,9 @@ export const site = {
 	// Nombre del form en Netlify Forms: si cambia, cambian las notificaciones y el historial de envíos.
 	formName: 'contact-form',
 
+	// Feed JSON de Behold: últimas fotos de Instagram (ver PLAN-instagram.md).
+	instagramFeed: 'https://feeds.behold.so/jZ5SRhL2JJltCujvFFLS',
+
 	// Lo genera `npm run cv:pdf` en cada build.
 	cvPdf: '/cv/ilan-vivanco-cv-es.pdf',
 

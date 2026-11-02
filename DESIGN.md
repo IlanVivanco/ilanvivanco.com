@@ -148,6 +148,9 @@ Círculo de 32px con borde `--line-strong`. Abierto: fondo amarillo, rota 180° 
 ### Email
 Display grande con `cursor: copy`. El click copia y muestra una pastilla "copiado" que desaparece sola. **No hay botón "copiar"**: la interacción no se explica. El email **nunca está en texto plano en el HTML**: se guarda ofuscado (`data-mail`) y se arma con JS al cargar.
 
+### Fotos de Instagram (`components/InstagramGrid.astro`)
+En "Fuera del código" de `/sobre-mi`: 6 fotos 1:1, en 3 columnas (2 en mobile), desaturadas en reposo y a color con zoom en hover y foco, igual que `ProjectCard`. Debajo, hasta 2 hashtags en mono. Sin carrusel ni JS. Sin fotos, el bloque no se muestra.
+
 ### Página legal (`/privacidad`)
 Una columna de lectura, máximo 760px, con los mismos tokens. Sin humor ni animaciones. Enlazada desde el footer y el formulario.
 
