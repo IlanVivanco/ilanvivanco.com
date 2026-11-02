@@ -156,7 +156,7 @@ const scenes: Scene[] = [
 	{
 		id: 'claude',
 		lines: [
-			{ t: [...P('~/ilan'), ['w', 'claude "bajá el LCP de la home"']], speed: 38 },
+			{ t: [...P('~/ilan'), ['w', 'claude -p "bajá el LCP de la home"']], speed: 38 },
 			{
 				t: [
 					['f', '  • '],
