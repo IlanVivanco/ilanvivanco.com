@@ -5,7 +5,7 @@ import Icon from '../components/Icon.astro'
 import { site } from '../data/site'
 import { cv, period, yearPeriod } from '../data/cv'
 
-const { summary, experience, earlier, stack, education, courses, languages } = cv.es
+const { summary, experience, earlier, stack, education, languages } = cv.es
 ---
 
 <Base
@@ -139,10 +139,6 @@ const { summary, experience, earlier, stack, education, courses, languages } = c
 							<span class="soft">{l.level}</span>
 						</li>
 					))}
-					<li data-reveal>
-						<strong>Autodidacta</strong>
-						<span class="soft">Cursos de {courses.join(', ')}. Lo demás, trabajando.</span>
-					</li>
 				</ul>
 			</div>
 		</div>

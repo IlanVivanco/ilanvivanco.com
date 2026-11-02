@@ -24,7 +24,6 @@ export type Cv = {
 	earlier: EarlierJob[]
 	stack: { group: string; items: string[] }[]
 	education: Education[]
-	courses: string[]
 	languages: { name: string; level: string }[]
 }
 
@@ -232,8 +231,6 @@ const es: Cv = {
 			period: '2001 – 2006',
 		},
 	],
-
-	courses: ['Wes Bos', 'Platzi', 'Udemy', 'Wmedia', 'Educación IT'],
 
 	languages: [
 		{ name: 'Español', level: 'Nativo' },

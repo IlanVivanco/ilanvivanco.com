@@ -137,7 +137,7 @@ Notas para implementar:
 | Freelance: `2005-12` a hoy | `oct 2006 — jun 2020` | migrado | Pasa a `dic 2005 — hoy` (D3). |
 | Andy Goldstein: `2007 — 2009` | `2007 — 2010` | migrado | Pasa a `2007 — 2009` (D3). |
 | Raggio: título "Diseñador gráfico" | Solo "Técnico en Comunicación Publicitaria" | migrado | Se agrega el título (D3). |
-| `courses.js`: Wmedia, Udemy, WesBos, Platzi, Educación IT | Una mención en "Autodidacta" | migrado | Selección breve en `courses` (D5). |
+| `courses.js`: Wmedia, Udemy, WesBos, Platzi, Educación IT | Sin equivalente | descartado | Se probó una selección breve y se sacó: una lista de cursos no refleja cómo aprende. |
 | `skills.js`: niveles por habilidad | No está | descartado | Las autoevaluaciones numéricas no aportan y no sirven para un ATS. |
 | `tech.js`: unas 55 tecnologías con ícono | `stack`, con unas 30, más actuales | migrado | Se suman HTML5, CSS3, jQuery y Bash (D5). El resto (escritorio y herramientas viejas) se descarta. |
 | `hobbies.js` | Solo fotografía, viajes, mate y café, en prosa | descartado | La nube de palabras no está en el diseño aprobado. "Fuera del código" cubre lo importante. |
@@ -194,7 +194,7 @@ El sitio nuevo no incluye los nombres de familiares, la fecha de nacimiento, el 
 | D2 | Teléfono | No se publica en el sitio ni en el PDF. |
 | D3 | Datos del CV que no coincidían | Se actualiza `cv.ts` con los datos del CV viejo: inicio en ago 2015, freelance desde dic 2005 y en curso, Goldstein 2007–2009 y título "Diseñador gráfico" en Raggio. |
 | D4 | Ubicación de los cargos | Remoto: Construye Mundo, Delicious Brains, Explore-Share y Magissim. Buenos Aires, Argentina: Activar, Mendióroz, Exastudio, NewPrint y Gilardoni. |
-| D5 | Cursos y palabras clave | Selección breve de cursos en `cv.ts`, en `/curriculum` y en el PDF. HTML5, CSS3, jQuery y Bash se suman a `stack` como chips. |
+| D5 | Cursos y palabras clave | Sin cursos en el sitio ni en el PDF. HTML5, CSS3, jQuery y Bash se suman a `stack` como chips. |
 | D6 | Instagram y Twitter | Se suman a `sameAs` del JSON-LD, sin cambio visual. |
 | D7 | Analytics | Beacon de Cloudflare listo y apagado sin `PUBLIC_CF_BEACON_TOKEN`. El token y la revisión de Cloudflare se ven al lanzar. |
 | D8 | Historial de git | Se mantiene este repo, sin reescribir el historial: los datos no son tan sensibles y conserva la conexión con Netlify, los issues y la referencia `979ff14`. |
