@@ -87,6 +87,7 @@ Notas para implementar:
 | Form `contact-form` en Netlify | conservado | **Está activo:** 71 envíos, el último el 2026-11-02. El `name` no cambia. |
 | Campos `name`, `email`, `message`, `fake` | conservado | El form nuevo usa `nombre`, `mensaje` y `_gotcha`; se **renombran** a los viejos para no cambiar las notificaciones ni la tabla de envíos. |
 | Campo `tema` | migrado | Campo nuevo del diseño aprobado. Aparece como columna adicional en Netlify. |
+| Campo `subject` | migrado | Asunto del mail de notificación, con el nombre y el tema. Netlify también lo muestra como una fila. |
 | Form `form 1` en Netlify | descartado | Vacío desde 2021 (0 envíos). Se puede borrar desde la UI. |
 | Ofuscación de email y teléfono en `pages/contact.vue` | migrado | El email pasa a `src/lib/mail.ts`. El teléfono no se publica (D2). |
 | Validaciones y copy con humor (`messages.*`) | descartado | La consola nueva tiene los suyos, ya aprobados. |

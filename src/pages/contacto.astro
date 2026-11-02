@@ -102,7 +102,7 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 							¿Cómo te llamás?
 						</p>
 						<div class="q-field">
-							<label class="sr-only" for="f-name">
+							<label class="sr-only" for="f-name" aria-hidden="true">
 								Nombre
 							</label>
 							<span class="q-caret" aria-hidden="true">
@@ -131,7 +131,7 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 							¿A qué email te respondo?
 						</p>
 						<div class="q-field">
-							<label class="sr-only" for="f-email">
+							<label class="sr-only" for="f-email" aria-hidden="true">
 								Email
 							</label>
 							<span class="q-caret" aria-hidden="true">
@@ -182,7 +182,7 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 							</span>{' '}
 							Contame un poco más <span class="q-help">(Enter envía · Shift+Enter, nueva línea)</span>
 						</p>
-						<label class="sr-only" for="f-msg">
+						<label class="sr-only" for="f-msg" aria-hidden="true">
 							Mensaje
 						</label>
 						<textarea
@@ -428,6 +428,8 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 
 			form.addEventListener('submit', async (e) => {
 				e.preventDefault()
+				// Un segundo Enter mientras se envía no manda otro mensaje
+				if (form.classList.contains('is-sending')) return
 				for (let i = 0; i < steps.length; i++) {
 					if (!validate(i)) {
 						current = i

@@ -55,6 +55,14 @@ export async function runFormChecks(ctx, base, email, log) {
 	)
 	await ok.page.close()
 
+	const twice = await submit(ctx, base, 200)
+	await twice.page.keyboard.press('Enter')
+	await twice.page.keyboard.press('Enter')
+	await twice.page.locator('.c-badge-ok').first().waitFor({ timeout: 5000 })
+	await twice.page.waitForTimeout(300)
+	log(twice.posts.length === 1, `form: un doble Enter manda un solo mensaje (${twice.posts.length})`)
+	await twice.page.close()
+
 	const failed = await submit(ctx, base, 500)
 	const link = failed.page.locator('[data-out] a[href^="mailto:"]')
 	await link.waitFor({ timeout: 5000 })
