@@ -75,20 +75,6 @@ const scenes: Scene[] = [
 			{
 				t: [
 					['v', '  '],
-					['p', 'foco'],
-					['v', ': ['],
-					['s', "'arquitectura'"],
-					['v', ', '],
-					['s', "'equipos'"],
-					['v', ', '],
-					['s', "'IA'"],
-					['v', '],'],
-				],
-				speed: 18,
-			},
-			{
-				t: [
-					['v', '  '],
 					['p', 'remoto'],
 					['v', ': '],
 					['k', 'true'],
@@ -110,12 +96,12 @@ const scenes: Scene[] = [
 			},
 			{ t: [['v', '};']], speed: 22 },
 			{ t: [['v', '']], mode: 'print', wait: 120 },
-			{ t: [['c', '// ¿hacemos algo juntos?']], speed: 26 },
 			{
 				t: [
 					['v', 'ilan.'],
 					['f', 'contactar'],
 					['v', '();'],
+					['c', ' // ¿hacemos algo juntos?'],
 				],
 				speed: 30,
 			},
