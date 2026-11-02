@@ -21,8 +21,9 @@ try {
     const page = await browser.newPage();
     const res = await page.goto(`${server.url}/cv/${lang}`, { waitUntil: 'networkidle' });
     if (!res.ok()) throw new Error(`/cv/${lang} respondió ${res.status()}`);
+    await page.evaluate(() => document.fonts.ready);
     const title = await page.title();
-    await page.pdf({ path: `public/cv/${file}`, format: 'A4', tagged: true, outline: true, printBackground: false, preferCSSPageSize: true });
+    await page.pdf({ path: `public/cv/${file}`, format: 'A4', tagged: true, outline: true, printBackground: true, preferCSSPageSize: true });
     await page.close();
 
     // Chromium solo escribe el título: el resto de los metadatos se agregan acá.
