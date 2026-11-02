@@ -1,0 +1,140 @@
+// Chequeos sobre lo que sale del build, sin navegador: email, analytics, SEO, redirects, presupuestos y CV.
+import { readdirSync, readFileSync, existsSync } from 'node:fs';
+import { join } from 'node:path';
+import { gzipSync } from 'node:zlib';
+import { createRequire } from 'node:module';
+import { PDFDocument, PDFName } from 'pdf-lib';
+import { cv, cvLabels, atsPeriod } from '../../src/data/cv.ts';
+import { publicPages, ogPath } from '../../src/data/pages.ts';
+import { site, statScreens } from '../../src/data/site.ts';
+
+const require = createRequire(import.meta.url);
+const { PDFParse } = require('pdf-parse');
+
+const DIST = 'dist';
+const JS_BUDGET_KB = 10;
+const read = (f) => readFileSync(join(DIST, f), 'utf8');
+const walk = (dir = '') => readdirSync(join(DIST, dir), { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(join(dir, e.name)) : [join(dir, e.name)]));
+const htmlFiles = () => walk().filter((f) => f.endsWith('.html'));
+const fileFor = (path) => (path === '/' ? 'index.html' : `${path.slice(1)}.html`);
+
+// Toda URL pública vieja tiene destino. Inventario y motivos en MIGRATION.md.
+const REDIRECTS = {
+  '/aniversario': 'https://gifrases.ilanvivanco.com/',
+  '/about': '/sobre-mi',
+  '/resume': '/curriculum',
+  '/contact': '/contacto',
+  '/contact-me': '/contacto',
+  '/portfolio/*': '/portfolio',
+  '/blog': '/',
+  '/blog/*': '/',
+  '/en': '/',
+  '/en/*': '/',
+  '/en/about': '/sobre-mi',
+  '/en/resume': '/curriculum',
+  '/en/contact': '/contacto',
+  '/en/portfolio': '/portfolio',
+  '/en/portfolio/*': '/portfolio',
+  '/en/blog/*': '/',
+  '/images/ilan-vivanco-social-card.png': '/og.png',
+  '/images/ilan-vivanco.jpg': '/img/ilan-800.webp',
+  '/images/ilan-vivanco-square.jpg': '/img/ilan-sq-480.webp',
+  '/images/ilan-vivanco-logo.png': '/favicon.svg',
+  '/images/favicon.png': '/favicon.svg',
+};
+
+const jsWeight = (file) => {
+  const html = read(file);
+  const inline = [...html.matchAll(/<script(?![^>]*\b(?:type="(?:speculationrules|application\/ld\+json)"|src=))[^>]*>([\s\S]*?)<\/script>/g)].map((m) => m[1]).join('');
+  const external = [...html.matchAll(/<script[^>]*\bsrc="(\/_astro\/[^"]+\.js)"/g)].map((m) => m[1]);
+  // Módulos importados por los scripts de entrada
+  const seen = new Set();
+  const visit = (src) => {
+    if (seen.has(src)) return;
+    seen.add(src);
+    for (const m of read(src.slice(1)).matchAll(/(?:from\s*|import\s*)["']\.\/([^"']+\.js)["']/g)) visit(`/_astro/${m[1]}`);
+  };
+  external.forEach(visit);
+  const gz = (s) => gzipSync(s).length;
+  return gz(inline) + [...seen].reduce((n, src) => n + gz(read(src.slice(1))), 0);
+};
+
+export async function runStaticChecks(log) {
+  // Email
+  const email = site.email;
+  log(!email.startsWith('['), 'email real en site.ts');
+  const leaks = htmlFiles().filter((f) => read(f).includes(email));
+  log(leaks.length === 0, `email fuera de todo el HTML de dist${leaks.length ? ': ' + leaks.join(', ') : ''}`);
+
+  // Analytics
+  const ga = htmlFiles().filter((f) => /G-7CJGME4GRL|googletagmanager|gtag\(/.test(read(f)));
+  log(ga.length === 0, `sin Google Analytics${ga.length ? ': ' + ga.join(', ') : ''}`);
+
+  // Formulario: Netlify lo detecta en el HTML estático
+  const contact = read('contacto.html');
+  log(/<form[^>]*name="?contact-form"?/.test(contact) && /data-netlify="?true"?/.test(contact) && /netlify-honeypot="?fake"?/.test(contact), 'form contact-form con data-netlify y honeypot en el HTML');
+  log(['form-name', 'name', 'email', 'tema', 'message', 'fake'].every((n) => new RegExp(`name="?${n}"?[\\s>/]`).test(contact)), 'campos del form con los nombres que espera Netlify');
+  log(contact.includes('href="/privacidad"'), 'el form enlaza a /privacidad');
+
+  // SEO
+  const sitemap = read('sitemap.xml');
+  log(publicPages.every((p) => sitemap.includes(`<loc>${new URL(p.path, site.url).href}</loc>`)), 'sitemap con todas las páginas públicas');
+  log(!sitemap.includes('/cv/') && !sitemap.includes('/404'), 'sitemap sin /cv ni 404');
+  for (const p of publicPages) {
+    const html = read(fileFor(p.path));
+    const canonical = new URL(p.path, site.url).href;
+    log(html.includes(`rel="canonical" href="${canonical}"`), `${p.path} canonical`);
+    log(html.includes(`content="${new URL(ogPath(p.path), site.url).href}"`) && existsSync(join(DIST, ogPath(p.path))), `${p.path} og:image propia y existente`);
+  }
+  log(htmlFiles().filter((f) => f.startsWith('cv/')).every((f) => read(f).includes('name="robots" content="noindex')), '/cv con noindex');
+  log(!publicPages.some((p) => p.path.startsWith('/cv')) && htmlFiles().filter((f) => !f.startsWith('cv/')).every((f) => !read(f).includes('href="/cv/es"')), 'sin links a /cv/es desde el sitio');
+
+  // Redirects
+  const toml = readFileSync('netlify.toml', 'utf8');
+  const rules = Object.fromEntries([...toml.matchAll(/from = "([^"]+)"\nto = "([^"]+)"\nstatus = (\d+)/g)].map((m) => [m[1], { to: m[2], status: m[3] }]));
+  const missing = Object.entries(REDIRECTS).filter(([from, to]) => rules[from]?.to !== to || rules[from]?.status !== '301');
+  log(missing.length === 0, `redirects 301 de las URLs viejas${missing.length ? ': faltan ' + missing.map(([f]) => f).join(', ') : ''}`);
+  log(Object.values(REDIRECTS).filter((to) => to.startsWith('/')).every((to) => to === '/' || existsSync(join(DIST, to)) || existsSync(join(DIST, `${to}.html`))), 'los destinos de los redirects existen');
+  log((toml.match(/force = true/g) ?? []).length === 1, 'solo /aniversario usa force');
+
+  // Presupuesto y stats honestos
+  for (const f of htmlFiles().filter((f) => !f.startsWith('cv/'))) {
+    const kb = jsWeight(f) / 1024;
+    log(kb <= JS_BUDGET_KB, `${f} JS propio ${kb.toFixed(1)} KB gz (máx. ${JS_BUDGET_KB})`);
+  }
+  const homeKb = jsWeight('index.html') / 1024;
+  const stat = statScreens.flatMap((s) => s.items).find((i) => i.label.includes('JavaScript'));
+  log(Math.abs(stat.value - homeKb) <= 0.5, `el stat dice ${stat.value} KB y la home pesa ${homeKb.toFixed(1)} KB`);
+
+  // CV para ATS
+  for (const lang of Object.keys(cv)) await checkPdf(lang, log);
+}
+
+async function checkPdf(lang, log) {
+  const file = join(DIST, 'cv', `ilan-vivanco-cv-${lang}.pdf`);
+  if (!existsSync(file)) return log(false, `CV ${lang}: falta ${file}`);
+  const bytes = readFileSync(file);
+  const parser = new PDFParse({ data: bytes });
+  const { text, total } = await parser.getText();
+  await parser.destroy();
+  const flat = text.replace(/\s+/g, ' ');
+  const data = cv[lang];
+  const labels = cvLabels[lang];
+
+  log(total <= 2, `CV ${lang}: ${total} página(s), máx. 2`);
+  const { summary, experience, skills, education, languages } = labels.headings;
+  const order = [site.name, labels.title, site.email, 'linkedin.com/in/ilanvivanco', 'ilanvivanco.com', summary, experience, skills, education, languages].map((h) => flat.indexOf(h));
+  log(order.every((n, i) => n >= 0 && (i === 0 || n > order[i - 1])), `CV ${lang}: orden de lectura de las secciones`);
+
+  const roles = [
+    ...data.experience.flatMap((j) => j.roles.map((r) => ({ title: r.title, org: j.org, when: atsPeriod(r, labels.present) }))),
+    ...data.earlier.map((j) => ({ title: j.title, org: j.org, when: atsPeriod(j, labels.present) })),
+  ];
+  const lost = roles.filter((r) => !flat.includes(r.title) || !flat.includes(r.org) || !flat.includes(r.when));
+  log(lost.length === 0, `CV ${lang}: ${roles.length} cargos con empresa y fechas${lost.length ? '; faltan: ' + lost.map((r) => r.title).join(', ') : ''}`);
+
+  const pdf = await PDFDocument.load(bytes, { updateMetadata: false });
+  log(!!pdf.catalog.get(PDFName.of('StructTreeRoot')), `CV ${lang}: PDF etiquetado`);
+  log(!!pdf.catalog.get(PDFName.of('Outlines')), `CV ${lang}: con outline`);
+  log(pdf.getTitle()?.includes(site.name) && pdf.getAuthor() === site.name, `CV ${lang}: título y autor`);
+}

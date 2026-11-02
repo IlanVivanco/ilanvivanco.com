@@ -1,58 +1,34 @@
-// QA del sitio: build servido con `astro preview` + chequeos en desktop y mobile.
+// QA del sitio: build servido localmente + chequeos en desktop y mobile.
 // Uso: npm run qa            (hace build antes)
 //      node scripts/qa/check.mjs --no-build
-// Falla (exit 1) si hay violaciones de axe, errores de consola o scroll horizontal.
+// Falla (exit 1) si hay violaciones de axe, errores de consola, scroll horizontal,
+// o si falla algún chequeo del build (ver static.mjs), del formulario (form.mjs) o del CV.
 //
 // Requiere el navegador de Playwright: npx playwright install chromium
 
-import { spawn, execSync } from 'node:child_process';
+import { execSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { chromium } from 'playwright';
+import { site } from '../../src/data/site.ts';
+import { serveDist } from '../lib/serve-dist.mjs';
+import { runFormChecks } from './form.mjs';
+import { runStaticChecks } from './static.mjs';
 
 const require = createRequire(import.meta.url);
 const axeSource = readFileSync(require.resolve('axe-core/axe.min.js'), 'utf8');
 
-const PORT = 4329;
-let BASE = `http://localhost:${PORT}`;
-const PAGES = ['/', '/curriculum', '/portfolio', '/contacto', '/sobre-mi', '/404'];
+const PAGES = ['/', '/curriculum', '/portfolio', '/contacto', '/sobre-mi', '/privacidad', '/404'];
 const VIEWPORTS = [
   { name: 'desktop', width: 1440, height: 900, isMobile: false },
   { name: 'mobile', width: 390, height: 844, isMobile: true },
 ];
 const AXE_TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice'];
 
-if (!process.argv.includes('--no-build')) execSync('npx astro build', { stdio: 'inherit' });
+if (!process.argv.includes('--no-build')) execSync('npm run build', { stdio: 'inherit' });
 
-// Astro permite un solo preview a la vez: si ya hay uno corriendo, se reutiliza.
-const server = spawn('npx', ['astro', 'preview', '--port', String(PORT)], { stdio: ['ignore', 'pipe', 'pipe'] });
-let reused = false;
-const onOutput = (chunk) => {
-  const m = String(chunk).match(/already running at (http:\/\/[^\s"\\]+)/);
-  if (m) { BASE = m[1].replace(/\/$/, ''); reused = true; }
-};
-server.stdout.on('data', onOutput);
-server.stderr.on('data', onOutput);
-// Astro deja el preview corriendo en segundo plano: si lo arrancamos nosotros, lo paramos explícitamente.
-let stopped = false;
-const stop = () => {
-  if (reused || stopped) return;
-  stopped = true;
-  try { execSync('npx astro preview stop', { stdio: 'ignore' }); } catch {}
-  server.kill('SIGTERM');
-};
-process.on('exit', stop);
-
-async function waitForServer() {
-  for (let i = 0; i < 60; i++) {
-    try {
-      const res = await fetch(BASE);
-      if (res.ok) return;
-    } catch {}
-    await new Promise((r) => setTimeout(r, 500));
-  }
-  throw new Error('astro preview no respondió');
-}
+const server = await serveDist();
+const BASE = server.url;
 
 let failures = 0;
 const log = (ok, msg) => {
@@ -61,7 +37,8 @@ const log = (ok, msg) => {
 };
 
 try {
-  await waitForServer();
+  await runStaticChecks(log);
+
   const browser = await chromium.launch();
   for (const vp of VIEWPORTS) {
     // reducedMotion: las animaciones de entrada no ocultan contenido durante el análisis
@@ -84,11 +61,12 @@ try {
       const label = `${vp.name.padEnd(7)} ${path}`;
       log(violations.length === 0, `${label} axe ${violations.length ? '\n    ' + violations.join('\n    ') : 'ok'}`);
       log(overflow <= 0, `${label} sin scroll horizontal${overflow > 0 ? ` (${overflow}px)` : ''}`);
-      // Los recursos que la preview no sirve (p. ej. el PDF del CV pendiente) no cuentan como error de la página
-      const real = errors.filter((e) => !/Failed to load resource/.test(e));
+      // /404 responde 404 a propósito: ese request no es un error de la página
+      const real = errors.filter((e) => !(path === '/404' && /Failed to load resource/.test(e)));
       log(real.length === 0, `${label} consola limpia${real.length ? ': ' + real.join(' | ') : ''}`);
       await page.close();
     }
+    if (vp.name === 'desktop') await runFormChecks(ctx, BASE, site.email, log);
     await ctx.close();
   }
   await browser.close();
@@ -96,7 +74,7 @@ try {
   failures++;
   console.error(e);
 } finally {
-  stop();
+  server.close();
 }
 
 console.log(failures ? `\n${failures} chequeo(s) fallaron` : '\nTodo ok');
