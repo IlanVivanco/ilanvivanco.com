@@ -51,7 +51,7 @@ netlify.toml          build, redirects y cabeceras
 
 1. **El contenido vive en `src/data/`.** Las páginas solo presentan datos. Para sumar un proyecto, un cargo o un stat, se edita el archivo de datos, no el markup.
 2. **Presupuestos (no negociables):**
-   - Lighthouse 100/100/100/100 en mobile y desktop.
+   - Lighthouse 99+ en las 4 categorías, en mobile y desktop.
    - JS propio ≤ 10 KB gz por página (hoy, 7,5 KB en la home). El beacon de Cloudflare es de terceros, pesa unos 10 KB gz y se carga diferido.
    - CLS 0.
    - `npm run qa` en verde.

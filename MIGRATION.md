@@ -88,7 +88,7 @@ Notas para implementar:
 | Campos `name`, `email`, `message`, `fake` | conservado | El form nuevo usa `nombre`, `mensaje` y `_gotcha`; se **renombran** a los viejos para no cambiar las notificaciones ni la tabla de envíos. |
 | Campo `tema` | migrado | Campo nuevo del diseño aprobado. Aparece como columna adicional en Netlify. |
 | Campo `subject` | migrado | Asunto del mail de notificación, con el nombre y el tema. Netlify también lo muestra como una fila. |
-| Form `form 1` en Netlify | descartado | Vacío desde 2021 (0 envíos). Se puede borrar desde la UI. |
+| Form `form 1` en Netlify | descartado | Vacío desde 2021 (0 envíos). Borrado el 2026-11-03. |
 | Ofuscación de email y teléfono en `pages/contact.vue` | migrado | El email pasa a `src/lib/mail.ts`. El teléfono no se publica (D2). |
 | Validaciones y copy con humor (`messages.*`) | descartado | La consola nueva tiene los suyos, ya aprobados. |
 
@@ -206,7 +206,7 @@ Quedan fuera de este PR porque son cambios en cuentas externas:
 
 - Cloudflare: crear el sitio en Web Analytics, cargar `PUBLIC_CF_BEACON_TOKEN` en Netlify, dejar apagada la inyección automática y revisar que Speed Brain no pise las Speculation Rules.
 - Netlify: crear el build hook de producción y cargarlo en `REBUILD_HOOK_URL` (ver `PLAN-instagram.md`).
-- Netlify: borrar `INSTAGRAM_URL`, `SUPABASE_URL` y `SUPABASE_KEY` y el form `form 1`.
+- Netlify: borrar `INSTAGRAM_URL`, `SUPABASE_URL` y `SUPABASE_KEY`.
 - Supabase: eliminar la tabla `options` o el proyecto.
 - NoCodeAPI: dar de baja la integración si no se reutiliza.
 - Google Analytics: cerrar la propiedad `G-7CJGME4GRL`.

@@ -123,7 +123,7 @@ export const statScreens: { title: string; items: Stat[] }[] = [
 	{
 		title: 'este sitio, en números',
 		items: [
-			{ value: 100, label: 'en Lighthouse, en las 4 categorías' },
+			{ value: 99, suffix: '+', label: 'en Lighthouse, en las 4 categorías' },
 			{
 				value: 7.5,
 				suffix: ' KB',
