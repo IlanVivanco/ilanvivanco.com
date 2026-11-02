@@ -2,7 +2,7 @@
 
 Inventario del sitio viejo y destino de cada elemento. La referencia del sitio Nuxt es el commit `979ff14` de `main`: todo lo que se borra se puede recuperar desde ahí (`git show 979ff14:<ruta>`).
 
-Destinos: **conservado** (queda igual), **migrado** (pasa al sitio nuevo con cambios), **descartado** (no pasa, con motivo) y **pendiente** (espera una decisión, ver [Decisiones pendientes](#decisiones-pendientes)).
+Destinos: **conservado** (queda igual), **migrado** (pasa al sitio nuevo con cambios) y **descartado** (no pasa, con motivo). Las referencias D1 a D8 apuntan a [Decisiones](#decisiones).
 
 > Este repo es público. Por eso este documento no reproduce datos personales del sitio viejo: se describen sin copiarlos.
 
@@ -22,7 +22,7 @@ Destinos: **conservado** (queda igual), **migrado** (pasa al sitio nuevo con cam
 | Hay que averiguar qué hay detrás de `INSTAGRAM_URL` | **NoCodeAPI**: el historial tiene `v1.nocodeapi.com/ilanvivanco/instagram/<id>` (commits `dc41335` y `0a244e5`; el id está enmascarado). No leí el valor actual. |
 | El feed de Instagram funciona | **Está roto:** `/api/instagram` responde 200 con cuerpo vacío. Sacarlo no quita nada que hoy funcione. |
 | Quizás hubo páginas de detalle en el portfolio | `skillsoft` tuvo `has_single: true` hasta el 2021-02-17 (`037d835`), pero no hay rastro de que se publicara. `/portfolio/skillsoft` da 404 y Wayback no la lista. El 301 con comodín lo cubre igual. |
-| El sitio se sirve desde Netlify | Delante de Netlify hay **Cloudflare** (`server: cloudflare`, `cf-ray`). Afecta a analytics: ver D7. |
+| El sitio se sirve desde Netlify | Delante de Netlify hay **Cloudflare** (`server: cloudflare`, `cf-ray`). Afecta a analytics: ver D7 y las tareas al lanzar. |
 | — | Hubo una página `pages/contact-me.vue` en versiones viejas. Se suma el 301 de `/contact-me`. |
 | — | `locales/general/portfolio.js` no se importa en ningún lado: es código muerto. Es la única fuente de los 7 proyectos fuera del portfolio. |
 | — | `locales/en_US.js` está casi todo en español. Lo único traducido de verdad son `locales/en/positions.js`, `menu.js` y parte de `cv.js`. |
@@ -88,7 +88,7 @@ Notas para implementar:
 | Campos `name`, `email`, `message`, `fake` | conservado | El form nuevo usa `nombre`, `mensaje` y `_gotcha`; se **renombran** a los viejos para no cambiar las notificaciones ni la tabla de envíos. |
 | Campo `tema` | migrado | Campo nuevo del diseño aprobado. Aparece como columna adicional en Netlify. |
 | Form `form 1` en Netlify | descartado | Vacío desde 2021 (0 envíos). Se puede borrar desde la UI. |
-| Ofuscación de email y teléfono en `pages/contact.vue` | migrado | El email pasa a `src/lib/mail.ts`. Teléfono: D2. |
+| Ofuscación de email y teléfono en `pages/contact.vue` | migrado | El email pasa a `src/lib/mail.ts`. El teléfono no se publica (D2). |
 | Validaciones y copy con humor (`messages.*`) | descartado | La consola nueva tiene los suyos, ya aprobados. |
 
 ## Analytics
@@ -125,7 +125,7 @@ Notas para implementar:
 | `locales/en_US.js`, `locales/en/menu.js` | descartado | Casi todo en español. Fase 2, recuperable desde `979ff14`. |
 | `locales/en/cv.js`, `locales/en/positions.js` | descartado | **Es la única traducción real.** Sirve de base para el CV en inglés de la Fase 2: `git show 979ff14:locales/en/positions.js`. |
 | `locales/es/menu.js`, `locales/i18n.config.js`, `locales/es_AR.js`: `meta.*` | migrado | Pasan a `site.nav` y a las props de `Base.astro`. |
-| `locales/general/socials.js` | pendiente | LinkedIn y GitHub están; Instagram y Twitter no: D6. |
+| `locales/general/socials.js` | migrado | LinkedIn y GitHub están visibles; Instagram y Twitter van en `sameAs` (D6). |
 
 ## CV: `locales/es/*` contra `src/data/cv.ts`
 
@@ -133,21 +133,21 @@ Notas para implementar:
 |---|---|---|---|
 | `positions.js`: 10 cargos | Todos, reescritos; `earlier` guarda los anteriores a 2015 | migrado | `cv.ts` suma Construye Mundo y divide Networks That Matter/EpicDevs en 3 roles. |
 | Meses de inicio y fin de los cargos anteriores a 2015 | Solo años | migrado | El PDF para ATS pide fechas consistentes: se recuperan del CV viejo, sin cambiar lo que muestra `/curriculum`. |
-| Inicio en Networks That Matter: `2015-08` | `jun 2015` | pendiente | D3. |
-| Freelance: `2005-12` a hoy | `oct 2006 — jun 2020` | pendiente | D3. |
-| Andy Goldstein: `2007 — 2009` | `2007 — 2010` | pendiente | D3. |
-| Raggio: título "Diseñador gráfico" | Solo "Técnico en Comunicación Publicitaria" | pendiente | D3. |
-| `courses.js`: Wmedia, Udemy, WesBos, Platzi, Educación IT | No está | pendiente | D5. |
+| Inicio en Networks That Matter: `2015-08` | `jun 2015` | migrado | Pasa a `ago 2015` (D3). |
+| Freelance: `2005-12` a hoy | `oct 2006 — jun 2020` | migrado | Pasa a `dic 2005 — hoy` (D3). |
+| Andy Goldstein: `2007 — 2009` | `2007 — 2010` | migrado | Pasa a `2007 — 2009` (D3). |
+| Raggio: título "Diseñador gráfico" | Solo "Técnico en Comunicación Publicitaria" | migrado | Se agrega el título (D3). |
+| `courses.js`: Wmedia, Udemy, WesBos, Platzi, Educación IT | Una mención en "Autodidacta" | migrado | Selección breve en `courses` (D5). |
 | `skills.js`: niveles por habilidad | No está | descartado | Las autoevaluaciones numéricas no aportan y no sirven para un ATS. |
-| `tech.js`: unas 55 tecnologías con ícono | `stack`, con unas 30, más actuales | pendiente | Las de escritorio y herramientas viejas se descartan. HTML5, CSS3, jQuery y Bash importan como palabras clave: D5. |
+| `tech.js`: unas 55 tecnologías con ícono | `stack`, con unas 30, más actuales | migrado | Se suman HTML5, CSS3, jQuery y Bash (D5). El resto (escritorio y herramientas viejas) se descarta. |
 | `hobbies.js` | Solo fotografía, viajes, mate y café, en prosa | descartado | La nube de palabras no está en el diseño aprobado. "Fuera del código" cubre lo importante. |
 | `data.languages` con niveles numéricos | `languages`: Nativo y Fluido | migrado | Más claro para un ATS. |
-| `data.email` | `site.email` vacío | pendiente | D1. |
-| `data.phone` | No está | pendiente | D2. |
+| `data.email` | `site.email` | migrado | D1. |
+| `data.phone` | No está | descartado | D2. |
 | `data.birth_date` | No está | descartado | Dato personal innecesario. No se usa ni en el CV. |
 | `data.references`: datos de contacto de un tercero | No está | descartado | Datos personales de otra persona en un repo y sitio públicos. |
 | `data.job_title`: "Programador web full stack" | "CTO / Director of Engineering" | migrado | Posicionamiento nuevo. |
-| Ubicación por cargo | Solo en los 3 roles de EpicDevs y, dentro de `meta`, en Construye Mundo y Freelance | pendiente | D4: el PDF para ATS la exige. |
+| Ubicación por cargo | Solo en los 3 roles de EpicDevs y, dentro de `meta`, en Construye Mundo y Freelance | migrado | D4: se completa en `cv.ts` para el PDF. |
 
 ## Componentes y páginas
 
@@ -184,27 +184,26 @@ Notas para implementar:
 
 ## Datos personales en el historial público
 
-El sitio nuevo no incluye los nombres de familiares, la fecha de nacimiento, el teléfono ni los datos de la referencia. Pero este repo es **público**, y todo eso sigue en el historial de git y en el sitio actual hasta el merge. Borrar los archivos no lo elimina del historial: ver D8.
+El sitio nuevo no incluye los nombres de familiares, la fecha de nacimiento, el teléfono ni los datos de la referencia. Pero este repo es **público**, y todo eso sigue en el historial de git y en el sitio actual hasta el merge. Borrar los archivos no lo elimina del historial; se decidió no reescribirlo (D8).
 
-## Decisiones pendientes
+## Decisiones
 
-Cada una tiene una recomendación. Se aplica lo que se decida y esta sección se actualiza.
-
-| # | Decisión | Recomendación |
+| # | Decisión | Resultado |
 |---|---|---|
-| D1 | Email público de `site.email` | Confirmar la dirección. |
-| D2 | Teléfono en el sitio y en el PDF | No publicarlo en ninguno. |
-| D3 | Datos del CV que no coinciden con el sitio viejo | `cv.ts` manda, porque sale de LinkedIn (2026). |
-| D4 | Ubicación de los cargos que no la tienen, para el PDF | Confirmar la propuesta. |
-| D5 | Cursos y palabras clave en el PDF | Sin cursos; sumar HTML5, CSS3, jQuery y Bash a `stack`. |
-| D6 | Instagram y Twitter en el sitio nuevo | Solo en `sameAs` del JSON-LD, sin cambio visual. |
-| D7 | Token de Cloudflare Web Analytics | Pasarlo; se puede esperar al final. |
-| D8 | Reescribir el historial de git | No reescribirlo por ahora. |
+| D1 | Email público de `site.email` | La dirección que ya usaba el sitio viejo. Ofuscada en el HTML. |
+| D2 | Teléfono | No se publica en el sitio ni en el PDF. |
+| D3 | Datos del CV que no coincidían | Se actualiza `cv.ts` con los datos del CV viejo: inicio en ago 2015, freelance desde dic 2005 y en curso, Goldstein 2007–2009 y título "Diseñador gráfico" en Raggio. |
+| D4 | Ubicación de los cargos | Remoto: Construye Mundo, Delicious Brains, Explore-Share y Magissim. Buenos Aires, Argentina: Activar, Mendióroz, Exastudio, NewPrint y Gilardoni. |
+| D5 | Cursos y palabras clave | Selección breve de cursos en `cv.ts`, en `/curriculum` y en el PDF. HTML5, CSS3, jQuery y Bash se suman a `stack` como chips. |
+| D6 | Instagram y Twitter | Se suman a `sameAs` del JSON-LD, sin cambio visual. |
+| D7 | Analytics | Beacon de Cloudflare listo y apagado sin `PUBLIC_CF_BEACON_TOKEN`. El token y la revisión de Cloudflare se ven al lanzar. |
+| D8 | Historial de git | Se mantiene este repo, sin reescribir el historial: los datos no son tan sensibles y conserva la conexión con Netlify, los issues y la referencia `979ff14`. |
 
 ## Tareas manuales tras el merge
 
 Quedan fuera de este PR porque son cambios en cuentas externas:
 
+- Cloudflare: crear el sitio en Web Analytics, cargar `PUBLIC_CF_BEACON_TOKEN` en Netlify, dejar apagada la inyección automática y revisar que Speed Brain no pise las Speculation Rules.
 - Netlify: borrar `INSTAGRAM_URL`, `SUPABASE_URL` y `SUPABASE_KEY` (tras la Fase 1B) y el form `form 1`.
 - Supabase: eliminar la tabla `options` o el proyecto (tras la Fase 1B).
 - NoCodeAPI: dar de baja la integración si no se reutiliza.
