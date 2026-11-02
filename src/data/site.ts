@@ -22,7 +22,7 @@ export const site = {
 		{ label: 'GitHub', icon: 'github', href: 'https://github.com/IlanVivanco' },
 		{ label: 'Instagram', icon: 'instagram', href: 'https://www.instagram.com/ilanvivanco/' },
 		{ label: 'X', icon: 'x', href: 'https://x.com/IlanVivanco' },
-		{ label: 'EpicDevs', icon: 'code', href: 'https://epicdevs.com' },
+		{ label: 'EpicDevs', icon: 'epicdevs', href: 'https://epicdevs.com' },
 	],
 
 	nav: [
