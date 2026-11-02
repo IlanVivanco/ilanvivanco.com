@@ -87,6 +87,7 @@ const cards = statScreens[0].items.map((_, i) => i)
 		let elapsed = 0
 		let userPaused = false
 		let hover = false
+		let focused = false
 		let visible = false
 		let started = false
 
@@ -141,7 +142,7 @@ const cards = statScreens[0].items.map((_, i) => i)
 			elapsed = 0
 		}
 
-		const paused = () => userPaused || hover || document.hidden || !visible
+		const paused = () => userPaused || hover || focused || document.hidden || !visible
 		dots.forEach((d, i) => d.addEventListener('click', () => show(i)))
 		// Sin hover (táctil): elegir un grupo deja de rotar hasta salir de pantalla, para poder leerlo (WCAG 2.2.2)
 		dots.forEach((d) =>
@@ -152,8 +153,8 @@ const cards = statScreens[0].items.map((_, i) => i)
 		root.addEventListener('pointerenter', () => (hover = true))
 		root.addEventListener('pointerleave', () => (hover = false))
 		// Solo el foco de teclado pausa: un click en un punto no congela el tiempo
-		root.addEventListener('focusin', (e) => (hover = (e.target as HTMLElement).matches(':focus-visible')))
-		root.addEventListener('focusout', () => (hover = false))
+		root.addEventListener('focusin', (e) => (focused = (e.target as HTMLElement).matches(':focus-visible')))
+		root.addEventListener('focusout', () => (focused = false))
 
 		new IntersectionObserver(
 			([e]) => {
