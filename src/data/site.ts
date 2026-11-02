@@ -70,39 +70,57 @@ export const focus = [
 export type Stat = { value: number; display?: string; prefix?: string; suffix?: string; label: string; approx?: boolean };
 export const statScreens: { title: string; items: Stat[] }[] = [
   {
-    title: 'mi trayectoria, en números',
+    title: "mi trayectoria, en números",
     items: [
-      { value: 21, label: 'años construyendo para la web' },
-      { value: 11, suffix: '+', label: 'años liderando ingeniería en EpicDevs' },
-      { value: 15, label: 'personas en el equipo que lideré' },
-      { value: 3, label: 'mercados: Europa, EE. UU. y Latam' },
+      { value: 21, label: "años construyendo para la web" },
+      {
+        value: 11,
+        suffix: "+",
+        label: "años liderando ingeniería en EpicDevs",
+      },
+      { value: 20, suffix: "+", label: "personas del equipo que lideré" },
+      { value: 3, label: "mercados: Europa, EE. UU. y Latam" },
     ],
   },
   {
-    title: 'mis números en el código',
+    title: "mis números en el código",
     items: [
-      { value: 7.7, prefix: '~', suffix: 'k', label: 'commits en GitHub' },
-      { value: 200, suffix: '+', label: 'pull requests' },
-      { value: 100, suffix: '+', label: 'sitios en producción', approx: true },
-      { value: 1, prefix: '~', suffix: 'M', label: 'líneas de código escritas', approx: true },
+      { value: 7.7, prefix: "~", suffix: "k", label: "commits en GitHub" },
+      { value: 200, suffix: "+", label: "pull requests" },
+      { value: 100, suffix: "+", label: "sitios en producción", approx: true },
+      {
+        value: 1,
+        prefix: "~",
+        suffix: "M",
+        label: "líneas de código escritas",
+        approx: true,
+      },
     ],
   },
   {
-    title: 'datos que nadie pidió',
+    title: "datos que nadie pidió",
     items: [
-      { value: 12, suffix: '+', label: 'editores probados, de Dreamweaver a Antigravity' },
-      { value: 16, label: 'años peleándome (y amigándome) con WordPress' },
-      { value: 0, display: '∞', label: 'mates y cafés. Ambos. En serio.' },
-      { value: 1, label: 'MX3 estéticamente destruido que se niega a morir' },
+      {
+        value: 12,
+        suffix: "+",
+        label: "editores probados, de Dreamweaver a Antigravity",
+      },
+      { value: 16, label: "años peleándome (y amigándome) con WordPress" },
+      { value: 0, display: "∞", label: "mates y cafés. Ambos. En serio." },
+      { value: 1, label: "MX3 estéticamente destruido que se niega a morir" },
     ],
   },
   {
-    title: 'este sitio, en números',
+    title: "este sitio, en números",
     items: [
-      { value: 100, label: 'en Lighthouse, en las 4 categorías' },
-      { value: 7.5, suffix: ' KB', label: 'de JavaScript propio en la home (sí, los conté)' },
-      { value: 0, label: 'errores de accesibilidad (axe, WCAG 2.2)' },
-      { value: 0.4, suffix: ' s', label: 'de LCP en desktop' },
+      { value: 100, label: "en Lighthouse, en las 4 categorías" },
+      {
+        value: 7.5,
+        suffix: " KB",
+        label: "de JavaScript propio en la home (sí, los conté)",
+      },
+      { value: 0, label: "errores de accesibilidad (axe, WCAG 2.2)" },
+      { value: 0.4, suffix: " s", label: "de LCP en desktop" },
     ],
   },
 ];
