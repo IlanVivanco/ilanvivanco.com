@@ -2,27 +2,33 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Analytics from '../components/Analytics.astro';
 import { site } from '../data/site';
+import { ogPath } from '../data/pages';
 
 interface Props {
   title?: string;
   description?: string;
   jsonLd?: Record<string, unknown>;
+  noindex?: boolean;
 }
-const { title, description = site.description, jsonLd } = Astro.props;
+const { title, description = site.description, jsonLd, noindex = false } = Astro.props;
 const pageTitle = title ? `${title} — Ilán Vivanco` : site.title;
-const canonical = new URL(Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '/'), site.url).href;
-const ogImage = new URL('/og.png', site.url).href;
+const pathname = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '/') || '/';
+const canonical = new URL(pathname, site.url).href;
+const ogImage = new URL(ogPath(pathname), site.url).href;
 
 const person = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Ilán Vivanco',
   url: site.url,
+  image: new URL('/img/ilan-800.webp', site.url).href,
+  description: site.description,
   jobTitle: 'CTO / Director of Engineering',
   worksFor: { '@type': 'Organization', name: 'EpicDevs', url: 'https://epicdevs.com' },
   address: { '@type': 'PostalAddress', addressLocality: 'Santander', addressRegion: 'Cantabria', addressCountry: 'ES' },
-  sameAs: site.socials.filter((s) => s.label !== 'EpicDevs').map((s) => s.href),
+  sameAs: [...site.socials.filter((s) => s.label !== 'EpicDevs').map((s) => s.href), ...site.profiles],
   knowsAbout: ['WordPress', 'JavaScript', 'Astro', 'Vue', 'React', 'Node.js', 'Arquitectura web', 'IA aplicada a la ingeniería'],
 };
 ---
@@ -33,7 +39,7 @@ const person = {
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
     <meta name="theme-color" content="#0A111F" />
     <meta name="color-scheme" content="dark" />
 
@@ -51,7 +57,9 @@ const person = {
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={pageTitle} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content="@IlanVivanco" />
 
     <script is:inline>
       // Marca JS antes del primer paint; si las animaciones no cargan en 2.5 s, se muestra todo.
@@ -61,9 +69,10 @@ const person = {
       }, 2500);
     </script>
     <script type="speculationrules" is:inline>
-      { "prerender": [{ "where": { "href_matches": "/*" }, "eagerness": "moderate" }] }
+      { "prerender": [{ "where": { "and": [{ "href_matches": "/*" }, { "not": { "href_matches": "/cv/*" } }] }, "eagerness": "moderate" }] }
     </script>
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd ?? person)} />
+    <Analytics />
   </head>
   <body>
     <a class="skip-link" href="#contenido">Saltar al contenido</a>

@@ -10,19 +10,21 @@ export const site = {
   location: 'Santander, Cantabria',
 
   // Contacto
-  email: '[tu@email.com]',
-  // Endpoint para el formulario (Formspree, Basin, una función propia…).
-  // Si queda vacío, el formulario abre el cliente de correo con el mensaje armado.
-  formEndpoint: '',
+  email: 'ilanvivanco@gmail.com',
+  // Nombre del form en Netlify Forms: si cambia, cambian las notificaciones y el historial de envíos.
+  formName: 'contact-form',
 
-  // Archivo del CV para descargar (subilo a /public con este nombre).
-  cvPdf: '/ilan-vivanco-cv.pdf',
+  // Lo genera `npm run cv:pdf` en cada build.
+  cvPdf: '/cv/ilan-vivanco-cv-es.pdf',
 
   socials: [
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/ilanvivanco/' },
     { label: 'GitHub', href: 'https://github.com/IlanVivanco' },
     { label: 'EpicDevs', href: 'https://epicdevs.com' },
   ],
+
+  // Perfiles que no se muestran en el sitio, pero identifican a la persona en el JSON-LD.
+  profiles: ['https://www.instagram.com/ilanvivanco/', 'https://twitter.com/IlanVivanco'],
 
   nav: [
     { label: 'Hola', href: '/' },
@@ -98,7 +100,7 @@ export const statScreens: { title: string; items: Stat[] }[] = [
     title: 'este sitio, en números',
     items: [
       { value: 100, label: 'en Lighthouse, en las 4 categorías' },
-      { value: 7, suffix: ' KB', label: 'de JavaScript en la home (sí, los conté)' },
+      { value: 7.5, suffix: ' KB', label: 'de JavaScript propio en la home (sí, los conté)' },
       { value: 0, label: 'errores de accesibilidad (axe, WCAG 2.2)' },
       { value: 0.4, suffix: ' s', label: 'de LCP en desktop' },
     ],
