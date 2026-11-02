@@ -1,61 +1,62 @@
 # ilanvivanco.com
 
-Sitio personal de Ilán Vivanco, hecho con Astro. Es un sitio estático, en modo oscuro, con la paleta del sitio anterior.
+[![Netlify Status](https://api.netlify.com/api/v1/badges/4e9fe96e-7e5a-4c39-9592-093ce60851c5/deploy-status)](https://app.netlify.com/sites/ilanvivanco/deploys)
 
-> Para trabajar en el sitio leé primero **`CLAUDE.md`** (reglas, presupuestos, verificación) y **`DESIGN.md`** (sistema de diseño).
+Sitio personal de Ilán Vivanco: estático, en modo oscuro y sin frameworks en el cliente.
+
+> Para trabajar en el sitio, leé primero **`CLAUDE.md`** (reglas, presupuestos y verificación) y **`DESIGN.md`** (sistema de diseño).
+
+## Stack
+
+- [Astro 7](https://astro.build) con salida estática y CSS inline. Requiere Node 22.23 o superior (ver `.node-version`).
+- TypeScript vanilla y Motion mini en el cliente.
+- Netlify para el hosting y el formulario (Netlify Forms). Cloudflare Web Analytics para las estadísticas, sin cookies.
+- Playwright y axe-core para el QA. Playwright también genera el CV en PDF y las imágenes OG.
 
 ## Comandos
 
 ```bash
 npm install
-npm run dev      # http://localhost:4321
-npm run build    # genera /dist
-npm run preview  # sirve /dist en local
-npm run qa       # build + axe WCAG 2.2 AA + overflow + consola (desktop y mobile)
-npx playwright install chromium   # una vez, para el QA
+npx playwright install chromium   # una vez: lo usan el build y el QA
+npm run dev        # http://localhost:4321
+npm run build      # astro build + CV en PDF + imágenes OG
+npm run cv:pdf     # regenera el PDF sobre el último build
+npm run og:images  # regenera las imágenes OG sobre el último build
+npm run preview    # sirve dist/
+npm run qa         # build + todos los chequeos
 ```
 
-Requiere Node 22.23 o superior (lo pide Astro 7).
+`npm run qa` verifica, en desktop y mobile: axe (WCAG 2.2 AA), scroll horizontal y consola. También comprueba el email ofuscado, el formulario, los redirects, el SEO, el peso de JS, el beacon de analytics y el CV para ATS.
 
-## Estructura
+## Dónde se edita cada cosa
 
-```
-src/
-  data/site.ts       config global: email, endpoint del form, redes, nav, áreas de foco y stats
-                     (los stats marcados `approx` son estimaciones por orden de magnitud)
-  data/cv.ts         experiencia, stack, formación, idiomas
-  data/projects.ts   portfolio (imagen opcional por proyecto)
-  styles/global.css  tokens de color/tipo, botones, tarjetas, animaciones base
-  scripts/ui.ts      revelado (Motion mini), glow/perspectiva de tarjetas por proximidad, header
-  scripts/terminal.ts terminal del hero: 3 escenas que se escriben solas
-  layouts/Base.astro head, SEO, JSON-LD, speculation rules
-  components/        Header, Footer, Logo, Fn (->titulo();), Icon, ProjectCard, Terminal, Stats
-  pages/             /, /curriculum, /portfolio, /contacto, /sobre-mi, 404, sitemap.xml
-public/
-  fonts/             Space Grotesk + Fira Code (variables, subset latin)
-  img/               foto, workspace y capturas de proyectos (webp)
-  favicon.svg, og.png, robots.txt
-```
+| Contenido | Archivo |
+|---|---|
+| Email, redes, navegación, áreas de foco y stats | `src/data/site.ts` |
+| CV: se usa en `/curriculum` y en el PDF | `src/data/cv.ts` |
+| Portfolio | `src/data/projects.ts`, con la captura en `public/img/projects/<slug>.webp` |
+| Páginas del sitemap y de las imágenes OG | `src/data/pages.ts` |
+| Redirects y cabeceras | `netlify.toml` |
+| Política de privacidad y aviso legal | `src/pages/privacidad.astro` |
+| Colores, tipografía y estilos base | `src/styles/global.css` |
 
-Las rutas son las mismas que en el sitio anterior, así que no hacen falta redirects.
-
-## Pendiente antes de publicar
-
-1. `src/data/site.ts` → `email`: reemplazar `[tu@email.com]`.
-2. `src/data/site.ts` → `formEndpoint`: URL de Formspree, Basin o una función propia. Si queda vacío, el formulario abre el cliente de correo con el mensaje armado.
-3. Subir el CV en PDF a `public/ilan-vivanco-cv.pdf`.
-4. Sumar proyectos recientes de EpicDevs en `projects.ts`. La captura va en `public/img/projects/<slug>.webp` (960×600).
-
-## Performance
-
-- Cero frameworks en el cliente. Unos 7 KB gz de JS en la home (Motion `mini` sobre WAAPI, terminal y tarjetas en vanilla TS).
-- CSS inline en cada página (`inlineStylesheets: 'always'`), sin requests bloqueantes.
-- Fuentes self-hosted con preload, solo el subset latin.
-- Speculation Rules para precargar páginas, y View Transitions entre páginas sin JS (`@view-transition`): el header queda fijo, la pastilla del nav se desliza y el contenido entra desde abajo.
-- Respeta `prefers-reduced-motion`. Si el JS no carga, todo se muestra igual.
-- Lighthouse en local: 100 en Performance, Accesibilidad, Best Practices y SEO (mobile y desktop).
-- axe-core (WCAG 2.2 AA + best practices): 0 violaciones en todas las páginas, en desktop y mobile, incluidos los estados abiertos del portfolio y los errores del formulario.
+El PDF (`public/cv/`) y las imágenes OG (`public/og/`) se generan en cada build y no se versionan.
 
 ## Deploy
 
-Funciona en cualquier hosting estático. En Netlify, Vercel o Cloudflare Pages: build command `npm run build`, output `dist`. Con `build.format: 'file'`, `/contacto` se sirve desde `contacto.html`, y estos hosts lo resuelven solos.
+Cada push a `main` se publica en Netlify, y cada PR genera un deploy preview. La configuración está en `netlify.toml`. El build instala Chromium, porque genera el PDF y las imágenes OG.
+
+| Variable de Netlify | Para qué |
+|---|---|
+| `PUBLIC_CF_BEACON_TOKEN` | Token de Cloudflare Web Analytics. Sin él, el sitio se publica sin beacon. |
+
+### Probar el formulario
+
+`netlify dev` no procesa Netlify Forms (responde 405), así que `npm run qa` simula el POST. Para probarlo de verdad:
+
+1. Abrí `/contacto` en el deploy preview del PR y mandá un mensaje.
+2. Comprobá que aparece en Netlify, en **Forms → contact-form**, y que llega la notificación.
+
+## Historial
+
+El sitio anterior estaba hecho en Nuxt 2. `MIGRATION.md` tiene el inventario de lo que se conservó, se migró y se descartó, y el TODO de la Fase 2. `PLAN-instagram.md` tiene el plan del feed de Instagram.

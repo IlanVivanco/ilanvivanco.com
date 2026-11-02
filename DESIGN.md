@@ -7,7 +7,7 @@ Guía de diseño del sitio. Todo componente nuevo tiene que poder explicarse con
 1. **Ingeniero, no agencia.** El sitio habla como un CTO: preciso, sobrio, con guiños de consola. Nada de marketing genérico.
 2. **Modo oscuro, paleta propia.** Navy profundo de fondo y los colores del isotipo (amarillo, teal, slate, naranja) como acentos. Sin degradados decorativos.
 3. **Movimiento con propósito.** Todo se mueve un poco y nada distrae. Cada animación responde a algo: entrar en pantalla, hover, cambio de estado o navegación.
-4. **Rendimiento como feature.** Lighthouse 100 en las 4 categorías, cerca de 7 KB de JS en la home y cero frameworks en el cliente. Si un efecto rompe eso, no va.
+4. **Rendimiento como feature.** Lighthouse 100 en las 4 categorías, 7,5 KB de JS propio en la home y cero frameworks en el cliente. Si un efecto rompe eso, no va.
 5. **Accesible por defecto.** WCAG 2.2 AA, 0 violaciones de axe, teclado completo y `prefers-reduced-motion` respetado siempre.
 
 ## 2. Color
@@ -140,11 +140,21 @@ Círculo de 32px con borde `--line-strong`. Abierto: fondo amarillo, rota 180° 
 - Las pestañas de la barra (`nombre · email · tema · mensaje`) navegan entre preguntas; las no alcanzadas quedan deshabilitadas.
 - El tema se elige con ↑↓ (radios nativos) y Enter; con mouse, el click avanza.
 - El mensaje se envía con **Enter** y Shift+Enter agrega línea. El botón es texto plano: `[ enviar ↵ ]`.
-- Los errores van en naranja con `✗`. La salida del envío se imprime como log (`→ …`, `✓ 200 OK`).
+- Los errores van en naranja con `✗`. La salida del envío se imprime como log (`→ …`, `✓ 200 OK`). Si el envío falla, el mensaje ofrece el email como alternativa.
+- Debajo de la pregunta actual va una línea en muted: "tus datos solo se usan para responderte · privacidad". Desaparece al enviar.
 - Sin JS es un formulario normal con todos los campos.
 
 ### Email
 Display grande con `cursor: copy`. El click copia y muestra una pastilla "copiado" que desaparece sola. **No hay botón "copiar"**: la interacción no se explica. El email **nunca está en texto plano en el HTML**: se guarda ofuscado (`data-mail`) y se arma con JS al cargar.
+
+### Página legal (`/privacidad`)
+Una columna de lectura, máximo 760px, con los mismos tokens. Sin humor ni animaciones. Enlazada desde el footer y el formulario.
+
+### CV para ATS (`components/CvAts.astro`)
+**Fuera del sistema de diseño a propósito:** una columna, negro sobre blanco, Arial, sin íconos, tablas ni imágenes. No se enlaza desde el sitio: `/curriculum` baja el PDF.
+
+### Imágenes OG (`scripts/build/og-images.mjs`)
+Mismo estilo que `public/og.png`, la imagen de la home: logo, `->función();`, título y subtítulo en amarillo. Una por página, generadas desde `src/data/pages.ts`.
 
 ### Chips
 Mono 0.8125rem, borde `--line-hi` y radio 999px. En el CV entran escalonados.
@@ -199,7 +209,7 @@ Mono 0.8125rem, borde `--line-hi` y radio 999px. En el CV entran escalonados.
 | Lugar | Texto |
 |---|---|
 | Hero | "Construyendo para la web desde 2005, cuando todavía se maquetaba con tablas." |
-| Stats | Pantalla `// datos que nadie pidió`; "7 KB de JavaScript en la home (sí, los conté)" |
+| Stats | Pantalla `// datos que nadie pidió`; "7,5 KB de JavaScript propio en la home (sí, los conté)" |
 | Terminal | `combustible: ['mate', 'café']`; commits `login: de un .txt a MySQL`, `init: diseño, fotos y <table>` |
 | 404 | "Esta página se fue a producción sin tests." / "O el link es viejo, o alguien hizo deploy un viernes." |
 | Formulario | "respondo en 1–2 días hábiles, mate mediante"; éxito: "Ahora la pelota está de mi lado" |

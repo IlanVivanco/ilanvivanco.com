@@ -8,17 +8,20 @@ Sitio personal de Ilán Vivanco (CTO / Director of Engineering en EpicDevs, Sant
 - Sin frameworks en el cliente. JS: **Motion mini** (`motion/mini`) + TS vanilla.
 - Fuentes self-hosted (Space Grotesk, Fira Code) en `public/fonts`.
 - Deploy: Netlify (ver `netlify.toml`).
-- QA: Playwright + axe-core (`scripts/qa/check.mjs`).
+- QA: Playwright + axe-core (`scripts/qa/check.mjs`). CI en GitHub Actions: build, QA y Lighthouse en cada PR.
+- Formulario: Netlify Forms. Analytics: Cloudflare Web Analytics (`PUBLIC_CF_BEACON_TOKEN`, sin cookies).
 
 ## Comandos
 
 ```bash
 npm install
 npm run dev        # http://localhost:4321
-npm run build      # genera dist/
+npm run build      # dist/ + CV en PDF + imágenes OG
+npm run cv:pdf     # regenera el PDF sobre el último build
+npm run og:images  # regenera las imágenes OG sobre el último build
 npm run preview    # sirve dist/
-npm run qa         # build + axe (WCAG 2.2 AA) + overflow + consola, desktop y mobile
-npx playwright install chromium   # una vez, para que corra el QA
+npm run qa         # build + axe, overflow y consola (desktop y mobile) + email, form, redirects, SEO, peso, analytics y CV
+npx playwright install chromium   # una vez: lo usan el build y el QA
 ```
 
 ## Estructura
@@ -26,16 +29,19 @@ npx playwright install chromium   # una vez, para que corra el QA
 ```
 src/
   data/site.ts        config global: email, form, redes, nav, áreas de foco, statScreens
-  data/cv.ts          experiencia, stack, formación, idiomas
+  data/cv.ts          experiencia, stack, formación, cursos, idiomas (fuente de /curriculum y del PDF)
+  data/pages.ts       páginas públicas: alimenta el sitemap y las imágenes OG
   data/projects.ts    portfolio (captura en public/img/projects/<slug>.webp)
   styles/global.css   tokens, base, botones, tarjetas, flechas, View Transitions, print
   scripts/ui.ts       revelado, tarjetas (glow, proximidad, perspectiva), header, menú
   scripts/terminal.ts escenas de la terminal del hero
   layouts/Base.astro  <head>, SEO, JSON-LD, speculation rules, header y footer
-  components/         Header, Footer, Logo, Fn, Icon, ProjectCard, Terminal, Stats
-  pages/              /, /curriculum, /portfolio, /contacto, /sobre-mi, 404, sitemap.xml
-public/               fonts, img, favicon.svg, og.png, robots.txt
+  components/         Header, Footer, Logo, Fn, Icon, ProjectCard, Terminal, Stats, Analytics, CvAts
+  pages/              /, /curriculum, /portfolio, /contacto, /sobre-mi, /privacidad, /cv/es, 404, sitemap.xml
+public/               fonts, img, favicon.svg, og.png, robots.txt (cv/ y og/ se generan, no se versionan)
+scripts/build/        CV en PDF e imágenes OG
 scripts/qa/           chequeos automáticos
+netlify.toml          build, redirects y cabeceras
 ```
 
 ## Reglas de trabajo
@@ -43,7 +49,7 @@ scripts/qa/           chequeos automáticos
 1. **El contenido vive en `src/data/`.** Las páginas solo presentan datos. Para sumar un proyecto, un cargo o un stat, se edita el archivo de datos, no el markup.
 2. **Presupuestos (no negociables):**
    - Lighthouse 100/100/100/100 en mobile y desktop.
-   - JS ≤ 10 KB gz por página (hoy, cerca de 7 KB en la home).
+   - JS propio ≤ 10 KB gz por página (hoy, 7,5 KB en la home). El beacon de Cloudflare es de terceros, pesa unos 10 KB gz y se carga diferido.
    - CLS 0.
    - `npm run qa` en verde.
 3. **Accesibilidad:** elementos semánticos reales, foco visible, contraste medido con los tokens, `prefers-reduced-motion` respetado, contenido que rota con pausa (WCAG 2.2.2). Checklist en `DESIGN.md §9`.
@@ -52,9 +58,11 @@ scripts/qa/           chequeos automáticos
 6. **Dependencias:** no sumar librerías de UI ni de animación sin justificar su peso contra el presupuesto. Primero CSS y APIs nativas (View Transitions, popover, `<details>`, IntersectionObserver).
 7. **Imágenes:** WebP con tamaño fijo, `width`/`height` siempre, `loading="lazy"` fuera del primer viewport, `alt` descriptivo.
 8. **Copy y humor:** español rioplatense con voseo, primera persona, posicionamiento de liderazgo técnico, con humor técnico y autocrítico (un guiño por sección, como máximo; reglas en `DESIGN.md §8`). Las cifras y anécdotas son reales o se marcan como aproximadas (`approx: true`, `~`, `+`). Nunca inventar datos, anécdotas ni clientes. Sin humor en el CV para ATS ni en lo legal.
-9. **Rutas:** las URLs públicas son contrato (`/`, `/curriculum`, `/portfolio`, `/contacto`, `/sobre-mi`, más lo que defina `netlify.toml`). Cambiar una ruta implica un redirect 301.
+9. **Rutas:** las URLs públicas son contrato (`/`, `/curriculum`, `/portfolio`, `/contacto`, `/sobre-mi`, más lo que defina `netlify.toml`). Cambiar una ruta implica un redirect 301. Si cambia una página pública, se actualiza `src/data/pages.ts`.
 10. **La terminal del hero usa siempre `~/ilan`.** El contenido de las escenas sale del CV real.
-11. **Privacidad:** el email nunca va en texto plano en el HTML (usar `encodeMail`/`decodeMail` de `src/lib/mail.ts`). Sin nombres de familiares en el sitio. Analytics solo sin cookies (Cloudflare Web Analytics): sin GA y sin banner.
+11. **Privacidad:** el email nunca va en texto plano en el HTML (usar `encodeMail`/`decodeMail` de `src/lib/mail.ts`). Solo el PDF del CV lo lleva en claro. Sin nombres de familiares en el sitio. Analytics solo sin cookies (Cloudflare Web Analytics): sin GA y sin banner.
+12. **Formulario:** el `name` del form (`contact-form`) y sus campos (`name`, `email`, `message`, `fake`) coinciden con los de Netlify. `data-step` usa el mismo nombre que el campo. Cambiarlos cambia las notificaciones y el historial de envíos.
+13. **CV:** `/curriculum` y el PDF salen de `src/data/cv.ts`. El PDF no usa el diseño del sitio: se edita en `components/CvAts.astro`, con una columna y máximo 2 páginas.
 
 ## Verificación antes de dar algo por terminado
 
@@ -72,9 +80,7 @@ scripts/qa/           chequeos automáticos
 
 ## Pendientes conocidos
 
-- `site.email` real en `src/data/site.ts` (ya se ofusca solo) y formulario conectado a Netlify Forms.
-- CV apto para ATS en español, generado desde `src/data/cv.ts` (`npm run cv:pdf`).
-- Cloudflare Web Analytics (`PUBLIC_CF_BEACON_TOKEN`) y página `/privacidad`.
-- Revisar los stats con `approx: true` en `statScreens`.
+- Completar los `[COMPLETAR]` de `/privacidad` antes de publicar.
+- Cargar `PUBLIC_CF_BEACON_TOKEN` en Netlify al lanzar y revisar la configuración de Cloudflare (ver `MIGRATION.md`).
 - **Fase 1B:** feed de Instagram (primero un plan aprobado: `PLAN-instagram.md`).
 - **Fase 2:** sitio y CV en inglés, blog, y portfolio actualizado con clientes actuales de EpicDevs y capturas nuevas.

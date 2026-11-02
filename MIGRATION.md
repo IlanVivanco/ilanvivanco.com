@@ -23,9 +23,9 @@ Destinos: **conservado** (queda igual), **migrado** (pasa al sitio nuevo con cam
 | El feed de Instagram funciona | **Está roto:** `/api/instagram` responde 200 con cuerpo vacío. Sacarlo no quita nada que hoy funcione. |
 | Quizás hubo páginas de detalle en el portfolio | `skillsoft` tuvo `has_single: true` hasta el 2021-02-17 (`037d835`), pero no hay rastro de que se publicara. `/portfolio/skillsoft` da 404 y Wayback no la lista. El 301 con comodín lo cubre igual. |
 | El sitio se sirve desde Netlify | Delante de Netlify hay **Cloudflare** (`server: cloudflare`, `cf-ray`). Afecta a analytics: ver D7 y las tareas al lanzar. |
-| — | Hubo una página `pages/contact-me.vue` en versiones viejas. Se suma el 301 de `/contact-me`. |
-| — | `locales/general/portfolio.js` no se importa en ningún lado: es código muerto. Es la única fuente de los 7 proyectos fuera del portfolio. |
-| — | `locales/en_US.js` está casi todo en español. Lo único traducido de verdad son `locales/en/positions.js`, `menu.js` y parte de `cv.js`. |
+| (nuevo) | Hubo una página `pages/contact-me.vue` en versiones viejas. Se suma el 301 de `/contact-me`. |
+| (nuevo) | `locales/general/portfolio.js` no se importa en ningún lado: es código muerto. Es la única fuente de los 7 proyectos fuera del portfolio. |
+| (nuevo) | `locales/en_US.js` está casi todo en español. Lo único traducido de verdad son `locales/en/positions.js`, `menu.js` y parte de `cv.js`. |
 
 ## Rutas y redirects
 
@@ -60,7 +60,7 @@ Destinos: **conservado** (queda igual), **migrado** (pasa al sitio nuevo con cam
 
 Notas para implementar:
 
-- Solo `/aniversario` lleva `force`. Netlify hace que `/portfolio/*` coincida también con `/portfolio`: sin `force`, el archivo estático gana y no hay bucle.
+- Solo `/aniversario` lleva `force`. `/portfolio/*` se implementa como `/portfolio/:slug`, porque el comodín también coincide con `/portfolio` y en `netlify dev` daba 404.
 - Hoy `/contacto/` (con barra) responde 200. Con `build.format: 'file'` hay que comprobarlo en el deploy preview y, si cambia, agregar un 301.
 - Las imágenes viejas referenciadas en el JSON-LD y en las redes dejan de existir como archivos, por eso llevan 301.
 
