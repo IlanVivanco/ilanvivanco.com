@@ -215,7 +215,7 @@ Mono 0.8125rem, borde `--line-hi` y radio 999px. En el CV entran escalonados.
 
 ### Datos reales disponibles para guiños
 - Editores probados (12+): Dreamweaver, Notepad, Notepad++, Vim/NeoVim, Nano, Sublime Text, PhpStorm, Atom, VS Code, Cursor, Windsurf, Antigravity.
-- Combustible: mate y café, ambos, en grandes cantidades.
+- Combustible: mate y café. Los dos juntos, solo en el stat de la home; en el resto, uno u otro.
 - Más de 5 teclados y un número parecido de mouses. Sigue usando un **MX3 estéticamente destruido que anda perfecto** y se niega a jubilarlo.
 - Empezó con Flash, ActionScript, HTML con tablas. **Su primer panel de acceso validaba usuarios contra un .txt**, porque todavía no sabía que existía MySQL.
 - 16 años con WordPress (desde 2010). Tema propio de VS Code: Monokai Cotalpa.
@@ -225,10 +225,10 @@ Mono 0.8125rem, borde `--line-hi` y radio 999px. En el CV entran escalonados.
 |---|---|
 | Hero | "Construyendo para la web desde 2005, cuando todavía se maquetaba con tablas." |
 | Stats | Pantalla `// datos que nadie pidió`; "7,5 KB de JavaScript propio en la home (sí, los conté)" |
-| Terminal | `combustible: ['mate', 'café']`; commits `login: de un .txt a MySQL`, `init: diseño, fotos y <table>` |
+| Terminal | `combustible: 'mate'`; commits `login: de un .txt a MySQL`, `init: diseño, fotos y <table>` |
 | 404 | "Esta página llegó a producción sin tests." / "O el link es viejo, o alguien hizo deploy un viernes." |
-| Formulario | "respondo en 1–2 días hábiles, mate mediante"; éxito: "Ahora la pelota está de mi lado" |
-| Footer | "hecho en Santander con Astro, mate y café" |
+| Formulario | "te respondo apenas pueda, mate mediante"; éxito: "Ahora la pelota está de mi lado" |
+| Footer | "hecho en Santander con Astro y café" |
 
 ## 9. Accesibilidad (checklist por cambio)
 

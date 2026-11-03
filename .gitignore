@@ -10,5 +10,7 @@ dist
 public/cv
 public/og
 public/img/instagram
+public/img/projects/*-480.webp
+public/img/projects/*-720.webp
 src/data/instagram.generated.json
 deno.lock

@@ -5,46 +5,22 @@ import Footer from '../components/Footer.astro'
 import Analytics from '../components/Analytics.astro'
 import { site } from '../data/site'
 import { ogPath } from '../data/pages'
+import { pageSchema, type PageSchemaType } from '../lib/schema'
 
 interface Props {
 	title?: string
+	// Reemplaza el <title> completo, sin el sufijo. El H1 no cambia.
+	fullTitle?: string
 	description?: string
-	jsonLd?: Record<string, unknown>
+	schemaType?: PageSchemaType
+	schemaMainEntity?: Record<string, unknown>
 	noindex?: boolean
 }
-const { title, description = site.description, jsonLd, noindex = false } = Astro.props
-const pageTitle = title ? `${title} | Ilán Vivanco` : site.title
+const { title, fullTitle, description = site.description, schemaType, schemaMainEntity, noindex = false } = Astro.props
+const pageTitle = fullTitle ?? (title ? `${title} | Ilán Vivanco` : site.title)
 const pathname = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '/') || '/'
 const canonical = new URL(pathname, site.url).href
 const ogImage = new URL(ogPath(pathname), site.url).href
-
-const person = {
-	'@context': 'https://schema.org',
-	'@type': 'Person',
-	'name': 'Ilán Vivanco',
-	'url': site.url,
-	'image': new URL('/img/ilan-800.webp', site.url).href,
-	'description': site.description,
-	'jobTitle': 'CTO / Director of Engineering',
-	'worksFor': { '@type': 'Organization', 'name': 'EpicDevs', 'url': 'https://epicdevs.com' },
-	'address': {
-		'@type': 'PostalAddress',
-		'addressLocality': 'Santander',
-		'addressRegion': 'Cantabria',
-		'addressCountry': 'ES',
-	},
-	'sameAs': site.socials.filter((s) => s.label !== 'EpicDevs').map((s) => s.href),
-	'knowsAbout': [
-		'WordPress',
-		'JavaScript',
-		'Astro',
-		'Vue',
-		'React',
-		'Node.js',
-		'Arquitectura web',
-		'IA aplicada a la ingeniería',
-	],
-}
 ---
 
 <!doctype html>
@@ -54,11 +30,14 @@ const person = {
 		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 		<title>{pageTitle}</title>
 		<meta name="description" content={description} />
-		{noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
+		{noindex ? <meta name="robots" content="noindex, follow" /> : <link rel="canonical" href={canonical} />}
 		<meta name="theme-color" content="#0A111F" />
 		<meta name="color-scheme" content="dark" />
 
+		<link rel="icon" href="/favicon.ico" sizes="32x32" />
 		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<link rel="manifest" href="/manifest.webmanifest" />
 		<link rel="preload" href="/fonts/space-grotesk.woff2" as="font" type="font/woff2" crossorigin />
 		<link rel="preload" href="/fonts/fira-code.woff2" as="font" type="font/woff2" crossorigin />
 		<slot name="head" />
@@ -94,7 +73,14 @@ const person = {
 				]
 			}
 		</script>
-		<script type="application/ld+json" set:html={JSON.stringify(jsonLd ?? person)} />
+		{!noindex && (
+			<script
+				type="application/ld+json"
+				set:html={JSON.stringify(
+					pageSchema({ pathname, title: pageTitle, description, type: schemaType, mainEntity: schemaMainEntity })
+				)}
+			/>
+		)}
 		<Analytics />
 	</head>
 	<body>

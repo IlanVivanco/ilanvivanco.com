@@ -8,6 +8,33 @@ NODE_VERSION = "22.23.4"
 # Chromium dentro de node_modules, que Netlify cachea entre builds
 PLAYWRIGHT_BROWSERS_PATH = "0"
 
+# Seguridad en todas las respuestas. Sin script-src a propósito: el JS inline y el de Cloudflare siguen andando.
+[[headers]]
+for = "/*"
+[headers.values]
+X-Content-Type-Options = "nosniff"
+X-Frame-Options = "SAMEORIGIN"
+Referrer-Policy = "strict-origin-when-cross-origin"
+Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+Content-Security-Policy = "frame-ancestors 'self'; base-uri 'self'; object-src 'none'; form-action 'self'"
+
+# Con hash en el nombre: no cambian nunca
+[[headers]]
+for = "/_astro/*"
+[headers.values]
+Cache-Control = "public, max-age=31536000, immutable"
+
+# Sin hash, pero casi no cambian
+[[headers]]
+for = "/fonts/*"
+[headers.values]
+Cache-Control = "public, max-age=2592000"
+
+[[headers]]
+for = "/manifest.webmanifest"
+[headers.values]
+Content-Type = "application/manifest+json"
+
 # El CV lleva el email en texto plano: se puede descargar, pero no se indexa
 [[headers]]
 for = "/cv/*"
@@ -15,8 +42,15 @@ for = "/cv/*"
 X-Robots-Tag = "noindex"
 
 # Redirects: las URLs públicas son contrato. Inventario y motivos en MIGRATION.md.
-# Solo /aniversario lleva force: sin force, un archivo estático siempre gana,
+# Solo /aniversario y el subdominio de Netlify llevan force: sin force, un archivo estático siempre gana,
 # /portfolio/:slug no coincide con /portfolio, así que no hay bucle.
+
+# Una sola URL pública. Los deploy previews tienen otro host y no entran acá.
+[[redirects]]
+from = "https://ilanvivanco.netlify.app/*"
+to = "https://ilanvivanco.com/:splat"
+status = 301
+force = true
 
 [[redirects]]
 from = "/aniversario"

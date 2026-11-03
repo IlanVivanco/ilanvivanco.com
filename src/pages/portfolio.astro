@@ -3,7 +3,8 @@ import Base from '../layouts/Base.astro'
 import Fn from '../components/Fn.astro'
 import Icon from '../components/Icon.astro'
 import WinControls from '../components/WinControls.astro'
-import { projects, formatDate, imageFor } from '../data/projects'
+import { portfolioList } from '../lib/schema'
+import { projects, formatDate, imageFor, imageSrcset, imageVariant } from '../data/projects'
 
 const filters = [
 	{ label: 'todos', tag: '' },
@@ -18,7 +19,9 @@ const range = `${Math.min(...years)}–${Math.max(...years)}`
 ---
 
 <Base
-	title="Trabajos"
+	schemaType="CollectionPage"
+	schemaMainEntity={portfolioList()}
+	fullTitle="Portfolio de Ilán Vivanco | Plataformas web y WordPress"
 	description="Una selección de plataformas y sitios en los que trabajé: WordPress a medida, plugins, migraciones e integraciones."
 >
 	<section class="section pf-hero">
@@ -77,7 +80,7 @@ const range = `${Math.min(...years)}–${Math.max(...years)}`
 						<details class="row" name="trabajos">
 							<summary
 								class="row-head"
-								data-preview={imageFor(p)}
+								data-preview={imageVariant(p, 720)}
 								data-name={p.name}
 								data-year={p.date.slice(0, 4)}
 								data-i={i}
@@ -93,6 +96,8 @@ const range = `${Math.min(...years)}–${Math.max(...years)}`
 							<div class="row-body">
 								<img
 									src={imageFor(p)}
+									srcset={imageSrcset(p)}
+									sizes="(max-width: 860px) calc(100vw - 40px), 560px"
 									alt={`Captura de ${p.name}`}
 									loading="lazy"
 									decoding="async"

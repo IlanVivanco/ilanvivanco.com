@@ -1,5 +1,5 @@
 // Interacciones con movimiento normal: el análisis de páginas de check.mjs usa movimiento reducido y no las ejercita.
-const STAT_INTERVAL = 5600
+const STAT_INTERVAL = 7500
 
 async function checkFilter(browser, base, log) {
 	const page = await browser.newPage({ viewport: { width: 1280, height: 800 } })

@@ -86,11 +86,9 @@ const scenes: Scene[] = [
 				t: [
 					['v', '  '],
 					['p', 'combustible'],
-					['v', ': ['],
+					['v', ': '],
 					['s', "'mate'"],
-					['v', ', '],
-					['s', "'café'"],
-					['v', '],'],
+					['v', ','],
 				],
 				speed: 22,
 			},
@@ -282,8 +280,14 @@ export function initTerminal(root: HTMLElement) {
 
 		const done: string[] = []
 		const cursor = '<span class="win-cursor"></span>'
+		// Se lee el alto al inicio del frame, con el layout limpio, para no forzar un reflow por cada tecla.
+		let scrollFrame = 0
 		const scrollEnd = () => {
-			if (body) body.scrollTop = body.scrollHeight
+			if (!body || scrollFrame) return
+			scrollFrame = requestAnimationFrame(() => {
+				scrollFrame = 0
+				body.scrollTop = body.scrollHeight
+			})
 		}
 		if (body) body.scrollTop = 0
 		for (const line of scene.lines) {

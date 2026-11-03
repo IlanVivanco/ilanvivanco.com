@@ -44,7 +44,7 @@ export type CvLabels = {
 
 const es: Cv = {
 	summary:
-		'Lidero la ingeniería en EpicDevs, donde construimos y operamos plataformas web para empresas de tecnología, universidades y ONG. Me ocupo de la arquitectura y del equipo: decido cómo se construye cada plataforma, cuido que siga rápida y mantenible cuando crece, y coordino a un equipo remoto en varios países.',
+		'Dirijo la ingeniería de EpicDevs, donde construimos y operamos plataformas web para empresas de tecnología, universidades y ONG. Defino la arquitectura, los procesos y los estándares técnicos, y coordino a un equipo remoto en varios países.',
 
 	experience: [
 		{
@@ -114,7 +114,7 @@ const es: Cv = {
 			],
 		},
 		{
-			org: 'Explore-Share',
+			org: 'Explore & Share',
 			meta: 'Part-time',
 			location: 'Remoto',
 			roles: [
