@@ -223,7 +223,18 @@ export async function runStaticChecks(log) {
 			.every((to) => to === '/' || existsSync(join(DIST, to)) || existsSync(join(DIST, `${to}.html`))),
 		'los destinos de los redirects existen'
 	)
-	log((toml.match(/force = true/g) ?? []).length === 1, 'solo /aniversario usa force')
+	log((toml.match(/force = true/g) ?? []).length === 2, 'solo /aniversario y netlify.app usan force')
+	log(toml.includes('from = "https://ilanvivanco.netlify.app/*"'), 'netlify.app redirige al dominio principal')
+	for (const header of [
+		'X-Content-Type-Options',
+		'X-Frame-Options',
+		'Referrer-Policy',
+		'Permissions-Policy',
+		'Content-Security-Policy',
+	]) {
+		log(toml.includes(`${header} =`), `cabecera ${header}`)
+	}
+	log(/for = "\/_astro\/\*"[\s\S]*?immutable/.test(toml), '/_astro con caché immutable')
 
 	// Presupuesto y stats honestos
 	for (const f of htmlFiles().filter((f) => !f.startsWith('cv/'))) {
