@@ -151,14 +151,38 @@ export async function runStaticChecks(log) {
 	// SEO
 	const sitemap = read('sitemap.xml')
 	log(
-		publicPages.every((p) => sitemap.includes(`<loc>${new URL(p.path, site.url).href}</loc>`)),
-		'sitemap con todas las páginas públicas'
+		publicPages
+			.filter((p) => !p.noindex)
+			.every((p) => sitemap.includes(`<loc>${new URL(p.path, site.url).href}</loc><lastmod>${p.updated}</lastmod>`)),
+		'sitemap con las páginas indexables y su lastmod'
+	)
+	log(
+		publicPages
+			.filter((p) => p.noindex)
+			.every((p) => !sitemap.includes(`<loc>${new URL(p.path, site.url).href}</loc>`)),
+		'sitemap sin páginas noindex'
+	)
+	for (const icon of ['favicon.ico', 'favicon.svg', 'apple-touch-icon.png', 'manifest.webmanifest']) {
+		log(existsSync(join(DIST, icon)), `${icon} publicado`)
+	}
+	log(
+		htmlFiles()
+			.filter((f) => !f.startsWith('cv/'))
+			.every((f) => !/<img\b(?![^>]*\bsrcset=)[^>]*\bsrc="\/img\/(?:projects|instagram)\//.test(read(f))),
+		'fotos de proyectos e Instagram con srcset'
 	)
 	log(!sitemap.includes('/cv/') && !sitemap.includes('/404'), 'sitemap sin /cv ni 404')
 	for (const p of publicPages) {
 		const html = read(fileFor(p.path))
 		const canonical = new URL(p.path, site.url).href
-		log(html.includes(`rel="canonical" href="${canonical}"`), `${p.path} canonical`)
+		if (p.noindex) log(html.includes('name="robots" content="noindex, follow"'), `${p.path} noindex, follow`)
+		else {
+			log(html.includes(`rel="canonical" href="${canonical}"`), `${p.path} canonical`)
+			const graph =
+				JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)?.[1] ?? '{}')['@graph'] ?? []
+			log(graph.some((n) => n['@type'] === 'Person') && graph.some((n) => n.url === canonical), `${p.path} JSON-LD`)
+			log(!JSON.stringify(graph).includes(site.email), `${p.path} JSON-LD sin email`)
+		}
 		log(
 			html.includes(`content="${new URL(ogPath(p.path), site.url).href}"`) && existsSync(join(DIST, ogPath(p.path))),
 			`${p.path} og:image propia y existente`

@@ -2,15 +2,17 @@
 	"name": "ilanvivanco.com",
 	"version": "2.0.0",
 	"scripts": {
+		"predev": "npm run images",
 		"dev": "astro dev",
-		"build": "npm run instagram && astro build && npm run cv:pdf && npm run og:images",
+		"build": "npm run instagram && npm run images && astro build && npm run cv:pdf && npm run og:images",
 		"preview": "astro preview",
 		"qa": "node scripts/qa/check.mjs",
 		"cv:pdf": "node scripts/build/cv-pdf.mjs",
 		"og:images": "node scripts/build/og-images.mjs",
 		"format": "prettier --write .",
 		"format:check": "prettier --check .",
-		"instagram": "node scripts/build/instagram.mjs"
+		"instagram": "node scripts/build/instagram.mjs",
+		"images": "node scripts/build/project-images.mjs"
 	},
 	"dependencies": {
 		"astro": "^7.4.4",

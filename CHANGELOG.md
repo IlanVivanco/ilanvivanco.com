@@ -1,5 +1,22 @@
 # Changelog
 
+## [Sin publicar]
+
+### Agregado
+
+- **`srcset` en las capturas de proyectos, las fotos de Instagram y el escritorio de `/sobre-mi`.** Las variantes de las capturas se generan en cada build (`npm run images`).
+- **Favicons:** `favicon.ico`, `apple-touch-icon.png` e íconos con `manifest.webmanifest`.
+- **`lastmod` en el sitemap**, desde `updated` en `src/data/pages.ts`.
+- **JSON-LD completo:** `Person` como entidad principal, `WebSite`, `ProfilePage`, `ContactPage`, `CollectionPage` con los proyectos y `BreadcrumbList`.
+
+### Cambiado
+
+- **`/privacidad`** pasa a `noindex, follow` y sale del sitemap.
+- **Stats:** "11+ años en EpicDevs, 8+ liderando ingeniería" reemplaza a "11+ años liderando ingeniería".
+- **Copy:** sin frases repetidas entre páginas y sin el plazo de respuesta en días hábiles. Mate y café juntos solo en el stat de la home.
+- **Explore & Share** se escribe igual en el CV y en el portfolio.
+- **Links externos:** todos en `https`.
+
 ## [2.0.0] - 2026-11-03
 
 Reescritura completa del sitio: de Nuxt 2 a Astro 7 estático, con diseño nuevo. Reemplaza a la versión [1.0.0](https://github.com/IlanVivanco/ilanvivanco.com/tree/v1.0.0).

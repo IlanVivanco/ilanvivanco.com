@@ -85,7 +85,7 @@ export const projects: Project[] = [
 	{
 		slug: 'brennan',
 		name: 'Brennan Consulting',
-		url: 'http://www.brennanconsults.com/',
+		url: 'https://www.brennanconsults.com/',
 		date: '2017-02',
 		client: 'EpicDevs',
 		description: 'Implementación de un diseño de terceros en un theme de WordPress a medida.',
@@ -104,7 +104,7 @@ export const projects: Project[] = [
 	{
 		slug: 'evergage',
 		name: 'Evergage',
-		url: 'http://www.evergage.com/',
+		url: 'https://www.evergage.com/',
 		date: '2016-04',
 		client: 'EpicDevs',
 		description: 'Desarrollo integral en WordPress con un theme a medida creado desde cero.',
@@ -122,7 +122,7 @@ export const projects: Project[] = [
 	{
 		slug: 'altura',
 		name: 'Altura Periodontics',
-		url: 'http://yourdentalimplants.com/',
+		url: 'https://www.yourdentalimplants.com/',
 		date: '2015-11',
 		client: 'EpicDevs',
 		description: 'Diseño y programación de un theme de WordPress a medida.',
@@ -137,5 +137,9 @@ export const formatDate = (ym: string) => {
 }
 
 export const imageFor = (p: Project) => p.image ?? `/img/projects/${p.slug}.webp`
+// Las variantes las genera scripts/build/project-images.mjs. La original mide 960 px.
+export const imageVariant = (p: Project, width: 480 | 720) => imageFor(p).replace(/\.webp$/, `-${width}.webp`)
+export const imageSrcset = (p: Project) =>
+	`${imageVariant(p, 480)} 480w, ${imageVariant(p, 720)} 720w, ${imageFor(p)} 960w`
 
 export const allTags = [...new Set(projects.flatMap((p) => p.tags))]

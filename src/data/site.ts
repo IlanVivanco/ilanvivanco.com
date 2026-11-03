@@ -41,7 +41,7 @@ export const site = {
 export const focus = [
 	{
 		title: 'Arquitectura de plataformas web',
-		text: 'WordPress como base y decisiones de arquitectura pensadas para que el sitio siga rápido cuando crece.',
+		text: 'WordPress como base y una arquitectura pensada para que sumar cosas no vuelva lento el sitio.',
 		tag: 'wordpress',
 	},
 	{
@@ -51,7 +51,7 @@ export const focus = [
 	},
 	{
 		title: 'IA en el trabajo diario',
-		text: 'Agentes de código, integraciones MCP y QA asistido, usados todos los días en el equipo.',
+		text: 'Agentes de código, integraciones MCP y QA asistido, metidos en el flujo real del equipo.',
 		tag: 'ai',
 	},
 	{
@@ -86,9 +86,9 @@ export const statScreens: { title: string; items: Stat[] }[] = [
 			{
 				value: 11,
 				suffix: '+',
-				label: 'años liderando ingeniería en EpicDevs',
+				label: 'años en EpicDevs, 8+ liderando ingeniería',
 			},
-			{ value: 20, suffix: '+', label: 'personas del equipo que lideré' },
+			{ value: 20, suffix: '+', label: 'personas que lideré a lo largo de estos años' },
 			{ value: 3, label: 'mercados: Europa, EE. UU. y Latam' },
 		],
 	},

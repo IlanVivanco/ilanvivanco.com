@@ -9,6 +9,7 @@ const FEED = process.env.INSTAGRAM_FEED_URL ?? site.instagramFeed
 const IMG_DIR = 'public/img/instagram'
 const DATA_FILE = 'src/data/instagram.generated.json'
 const SIZE = 480
+const VARIANTS = [240, 360]
 const TIMEOUT = 15_000
 
 const get = async (url) => {
@@ -27,6 +28,12 @@ try {
 			const photo = Buffer.from(await (await get(p.image)).arrayBuffer())
 			const file = `${p.id}.webp`
 			await sharp(photo).resize(SIZE, SIZE, { fit: 'cover' }).webp({ quality: 72 }).toFile(`${IMG_DIR}/${file}`)
+			for (const size of VARIANTS) {
+				await sharp(photo)
+					.resize(size, size, { fit: 'cover' })
+					.webp({ quality: 72 })
+					.toFile(`${IMG_DIR}/${p.id}-${size}.webp`)
+			}
 			posts.push({ src: `/img/instagram/${file}`, url: p.url, date: p.date, alt: p.alt, tags: p.tags })
 		} catch (error) {
 			console.warn(`Instagram: se omite el post ${p.id} (${error.message})`)

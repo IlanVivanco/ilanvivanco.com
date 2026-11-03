@@ -1,6 +1,6 @@
 ---
 import type { Project } from '../data/projects'
-import { formatDate, imageFor } from '../data/projects'
+import { formatDate, imageFor, imageSrcset } from '../data/projects'
 import Icon from './Icon.astro'
 
 interface Props {
@@ -20,7 +20,16 @@ const Tag = p.url ? 'a' : 'article'
 	data-reveal
 >
 	<div class="shot">
-		<img src={imageFor(p)} alt={`Captura de ${p.name}`} loading="lazy" decoding="async" width="960" height="600" />
+		<img
+			src={imageFor(p)}
+			srcset={imageSrcset(p)}
+			sizes="(max-width: 960px) calc(100vw - 40px), 560px"
+			alt={`Captura de ${p.name}`}
+			loading="lazy"
+			decoding="async"
+			width="960"
+			height="600"
+		/>
 		{p.url && (
 			<span class="shot-cta mono" aria-hidden="true">
 				visitar <Icon name="arrow-up-right" size={16} />

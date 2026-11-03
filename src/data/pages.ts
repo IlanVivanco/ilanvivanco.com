@@ -1,16 +1,34 @@
-// Páginas públicas del sitio: alimentan el sitemap y las imágenes OG.
+// Páginas públicas del sitio: alimentan el sitemap, el JSON-LD y las imágenes OG.
+// `updated` (YYYY-MM-DD) es el lastmod del sitemap: se cambia a mano cuando cambia el contenido de la página.
+// `noindex`: se publica y tiene imagen OG, pero no va al sitemap.
 // Las URLs son contrato: cambiar una implica un redirect 301 en netlify.toml.
 
-export type PublicPage = { path: string; slug: string; fn: string; title: string; subtitle: string }
+export type PublicPage = {
+	path: string
+	slug: string
+	fn: string
+	title: string
+	subtitle: string
+	updated: string
+	noindex?: boolean
+}
 
 export const publicPages: PublicPage[] = [
-	{ path: '/', slug: 'home', fn: 'hola_mundo', title: 'Ilán Vivanco', subtitle: 'CTO en EpicDevs' },
+	{
+		path: '/',
+		slug: 'home',
+		fn: 'hola_mundo',
+		title: 'Ilán Vivanco',
+		subtitle: 'CTO en EpicDevs',
+		updated: '2026-11-03',
+	},
 	{
 		path: '/curriculum',
 		slug: 'curriculum',
 		fn: 'mi_historial',
 		title: 'Mi CV',
 		subtitle: 'CTO / Director of Engineering',
+		updated: '2026-11-03',
 	},
 	{
 		path: '/portfolio',
@@ -18,6 +36,7 @@ export const publicPages: PublicPage[] = [
 		fn: 'portfolio',
 		title: 'Trabajos',
 		subtitle: 'Plataformas y sitios en producción',
+		updated: '2026-11-03',
 	},
 	{
 		path: '/sobre-mi',
@@ -25,13 +44,15 @@ export const publicPages: PublicPage[] = [
 		fn: 'más_info_sobre_mí',
 		title: 'Más sobre mí',
 		subtitle: 'De Buenos Aires a Santander',
+		updated: '2026-11-03',
 	},
 	{
 		path: '/contacto',
 		slug: 'contacto',
 		fn: 'contactame',
 		title: '¿Hacemos algo juntos?',
-		subtitle: 'Respondo en uno o dos días hábiles',
+		subtitle: 'Contame en qué estás trabajando',
+		updated: '2026-11-03',
 	},
 	{
 		path: '/privacidad',
@@ -39,6 +60,8 @@ export const publicPages: PublicPage[] = [
 		fn: 'privacidad',
 		title: 'Privacidad y aviso legal',
 		subtitle: 'Qué datos se usan y para qué',
+		updated: '2026-11-03',
+		noindex: true,
 	},
 ]
 

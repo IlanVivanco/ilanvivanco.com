@@ -13,6 +13,7 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 ---
 
 <Base
+	schemaType="ContactPage"
 	title="Contacto"
 	description="¿Qué te parece si hacemos algo juntos? Escribime por email, LinkedIn o el formulario."
 >
@@ -24,7 +25,7 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 					¿Hacemos algo juntos?
 				</h1>
 				<p class="lede" data-reveal data-delay="0.05">
-					Contame en qué estás trabajando. Respondo en uno o dos días hábiles.
+					Contame en qué estás trabajando y lo charlamos.
 				</p>
 
 				<div class="mail" data-reveal data-delay="0.1">
@@ -89,7 +90,7 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 						<span class="c-pr">$</span> <span class="c-w">./contacto.sh</span>
 					</p>
 					<p class="con-line c-m" aria-hidden="true">
-						contacto v1.0 · respondo en 1 o 2 días hábiles, mate mediante
+						contacto v1.0 · te respondo apenas pueda, mate mediante
 					</p>
 
 					<ol class="con-log" role="list" data-log aria-label="Tus respuestas"></ol>
@@ -468,7 +469,7 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 					if (!res.ok) throw new Error(String(res.status))
 					await print(`<span class="c-badge c-badge-ok">${res.status} OK</span>`, 250)
 					await print(
-						`<div class="con-note"><strong class="c-w">¡Gracias, ${esc(firstName())}!</strong><br />Ahora la pelota está de mi lado: te respondo a <span class="c-y">${esc(email)}</span> en uno o dos días hábiles.</div>`,
+						`<div class="con-note"><strong class="c-w">¡Gracias, ${esc(firstName())}!</strong><br />Ahora la pelota está de mi lado: te respondo a <span class="c-y">${esc(email)}</span> apenas pueda.</div>`,
 						350
 					)
 					announce.textContent = `Mensaje enviado. Te respondo a ${email}.`

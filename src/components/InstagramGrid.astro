@@ -24,6 +24,8 @@ const when = (date: string) =>
 						<span class="ig-shot">
 							<img
 								src={p.src}
+								srcset={`${p.src.replace('.webp', '-240.webp')} 240w, ${p.src.replace('.webp', '-360.webp')} 360w, ${p.src} 480w`}
+								sizes="(max-width: 640px) calc(50vw - 26px), (max-width: 1260px) calc(33vw - 30px), 384px"
 								width="480"
 								height="480"
 								loading="lazy"
