@@ -62,7 +62,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
 				autofocus
 				aria-label="Cerrar menú"
 			>
-				<Icon name="close" size={22} />
+				<Icon name="x" size={22} />
 			</button>
 		</div>
 		<nav aria-label="Principal (móvil)">
@@ -206,10 +206,17 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
 		align-items: center;
 		justify-content: center;
 		border-radius: 12px;
-		border: 1px solid var(--line-strong);
-		background: var(--bg-raised);
+		border: 0;
+		background: transparent;
 		color: var(--text);
 		cursor: pointer;
+		transition: background 0.2s;
+	}
+	/* En táctil, el hover queda pegado después de tocar */
+	@media (hover: hover) {
+		.menu-btn:hover {
+			background: var(--bg-raised);
+		}
 	}
 
 	.mobile-menu {

@@ -675,6 +675,12 @@ main {
    Impresión (para /curriculum)
 ---------------------------------------------------------------- */
 @media print {
+	.tech-tip {
+		position: static !important;
+		opacity: 1 !important;
+		border: 0 !important;
+		translate: none !important;
+	}
 	:root {
 		--bg: #fff;
 		--bg-raised: #fff;

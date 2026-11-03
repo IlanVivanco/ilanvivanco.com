@@ -3,9 +3,13 @@ import Base from '../layouts/Base.astro'
 import Fn from '../components/Fn.astro'
 import Icon from '../components/Icon.astro'
 import { site } from '../data/site'
-import { cv, period, yearPeriod } from '../data/cv'
+import { cv, period, stackIcons, yearPeriod } from '../data/cv'
 
 const { summary, experience, earlier, stack, education, languages } = cv.es
+// Cada tecnología con ícono, en el orden del stack. Los ítems "A / B" se separan.
+const techIcons = stack
+	.flatMap((g) => g.items.flatMap((item) => item.split(' / ')))
+	.filter((label) => stackIcons[label])
 ---
 
 <Base
@@ -23,7 +27,7 @@ const { summary, experience, earlier, stack, education, languages } = cv.es
 			</p>
 			<div class="meta mono" data-reveal data-delay="0.1">
 				<span>
-					<Icon name="pin" size={16} /> {site.location}
+					<Icon name="map-pin" size={16} /> {site.location}
 				</span>
 				<span>
 					<Icon name="clock" size={16} /> CET · remoto
@@ -106,14 +110,26 @@ const { summary, experience, earlier, stack, education, languages } = cv.es
 			<h2 id="stack" class="side-title mono">
 				Stack
 			</h2>
-			<dl class="stack-list" data-reveal-group>
-				{stack.map((g) => (
-					<div class="stack-row" data-reveal>
-						<dt class="mono">{g.group}</dt>
-						<dd>{g.items.join(', ')}</dd>
-					</div>
-				))}
-			</dl>
+			<div class="stack-block">
+				<ul class="tech" role="list" data-reveal>
+					{techIcons.map((label) => (
+						<li class="tech-item" tabindex="0">
+							<Icon name={stackIcons[label] as 'wordpress'} size={24} title={label} />
+							<span class="tech-tip mono" aria-hidden="true">
+								{label}
+							</span>
+						</li>
+					))}
+				</ul>
+				<dl class="stack-list" data-reveal-group>
+					{stack.map((g) => (
+						<div class="stack-row" data-reveal>
+							<dt class="mono">{g.group}</dt>
+							<dd>{g.items.join(', ')}</dd>
+						</div>
+					))}
+				</dl>
+			</div>
 		</div>
 	</section>
 
@@ -144,6 +160,30 @@ const { summary, experience, earlier, stack, education, languages } = cv.es
 		</div>
 	</section>
 </Base>
+
+<script>
+	// WCAG 1.4.13: Escape cierra el tooltip sin mover el foco ni el puntero
+	const lists = document.querySelectorAll<HTMLElement>('.tech')
+	const show = (on: boolean) => lists.forEach((l) => l.classList.toggle('is-dismissed', !on))
+	document.addEventListener('keydown', (e) => e.key === 'Escape' && show(false))
+	// Corre el tooltip lo justo para que no se corte en el borde de la pantalla
+	const fit = (tip: HTMLElement | null | undefined) => {
+		if (!tip) return
+		tip.style.removeProperty('--shift')
+		const { left, right } = tip.getBoundingClientRect()
+		const edge = document.documentElement.clientWidth - 8
+		const shift = left < 8 ? 8 - left : right > edge ? edge - right : 0
+		if (shift) tip.style.setProperty('--shift', `${shift}px`)
+	}
+	lists.forEach((l) =>
+		['pointerover', 'focusin'].forEach((type) =>
+			l.addEventListener(type, (e) => {
+				show(true)
+				fit((e.target as HTMLElement).closest('.tech-item')?.querySelector<HTMLElement>('.tech-tip'))
+			})
+		)
+	)
+</script>
 
 <style>
 	.cv-hero {
@@ -397,7 +437,13 @@ const { summary, experience, earlier, stack, education, languages } = cv.es
 		color: var(--text-soft);
 	}
 
-	/* Stack como texto: las pastillas parecían links o filtros */
+	/* Grilla de íconos y lista de texto: las pastillas parecían links o filtros */
+	.stack-block {
+		display: flex;
+		flex-direction: column;
+		gap: 24px;
+		min-width: 0;
+	}
 	.stack-list {
 		margin: 0;
 		border-top: 1px solid var(--line);
@@ -417,6 +463,60 @@ const { summary, experience, earlier, stack, education, languages } = cv.es
 	.stack-row dd {
 		margin: 0;
 		color: var(--text-soft);
+	}
+	.tech {
+		display: grid;
+		grid-template-columns: repeat(10, minmax(0, 1fr));
+		gap: 8px;
+		justify-items: start;
+		margin: 0 0 0 -6px;
+		padding: 0;
+	}
+	.tech-item {
+		position: relative;
+		display: flex;
+		padding: 6px;
+		border-radius: 6px;
+		transition: color 0.15s;
+	}
+	/* Sin hover en el svg: su <title> es para lectores de pantalla y no debe sumar el tooltip nativo */
+	.tech-item :global(svg) {
+		pointer-events: none;
+	}
+	.tech-item:hover,
+	.tech-item:focus {
+		color: var(--yellow-hi);
+	}
+	.tech-tip {
+		position: absolute;
+		bottom: 100%;
+		left: 50%;
+		z-index: 5;
+		padding: 4px 8px;
+		border: 1px solid var(--line-hi);
+		border-radius: 6px;
+		background: var(--bg-raised);
+		color: var(--text);
+		font-size: 0.75rem;
+		white-space: nowrap;
+		opacity: 0;
+		pointer-events: none;
+		translate: calc(-50% + var(--shift, 0px)) 0;
+		transition: opacity 0.15s;
+	}
+	.tech-item:hover .tech-tip,
+	.tech-item:focus .tech-tip {
+		opacity: 1;
+	}
+	/* WCAG 1.4.13: con mouse se puede pasar al tooltip. En táctil no captura toques: taparía al ícono de arriba */
+	@media (hover: hover) {
+		.tech-item:hover .tech-tip {
+			pointer-events: auto;
+		}
+	}
+	.tech.is-dismissed .tech-tip {
+		opacity: 0;
+		pointer-events: none;
 	}
 	.two {
 		display: grid;
@@ -443,6 +543,9 @@ const { summary, experience, earlier, stack, education, languages } = cv.es
 	@media (max-width: 820px) {
 		.stack-row {
 			grid-template-columns: minmax(0, 1fr);
+		}
+		.tech {
+			grid-template-columns: repeat(6, minmax(0, 1fr));
 		}
 		.cv-grid {
 			grid-template-columns: minmax(0, 1fr);

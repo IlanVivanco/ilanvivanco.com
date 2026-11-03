@@ -24,7 +24,7 @@ export const site = {
 		{ label: 'LinkedIn', icon: 'linkedin', href: 'https://www.linkedin.com/in/ilanvivanco/' },
 		{ label: 'GitHub', icon: 'github', href: 'https://github.com/IlanVivanco' },
 		{ label: 'Instagram', icon: 'instagram', href: 'https://www.instagram.com/ilanvivanco/' },
-		{ label: 'X', icon: 'x', href: 'https://x.com/IlanVivanco' },
+		{ label: 'X', icon: 'x-brand', href: 'https://x.com/IlanVivanco' },
 		{ label: 'EpicDevs', icon: 'epicdevs', href: 'https://epicdevs.com' },
 	],
 
@@ -130,7 +130,7 @@ export const statScreens: { title: string; items: Stat[] }[] = [
 				label: 'de JavaScript propio en la home (sí, los conté)',
 			},
 			{ value: 0, label: 'errores de accesibilidad (axe, WCAG 2.2)' },
-			{ value: 0.5, suffix: ' s', label: 'de LCP en desktop' },
+			{ value: 0.3, suffix: ' s', label: 'de LCP en desktop' },
 		],
 	},
 ]

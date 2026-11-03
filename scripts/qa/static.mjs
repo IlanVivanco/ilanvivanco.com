@@ -171,6 +171,15 @@ export async function runStaticChecks(log) {
 			.every((f) => !/<img\b(?![^>]*\bsrcset=)[^>]*\bsrc="\/img\/(?:projects|instagram)\//.test(read(f))),
 		'fotos de proyectos e Instagram con srcset'
 	)
+	const cvPage = read('curriculum.html')
+	const techItems = cvPage.match(/<li[^>]*class="tech-item[^>]*>.*?<\/li>/gs) ?? []
+	log(
+		techItems.length > 0 &&
+			techItems.every(
+				(t) => /tabindex="0"/.test(t) && /role="img"[^>]*><title>[^<]+<\/title>/.test(t) && /tech-tip/.test(t)
+			),
+		`/curriculum: ${techItems.length} íconos del stack con title, foco y tooltip`
+	)
 	log(!sitemap.includes('/cv/') && !sitemap.includes('/404'), 'sitemap sin /cv ni 404')
 	for (const p of publicPages) {
 		const html = read(fileFor(p.path))

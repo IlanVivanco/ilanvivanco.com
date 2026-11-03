@@ -85,7 +85,7 @@ Reglas:
 ### Flechas (consistencia)
 - `↗` (`arrow-up-right`) **rota 45°** en hover/focus, en botones, links y tarjetas.
 - `→` (`arrow-right`) se desplaza 3px. `download` baja 2px.
-- Los íconos son inline SVG de trazo (`components/Icon.astro`), con la clase `i-<nombre>`. Sin emojis ni librerías de íconos.
+- Los íconos son SVG inline de [Lucide](https://lucide.dev/icons), copiados uno por uno a `components/Icon.astro` con su mismo nombre y la clase `i-<nombre>`. Trazo de 1,75. Sin emojis ni dependencias de íconos. Los logos de marcas y tecnologías salen de [Simple Icons](https://simpleicons.org), con relleno. Con `title`, el ícono se anuncia al lector de pantalla; sin `title`, es decorativo.
 
 ### Link con flecha (`.link-arrow`)
 Texto con flecha y el mismo subrayado que `.link` (todos los links de texto, email incluido): línea fina en reposo que se llena de amarillo en hover. Usa `width: fit-content`: nunca se estira dentro de un flex o grid.
@@ -101,10 +101,12 @@ Texto con flecha y el mismo subrayado que `.link` (todos los links de texto, ema
 - Sticky. Al hacer scroll gana fondo con blur y borde inferior.
 - Nav desktop en una "pista" con borde. Ítem activo: **dot amarillo adelante + la pestaña se ensancha + pastilla `--surface-hi` sin borde**.
 - La pastilla tiene `view-transition-name: nav-pill`: entre páginas viaja con resorte y se estira y aplasta en el trayecto. El texto del nav aparece de inmediato; la pastilla se mezcla con `lighten` para no taparlo.
-- En mobile: botón de menú con `popover` nativo, a pantalla completa, con los links grandes numerados y entrada escalonada.
+- En mobile: botón de menú sin borde ni fondo (fondo solo en hover, y no en táctil), con `popover` nativo, a pantalla completa, con los links grandes numerados y entrada escalonada.
 
 ### Consolas
 Terminal, formulario y filtro comparten `.win-frame`, `.win-bar`, `.win-title`, `.win-body` y `.win-cursor` (`global.css`) y `WinControls`: mismo marco, barra, tipografía, padding y cursor. Lo propio de cada una va en su componente.
+
+En pantallas táctiles, al enfocar un campo del formulario, su pregunta sube hasta debajo del header para que el teclado no la tape.
 
 ### Terminal del hero (`components/Terminal.astro` + `scripts/terminal.ts`)
 - Barra estilo Windows Terminal: pestañas (`ilan.ts`, `git log`, `claude`) con barra de progreso a la izquierda, botón de pausa (solo ícono) y controles de ventana a la derecha (`WinControls`, decorativos). Cuerpo de alto fijo (sin CLS). Sin los 3 dots de Mac.
@@ -170,7 +172,7 @@ Con la identidad del sitio (banda navy, Space Grotesk y Fira Code, línea de tie
 Mismo estilo que `public/og.png`, la imagen de la home: logo, `->función();`, título y subtítulo en amarillo. Una por página, generadas desde `src/data/pages.ts`.
 
 ### Chips
-Solo para etiquetas de proyectos. El stack de `/curriculum` va como lista de texto: las pastillas parecían links o filtros.
+Solo para etiquetas de proyectos. El stack de `/curriculum` no usa pastillas, porque parecían links o filtros: arriba, una grilla de íconos de Simple Icons, en un solo color y con `<title>`, y un tooltip con hover, foco o toque que se cierra con Escape; abajo, la lista de texto por categoría, con todo el stack. El PDF usa solo texto.
 
 Mono 0.8125rem, borde `--line-hi` y radio 999px. En el CV entran escalonados.
 

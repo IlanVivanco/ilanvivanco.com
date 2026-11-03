@@ -9,7 +9,7 @@ import { focus } from '../data/site'
 import { projects } from '../data/projects'
 
 const featured = projects.find((p) => p.featured) ?? projects[0]
-const focusIcons = { wordpress: 'layers', js: 'code', ai: 'spark', api: 'plug', team: 'users' } as const
+const focusIcons = { wordpress: 'layers', js: 'code', ai: 'sparkles', api: 'plug', team: 'users' } as const
 ---
 
 <Base>
@@ -17,9 +17,9 @@ const focusIcons = { wordpress: 'layers', js: 'code', ai: 'spark', api: 'plug', 
 		slot="head"
 		rel="preload"
 		as="image"
-		href="/img/ilan-sq-480.webp"
+		href="/img/ilan-sq-240.webp"
 		imagesrcset="/img/ilan-sq-240.webp 240w, /img/ilan-sq-480.webp 480w"
-		imagesizes="140px"
+		imagesizes="clamp(96px, 10vw, 136px)"
 		fetchpriority="high"
 	/>
 	<!-- HERO -->
@@ -31,7 +31,7 @@ const focusIcons = { wordpress: 'layers', js: 'code', ai: 'spark', api: 'plug', 
 						<img
 							src="/img/ilan-sq-240.webp"
 							srcset="/img/ilan-sq-240.webp 240w, /img/ilan-sq-480.webp 480w"
-							sizes="140px"
+							sizes="clamp(96px, 10vw, 136px)"
 							width="240"
 							height="240"
 							alt="Ilán Vivanco sonriendo, con barba y camisa estampada, sobre un fondo gris"
