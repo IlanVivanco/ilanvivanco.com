@@ -85,7 +85,7 @@ Reglas:
 ### Flechas (consistencia)
 - `↗` (`arrow-up-right`) **rota 45°** en hover/focus, en botones, links y tarjetas.
 - `→` (`arrow-right`) se desplaza 3px. `download` baja 2px.
-- Los íconos son SVG inline de [Lucide](https://lucide.dev/icons), copiados uno por uno a `components/Icon.astro` con su mismo nombre y la clase `i-<nombre>`. Trazo de 1,75. Sin emojis ni dependencias de íconos. Los logos de marcas salen de [Simple Icons](https://simpleicons.org), con relleno.
+- Los íconos son SVG inline de [Lucide](https://lucide.dev/icons), copiados uno por uno a `components/Icon.astro` con su mismo nombre y la clase `i-<nombre>`. Trazo de 1,75. Sin emojis ni dependencias de íconos. Los logos de marcas y tecnologías salen de [Simple Icons](https://simpleicons.org), con relleno. Con `title`, el ícono se anuncia al lector de pantalla; sin `title`, es decorativo.
 
 ### Link con flecha (`.link-arrow`)
 Texto con flecha y el mismo subrayado que `.link` (todos los links de texto, email incluido): línea fina en reposo que se llena de amarillo en hover. Usa `width: fit-content`: nunca se estira dentro de un flex o grid.
@@ -172,7 +172,7 @@ Con la identidad del sitio (banda navy, Space Grotesk y Fira Code, línea de tie
 Mismo estilo que `public/og.png`, la imagen de la home: logo, `->función();`, título y subtítulo en amarillo. Una por página, generadas desde `src/data/pages.ts`.
 
 ### Chips
-Solo para etiquetas de proyectos. El stack de `/curriculum` va como lista de texto: las pastillas parecían links o filtros.
+Solo para etiquetas de proyectos. El stack de `/curriculum` no usa pastillas, porque parecían links o filtros: van íconos sueltos de Simple Icons, en un solo color y con `<title>`, y un tooltip con hover, foco o toque que se cierra con Escape. Lo que no tiene ícono va como texto. El PDF usa solo texto.
 
 Mono 0.8125rem, borde `--line-hi` y radio 999px. En el CV entran escalonados.
 

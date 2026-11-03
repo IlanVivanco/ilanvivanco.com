@@ -238,6 +238,42 @@ const es: Cv = {
 	],
 }
 
+// Íconos del stack en /curriculum: nombre tal como figura en `stack` → ícono de Icon.astro. Los ítems "A / B" se separan.
+// Lo que no está acá se muestra como texto. El PDF para ATS siempre usa texto.
+export const stackIcons: Record<string, string> = {
+	'WordPress': 'wordpress',
+	'WooCommerce': 'woocommerce',
+	'PHP': 'php',
+	'MySQL': 'mysql',
+	'Laravel': 'laravel',
+	'JavaScript': 'javascript',
+	'TypeScript': 'typescript',
+	'HTML5': 'html5',
+	'CSS3': 'css',
+	'Vue': 'vuedotjs',
+	'Nuxt': 'nuxt',
+	'React': 'react',
+	'Astro': 'astro',
+	'jQuery': 'jquery',
+	'Tailwind CSS': 'tailwindcss',
+	'Sass': 'sass',
+	'Node.js': 'nodedotjs',
+	'n8n': 'n8n',
+	'Stripe': 'stripe',
+	'PayPal': 'paypal',
+	'HubSpot': 'hubspot',
+	'MCP': 'modelcontextprotocol',
+	'Git': 'git',
+	'GitHub Actions': 'githubactions',
+	'Docker': 'docker',
+	'Bash': 'gnubash',
+	'Cloudflare': 'cloudflare',
+	'AWS': 'amazonwebservices',
+	'WP Engine': 'wpengine',
+	'Pantheon': 'pantheon',
+	'Netlify': 'netlify',
+}
+
 // `en` se suma en la Fase 2. El generador del PDF toma los idiomas de acá.
 export const cv: { es: Cv; en?: Cv } = { es }
 

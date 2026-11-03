@@ -3,9 +3,13 @@ import Base from '../layouts/Base.astro'
 import Fn from '../components/Fn.astro'
 import Icon from '../components/Icon.astro'
 import { site } from '../data/site'
-import { cv, period, yearPeriod } from '../data/cv'
+import { cv, period, stackIcons, yearPeriod } from '../data/cv'
 
 const { summary, experience, earlier, stack, education, languages } = cv.es
+const stackParts = (items: string[]) => {
+	const labels = items.flatMap((item) => (item.split(' / ').every((l) => stackIcons[l]) ? item.split(' / ') : [item]))
+	return { icons: labels.filter((l) => stackIcons[l]), text: labels.filter((l) => !stackIcons[l]) }
+}
 ---
 
 <Base
@@ -107,12 +111,29 @@ const { summary, experience, earlier, stack, education, languages } = cv.es
 				Stack
 			</h2>
 			<dl class="stack-list" data-reveal-group>
-				{stack.map((g) => (
-					<div class="stack-row" data-reveal>
-						<dt class="mono">{g.group}</dt>
-						<dd>{g.items.join(', ')}</dd>
-					</div>
-				))}
+				{stack.map((g) => {
+					const { icons, text } = stackParts(g.items)
+					return (
+						<div class="stack-row" data-reveal>
+							<dt class="mono">{g.group}</dt>
+							<dd>
+								{icons.length > 0 && (
+									<ul class="tech" role="list">
+										{icons.map((label) => (
+											<li class="tech-item" tabindex="0">
+												<Icon name={stackIcons[label] as 'wordpress'} size={24} title={label} />
+												<span class="tech-tip mono" aria-hidden="true">
+													{label}
+												</span>
+											</li>
+										))}
+									</ul>
+								)}
+								{text.length > 0 && <p class="tech-text">{text.join(', ')}</p>}
+							</dd>
+						</div>
+					)
+				})}
 			</dl>
 		</div>
 	</section>
@@ -144,6 +165,30 @@ const { summary, experience, earlier, stack, education, languages } = cv.es
 		</div>
 	</section>
 </Base>
+
+<script>
+	// WCAG 1.4.13: Escape cierra el tooltip sin mover el foco ni el puntero
+	const lists = document.querySelectorAll<HTMLElement>('.tech')
+	const show = (on: boolean) => lists.forEach((l) => l.classList.toggle('is-dismissed', !on))
+	document.addEventListener('keydown', (e) => e.key === 'Escape' && show(false))
+	// Corre el tooltip lo justo para que no se corte en el borde de la pantalla
+	const fit = (tip: HTMLElement | null | undefined) => {
+		if (!tip) return
+		tip.style.removeProperty('--shift')
+		const { left, right } = tip.getBoundingClientRect()
+		const edge = document.documentElement.clientWidth - 8
+		const shift = left < 8 ? 8 - left : right > edge ? edge - right : 0
+		if (shift) tip.style.setProperty('--shift', `${shift}px`)
+	}
+	lists.forEach((l) =>
+		['pointerover', 'focusin'].forEach((type) =>
+			l.addEventListener(type, (e) => {
+				show(true)
+				fit((e.target as HTMLElement).closest('.tech-item')?.querySelector<HTMLElement>('.tech-tip'))
+			})
+		)
+	)
+</script>
 
 <style>
 	.cv-hero {
@@ -397,7 +442,7 @@ const { summary, experience, earlier, stack, education, languages } = cv.es
 		color: var(--text-soft);
 	}
 
-	/* Stack como texto: las pastillas parecían links o filtros */
+	/* Stack con íconos sueltos y texto: las pastillas parecían links o filtros */
 	.stack-list {
 		margin: 0;
 		border-top: 1px solid var(--line);
@@ -415,8 +460,61 @@ const { summary, experience, earlier, stack, education, languages } = cv.es
 		color: var(--muted);
 	}
 	.stack-row dd {
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
 		margin: 0;
 		color: var(--text-soft);
+	}
+	.tech {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 4px;
+		margin: -6px 0 0 -6px;
+		padding: 0;
+	}
+	.tech-item {
+		position: relative;
+		display: flex;
+		padding: 6px;
+		border-radius: 6px;
+		transition: color 0.15s;
+	}
+	/* Sin hover en el svg: su <title> es para lectores de pantalla y no debe sumar el tooltip nativo */
+	.tech-item :global(svg) {
+		pointer-events: none;
+	}
+	.tech-item:hover,
+	.tech-item:focus {
+		color: var(--yellow-hi);
+	}
+	.tech-tip {
+		position: absolute;
+		bottom: 100%;
+		left: 50%;
+		z-index: 5;
+		padding: 4px 8px;
+		border: 1px solid var(--line-hi);
+		border-radius: 6px;
+		background: var(--bg-raised);
+		color: var(--text);
+		font-size: 0.75rem;
+		white-space: nowrap;
+		opacity: 0;
+		pointer-events: none;
+		translate: calc(-50% + var(--shift, 0px)) 0;
+		transition: opacity 0.15s;
+	}
+	.tech-item:hover .tech-tip,
+	.tech-item:focus .tech-tip {
+		opacity: 1;
+		pointer-events: auto;
+	}
+	.tech.is-dismissed .tech-tip {
+		opacity: 0;
+	}
+	.tech-text {
+		margin: 0;
 	}
 	.two {
 		display: grid;

@@ -1,6 +1,10 @@
 # Changelog
 
-## [2.1.1] - 2026-11-03
+## [2.2.0] - 2026-11-03
+
+### Agregado
+
+- **Stack con íconos en `/curriculum`**, con su nombre para lectores de pantalla y un tooltip con hover, foco o toque. El PDF sigue en texto.
 
 ### Cambiado
 
@@ -9,6 +13,7 @@
 - **Stats:** el LCP publicado en desktop pasa a 0,3 s, medido en producción.
 - **Íconos:** los de interfaz salen de Lucide y los logos de marcas de Simple Icons, copiados de a uno y sin dependencias. Se sacaron los que no se usaban.
 - **Botón de menú:** sin borde ni fondo.
+- **Logo de EpicDevs en las redes:** sólido, en un solo tono.
 
 ## [2.1.0] - 2026-11-03
 
@@ -68,6 +73,6 @@ Reescritura completa del sitio: de Nuxt 2 a Astro 7 estático, con diseño nuevo
 - **Google Analytics:** reemplazado por Cloudflare Web Analytics.
 - **Feed de Instagram anterior:** dependía de NoCodeAPI, Supabase y una función de Netlify, y ya estaba roto.
 
-[2.1.1]: https://github.com/IlanVivanco/ilanvivanco.com/compare/v2.1.0...v2.1.1
+[2.2.0]: https://github.com/IlanVivanco/ilanvivanco.com/compare/v2.1.0...v2.2.0
 [2.1.0]: https://github.com/IlanVivanco/ilanvivanco.com/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/IlanVivanco/ilanvivanco.com/compare/v1.0.0...v2.0.0
