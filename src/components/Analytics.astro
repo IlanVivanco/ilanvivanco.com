@@ -1,6 +1,8 @@
 ---
 // Cloudflare Web Analytics: sin cookies. Solo en producción y con token.
-const token = import.meta.env.PROD ? import.meta.env.PUBLIC_CF_BEACON_TOKEN : ''
+// Netlify define CONTEXT en sus builds: los previews no cuentan visitas.
+const isPreview = process.env.CONTEXT && process.env.CONTEXT !== 'production'
+const token = import.meta.env.PROD && !isPreview ? import.meta.env.PUBLIC_CF_BEACON_TOKEN : ''
 ---
 
 {token && <script is:inline define:vars={{ token }}>
