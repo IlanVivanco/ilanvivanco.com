@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1.1] - 2026-11-03
+
+### Cambiado
+
+- **Formulario en mobile:** al enfocar un campo, la pregunta sube hasta debajo del header para que el teclado no la tape.
+- **Foto del hero:** el `sizes` refleja el tamaño real, así mobile baja la versión de 240 px en lugar de la de 480 px.
+- **Stats:** el LCP publicado en desktop pasa a 0,3 s, medido en producción.
+
 ## [2.1.0] - 2026-11-03
 
 ### Agregado
@@ -58,5 +66,6 @@ Reescritura completa del sitio: de Nuxt 2 a Astro 7 estático, con diseño nuevo
 - **Google Analytics:** reemplazado por Cloudflare Web Analytics.
 - **Feed de Instagram anterior:** dependía de NoCodeAPI, Supabase y una función de Netlify, y ya estaba roto.
 
+[2.1.1]: https://github.com/IlanVivanco/ilanvivanco.com/compare/v2.1.0...v2.1.1
 [2.1.0]: https://github.com/IlanVivanco/ilanvivanco.com/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/IlanVivanco/ilanvivanco.com/compare/v1.0.0...v2.0.0
