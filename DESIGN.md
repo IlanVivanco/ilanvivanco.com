@@ -101,7 +101,7 @@ Texto con flecha y el mismo subrayado que `.link` (todos los links de texto, ema
 - Sticky. Al hacer scroll gana fondo con blur y borde inferior.
 - Nav desktop en una "pista" con borde. Ítem activo: **dot amarillo adelante + la pestaña se ensancha + pastilla `--surface-hi` sin borde**.
 - La pastilla tiene `view-transition-name: nav-pill`: entre páginas viaja con resorte y se estira y aplasta en el trayecto. El texto del nav aparece de inmediato; la pastilla se mezcla con `lighten` para no taparlo.
-- En mobile: botón de menú sin borde ni fondo (fondo solo en hover), con `popover` nativo, a pantalla completa, con los links grandes numerados y entrada escalonada.
+- En mobile: botón de menú sin borde ni fondo (fondo solo en hover, y no en táctil), con `popover` nativo, a pantalla completa, con los links grandes numerados y entrada escalonada.
 
 ### Consolas
 Terminal, formulario y filtro comparten `.win-frame`, `.win-bar`, `.win-title`, `.win-body` y `.win-cursor` (`global.css`) y `WinControls`: mismo marco, barra, tipografía, padding y cursor. Lo propio de cada una va en su componente.

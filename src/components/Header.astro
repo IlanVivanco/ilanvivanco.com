@@ -212,8 +212,11 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
 		cursor: pointer;
 		transition: background 0.2s;
 	}
-	.menu-btn:hover {
-		background: var(--bg-raised);
+	/* En táctil, el hover queda pegado después de tocar */
+	@media (hover: hover) {
+		.menu-btn:hover {
+			background: var(--bg-raised);
+		}
 	}
 
 	.mobile-menu {
