@@ -85,7 +85,7 @@ Reglas:
 ### Flechas (consistencia)
 - `↗` (`arrow-up-right`) **rota 45°** en hover/focus, en botones, links y tarjetas.
 - `→` (`arrow-right`) se desplaza 3px. `download` baja 2px.
-- Los íconos son inline SVG de trazo (`components/Icon.astro`), con la clase `i-<nombre>`. Sin emojis ni librerías de íconos.
+- Los íconos son SVG inline de [Lucide](https://lucide.dev/icons), copiados uno por uno a `components/Icon.astro` con su mismo nombre y la clase `i-<nombre>`. Trazo de 1,75. Sin emojis ni dependencias de íconos. Los logos de marcas salen de [Simple Icons](https://simpleicons.org), con relleno.
 
 ### Link con flecha (`.link-arrow`)
 Texto con flecha y el mismo subrayado que `.link` (todos los links de texto, email incluido): línea fina en reposo que se llena de amarillo en hover. Usa `width: fit-content`: nunca se estira dentro de un flex o grid.
@@ -101,7 +101,7 @@ Texto con flecha y el mismo subrayado que `.link` (todos los links de texto, ema
 - Sticky. Al hacer scroll gana fondo con blur y borde inferior.
 - Nav desktop en una "pista" con borde. Ítem activo: **dot amarillo adelante + la pestaña se ensancha + pastilla `--surface-hi` sin borde**.
 - La pastilla tiene `view-transition-name: nav-pill`: entre páginas viaja con resorte y se estira y aplasta en el trayecto. El texto del nav aparece de inmediato; la pastilla se mezcla con `lighten` para no taparlo.
-- En mobile: botón de menú con `popover` nativo, a pantalla completa, con los links grandes numerados y entrada escalonada.
+- En mobile: botón de menú sin borde ni fondo (fondo solo en hover), con `popover` nativo, a pantalla completa, con los links grandes numerados y entrada escalonada.
 
 ### Consolas
 Terminal, formulario y filtro comparten `.win-frame`, `.win-bar`, `.win-title`, `.win-body` y `.win-cursor` (`global.css`) y `WinControls`: mismo marco, barra, tipografía, padding y cursor. Lo propio de cada una va en su componente.

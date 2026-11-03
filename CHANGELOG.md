@@ -7,6 +7,8 @@
 - **Formulario en mobile:** al enfocar un campo, la pregunta sube hasta debajo del header para que el teclado no la tape.
 - **Foto del hero:** el `sizes` refleja el tamaño real, así mobile baja la versión de 240 px en lugar de la de 480 px.
 - **Stats:** el LCP publicado en desktop pasa a 0,3 s, medido en producción.
+- **Íconos:** los de interfaz salen de Lucide y los logos de marcas de Simple Icons, copiados de a uno y sin dependencias. Se sacaron los que no se usaban.
+- **Botón de menú:** sin borde ni fondo.
 
 ## [2.1.0] - 2026-11-03
 
