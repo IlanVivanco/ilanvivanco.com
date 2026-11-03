@@ -1,6 +1,6 @@
 # Changelog
 
-## [Sin publicar]
+## [2.1.0] - 2026-11-03
 
 ### Agregado
 
@@ -11,6 +11,11 @@
 
 ### Cambiado
 
+- **Cabeceras de seguridad y caché:** `nosniff`, `Referrer-Policy`, `Permissions-Policy`, protección contra framing, y caché `immutable` en `/_astro/*`.
+- **`ilanvivanco.netlify.app`** redirige al dominio principal.
+- **Títulos:** `/curriculum` y `/portfolio` tienen un `<title>` más descriptivo. Los H1 no cambian.
+- **Stats:** rotan cada 7,5 s en lugar de 5,6 s, y el LCP publicado en desktop pasa a 0,5 s.
+- **Terminal:** el scroll ya no fuerza un reflow por cada tecla.
 - **`/privacidad`** pasa a `noindex, follow` y sale del sitemap.
 - **Stats:** "11+ años en EpicDevs, 8+ liderando ingeniería" reemplaza a "11+ años liderando ingeniería".
 - **Copy:** sin frases repetidas entre páginas y sin el plazo de respuesta en días hábiles. Mate y café juntos solo en el stat de la home.
@@ -53,4 +58,5 @@ Reescritura completa del sitio: de Nuxt 2 a Astro 7 estático, con diseño nuevo
 - **Google Analytics:** reemplazado por Cloudflare Web Analytics.
 - **Feed de Instagram anterior:** dependía de NoCodeAPI, Supabase y una función de Netlify, y ya estaba roto.
 
+[2.1.0]: https://github.com/IlanVivanco/ilanvivanco.com/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/IlanVivanco/ilanvivanco.com/compare/v1.0.0...v2.0.0

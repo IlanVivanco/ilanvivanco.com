@@ -62,7 +62,7 @@ netlify.toml          build, redirects y cabeceras
 6. **Dependencias:** no sumar librerías de UI ni de animación sin justificar su peso contra el presupuesto. Primero CSS y APIs nativas (View Transitions, popover, `<details>`, IntersectionObserver).
 7. **Imágenes:** WebP con tamaño fijo, `width`/`height` siempre, `loading="lazy"` fuera del primer viewport, `alt` descriptivo.
 8. **Copy y humor:** español rioplatense con voseo, primera persona, con signos de apertura (`¿`, `¡`), sin raya larga ni frases hechas, posicionamiento de liderazgo técnico, con humor técnico y autocrítico (un guiño por sección, como máximo; reglas en `DESIGN.md §8`). Las cifras y anécdotas son reales o se marcan como aproximadas (`approx: true`, `~`, `+`). Nunca inventar datos, anécdotas ni clientes. Sin humor en el CV para ATS ni en lo legal.
-9. **Rutas:** las URLs públicas son contrato (`/`, `/curriculum`, `/portfolio`, `/contacto`, `/sobre-mi`, más lo que defina `netlify.toml`). Cambiar una ruta implica un redirect 301. Si cambia una página pública, se actualiza `src/data/pages.ts`, incluida la fecha `updated` (el `lastmod` del sitemap).
+9. **Rutas:** las URLs públicas son contrato (`/`, `/curriculum`, `/portfolio`, `/contacto`, `/sobre-mi`, más lo que defina `netlify.toml`). Cambiar una ruta implica un redirect 301. Si cambia una página pública, se actualiza `src/data/pages.ts`, y su fecha `updated` (el `lastmod` del sitemap) se cambia en el bump de versión.
 10. **La terminal del hero usa siempre `~/ilan`.** El contenido de las escenas sale del CV real.
 11. **Privacidad:** el email nunca va en texto plano en el HTML (usar `encodeMail`/`decodeMail` de `src/lib/mail.ts`). Solo el PDF del CV lo lleva en claro. Sin nombres de familiares en el sitio. Analytics solo sin cookies (Cloudflare Web Analytics): sin GA y sin banner. La única cookie es `cf_clearance`, de seguridad de Cloudflare, y figura en `/privacidad`: si cambia la configuración de Cloudflare, revisar ese texto.
 12. **Formulario:** el `name` del form (`contact-form`) y sus campos (`name`, `email`, `tema`, `message`, `subject`, `fake`) coinciden con los de Netlify. `data-step` usa el mismo nombre que el campo. Con JS, `subject` se arma con el nombre y el tema. Netlify titula cada campo con su `<label>`: por eso es oculto y corto, y la pregunta visible se asocia con `aria-labelledby`.
@@ -84,6 +84,7 @@ netlify.toml          build, redirects y cabeceras
 
 - Ramas descriptivas (`feat/...`, `fix/...`), commits chicos en imperativo y en español o inglés de forma consistente dentro de un PR.
 - **Sin atribución de IA en commits ni PRs:** nada de `Co-Authored-By` de asistentes ni links a sesiones.
+- **Bump de versión:** se actualizan `package.json`, `package-lock.json` y `CHANGELOG.md`, y `updated` en `src/data/pages.ts` en cada página cuyo contenido cambió desde la versión anterior. Los rebuilds no tocan el `lastmod`.
 - No commitear `dist/`, `.astro/`, `node_modules/` ni secretos (`.env`).
 
 ## Pendientes conocidos

@@ -1,5 +1,6 @@
 // Páginas públicas del sitio: alimentan el sitemap, el JSON-LD y las imágenes OG.
-// `updated` (YYYY-MM-DD) es el lastmod del sitemap: se cambia a mano cuando cambia el contenido de la página.
+// `updated` (YYYY-MM-DD) es el lastmod del sitemap: se cambia en cada bump de versión, solo en las páginas
+// cuyo contenido cambió. Los rebuilds (por ejemplo, el semanal de Instagram) no cuentan.
 // `noindex`: se publica y tiene imagen OG, pero no va al sitemap.
 // Las URLs son contrato: cambiar una implica un redirect 301 en netlify.toml.
 
