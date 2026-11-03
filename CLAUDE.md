@@ -87,6 +87,4 @@ netlify.toml          build, redirects y cabeceras
 
 ## Pendientes conocidos
 
-- Cargar `PUBLIC_CF_BEACON_TOKEN` en Netlify al lanzar y revisar la configuración de Cloudflare (ver `MIGRATION.md`).
-- Crear el build hook de producción y cargarlo en `REBUILD_HOOK_URL` al lanzar (ver `PLAN-instagram.md`).
 - **Fase 2:** sitio y CV en inglés, blog, y portfolio actualizado con clientes actuales de EpicDevs y capturas nuevas.

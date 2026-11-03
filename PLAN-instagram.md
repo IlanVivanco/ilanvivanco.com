@@ -1,6 +1,6 @@
 # Instagram (Fase 1B)
 
-**Estado: implementado.** Falta un paso al lanzar (abajo).
+**Estado: implementado.**
 
 ## Cómo funciona
 
@@ -13,9 +13,9 @@ Las fotos se publican solas, sin revisión. Por eso no se muestra el caption: po
 
 Si Behold o Instagram fallan, el build sigue y `/sobre-mi` se publica sin la grilla, hasta el próximo build.
 
-## Al lanzar
+## Rebuild semanal
 
-Crear un build hook de producción en Netlify (Site configuration → Build & deploy → Build hooks) y guardar su URL en la variable `REBUILD_HOOK_URL`. Sin ella, la función no hace nada y las fotos solo se actualizan con cada deploy.
+Usa el build hook de `main` guardado en la variable `REBUILD_HOOK_URL` de Netlify. Sin ella, la función no hace nada y las fotos solo se actualizan con cada deploy.
 
 ## Si cambia Behold
 
