@@ -242,7 +242,6 @@ const es: Cv = {
 // Lo que no está acá se muestra como texto. El PDF para ATS siempre usa texto.
 export const stackIcons: Record<string, string> = {
 	'WordPress': 'wordpress',
-	'WooCommerce': 'woocommerce',
 	'PHP': 'php',
 	'MySQL': 'mysql',
 	'Laravel': 'laravel',
