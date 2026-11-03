@@ -9,13 +9,15 @@ import { pageSchema, type PageSchemaType } from '../lib/schema'
 
 interface Props {
 	title?: string
+	// Reemplaza el <title> completo, sin el sufijo. El H1 no cambia.
+	fullTitle?: string
 	description?: string
 	schemaType?: PageSchemaType
 	schemaMainEntity?: Record<string, unknown>
 	noindex?: boolean
 }
-const { title, description = site.description, schemaType, schemaMainEntity, noindex = false } = Astro.props
-const pageTitle = title ? `${title} | Ilán Vivanco` : site.title
+const { title, fullTitle, description = site.description, schemaType, schemaMainEntity, noindex = false } = Astro.props
+const pageTitle = fullTitle ?? (title ? `${title} | Ilán Vivanco` : site.title)
 const pathname = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '/') || '/'
 const canonical = new URL(pathname, site.url).href
 const ogImage = new URL(ogPath(pathname), site.url).href
