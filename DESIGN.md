@@ -106,6 +106,8 @@ Texto con flecha y el mismo subrayado que `.link` (todos los links de texto, ema
 ### Consolas
 Terminal, formulario y filtro comparten `.win-frame`, `.win-bar`, `.win-title`, `.win-body` y `.win-cursor` (`global.css`) y `WinControls`: mismo marco, barra, tipografía, padding y cursor. Lo propio de cada una va en su componente.
 
+En pantallas táctiles, al enfocar un campo del formulario, su pregunta sube hasta debajo del header para que el teclado no la tape.
+
 ### Terminal del hero (`components/Terminal.astro` + `scripts/terminal.ts`)
 - Barra estilo Windows Terminal: pestañas (`ilan.ts`, `git log`, `claude`) con barra de progreso a la izquierda, botón de pausa (solo ícono) y controles de ventana a la derecha (`WinControls`, decorativos). Cuerpo de alto fijo (sin CLS). Sin los 3 dots de Mac.
 - **Siempre `~/ilan`** como path.

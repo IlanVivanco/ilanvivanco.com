@@ -409,6 +409,26 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 				.querySelectorAll<HTMLElement>('.opt')
 				.forEach((o) => o.addEventListener('pointerup', () => setTimeout(next, 180)))
 
+			// En pantallas táctiles el teclado tapa la mitad de abajo: la pregunta activa sube hasta debajo del header.
+			if (matchMedia('(pointer: coarse)').matches) {
+				let raiseUntil = 0
+				const raise = () => {
+					const field = document.activeElement
+					if (performance.now() > raiseUntil || !(field instanceof HTMLElement) || !form.contains(field)) return
+					if (field.matches('input[type=text], input[type=email], textarea')) {
+						field.closest('[data-step]')?.scrollIntoView({ block: 'start' })
+					}
+				}
+				form.addEventListener('focusin', () => {
+					raiseUntil = performance.now() + 800
+					// El form está cerca del final de la página: sin este espacio, el scroll no alcanza para subirlo.
+					form.closest('.ct')?.classList.add('is-typing')
+					requestAnimationFrame(raise)
+				})
+				// El teclado abre después del foco y mueve el viewport visual. Pasado ese momento, el scroll es del usuario.
+				window.visualViewport?.addEventListener('resize', raise)
+			}
+
 			const grow = () => {
 				textarea.style.height = 'auto'
 				textarea.style.height = `${Math.min(textarea.scrollHeight, 280)}px`
@@ -660,6 +680,11 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 		color: var(--muted);
 	}
 
+	.ct.is-typing {
+		padding-bottom: 50vh;
+		/* El scroll necesita el alto final en este frame, también con reduced-motion */
+		transition: none !important;
+	}
 	.con-body {
 		display: flex;
 		flex-direction: column;

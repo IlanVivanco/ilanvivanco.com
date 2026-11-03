@@ -13,7 +13,7 @@ import { chromium } from 'playwright'
 import { site } from '../../src/data/site.ts'
 import { serveDist } from '../lib/serve-dist.mjs'
 import { runAnalyticsChecks } from './analytics.mjs'
-import { runFormChecks } from './form.mjs'
+import { runFormChecks, runFormViewportCheck } from './form.mjs'
 import { runInteractionChecks } from './interactions.mjs'
 import { runStaticChecks } from './static.mjs'
 
@@ -74,6 +74,7 @@ try {
 			await page.close()
 		}
 		if (vp.name === 'desktop') await runFormChecks(ctx, BASE, site.email, log)
+		else await runFormViewportCheck(ctx, BASE, log)
 		await ctx.close()
 	}
 	await runInteractionChecks(browser, BASE, axeSource, AXE_TAGS, log)

@@ -21,6 +21,18 @@ async function submit(ctx, base, status) {
 	return { page, posts }
 }
 
+// Mobile: al enfocar un campo, la pregunta queda arriba, donde el teclado no la tapa.
+export async function runFormViewportCheck(ctx, base, log) {
+	const page = await ctx.newPage()
+	await page.goto(`${base}/contacto`, { waitUntil: 'networkidle' })
+	await page.locator('#f-name').tap()
+	await page.waitForTimeout(900)
+	const top = await page.evaluate(() => document.querySelector('[data-step=name]').getBoundingClientRect().top)
+	const header = await page.evaluate(() => parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop))
+	log(Math.abs(top - header) < 40, `form: el campo enfocado sube debajo del header (top ${Math.round(top)} px)`)
+	await page.close()
+}
+
 export async function runFormChecks(ctx, base, email, log) {
 	const steps = await ctx.newPage()
 	await steps.goto(`${base}/contacto`, { waitUntil: 'networkidle' })
