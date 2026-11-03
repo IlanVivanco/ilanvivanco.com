@@ -4,7 +4,7 @@
 
 ### Agregado
 
-- **Stack con íconos en `/curriculum`**, con su nombre para lectores de pantalla y un tooltip con hover, foco o toque. El PDF sigue en texto.
+- **Grilla de íconos en el stack de `/curriculum`**, sobre las categorías en texto, con el nombre de cada tecnología para lectores de pantalla y un tooltip con hover, foco o toque. El PDF sigue en texto.
 
 ### Cambiado
 

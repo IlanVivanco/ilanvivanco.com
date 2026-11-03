@@ -172,7 +172,7 @@ Con la identidad del sitio (banda navy, Space Grotesk y Fira Code, línea de tie
 Mismo estilo que `public/og.png`, la imagen de la home: logo, `->función();`, título y subtítulo en amarillo. Una por página, generadas desde `src/data/pages.ts`.
 
 ### Chips
-Solo para etiquetas de proyectos. El stack de `/curriculum` no usa pastillas, porque parecían links o filtros: van íconos sueltos de Simple Icons, en un solo color y con `<title>`, y un tooltip con hover, foco o toque que se cierra con Escape. Lo que no tiene ícono va como texto. El PDF usa solo texto.
+Solo para etiquetas de proyectos. El stack de `/curriculum` no usa pastillas, porque parecían links o filtros: arriba, una grilla de íconos de Simple Icons, en un solo color y con `<title>`, y un tooltip con hover, foco o toque que se cierra con Escape; abajo, la lista de texto por categoría, con todo el stack. El PDF usa solo texto.
 
 Mono 0.8125rem, borde `--line-hi` y radio 999px. En el CV entran escalonados.
 

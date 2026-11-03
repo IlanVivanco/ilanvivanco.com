@@ -239,7 +239,7 @@ const es: Cv = {
 }
 
 // Íconos del stack en /curriculum: nombre tal como figura en `stack` → ícono de Icon.astro. Los ítems "A / B" se separan.
-// Lo que no está acá se muestra como texto. El PDF para ATS siempre usa texto.
+// Lo que no está acá queda solo en la lista de texto, que siempre muestra todo el stack.
 export const stackIcons: Record<string, string> = {
 	'WordPress': 'wordpress',
 	'PHP': 'php',
