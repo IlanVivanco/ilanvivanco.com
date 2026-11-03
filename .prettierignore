@@ -1,0 +1,9 @@
+dist
+.astro
+.netlify
+.lighthouseci
+node_modules
+public
+package-lock.json
+*.md
+src/data/instagram.generated.json

@@ -1,0 +1,30 @@
+---
+// Controles de ventana estilo Linux y Windows: decorativos, como el resto de la barra.
+---
+
+<span class="win" aria-hidden="true">
+	<svg viewBox="0 0 12 12" width="10" height="10">
+		<path d="M1.5 6h9"></path>
+	</svg>
+	<svg viewBox="0 0 12 12" width="10" height="10">
+		<rect x="2" y="2" width="8" height="8"></rect>
+	</svg>
+	<svg viewBox="0 0 12 12" width="10" height="10">
+		<path d="m2 2 8 8M10 2l-8 8"></path>
+	</svg>
+</span>
+
+<style>
+	.win {
+		flex: none;
+		display: inline-flex;
+		align-items: center;
+		gap: 14px;
+		color: color-mix(in oklab, var(--muted) 65%, transparent);
+	}
+	svg {
+		fill: none;
+		stroke: currentColor;
+		stroke-width: 1;
+	}
+</style>

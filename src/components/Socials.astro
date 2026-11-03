@@ -1,0 +1,43 @@
+---
+// Redes como íconos. Inline, sin requests ni JS: cada uno suma unos cientos de bytes al HTML.
+import { site } from '../data/site'
+import Icon from './Icon.astro'
+---
+
+<ul class="socials" role="list">
+	{site.socials.map((s) => (
+		<li>
+			<a href={s.href} target="_blank" rel="noopener" aria-label={s.label} title={s.label}>
+				<Icon name={s.icon as 'linkedin'} size={20} />
+			</a>
+		</li>
+	))}
+</ul>
+
+<style>
+	.socials {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 4px;
+		margin: 0;
+	}
+	a {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 44px;
+		height: 44px;
+		border-radius: 10px;
+		color: var(--text-soft);
+		transition:
+			color 0.2s,
+			background-color 0.2s,
+			translate 0.3s var(--ease-out);
+	}
+	a:hover,
+	a:focus-visible {
+		color: var(--yellow-hi);
+		background: var(--surface);
+		translate: 0 -2px;
+	}
+</style>

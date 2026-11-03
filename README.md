@@ -2,28 +2,64 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/4e9fe96e-7e5a-4c39-9592-093ce60851c5/deploy-status)](https://app.netlify.com/sites/ilanvivanco/deploys)
 
-Hi, I'm Ilán Vivanco! I'm a Senior Full Stack Web Developer.
-🚀 This is the codebase behind my personal portfolio website.
+Sitio personal de Ilán Vivanco: estático, en modo oscuro y sin frameworks en el cliente.
 
-If you have any suggestions, feel free to fork this repo and send a PR.
-
-[![Website](https://img.shields.io/badge/-ilanvivanco.com-475b7d?style=flat-square&logo=google-chrome&logoColor=white)](https://ilanvivanco.com)
-[![Twitter](https://img.shields.io/badge/-Twitter-1DA1F2?style=flat-square&logo=twitter&logoColor=white)](https://twitter.com/IlanVivanco)
-[![Instagram](https://img.shields.io/badge/-Instagram-E4405F?style=flat-square&logo=instagram&logoColor=white)](https://www.instagram.com/ilanvivanco)
-[![LinkedIn](https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat-square&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/ilanvivanco)
-[![Github](https://img.shields.io/badge/-Github-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/IlanVivanco)
-
+> Para trabajar en el sitio, leé primero **`CLAUDE.md`** (reglas, presupuestos y verificación) y **`DESIGN.md`** (sistema de diseño).
 
 ## Stack
 
-I started to learn <img src="assets/images/global/vue.png" height="15px" /> Vue.js and decided to give it a go for this website.
-I also used the <img src="assets/images/global/nuxt.png" height="15px" /> Nuxt.js framework to serve static pages and load content from `.md` files.
+- [Astro 7](https://astro.build) con salida estática y CSS inline. Requiere Node 22.23 o superior (ver `.node-version`).
+- TypeScript vanilla y Motion mini en el cliente.
+- Netlify para el hosting y el formulario (Netlify Forms). Cloudflare Web Analytics para las estadísticas, sin cookies.
+- Playwright y axe-core para el QA. Playwright también genera el CV en PDF y las imágenes OG.
 
-<p align="center"><img src="https://media.giphy.com/media/3o84U6421OOWegpQhq/giphy.gif" alt="Like magic!" /></p>
+## Comandos
 
+```bash
+npm install
+npx playwright install chromium   # una vez: lo usan el build y el QA
+npm run dev        # http://localhost:4321
+npm run build      # astro build + CV en PDF + imágenes OG
+npm run cv:pdf     # regenera el PDF sobre el último build
+npm run og:images  # regenera las imágenes OG sobre el último build
+npm run preview    # sirve dist/
+npm run qa         # build + todos los chequeos
+```
 
-## Installation
+`npm run qa` verifica, en desktop y mobile: axe (WCAG 2.2 AA), scroll horizontal y consola. También comprueba el email ofuscado, el formulario, los redirects, el SEO, el peso de JS, el beacon de analytics y el CV para ATS.
 
-- Clone this repo locally.
-- Install dependencies by `npm install`.
-- Run `npm run dev`.
+## Dónde se edita cada cosa
+
+| Contenido | Archivo |
+|---|---|
+| Email, redes, navegación, áreas de foco y stats | `src/data/site.ts` |
+| CV: se usa en `/curriculum` y en el PDF | `src/data/cv.ts` |
+| Portfolio | `src/data/projects.ts`, con la captura en `public/img/projects/<slug>.webp` |
+| Páginas del sitemap y de las imágenes OG | `src/data/pages.ts` |
+| Redirects y cabeceras | `netlify.toml` |
+| Política de privacidad y aviso legal | `src/pages/privacidad.astro` |
+| Colores, tipografía y estilos base | `src/styles/global.css` |
+
+El PDF (`public/cv/`) y las imágenes OG (`public/og/`) se generan en cada build y no se versionan.
+
+## Deploy
+
+Cada push a `main` se publica en Netlify, y cada PR genera un deploy preview. La configuración está en `netlify.toml`. El build instala Chromium, porque genera el PDF y las imágenes OG.
+
+| Variable de Netlify | Para qué |
+|---|---|
+| `PUBLIC_CF_BEACON_TOKEN` | Token de Cloudflare Web Analytics. Sin él, el sitio se publica sin beacon. Los previews nunca lo cargan. |
+| `REBUILD_HOOK_URL` | Build hook de `main`, para el rebuild semanal que trae las fotos de Instagram. |
+
+### Probar el formulario
+
+`netlify dev` no procesa Netlify Forms (responde 405), así que `npm run qa` simula el POST. Para probarlo de verdad:
+
+1. Abrí `/contacto` en el deploy preview del PR y mandá un mensaje.
+2. Comprobá que aparece en Netlify, en **Forms → contact-form**, y que llega la notificación.
+
+## Historial
+
+Los cambios de cada versión están en `CHANGELOG.md`.
+
+El sitio anterior estaba hecho en Nuxt 2. `MIGRATION.md` tiene el inventario de lo que se conservó, se migró y se descartó, y el TODO de la Fase 2. `PLAN-instagram.md` tiene el plan del feed de Instagram.
