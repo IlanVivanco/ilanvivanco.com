@@ -89,4 +89,4 @@ netlify.toml          build, redirects y cabeceras
 
 ## Pendientes conocidos
 
-- **Fase 2:** sitio y CV en inglés, blog, y portfolio actualizado con clientes actuales de EpicDevs y capturas nuevas.
+- **Fase 2:** sitio y CV en inglés, blog, portfolio actualizado con clientes actuales de EpicDevs y capturas nuevas, y revisión del stack y de la información del CV.

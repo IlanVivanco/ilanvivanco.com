@@ -217,6 +217,7 @@ Quedan fuera de este PR porque son cambios en cuentas externas:
 
 - **Sitio en inglés:** i18n de Astro, con `es` por defecto sin prefijo y `en` en `/en/…`. Recupera `/en/about`, `/en/resume`, `/en/contact` y `/en/portfolio` (quitando sus 301) y suma `hreflang`.
 - **CV en inglés** con el mismo generador ATS. Base: `git show 979ff14:locales/en/positions.js`.
+- **Revisar el stack y la información del CV** en `src/data/cv.ts`, y ajustar la grilla de íconos de `/curriculum` si cambia la lista.
 - **Blog** con content collections y el tema de Prism `monokai-cotalpa` si hay código. Quita los 301 de `/blog*`.
 - **Portfolio actualizado** con proyectos y clientes actuales de EpicDevs, confirmando qué se puede mostrar públicamente, y capturas nuevas.
 - **Evaluar los proyectos del sitio viejo que no están en el nuevo.** Ninguno tiene descripción en `content/` ni en `locales/`: solo nombre, URL y captura.
