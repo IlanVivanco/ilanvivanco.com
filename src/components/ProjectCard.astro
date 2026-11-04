@@ -1,6 +1,7 @@
 ---
 import type { Project } from '../data/projects'
 import { imageFor, imageSrcset } from '../data/projects'
+import { ui } from '../i18n'
 import Icon from './Icon.astro'
 
 interface Props {
@@ -8,6 +9,7 @@ interface Props {
 	headingLevel?: 'h2' | 'h3'
 }
 const { project: p, headingLevel: H = 'h3' } = Astro.props
+const { card: t, externalNote } = ui(Astro.currentLocale)
 // Con case study, la tarjeta lleva a su página; si no, al sitio.
 const href = p.study ? `/portfolio/${p.slug}` : p.url
 const external = !p.study && Boolean(p.url)
@@ -27,7 +29,7 @@ const Tag = href ? 'a' : 'article'
 			src={imageFor(p)}
 			srcset={imageSrcset(p)}
 			sizes="(max-width: 960px) calc(100vw - 40px), 560px"
-			alt={`Captura de ${p.name}`}
+			alt={`${t.shot} ${p.name}`}
 			loading="lazy"
 			decoding="async"
 			width="960"
@@ -35,7 +37,7 @@ const Tag = href ? 'a' : 'article'
 		/>
 		{href && (
 			<span class="shot-cta mono" aria-hidden="true">
-				{p.study ? 'ver el caso' : 'visitar'} <Icon name="arrow-up-right" size={16} />
+				{p.study ? t.study : t.visit} <Icon name="arrow-up-right" size={16} />
 			</span>
 		)}
 	</div>
@@ -45,7 +47,7 @@ const Tag = href ? 'a' : 'article'
 		</p>
 		<H class="name">
 			{p.name}
-			{external && <span class="sr-only"> (abre en otra pestaña)</span>}
+			{external && <span class="sr-only">{externalNote}</span>}
 		</H>
 		<p class="desc">{p.description}</p>
 		<ul class="tags" role="list">

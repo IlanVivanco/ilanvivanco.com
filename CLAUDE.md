@@ -36,7 +36,7 @@ src/
   data/cv.ts          experiencia, stack, formación, idiomas (fuente de /curriculum y del PDF)
   data/pages.ts       páginas públicas: alimenta el sitemap, el JSON-LD y las imágenes OG; idioma y ruta alternativa de cada una
   data/projects.ts    portfolio: filas y case studies (portada en public/img/projects/<slug>.webp, capturas en <slug>/)
-  i18n/               textos del layout y de los scripts del cliente, por idioma, y `byLang` para los datos
+  i18n/               textos de las páginas, del layout y de los scripts del cliente, por idioma, y `byLang` para los datos
   styles/global.css   tokens, base, botones, tarjetas, flechas, View Transitions, print
   scripts/ui.ts       revelado, tarjetas (glow, proximidad, perspectiva), header, menú
   scripts/terminal.ts motor de la terminal del hero; las escenas van en terminal-<idioma>.ts

@@ -3,7 +3,7 @@ import { statsFor, type Stat } from '../data/site'
 import { ui } from '../i18n'
 
 const statScreens = statsFor(Astro.currentLocale)
-const { intl } = ui(Astro.currentLocale)
+const { intl, stats: t } = ui(Astro.currentLocale)
 const num = (v: number) => (Number.isInteger(v) ? String(v) : v.toLocaleString(intl, { maximumFractionDigits: 1 }))
 const shown = (s: Stat) => s.display ?? num(s.value)
 const text = (s: Stat) => `${s.prefix ?? ''}${shown(s)}${s.suffix ?? ''} ${s.label}`
@@ -12,7 +12,7 @@ const cards = statScreens[0].items.map((_, i) => i)
 
 <section class="stats" aria-labelledby="stats-title" data-stats data-intl={intl}>
 	<h2 id="stats-title" class="sr-only">
-		En números
+		{t.heading}
 	</h2>
 	<div class="stats-head">
 		<p class="stats-title mono" aria-hidden="true">
@@ -20,7 +20,7 @@ const cards = statScreens[0].items.map((_, i) => i)
 			<span class="title-caret"></span>
 		</p>
 		<div class="stats-controls">
-			<div class="screens" role="group" aria-label="Elegir grupo de cifras">
+			<div class="screens" role="group" aria-label={t.group}>
 				{statScreens.map((s, i) => (
 					<button
 						type="button"
@@ -28,7 +28,7 @@ const cards = statScreens[0].items.map((_, i) => i)
 						data-screen-btn={i}
 						data-title={s.title}
 						aria-pressed={i === 0 ? 'true' : 'false'}
-						aria-label={`Mostrar: ${s.title}`}
+						aria-label={`${t.show} ${s.title}`}
 					>
 						<span class="dot-fill"></span>
 					</button>

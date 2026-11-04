@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro'
 import Icon from '../components/Icon.astro'
+import { pathFor } from '../data/pages'
 import { ui } from '../i18n'
 
 const t = ui(Astro.currentLocale).notFound
@@ -15,7 +16,7 @@ const t = ui(Astro.currentLocale).notFound
 			</p>
 			<h1 class="display">{t.heading}</h1>
 			<p class="lede">{t.lede}</p>
-			<a class="btn btn-primary" href="/" style="align-self: flex-start">
+			<a class="btn btn-primary" href={pathFor('/', Astro.currentLocale)} style="align-self: flex-start">
 				{t.home} <Icon name="arrow-right" />
 			</a>
 		</div>

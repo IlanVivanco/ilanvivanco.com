@@ -1,15 +1,5 @@
 // Escenas de la terminal del hero, en español. El contenido sale del CV real.
-import type { Line, Scene, Tok } from './terminal'
-
-const P = (path: string): Tok[] => [
-	['pr', '$ '],
-	['m', `${path} `],
-]
-const C = (hash: string, year: string, msg: string, head = false): Line => ({
-	t: [['y', '* '], ['h', hash], ...(head ? ([['br', ' (HEAD)']] as Tok[]) : []), ['m', ` ${year} `], ['v', msg]],
-	mode: 'print',
-	wait: head ? 420 : 170,
-})
+import { C, P, type Scene } from './terminal'
 
 export const scenes: Scene[] = [
 	{

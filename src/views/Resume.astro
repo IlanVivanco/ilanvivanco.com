@@ -4,25 +4,24 @@ import Fn from '../components/Fn.astro'
 import Icon from '../components/Icon.astro'
 import { siteText } from '../data/site'
 import { cv, period, stackIcons, yearPeriod } from '../data/cv'
+import { ui } from '../i18n'
 
 const lang = Astro.currentLocale === 'en' ? 'en' : 'es'
 const { summary, experience, earlier, stack, education, languages } = cv[lang]
 const { location, cvPdf } = siteText(lang)
+const t = ui(lang).resume
 // Cada tecnología con ícono, en el orden del stack. Los ítems "A / B" se separan.
 const techIcons = stack
 	.flatMap((g) => g.items.flatMap((item) => item.split(' / ')))
 	.filter((label) => stackIcons[label])
 ---
 
-<Base
-	fullTitle="CV de Ilán Vivanco | CTO y Director of Engineering"
-	description="Currículum de Ilán Vivanco: CTO / Director of Engineering en EpicDevs. Experiencia, stack, formación e idiomas."
->
+<Base fullTitle={t.fullTitle} description={t.description}>
 	<section class="section cv-hero">
 		<div class="container stack" style="--gap: 28px">
-			<Fn name="mi_historial" as="p" />
+			<Fn name={t.fn} as="p" />
 			<h1 class="display" data-reveal>
-				Mi CV
+				{t.title}
 			</h1>
 			<p class="lede">{summary}</p>
 			<div class="meta mono" data-reveal data-delay="0.1">
@@ -30,15 +29,15 @@ const techIcons = stack
 					<Icon name="map-pin" size={16} /> {location}
 				</span>
 				<span>
-					<Icon name="clock" size={16} /> CET · remoto
+					<Icon name="clock" size={16} /> {t.remote}
 				</span>
 				<span>
-					<Icon name="globe" size={16} /> Español · Inglés
+					<Icon name="globe" size={16} /> {t.languages}
 				</span>
 			</div>
 			<div class="ctas no-print" data-reveal data-delay="0.15">
 				<a class="btn btn-primary is-down" href={cvPdf} download>
-					Descargar PDF <Icon name="download" />
+					{t.download} <Icon name="download" />
 				</a>
 			</div>
 		</div>
@@ -47,7 +46,7 @@ const techIcons = stack
 	<section class="section" aria-labelledby="experiencia">
 		<div class="container cv-grid">
 			<h2 id="experiencia" class="side-title mono">
-				Experiencia
+				{t.experience}
 			</h2>
 			<ol class="timeline" role="list">
 				{experience.map((job) => (
@@ -85,7 +84,7 @@ const techIcons = stack
 			<span aria-hidden="true"></span>
 			<details class="earlier" data-reveal>
 				<summary>
-					<span>Antes de 2015: diseño, fotografía y los primeros sitios</span>
+					<span>{t.earlier}</span>
 					<span class="toggle" aria-hidden="true">
 						<i></i>
 						<i></i>
@@ -136,7 +135,7 @@ const techIcons = stack
 	<section class="section" aria-labelledby="formacion">
 		<div class="container cv-grid">
 			<h2 id="formacion" class="side-title mono">
-				Formación e idiomas
+				{t.education}
 			</h2>
 			<div class="two" data-reveal-group>
 				<ul class="plain" role="list">

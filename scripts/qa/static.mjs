@@ -33,13 +33,7 @@ const REDIRECTS = {
 	'/contact-me': '/contacto',
 	'/cv/es': '/cv',
 	'/portfolio/:slug': '/portfolio',
-	'/en': '/',
-	'/en/*': '/',
-	'/en/about': '/sobre-mi',
-	'/en/resume': '/curriculum',
-	'/en/contact': '/contacto',
-	'/en/portfolio': '/portfolio',
-	'/en/portfolio/*': '/portfolio',
+	'/en/portfolio/:slug': '/en/portfolio',
 	'/en/blog/*': '/',
 	'/images/ilan-vivanco-social-card.png': '/og.png',
 	'/images/ilan-vivanco.jpg': '/img/ilan-800.webp',
@@ -95,6 +89,18 @@ export async function runStaticChecks(log) {
 		'campos del form con los nombres que espera Netlify'
 	)
 	log(contact.includes('href="/privacidad"'), 'el form enlaza a /privacidad')
+	const contactEn = read('en/contact.html')
+	log(
+		/<form[^>]*name="?contact-form"?/.test(contactEn) &&
+			['form-name', 'subject', 'name', 'email', 'tema', 'message', 'fake'].every((n) =>
+				new RegExp(`name="?${n}"?[\\s>/]`).test(contactEn)
+			),
+		'form en inglés con el mismo nombre y los mismos campos'
+	)
+	log(
+		[contact, contactEn].every((html) => !/<form[^>]*'/.test(html)),
+		'el <form> sin apóstrofos: Netlify lo reescribe con comillas simples'
+	)
 
 	// Links externos en otra pestaña
 	const sameTab = htmlFiles()
@@ -246,6 +252,7 @@ export async function runStaticChecks(log) {
 
 	// Redirects
 	const toml = readFileSync('netlify.toml', 'utf8')
+	log(/\[\[redirects\]\]\nfrom = "\/en\/\*"\nto = "\/en\/404"\nstatus = 404/.test(toml), '/en/* da el 404 en inglés')
 	const rules = Object.fromEntries(
 		[...toml.matchAll(/from = "([^"]+)"\nto = "([^"]+)"\nstatus = (\d+)/g)].map((m) => [
 			m[1],

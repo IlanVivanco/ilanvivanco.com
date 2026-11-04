@@ -4,18 +4,14 @@ import Fn from '../components/Fn.astro'
 import Icon from '../components/Icon.astro'
 import WinControls from '../components/WinControls.astro'
 import { portfolioList } from '../lib/schema'
+import { ui } from '../i18n'
 import { projectsFor, imageFor, imageSrcset, imageVariant, shotAlt, shotPath, shotSrcset } from '../data/projects'
 
 const lang = Astro.currentLocale
 const projects = projectsFor(lang)
-const filters = [
-	{ label: 'todos', tag: '' },
-	{ label: 'case-studies', tag: 'Case study' },
-	{ label: 'migraciones', tag: 'Migración' },
-	{ label: 'integraciones', tag: 'Integración' },
-	{ label: 'plugins', tag: 'WP Plugin' },
-	{ label: 'propios', tag: 'Producto propio' },
-]
+const t = ui(lang).portfolio
+const { filters } = t
+const { card, externalNote } = ui(lang)
 const years = projects.map((p) => Number(p.date.slice(0, 4)))
 const range = `${Math.min(...years)}–${Math.max(...years)}`
 ---
@@ -23,36 +19,33 @@ const range = `${Math.min(...years)}–${Math.max(...years)}`
 <Base
 	schemaType="CollectionPage"
 	schemaMainEntity={portfolioList(lang)}
-	fullTitle="Portfolio de Ilán Vivanco | Plataformas web y WordPress"
-	description="Una selección de plataformas y sitios en los que trabajé: WordPress a medida, plugins, migraciones e integraciones."
+	fullTitle={t.fullTitle}
+	description={t.description}
 >
 	<section class="section pf-hero">
 		<div class="container stack" style="--gap: 22px">
 			<Fn name="portfolio" as="p" />
 			<h1 class="display" data-reveal>
-				Trabajos
+				{t.title}
 			</h1>
-			<p class="lede">
-				Algunos de los proyectos en los que trabajé, la mayoría con el equipo de EpicDevs: plataformas WordPress a
-				medida, plugins, migraciones e integraciones. Abrí cualquiera para ver el detalle.
-			</p>
+			<p class="lede">{t.lede}</p>
 		</div>
 	</section>
 
-	<section class="pf" aria-label="Proyectos">
+	<section class="pf" aria-label={t.projects}>
 		<div class="container stack" style="--gap: 28px">
 			<!-- Filtro con forma de comando -->
 			<div class="cmd win-frame" data-reveal>
 				<div class="win-bar">
 					<span class="win-title" aria-hidden="true">
-						~/ilan/trabajos
+						~/ilan/{t.folder}
 					</span>
 					<WinControls />
 				</div>
 				<div class="cmd-body win-body">
 					<!-- prettier-ignore -->
-					<p class="cmd-line mono" aria-hidden="true"><span class="t-pr">$</span> ls trabajos<span class="cmd-arg" data-cmd-arg></span><span class="win-cursor"></span></p>
-					<div class="cmd-filters" role="group" aria-label="Filtrar proyectos">
+					<p class="cmd-line mono" aria-hidden="true"><span class="t-pr">$</span> ls {t.folder}<span class="cmd-arg" data-cmd-arg></span><span class="win-cursor"></span></p>
+					<div class="cmd-filters" role="group" aria-label={t.filterLabel}>
 						{filters.map((f, i) => (
 							<button
 								type="button"
@@ -70,7 +63,7 @@ const range = `${Math.min(...years)}–${Math.max(...years)}`
 						<span class="t-arrow" aria-hidden="true">
 							→
 						</span>{' '}
-						<strong data-count>{projects.length}</strong> proyectos · <span data-range>{range}</span>
+						<strong data-count>{projects.length}</strong> {t.count} · <span data-range>{range}</span>
 					</p>
 				</div>
 			</div>
@@ -100,7 +93,7 @@ const range = `${Math.min(...years)}–${Math.max(...years)}`
 									src={imageFor(p)}
 									srcset={imageSrcset(p)}
 									sizes="(max-width: 860px) calc(100vw - 40px), 560px"
-									alt={`Captura de ${p.name}`}
+									alt={`${card.shot} ${p.name}`}
 									loading="lazy"
 									decoding="async"
 									width="960"
@@ -119,18 +112,18 @@ const range = `${Math.min(...years)}–${Math.max(...years)}`
 									<div class="row-actions">
 										{p.study && (
 											<a class="btn btn-sm" href={`/portfolio/${p.slug}`}>
-												Ver el caso <Icon name="arrow-up-right" size={16} />
+												{t.study} <Icon name="arrow-up-right" size={16} />
 											</a>
 										)}
 										{p.post && (
 											<a class="btn btn-sm" href={p.post}>
-												Leer el post <Icon name="arrow-up-right" size={16} />
+												{t.post} <Icon name="arrow-up-right" size={16} />
 											</a>
 										)}
 										{p.url && (
 											<a class="btn btn-sm" href={p.url} target="_blank" rel="noopener">
-												{p.urlLabel ?? 'Visitar el sitio'} <Icon name="arrow-up-right" size={16} />
-												<span class="sr-only"> (abre en otra pestaña)</span>
+												{p.urlLabel ?? t.visit} <Icon name="arrow-up-right" size={16} />
+												<span class="sr-only">{externalNote}</span>
 											</a>
 										)}
 									</div>

@@ -42,6 +42,21 @@ const text = {
 			{ label: 'Contacto', href: '/contacto', mobileOnly: true },
 		],
 	},
+	en: {
+		title: 'Ilán Vivanco | CTO at EpicDevs',
+		description:
+			"CTO at EpicDevs. Web platforms, WordPress, JavaScript, and AI in the team's daily work. I've been building websites since 2005, and I live in Santander.",
+		location: 'Santander, Cantabria',
+		cvPdf: '/cv/ilan-vivanco-cv-en.pdf',
+		nav: [
+			{ label: 'Hi', href: '/en' },
+			{ label: 'Resume', href: '/en/resume' },
+			{ label: 'Work', href: '/en/portfolio' },
+			// El blog solo está en español.
+			{ label: 'Blog', href: '/blog' },
+			{ label: 'Contact', href: '/en/contact', mobileOnly: true },
+		],
+	},
 }
 export const siteText = (locale?: string) => byLang(text, locale)
 
@@ -143,5 +158,72 @@ const statScreens: { title: string; items: Stat[] }[] = [
 	},
 ]
 
-export const focusFor = (locale?: string) => byLang({ es: focus }, locale)
-export const statsFor = (locale?: string) => byLang({ es: statScreens }, locale)
+const focusEn: typeof focus = [
+	{
+		title: 'Web platform architecture',
+		text: "WordPress as the base, and an architecture built so that adding things doesn't slow the site down.",
+		tag: 'wordpress',
+	},
+	{
+		title: 'Modern JavaScript',
+		text: 'Vue, React, Astro, and Node.js for interfaces, internal tools, and fast websites.',
+		tag: 'js',
+	},
+	{
+		title: 'AI in daily work',
+		text: "Coding agents, MCP integrations, and AI-assisted QA, built into the team's real workflow.",
+		tag: 'ai',
+	},
+	{
+		title: 'Integrations and migrations',
+		text: 'APIs, data sync, and migrations from Drupal, Hugo, Craft, or custom platforms.',
+		tag: 'api',
+	},
+	{
+		title: 'Leading remote teams',
+		text: 'Clear processes and standards, so a team spread across several countries ships well.',
+		tag: 'team',
+	},
+]
+
+const statScreensEn: typeof statScreens = [
+	{
+		title: 'my career, by the numbers',
+		items: [
+			{ value: 21, label: 'years building for the web' },
+			{ value: 11, suffix: '+', label: 'years at EpicDevs, 8+ leading engineering' },
+			{ value: 20, suffix: '+', label: "people I've led over these years" },
+			{ value: 3, label: 'markets: Europe, the U.S., and Latin America' },
+		],
+	},
+	{
+		title: 'my numbers in code',
+		items: [
+			{ value: 7.7, prefix: '~', suffix: 'k', label: 'commits on GitHub' },
+			{ value: 200, suffix: '+', label: 'pull requests' },
+			{ value: 100, suffix: '+', label: 'sites in production', approx: true },
+			{ value: 1, prefix: '~', suffix: 'M', label: 'lines of code written', approx: true },
+		],
+	},
+	{
+		title: 'facts nobody asked for',
+		items: [
+			{ value: 12, suffix: '+', label: 'editors tried, from Dreamweaver to Antigravity' },
+			{ value: 16, label: 'years fighting (and making up) with WordPress' },
+			{ value: 0, display: '∞', label: 'mates and coffees. Both. Seriously.' },
+			{ value: 1, label: 'aesthetically destroyed MX3 that refuses to die' },
+		],
+	},
+	{
+		title: 'this site, by the numbers',
+		items: [
+			{ value: 99, suffix: '+', label: 'on Lighthouse, in all 4 categories' },
+			{ value: 7.5, suffix: ' KB', label: 'of my own JavaScript on the home page (yes, I counted)' },
+			{ value: 0, label: 'accessibility errors (axe, WCAG 2.2)' },
+			{ value: 0.3, suffix: ' s', label: 'LCP on desktop' },
+		],
+	},
+]
+
+export const focusFor = (locale?: string) => byLang({ es: focus, en: focusEn }, locale)
+export const statsFor = (locale?: string) => byLang({ es: statScreens, en: statScreensEn }, locale)

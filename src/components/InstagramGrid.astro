@@ -11,6 +11,7 @@ type Post = { src: string; url: string; date: string; alt: string | null; tags: 
 const dataFile = 'src/data/instagram.generated.json'
 const posts: Post[] = existsSync(dataFile) ? JSON.parse(readFileSync(dataFile, 'utf8')) : []
 const profile = site.socials.find((s) => s.label === 'Instagram')!.href
+const t = ui(Astro.currentLocale).instagram
 const when = (date: string) =>
 	new Intl.DateTimeFormat(ui(Astro.currentLocale).intl, { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(
 		new Date(date)
@@ -19,7 +20,7 @@ const when = (date: string) =>
 
 {posts.length > 0 && (
 	<div class="ig stack" style="--gap: 20px">
-		<Fn name="últimas_fotos" as="p" />
+		<Fn name={t.fn} as="p" />
 		<ul class="ig-grid" role="list" data-reveal-group>
 			{posts.map((p) => (
 				<li data-reveal>
@@ -33,7 +34,7 @@ const when = (date: string) =>
 								height="480"
 								loading="lazy"
 								decoding="async"
-								alt={p.alt ?? `Foto de Instagram de ${when(p.date)}`}
+								alt={p.alt ?? `${t.photo} ${when(p.date)}`}
 							/>
 						</span>
 						{p.tags.length > 0 && <span class="ig-tags mono">{p.tags.map((t) => `#${t}`).join(' ')}</span>}
@@ -42,7 +43,7 @@ const when = (date: string) =>
 			))}
 		</ul>
 		<a class="link-arrow" href={profile} target="_blank" rel="noopener">
-			Más fotos en Instagram <Icon name="arrow-up-right" size={18} />
+			{t.more} <Icon name="arrow-up-right" size={18} />
 		</a>
 	</div>
 )}

@@ -15,7 +15,9 @@ const year = new Date().getFullYear()
 			</span>
 			<span class="foot-note">{`© ${year} · ${t.credit}`}</span>
 		</div>
-		<a href="/privacidad">{t.privacy}</a>
+		<a href="/privacidad" hreflang={t.privacyLang}>
+			{t.privacy}
+		</a>
 		<Socials />
 	</div>
 </footer>

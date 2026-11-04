@@ -15,6 +15,7 @@ const WEBSITE_ID = abs('/#website')
 
 const knowsAbout = {
 	es: ['Arquitectura web', 'IA aplicada a la ingeniería'],
+	en: ['Web architecture', 'AI applied to engineering'],
 }
 
 const person = (lang?: string) => ({

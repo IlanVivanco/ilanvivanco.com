@@ -4,27 +4,27 @@ import Fn from '../components/Fn.astro'
 import Icon from '../components/Icon.astro'
 import WinControls from '../components/WinControls.astro'
 import MailLink from '../components/MailLink.astro'
+import { pathFor } from '../data/pages'
 import { emailFor, site } from '../data/site'
 import { ui } from '../i18n'
 import { encodeMail } from '../lib/mail'
 
 const mail = encodeMail(emailFor(Astro.currentLocale))
-const { intl, contact } = ui(Astro.currentLocale)
+const { intl, contact, footer } = ui(Astro.currentLocale)
 
-const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'Consultoría', 'Otra cosa']
+// Netlify reescribe el <form> con comillas simples y rompe cualquier apóstrofo: van como escape de JSON.
+const formText = JSON.stringify(contact).replace(/'/g, '\\u0027')
+const copy = ui(Astro.currentLocale).contactPage
+const { topics } = copy
 ---
 
-<Base
-	schemaType="ContactPage"
-	title="Contacto"
-	description="¿Qué te parece si hacemos algo juntos? Escribime por email, LinkedIn o el formulario."
->
+<Base schemaType="ContactPage" title={copy.title} description={copy.description}>
 	<section class="section ct">
 		<div class="container ct-grid">
 			<div class="stack ct-copy" style="--gap: 24px">
-				<Fn name="contactame" as="p" />
-				<h1 class="display">¿Hacemos algo juntos?</h1>
-				<p class="lede">Contame en qué estás trabajando y lo charlamos.</p>
+				<Fn name={copy.fn} as="p" />
+				<h1 class="display">{copy.heading}</h1>
+				<p class="lede">{copy.lede}</p>
 
 				<div class="mail" data-reveal data-delay="0.1">
 					<span class="mono mail-label">email</span>
@@ -49,7 +49,7 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 				<p class="clock mono" data-reveal data-delay="0.2">
 					<span class="live" aria-hidden="true"></span>
 					<span>
-						En Santander son las{' '}
+						{copy.clock}{' '}
 						<time data-clock data-intl={intl}>
 							--:--
 						</time>
@@ -62,24 +62,24 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 				class="console win-frame"
 				name={site.formName}
 				method="POST"
-				action="/contacto"
+				action={pathFor('/contacto', Astro.currentLocale)}
 				data-netlify="true"
 				netlify-honeypot="fake"
 				data-console
 				data-mail={mail}
-				data-t={JSON.stringify(contact)}
+				data-t={formText}
 				data-reveal
 				data-delay="0.1"
 				aria-labelledby="con-title"
 			>
 				<input type="hidden" name="form-name" value={site.formName} />
-				<input type="hidden" name="subject" data-remove-prefix value="Mensaje desde ilanvivanco.com" />
+				<input type="hidden" name="subject" data-remove-prefix value={copy.subject} />
 				<div class="win-bar">
 					<h2 id="con-title" class="sr-only">
-						Formulario de contacto
+						{copy.formTitle}
 					</h2>
 					<span class="win-title" aria-hidden="true">
-						~/ilan/contacto
+						~/ilan/{copy.folder}
 					</span>
 					<WinControls />
 				</div>
@@ -89,24 +89,24 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 
 				<div class="con-body win-body">
 					<p class="con-line" aria-hidden="true">
-						<span class="c-pr">$</span> <span class="c-w">./contacto.sh</span>
+						<span class="c-pr">$</span> <span class="c-w">./{copy.script}</span>
 					</p>
 					<p class="con-line c-m" aria-hidden="true">
-						contacto v1.0 · te respondo apenas pueda, mate mediante
+						{copy.banner}
 					</p>
 
-					<ol class="con-log" role="list" data-log aria-label="Tus respuestas"></ol>
+					<ol class="con-log" role="list" data-log aria-label={copy.answers}></ol>
 
 					<div class="q is-current" data-step="name">
 						<p class="q-label" id="q-name">
 							<span class="q-mark" aria-hidden="true">
 								?
 							</span>{' '}
-							¿Cómo te llamás?
+							{copy.askName}
 						</p>
 						<div class="q-field">
 							<label class="sr-only" for="f-name" aria-hidden="true">
-								Nombre
+								{copy.labelName}
 							</label>
 							<span class="q-caret" aria-hidden="true">
 								›
@@ -120,7 +120,7 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 								required
 								spellcheck="false"
 							/>
-							<button type="button" class="q-enter" data-next aria-label="Confirmar y seguir">
+							<button type="button" class="q-enter" data-next aria-label={copy.next}>
 								↵
 							</button>
 						</div>
@@ -131,7 +131,7 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 							<span class="q-mark" aria-hidden="true">
 								?
 							</span>{' '}
-							¿A qué email te respondo?
+							{contact.emailAsk.trim()}
 						</p>
 						<div class="q-field">
 							<label class="sr-only" for="f-email" aria-hidden="true">
@@ -151,7 +151,7 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 								spellcheck="false"
 								aria-describedby="f-email-err"
 							/>
-							<button type="button" class="q-enter" data-next aria-label="Confirmar y seguir">
+							<button type="button" class="q-enter" data-next aria-label={copy.next}>
 								↵
 							</button>
 						</div>
@@ -163,7 +163,7 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 							<span class="q-mark" aria-hidden="true">
 								?
 							</span>{' '}
-							¿Sobre qué querés hablar? <span class="q-help">(↑↓ y Enter)</span>
+							{copy.askTopic} <span class="q-help">{copy.topicHelp}</span>
 						</legend>
 						<div class="opts">
 							{topics.map((t, i) => (
@@ -183,10 +183,10 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 							<span class="q-mark" aria-hidden="true">
 								?
 							</span>{' '}
-							Contame un poco más <span class="q-help">(Enter envía · Shift+Enter, nueva línea)</span>
+							{copy.askMessage} <span class="q-help">{copy.messageHelp}</span>
 						</p>
 						<label class="sr-only" for="f-msg" aria-hidden="true">
-							Mensaje
+							{copy.labelMessage}
 						</label>
 						<textarea
 							id="f-msg"
@@ -199,10 +199,10 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 						></textarea>
 						<div class="q-foot">
 							<span class="c-m q-count" data-count aria-hidden="true">
-								0 caracteres
+								0 {contact.chars}
 							</span>
 							<button class="cli-btn" type="submit">
-								[ <span data-submit-label>enviar</span> ↵ ]
+								[ <span data-submit-label>{contact.submit}</span> ↵ ]
 							</button>
 						</div>
 					</div>
@@ -214,7 +214,10 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 					</div>
 
 					<p class="con-privacy c-m">
-						tus datos solo se usan para responderte · <a href="/privacidad">privacidad</a>
+						{copy.privacy}{' '}
+						<a href="/privacidad" hreflang={footer.privacyLang}>
+							{copy.privacyLink}
+						</a>
 					</p>
 
 					<ol class="con-out" role="list" data-out></ol>
@@ -223,13 +226,13 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 							$
 						</span>
 						<button type="button" class="restart" data-restart>
-							./contacto.sh
+							./{copy.script}
 						</button>
 					</div>
 				</div>
 				<div class="con-status win-bar win-status">
-					<ol class="con-steps" role="list" aria-label="Pasos" data-steps>
-						{['nombre', 'email', 'tema', 'mensaje'].map((t, i) => (
+					<ol class="con-steps" role="list" aria-label={copy.stepsLabel} data-steps>
+						{copy.steps.map((t, i) => (
 							<li class="con-stp" data-state={i === 0 ? 'current' : 'pending'} hidden={i > 0}>
 								<button
 									type="button"
