@@ -44,7 +44,8 @@ const tabs = ['ilan.ts', 'git log', 'claude']
 
 <script>
 	import { initTerminal } from '../scripts/terminal'
-	document.querySelectorAll<HTMLElement>('[data-terminal]').forEach((el) => initTerminal(el))
+	import { scenes } from '../scripts/terminal-es'
+	document.querySelectorAll<HTMLElement>('[data-terminal]').forEach((el) => initTerminal(el, scenes))
 </script>
 
 <style>
