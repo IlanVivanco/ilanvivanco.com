@@ -1,5 +1,7 @@
 // Portfolio. Los case studies (`study`) tienen página propia en /portfolio/<slug>; el resto es una fila del índice.
 // Imágenes: portada en public/img/projects/<slug>.webp y el resto en public/img/projects/<slug>/<archivo>.webp.
+// Con textos, se piden por idioma: `projectsFor`, `studiesFor` y `shotAlt`.
+import { byLang } from '../i18n/index.ts'
 
 export type StudyStep = {
 	title: string
@@ -33,7 +35,7 @@ export type Project = {
 	study?: Study
 }
 
-export const projects: Project[] = [
+const es: Project[] = [
 	{
 		slug: 'tempo',
 		name: 'Tempo Communications',
@@ -575,16 +577,23 @@ export const shotSrcset = (p: Project, file: string) => {
 	const path = shotPath(p, file)
 	return `${path.replace(/\.webp$/, '-480.webp')} 480w, ${path.replace(/\.webp$/, '-720.webp')} 720w, ${path} 1440w`
 }
-const shotKinds: [RegExp, string][] = [
-	[/contexto/, 'en una pantalla, sobre un escritorio'],
-	[/duo/, 'en desktop y mobile'],
-	[/scroll/, 'más abajo en la página'],
-	[/mobile/, 'en mobile'],
-]
-export const shotAlt = (p: Project, file: string) => {
-	const kind = shotKinds.find(([re]) => re.test(file))?.[1]
+const shotText = {
+	es: {
+		shot: 'Captura de',
+		kinds: [
+			[/contexto/, 'en una pantalla, sobre un escritorio'],
+			[/duo/, 'en desktop y mobile'],
+			[/scroll/, 'más abajo en la página'],
+			[/mobile/, 'en mobile'],
+		] as [RegExp, string][],
+	},
+}
+export const shotAlt = (p: Project, file: string, locale?: string) => {
+	const { shot, kinds } = byLang(shotText, locale)
+	const kind = kinds.find(([re]) => re.test(file))?.[1]
 	const page = file.replace(/-(contexto|duo|scroll|desk)$/, '').replace(/-/g, ' ')
-	return `Captura de ${p.name}: ${kind ?? page}`
+	return `${shot} ${p.name}: ${kind ?? page}`
 }
 
-export const studies = projects.filter((p) => p.study)
+export const projectsFor = (locale?: string) => byLang({ es }, locale)
+export const studiesFor = (locale?: string) => projectsFor(locale).filter((p) => p.study)

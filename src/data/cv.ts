@@ -33,6 +33,8 @@ export type CvLabels = {
 	title: string
 	location: string
 	present: string
+	now: string
+	months: string[]
 	headings: {
 		summary: string
 		experience: string
@@ -302,6 +304,8 @@ export const cvLabels: { es: CvLabels; en?: CvLabels } = {
 		title: 'CTO / Director of Engineering',
 		location: 'Santander, España',
 		present: 'Actualidad',
+		now: 'hoy',
+		months: ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'],
 		headings: {
 			summary: 'Resumen',
 			experience: 'Experiencia profesional',
@@ -312,15 +316,16 @@ export const cvLabels: { es: CvLabels; en?: CvLabels } = {
 	},
 }
 
-const months = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic']
-const monthName = (ym: string) => {
+const monthName = (ym: string, months: string[]) => {
 	const [y, m] = ym.split('-').map(Number)
 	return `${months[m - 1]} ${y}`
 }
 
 // Para /curriculum: "sep 2020 – hoy" y, en los cargos viejos, "2014 – 2018".
-export const period = (r: { start: string; end?: string }) =>
-	`${monthName(r.start)} – ${r.end ? monthName(r.end) : 'hoy'}`
+export const period = (r: { start: string; end?: string }, lang: 'es' | 'en' = 'es') => {
+	const { months, now } = cvLabels[lang] ?? cvLabels.es
+	return `${monthName(r.start, months)} – ${r.end ? monthName(r.end, months) : now}`
+}
 export const yearPeriod = (r: { start: string; end: string }) => `${r.start.slice(0, 4)} – ${r.end.slice(0, 4)}`
 
 // Para el PDF: un único formato, "09/2020 – Actualidad".

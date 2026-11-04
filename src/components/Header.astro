@@ -1,11 +1,12 @@
 ---
-import { site } from '../data/site'
+import { siteText } from '../data/site'
 import { ui } from '../i18n'
 import Logo from './Logo.astro'
 import Icon from './Icon.astro'
 import Socials from './Socials.astro'
 
 const t = ui(Astro.currentLocale).header
+const { nav } = siteText(Astro.currentLocale)
 const path =
 	Astro.url.pathname
 		.replace(/\.html$/, '')
@@ -23,7 +24,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
 
 		<nav class="nav-desktop" aria-label={t.nav}>
 			<ul role="list">
-				{site.nav
+				{nav
 					.filter((item) => !item.mobileOnly)
 					.map((item) => (
 						<li>
@@ -69,7 +70,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
 		</div>
 		<nav aria-label={t.navMobile}>
 			<ul role="list">
-				{site.nav.map((item, i) => (
+				{nav.map((item, i) => (
 					<li style={`--i:${i}`}>
 						<a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
 							<span class="mono idx">0{i + 1}</span>

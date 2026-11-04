@@ -4,8 +4,10 @@ import Fn from '../components/Fn.astro'
 import Icon from '../components/Icon.astro'
 import WinControls from '../components/WinControls.astro'
 import { portfolioList } from '../lib/schema'
-import { projects, imageFor, imageSrcset, imageVariant, shotAlt, shotPath, shotSrcset } from '../data/projects'
+import { projectsFor, imageFor, imageSrcset, imageVariant, shotAlt, shotPath, shotSrcset } from '../data/projects'
 
+const lang = Astro.currentLocale
+const projects = projectsFor(lang)
 const filters = [
 	{ label: 'todos', tag: '' },
 	{ label: 'case-studies', tag: 'Case study' },
@@ -20,7 +22,7 @@ const range = `${Math.min(...years)}–${Math.max(...years)}`
 
 <Base
 	schemaType="CollectionPage"
-	schemaMainEntity={portfolioList()}
+	schemaMainEntity={portfolioList(lang)}
 	fullTitle="Portfolio de Ilán Vivanco | Plataformas web y WordPress"
 	description="Una selección de plataformas y sitios en los que trabajé: WordPress a medida, plugins, migraciones e integraciones."
 >
@@ -140,7 +142,7 @@ const range = `${Math.min(...years)}–${Math.max(...years)}`
 												src={shotPath(p, file)}
 												srcset={shotSrcset(p, file)}
 												sizes="(max-width: 860px) calc(100vw - 40px), 400px"
-												alt={shotAlt(p, file)}
+												alt={shotAlt(p, file, lang)}
 												loading="lazy"
 												decoding="async"
 												width="1440"

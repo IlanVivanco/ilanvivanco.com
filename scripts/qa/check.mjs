@@ -12,7 +12,7 @@ import { createRequire } from 'node:module'
 import { chromium } from 'playwright'
 import { site } from '../../src/data/site.ts'
 import { posts } from '../../src/data/posts.ts'
-import { studies } from '../../src/data/projects.ts'
+import { studiesFor } from '../../src/data/projects.ts'
 import { serveDist } from '../lib/serve-dist.mjs'
 import { runAnalyticsChecks } from './analytics.mjs'
 import { runFormChecks, runFormViewportCheck } from './form.mjs'
@@ -26,7 +26,7 @@ const PAGES = [
 	'/',
 	'/curriculum',
 	'/portfolio',
-	...studies.map((p) => `/portfolio/${p.slug}`),
+	...studiesFor('es').map((p) => `/portfolio/${p.slug}`),
 	'/blog',
 	...posts.map((p) => `/blog/${p.slug}`),
 	'/contacto',

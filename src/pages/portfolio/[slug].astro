@@ -1,8 +1,9 @@
 ---
 import Study from '../../views/Study.astro'
-import { studies, type Project } from '../../data/projects'
+import { studiesFor, type Project } from '../../data/projects'
 
-export const getStaticPaths = () => studies.map((project) => ({ params: { slug: project.slug }, props: { project } }))
+export const getStaticPaths = () =>
+	studiesFor('es').map((project) => ({ params: { slug: project.slug }, props: { project } }))
 
 const { project } = Astro.props as { project: Project }
 ---
