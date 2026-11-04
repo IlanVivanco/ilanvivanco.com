@@ -194,7 +194,7 @@ El sitio nuevo no incluye los nombres de familiares, la fecha de nacimiento, el 
 |---|---|---|
 | D1 | Email público de `site.email` | La dirección que ya usaba el sitio viejo. Ofuscada en el HTML. |
 | D2 | Teléfono | No se publica en el sitio ni en el PDF. |
-| D3 | Datos del CV que no coincidían | Se actualiza `cv.ts` con los datos del CV viejo: inicio en ago 2015, freelance desde dic 2005 y en curso, Goldstein 2007–2009 y título "Diseñador gráfico" en Raggio. |
+| D3 | Datos del CV que no coincidían | Se actualiza `cv.ts` con los datos del CV viejo: freelance en curso, Goldstein 2007–2009 y título "Diseñador gráfico" en Raggio. El inicio en EpicDevs, que había pasado a ago 2015, queda en jun 2015, y el de freelance, que había pasado a dic 2005, queda en oct 2006 (confirmados en la revisión contra LinkedIn de la 2.6.3). |
 | D4 | Ubicación de los cargos | Remoto: Construye Mundo, Delicious Brains, Explore-Share y Magissim. Buenos Aires, Argentina: Activar, Mendióroz, Exastudio, NewPrint y Gilardoni. |
 | D5 | Cursos y palabras clave | Sin cursos en el sitio ni en el PDF. HTML5, CSS3, jQuery y Bash se suman a `stack` como chips. |
 | D6 | Instagram y Twitter | Se suman a `sameAs` del JSON-LD, sin cambio visual. |
