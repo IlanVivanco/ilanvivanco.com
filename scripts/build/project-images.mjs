@@ -12,7 +12,7 @@ const mtime = (f) =>
 	)
 
 let made = 0
-for (const file of (await readdir(DIR)).filter((f) => f.endsWith('.webp') && !isVariant(f))) {
+for (const file of (await readdir(DIR, { recursive: true })).filter((f) => f.endsWith('.webp') && !isVariant(f))) {
 	const source = `${DIR}/${file}`
 	for (const width of WIDTHS) {
 		const target = source.replace(/\.webp$/, `-${width}.webp`)
