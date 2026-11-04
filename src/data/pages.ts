@@ -40,7 +40,7 @@ export const publicPages: PublicPage[] = [
 		fn: 'portfolio',
 		title: 'Trabajos',
 		subtitle: 'Plataformas y sitios en producción',
-		updated: '2026-11-06',
+		updated: '2026-11-04',
 	},
 	{
 		path: '/blog',
@@ -48,7 +48,7 @@ export const publicPages: PublicPage[] = [
 		fn: 'blog',
 		title: 'Blog',
 		subtitle: 'Lo que aprendí construyendo para la web',
-		updated: '2026-11-06',
+		updated: '2026-11-04',
 	},
 	{
 		path: '/sobre-mi',
