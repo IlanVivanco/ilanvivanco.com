@@ -313,7 +313,7 @@ async function checkPdf(lang, log) {
 		labels.title,
 		emailFor(lang),
 		'linkedin.com/in/ilanvivanco',
-		'ilanvivanco.com',
+		'| ilanvivanco.com',
 		summary,
 		experience,
 		skills,
