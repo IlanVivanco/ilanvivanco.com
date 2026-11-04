@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro'
 import Fn from '../components/Fn.astro'
 import Icon from '../components/Icon.astro'
-import { studies, shotAlt, shotPath, shotSrcset, imageFor, type Project } from '../data/projects'
+import { studiesFor, shotAlt, shotPath, shotSrcset, imageFor, type Project } from '../data/projects'
 import { site } from '../data/site'
 
 interface Props {
@@ -10,7 +10,9 @@ interface Props {
 }
 const { project: p } = Astro.props
 const s = p.study!
-const next = studies[(studies.indexOf(p) + 1) % studies.length]
+const lang = Astro.currentLocale
+const studies = studiesFor(lang)
+const next = studies[(studies.findIndex((x) => x.slug === p.slug) + 1) % studies.length]
 const fn = p.slug.replace(/-/g, '_')
 ---
 
@@ -62,7 +64,7 @@ const fn = p.slug.replace(/-/g, '_')
 				src={shotPath(p, s.hero)}
 				srcset={shotSrcset(p, s.hero)}
 				sizes="(max-width: 1180px) calc(100vw - 40px), 1120px"
-				alt={shotAlt(p, s.hero)}
+				alt={shotAlt(p, s.hero, lang)}
 				fetchpriority="high"
 				decoding="async"
 				width="1440"
@@ -83,7 +85,7 @@ const fn = p.slug.replace(/-/g, '_')
 							src={shotPath(p, step.shot)}
 							srcset={shotSrcset(p, step.shot)}
 							sizes="(max-width: 1180px) calc(100vw - 40px), 1120px"
-							alt={shotAlt(p, step.shot)}
+							alt={shotAlt(p, step.shot, lang)}
 							loading="lazy"
 							decoding="async"
 							width="1440"

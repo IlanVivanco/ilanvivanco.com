@@ -2,10 +2,12 @@
 import Base from '../layouts/Base.astro'
 import Fn from '../components/Fn.astro'
 import Icon from '../components/Icon.astro'
-import { site } from '../data/site'
+import { siteText } from '../data/site'
 import { cv, period, stackIcons, yearPeriod } from '../data/cv'
 
-const { summary, experience, earlier, stack, education, languages } = cv.es
+const lang = Astro.currentLocale === 'en' ? 'en' : 'es'
+const { summary, experience, earlier, stack, education, languages } = cv[lang] ?? cv.es
+const { location, cvPdf } = siteText(lang)
 // Cada tecnología con ícono, en el orden del stack. Los ítems "A / B" se separan.
 const techIcons = stack
 	.flatMap((g) => g.items.flatMap((item) => item.split(' / ')))
@@ -25,7 +27,7 @@ const techIcons = stack
 			<p class="lede">{summary}</p>
 			<div class="meta mono" data-reveal data-delay="0.1">
 				<span>
-					<Icon name="map-pin" size={16} /> {site.location}
+					<Icon name="map-pin" size={16} /> {location}
 				</span>
 				<span>
 					<Icon name="clock" size={16} /> CET · remoto
@@ -35,7 +37,7 @@ const techIcons = stack
 				</span>
 			</div>
 			<div class="ctas no-print" data-reveal data-delay="0.15">
-				<a class="btn btn-primary is-down" href={site.cvPdf} download>
+				<a class="btn btn-primary is-down" href={cvPdf} download>
 					Descargar PDF <Icon name="download" />
 				</a>
 			</div>
@@ -68,7 +70,7 @@ const techIcons = stack
 									<div class="role-head">
 										<h4>{r.title}</h4>
 										<span class="mono period">
-											{period(r)}
+											{period(r, lang)}
 											{r.place && ` · ${r.place}`}
 										</span>
 									</div>

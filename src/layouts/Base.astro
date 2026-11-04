@@ -3,7 +3,7 @@ import '../styles/global.css'
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
 import Analytics from '../components/Analytics.astro'
-import { site } from '../data/site'
+import { site, siteText } from '../data/site'
 import { ogPath } from '../data/pages'
 import { ui } from '../i18n'
 import { pageSchema, type PageSchemaType } from '../lib/schema'
@@ -18,18 +18,12 @@ interface Props {
 	noindex?: boolean
 	ogType?: 'website' | 'article'
 }
-const {
-	title,
-	fullTitle,
-	description = site.description,
-	schemaType,
-	schemaMainEntity,
-	noindex = false,
-	ogType = 'website',
-} = Astro.props
+const { title, fullTitle, description, schemaType, schemaMainEntity, noindex = false, ogType = 'website' } = Astro.props
 const lang = Astro.currentLocale
 const t = ui(lang)
-const pageTitle = fullTitle ?? (title ? `${title} | Ilán Vivanco` : site.title)
+const text = siteText(lang)
+const metaDescription = description ?? text.description
+const pageTitle = fullTitle ?? (title ? `${title} | Ilán Vivanco` : text.title)
 const pathname = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '/') || '/'
 const canonical = new URL(pathname, site.url).href
 const ogImage = new URL(ogPath(pathname), site.url).href
@@ -41,7 +35,7 @@ const ogImage = new URL(ogPath(pathname), site.url).href
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 		<title>{pageTitle}</title>
-		<meta name="description" content={description} />
+		<meta name="description" content={metaDescription} />
 		<meta name="author" content={site.name} />
 		{noindex ? <meta name="robots" content="noindex, follow" /> : <link rel="canonical" href={canonical} />}
 		<meta name="theme-color" content="#0A111F" />
@@ -59,7 +53,7 @@ const ogImage = new URL(ogPath(pathname), site.url).href
 		<meta property="og:locale" content={t.ogLocale} />
 		<meta property="og:site_name" content="Ilán Vivanco" />
 		<meta property="og:title" content={pageTitle} />
-		<meta property="og:description" content={description} />
+		<meta property="og:description" content={metaDescription} />
 		<meta property="og:url" content={canonical} />
 		<meta property="og:image" content={ogImage} />
 		<meta property="og:image:width" content="1200" />
@@ -90,7 +84,14 @@ const ogImage = new URL(ogPath(pathname), site.url).href
 			<script
 				type="application/ld+json"
 				set:html={JSON.stringify(
-					pageSchema({ pathname, title: pageTitle, description, type: schemaType, mainEntity: schemaMainEntity })
+					pageSchema({
+						pathname,
+						lang,
+						title: pageTitle,
+						description: metaDescription,
+						type: schemaType,
+						mainEntity: schemaMainEntity,
+					})
 				)}
 			/>
 		)}

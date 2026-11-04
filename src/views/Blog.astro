@@ -35,7 +35,7 @@ import { coverSrcset, formatPostDate, posts } from '../data/posts'
 						</div>
 						<div class="info">
 							<time class="mono" datetime={p.date}>
-								{formatPostDate(p.date)}
+								{formatPostDate(p.date, Astro.currentLocale)}
 							</time>
 							<h2 class="h3">
 								<a href={`/blog/${p.slug}`}>{p.title}</a>

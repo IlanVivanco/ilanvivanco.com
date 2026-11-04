@@ -3,6 +3,7 @@
 import { copyFile, mkdir, readFile } from 'node:fs/promises'
 import { chromium } from 'playwright'
 import { publicPages } from '../../src/data/pages.ts'
+import { ui } from '../../src/i18n/index.ts'
 import { serveDist } from '../lib/serve-dist.mjs'
 
 const esc = (v) => v.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c])
@@ -11,7 +12,7 @@ const logo = await readFile('public/favicon.svg', 'utf8')
 // Hasta 30 caracteres, una línea. Más largo, dos líneas de 56 px, que entran antes del subtítulo.
 const titleSize = (title) => (title.length > 30 ? 56 : title.length > 18 ? 76 : 96)
 
-const html = ({ fn, title, subtitle }) => `<!doctype html><html lang="es"><meta charset="utf-8"><style>
+const html = ({ lang, fn, title, subtitle }) => `<!doctype html><html lang="${lang}"><meta charset="utf-8"><style>
   @font-face { font-family: 'Space Grotesk'; src: url('/fonts/space-grotesk.woff2') format('woff2'); font-weight: 300 700; }
   @font-face { font-family: 'Fira Code'; src: url('/fonts/fira-code.woff2') format('woff2'); font-weight: 300 700; }
   * { margin: 0; box-sizing: border-box; }
@@ -30,7 +31,7 @@ const html = ({ fn, title, subtitle }) => `<!doctype html><html lang="es"><meta 
 <p class="fn"><span class="arrow">-&gt;</span>${esc(fn)}<span class="paren">()</span><span class="semi">;</span></p>
 <h1>${esc(title)}</h1>
 <p class="sub">${esc(subtitle)}</p>
-<div class="foot"><span>Ilán Vivanco · CTO en EpicDevs</span><span>ilanvivanco.com</span></div>
+<div class="foot"><span>Ilán Vivanco · ${ui(lang).role}</span><span>ilanvivanco.com</span></div>
 </html>`
 
 const server = await serveDist()

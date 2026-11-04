@@ -7,7 +7,7 @@
 
 import type { Lang } from '../i18n/index.ts'
 import { posts } from './posts.ts'
-import { studies } from './projects.ts'
+import { studiesFor } from './projects.ts'
 
 export type PublicPage = {
 	path: string
@@ -96,7 +96,7 @@ export const publicPages: PublicPage[] = [
 // La home usa la imagen original; el resto se genera en el build. Sin página propia (404), la original.
 // Cada case study es una página pública más.
 publicPages.push(
-	...studies.map((p) => ({
+	...studiesFor('es').map((p) => ({
 		path: `/portfolio/${p.slug}`,
 		lang: 'es' as const,
 		slug: `portfolio-${p.slug}`,
@@ -119,6 +119,10 @@ publicPages.push(
 		updated: p.updated,
 	}))
 )
+
+// La ruta de una página en español, en el idioma pedido.
+export const pathFor = (path: string, locale?: string) =>
+	(locale === 'en' && publicPages.find((p) => p.path === path)?.alternate) || path
 
 export const ogPath = (path: string) => {
 	const page = publicPages.find((p) => p.path === path)

@@ -1,6 +1,10 @@
-// Textos de Base, Header, Footer y 404.
+// Textos del layout y de los scripts del cliente, que los reciben por atributos `data-*`.
 export const es = {
 	ogLocale: 'es_ES',
+	intl: 'es-ES',
+	role: 'CTO en EpicDevs',
+	home: 'Inicio',
+	copied: 'copiado',
 	skipLink: 'Saltar al contenido',
 	header: {
 		home: 'Ilán Vivanco, inicio',
@@ -20,5 +24,24 @@ export const es = {
 		heading: 'Esta página llegó a producción sin tests.',
 		lede: 'O el link es viejo, o alguien hizo deploy un viernes. En cualquier caso, acá no hay nada.',
 		home: 'Volver al inicio',
+	},
+	contact: {
+		emailAsk: ' ¿A qué email te respondo?',
+		emailGreet: ' Un gusto, {name}. ¿A qué email te respondo?',
+		emailInvalid: '✗ Ese email no parece válido. Probá de nuevo.',
+		edit: 'Editar: {question} {answer}',
+		char: 'carácter',
+		chars: 'caracteres',
+		preparing: 'preparando mensaje',
+		charsWait: 'caracteres…',
+		endpoint: '/mensajes',
+		thanks: '¡Gracias, {name}!',
+		thanksBody: 'Ahora la pelota está de mi lado: te respondo a {email} apenas pueda.',
+		sent: 'Mensaje enviado. Te respondo a {email}.',
+		failed: 'Algo falló.',
+		failedBody: 'No fue tu culpa (probablemente).',
+		retry: 'Probá de nuevo o escribime a {mail}.',
+		notSent: 'No se pudo enviar. Probá de nuevo o escribime a {mail}.',
+		submit: 'enviar',
 	},
 }

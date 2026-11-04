@@ -1,6 +1,7 @@
 // Posts del blog: un archivo por post en src/content/blog/<slug>.md, con front matter de `clave: "valor"`.
 // Este módulo lo lee con fs porque también lo usan el sitemap, las imágenes OG y la QA, que corren fuera de Astro.
 // `date` y `updated` son YYYY-MM-DD. `updated` se cambia en el bump de versión, si cambió el contenido.
+import { ui } from '../i18n/index.ts'
 import { readdirSync, readFileSync } from 'node:fs'
 
 const DIR = 'src/content/blog'
@@ -39,8 +40,10 @@ export const posts: Post[] = readdirSync(DIR)
 	.map(readPost)
 	.sort((a, b) => b.date.localeCompare(a.date))
 
-const dateFormat = new Intl.DateTimeFormat('es-AR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })
-export const formatPostDate = (date: string) => dateFormat.format(new Date(`${date}T12:00:00Z`))
+export const formatPostDate = (date: string, locale?: string) =>
+	new Intl.DateTimeFormat(ui(locale).intl, { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(
+		new Date(`${date}T12:00:00Z`)
+	)
 
 // Las variantes las genera scripts/build/project-images.mjs. La original mide 1440 px.
 export const coverSrcset = (p: Post) =>

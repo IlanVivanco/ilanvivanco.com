@@ -1,13 +1,16 @@
 ---
-import { statScreens, type Stat } from '../data/site'
+import { statsFor, type Stat } from '../data/site'
+import { ui } from '../i18n'
 
-const num = (v: number) => (Number.isInteger(v) ? String(v) : v.toLocaleString('es-ES', { maximumFractionDigits: 1 }))
+const statScreens = statsFor(Astro.currentLocale)
+const { intl } = ui(Astro.currentLocale)
+const num = (v: number) => (Number.isInteger(v) ? String(v) : v.toLocaleString(intl, { maximumFractionDigits: 1 }))
 const shown = (s: Stat) => s.display ?? num(s.value)
 const text = (s: Stat) => `${s.prefix ?? ''}${shown(s)}${s.suffix ?? ''} ${s.label}`
 const cards = statScreens[0].items.map((_, i) => i)
 ---
 
-<section class="stats" aria-labelledby="stats-title" data-stats>
+<section class="stats" aria-labelledby="stats-title" data-stats data-intl={intl}>
 	<h2 id="stats-title" class="sr-only">
 		En números
 	</h2>
@@ -23,6 +26,7 @@ const cards = statScreens[0].items.map((_, i) => i)
 						type="button"
 						class="screen-dot"
 						data-screen-btn={i}
+						data-title={s.title}
 						aria-pressed={i === 0 ? 'true' : 'false'}
 						aria-label={`Mostrar: ${s.title}`}
 					>
@@ -74,11 +78,9 @@ const cards = statScreens[0].items.map((_, i) => i)
 	const root = document.querySelector<HTMLElement>('[data-stats]')
 	if (root) {
 		const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches
-		const titles = [...root.querySelectorAll<HTMLButtonElement>('[data-screen-btn]')].map((b) =>
-			(b.getAttribute('aria-label') || '').replace('Mostrar: ', '')
-		)
 		const items = [...root.querySelectorAll<HTMLElement>('[data-stat-item]')]
 		const dots = [...root.querySelectorAll<HTMLButtonElement>('[data-screen-btn]')]
+		const titles = dots.map((b) => b.dataset.title || '')
 		const titleEl = root.querySelector<HTMLElement>('[data-screen-title]')!
 
 		const N = dots.length
@@ -92,7 +94,7 @@ const cards = statScreens[0].items.map((_, i) => i)
 		let started = false
 
 		const fmt = (v: number, d: number) =>
-			v.toLocaleString('es-ES', { minimumFractionDigits: d, maximumFractionDigits: d })
+			v.toLocaleString(root.dataset.intl, { minimumFractionDigits: d, maximumFractionDigits: d })
 		const countUp = (item: HTMLElement, delay = 0) => {
 			const el = item.querySelector<HTMLElement>('[data-num]')
 			if (!el || item.dataset.value === undefined) return // valores fijos (∞) no cuentan

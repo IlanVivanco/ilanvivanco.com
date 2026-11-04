@@ -7,3 +7,6 @@ export type Lang = 'es' | 'en'
 const strings = { es }
 
 export const ui = (locale?: string) => strings[locale as keyof typeof strings] ?? strings.es
+
+// Datos con una versión por idioma: hasta que exista la versión en inglés, cae en español.
+export const byLang = <T>(map: { es: T; en?: T }, locale?: string): T => map[locale as Lang] ?? map.es

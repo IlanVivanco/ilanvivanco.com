@@ -36,10 +36,10 @@ src/
   data/cv.ts          experiencia, stack, formación, idiomas (fuente de /curriculum y del PDF)
   data/pages.ts       páginas públicas: alimenta el sitemap, el JSON-LD y las imágenes OG; idioma y ruta alternativa de cada una
   data/projects.ts    portfolio: filas y case studies (portada en public/img/projects/<slug>.webp, capturas en <slug>/)
-  i18n/               textos de Base, Header, Footer y 404, por idioma
+  i18n/               textos del layout y de los scripts del cliente, por idioma, y `byLang` para los datos
   styles/global.css   tokens, base, botones, tarjetas, flechas, View Transitions, print
   scripts/ui.ts       revelado, tarjetas (glow, proximidad, perspectiva), header, menú
-  scripts/terminal.ts escenas de la terminal del hero
+  scripts/terminal.ts motor de la terminal del hero; las escenas van en terminal-<idioma>.ts
   lib/schema.ts       JSON-LD: Person, WebSite y el tipo de cada página
   layouts/Base.astro  <head>, SEO, speculation rules, header y footer
   components/         Header, Footer, Socials, MailLink, InstagramGrid, WinControls, Logo, Fn, Icon, ProjectCard, Terminal, Stats, Analytics, CvAts
@@ -66,7 +66,7 @@ netlify.toml          build, redirects y cabeceras
 5. **Botones:** nunca pisar `.btn` desde estilos locales. En prosa, usar `a:not(.btn)`.
 6. **Dependencias:** no sumar librerías de UI ni de animación sin justificar su peso contra el presupuesto. Primero CSS y APIs nativas (View Transitions, popover, `<details>`, IntersectionObserver). Los íconos de Lucide y los logos de Simple Icons se copian de a uno a `components/Icon.astro`, sin sumar los paquetes.
 7. **Imágenes:** WebP con tamaño fijo, `width`/`height` siempre, `loading="lazy"` fuera del primer viewport, `alt` descriptivo.
-8. **Copy y humor:** español rioplatense con voseo, primera persona, con signos de apertura (`¿`, `¡`), sin raya larga ni frases hechas, posicionamiento de liderazgo técnico, con humor técnico y autocrítico (un guiño por sección, como máximo; reglas en `DESIGN.md §8`). Las cifras y anécdotas son reales o se marcan como aproximadas (`approx: true`, `~`, `+`). Nunca inventar datos, anécdotas ni clientes. Sin humor en el CV para ATS ni en lo legal.
+8. **Copy y humor:** español rioplatense con voseo, primera persona, con signos de apertura (`¿`, `¡`), sin raya larga ni frases hechas, posicionamiento de liderazgo técnico, con humor técnico y autocrítico (un guiño por sección, como máximo; reglas en `DESIGN.md §8`). Las cifras y anécdotas son reales o se marcan como aproximadas (`approx: true`, `~`, `+`). Nunca inventar datos, anécdotas ni clientes. Sin humor en el CV para ATS ni en lo legal. En inglés, el mismo tono cercano y con humor: inglés de EE. UU., primera persona (`I`) y contracciones (reglas en `DESIGN.md §8`).
 9. **Rutas:** las URLs públicas son contrato (`/`, `/curriculum`, `/portfolio`, `/contacto`, `/sobre-mi`, más lo que defina `netlify.toml`). Cambiar una ruta implica un redirect 301. Si cambia una página pública, se actualiza `src/data/pages.ts`, y su fecha `updated` (el `lastmod` del sitemap) se cambia en el bump de versión. `es` va sin prefijo y `en` en `/en/...`. El mapa de rutas entre idiomas vive en `pages.ts` (`alternate`), porque Astro no traduce slugs. Ningún slug puede ser `es` ni `en`: Astro busca el idioma en todos los segmentos de la ruta. `/privacidad` existe solo en español.
 10. **La terminal del hero usa siempre `~/ilan`.** El contenido de las escenas sale del CV real.
 11. **Privacidad:** el email nunca va en texto plano en el HTML (usar `encodeMail`/`decodeMail` de `src/lib/mail.ts`). Solo el PDF del CV lo lleva en claro. Sin nombres de familiares en el sitio. Analytics solo sin cookies (Cloudflare Web Analytics): sin GA y sin banner. La única cookie es `cf_clearance`, de seguridad de Cloudflare, y figura en `/privacidad`: si cambia la configuración de Cloudflare, revisar ese texto.

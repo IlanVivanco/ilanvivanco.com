@@ -5,9 +5,12 @@ import Icon from '../components/Icon.astro'
 import Terminal from '../components/Terminal.astro'
 import Stats from '../components/Stats.astro'
 import ProjectCard from '../components/ProjectCard.astro'
-import { focus } from '../data/site'
-import { projects } from '../data/projects'
+import { focusFor } from '../data/site'
+import { projectsFor } from '../data/projects'
 
+const lang = Astro.currentLocale
+const focus = focusFor(lang)
+const projects = projectsFor(lang)
 const featured = projects.find((p) => p.featured) ?? projects[0]
 const focusIcons = { wordpress: 'layers', js: 'code', ai: 'sparkles', api: 'plug', team: 'users' } as const
 ---

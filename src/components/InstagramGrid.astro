@@ -2,6 +2,7 @@
 // Últimas fotos de Instagram, ya copiadas al sitio por scripts/build/instagram.mjs. Sin fotos, no se muestra.
 import { existsSync, readFileSync } from 'node:fs'
 import { site } from '../data/site'
+import { ui } from '../i18n'
 import Fn from './Fn.astro'
 import Icon from './Icon.astro'
 
@@ -11,7 +12,9 @@ const dataFile = 'src/data/instagram.generated.json'
 const posts: Post[] = existsSync(dataFile) ? JSON.parse(readFileSync(dataFile, 'utf8')) : []
 const profile = site.socials.find((s) => s.label === 'Instagram')!.href
 const when = (date: string) =>
-	new Intl.DateTimeFormat('es-ES', { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(date))
+	new Intl.DateTimeFormat(ui(Astro.currentLocale).intl, { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(
+		new Date(date)
+	)
 ---
 
 {posts.length > 0 && (

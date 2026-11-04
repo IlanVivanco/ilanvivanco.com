@@ -7,7 +7,7 @@ import { PDFDocument, PDFName } from 'pdf-lib'
 import { cv, cvLabels, atsPeriod } from '../../src/data/cv.ts'
 import { publicPages, ogPath } from '../../src/data/pages.ts'
 import { posts } from '../../src/data/posts.ts'
-import { site, statScreens } from '../../src/data/site.ts'
+import { site, statsFor } from '../../src/data/site.ts'
 import { parsePost } from '../lib/instagram-post.mjs'
 
 const require = createRequire(import.meta.url)
@@ -286,7 +286,9 @@ export async function runStaticChecks(log) {
 		log(kb <= JS_BUDGET_KB, `${f} JS propio ${kb.toFixed(1)} KB gz (máx. ${JS_BUDGET_KB})`)
 	}
 	const homeKb = jsWeight('index.html') / 1024
-	const stat = statScreens.flatMap((s) => s.items).find((i) => i.label.includes('JavaScript'))
+	const stat = statsFor('es')
+		.flatMap((s) => s.items)
+		.find((i) => i.label.includes('JavaScript'))
 	log(Math.abs(stat.value - homeKb) <= 0.5, `el stat dice ${stat.value} KB y la home pesa ${homeKb.toFixed(1)} KB`)
 
 	// CV para ATS

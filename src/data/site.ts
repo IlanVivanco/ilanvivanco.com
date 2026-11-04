@@ -1,12 +1,9 @@
-// Datos globales del sitio.
+// Datos globales del sitio. Lo que cambia con el idioma se pide por `siteText`, `focusFor` y `statsFor`.
+import { byLang } from '../i18n/index.ts'
 
 export const site = {
 	name: 'Ilán Vivanco',
-	title: 'Ilán Vivanco | CTO en EpicDevs',
-	description:
-		'CTO en EpicDevs. Plataformas web, WordPress, JavaScript e IA en el trabajo diario del equipo. Hago sitios desde 2005 y vivo en Santander.',
 	url: 'https://ilanvivanco.com',
-	location: 'Santander, Cantabria',
 
 	// Contacto
 	email: 'ilanvivanco@gmail.com',
@@ -16,9 +13,6 @@ export const site = {
 	// Feed JSON de Behold: últimas fotos de Instagram (ver README.md).
 	instagramFeed: 'https://feeds.behold.so/jZ5SRhL2JJltCujvFFLS',
 
-	// Lo genera `npm run cv:pdf` en cada build.
-	cvPdf: '/cv/ilan-vivanco-cv-es.pdf',
-
 	socials: [
 		{ label: 'LinkedIn', icon: 'linkedin', href: 'https://www.linkedin.com/in/ilanvivanco/' },
 		{ label: 'GitHub', icon: 'github', href: 'https://github.com/IlanVivanco' },
@@ -26,19 +20,30 @@ export const site = {
 		{ label: 'X', icon: 'x-brand', href: 'https://x.com/IlanVivanco' },
 		{ label: 'EpicDevs', icon: 'epicdevs', href: 'https://epicdevs.com' },
 	],
-
-	nav: [
-		{ label: 'Hola', href: '/' },
-		{ label: 'Mi CV', href: '/curriculum' },
-		{ label: 'Trabajos', href: '/portfolio' },
-		{ label: 'Blog', href: '/blog' },
-		// En desktop lo cubre el botón Hablemos del header.
-		{ label: 'Contacto', href: '/contacto', mobileOnly: true },
-	],
 }
 
+const text = {
+	es: {
+		title: 'Ilán Vivanco | CTO en EpicDevs',
+		description:
+			'CTO en EpicDevs. Plataformas web, WordPress, JavaScript e IA en el trabajo diario del equipo. Hago sitios desde 2005 y vivo en Santander.',
+		location: 'Santander, Cantabria',
+		// Lo genera `npm run cv:pdf` en cada build.
+		cvPdf: '/cv/ilan-vivanco-cv-es.pdf',
+		nav: [
+			{ label: 'Hola', href: '/' },
+			{ label: 'Mi CV', href: '/curriculum' },
+			{ label: 'Trabajos', href: '/portfolio' },
+			{ label: 'Blog', href: '/blog' },
+			// En desktop lo cubre el botón Hablemos del header.
+			{ label: 'Contacto', href: '/contacto', mobileOnly: true },
+		],
+	},
+}
+export const siteText = (locale?: string) => byLang(text, locale)
+
 // Áreas de foco (de LinkedIn).
-export const focus = [
+const focus = [
 	{
 		title: 'Arquitectura de plataformas web',
 		text: 'WordPress como base y una arquitectura pensada para que sumar cosas no vuelva lento el sitio.',
@@ -78,7 +83,7 @@ export type Stat = {
 	label: string
 	approx?: boolean
 }
-export const statScreens: { title: string; items: Stat[] }[] = [
+const statScreens: { title: string; items: Stat[] }[] = [
 	{
 		title: 'mi trayectoria, en números',
 		items: [
@@ -134,3 +139,6 @@ export const statScreens: { title: string; items: Stat[] }[] = [
 		],
 	},
 ]
+
+export const focusFor = (locale?: string) => byLang({ es: focus }, locale)
+export const statsFor = (locale?: string) => byLang({ es: statScreens }, locale)
