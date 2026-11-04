@@ -4,7 +4,7 @@ import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
 import Analytics from '../components/Analytics.astro'
 import { site, siteText } from '../data/site'
-import { ogPath } from '../data/pages'
+import { ogPath, publicPages } from '../data/pages'
 import { ui } from '../i18n'
 import { pageSchema, type PageSchemaType } from '../lib/schema'
 
@@ -18,7 +18,15 @@ interface Props {
 	noindex?: boolean
 	ogType?: 'website' | 'article'
 }
-const { title, fullTitle, description, schemaType, schemaMainEntity, noindex = false, ogType = 'website' } = Astro.props
+const {
+	title,
+	fullTitle,
+	description,
+	schemaType,
+	schemaMainEntity,
+	noindex: noindexProp = false,
+	ogType = 'website',
+} = Astro.props
 const lang = Astro.currentLocale
 const t = ui(lang)
 const text = siteText(lang)
@@ -27,6 +35,7 @@ const pageTitle = fullTitle ?? (title ? `${title} | Ilán Vivanco` : text.title)
 const pathname = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '/') || '/'
 const canonical = new URL(pathname, site.url).href
 const ogImage = new URL(ogPath(pathname), site.url).href
+const noindex = noindexProp || publicPages.find((p) => p.path === pathname)?.noindex
 ---
 
 <!doctype html>

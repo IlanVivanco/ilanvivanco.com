@@ -578,6 +578,15 @@ export const shotSrcset = (p: Project, file: string) => {
 	return `${path.replace(/\.webp$/, '-480.webp')} 480w, ${path.replace(/\.webp$/, '-720.webp')} 720w, ${path} 1440w`
 }
 const shotText = {
+	en: {
+		shot: 'Screenshot of',
+		kinds: [
+			[/contexto/, 'on a screen, on a desk'],
+			[/duo/, 'on desktop and mobile'],
+			[/scroll/, 'further down the page'],
+			[/mobile/, 'on mobile'],
+		] as [RegExp, string][],
+	},
 	es: {
 		shot: 'Captura de',
 		kinds: [
@@ -595,5 +604,17 @@ export const shotAlt = (p: Project, file: string, locale?: string) => {
 	return `${shot} ${p.name}: ${kind ?? page}`
 }
 
-export const projectsFor = (locale?: string) => byLang({ es }, locale)
+// En inglés, sin case studies todavía: la tarjeta lleva al sitio del proyecto.
+const enText: Record<string, Pick<Project, 'period' | 'role' | 'description' | 'tags'>> = {
+	tempo: {
+		period: 'since 2025',
+		role: 'Tech lead and PM. I planned the project and built the data extraction and the catalog importer.',
+		description:
+			'Content in WordPress, catalog in Craft, and sales in Shopify. We brought them together into one new site, without taking Shopify out of checkout.',
+		tags: ['WordPress', 'Shopify', 'Migration', 'Integration'],
+	},
+}
+const en: Project[] = es.map((p) => ({ ...p, ...enText[p.slug], study: undefined }))
+
+export const projectsFor = (locale?: string) => byLang({ es, en }, locale)
 export const studiesFor = (locale?: string) => projectsFor(locale).filter((p) => p.study)

@@ -2,12 +2,19 @@
 // Terminal animada del hero. El HTML inicial es la escena 1 completa (sin JS se ve igual).
 import Icon from './Icon.astro'
 import WinControls from './WinControls.astro'
+import { ui } from '../i18n'
+
 const tabs = ['ilan.ts', 'git log', 'claude']
+const isEn = Astro.currentLocale === 'en'
+const t = ui(Astro.currentLocale).terminal
+const first = isEn
+	? `<span class="t-line"><span class="t-k">const</span> ilan = &#123;</span><span class="t-line">  <span class="t-p">role</span>: <span class="t-s">'CTO @ EpicDevs'</span>,</span><span class="t-line">  <span class="t-p">base</span>: <span class="t-s">'Santander, ES'</span>,</span><span class="t-line">  <span class="t-p">since</span>: <span class="t-n">2005</span>,</span><span class="t-line">  <span class="t-p">stack</span>: [<span class="t-s">'WP'</span>, <span class="t-s">'Vue'</span>, <span class="t-s">'Astro'</span>, <span class="t-s">'Node'</span>],</span><span class="t-line">  <span class="t-p">focus</span>: [<span class="t-s">'architecture'</span>, <span class="t-s">'teams'</span>, <span class="t-s">'AI'</span>],</span><span class="t-line">  <span class="t-p">remote</span>: <span class="t-k">true</span>,</span><span class="t-line">  <span class="t-p">fuel</span>: <span class="t-s">'mate'</span>,</span><span class="t-line">&#125;;</span><span class="t-line"></span><span class="t-line"><span class="t-c">// shall we build something?</span></span><span class="t-line">ilan.<span class="t-f">contact</span>();</span>`
+	: `<span class="t-line"><span class="t-k">const</span> ilan = &#123;</span><span class="t-line">  <span class="t-p">rol</span>: <span class="t-s">'CTO @ EpicDevs'</span>,</span><span class="t-line">  <span class="t-p">base</span>: <span class="t-s">'Santander, ES'</span>,</span><span class="t-line">  <span class="t-p">desde</span>: <span class="t-n">2005</span>,</span><span class="t-line">  <span class="t-p">stack</span>: [<span class="t-s">'WP'</span>, <span class="t-s">'Vue'</span>, <span class="t-s">'Astro'</span>, <span class="t-s">'Node'</span>],</span><span class="t-line">  <span class="t-p">foco</span>: [<span class="t-s">'arquitectura'</span>, <span class="t-s">'equipos'</span>, <span class="t-s">'IA'</span>],</span><span class="t-line">  <span class="t-p">remoto</span>: <span class="t-k">true</span>,</span><span class="t-line">  <span class="t-p">combustible</span>: <span class="t-s">'mate'</span>,</span><span class="t-line">&#125;;</span><span class="t-line"></span><span class="t-line"><span class="t-c">// ¿hacemos algo juntos?</span></span><span class="t-line">ilan.<span class="t-f">contactar</span>();</span>`
 ---
 
 <figure class="term win-frame" data-terminal>
 	<div class="term-bar win-bar">
-		<div class="term-tabs" role="group" aria-label="Escenas de la terminal">
+		<div class="term-tabs" role="group" aria-label={t.scenes}>
 			{tabs.map((t, i) => (
 				<button type="button" class="term-tab mono" data-term-tab aria-pressed={i === 0 ? 'true' : 'false'}>
 					<span>{t}</span>
@@ -15,13 +22,7 @@ const tabs = ['ilan.ts', 'git log', 'claude']
 				</button>
 			))}
 		</div>
-		<button
-			type="button"
-			class="term-toggle"
-			data-term-toggle
-			aria-pressed="false"
-			aria-label="Pausar la animación de la terminal"
-		>
+		<button type="button" class="term-toggle" data-term-toggle aria-pressed="false" aria-label={t.pause}>
 			<span class="when-playing">
 				<Icon name="pause" size={14} />
 			</span>
@@ -31,22 +32,23 @@ const tabs = ['ilan.ts', 'git log', 'claude']
 		</button>
 		<WinControls />
 	</div>
-	<pre
-		class="term-body win-body"
-		aria-hidden="true"
-	><code data-term-out><span class="t-line"><span class="t-k">const</span> ilan = &#123;</span><span class="t-line">  <span class="t-p">rol</span>: <span class="t-s">'CTO @ EpicDevs'</span>,</span><span class="t-line">  <span class="t-p">base</span>: <span class="t-s">'Santander, ES'</span>,</span><span class="t-line">  <span class="t-p">desde</span>: <span class="t-n">2005</span>,</span><span class="t-line">  <span class="t-p">stack</span>: [<span class="t-s">'WP'</span>, <span class="t-s">'Vue'</span>, <span class="t-s">'Astro'</span>, <span class="t-s">'Node'</span>],</span><span class="t-line">  <span class="t-p">foco</span>: [<span class="t-s">'arquitectura'</span>, <span class="t-s">'equipos'</span>, <span class="t-s">'IA'</span>],</span><span class="t-line">  <span class="t-p">remoto</span>: <span class="t-k">true</span>,</span><span class="t-line">  <span class="t-p">combustible</span>: <span class="t-s">'mate'</span>,</span><span class="t-line">&#125;;</span><span class="t-line"></span><span class="t-line"><span class="t-c">// ¿hacemos algo juntos?</span></span><span class="t-line">ilan.<span class="t-f">contactar</span>();</span></code></pre>
-	<figcaption class="sr-only">
-		Terminal decorativa con tres escenas: un perfil de Ilán escrito como objeto de TypeScript, su carrera contada como
-		un historial de git desde 2005 hasta CTO en EpicDevs en 2020, y un agente de IA que mejora el tiempo de carga de
-		una página.
-	</figcaption>
+	<pre class="term-body win-body" aria-hidden="true"><code data-term-out set:html={first}></code></pre>
+	<figcaption class="sr-only">{t.caption}</figcaption>
 </figure>
 
-<script>
-	import { initTerminal } from '../scripts/terminal'
-	import { scenes } from '../scripts/terminal-es'
-	document.querySelectorAll<HTMLElement>('[data-terminal]').forEach((el) => initTerminal(el, scenes))
-</script>
+{isEn ? (
+	<script>
+		import { initTerminal } from '../scripts/terminal'
+		import { scenes } from '../scripts/terminal-en'
+		document.querySelectorAll<HTMLElement>('[data-terminal]').forEach((el) => initTerminal(el, scenes))
+	</script>
+) : (
+	<script>
+		import { initTerminal } from '../scripts/terminal'
+		import { scenes } from '../scripts/terminal-es'
+		document.querySelectorAll<HTMLElement>('[data-terminal]').forEach((el) => initTerminal(el, scenes))
+	</script>
+)}
 
 <style>
 	.term-bar {

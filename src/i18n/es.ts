@@ -1,4 +1,4 @@
-// Textos del layout y de los scripts del cliente, que los reciben por atributos `data-*`.
+// Textos de las páginas, del layout y de los scripts del cliente, que los reciben por atributos `data-*`.
 export const es = {
 	ogLocale: 'es_ES',
 	intl: 'es-ES',
@@ -18,6 +18,97 @@ export const es = {
 	footer: {
 		credit: 'hecho en Santander con Astro y café',
 		privacy: 'Privacidad y aviso legal',
+		privacyLang: undefined as string | undefined,
+	},
+	externalNote: ' (abre en otra pestaña)',
+	stats: {
+		heading: 'En números',
+		group: 'Elegir grupo de cifras',
+		show: 'Mostrar:',
+	},
+	terminal: {
+		scenes: 'Escenas de la terminal',
+		pause: 'Pausar la animación de la terminal',
+		caption:
+			'Terminal decorativa con tres escenas: un perfil de Ilán escrito como objeto de TypeScript, su carrera contada como un historial de git desde 2005 hasta CTO en EpicDevs en 2020, y un agente de IA que mejora el tiempo de carga de una página.',
+	},
+	card: {
+		shot: 'Captura de',
+		study: 'ver el caso',
+		visit: 'visitar',
+	},
+	instagram: {
+		fn: 'últimas_fotos',
+		more: 'Más fotos en Instagram',
+		photo: 'Foto de Instagram de',
+	},
+	homePage: {
+		avatarAlt: 'Ilán Vivanco sonriendo, con barba y camisa estampada, sobre un fondo gris',
+		hello: '¡Hola! Me llamo',
+		roleAt: 'CTO en',
+		lede: 'Lidero la ingeniería de plataformas web para empresas de tecnología, universidades y ONG. Trabajo con WordPress y JavaScript, y uso IA todos los días con el equipo. Hago sitios desde 2005, cuando todavía se maquetaba con tablas.',
+		contact: 'Contactame',
+		cv: 'Ver mi CV',
+		fnWhat: 'qué_hago',
+		whatLede:
+			'Mi trabajo es que las decisiones técnicas de hoy no sean el problema de mañana. En la práctica, se reparte así:',
+		fnAbout: 'sobre_mí',
+		aboutLede:
+			'Vengo de la comunicación publicitaria, el diseño y la fotografía. Me enganché con la programación y me quedé.',
+		aboutPast:
+			'Pasé de Flash a PHP y JavaScript, y WordPress sigue siendo la base de casi todo lo que hago. Llevo más de once años trabajando en remoto, desde Buenos Aires, la Patagonia y ahora Cantabria.',
+		aboutOff: 'Cuando no estoy con código, viajo con mi familia y salgo con la cámara.',
+		aboutMore: 'Más sobre mí',
+		fnWork: 'trabajos',
+		workLede:
+			'Plataformas, plugins y migraciones en WordPress, la mayoría con el equipo de EpicDevs. Acá va uno; el resto está en el portfolio.',
+		workCta: 'Ver mis trabajos',
+		fnContact: 'contactame',
+		ctaTitle: '¿Qué te parece si hacemos algo juntos?',
+		write: 'Escribime',
+	},
+	about: {
+		title: 'Más sobre mí',
+		description:
+			'Ilán Vivanco: de la comunicación publicitaria y la fotografía a liderar ingeniería web. Buenos Aires, Patagonia y Santander.',
+		fn: 'más_info_sobre_mí',
+		lede: 'Nací en Buenos Aires en 1988. Estudié comunicación publicitaria, diseño gráfico y fotografía, pero desde 2005 me dedico a la programación web.',
+		photoAlt: 'Retrato de Ilán Vivanco',
+		story: 'La historia',
+		storyStart:
+			'Empecé por el lado artístico, armando diseños y animaciones con Flash y ActionScript, y maquetando con tablas como se hacía entonces. La lógica me enganchó enseguida: mi primer panel de acceso validaba usuarios contra un archivo .txt, porque todavía no sabía que existía MySQL. Después llegaron PHP, MySQL, CSS y JavaScript.',
+		storyWp:
+			'Cerca de 2010 descubrí WordPress, y desde entonces hice de todo con él: themes a medida, migraciones grandes de bases de datos, plugins e integraciones con muchas APIs.',
+		storyNowBefore: 'Hoy soy CTO y socio en',
+		storyNowAfter:
+			', y mi trabajo pasa por la arquitectura y por el equipo. También voy sumando IA a nuestro día a día: agentes de código, integraciones MCP y QA asistido.',
+		storySelf: 'Soy autodidacta. Cada proyecto nuevo es una excusa para probar algo distinto.',
+		journey: 'El recorrido',
+		route: [
+			{
+				place: 'Buenos Aires',
+				when: '1988 – 2015',
+				text: 'Diseño, fotografía y los primeros años como desarrollador. Primeros trabajos remotos para Bélgica.',
+			},
+			{
+				place: 'Puerto Madryn, Patagonia',
+				when: '2015 – 2020',
+				text: 'Remoto e híbrido para Bélgica y EE. UU. Lideré un equipo de 15 personas en lo que hoy es EpicDevs.',
+			},
+			{
+				place: 'Santander, Cantabria',
+				when: '2020 – hoy',
+				text: 'CTO y socio en EpicDevs, con la base del equipo en Europa.',
+			},
+		],
+		outside: 'Fuera del código',
+		family: 'Viajo con mi esposa y nuestra hija. Nos gusta conocer lugares nuevos, y yo siempre llevo la cámara.',
+		desk: 'En el escritorio: mate en cantidades poco recomendables, más de cinco teclados en mi historial y un mouse MX3 que debería haber jubilado hace años. Está estéticamente destruido, pero anda perfecto, así que se queda.',
+		site: 'Este sitio está hecho con Astro: HTML estático, CSS inline y unos pocos kilobytes de JavaScript para darle movimiento.',
+		talk: 'Hablemos',
+		cv: 'Ver mi CV',
+		deskAlt: 'Mi escritorio: monitor con código, laptop, teclado y auriculares',
+		deskCaption: 'mi_workspace();',
 	},
 	notFound: {
 		title: 'Página no encontrada',

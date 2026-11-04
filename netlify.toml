@@ -102,11 +102,6 @@ status = 301
 
 # Inglés: Fase 2
 [[redirects]]
-from = "/en/about"
-to = "/sobre-mi"
-status = 301
-
-[[redirects]]
 from = "/en/resume"
 to = "/curriculum"
 status = 301
@@ -128,11 +123,6 @@ status = 301
 
 [[redirects]]
 from = "/en/blog/*"
-to = "/"
-status = 301
-
-[[redirects]]
-from = "/en"
 to = "/"
 status = 301
 

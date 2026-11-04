@@ -22,6 +22,29 @@ export type PublicPage = {
 }
 
 export const publicPages: PublicPage[] = [
+	// Inglés: con `noindex` y sin enlazar hasta el lanzamiento.
+	{
+		path: '/en',
+		lang: 'en',
+		alternate: '/',
+		slug: 'en-home',
+		fn: 'hello_world',
+		title: 'Ilán Vivanco',
+		subtitle: 'CTO at EpicDevs',
+		updated: '2026-11-04',
+		noindex: true,
+	},
+	{
+		path: '/en/about',
+		lang: 'en',
+		alternate: '/sobre-mi',
+		slug: 'en-about',
+		fn: 'more_about_me',
+		title: 'More about me',
+		subtitle: 'From Buenos Aires to Santander',
+		updated: '2026-11-04',
+		noindex: true,
+	},
 	{
 		path: '/',
 		lang: 'es',

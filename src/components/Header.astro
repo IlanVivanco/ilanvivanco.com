@@ -1,4 +1,5 @@
 ---
+import { pathFor } from '../data/pages'
 import { siteText } from '../data/site'
 import { ui } from '../i18n'
 import Logo from './Logo.astro'
@@ -6,18 +7,20 @@ import Icon from './Icon.astro'
 import Socials from './Socials.astro'
 
 const t = ui(Astro.currentLocale).header
+const homePath = pathFor('/', Astro.currentLocale)
+const contactPath = pathFor('/contacto', Astro.currentLocale)
 const { nav } = siteText(Astro.currentLocale)
 const path =
 	Astro.url.pathname
 		.replace(/\.html$/, '')
 		.replace(/\/index$/, '')
 		.replace(/\/$/, '') || '/'
-const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href))
+const isActive = (href: string) => (href === homePath ? path === href : path.startsWith(href))
 ---
 
 <header class="site-header" data-header>
 	<div class="container bar">
-		<a href="/" class="brand" aria-label={t.home}>
+		<a href={homePath} class="brand" aria-label={t.home}>
 			<Logo size={30} />
 			<span class="brand-name">ilán vivanco</span>
 		</a>
@@ -41,9 +44,9 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
 		</nav>
 
 		<a
-			href="/contacto"
+			href={contactPath}
 			class="btn btn-primary btn-sm header-cta"
-			aria-current={isActive('/contacto') ? 'page' : undefined}
+			aria-current={isActive(contactPath) ? 'page' : undefined}
 		>
 			{t.cta}
 			<Icon name="arrow-up-right" />

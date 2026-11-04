@@ -13,6 +13,16 @@ export type Line = {
 }
 export type Scene = { id: string; lines: Line[] }
 
+export const P = (path: string): Tok[] => [
+	['pr', '$ '],
+	['m', `${path} `],
+]
+export const C = (hash: string, year: string, msg: string, head = false): Line => ({
+	t: [['y', '* '], ['h', hash], ...(head ? ([['br', ' (HEAD)']] as Tok[]) : []), ['m', ` ${year} `], ['v', msg]],
+	mode: 'print',
+	wait: head ? 420 : 170,
+})
+
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 const tokHtml = (t: Tok[], chars = Infinity) => {
 	let out = ''

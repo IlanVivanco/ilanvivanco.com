@@ -7,8 +7,12 @@ import Stats from '../components/Stats.astro'
 import ProjectCard from '../components/ProjectCard.astro'
 import { focusFor } from '../data/site'
 import { projectsFor } from '../data/projects'
+import { pathFor } from '../data/pages'
+import { ui } from '../i18n'
 
 const lang = Astro.currentLocale
+const t = ui(lang).homePage
+const contactPath = pathFor('/contacto', lang)
 const focus = focusFor(lang)
 const projects = projectsFor(lang)
 const featured = projects.find((p) => p.featured) ?? projects[0]
@@ -37,17 +41,17 @@ const focusIcons = { wordpress: 'layers', js: 'code', ai: 'sparkles', api: 'plug
 							sizes="clamp(96px, 10vw, 136px)"
 							width="240"
 							height="240"
-							alt="Ilán Vivanco sonriendo, con barba y camisa estampada, sobre un fondo gris"
+							alt={t.avatarAlt}
 							fetchpriority="high"
 							decoding="async"
 						/>
 					</figure>
 					<div class="intro-text">
-						<p class="eyebrow">¡Hola! Me llamo</p>
+						<p class="eyebrow">{t.hello}</p>
 						<h1 class="display">Ilán Vivanco</h1>
 						<p class="role mono">
 							<span>
-								CTO en{' '}
+								{t.roleAt}{' '}
 								<a class="link" href="https://epicdevs.com" target="_blank" rel="noopener">
 									EpicDevs
 								</a>
@@ -58,17 +62,13 @@ const focusIcons = { wordpress: 'layers', js: 'code', ai: 'sparkles', api: 'plug
 						</p>
 					</div>
 				</div>
-				<p class="lede">
-					Lidero la ingeniería de plataformas web para empresas de tecnología, universidades y ONG. Trabajo con
-					WordPress y JavaScript, y uso IA todos los días con el equipo. Hago sitios desde 2005, cuando todavía se
-					maquetaba con tablas.
-				</p>
+				<p class="lede">{t.lede}</p>
 				<div class="ctas" data-reveal data-delay="0.14">
-					<a class="btn btn-primary" href="/contacto">
-						Contactame <Icon name="arrow-up-right" />
+					<a class="btn btn-primary" href={contactPath}>
+						{t.contact} <Icon name="arrow-up-right" />
 					</a>
-					<a class="btn" href="/curriculum">
-						Ver mi CV <Icon name="arrow-right" />
+					<a class="btn" href={pathFor('/curriculum', lang)}>
+						{t.cv} <Icon name="arrow-right" />
 					</a>
 				</div>
 			</div>
@@ -87,11 +87,8 @@ const focusIcons = { wordpress: 'layers', js: 'code', ai: 'sparkles', api: 'plug
 	<section class="section" aria-labelledby="que-hago">
 		<div class="container stack" style="--gap: 40px">
 			<header class="sec-head" data-reveal>
-				<Fn name="qué_hago" id="que-hago" />
-				<p class="lede">
-					Mi trabajo es que las decisiones técnicas de hoy no sean el problema de mañana. En la práctica, se
-					reparte así:
-				</p>
+				<Fn name={t.fnWhat} id="que-hago" />
+				<p class="lede">{t.whatLede}</p>
 			</header>
 			<ul class="bento" role="list" data-reveal-group>
 				{focus.map((f, i) => (
@@ -110,19 +107,13 @@ const focusIcons = { wordpress: 'layers', js: 'code', ai: 'sparkles', api: 'plug
 	<!-- SOBRE MÍ -->
 	<section class="section" aria-labelledby="sobre-mi">
 		<div class="container about">
-			<Fn name="sobre_mí" id="sobre-mi" class="about-title" />
+			<Fn name={t.fnAbout} id="sobre-mi" class="about-title" />
 			<div class="stack about-body" style="--gap: 18px" data-reveal>
-				<p class="lede">
-					Vengo de la comunicación publicitaria, el diseño y la fotografía. Me enganché con la programación y me
-					quedé.
-				</p>
-				<p>
-					Pasé de Flash a PHP y JavaScript, y WordPress sigue siendo la base de casi todo lo que hago. Llevo más de
-					once años trabajando en remoto, desde Buenos Aires, la Patagonia y ahora Cantabria.
-				</p>
-				<p>Cuando no estoy con código, viajo con mi familia y salgo con la cámara.</p>
-				<a class="link-arrow" href="/sobre-mi">
-					Más sobre mí <Icon name="arrow-right" size={18} />
+				<p class="lede">{t.aboutLede}</p>
+				<p>{t.aboutPast}</p>
+				<p>{t.aboutOff}</p>
+				<a class="link-arrow" href={pathFor('/sobre-mi', lang)}>
+					{t.aboutMore} <Icon name="arrow-right" size={18} />
 				</a>
 			</div>
 		</div>
@@ -132,13 +123,10 @@ const focusIcons = { wordpress: 'layers', js: 'code', ai: 'sparkles', api: 'plug
 	<section class="section" aria-labelledby="trabajos">
 		<div class="container work">
 			<div class="stack work-copy" style="--gap: 20px" data-reveal>
-				<Fn name="trabajos" id="trabajos" />
-				<p class="lede">
-					Plataformas, plugins y migraciones en WordPress, la mayoría con el equipo de EpicDevs. Acá va uno; el
-					resto está en el portfolio.
-				</p>
-				<a class="btn work-cta" href="/portfolio">
-					Ver mis trabajos <Icon name="arrow-right" />
+				<Fn name={t.fnWork} id="trabajos" />
+				<p class="lede">{t.workLede}</p>
+				<a class="btn work-cta" href={pathFor('/portfolio', lang)}>
+					{t.workCta} <Icon name="arrow-right" />
 				</a>
 			</div>
 			<div data-reveal data-delay="0.1">
@@ -151,13 +139,13 @@ const focusIcons = { wordpress: 'layers', js: 'code', ai: 'sparkles', api: 'plug
 	<section class="section cta-sec" aria-labelledby="cta">
 		<div class="container">
 			<div class="cta card" data-reveal>
-				<Fn name="contactame" as="p" />
+				<Fn name={t.fnContact} as="p" />
 				<h2 id="cta" class="h2">
-					¿Qué te parece si hacemos algo juntos?
+					{t.ctaTitle}
 				</h2>
 				<div class="ctas">
-					<a class="btn btn-primary" href="/contacto">
-						Escribime <Icon name="arrow-up-right" />
+					<a class="btn btn-primary" href={contactPath}>
+						{t.write} <Icon name="arrow-up-right" />
 					</a>
 					<a class="btn" href="https://www.linkedin.com/in/ilanvivanco/" target="_blank" rel="noopener">
 						<Icon name="linkedin" /> LinkedIn

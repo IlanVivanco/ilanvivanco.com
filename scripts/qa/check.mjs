@@ -31,6 +31,8 @@ const PAGES = [
 	...posts.map((p) => `/blog/${p.slug}`),
 	'/contacto',
 	'/sobre-mi',
+	'/en',
+	'/en/about',
 	'/privacidad',
 	'/404',
 ]
