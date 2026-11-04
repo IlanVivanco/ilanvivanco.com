@@ -51,7 +51,7 @@ First came fixed fields with specific templates: tidy, but every new variant too
 
 ![Illustration of a field form with title, subtitle, image, button, and link, next to the resulting site and a list of PHP templates.](/img/blog/two-decades-of-wordpress/era-3-acf-fields.webp)
 
-With that we built our base theme, which we were already using in 2017. And we discovered a law that would keep repeating itself: whatever best solves your problem today is what you'll have to migrate tomorrow. When a site grew to thousands of courses, like [Skillsoft](/en/portfolio/skillsoft), the problem became importing catalogs every month without things getting out of hand, and adapting it so the theme showed what it had to show.
+With that we built our base theme, which we were already using in 2017. And we discovered a law that would keep repeating itself: whatever best solves your problem today is what you'll have to migrate tomorrow. When a site grew to thousands of courses, like [Skillsoft](/en/portfolio/skillsoft), the problem became importing catalogs every month without things getting out of hand, and adapting the import so the theme showed what it had to show.
 
 ![Illustration of a layout editor: a cards block being dragged between the hero, the testimonials, and the call to action, with the resulting site behind it.](/img/blog/two-decades-of-wordpress/era-4-acf-layouts.webp)
 
@@ -131,7 +131,7 @@ And sometimes there's no other way, and you have to say so. At [Naropa](/en/port
 
 In [December 2025, WordPress 6.9](https://wordpress.org/news/2025/12/gene/) brought the Abilities API, a standard way of opening the door to AI. The [MCP adapter](https://github.com/WordPress/mcp-adapter) connects it to agents. Even [Elementor](https://elementor.com/mcp/) has already announced its own MCP, though in my opinion it's running at half speed.
 
-The request from the start is now written just as it sounds: "change the title and add three cards." We're working on letting a client's team do this with clear roles and guidelines, and with a person who reviews before publishing.
+The request from the start now gets typed as is: "change the title and add three cards." We're working on letting a client's team do this with clear roles and guidelines, and with a person who reviews before publishing.
 
 I'm living it firsthand too. I [built this very site with agents](/en/portfolio/ilanvivanco), putting two models on opposite sides: one builds and the other reviews. They're fast, and sometimes they correct me. They also get things wrong with admirable confidence. The challenge now is catching those errors in time: knowing where to look.
 
@@ -147,7 +147,7 @@ If 20 years of swerves taught me anything, it's that tools change faster than pr
 
 ### When the tool is enough
 
-Changing a title, deleting two pages, or editing metadata no longer takes a developer behind it. More complex tasks do: that's where what a developer learned over all these years still carries weight. In practice, I split it in three.
+Changing a title, deleting two pages, or editing metadata no longer takes a developer. More complex tasks do: that's where what a developer learned over all these years still counts. In practice, I sort it into three groups.
 
 **Enough, if someone checks the result:**
 
@@ -167,11 +167,11 @@ Changing a title, deleting two pages, or editing metadata no longer takes a deve
 - **Integrating with other systems.** More and more pieces connect in one place: HubSpot forms, UTM parameters, analytics, payment gateways. The problem is what happens if the other side fails or changes.
 - **Recurring imports,** like the [Skillsoft](/en/portfolio/skillsoft) catalogs. There are cases where a repetitive, consistent process beats generative AI, where doing the same thing twice doesn't guarantee the same result.
 - **Permissions and paid content.** A mistake here doesn't show on screen, but someone gets access to what they shouldn't. And there's no worse error than a silent one.
-- **Site networks.** In a network like [Tufts's](/en/portfolio/tufts-jumbopress), a change that works on one site can break another. You need automated checks that find the odd cases in time.
+- **Site networks.** In a network like the one at [Tufts](/en/portfolio/tufts-jumbopress), a change that works on one site can break another. You need automated checks that find the odd cases in time.
 - **Incidents.** When something goes down on a Friday, first you have to understand what happened, and only then touch anything. And a 1M token context isn't always enough for a site with thousands of pages and years of history.
 
-The difference isn't how hard the task looks, but how much a mistake costs and whether you'll notice in time. A wrong title gets seen and fixed in a minute. A wrong redirect can take weeks to notice, and Google doesn't forgive.
+How hard a task looks matters less than how much a mistake costs and whether you'll notice in time. A wrong title gets seen and fixed in a minute. A wrong redirect can take weeks to notice, and Google doesn't forgive.
 
 ### There's no one ring
 
-Getting my nerd out: there's no one ring to rule them all either. There are many ways to reach a goal. So my focus today isn't on picking the winning tool, but on bringing each client the one they need to do their work faster and more efficiently, but well. With their intent, their voice, and their aesthetic. Using the LLM as one more tool, a powerful one, but nothing more.
+Getting my nerd out: there's no one ring to rule them all either. There are many ways to reach a goal. So my focus today isn't on picking the winning tool, but on bringing each client the one they need to do their work faster and more efficiently, and to do it well. With their intent, their voice, and their aesthetic. Using the LLM as one more tool, a powerful one, but nothing more.
