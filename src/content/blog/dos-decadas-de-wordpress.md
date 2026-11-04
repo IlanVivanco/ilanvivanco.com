@@ -14,7 +14,7 @@ Hoy le podés pedir a un agente que cambie un título y sume tres tarjetas en un
 
 Entonces, si cualquiera puede hacer un sitio con IA, ¿para qué un developer?
 
-Hago sitios desde 2005 y trabajo con WordPress con regularidad desde al menos 2010. Para contestar esa pregunta, voy a hacer algo un poco obsesivo: tomar ese pedido, cambiar un título y sumar tres tarjetas, y ver cómo se resolvía en cada época. Spoiler: cada cambio resolvió un problema y trajo otro. Y cada vez, alguien anunció el fin de una era.
+Hago sitios desde 2005 y trabajo con WordPress con regularidad desde al menos 2010. Para contestar esa pregunta, voy a hacer algo un poco obsesivo: tomar ese pedido (cambiar un título y sumar tres tarjetas) y ver cómo se resolvía en cada época. Spoiler: cada cambio resolvió un problema y trajo otro. Y cada vez, alguien anunció el fin de una era.
 
 Si no sos del palo, vas a entender la mayor parte. El resto es culpa de los shortcodes.
 
@@ -38,19 +38,19 @@ Parecía magia hasta que lo sacabas. Según la [propia documentación](https://d
 
 Para quien administraba un sitio fue enorme. Pero se cambiaban opciones, no la estructura. El título se podía tocar. Las tres tarjetas seguían siendo otro tema. Y si el theme no te daba las opciones, seguías con las manos atadas.
 
-Y una nota sobre el vértigo: la gran novedad de 2012 fue, diez años más tarde, algo que [WordPress 5.9](https://wordpress.org/news/2022/01/josephine/) anunció que, con los themes de bloques, ya no hacía falta. Textual: "you no longer need the Customizer".
+Una nota sobre el vértigo: diez años más tarde, [WordPress 5.9](https://wordpress.org/news/2022/01/josephine/) anunció que la gran novedad de 2012 ya no hacía falta con los themes de bloques. Textual: "you no longer need the Customizer".
 
 ![Ilustración del customizer de WordPress, con sus secciones de identidad, colores, menús y widgets, al lado de la vista previa de un sitio y un editor de menú.](/img/blog/dos-decadas-de-wordpress/era-2-customizer.webp)
 
 ### El contenido se separa del diseño
 
-[Advanced Custom Fields](https://wordpress.org/plugins/advanced-custom-fields/) cambió la conversación desde 2011. En vez de un gran cuadro de texto, quien edita completa un formulario: título, imagen, botón. El theme decide cómo se ve.
+Desde 2011, con [Advanced Custom Fields](https://wordpress.org/plugins/advanced-custom-fields/), en vez de un gran cuadro de texto, quien edita completa un formulario: título, imagen, botón. El theme decide cómo se ve.
 
 Primero fueron campos fijos con templates específicos: prolijo, pero cada variante nueva pedía código. Después llegaron los layouts, bloques que se apilan y se reordenan. Las tres tarjetas ya eran algo que cualquiera podía sumar, aunque el resultado se viera recién al abrir la página.
 
 ![Ilustración de un formulario de campos con título, bajada, imagen, botón y enlace, junto al sitio resultante y una lista de templates PHP.](/img/blog/dos-decadas-de-wordpress/era-3-acf-fields.webp)
 
-Con eso armamos nuestro theme base, que ya usábamos en 2017. Y descubrimos una ley que se iba a repetir: lo que mejor te resuelve un problema hoy es lo que vas a tener que migrar mañana. Cuando un sitio creció hasta tener miles de cursos, como [Skillsoft](/portfolio/skillsoft), el problema ya no era un formulario, sino importar catálogos cada mes sin descontrolar nada y adaptarlo para que el theme mostrara lo que tenía que mostrar.
+Con eso armamos nuestro theme base, que ya usábamos en 2017. Y descubrimos una ley que se iba a repetir: lo que mejor te resuelve un problema hoy es lo que vas a tener que migrar mañana. Cuando un sitio creció hasta tener miles de cursos, como [Skillsoft](/portfolio/skillsoft), el problema pasó a ser importar catálogos cada mes sin descontrolar nada y adaptarlo para que el theme mostrara lo que tenía que mostrar.
 
 ![Ilustración de un editor de layouts: un bloque de tarjetas se arrastra entre el hero, los testimonios y el llamado a la acción, con el sitio resultante detrás.](/img/blog/dos-decadas-de-wordpress/era-4-acf-layouts.webp)
 
@@ -60,7 +60,7 @@ Con eso armamos nuestro theme base, que ya usábamos en 2017. Y descubrimos una 
 
 Visual Composer, Divi y Enfold prometieron lo que todos querían: armar la página con cajas visuales. Filas, columnas, elementos. Por fin, casi cualquier cosa sin tocar código.
 
-El detalle estaba abajo: mucho de lo que guardaban seguían siendo shortcodes. Tu contenido quedaba atado al builder. Si un día querías irte, te encontrabas con un `[vc_row]` donde antes había un texto.
+El detalle estaba abajo: mucho de lo que guardaban seguían siendo shortcodes, así que tu contenido quedaba atado al builder. Si un día querías irte, te encontrabas con un `[vc_row]` donde antes había un texto.
 
 Años después, el propio Divi lo reconoció a su manera. La página de [Divi 5](https://www.elegantthemes.com/divi-5/) tiene un título que dice "No more shortcodes". Todavía hoy, cada tanto, nos llega algún export con código de un builder que hay que limpiar a mano.
 
@@ -80,7 +80,7 @@ No fue gratis. Había una discusión de fondo en el equipo: ¿no era mejor Guten
 
 El [6 de diciembre de 2018](https://wordpress.org/news/2018/12/bebo/), WordPress 5.0 reemplazó el editor por uno de bloques, y lo presentó como "the first step toward an exciting new future". Fue el volantazo más grande de todos, porque no lo elegías: venía con la actualización.
 
-Nosotros no fuimos más valientes. Esa misma semana estábamos pasándonos el link de un plugin para desactivarlo. Cuatro días después, un cliente actualizó por su cuenta, y hubo que desactivarlo para dejarle su editor de siempre, avisándole que eso no iba a durar.
+Nosotros no fuimos más valientes. Esa misma semana estábamos pasándonos el link de un plugin para desactivarlo. Cuatro días después, un cliente actualizó por su cuenta, y hubo que desactivarlo para dejarle su editor de siempre, y le avisamos que eso no iba a durar.
 
 La respuesta del ecosistema se puede medir. WordPress había [prometido sostener el editor clásico hasta 2021](https://make.wordpress.org/core/2018/11/07/classic-editor-plugin-support-window/). El plugin [Classic Editor](https://wordpress.org/plugins/classic-editor/) hoy declara más de 8 millones de instalaciones activas, y soporte "until 2024, or as long as is necessary".
 
@@ -94,7 +94,7 @@ Y como nada es definitivo, tuvimos también el camino inverso. Al pasar páginas
 
 [En enero de 2022](https://wordpress.org/news/2022/01/josephine/), WordPress anunció "Full site editing is here". La misma idea se extendió a encabezado, pie, plantillas y estilos. El diseño pasó a vivir en un sistema de tokens.
 
-Para nosotros, es una rama que sigue abierta: un flujo válido, fácil de mantener, y la dirección oficial de WordPress. En [Tufts](/portfolio/tufts-jumbopress) construimos un theme de bloques para los sitios nuevos de su red, mientras los actuales siguen funcionando.
+Para nosotros, es una rama que sigue abierta: un flujo válido y fácil de mantener, y la dirección oficial de WordPress. En [Tufts](/portfolio/tufts-jumbopress) construimos un theme de bloques para los sitios nuevos de su red, mientras los actuales siguen funcionando.
 
 ![Ilustración del editor de sitio de WordPress, con plantillas, patrones y estilos en el menú, partes como encabezado y pie, y un panel de tipografía y colores.](/img/blog/dos-decadas-de-wordpress/era-8-block-themes.webp)
 
@@ -114,7 +114,7 @@ También hay que admitir que a más de uno le costó horrores sacarse esa manera
 
 Cada volantazo tiene un costado comercial. Sale una tecnología nueva, y alguien va a decirte que tu sitio ya no sirve y que hay que rehacerlo.
 
-Nos pasó de cerca. En 2024, alguien vino a pedirnos una segunda opinión: otra agencia le había dicho que su builder no servía y que había que rehacer todo. Y acá va la parte incómoda: a nosotros también nos convenía darle la razón, porque rehacer es más trabajo facturable.
+Nos pasó de cerca. En 2024, alguien vino a pedirnos una segunda opinión: otra agencia le había dicho que su builder no servía y que había que rehacer todo. Lo incómodo es que a nosotros también nos convenía darle la razón, porque rehacer es más trabajo facturable.
 
 Lo revisamos, y a la agencia no le faltaba razón: el sitio era un lío. Años de distintos developers, con estilos y paradigmas apilados uno encima de otro: templates de Laravel, templates de WordPress, shortcodes, campos de ACF y Elementor como builder. Una mezcla digna de mención. Pero esa persona no tenía presupuesto ni tiempo para rehacerlo, así que encontramos una solución intermedia para editar lo que necesitaba a corto plazo, con una advertencia: tarde o temprano, lo iba a tener que rehacer.
 
@@ -124,15 +124,15 @@ Nunca fue nuestra filosofía recomendar rehacer por reflejo. Lo mejor para cada 
 - **Probar antes de sentenciar.** Una vez nos tocó un sitio con un theme discontinuado, cuya página oficial ya era de casinos. Antes de condenarlo, propusimos probar las actualizaciones en un entorno aparte. Recuerdo frases como: "si sale bien, tiran un poco más. Si no, site nuevo o muerte".
 - **Elegir qué modernizar.** En [Tufts](/portfolio/tufts-jumbopress), la auditoría recomendaba modernizar toda la red. Se eligió otro camino, y también funcionó, pero a otra escala.
 
-Y a veces no queda otra, y hay que decirlo. En [Naropa](/portfolio/naropa), el sitio era reciente pero tenía problemas de rendimiento y usabilidad, hasta en el dashboard. Lo auditamos, propusimos pasar a Elementor, y lo rehicimos completo en unos cuatro meses. Rehacer no es el problema. El problema es que sea la primera respuesta, siempre.
+Y a veces no queda otra, y hay que decirlo. En [Naropa](/portfolio/naropa), el sitio era reciente pero tenía problemas de rendimiento y usabilidad, hasta en el dashboard. Lo auditamos, propusimos pasar a Elementor, y lo rehicimos completo en unos cuatro meses. El problema es que rehacer sea la primera respuesta, siempre.
 
 ## Acto 3: se lo pedís a tu LLM amigo
 
 En [diciembre de 2025, WordPress 6.9](https://wordpress.org/news/2025/12/gene/) trajo la Abilities API, una forma estándar de abrirle la puerta a la IA. El [adaptador de MCP](https://github.com/WordPress/mcp-adapter) la conecta con los agentes. Hasta [Elementor](https://elementor.com/mcp/) anunció ya su propio MCP, aunque a mi parecer a media máquina.
 
-El pedido del principio ahora se escribe tal cual: "cambiá el título y sumá tres tarjetas". Ahí estamos trabajando: en que el equipo de un cliente pueda hacer esto con roles y lineamientos claros, y con una persona que revisa antes de publicar.
+El pedido del principio ahora se escribe tal cual: "cambiá el título y sumá tres tarjetas". Estamos trabajando en que el equipo de un cliente pueda hacer esto con roles y lineamientos claros, y con una persona que revisa antes de publicar.
 
-Yo lo vivo también en carne propia. Este mismo sitio lo [hice con agentes](/portfolio/ilanvivanco), poniendo a dos modelos en lados opuestos: uno hace y el otro revisa. Son rápidos, y a veces me corrigen. También se equivocan con una seguridad admirable. El desafío ahora es poder agarrar esos errores a tiempo, saber dónde mirar.
+Yo lo vivo también en carne propia. Este mismo sitio lo [hice con agentes](/portfolio/ilanvivanco), poniendo a dos modelos en lados opuestos: uno hace y el otro revisa. Son rápidos, y a veces me corrigen. También se equivocan con una seguridad admirable. El desafío ahora es agarrar esos errores a tiempo: saber dónde mirar.
 
 ![Ilustración de un agente que recibe el pedido de actualizar el título de la home, lee los lineamientos de marca, crea un borrador y espera una revisión antes de publicar. Su rol le permite leer y editar contenido, pero no publicar ni cambiar plugins.](/img/blog/dos-decadas-de-wordpress/era-9-agentes.webp)
 
@@ -142,7 +142,7 @@ La línea entre un developer profesional y uno amateur se está difuminando, es 
 
 Lo mismo que te permite crear 3 tarjetas te permite romper todo el sitio. Sin una guía clara detrás, se puede generar mucha basura inconsistente, muy rápido.
 
-Si algo aprendí de 20 años de volantazos es que las herramientas cambian más rápido que los problemas. Ya vi morir a varias soluciones definitivas. Incluso PHP lleva más años muriendo que de vida misma. Lo que sigue igual: qué se rompe, por qué, qué no hay que tocar un viernes, y cuándo rehacer no es la respuesta.
+Si algo aprendí de 20 años de volantazos es que las herramientas cambian más rápido que los problemas. Ya vi morir a varias soluciones definitivas. Incluso PHP lleva más años muriendo que de vida misma. Lo que sigue igual: qué se rompe, por qué, qué no hay que tocar un viernes y cuándo rehacer no es la respuesta.
 
 ### Cuándo alcanza con la herramienta
 
@@ -151,8 +151,8 @@ Cambiar un título, borrar dos páginas o editar metadata ya no necesita un deve
 **Alcanza, si alguien mira el resultado:**
 
 - **Contenido.** Cambiar textos e imágenes, borrar un par de páginas o revisar lo que quedó viejo.
-- **Landings.** Armar una nueva con patrones que el sitio ya tiene. La clave son las buenas instrucciones y lineamientos: sin eso, rehacés todo una y otra vez.
-- **Metadata en masa.** Mejor todavía: extraerla a una planilla, editarla, revisarla y volver a importarla. Lo mejor de ambos mundos.
+- **Landings.** Armar una nueva con patrones que el sitio ya tiene. Hacen falta buenas instrucciones y lineamientos: sin eso, rehacés todo una y otra vez.
+- **Metadata en masa.** Mejor todavía: extraerla a una planilla, editarla, revisarla y volver a importarla.
 - **Primeros borradores.** De una página, un componente o un prototipo para mostrar una idea.
 
 **Sirve, pero timoneado, no en piloto automático:**
@@ -162,8 +162,8 @@ Cambiar un título, borrar dos páginas o editar metadata ya no necesita un deve
 
 **Todavía no alcanza, o no sola:**
 
-- **Migrar sin perder nada.** Conservar URLs, redirects y datos, con forma de volver atrás, como en [Harver](/portfolio/harver) o [Tempo](/portfolio/tempo). Acá un workflow ordenado sigue siendo clave.
-- **Integrar con otros sistemas.** Cada vez hay más piezas conectadas en un solo lugar: formularios en HubSpot, parámetros UTM, analytics, pasarelas de pago. El problema real es qué pasa si el otro lado falla o cambia.
+- **Migrar sin perder nada.** Conservar URLs, redirects y datos, con forma de volver atrás, como en [Harver](/portfolio/harver) o [Tempo](/portfolio/tempo). Acá sigue haciendo falta un workflow ordenado.
+- **Integrar con otros sistemas.** Cada vez hay más piezas conectadas en un solo lugar: formularios en HubSpot, parámetros UTM, analytics, pasarelas de pago. El problema es qué pasa si el otro lado falla o cambia.
 - **Importar en forma recurrente,** como los catálogos de [Skillsoft](/portfolio/skillsoft). Hay casos en los que un proceso repetitivo y consistente le gana a la IA generativa, donde hacer dos veces lo mismo no garantiza el mismo resultado.
 - **Permisos y contenido pago.** Un error acá no se ve en pantalla, pero alguien accede a lo que no debe. Y no hay peor error que el silencioso.
 - **Redes de sitios.** En una red como la de [Tufts](/portfolio/tufts-jumbopress), un cambio que anda en un sitio puede romper otro. Hacen falta chequeos automáticos que encuentren los casos raros a tiempo.
