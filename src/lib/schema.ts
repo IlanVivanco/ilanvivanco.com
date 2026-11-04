@@ -101,7 +101,8 @@ export const pageSchema = ({
 }) => {
 	const page = publicPages.find((p) => p.path === pathname)
 	const url = abs(pathname)
-	const breadcrumb = pathname !== '/' &&
+	const isHome = pathname === pathFor('/', lang)
+	const breadcrumb = !isHome &&
 		page && {
 			'@type': 'BreadcrumbList',
 			'@id': `${url}#breadcrumb`,
@@ -124,7 +125,7 @@ export const pageSchema = ({
 				'inLanguage': lang ?? 'es',
 				'isPartOf': { '@id': WEBSITE_ID },
 				...(page && { dateModified: page.updated }),
-				...(type === 'ProfilePage' || pathname === '/'
+				...(type === 'ProfilePage' || isHome
 					? { mainEntity: { '@id': PERSON_ID } }
 					: { about: { '@id': PERSON_ID } }),
 				...(mainEntity && { mainEntity }),

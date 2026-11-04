@@ -4,7 +4,7 @@ import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
 import Analytics from '../components/Analytics.astro'
 import { site, siteText } from '../data/site'
-import { ogPath, publicPages } from '../data/pages'
+import { hreflangFor, ogPath, publicPages } from '../data/pages'
 import { ui } from '../i18n'
 import { pageSchema, type PageSchemaType } from '../lib/schema'
 
@@ -47,6 +47,10 @@ const noindex = noindexProp || publicPages.find((p) => p.path === pathname)?.noi
 		<meta name="description" content={metaDescription} />
 		<meta name="author" content={site.name} />
 		{noindex ? <meta name="robots" content="noindex, follow" /> : <link rel="canonical" href={canonical} />}
+		{!noindex &&
+			hreflangFor(pathname).map((h) => (
+				<link rel="alternate" hreflang={h.lang} href={new URL(h.path, site.url).href} />
+			))}
 		<meta name="theme-color" content="#0A111F" />
 		<meta name="color-scheme" content="dark" />
 
@@ -60,6 +64,9 @@ const noindex = noindexProp || publicPages.find((p) => p.path === pathname)?.noi
 
 		<meta property="og:type" content={ogType} />
 		<meta property="og:locale" content={t.ogLocale} />
+		{!noindex && hreflangFor(pathname).length > 0 && (
+			<meta property="og:locale:alternate" content={t.ogLocaleAlternate} />
+		)}
 		<meta property="og:site_name" content="Ilán Vivanco" />
 		<meta property="og:title" content={pageTitle} />
 		<meta property="og:description" content={metaDescription} />

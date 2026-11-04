@@ -22,7 +22,6 @@ export type PublicPage = {
 }
 
 export const publicPages: PublicPage[] = [
-	// Inglés: con `noindex` y sin enlazar hasta el lanzamiento.
 	{
 		path: '/en',
 		lang: 'en',
@@ -32,7 +31,6 @@ export const publicPages: PublicPage[] = [
 		title: 'Ilán Vivanco',
 		subtitle: 'CTO at EpicDevs',
 		updated: '2026-11-04',
-		noindex: true,
 	},
 	{
 		path: '/en/about',
@@ -43,7 +41,6 @@ export const publicPages: PublicPage[] = [
 		title: 'More about me',
 		subtitle: 'From Buenos Aires to Santander',
 		updated: '2026-11-04',
-		noindex: true,
 	},
 	{
 		path: '/en/resume',
@@ -54,7 +51,6 @@ export const publicPages: PublicPage[] = [
 		title: 'My resume',
 		subtitle: 'CTO / Director of Engineering',
 		updated: '2026-11-04',
-		noindex: true,
 	},
 	{
 		path: '/en/portfolio',
@@ -65,7 +61,6 @@ export const publicPages: PublicPage[] = [
 		title: 'Work',
 		subtitle: 'Web platforms and WordPress',
 		updated: '2026-11-04',
-		noindex: true,
 	},
 	{
 		path: '/en/contact',
@@ -76,7 +71,6 @@ export const publicPages: PublicPage[] = [
 		title: 'Shall we build something?',
 		subtitle: 'Email, LinkedIn, or the form',
 		updated: '2026-11-04',
-		noindex: true,
 	},
 	{
 		path: '/',
@@ -177,6 +171,18 @@ publicPages.push(
 )
 
 // La ruta de una página en español, en el idioma pedido.
+// `hreflang` de una página: las dos versiones y `x-default`, en español. Sin versión en el otro idioma, ninguno.
+export const hreflangFor = (path: string) => {
+	const page = publicPages.find((p) => p.path === path)
+	if (!page?.alternate || page.noindex) return []
+	const [es, en] = page.lang === 'es' ? [page.path, page.alternate] : [page.alternate, page.path]
+	return [
+		{ lang: 'es', path: es },
+		{ lang: 'en', path: en },
+		{ lang: 'x-default', path: es },
+	]
+}
+
 export const pathFor = (path: string, locale?: string) =>
 	(locale === 'en' && publicPages.find((p) => p.path === path)?.alternate) || path
 

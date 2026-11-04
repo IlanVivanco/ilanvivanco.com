@@ -216,5 +216,5 @@ Quedan fuera de este PR porque son cambios en cuentas externas:
 
 ## TODO / Fase 2
 
-- **Sitio en inglés:** i18n de Astro, con `es` por defecto sin prefijo y `en` en `/en/…`. Recupera `/en/about`, `/en/resume`, `/en/contact` y `/en/portfolio` (quitando sus 301) y suma `hreflang`.
+- **Case studies en inglés:** `/en/portfolio/:slug` sigue en 301 a `/en/portfolio`.
 - **Tema de Prism `monokai-cotalpa` en el blog,** cuando un post lleve bloques de código.

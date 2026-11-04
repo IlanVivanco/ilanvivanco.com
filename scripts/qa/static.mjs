@@ -167,6 +167,45 @@ export async function runStaticChecks(log) {
 			.every((p) => !sitemap.includes(`<loc>${new URL(p.path, site.url).href}</loc>`)),
 		'sitemap sin páginas noindex'
 	)
+	// Idiomas: hreflang recíproco entre las dos versiones, en el head y en el sitemap, y sin hreflang en noindex.
+	const hreflangs = (html) =>
+		[...html.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)"/g)]
+			.map((m) => `${m[1]} ${m[2]}`)
+			.sort()
+	const paired = publicPages.filter((p) => p.alternate && !p.noindex)
+	log(
+		paired.every((p) => {
+			const other = publicPages.find((o) => o.path === p.alternate)
+			const links = hreflangs(read(fileFor(p.path)))
+			return (
+				other?.alternate === p.path &&
+				links.length === 3 &&
+				links.join() === hreflangs(read(fileFor(other.path))).join() &&
+				links.includes(`${p.lang} ${new URL(p.path, site.url).href}`)
+			)
+		}),
+		`hreflang recíproco en ${paired.length} páginas`
+	)
+	log(
+		paired.every((p) =>
+			sitemap.includes(`<xhtml:link rel="alternate" hreflang="${p.lang}" href="${new URL(p.path, site.url).href}"/>`)
+		),
+		'sitemap con hreflang'
+	)
+	log(
+		publicPages.filter((p) => p.noindex || !p.alternate).every((p) => hreflangs(read(fileFor(p.path))).length === 0),
+		'sin hreflang en noindex ni en páginas de un solo idioma'
+	)
+	log(
+		publicPages.every((p) => {
+			const html = read(fileFor(p.path))
+			const lang = p.lang === 'es' ? 'en' : 'es'
+			return new RegExp(
+				`class="lang-switch[^>]*href="${p.alternate ?? (lang === 'en' ? '/en' : '/')}"[^>]*lang="${lang}" hreflang="${lang}"`
+			).test(html)
+		}),
+		'selector de idioma en cada página, con destino, lang y hreflang'
+	)
 	for (const icon of ['favicon.ico', 'favicon.svg', 'apple-touch-icon.png', 'manifest.webmanifest']) {
 		log(existsSync(join(DIST, icon)), `${icon} publicado`)
 	}

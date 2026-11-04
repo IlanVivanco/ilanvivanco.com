@@ -42,7 +42,7 @@ src/
   scripts/terminal.ts motor de la terminal del hero; las escenas van en terminal-<idioma>.ts
   lib/schema.ts       JSON-LD: Person, WebSite y el tipo de cada página
   layouts/Base.astro  <head>, SEO, speculation rules, header y footer
-  components/         Header, Footer, Socials, MailLink, InstagramGrid, WinControls, Logo, Fn, Icon, ProjectCard, Terminal, Stats, Analytics, CvAts
+  components/         Header, Footer, LangSwitch, Socials, MailLink, InstagramGrid, WinControls, Logo, Fn, Icon, ProjectCard, Terminal, Stats, Analytics, CvAts
   pages/              rutas de una línea: /, /curriculum, /portfolio, /portfolio/<slug>, /blog, /blog/<slug>, /contacto, /sobre-mi, /privacidad, /cv, /en/cv, 404, sitemap.xml
   views/              cuerpo de cada página: Home, Resume, Portfolio, Study, Blog, Post, Contact, About, Privacy, NotFound
 public/               fonts, img, favicon.svg, og.png, robots.txt (cv/ y og/ se generan, no se versionan)
@@ -119,5 +119,6 @@ Muestra de cómo escribe Ilán:
 
 ## Pendientes conocidos
 
-- **Fase 2:** sitio y CV en inglés. Tema de Prism `monokai-cotalpa` cuando un post lleve bloques de código.
+- **Case studies en inglés:** hoy `/en/portfolio/:slug` redirige a `/en/portfolio`.
+- Tema de Prism `monokai-cotalpa` cuando un post lleve bloques de código.
 - **Humanizer en inglés:** skill aparte, sin mezclarla con `humanizar`. Auditar e instalar `blader/humanizer` como se hizo con esta, y extender "Voz" con una muestra real de Ilán en inglés (hoy no hay). Probarla con el primer texto de la Fase 2.

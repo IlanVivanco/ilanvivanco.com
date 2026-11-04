@@ -1,0 +1,35 @@
+---
+// Selector de idioma: la misma página en el otro idioma o, si no existe, la home de ese idioma.
+import { publicPages } from '../data/pages'
+import { ui } from '../i18n'
+
+const { switcher } = ui(Astro.currentLocale)
+const path =
+	Astro.url.pathname
+		.replace(/\.html$/, '')
+		.replace(/\/index$/, '')
+		.replace(/\/$/, '') || '/'
+const href = publicPages.find((p) => p.path === path)?.alternate ?? switcher.home
+---
+
+<a class="lang-switch mono" href={href} lang={switcher.lang} hreflang={switcher.lang}>
+	{switcher.code}
+	<span class="sr-only">, {switcher.label}</span>
+</a>
+
+<style>
+	.lang-switch {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-width: 44px;
+		min-height: 44px;
+		font-size: 0.8125rem;
+		color: var(--text-soft);
+		text-decoration: none;
+		transition: color 0.2s;
+	}
+	.lang-switch:hover {
+		color: var(--yellow-hi);
+	}
+</style>

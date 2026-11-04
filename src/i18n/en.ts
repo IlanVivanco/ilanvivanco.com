@@ -3,11 +3,13 @@ import type { es } from './es.ts'
 
 export const en: typeof es = {
 	ogLocale: 'en_US',
+	ogLocaleAlternate: 'es_ES',
 	intl: 'en-US',
 	role: 'CTO at EpicDevs',
 	home: 'Home',
 	copied: 'copied',
 	skipLink: 'Skip to content',
+	switcher: { code: 'ES', label: 'versión en español', lang: 'es', home: '/' },
 	header: {
 		home: 'Ilán Vivanco, home',
 		nav: 'Main',
@@ -19,7 +21,7 @@ export const en: typeof es = {
 	},
 	footer: {
 		credit: 'made in Santander with Astro and coffee',
-		privacy: 'Privacy and legal notice (in Spanish)',
+		privacy: 'Privacy',
 		privacyLang: 'es',
 	},
 	externalNote: ' (opens in a new tab)',
@@ -100,7 +102,7 @@ export const en: typeof es = {
 		],
 		count: 'projects',
 		study: 'See the case',
-		post: 'Read the post (in Spanish)',
+		post: 'Read the post',
 		visit: 'Visit the site',
 	},
 	contactPage: {
@@ -126,7 +128,7 @@ export const en: typeof es = {
 		messageHelp: '(Enter sends · Shift+Enter, new line)',
 		labelMessage: 'Message',
 		privacy: 'your data is only used to reply to you ·',
-		privacyLink: 'privacy (in Spanish)',
+		privacyLink: 'privacy',
 		stepsLabel: 'Steps',
 		steps: ['name', 'email', 'topic', 'message'],
 	},

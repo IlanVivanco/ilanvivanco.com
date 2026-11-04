@@ -1,11 +1,13 @@
 // Textos de las páginas, del layout y de los scripts del cliente, que los reciben por atributos `data-*`.
 export const es = {
 	ogLocale: 'es_ES',
+	ogLocaleAlternate: 'en_US',
 	intl: 'es-ES',
 	role: 'CTO en EpicDevs',
 	home: 'Inicio',
 	copied: 'copiado',
 	skipLink: 'Saltar al contenido',
+	switcher: { code: 'EN', label: 'English version', lang: 'en', home: '/en' },
 	header: {
 		home: 'Ilán Vivanco, inicio',
 		nav: 'Principal',
