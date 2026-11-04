@@ -1,9 +1,7 @@
 ---
 import Base from '../layouts/Base.astro'
 import Fn from '../components/Fn.astro'
-import { formatPostDate, posts } from '../data/posts'
-
-const sorted = [...posts].sort((a, b) => b.date.localeCompare(a.date))
+import { coverSrcset, formatPostDate, posts } from '../data/posts'
 ---
 
 <Base
@@ -22,23 +20,33 @@ const sorted = [...posts].sort((a, b) => b.date.localeCompare(a.date))
 				Lo que aprendí construyendo para la web, con los errores incluidos.
 			</p>
 			<ul class="posts" role="list" data-reveal data-delay="0.1">
-				{sorted.map((p) => (
+				{posts.map((p, i) => (
 					<li>
-						<time class="mono" datetime={p.date}>
-							{formatPostDate(p.date)}
-						</time>
-						<h2 class="h3">
-							<a href={`/blog/${p.slug}`}>{p.title}</a>
-						</h2>
-						<p>{p.description}</p>
+						<div class="cover">
+							<img
+								src={p.image}
+								srcset={coverSrcset(p)}
+								sizes="(max-width: 640px) calc(100vw - 40px), 280px"
+								alt={p.imageAlt}
+								loading={i === 0 ? undefined : 'lazy'}
+								fetchpriority={i === 0 ? 'high' : undefined}
+								decoding="async"
+								width="1440"
+								height="900"
+							/>
+						</div>
+						<div class="info">
+							<time class="mono" datetime={p.date}>
+								{formatPostDate(p.date)}
+							</time>
+							<h2 class="h3">
+								<a href={`/blog/${p.slug}`}>{p.title}</a>
+							</h2>
+							<p>{p.description}</p>
+						</div>
 					</li>
 				))}
 			</ul>
-			<p class="mono rss">
-				<a class="link" href="/rss.xml">
-					RSS
-				</a>
-			</p>
 		</div>
 	</section>
 </Base>
@@ -52,18 +60,43 @@ const sorted = [...posts].sort((a, b) => b.date.localeCompare(a.date))
 		flex-direction: column;
 		margin: 24px 0 0;
 		padding: 0;
-		max-width: 760px;
+		max-width: 900px;
 		border-top: 1px solid var(--line);
 	}
 	.posts li {
-		display: flex;
-		flex-direction: column;
-		gap: 8px;
+		position: relative;
+		display: grid;
+		grid-template-columns: 280px minmax(0, 1fr);
+		gap: 28px;
+		align-items: center;
 		padding-block: 28px;
 		border-bottom: 1px solid var(--line);
 	}
-	.posts time,
-	.rss {
+	.cover {
+		overflow: hidden;
+		border: 1px solid var(--line);
+		border-radius: 12px;
+		line-height: 0;
+	}
+	.cover img {
+		width: 100%;
+		height: auto;
+		filter: grayscale(0.7) brightness(0.72) contrast(1.05);
+		transition:
+			filter 0.5s var(--ease-out),
+			scale 0.7s var(--ease-out);
+	}
+	.posts li:hover img,
+	.posts li:has(a:focus-visible) img {
+		filter: none;
+		scale: 1.04;
+	}
+	.info {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+	}
+	.posts time {
 		color: var(--muted);
 		font-size: 0.8125rem;
 	}
@@ -75,7 +108,13 @@ const sorted = [...posts].sort((a, b) => b.date.localeCompare(a.date))
 		text-decoration: none;
 		transition: color 0.2s;
 	}
-	.posts h2 a:hover,
+	/* Toda la fila lleva al post */
+	.posts h2 a::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+	}
+	.posts li:hover h2 a,
 	.posts h2 a:focus-visible {
 		color: var(--yellow-hi);
 	}
@@ -83,5 +122,11 @@ const sorted = [...posts].sort((a, b) => b.date.localeCompare(a.date))
 		margin: 0;
 		max-width: 70ch;
 		color: var(--text-soft);
+	}
+	@media (max-width: 640px) {
+		.posts li {
+			grid-template-columns: minmax(0, 1fr);
+			gap: 16px;
+		}
 	}
 </style>
