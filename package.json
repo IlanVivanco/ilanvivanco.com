@@ -1,6 +1,6 @@
 {
 	"name": "ilanvivanco.com",
-	"version": "2.3.0",
+	"version": "2.4.0",
 	"scripts": {
 		"predev": "npm run images",
 		"dev": "astro dev",

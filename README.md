@@ -63,3 +63,7 @@ Cada push a `main` se publica en Netlify, y cada PR genera un deploy preview. La
 Los cambios de cada versión están en `CHANGELOG.md`.
 
 El sitio anterior estaba hecho en Nuxt 2. `MIGRATION.md` tiene el inventario de lo que se conservó, se migró y se descartó, y el TODO de la Fase 2. `PLAN-instagram.md` tiene el plan del feed de Instagram.
+
+## Clones locales
+
+- Demo del plugin de Women's Power Gap, con datos de ejemplo: `~/ddev/wpg-demo` (proyecto DDEV `wpg-demo`).

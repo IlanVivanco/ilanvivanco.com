@@ -11,6 +11,7 @@ const filters = [
 	{ label: 'migraciones', tag: 'Migración' },
 	{ label: 'integraciones', tag: 'Integración' },
 	{ label: 'plugins', tag: 'WP Plugin' },
+	{ label: 'propios', tag: 'Producto propio' },
 ]
 const years = projects.map((p) => Number(p.date.slice(0, 4)))
 const range = `${Math.min(...years)}–${Math.max(...years)}`
