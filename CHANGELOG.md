@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.1] - 2026-11-04
+
+### Cambiado
+
+- **CV:** Construye Mundo pasa a voluntariado, Freelance a remoto e inglés a "Fluido oral y escrito".
+- **Stack:** suma Multisite, Elementor, ACF, Salesforce, Shopify, Supabase, Pressable, Kinsta, Vercel y Railway.
+
 ## [2.2.0] - 2026-11-03
 
 ### Agregado
