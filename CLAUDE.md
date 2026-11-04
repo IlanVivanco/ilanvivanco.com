@@ -78,7 +78,7 @@ netlify.toml          build, redirects y cabeceras
 
 ## Voz
 
-Para editar prosa con `/humanizar` (se invoca a mano). Estas reglas mandan sobre `.claude/skills/humanizar/SKILL.md`, y la base sigue en la regla 8 y en `DESIGN.md §8`.
+Para editar prosa con `/humanizar`, cuando Ilán lo pide. Estas reglas mandan sobre `.claude/skills/humanizar/SKILL.md`, y la base sigue en la regla 8 y en `DESIGN.md §8`.
 
 - **Registro:** rioplatense con voseo, `¿` y `¡`, comillas rectas, sin raya larga. En los correos manda `~/.claude/identity.md`.
 - **Vocabulario:** clichés de marketing afuera; modismos rioplatenses adentro ("manos atadas", "en carne propia").
@@ -103,7 +103,7 @@ Muestra de cómo escribe Ilán:
 
 ## Voz en inglés
 
-Para editar prosa en inglés con `/humanizer` (se invoca a mano). Estas reglas mandan sobre `.claude/skills/humanizer/SKILL.md`, y la base sigue en la regla 8 y en `DESIGN.md §8`.
+Para editar prosa en inglés con `/humanizer`, cuando Ilán lo pide. Estas reglas mandan sobre `.claude/skills/humanizer/SKILL.md`, y la base sigue en la regla 8 y en `DESIGN.md §8`.
 
 - **Registro:** inglés de EE. UU., primera persona (`I`) y contracciones, cercano y con humor técnico. Comillas rectas y sin raya larga.
 - **Alcance:** los mismos límites que en español: modo archivo solo sobre prosa de `.md`; para `src/i18n/en.ts` y `src/data/*.ts`, modo pegado. Quedan fuera el microcopy, los stats, el CV para ATS y los legales.

@@ -8,7 +8,6 @@ description: |
   o español neutro sin lugar. También revisa informes y presentaciones (.pptx) lámina por lámina. Adapta al español la guía "Signs of AI writing" de Wikipedia y los
   estudios de corpus sobre textos de IA en español.
 license: MIT
-disable-model-invocation: true
 metadata:
   version: "1.4.0"
   source: vfleanconsult-lab/humanizar
