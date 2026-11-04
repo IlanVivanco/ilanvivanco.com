@@ -5,8 +5,6 @@ export const site = {
 	name: 'Ilán Vivanco',
 	url: 'https://ilanvivanco.com',
 
-	// Contacto
-	email: 'ilanvivanco@gmail.com',
 	// Nombre del form en Netlify Forms: si cambia, cambian las notificaciones y el historial de envíos.
 	formName: 'contact-form',
 
@@ -21,6 +19,11 @@ export const site = {
 		{ label: 'EpicDevs', icon: 'epicdevs', href: 'https://epicdevs.com' },
 	],
 }
+
+// Una dirección por idioma, las dos del dominio. Ofuscadas en el HTML: ver encodeMail.
+const emails = { es: 'hola@ilanvivanco.com', en: 'hi@ilanvivanco.com' }
+export const emailFor = (locale?: string) => byLang(emails, locale)
+export const allEmails = Object.values(emails)
 
 const text = {
 	es: {

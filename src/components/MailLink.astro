@@ -1,6 +1,6 @@
 ---
 // Email ofuscado en el HTML: se arma al cargar y el click lo copia (si no hay permiso, sigue el mailto).
-import { site } from '../data/site'
+import { emailFor } from '../data/site'
 import { ui } from '../i18n'
 import { encodeMail } from '../lib/mail'
 
@@ -13,7 +13,7 @@ const { class: className = '' } = Astro.props
 <a
 	class:list={['link', 'mail-link', className]}
 	href="/contacto"
-	data-mail={encodeMail(site.email)}
+	data-mail={encodeMail(emailFor(Astro.currentLocale))}
 	data-copied={ui(Astro.currentLocale).copied}
 >
 	<span data-mail-text>[email protegido]</span>

@@ -2,7 +2,7 @@
 // CV para ATS con la identidad del sitio: una columna, sin tablas ni imágenes, y texto real en orden de lectura.
 // El color y las formas son solo CSS (nada de texto generado): lo que lee un ATS es lo mismo que sin estilos.
 import { atsPeriod, cv, cvLabels } from '../data/cv'
-import { site } from '../data/site'
+import { emailFor, site } from '../data/site'
 import { encodeMail } from '../lib/mail'
 import Logo from './Logo.astro'
 
@@ -210,7 +210,7 @@ const bare = (url: string) => url.replace(/^https:\/\/(www\.)?/, '').replace(/\/
 				<p class="title">{labels.title}</p>
 				<p class="contact">
 					{labels.location} |{' '}
-					<a data-mail={encodeMail(site.email)} href="#">
+					<a data-mail={encodeMail(emailFor(lang))} href="#">
 						[email]
 					</a>{' '}
 					| <a href={linkedin}>{bare(linkedin)}</a> | <a href={site.url}>{bare(site.url)}</a>

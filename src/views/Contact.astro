@@ -4,11 +4,11 @@ import Fn from '../components/Fn.astro'
 import Icon from '../components/Icon.astro'
 import WinControls from '../components/WinControls.astro'
 import MailLink from '../components/MailLink.astro'
-import { site } from '../data/site'
+import { emailFor, site } from '../data/site'
 import { ui } from '../i18n'
 import { encodeMail } from '../lib/mail'
 
-const mail = encodeMail(site.email)
+const mail = encodeMail(emailFor(Astro.currentLocale))
 const { intl, contact } = ui(Astro.currentLocale)
 
 const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'Consultoría', 'Otra cosa']

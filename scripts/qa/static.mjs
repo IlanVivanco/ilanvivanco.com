@@ -7,7 +7,7 @@ import { PDFDocument, PDFName } from 'pdf-lib'
 import { cv, cvLabels, atsPeriod } from '../../src/data/cv.ts'
 import { publicPages, ogPath } from '../../src/data/pages.ts'
 import { posts } from '../../src/data/posts.ts'
-import { site, statsFor } from '../../src/data/site.ts'
+import { allEmails, emailFor, site, statsFor } from '../../src/data/site.ts'
 import { parsePost } from '../lib/instagram-post.mjs'
 
 const require = createRequire(import.meta.url)
@@ -73,8 +73,7 @@ const jsWeight = (file) => {
 
 export async function runStaticChecks(log) {
 	// Email
-	const email = site.email
-	const leaks = htmlFiles().filter((f) => read(f).includes(email))
+	const leaks = htmlFiles().filter((f) => [...allEmails, 'ilanvivanco@gmail.com'].some((e) => read(f).includes(e)))
 	log(leaks.length === 0, `email fuera de todo el HTML de dist${leaks.length ? ': ' + leaks.join(', ') : ''}`)
 
 	// Analytics
@@ -191,7 +190,7 @@ export async function runStaticChecks(log) {
 			const graph =
 				JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)?.[1] ?? '{}')['@graph'] ?? []
 			log(graph.some((n) => n['@type'] === 'Person') && graph.some((n) => n.url === canonical), `${p.path} JSON-LD`)
-			log(!JSON.stringify(graph).includes(site.email), `${p.path} JSON-LD sin email`)
+			log(!allEmails.some((e) => JSON.stringify(graph).includes(e)), `${p.path} JSON-LD sin email`)
 		}
 		log(
 			html.includes(`content="${new URL(ogPath(p.path), site.url).href}"`) && existsSync(join(DIST, ogPath(p.path))),
@@ -312,7 +311,7 @@ async function checkPdf(lang, log) {
 	const order = [
 		site.name,
 		labels.title,
-		site.email,
+		emailFor(lang),
 		'linkedin.com/in/ilanvivanco',
 		'ilanvivanco.com',
 		summary,

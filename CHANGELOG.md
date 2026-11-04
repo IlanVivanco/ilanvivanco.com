@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.6.6] - 2026-11-04
+
+### Cambiado
+
+- **Email público:** el sitio y el CV pasan a `hola@ilanvivanco.com`, y el CV en inglés a `hi@ilanvivanco.com`.
+
 ## [2.6.5] - 2026-11-04
 
 ### Cambiado
