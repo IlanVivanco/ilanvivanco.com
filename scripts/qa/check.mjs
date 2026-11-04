@@ -10,7 +10,7 @@ import { execSync } from 'node:child_process'
 import { readFileSync } from 'node:fs'
 import { createRequire } from 'node:module'
 import { chromium } from 'playwright'
-import { site } from '../../src/data/site.ts'
+import { emailFor } from '../../src/data/site.ts'
 import { posts } from '../../src/data/posts.ts'
 import { studiesFor } from '../../src/data/projects.ts'
 import { serveDist } from '../lib/serve-dist.mjs'
@@ -86,7 +86,7 @@ try {
 			log(real.length === 0, `${label} consola limpia${real.length ? ': ' + real.join(' | ') : ''}`)
 			await page.close()
 		}
-		if (vp.name === 'desktop') await runFormChecks(ctx, BASE, site.email, log)
+		if (vp.name === 'desktop') await runFormChecks(ctx, BASE, emailFor('es'), log)
 		else await runFormViewportCheck(ctx, BASE, log)
 		await ctx.close()
 	}
