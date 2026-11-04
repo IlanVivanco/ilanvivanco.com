@@ -73,6 +73,31 @@ netlify.toml          build, redirects y cabeceras
 15. **Links externos:** siempre con `target="_blank" rel="noopener"` (lo valida el QA).
 16. **CV:** `/curriculum` y el PDF salen de `src/data/cv.ts`. El PDF se edita en `components/CvAts.astro`, con una columna y máximo 2 páginas: el QA valida orden de lectura y fuentes. Reglas en `DESIGN.md`.
 
+## Voz
+
+Para editar prosa con `/humanizar` (se invoca a mano). Estas reglas mandan sobre `.claude/skills/humanizar/SKILL.md`, y la base sigue en la regla 8 y en `DESIGN.md §8`.
+
+- **Registro:** rioplatense con voseo, `¿` y `¡`, comillas rectas, sin raya larga. En los correos manda `~/.claude/identity.md`.
+- **Vocabulario:** clichés de marketing afuera; modismos rioplatenses adentro ("manos atadas", "en carne propia").
+- **Alcance:** modo archivo solo sobre prosa de `.md`; para `src/data/*.ts`, modo pegado. Quedan fuera el microcopy, los stats, el CV para ATS y los legales.
+- **Permiso:** lo publicado o aprobado se edita solo con OK de Ilán.
+- **Contenido:** solo los datos, opiniones y anécdotas que ya están en el texto. Esto pisa el permiso de la skill para agregar opiniones.
+- **Se conservan:** `alt`, texto de links, títulos, citas, listas con sus etiquetas, y remates y guiños según `DESIGN.md §8`.
+
+Muestra de cómo escribe Ilán:
+
+> También hay que admitir que a más de uno le costó horrores sacarse esa manera de trabajar de la cabeza. Hemos tenido largas sesiones internas tratando de descular quién había editado qué, por qué había 4 branches sin mergear e infinidad de cambios en prod que no figuraban en el repo. Lo que a corto plazo parece fácil y rápido, a la larga te trae "merge conflicts" y dolores de cabeza.
+>
+> No fue gratis. Había una discusión de fondo en el equipo: ¿no era mejor Gutenberg? ¿Quién busca "programador en Elementor"? Y los updates también traían sorpresas. En agosto de 2022, una versión nueva nos rompió íconos en un sitio y, en otro, alguien terminó editando el core del plugin para salir del paso. Sí, ya sé. Por eso, después, un update limpio fue un lanzamiento en sí mismo.
+>
+> La línea entre un developer profesional y uno amateur se está difuminando, es inevitable. Me parece genial, y me parece peligroso, por lo mismo que decía el tío Ben: "un gran poder conlleva una gran responsabilidad".
+>
+> Lo mismo que te permite crear 3 tarjetas te permite romper todo el sitio. Sin una guía clara detrás, se puede generar mucha basura inconsistente, muy rápido.
+>
+> Sacando mi lado nerd: tampoco existe el anillo único para gobernarlos a todos. Hay muchas maneras de lograr un objetivo. Por eso mi foco hoy no está en elegir la herramienta ganadora, sino en acercarle a cada cliente la que necesita para hacer su trabajo más rápido y eficiente, pero bien. Con su intención, su voz y su estética. Usar el LLM como una herramienta más, poderosa, pero nada más.
+>
+> Microcopy del sitio, como referencia de humor: "Esta página llegó a producción sin tests." / "O el link es viejo, o alguien hizo deploy un viernes." / "7,5 KB de JavaScript propio en la home (sí, los conté)".
+
 ## Verificación antes de dar algo por terminado
 
 0. `npm run format` (tabs de 3, sin punto y coma, comillas simples, 120 columnas; lo controla el CI).
