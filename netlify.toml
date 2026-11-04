@@ -42,6 +42,11 @@ for = "/cv"
 X-Robots-Tag = "noindex"
 
 [[headers]]
+for = "/en/cv"
+[headers.values]
+X-Robots-Tag = "noindex"
+
+[[headers]]
 for = "/cv/*"
 [headers.values]
 X-Robots-Tag = "noindex"

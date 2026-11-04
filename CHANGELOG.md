@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.6.5] - 2026-11-04
+
+### Cambiado
+
+- **Stack del CV:** salen JetEngine, Beaver Builder y Divi.
+
 ## [2.6.4] - 2026-11-04
 
 ### Cambiado

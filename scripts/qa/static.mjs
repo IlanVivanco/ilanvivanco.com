@@ -208,8 +208,8 @@ export async function runStaticChecks(log) {
 		!publicPages.some((p) => p.path.startsWith('/cv')) &&
 			htmlFiles()
 				.filter((f) => !isCv(f))
-				.every((f) => !read(f).includes('href="/cv"')),
-		'sin links a /cv desde el sitio'
+				.every((f) => !read(f).includes('href="/cv"') && !read(f).includes('href="/en/cv"')),
+		'sin links a /cv ni a /en/cv desde el sitio'
 	)
 
 	// Blog
@@ -268,6 +268,7 @@ export async function runStaticChecks(log) {
 	)
 	log((toml.match(/force = true/g) ?? []).length === 2, 'solo /aniversario y netlify.app usan force')
 	log(/for = "\/cv"[\s\S]*?X-Robots-Tag = "noindex"/.test(toml), '/cv con X-Robots-Tag noindex')
+	log(/for = "\/en\/cv"[\s\S]*?X-Robots-Tag = "noindex"/.test(toml), '/en/cv con X-Robots-Tag noindex')
 	log(toml.includes('from = "https://ilanvivanco.netlify.app/*"'), 'netlify.app redirige al dominio principal')
 	for (const header of [
 		'X-Content-Type-Options',
