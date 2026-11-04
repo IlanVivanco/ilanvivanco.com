@@ -1,3 +1,15 @@
+---
+title: "20 años de hacer lo mismo de otra forma en WordPress"
+subtitle: "Un mismo pedido en cada época"
+description: "Cambiar un título y sumar tres tarjetas: cómo se resolvió ese pedido en cada época de WordPress y, ahora que lo hace un agente, para qué sigue haciendo falta un developer."
+date: "2026-11-06"
+updated: "2026-11-06"
+image: "/img/blog/dos-decadas-de-wordpress/era-9-agentes.webp"
+imageAlt: "Ilustración de un agente que recibe el pedido de actualizar el título de la home, lee los lineamientos de marca, crea un borrador y espera una revisión antes de publicar. Su rol le permite leer y editar contenido, pero no publicar ni cambiar plugins."
+ctaTitle: "¿Estás por rehacer un sitio y no sabés si hace falta?"
+ctaLabel: "Contame qué tenés y lo miramos"
+---
+
 Hoy le podés pedir a un agente que cambie un título y sume tres tarjetas en un sitio, y lo hace. Durante años, ese mismo pedido fue un trabajo. Fue el mío.
 
 Entonces, si cualquiera puede hacer un sitio con IA, ¿para qué un developer?
@@ -102,9 +114,11 @@ También hay que admitir que a más de uno le costó horrores sacarse esa manera
 
 Cada volantazo tiene un costado comercial. Sale una tecnología nueva, y alguien va a decirte que tu sitio ya no sirve y que hay que rehacerlo.
 
-Nos pasó de cerca. En 2024, otra agencia le dijo a alguien que su builder no servía y que había que rehacer todo. Esa persona nos pidió una segunda opinión. Y la verdad incómoda: a nosotros también nos convenía confirmarlo, porque rehacer es más trabajo facturable.
+Nos pasó de cerca. En 2024, alguien vino a pedirnos una segunda opinión: otra agencia le había dicho que su builder no servía y que había que rehacer todo. Y acá va la parte incómoda: a nosotros también nos convenía darle la razón, porque rehacer es más trabajo facturable.
 
-Pero la verdad, nunca fue nuestra filosofía recomendar eso por reflejo. Lo mejor para cada cliente suele ser otra cosa, y muchas veces se ve recién al mirar de verdad:
+Lo revisamos, y a la agencia no le faltaba razón: el sitio era un lío. Años de distintos developers, con estilos y paradigmas apilados uno encima de otro: templates de Laravel, templates de WordPress, shortcodes, campos de ACF y Elementor como builder. Una mezcla digna de mención. Pero esa persona no tenía presupuesto ni tiempo para rehacerlo, así que encontramos una solución intermedia para editar lo que necesitaba a corto plazo, con una advertencia: tarde o temprano, lo iba a tener que rehacer.
+
+Nunca fue nuestra filosofía recomendar rehacer por reflejo. Lo mejor para cada cliente suele ser otra cosa, y muchas veces se ve recién al mirar de verdad:
 
 - **Reconstruir sin frenar.** [Harver](/portfolio/harver) tenía un sitio heredado y plazos que no daban para empezar de cero. Lo optimizamos y lo fuimos reconstruyendo por lotes.
 - **Probar antes de sentenciar.** Una vez nos tocó un sitio con un theme discontinuado, cuya página oficial ya era de casinos. Antes de condenarlo, propusimos probar las actualizaciones en un entorno aparte. Recuerdo frases como: "si sale bien, tiran un poco más. Si no, site nuevo o muerte".
@@ -132,37 +146,31 @@ Si algo aprendí de 20 años de volantazos es que las herramientas cambian más 
 
 ### Cuándo alcanza con la herramienta
 
-El trabajo simple ya no necesita un developer atrás. Cambiar un título, borrar 2 páginas, editar metadata, probablemente tampoco. Pero las tareas más complejas e intrincadas todavía se benefician de lo que un developer aprendió en los últimos años.
-
-En la práctica, lo divido en tres.
+Cambiar un título, borrar dos páginas o editar metadata ya no necesita un developer atrás. Las tareas más complejas, sí: ahí todavía pesa lo que un developer aprendió en todos estos años. En la práctica, lo divido en tres.
 
 **Alcanza, si alguien mira el resultado:**
 
-- Cambiar textos e imágenes, borrar un par de páginas, o revisar contenido viejo o desactualizado.
-- Armar una landing nueva con patrones que el sitio ya tiene. La clave está en tener buenas instrucciones y lineamientos, para no tener que rehacer todo constantemente.
-- Editar metadata en masa. O incluso mejor: extraerla a una planilla, editarla, revisarla y volver a importarla. Lo mejor de ambos mundos.
-- Hacer un primer borrador de una página, un componente o un prototipo para mostrar una idea.
+- **Contenido.** Cambiar textos e imágenes, borrar un par de páginas o revisar lo que quedó viejo.
+- **Landings.** Armar una nueva con patrones que el sitio ya tiene. La clave son las buenas instrucciones y lineamientos: sin eso, rehacés todo una y otra vez.
+- **Metadata en masa.** Mejor todavía: extraerla a una planilla, editarla, revisarla y volver a importarla. Lo mejor de ambos mundos.
+- **Primeros borradores.** De una página, un componente o un prototipo para mostrar una idea.
 
 **Sirve, pero timoneado, no en piloto automático:**
 
 - **Diagnosticar.** Encontrar por qué un sitio anda lento, en vez de sumar un parche encima.
-- **Auditar.** Encontrar patrones negativos y problemas. Decidir si conviene rehacer o no sigue siendo mejor trabajo para una persona.
+- **Auditar.** Encontrar patrones negativos y problemas. Decidir si conviene rehacer sigue siendo mejor trabajo para una persona.
 
 **Todavía no alcanza, o no sola:**
 
-- **Migrar sin perder nada.** Conservar URLs, redirects y datos, con forma de volver atrás, como en [Harver](/portfolio/harver) o [Tempo](/portfolio/tempo). Un workflow ordenado sigue siendo clave.
-- **Integrar con otros sistemas.** Cada día tenemos más microsistemas conectados en un solo lado: formularios en HubSpot, parámetros UTM para campañas, analytics, pasarelas de pago. El problema real es qué pasa si el otro lado falla o cambia.
-- **Importar en forma recurrente,** como los catálogos de [Skillsoft](/portfolio/skillsoft). Todavía hay casos en los que resolver un problema de manera procedural, repetitiva y consistente es superior a la IA generativa, donde hacer dos veces lo mismo no garantiza el mismo resultado.
-- **Permisos y contenido pago.** Un error acá no se ve en pantalla, pero alguien accede a lo que no debe. Nada peor que un error silencioso de este estilo.
+- **Migrar sin perder nada.** Conservar URLs, redirects y datos, con forma de volver atrás, como en [Harver](/portfolio/harver) o [Tempo](/portfolio/tempo). Acá un workflow ordenado sigue siendo clave.
+- **Integrar con otros sistemas.** Cada vez hay más piezas conectadas en un solo lugar: formularios en HubSpot, parámetros UTM, analytics, pasarelas de pago. El problema real es qué pasa si el otro lado falla o cambia.
+- **Importar en forma recurrente,** como los catálogos de [Skillsoft](/portfolio/skillsoft). Hay casos en los que un proceso repetitivo y consistente le gana a la IA generativa, donde hacer dos veces lo mismo no garantiza el mismo resultado.
+- **Permisos y contenido pago.** Un error acá no se ve en pantalla, pero alguien accede a lo que no debe. Y no hay peor error que el silencioso.
 - **Redes de sitios.** En una red como la de [Tufts](/portfolio/tufts-jumbopress), un cambio que anda en un sitio puede romper otro. Hacen falta chequeos automáticos que encuentren los casos raros a tiempo.
-- **Incidentes.** Cuando algo se cae un viernes, hay que entender qué pasó antes de tocar nada. Y un contexto de 1M de tokens no siempre alcanza para un sitio de miles de páginas con años de historia.
+- **Incidentes.** Cuando algo se cae un viernes, primero hay que entender qué pasó, y recién después tocar. Y un contexto de 1M de tokens no siempre alcanza para un sitio de miles de páginas con años de historia.
 
-La diferencia no está en lo difícil que parece la tarea, sino en cuánto cuesta equivocarse y si se nota a tiempo. Un título mal se ve y se corrige en un minuto. Un redirect mal puede tardar semanas en notarse y Google no perdona con eso.
+La diferencia no está en lo difícil que parece la tarea, sino en cuánto cuesta equivocarse y si se nota a tiempo. Un título mal se ve y se corrige en un minuto. Un redirect mal puede tardar semanas en notarse, y Google no perdona.
 
 ### No hay un anillo único
 
 Sacando mi lado nerd: tampoco existe el anillo único para gobernarlos a todos. Hay muchas maneras de lograr un objetivo. Por eso mi foco hoy no está en elegir la herramienta ganadora, sino en acercarle a cada cliente la que necesita para hacer su trabajo más rápido y eficiente, pero bien. Con su intención, su voz y su estética. Usar el LLM como una herramienta más, poderosa, pero nada más.
-
----
-
-¿Estás por rehacer un sitio y no sabés si hace falta? [Contame qué tenés](/contacto) y lo miramos.
