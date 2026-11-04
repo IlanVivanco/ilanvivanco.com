@@ -43,7 +43,7 @@ src/
   lib/schema.ts       JSON-LD: Person, WebSite y el tipo de cada página
   layouts/Base.astro  <head>, SEO, speculation rules, header y footer
   components/         Header, Footer, LangSwitch, Socials, MailLink, InstagramGrid, WinControls, Logo, Fn, Icon, ProjectCard, Terminal, Stats, Analytics, CvAts
-  pages/              rutas de una línea: /, /curriculum, /portfolio, /portfolio/<slug>, /blog, /blog/<slug>, /contacto, /sobre-mi, /privacidad, /cv, /en/cv, 404, sitemap.xml
+  pages/              rutas de una línea: /, /curriculum, /portfolio, /portfolio/<slug>, /en/portfolio/<slug>, /blog, /blog/<slug>, /contacto, /sobre-mi, /privacidad, /cv, /en/cv, 404, sitemap.xml
   views/              cuerpo de cada página: Home, Resume, Portfolio, Study, Blog, Post, Contact, About, Privacy, NotFound
 public/               fonts, img, favicon.svg, og.png, robots.txt (cv/ y og/ se generan, no se versionan)
 scripts/build/        fotos de Instagram, variantes de capturas, CV en PDF e imágenes OG
@@ -130,6 +130,5 @@ Todavía no hay una muestra escrita por Ilán en inglés. Hasta entonces, la ref
 
 ## Pendientes conocidos
 
-- **Case studies en inglés:** hoy `/en/portfolio/:slug` redirige a `/en/portfolio`.
 - Tema de Prism `monokai-cotalpa` cuando un post lleve bloques de código.
 - **Muestra de Ilán en inglés:** sumarla a "Voz en inglés" cuando haya un texto suyo que se pueda publicar.

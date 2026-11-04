@@ -84,6 +84,14 @@ export const en: typeof es = {
 		earlier: 'Before 2015: design, photography, and the first websites',
 		education: 'Education and languages',
 	},
+	study: {
+		back: 'work',
+		role: 'My role',
+		start: 'The starting point',
+		steps: 'What we did',
+		figures: 'By the numbers',
+		next: 'Next case',
+	},
 	portfolio: {
 		fullTitle: "Ilán Vivanco's portfolio | Web platforms and WordPress",
 		description:
@@ -95,6 +103,7 @@ export const en: typeof es = {
 		filterLabel: 'Filter projects',
 		filters: [
 			{ label: 'all', tag: '' },
+			{ label: 'case-studies', tag: 'Case study' },
 			{ label: 'migrations', tag: 'Migration' },
 			{ label: 'integrations', tag: 'Integration' },
 			{ label: 'plugins', tag: 'WP Plugin' },

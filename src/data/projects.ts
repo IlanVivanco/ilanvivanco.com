@@ -586,6 +586,19 @@ const shotText = {
 			[/scroll/, 'further down the page'],
 			[/mobile/, 'on mobile'],
 		] as [RegExp, string][],
+		pages: {
+			catalogo: 'catalog',
+			eventos: 'events',
+			revista: 'magazine',
+			reportes: 'reports',
+			certificaciones: 'certifications',
+			red: 'network',
+			sintaxis: 'syntax',
+			paleta: 'palette',
+			comandos: 'commands',
+			variantes: 'variants',
+			versionado: 'versioning',
+		} as Record<string, string>,
 	},
 	es: {
 		shot: 'Captura de',
@@ -595,58 +608,279 @@ const shotText = {
 			[/scroll/, 'más abajo en la página'],
 			[/mobile/, 'en mobile'],
 		] as [RegExp, string][],
+		pages: {} as Record<string, string>,
 	},
 }
 export const shotAlt = (p: Project, file: string, locale?: string) => {
-	const { shot, kinds } = byLang(shotText, locale)
+	const { shot, kinds, pages } = byLang(shotText, locale)
 	const kind = kinds.find(([re]) => re.test(file))?.[1]
-	const page = file.replace(/-(contexto|duo|scroll|desk)$/, '').replace(/-/g, ' ')
+	const page = file
+		.replace(/-(contexto|duo|scroll|desk)$/, '')
+		.split('-')
+		.map((word) => pages[word] ?? word)
+		.join(' ')
 	return `${shot} ${p.name}: ${kind ?? page}`
 }
 
-// En inglés, sin case studies todavía: la tarjeta lleva al sitio del proyecto.
+type StudyText = Pick<Study, 'tagline' | 'lead' | 'start' | 'figures'> & { steps: { title: string; text: string }[] }
+const enStudies: Record<string, StudyText> = {
+	'tempo': {
+		tagline: 'Catalog, content, and store in one site',
+		lead: 'The content was in WordPress, the catalog in Craft, and sales in Shopify. We brought them together into a new site, without taking Shopify out of sales.',
+		start: "The old WordPress read the catalog from Craft, and that dependency was fragile. Shopify had to stay, because it was already integrated with the company's systems. Craft, on the other hand, had to give up its data, and that data had to be mapped properly.",
+		steps: [
+			{
+				title: 'First, a copy',
+				text: 'Before touching anything, I migrated the site to a separate environment, so I could analyze and export it without risk. That confirmed it was better to build from scratch.',
+			},
+			{
+				title: 'A spreadsheet as the source of truth',
+				text: "I merged several exports into a master spreadsheet, where Tempo's team could work on the new categories.",
+			},
+			{
+				title: 'An importer before manual entry',
+				text: 'I wrote a command-line tool that can be re-run, with a test mode and product code validation. Odd cases were fixed by hand, to keep the logic free of exceptions.',
+			},
+			{
+				title: 'A hybrid store',
+				text: 'WordPress shows the synced catalog and Shopify closes the sale. We started with a plugin and, when it hit its limit, the team replaced it with a custom one, without changing the front end.',
+			},
+			{
+				title: 'One rule, not hundreds',
+				text: 'Some documents had links already handed out to distributors. We migrated them keeping every file name, so a single redirect rule was enough.',
+			},
+		],
+		figures: ['~1,260 catalog entries exported from Craft', '876 documents migrated', 'Live since August 2026'],
+	},
+	'naropa': {
+		tagline: 'University in Boulder, Colorado',
+		lead: "A university's website, academic catalog, events, and publications, all on WordPress. There's a new catalog every year, so this project has no end date.",
+		start: 'In 2022, Naropa changed vendors. The site we inherited was recent, but it had performance and usability problems, even in the dashboard. We audited it and proposed moving it to Elementor in an orderly way.',
+		steps: [
+			{
+				title: 'The whole site, again',
+				text: 'In about four months we rebuilt and restructured the entire site: sitemap, templates, menu, staff directory, and the migration of events, people, and posts. It launched in December 2022, and then we trained their team to edit on their own.',
+			},
+			{
+				title: 'A catalog that renews every year',
+				text: "The catalog stayed out of the rebuild, by Naropa's decision. We maintain it each academic year: from 2022-23 through 2026-27, every edition gets updated and published.",
+			},
+			{
+				title: 'Events without double entry',
+				text: "The university's calendars live in SharePoint. We built a process that brings them into WordPress as drafts, so editors can review them before publishing.",
+			},
+			{
+				title: 'Changing hosts',
+				text: "In early 2025 I proposed moving the site and catalog to Pressable, and reviewed it with Naropa's IT team. The cutover was in May, with a content freeze and QA comparing staging and production.",
+			},
+			{
+				title: 'Accessibility',
+				text: 'We worked on touch targets, mobile text, and images. The Silktide accessibility score went from 61% to 92%.',
+			},
+			{
+				title: 'A living site',
+				text: "We keep expanding the site with Naropa's team: a new home page, the 50th anniversary section, the online magazine, the graduation program on the web, and a program finder.",
+			},
+		],
+		figures: [
+			'Active relationship since 2022',
+			'400+ tasks completed',
+			'5 catalog editions',
+			'Accessibility: from 61% to 92%',
+		],
+	},
+	'harver': {
+		tagline: 'Hiring software',
+		lead: "After several acquisitions, Harver had an inherited main site and one more for each brand it bought, each on its own platform. We stayed with them until the handoff, at the end of 2025, and today's site already has changes from another team.",
+		start: "Marketing depended on a base that was hard to edit, with deadlines that didn't allow for stopping everything and starting over. The acquired brands lived on WordPress, HubSpot, Craft CMS, and Webflow.",
+		steps: [
+			{
+				title: 'First, tidy up what we inherited',
+				text: 'We started with an audit and a facelift on tight deadlines. On top of that, we built a new base theme to keep building from.',
+			},
+			{
+				title: 'Rebuilding without stopping',
+				text: "Working from an agency's design, we moved the critical pages to Elementor in batches, to hit marketing's dates without waiting for a big launch.",
+			},
+			{
+				title: 'Each brand, in two stages',
+				text: 'First, the content and redirects. Later, the domains and old servers. When shutting them down, we started with a single site, with DNS changes first thing in the morning, so we could test and roll back.',
+			},
+		],
+		figures: ['More than 3 years of work', '4 source platforms'],
+	},
+	'kid-city-guide': {
+		tagline: "EpicDevs' own project",
+		lead: 'A network of local guides to things to do with kids, which started as a single site and now covers 21 cities.',
+		start: 'It was one WordPress install on a commercial directory theme, where each city was a filter inside the same site. Every new market added weight and complexity to a single installation.',
+		steps: [
+			{
+				title: 'One city, one site',
+				text: 'In 2021 we split each city into its own site within a network. We built Denver first on staging and, once it was validated, repeated the process for the others.',
+			},
+			{
+				title: 'Rebuilding without losing ground',
+				text: 'In 2023 we redid the base with a custom theme. Each city was migrated with its spreadsheet of posts and places, normalized categories, and redirect checks. And opening a city became a repeatable checklist.',
+			},
+			{
+				title: 'A decision we reversed',
+				text: 'In 2024, following an SEO request, we moved the cities from subdomains to subfolders. Google ended up mixing the new structure, and traffic took a big hit. Within a few weeks we went back and reversed the redirects. Today each city is still on its subdomain.',
+			},
+			{
+				title: 'Events with less manual work',
+				text: 'We designed a flow that gathers events by city, puts them in a spreadsheet, and generates descriptions and categories with AI, with editorial review before publishing.',
+			},
+		],
+		figures: ['21 active cities', 'More than 7 years of continuous evolution'],
+	},
+	'skillsoft': {
+		tagline: 'A catalog that updates without getting out of hand',
+		lead: "It was the most complex project I'd taken on up to that point, at Networks That Matter, now EpicDevs. The screenshots are from that era: Skillsoft's current site isn't this work anymore.",
+		start: "The catalog lived in giant XML files generated by internal systems, and each team used them for its own purpose, so changing their structure wasn't an option. Migrating once wasn't enough: the XML came back every cycle.",
+		steps: [
+			{
+				title: 'Accepting the source as it was',
+				text: 'We considered moving to spreadsheets, but the product team already generated XML. We decided to adapt to that format and not ask anyone to change anything.',
+			},
+			{
+				title: 'An identity that survives changes',
+				text: 'At first I built the slugs from the title, and any editorial tweak caused conflicts. So I combined the XML ID with the title: readable URLs and a stable key.',
+			},
+			{
+				title: 'One course, one record',
+				text: 'The same course appeared in several series. The parser unifies it by its code and accumulates its parents, instead of creating copies.',
+			},
+			{
+				title: 'Testing before publishing',
+				text: 'Each cycle started from a copy of production: we imported, marketing validated on staging, and only then did we go live, coordinating an editing window.',
+			},
+		],
+		figures: [
+			'Between ~4,900 and ~5,900 courses per export',
+			'More than 4,000 redirects from old URLs',
+			'4 XML files and 1 API as sources',
+		],
+	},
+	'datos-insights': {
+		tagline: 'Paid research, new brand, and new platform, on the same day',
+		lead: 'How do you move a paid research library to another platform on the very day the company changes its name? We moved Aite-Novarica Group from Drupal to WordPress, and launched alongside the announcement of its new brand. We worked there until 2025.',
+		start: "The old site had thousands of pieces of content, with URLs that didn't follow its own structure, and inside it lived the contracts that defined what each client could read.",
+		steps: [
+			{
+				title: 'Understanding before moving',
+				text: 'I set up a local copy of Drupal and mapped content types and URLs. With that, the client could decide what to migrate and what not to.',
+			},
+			{
+				title: 'Cutting scope to get there',
+				text: "A rushed MVP didn't add up, so we prioritized doing it right, and individual report sales were left for later.",
+			},
+			{
+				title: 'Access by company, not by person',
+				text: "We translated the contracts into memberships by research area. Anyone who registers with a client company's domain gets access to what that company has contracted.",
+			},
+			{
+				title: 'Salesforce with custom code',
+				text: 'We built a plugin that links each registration to its account, and sends downloads and email preferences to Salesforce.',
+			},
+		],
+		figures: ['Launched on June 21, 2023', '2 brands unified in one site'],
+	},
+	'tufts-jumbopress': {
+		tagline: "A university's WordPress platform",
+		lead: "Tufts runs its departments' sites on one WordPress platform. We audited it, built a new theme for upcoming sites, and today we keep solving what the audit found in the existing ones.",
+		start: "In January 2025, the university looked for a partner to define how to renew JumboPress. There were dozens of sites, edited by the departments themselves, and the page builder they were built on held back any evolution. The first request wasn't to build, but to come up with a strategy.",
+		steps: [
+			{
+				title: 'Understanding before proposing',
+				text: 'For five weeks we audited the front end, accessibility, infrastructure, plugins, and custom code, and tested conversions on real pages.',
+			},
+			{
+				title: 'Why a single block theme?',
+				text: "Adding skins to the classic theme didn't solve the dependency on the builder, and several themes would multiply maintenance. I proposed just one, with a limited editing layer and the blocks inside it, to avoid version mismatches.",
+			},
+			{
+				title: 'From recommendation to real scope',
+				text: 'The audit recommended modernizing the whole network. A narrower path was chosen: JumboPress 3.0 for new sites, while the rest kept running. Three sites use it today.',
+			},
+			{
+				title: 'Publish once, reach everyone',
+				text: "I designed the deployment around a shared origin, separate from the legacy code. Sites take the code from there, and the final step to production stays in the hands of Tufts' team.",
+			},
+		],
+		figures: ['5 weeks of auditing', '3 public sites on the new theme'],
+	},
+	'ilanvivanco': {
+		tagline: 'My lab',
+		lead: "This site is where I leave my comfort zone and try new things, so I'm ready when a client needs them. It's on its second, very different version.",
+		start: 'In 2020 I built it with Nuxt and Vue, outside my usual turf. It had a portfolio, a resume, animations, and even a blog in two languages. The blog had three posts, all hidden. I wanted to refresh the information, and took the chance to focus fully on accessibility and performance.',
+		steps: [
+			{
+				title: 'Starting with the limits',
+				text: "Before the design, I defined what's non-negotiable: 99+ on Lighthouse, 10 KB of my own JavaScript per page, and zero layout shift.",
+			},
+			{
+				title: "Not breaking what's there",
+				text: 'Before deleting anything, I audited every URL on the old site. The old routes still respond with their redirects.',
+			},
+			{
+				title: 'Researching with agents',
+				text: 'For this portfolio, agents went through years of work in Gmail, Slack, Trello, GitHub, and Notion. The result was an inventory of 168 projects, and then we reviewed each case together. They corrected me too: I remembered a weekly import, and it was monthly.',
+			},
+			{
+				title: 'Two models on opposite sides',
+				text: "Claude builds and Codex reviews, or the other way around. What one signs off on, the other argues with. The final call is mine, and QA applies to everyone: what doesn't pass doesn't get in.",
+			},
+		],
+		figures: [
+			'99+ on Lighthouse, in all 4 categories',
+			'7.5 KB of my own JavaScript on the home page',
+			'0 accessibility errors with axe',
+		],
+	},
+}
+
 const enText: Record<string, Pick<Project, 'period' | 'role' | 'description' | 'tags'> & Partial<Project>> = {
 	'tempo': {
 		period: 'since 2025',
 		role: 'Tech lead and PM. I planned the project and built the data extraction and the catalog importer.',
 		description:
 			'Content in WordPress, catalog in Craft, and sales in Shopify. We brought them together into one new site, without taking Shopify out of sales.',
-		tags: ['WordPress', 'Shopify', 'Migration', 'Integration'],
+		tags: ['Case study', 'WordPress', 'Shopify', 'Migration', 'Integration'],
 	},
 	'naropa': {
 		period: 'since 2022',
 		role: 'CTO / Director of Engineering. Architecture, audits, and technical direction.',
 		description:
 			"A university's website, academic catalog, events, and publications. We took it over from another vendor in 2022 and keep building it alongside their team.",
-		tags: ['WordPress', 'Elementor', 'Migration', 'Integration'],
+		tags: ['Case study', 'WordPress', 'Elementor', 'Migration', 'Integration'],
 	},
 	'harver': {
 		period: '2022 to 2025',
 		role: 'Technical lead and technical contact. Theme foundation and migration plan.',
 		description:
 			'An inherited site, and one more brand with every acquisition. We rebuilt it in phases while the other brands moved into one place.',
-		tags: ['WordPress', 'Elementor', 'Migration'],
+		tags: ['Case study', 'WordPress', 'Elementor', 'Migration'],
 	},
 	'kid-city-guide': {
 		period: 'since 2019',
 		role: 'Technical lead. Architecture, planning, and coordinating the development team.',
 		description:
 			"A network of local guides to things to do with kids, EpicDevs' own project. It started as a single site and now covers 21 cities.",
-		tags: ['WordPress', 'Multisite', 'Migration'],
+		tags: ['Case study', 'WordPress', 'Multisite', 'Migration'],
 	},
 	'skillsoft': {
 		period: '2017 to 2020',
 		role: 'Team lead and main dev. Architect of the importer.',
 		description:
 			'Thousands of courses spread across XML from different teams, turned into a WordPress catalog that took in new data every month without duplicating inventory.',
-		tags: ['WordPress', 'Migration', 'Integration', 'WP Plugin'],
+		tags: ['Case study', 'WordPress', 'Migration', 'Integration', 'WP Plugin'],
 	},
 	'datos-insights': {
 		period: '2022 to 2025',
 		role: 'Tech lead and architect.',
 		description:
 			'A paid research library, moved from Drupal to WordPress, with subscription access and a Salesforce connection. It launched the same day as the new brand.',
-		tags: ['WordPress', 'Salesforce', 'Migration', 'Integration'],
+		tags: ['Case study', 'WordPress', 'Salesforce', 'Migration', 'Integration'],
 	},
 	'tufts-jumbopress': {
 		urlLabel: 'See a site in the network',
@@ -654,14 +888,14 @@ const enText: Record<string, Pick<Project, 'period' | 'role' | 'description' | '
 		role: 'Architect and tech lead, author of the audits.',
 		description:
 			"A university's WordPress platform: we audited it end to end, built a block theme for new sites, and kept going with the existing ones.",
-		tags: ['WordPress', 'Gutenberg', 'Multisite'],
+		tags: ['Case study', 'WordPress', 'Gutenberg', 'Multisite'],
 	},
 	'ilanvivanco': {
 		period: 'since 2020',
 		role: 'Everything, for better and for worse.',
 		description:
 			"My lab: this is where I try new things before a client needs them. It's on its second version, and the latest was built with agents from end to end.",
-		tags: ['Astro', 'Own product', 'AI'],
+		tags: ['Case study', 'Astro', 'Own product', 'AI'],
 	},
 	'camunda': {
 		period: '2019 to 2026',
@@ -774,7 +1008,21 @@ const enText: Record<string, Pick<Project, 'period' | 'role' | 'description' | '
 		tags: ['Own product', 'TypeScript'],
 	},
 }
-const en: Project[] = es.map((p) => ({ ...p, ...enText[p.slug], study: undefined }))
+// La estructura sale de `es`: en inglés solo cambia el texto.
+const en: Project[] = es.map((p) => {
+	const text = enStudies[p.slug]
+	return {
+		...p,
+		...enText[p.slug],
+		study: p.study &&
+			text && {
+				...p.study,
+				...text,
+				steps: p.study.steps.map((step, i) => ({ ...step, ...text.steps[i] })),
+			},
+	}
+})
 
 export const projectsFor = (locale?: string) => byLang({ es, en }, locale)
+export const studyPath = (slug: string, locale?: string) => `${locale === 'en' ? '/en' : ''}/portfolio/${slug}`
 export const studiesFor = (locale?: string) => projectsFor(locale).filter((p) => p.study)

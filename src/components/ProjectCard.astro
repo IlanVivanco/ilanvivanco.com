@@ -1,6 +1,6 @@
 ---
 import type { Project } from '../data/projects'
-import { imageFor, imageSrcset } from '../data/projects'
+import { imageFor, imageSrcset, studyPath } from '../data/projects'
 import { ui } from '../i18n'
 import Icon from './Icon.astro'
 
@@ -11,7 +11,7 @@ interface Props {
 const { project: p, headingLevel: H = 'h3' } = Astro.props
 const { card: t, externalNote } = ui(Astro.currentLocale)
 // Con case study, la tarjeta lleva a su página; si no, al sitio.
-const href = p.study ? `/portfolio/${p.slug}` : p.url
+const href = p.study ? studyPath(p.slug, Astro.currentLocale) : p.url
 const external = !p.study && Boolean(p.url)
 const Tag = href ? 'a' : 'article'
 ---

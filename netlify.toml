@@ -100,7 +100,7 @@ from = "/cv/es"
 to = "/cv"
 status = 301
 
-# Inglés. Los case studies todavía no están traducidos.
+# Inglés. /en/portfolio/:slug no coincide con /en/portfolio, y sin force los case studies que existen ganan.
 [[redirects]]
 from = "/en/portfolio/:slug"
 to = "/en/portfolio"

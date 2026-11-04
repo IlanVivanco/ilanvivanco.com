@@ -2,8 +2,10 @@
 import Base from '../layouts/Base.astro'
 import Fn from '../components/Fn.astro'
 import Icon from '../components/Icon.astro'
-import { studiesFor, shotAlt, shotPath, shotSrcset, imageFor, type Project } from '../data/projects'
+import { studiesFor, studyPath, shotAlt, shotPath, shotSrcset, imageFor, type Project } from '../data/projects'
+import { pathFor } from '../data/pages'
 import { site } from '../data/site'
+import { ui } from '../i18n'
 
 interface Props {
 	project: Project
@@ -11,6 +13,8 @@ interface Props {
 const { project: p } = Astro.props
 const s = p.study!
 const lang = Astro.currentLocale
+const t = ui(lang).study
+const { portfolio, externalNote } = ui(lang)
 const studies = studiesFor(lang)
 const next = studies[(studies.findIndex((x) => x.slug === p.slug) + 1) % studies.length]
 const fn = p.slug.replace(/-/g, '_')
@@ -30,8 +34,8 @@ const fn = p.slug.replace(/-/g, '_')
 >
 	<article class="section study">
 		<div class="container stack" style="--gap: 22px">
-			<a class="back mono" href="/portfolio">
-				← trabajos
+			<a class="back mono" href={pathFor('/portfolio', lang)}>
+				← {t.back}
 			</a>
 			<Fn name={fn} as="p" />
 			<h1 class="display" data-reveal>
@@ -43,7 +47,7 @@ const fn = p.slug.replace(/-/g, '_')
 			<p class="lede">{s.lead}</p>
 			<dl class="facts" data-reveal data-delay="0.1">
 				<div>
-					<dt class="mono">Mi rol</dt>
+					<dt class="mono">{t.role}</dt>
 					<dd>{p.role}</dd>
 				</div>
 				<div>
@@ -54,8 +58,8 @@ const fn = p.slug.replace(/-/g, '_')
 			{p.url && (
 				<div>
 					<a class="btn btn-sm" href={p.url} target="_blank" rel="noopener">
-						{p.urlLabel ?? 'Visitar el sitio'} <Icon name="arrow-up-right" size={16} />
-						<span class="sr-only"> (abre en otra pestaña)</span>
+						{p.urlLabel ?? portfolio.visit} <Icon name="arrow-up-right" size={16} />
+						<span class="sr-only">{externalNote}</span>
 					</a>
 				</div>
 			)}
@@ -71,10 +75,10 @@ const fn = p.slug.replace(/-/g, '_')
 				height="900"
 			/>
 
-			<h2 class="title">El punto de partida</h2>
+			<h2 class="title">{t.start}</h2>
 			<p class="text">{s.start}</p>
 
-			<h2 class="title">Qué hicimos</h2>
+			<h2 class="title">{t.steps}</h2>
 			{s.steps.map((step) => (
 				<section class="step stack" style="--gap: 12px">
 					<h3>{step.title}</h3>
@@ -95,15 +99,15 @@ const fn = p.slug.replace(/-/g, '_')
 				</section>
 			))}
 
-			<h2 class="title">En números</h2>
+			<h2 class="title">{t.figures}</h2>
 			<ul class="figures" role="list">
 				{s.figures.map((f) => (
 					<li class="chip">{f}</li>
 				))}
 			</ul>
 
-			<a class="next" href={`/portfolio/${next.slug}`}>
-				<span class="mono">Siguiente caso</span>
+			<a class="next" href={studyPath(next.slug, lang)}>
+				<span class="mono">{t.next}</span>
 				<strong>
 					{next.name} <Icon name="arrow-up-right" size={16} />
 				</strong>

@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.8.0] - 2026-11-04
+
+### Agregado
+
+- **Case studies en inglés** en `/en/portfolio/<slug>`, con `hreflang` hacia su versión en español.
+
 ## [2.7.0] - 2026-11-04
 
 ### Agregado

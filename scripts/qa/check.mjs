@@ -36,6 +36,7 @@ const PAGES = [
 	'/en/resume',
 	'/en/portfolio',
 	'/en/contact',
+	...studiesFor('en').map((p) => `/en/portfolio/${p.slug}`),
 	'/en/404',
 	'/privacidad',
 	'/404',
