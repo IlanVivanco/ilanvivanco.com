@@ -104,6 +104,10 @@ Texto con flecha y el mismo subrayado que `.link` (todos los links de texto, ema
 - La pastilla tiene `view-transition-name: nav-pill`: entre páginas viaja con resorte y se estira y aplasta en el trayecto. El texto del nav aparece de inmediato; la pastilla se mezcla con `lighten` para no taparlo.
 - En mobile: botón de menú sin borde ni fondo (fondo solo en hover, y no en táctil), con `popover` nativo, a pantalla completa, con los links grandes numerados y entrada escalonada.
 
+### Selector de idioma
+
+Un `<a>` sin JS en el header, `EN` o `ES`, con `lang` y `hreflang`. Lleva a la misma página en el otro idioma, según `alternate` en `pages.ts`. Si no existe (blog, case studies, privacidad), lleva a la home de ese idioma. Sin redirección por idioma del navegador.
+
 ### Consolas
 Terminal, formulario y filtro comparten `.win-frame`, `.win-bar`, `.win-title`, `.win-body` y `.win-cursor` (`global.css`) y `WinControls`: mismo marco, barra, tipografía, padding y cursor. Lo propio de cada una va en su componente.
 

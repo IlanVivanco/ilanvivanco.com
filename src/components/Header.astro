@@ -1,5 +1,5 @@
 ---
-import { pathFor } from '../data/pages'
+import { pathFor, publicPages } from '../data/pages'
 import { siteText } from '../data/site'
 import { ui } from '../i18n'
 import Logo from './Logo.astro'
@@ -7,6 +7,7 @@ import Icon from './Icon.astro'
 import Socials from './Socials.astro'
 
 const t = ui(Astro.currentLocale).header
+const { switcher } = ui(Astro.currentLocale)
 const homePath = pathFor('/', Astro.currentLocale)
 const contactPath = pathFor('/contacto', Astro.currentLocale)
 const { nav } = siteText(Astro.currentLocale)
@@ -15,6 +16,8 @@ const path =
 		.replace(/\.html$/, '')
 		.replace(/\/index$/, '')
 		.replace(/\/$/, '') || '/'
+// Sin versión en el otro idioma, el selector lleva a la home de ese idioma.
+const switchTo = publicPages.find((p) => p.path === path)?.alternate ?? switcher.home
 const isActive = (href: string) => (href === homePath ? path === href : path.startsWith(href))
 ---
 
@@ -42,6 +45,11 @@ const isActive = (href: string) => (href === homePath ? path === href : path.sta
 					))}
 			</ul>
 		</nav>
+
+		<a class="lang-switch mono" href={switchTo} lang={switcher.lang} hreflang={switcher.lang}>
+			{switcher.code}
+			<span class="sr-only">, {switcher.label}</span>
+		</a>
 
 		<a
 			href={contactPath}
@@ -205,6 +213,20 @@ const isActive = (href: string) => (href === homePath ? path === href : path.sta
 		view-transition-name: nav-pill;
 	}
 
+	.lang-switch {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-width: 44px;
+		min-height: 44px;
+		font-size: 0.8125rem;
+		color: var(--text-soft);
+		text-decoration: none;
+		transition: color 0.2s;
+	}
+	.lang-switch:hover {
+		color: var(--text);
+	}
 	.menu-btn {
 		display: none;
 		width: 44px;
@@ -314,6 +336,20 @@ const isActive = (href: string) => (href === homePath ? path === href : path.sta
 		.nav-desktop,
 		.header-cta {
 			display: none;
+		}
+		.lang-switch {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			min-width: 44px;
+			min-height: 44px;
+			font-size: 0.8125rem;
+			color: var(--text-soft);
+			text-decoration: none;
+			transition: color 0.2s;
+		}
+		.lang-switch:hover {
+			color: var(--text);
 		}
 		.menu-btn {
 			display: inline-flex;

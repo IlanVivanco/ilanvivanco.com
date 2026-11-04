@@ -3,11 +3,13 @@ import type { es } from './es.ts'
 
 export const en: typeof es = {
 	ogLocale: 'en_US',
+	ogLocaleAlternate: 'es_ES',
 	intl: 'en-US',
 	role: 'CTO at EpicDevs',
 	home: 'Home',
 	copied: 'copied',
 	skipLink: 'Skip to content',
+	switcher: { code: 'ES', label: 'versión en español', lang: 'es', home: '/' },
 	header: {
 		home: 'Ilán Vivanco, home',
 		nav: 'Main',

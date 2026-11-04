@@ -119,5 +119,6 @@ Muestra de cómo escribe Ilán:
 
 ## Pendientes conocidos
 
-- **Fase 2:** sitio y CV en inglés. Tema de Prism `monokai-cotalpa` cuando un post lleve bloques de código.
+- **Case studies en inglés:** hoy `/en/portfolio/:slug` redirige a `/en/portfolio`.
+- Tema de Prism `monokai-cotalpa` cuando un post lleve bloques de código.
 - **Humanizer en inglés:** skill aparte, sin mezclarla con `humanizar`. Auditar e instalar `blader/humanizer` como se hizo con esta, y extender "Voz" con una muestra real de Ilán en inglés (hoy no hay). Probarla con el primer texto de la Fase 2.

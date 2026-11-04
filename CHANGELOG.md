@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.7.0] - 2026-11-04
+
+### Agregado
+
+- **Sitio en inglés:** `/en`, `/en/about`, `/en/resume`, `/en/portfolio` y `/en/contact`, con su CV en PDF y su 404.
+- **Selector de idioma en el header,** sin JS, y `hreflang` en el head y en el sitemap.
+
 ## [2.6.6] - 2026-11-04
 
 ### Cambiado
