@@ -29,7 +29,7 @@ export const publicPages: PublicPage[] = [
 		fn: 'mi_historial',
 		title: 'Mi CV',
 		subtitle: 'CTO / Director of Engineering',
-		updated: '2026-11-03',
+		updated: '2026-11-04',
 	},
 	{
 		path: '/portfolio',

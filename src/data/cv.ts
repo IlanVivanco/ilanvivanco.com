@@ -199,7 +199,10 @@ const es: Cv = {
 	],
 
 	stack: [
-		{ group: 'Plataforma', items: ['WordPress', 'WooCommerce', 'Gutenberg', 'PHP', 'MySQL', 'Laravel'] },
+		{
+			group: 'Plataforma',
+			items: ['WordPress', 'Multisite', 'WooCommerce', 'Gutenberg', 'Elementor', 'ACF', 'PHP', 'MySQL', 'Laravel'],
+		},
 		{
 			group: 'Frontend',
 			items: [
@@ -215,11 +218,28 @@ const es: Cv = {
 				'Sass',
 			],
 		},
-		{ group: 'Backend e integraciones', items: ['Node.js', 'REST APIs', 'n8n', 'Stripe', 'PayPal', 'HubSpot'] },
+		{
+			group: 'Backend e integraciones',
+			items: ['Node.js', 'REST APIs', 'n8n', 'Salesforce', 'Shopify', 'Stripe', 'PayPal', 'HubSpot', 'Supabase'],
+		},
 		{ group: 'IA', items: ['Agentes de código', 'MCP', 'QA asistido por IA', 'Automatizaciones'] },
 		{
 			group: 'Infra y flujo',
-			items: ['Git', 'GitHub Actions', 'Docker', 'Bash', 'Cloudflare', 'AWS', 'WP Engine', 'Pantheon', 'Netlify'],
+			items: [
+				'Git',
+				'GitHub Actions',
+				'Docker',
+				'Bash',
+				'Cloudflare',
+				'AWS',
+				'WP Engine',
+				'Pressable',
+				'Kinsta',
+				'Pantheon',
+				'Netlify',
+				'Vercel',
+				'Railway',
+			],
 		},
 	],
 
@@ -234,7 +254,7 @@ const es: Cv = {
 
 	languages: [
 		{ name: 'Español', level: 'Nativo' },
-		{ name: 'Inglés', level: 'Fluido' },
+		{ name: 'Inglés', level: 'Fluido oral y escrito' },
 	],
 }
 
