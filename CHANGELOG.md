@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.6.3] - 2026-11-04
+
+### Corregido
+
+- **CLS con fuentes lentas:** fuentes de respaldo con las métricas de Space Grotesk y Fira Code, para que su llegada casi no mueva el layout.
+- **CLS en los stats:** el contador reserva el ancho final, y el sufijo ya no se corre con cada dígito nuevo.
+
 ## [2.6.2] - 2026-11-04
 
 ### Corregido

@@ -44,6 +44,7 @@ Reglas:
 
 - **Space Grotesk** (variable 300–700), para títulos y texto.
 - **Fira Code** (variable 300–700), para todo lo "técnico": labels, meta, chips, terminal, formulario, stats, títulos `->fn();`.
+- **Respaldos con métricas:** `Space Grotesk Fallback` y `Fira Code Fallback` (`global.css`) ocupan casi lo mismo que cada fuente, para que su llegada no mueva el layout. Si cambia una fuente, se recalculan.
 - Self-hosted en `/public/fonts`, solo el subset latin, con `preload`. No agregar Google Fonts ni otras familias.
 
 | Clase / uso | Tamaño | Notas |
