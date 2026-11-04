@@ -1,6 +1,7 @@
 ---
 // Email ofuscado en el HTML: se arma al cargar y el click lo copia (si no hay permiso, sigue el mailto).
 import { site } from '../data/site'
+import { ui } from '../i18n'
 import { encodeMail } from '../lib/mail'
 
 interface Props {
@@ -9,7 +10,12 @@ interface Props {
 const { class: className = '' } = Astro.props
 ---
 
-<a class:list={['link', 'mail-link', className]} href="/contacto" data-mail={encodeMail(site.email)}>
+<a
+	class:list={['link', 'mail-link', className]}
+	href="/contacto"
+	data-mail={encodeMail(site.email)}
+	data-copied={ui(Astro.currentLocale).copied}
+>
 	<span data-mail-text>[email protegido]</span>
 	<span class="mail-tip mono" data-copy-tip aria-live="polite"></span>
 </a>
@@ -28,7 +34,7 @@ const { class: className = '' } = Astro.props
 			try {
 				await navigator.clipboard.writeText(email)
 				a.classList.add('is-copied')
-				tip.textContent = 'copiado'
+				tip.textContent = a.dataset.copied!
 				clearTimeout(t)
 				t = window.setTimeout(() => {
 					a.classList.remove('is-copied')

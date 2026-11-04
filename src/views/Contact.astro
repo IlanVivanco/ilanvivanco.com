@@ -5,9 +5,11 @@ import Icon from '../components/Icon.astro'
 import WinControls from '../components/WinControls.astro'
 import MailLink from '../components/MailLink.astro'
 import { site } from '../data/site'
+import { ui } from '../i18n'
 import { encodeMail } from '../lib/mail'
 
 const mail = encodeMail(site.email)
+const { intl, contact } = ui(Astro.currentLocale)
 
 const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'Consultoría', 'Otra cosa']
 ---
@@ -47,7 +49,10 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 				<p class="clock mono" data-reveal data-delay="0.2">
 					<span class="live" aria-hidden="true"></span>
 					<span>
-						En Santander son las <time data-clock>--:--</time>
+						En Santander son las{' '}
+						<time data-clock data-intl={intl}>
+							--:--
+						</time>
 					</span>
 				</p>
 			</div>
@@ -62,6 +67,7 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 				netlify-honeypot="fake"
 				data-console
 				data-mail={mail}
+				data-t={JSON.stringify(contact)}
 				data-reveal
 				data-delay="0.1"
 				aria-labelledby="con-title"
@@ -254,7 +260,7 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 		const tickClock = () => {
 			if (!clock) return
 			const now = new Date()
-			clock.textContent = new Intl.DateTimeFormat('es-ES', {
+			clock.textContent = new Intl.DateTimeFormat(clock.dataset.intl, {
 				hour: '2-digit',
 				minute: '2-digit',
 				timeZone: 'Europe/Madrid',
@@ -267,6 +273,8 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 		/* ---------- Formulario como consola ---------- */
 		const form = document.querySelector<HTMLFormElement>('[data-console]')
 		if (form) {
+			const t = JSON.parse(form.dataset.t!) as Record<string, string>
+			const fill = (text: string, values: Record<string, string>) => text.replace(/\{(\w+)\}/g, (_, k) => values[k])
 			const steps = [...form.querySelectorAll<HTMLElement>('[data-step]')]
 			const log = form.querySelector<HTMLOListElement>('[data-log]')!
 			const out = form.querySelector<HTMLOListElement>('[data-out]')!
@@ -316,7 +324,7 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 				})
 				label.textContent = `[${current + 1}/${steps.length}]`
 				progress.style.transform = `scaleX(${current / steps.length})`
-				if (firstName()) emailLabel.lastChild!.textContent = ` Un gusto, ${firstName()}. ¿A qué email te respondo?`
+				if (firstName()) emailLabel.lastChild!.textContent = fill(t.emailGreet, { name: firstName() })
 
 				log.innerHTML = ''
 				steps.slice(0, current).forEach((s, i) => {
@@ -324,7 +332,7 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 					const btn = document.createElement('button')
 					btn.type = 'button'
 					btn.className = 'log-line'
-					btn.setAttribute('aria-label', `Editar: ${questions[i]} ${valueOf(s)}`)
+					btn.setAttribute('aria-label', fill(t.edit, { question: questions[i], answer: valueOf(s) }))
 					btn.disabled = form.classList.contains('is-sending')
 					btn.innerHTML = `<span class="c-ok">✓</span> <span class="c-m c-q"></span> <span class="c-y c-a"></span>`
 					btn.querySelector('.c-q')!.textContent = questions[i]
@@ -358,7 +366,7 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 				if (s.dataset.step === 'email') {
 					const input = s.querySelector('input')!
 					const ok = input.checkValidity() && /\S+@\S+\.\S+/.test(v)
-					emailErr.textContent = ok ? '' : '✗ Ese email no parece válido. Probá de nuevo.'
+					emailErr.textContent = ok ? '' : t.emailInvalid
 					input.setAttribute('aria-invalid', String(!ok))
 					if (!ok) shake(s)
 					return ok
@@ -429,7 +437,7 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 				textarea.style.height = 'auto'
 				textarea.style.height = `${Math.min(textarea.scrollHeight, 280)}px`
 				const n = textarea.value.length
-				counter.textContent = `${n} ${n === 1 ? 'carácter' : 'caracteres'}`
+				counter.textContent = `${n} ${n === 1 ? t.char : t.chars}`
 			}
 			textarea.addEventListener('input', grow)
 
@@ -468,11 +476,11 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 				out.innerHTML = ''
 
 				await print(
-					`<span class="c-v">→</span> <span class="c-m">preparando mensaje</span> <span class="c-w">${textarea.value.length}</span> <span class="c-m">caracteres…</span>`,
+					`<span class="c-v">→</span> <span class="c-m">${t.preparing}</span> <span class="c-w">${textarea.value.length}</span> <span class="c-m">${t.charsWait}</span>`,
 					150
 				)
 				await print(
-					`<span class="c-v">→</span> <span class="c-pr">POST</span> <span class="c-w">/mensajes</span>`,
+					`<span class="c-v">→</span> <span class="c-pr">POST</span> <span class="c-w">${t.endpoint}</span>`,
 					300
 				)
 				try {
@@ -485,18 +493,18 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 					if (!res.ok) throw new Error(String(res.status))
 					await print(`<span class="c-badge c-badge-ok">${res.status} OK</span>`, 250)
 					await print(
-						`<div class="con-note"><strong class="c-w">¡Gracias, ${esc(firstName())}!</strong><br />Ahora la pelota está de mi lado: te respondo a <span class="c-y">${esc(email)}</span> apenas pueda.</div>`,
+						`<div class="con-note"><strong class="c-w">${fill(t.thanks, { name: esc(firstName()) })}</strong><br />${fill(t.thanksBody, { email: `<span class="c-y">${esc(email)}</span>` })}</div>`,
 						350
 					)
-					announce.textContent = `Mensaje enviado. Te respondo a ${email}.`
+					announce.textContent = fill(t.sent, { email })
 				} catch {
 					const mail = esc(decodeMail(form.dataset.mail || ''))
 					await print(`<span class="c-badge c-badge-err">ERROR</span>`, 250)
 					await print(
-						`<div class="con-note con-note-err"><strong class="c-err">Algo falló.</strong> No fue tu culpa (probablemente).<br />Probá de nuevo o escribime a <a href="mailto:${mail}">${mail}</a>.</div>`,
+						`<div class="con-note con-note-err"><strong class="c-err">${t.failed}</strong> ${t.failedBody}<br />${fill(t.retry, { mail: `<a href="mailto:${mail}">${mail}</a>` })}</div>`,
 						200
 					)
-					announce.textContent = `No se pudo enviar. Probá de nuevo o escribime a ${mail}.`
+					announce.textContent = fill(t.notSent, { mail })
 					form.classList.remove('is-sending')
 					current = steps.length - 1
 					render()
@@ -514,8 +522,8 @@ const topics = ['Un proyecto nuevo', 'Liderazgo técnico', 'IA en tu equipo', 'C
 				out.innerHTML = ''
 				restartWrap.hidden = true
 				form.classList.remove('is-sending')
-				emailLabel.lastChild!.textContent = ' ¿A qué email te respondo?'
-				submitLabel.textContent = 'enviar'
+				emailLabel.lastChild!.textContent = t.emailAsk
+				submitLabel.textContent = t.submit
 				render()
 			})
 
