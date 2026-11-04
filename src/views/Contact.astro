@@ -12,6 +12,8 @@ import { encodeMail } from '../lib/mail'
 const mail = encodeMail(emailFor(Astro.currentLocale))
 const { intl, contact, footer } = ui(Astro.currentLocale)
 
+// Netlify reescribe el <form> con comillas simples y rompe cualquier apóstrofo: van como escape de JSON.
+const formText = JSON.stringify(contact).replace(/'/g, '\\u0027')
 const copy = ui(Astro.currentLocale).contactPage
 const { topics } = copy
 ---
@@ -65,7 +67,7 @@ const { topics } = copy
 				netlify-honeypot="fake"
 				data-console
 				data-mail={mail}
-				data-t={JSON.stringify(contact)}
+				data-t={formText}
 				data-reveal
 				data-delay="0.1"
 				aria-labelledby="con-title"

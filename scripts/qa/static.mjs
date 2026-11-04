@@ -97,6 +97,10 @@ export async function runStaticChecks(log) {
 			),
 		'form en inglés con el mismo nombre y los mismos campos'
 	)
+	log(
+		[contact, contactEn].every((html) => !/<form[^>]*'/.test(html)),
+		'el <form> sin apóstrofos: Netlify lo reescribe con comillas simples'
+	)
 
 	// Links externos en otra pestaña
 	const sameTab = htmlFiles()
