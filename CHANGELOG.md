@@ -6,6 +6,7 @@
 
 - **CV, revisado contra LinkedIn:** el inicio en EpicDevs pasa a junio de 2015, y Freelance arranca en octubre de 2006 y figura como remoto. Magissim, Exastudio y Gilardoni usan los títulos de LinkedIn, y Mendióroz pasa a Mendióroz Design.
 - **Stack:** suma JetEngine, Gravity Forms, Yoast, Beaver Builder, Divi, Composer, Craft CMS, Drupal, Hugo, PrestaShop, IA generativa, Claude, Codex, CI/CD, Notion, Slack y herramientas de diseño, además de una categoría de equipo. Es una versión amplia, pendiente de revisión.
+- **Íconos del stack:** suman Gutenberg, Elementor, Salesforce, Shopify, Supabase, Claude, Codex, Railway y Figma, y salen jQuery, Sass y PayPal, que siguen en la lista de texto.
 
 ### Corregido
 

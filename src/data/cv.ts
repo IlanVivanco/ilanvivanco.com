@@ -277,7 +277,7 @@ const es: Cv = {
 			group: 'Equipo',
 			items: ['Liderazgo de ingeniería', 'Equipos remotos', 'Planificación técnica', 'Notion', 'Slack'],
 		},
-		{ group: 'Diseño', items: ['Photoshop', 'Illustrator', 'InDesign', 'Adobe XD'] },
+		{ group: 'Diseño', items: ['Figma', 'Photoshop', 'Illustrator', 'InDesign'] },
 	],
 
 	education: [
@@ -299,6 +299,8 @@ const es: Cv = {
 // Lo que no está acá queda solo en la lista de texto, que siempre muestra todo el stack.
 export const stackIcons: Record<string, string> = {
 	'WordPress': 'wordpress',
+	'Gutenberg': 'gutenberg',
+	'Elementor': 'elementor',
 	'PHP': 'php',
 	'MySQL': 'mysql',
 	'Laravel': 'laravel',
@@ -310,14 +312,16 @@ export const stackIcons: Record<string, string> = {
 	'Nuxt': 'nuxt',
 	'React': 'react',
 	'Astro': 'astro',
-	'jQuery': 'jquery',
 	'Tailwind CSS': 'tailwindcss',
-	'Sass': 'sass',
 	'Node.js': 'nodedotjs',
 	'n8n': 'n8n',
+	'Salesforce': 'salesforce',
+	'Shopify': 'shopify',
 	'Stripe': 'stripe',
-	'PayPal': 'paypal',
 	'HubSpot': 'hubspot',
+	'Supabase': 'supabase',
+	'Claude': 'claude',
+	'Codex': 'openai',
 	'MCP': 'modelcontextprotocol',
 	'Git': 'git',
 	'GitHub Actions': 'githubactions',
@@ -328,6 +332,8 @@ export const stackIcons: Record<string, string> = {
 	'WP Engine': 'wpengine',
 	'Pantheon': 'pantheon',
 	'Netlify': 'netlify',
+	'Railway': 'railway',
+	'Figma': 'figma',
 }
 
 // `en` se suma en la Fase 2. El generador del PDF toma los idiomas de acá.
