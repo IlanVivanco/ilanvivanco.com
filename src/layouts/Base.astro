@@ -15,8 +15,17 @@ interface Props {
 	schemaType?: PageSchemaType
 	schemaMainEntity?: Record<string, unknown>
 	noindex?: boolean
+	ogType?: 'website' | 'article'
 }
-const { title, fullTitle, description = site.description, schemaType, schemaMainEntity, noindex = false } = Astro.props
+const {
+	title,
+	fullTitle,
+	description = site.description,
+	schemaType,
+	schemaMainEntity,
+	noindex = false,
+	ogType = 'website',
+} = Astro.props
 const pageTitle = fullTitle ?? (title ? `${title} | Ilán Vivanco` : site.title)
 const pathname = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '/') || '/'
 const canonical = new URL(pathname, site.url).href
@@ -42,7 +51,7 @@ const ogImage = new URL(ogPath(pathname), site.url).href
 		<link rel="preload" href="/fonts/fira-code.woff2" as="font" type="font/woff2" crossorigin />
 		<slot name="head" />
 
-		<meta property="og:type" content="website" />
+		<meta property="og:type" content={ogType} />
 		<meta property="og:locale" content={site.locale} />
 		<meta property="og:site_name" content="Ilán Vivanco" />
 		<meta property="og:title" content={pageTitle} />

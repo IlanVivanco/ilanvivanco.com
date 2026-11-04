@@ -8,6 +8,9 @@ import { serveDist } from '../lib/serve-dist.mjs'
 const esc = (v) => v.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c])
 const logo = await readFile('public/favicon.svg', 'utf8')
 
+// Hasta 30 caracteres, una línea. Más largo, dos líneas de 56 px, que entran antes del subtítulo.
+const titleSize = (title) => (title.length > 30 ? 56 : title.length > 18 ? 76 : 96)
+
 const html = ({ fn, title, subtitle }) => `<!doctype html><html lang="es"><meta charset="utf-8"><style>
   @font-face { font-family: 'Space Grotesk'; src: url('/fonts/space-grotesk.woff2') format('woff2'); font-weight: 300 700; }
   @font-face { font-family: 'Fira Code'; src: url('/fonts/fira-code.woff2') format('woff2'); font-weight: 300 700; }
@@ -19,7 +22,7 @@ const html = ({ fn, title, subtitle }) => `<!doctype html><html lang="es"><meta 
   .logo { top: 80px; width: 96px; line-height: 0; }
   .fn { top: 218px; font-size: 30px; }
   .arrow { color: #55C9D1; } .paren { color: #EE7650; } .semi { color: #8E9CB8; }
-  h1 { top: 268px; width: 1040px; font: 700 ${title.length > 18 ? 76 : 96}px/1.1 'Space Grotesk', sans-serif; letter-spacing: -0.04em; white-space: nowrap; }
+  h1 { top: 268px; width: 1040px; font: 700 ${titleSize(title)}px/1.1 'Space Grotesk', sans-serif; letter-spacing: -0.04em; ${title.length > 30 ? '' : 'white-space: nowrap; '}}
   .sub { top: 408px; font-size: 30px; color: #D8BD2D; }
   .foot { top: 520px; right: 80px; display: flex; justify-content: space-between; font-size: 24px; color: #8E9CB8; }
 </style>

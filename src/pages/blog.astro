@@ -1,0 +1,87 @@
+---
+import Base from '../layouts/Base.astro'
+import Fn from '../components/Fn.astro'
+import { formatPostDate, posts } from '../data/posts'
+
+const sorted = [...posts].sort((a, b) => b.date.localeCompare(a.date))
+---
+
+<Base
+	title="Blog"
+	description="Lo que aprendí construyendo para la web, con los errores incluidos: WordPress, equipos, deploys e IA en el trabajo de todos los días."
+	schemaType="CollectionPage"
+>
+	<link slot="head" rel="alternate" type="application/rss+xml" title="Blog de Ilán Vivanco" href="/rss.xml" />
+	<section class="section blog">
+		<div class="container stack" style="--gap: 16px">
+			<Fn name="blog" as="p" />
+			<h1 class="display" data-reveal>
+				Blog
+			</h1>
+			<p class="lede" data-reveal data-delay="0.05">
+				Lo que aprendí construyendo para la web, con los errores incluidos.
+			</p>
+			<ul class="posts" role="list" data-reveal data-delay="0.1">
+				{sorted.map((p) => (
+					<li>
+						<time class="mono" datetime={p.date}>
+							{formatPostDate(p.date)}
+						</time>
+						<h2 class="h3">
+							<a href={`/blog/${p.slug}`}>{p.title}</a>
+						</h2>
+						<p>{p.description}</p>
+					</li>
+				))}
+			</ul>
+			<p class="mono rss">
+				<a class="link" href="/rss.xml">
+					RSS
+				</a>
+			</p>
+		</div>
+	</section>
+</Base>
+
+<style>
+	.blog {
+		padding-top: clamp(40px, 7vw, 88px);
+	}
+	.posts {
+		display: flex;
+		flex-direction: column;
+		margin: 24px 0 0;
+		padding: 0;
+		max-width: 760px;
+		border-top: 1px solid var(--line);
+	}
+	.posts li {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+		padding-block: 28px;
+		border-bottom: 1px solid var(--line);
+	}
+	.posts time,
+	.rss {
+		color: var(--muted);
+		font-size: 0.8125rem;
+	}
+	.posts h2 {
+		margin: 0;
+	}
+	.posts h2 a {
+		color: var(--text);
+		text-decoration: none;
+		transition: color 0.2s;
+	}
+	.posts h2 a:hover,
+	.posts h2 a:focus-visible {
+		color: var(--yellow-hi);
+	}
+	.posts p {
+		margin: 0;
+		max-width: 70ch;
+		color: var(--text-soft);
+	}
+</style>

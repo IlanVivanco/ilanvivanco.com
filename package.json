@@ -1,6 +1,6 @@
 {
 	"name": "ilanvivanco.com",
-	"version": "2.5.0",
+	"version": "2.6.0",
 	"scripts": {
 		"predev": "npm run images",
 		"dev": "astro dev",
@@ -15,6 +15,7 @@
 		"images": "node scripts/build/project-images.mjs"
 	},
 	"dependencies": {
+		"@astrojs/markdown-satteri": "^0.4.6",
 		"astro": "^7.4.4",
 		"motion": "^14.9.0"
 	},
