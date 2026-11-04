@@ -136,7 +136,7 @@ const es: Cv = {
 			roles: [
 				{
 					title: 'Full-stack Developer independiente',
-					start: '2005-12',
+					start: '2006-10',
 					highlights: [
 						'Sitios a medida, plataformas CMS y soluciones digitales para agencias y clientes directos.',
 						'Desarrollo en PHP, CMS a medida y los primeros proyectos en WordPress que después crecieron a plataformas grandes.',
@@ -150,7 +150,7 @@ const es: Cv = {
 	earlier: [
 		{
 			org: 'Magissim',
-			title: 'Web developer y diseñador',
+			title: 'Senior Web Developer y diseñador gráfico',
 			start: '2014-08',
 			end: '2018-04',
 			location: 'Remoto',
@@ -165,7 +165,7 @@ const es: Cv = {
 			text: 'Backends a medida en PHP y MySQL; sitios en WordPress.',
 		},
 		{
-			org: 'Mendióroz Diseño',
+			org: 'Mendióroz Design',
 			title: 'Diseñador gráfico',
 			start: '2011-05',
 			end: '2013-04',
@@ -174,7 +174,7 @@ const es: Cv = {
 		},
 		{
 			org: 'Exastudio',
-			title: 'Diseñador y desarrollador web',
+			title: 'Junior Web Developer',
 			start: '2008-09',
 			end: '2010-05',
 			location: 'Buenos Aires, Argentina',
@@ -190,7 +190,7 @@ const es: Cv = {
 		},
 		{
 			org: 'Gilardoni & Asoc.',
-			title: 'Asistente de fotografía y diseñador',
+			title: 'Diseñador gráfico y web, ayudante de fotografía',
 			start: '2005-06',
 			end: '2007-05',
 			location: 'Buenos Aires, Argentina',
