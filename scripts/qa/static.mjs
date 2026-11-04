@@ -184,6 +184,7 @@ export async function runStaticChecks(log) {
 	for (const p of publicPages) {
 		const html = read(fileFor(p.path))
 		const canonical = new URL(p.path, site.url).href
+		log(html.includes(`<html lang="${p.lang}"`), `${p.path} con lang="${p.lang}"`)
 		if (p.noindex) log(html.includes('name="robots" content="noindex, follow"'), `${p.path} noindex, follow`)
 		else {
 			log(html.includes(`rel="canonical" href="${canonical}"`), `${p.path} canonical`)

@@ -1,19 +1,22 @@
 ---
 import Base from '../layouts/Base.astro'
 import Icon from '../components/Icon.astro'
+import { ui } from '../i18n'
+
+const t = ui(Astro.currentLocale).notFound
 ---
 
-<Base title="Página no encontrada" noindex>
+<Base title={t.title} noindex>
 	<section class="section">
 		<div class="container stack" style="--gap: 24px">
 			<p class="fn">
 				<span class="arrow">-&gt;</span>error<span class="paren">(404)</span>
 				<span class="semi">;</span>
 			</p>
-			<h1 class="display">Esta página llegó a producción sin tests.</h1>
-			<p class="lede">O el link es viejo, o alguien hizo deploy un viernes. En cualquier caso, acá no hay nada.</p>
+			<h1 class="display">{t.heading}</h1>
+			<p class="lede">{t.lede}</p>
 			<a class="btn btn-primary" href="/" style="align-self: flex-start">
-				Volver al inicio <Icon name="arrow-right" />
+				{t.home} <Icon name="arrow-right" />
 			</a>
 		</div>
 	</section>
