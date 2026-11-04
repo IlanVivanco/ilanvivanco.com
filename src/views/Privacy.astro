@@ -1,0 +1,118 @@
+---
+import Base from '../layouts/Base.astro'
+import Fn from '../components/Fn.astro'
+import MailLink from '../components/MailLink.astro'
+---
+
+<Base
+	noindex
+	title="Privacidad y aviso legal"
+	description="Política de privacidad y aviso legal de ilanvivanco.com: qué datos se recogen en el formulario, para qué se usan y cómo ejercer tus derechos."
+>
+	<section class="section legal">
+		<div class="container legal-body">
+			<Fn name="privacidad" as="p" />
+			<h1 class="display">Privacidad y aviso legal</h1>
+			<p class="lede">Solo los datos justos para responderte. Sin cookies de seguimiento ni publicidad.</p>
+			<p class="mono updated">Última actualización: noviembre de 2026</p>
+
+			<h2 class="h3">Responsable</h2>
+			<ul>
+				<li>Titular: Ilán Vivanco Parada</li>
+				<li>NIF: 21703309A</li>
+				<li>Domicilio: Trav. San Fernando 1, 1ºB, 39100 Santa Cruz de Bezana, Cantabria, España</li>
+				<li>
+					Email: <MailLink />
+				</li>
+			</ul>
+
+			<h2 class="h3">Datos y finalidad</h2>
+			<p>
+				El formulario pide nombre, email, tema y mensaje. Se usan solo para responderte, sin publicidad, perfiles ni
+				decisiones automatizadas.
+			</p>
+
+			<h2 class="h3">Base legal</h2>
+			<p>
+				Tu consentimiento al enviar el formulario (art. 6.1.a del RGPD) y, si consultás por un proyecto, las medidas
+				precontractuales que pidas (art. 6.1.b). Podés retirar el consentimiento cuando quieras.
+			</p>
+
+			<h2 class="h3">Conservación</h2>
+			<p>
+				Hasta 12 meses después de la última respuesta, o los plazos legales si se inicia una relación profesional.
+			</p>
+
+			<h2 class="h3">Proveedores</h2>
+			<p>Tus datos no se venden ni se ceden, salvo obligación legal. Los tratan por cuenta del responsable:</p>
+			<ul>
+				<li>
+					<strong>Netlify, Inc.</strong> (EE. UU.): alojamiento y formulario.
+				</li>
+				<li>
+					<strong>Cloudflare, Inc.</strong> (EE. UU.): red, seguridad y estadísticas.
+				</li>
+				<li>
+					<strong>Google LLC</strong> (EE. UU.): correo.
+				</li>
+			</ul>
+			<p>
+				Las transferencias fuera del EEE se amparan en el Marco de Privacidad de Datos UE-EE. UU. o en cláusulas
+				contractuales tipo.
+			</p>
+
+			<h2 class="h3">Tus derechos</h2>
+			<!-- prettier-ignore -->
+			<p>Podés pedir acceso, rectificación, supresión, oposición, limitación y portabilidad por email. También podés reclamar ante la <a class="link" href="https://www.aepd.es/" target="_blank" rel="noopener">AEPD</a>.</p>
+
+			<h2 class="h3">Cookies</h2>
+			<p>
+				Este sitio no usa cookies de seguimiento, analítica ni publicidad, por eso no hay banner. Cloudflare, que
+				protege el sitio, puede guardar una cookie técnica de seguridad (<code>cf_clearance</code>, hasta 1 año)
+				para distinguir personas de bots. Las visitas se miden con Cloudflare Web Analytics, que no usa cookies.
+			</p>
+
+			<h2 class="h3">Aviso legal</h2>
+			<p>
+				Web personal y profesional de Ilán Vivanco (Ley 34/2002, LSSI). Textos, fotos y diseño son de su titular,
+				salvo indicación en contrario; las marcas y capturas de terceros son de sus dueños y se muestran como
+				referencia de trabajos realizados. No se responde por el contenido de sitios enlazados. Se aplica la
+				legislación española.
+			</p>
+		</div>
+	</section>
+</Base>
+
+<style>
+	.legal {
+		padding-top: clamp(40px, 7vw, 88px);
+	}
+	.legal-body {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		max-width: 760px;
+	}
+	.legal-body h2 {
+		margin-top: 24px;
+	}
+	.legal-body p,
+	.legal-body li {
+		color: var(--text-soft);
+		max-width: 70ch;
+	}
+	.legal-body strong {
+		color: var(--text);
+	}
+	.legal-body ul {
+		margin: 0;
+		padding-left: 20px;
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+	}
+	.updated {
+		font-size: 0.8125rem;
+		color: var(--muted) !important;
+	}
+</style>
