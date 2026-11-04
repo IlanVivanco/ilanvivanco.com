@@ -33,14 +33,14 @@ src/
   data/site.ts        config global: email, form, redes, nav, áreas de foco, statScreens
   data/cv.ts          experiencia, stack, formación, idiomas (fuente de /curriculum y del PDF)
   data/pages.ts       páginas públicas: alimenta el sitemap, el JSON-LD y las imágenes OG
-  data/projects.ts    portfolio (captura en public/img/projects/<slug>.webp)
+  data/projects.ts    portfolio: filas y case studies (portada en public/img/projects/<slug>.webp, capturas en <slug>/)
   styles/global.css   tokens, base, botones, tarjetas, flechas, View Transitions, print
   scripts/ui.ts       revelado, tarjetas (glow, proximidad, perspectiva), header, menú
   scripts/terminal.ts escenas de la terminal del hero
   lib/schema.ts       JSON-LD: Person, WebSite y el tipo de cada página
   layouts/Base.astro  <head>, SEO, speculation rules, header y footer
   components/         Header, Footer, Socials, MailLink, InstagramGrid, WinControls, Logo, Fn, Icon, ProjectCard, Terminal, Stats, Analytics, CvAts
-  pages/              /, /curriculum, /portfolio, /contacto, /sobre-mi, /privacidad, /cv/es, 404, sitemap.xml
+  pages/              /, /curriculum, /portfolio, /portfolio/<slug>, /contacto, /sobre-mi, /privacidad, /cv/es, 404, sitemap.xml
 public/               fonts, img, favicon.svg, og.png, robots.txt (cv/ y og/ se generan, no se versionan)
 scripts/build/        fotos de Instagram, variantes de capturas, CV en PDF e imágenes OG
 netlify/functions/    rebuild semanal

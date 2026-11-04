@@ -4,6 +4,8 @@
 // `noindex`: se publica y tiene imagen OG, pero no va al sitemap.
 // Las URLs son contrato: cambiar una implica un redirect 301 en netlify.toml.
 
+import { studies } from './projects.ts'
+
 export type PublicPage = {
 	path: string
 	slug: string
@@ -67,6 +69,18 @@ export const publicPages: PublicPage[] = [
 ]
 
 // La home usa la imagen original; el resto se genera en el build. Sin página propia (404), la original.
+// Cada case study es una página pública más.
+publicPages.push(
+	...studies.map((p) => ({
+		path: `/portfolio/${p.slug}`,
+		slug: `portfolio-${p.slug}`,
+		fn: p.slug.replace(/-/g, '_'),
+		title: p.name,
+		subtitle: p.study!.tagline,
+		updated: '2026-11-04',
+	}))
+)
+
 export const ogPath = (path: string) => {
 	const page = publicPages.find((p) => p.path === path)
 	return !page || page.path === '/' ? '/og.png' : `/og/${page.slug}.png`
