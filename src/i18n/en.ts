@@ -102,7 +102,7 @@ export const en: typeof es = {
 		],
 		count: 'projects',
 		study: 'See the case',
-		post: 'Read the post (in Spanish)',
+		post: 'Read the post',
 		visit: 'Visit the site',
 	},
 	contactPage: {
