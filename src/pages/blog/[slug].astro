@@ -1,0 +1,199 @@
+---
+import { getEntry, render } from 'astro:content'
+import Base from '../../layouts/Base.astro'
+import Fn from '../../components/Fn.astro'
+import Icon from '../../components/Icon.astro'
+import { formatPostDate, posts, type Post } from '../../data/posts'
+import { blogPosting } from '../../lib/schema'
+
+export const getStaticPaths = () => posts.map((post) => ({ params: { slug: post.slug }, props: { post } }))
+
+const { post: p } = Astro.props as { post: Post }
+const entry = await getEntry('blog', p.slug)
+if (!entry) throw new Error(`Falta src/content/blog/${p.slug}.md`)
+const { Content } = await render(entry)
+---
+
+<Base title={p.title} description={p.description} ogType="article" schemaMainEntity={blogPosting(p)}>
+	<Fragment slot="head">
+		<meta property="article:published_time" content={p.date} />
+		<meta property="article:modified_time" content={p.updated} />
+		<link rel="alternate" type="application/rss+xml" title="Blog de Ilán Vivanco" href="/rss.xml" />
+	</Fragment>
+	<article class="section post">
+		<div class="container post-col">
+			<a class="back mono" href="/blog">
+				← blog
+			</a>
+			<Fn name={p.fn} as="p" />
+			<h1 data-reveal>{p.title}</h1>
+			<div class="byline" data-reveal data-delay="0.05">
+				<img src="/img/ilan-sq-240.webp" alt="Retrato de Ilán Vivanco" width="40" height="40" decoding="async" />
+				<p>
+					<a class="link author" href="/sobre-mi" rel="author">
+						Ilán Vivanco
+					</a>
+					<span class="mono meta">
+						CTO en EpicDevs · <time datetime={p.date}>{formatPostDate(p.date)}</time>
+					</span>
+				</p>
+			</div>
+			<div class="post-body">
+				<Content />
+			</div>
+			<aside class="post-cta card" data-tilt="off" aria-labelledby="post-cta">
+				<Fn name="contactame" as="p" />
+				<h2 id="post-cta" class="h3">
+					{p.ctaTitle}
+				</h2>
+				<a class="btn btn-primary" href="/contacto">
+					{p.ctaLabel} <Icon name="arrow-up-right" />
+				</a>
+			</aside>
+		</div>
+	</article>
+</Base>
+
+<style>
+	.post {
+		padding-top: clamp(40px, 7vw, 88px);
+	}
+	.post-col {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		max-width: calc(760px + 2 * var(--gutter));
+	}
+	.back,
+	.meta {
+		margin: 0;
+		color: var(--muted);
+		font-size: 0.875rem;
+	}
+	.byline {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+	}
+	.byline img {
+		flex: none;
+		border-radius: 50%;
+	}
+	.byline p {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 2px;
+		margin: 0;
+	}
+	.author {
+		color: var(--text);
+		font-weight: 500;
+	}
+	.post-cta {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 16px;
+		margin-top: 40px;
+		padding: clamp(24px, 4vw, 40px);
+		background: linear-gradient(140deg, var(--surface) 0%, var(--bg-raised) 60%);
+	}
+	.post-cta h2 {
+		margin: 0;
+		text-wrap: balance;
+	}
+	/* El texto es largo: en mobile ocupa el ancho de la tarjeta, y si no entra, baja de línea */
+	@media (max-width: 480px) {
+		.post-cta .btn {
+			justify-content: center;
+			width: 100%;
+			padding-inline: 16px;
+			font-size: 0.9375rem;
+			white-space: normal;
+			text-align: center;
+		}
+	}
+	.back {
+		width: fit-content;
+		text-decoration: none;
+	}
+	.back:hover {
+		color: var(--text);
+	}
+	h1 {
+		margin: 0;
+		font-size: clamp(2rem, 3.6vw, 3rem);
+		line-height: 1.08;
+		letter-spacing: -0.03em;
+		text-wrap: balance;
+	}
+	.post-body {
+		display: flex;
+		flex-direction: column;
+		gap: 18px;
+		margin-top: 16px;
+		color: var(--text-soft);
+	}
+	/* El HTML del Markdown no lleva el atributo de los estilos locales */
+	.post-body :global(p),
+	.post-body :global(ul) {
+		margin: 0;
+		max-width: 70ch;
+		text-wrap: pretty;
+	}
+	.post-body :global(strong),
+	.post-body :global(a) {
+		color: var(--text);
+	}
+	.post-body :global(a:hover),
+	.post-body :global(a:focus-visible) {
+		color: var(--yellow-hi);
+	}
+	.post-body :global(h2) {
+		margin: 40px 0 0;
+		font-size: clamp(1.5rem, 2.4vw, 1.875rem);
+		line-height: 1.15;
+		letter-spacing: -0.02em;
+		color: var(--text);
+		text-wrap: balance;
+	}
+	.post-body :global(h3) {
+		margin: 24px 0 0;
+		font-size: 1.1875rem;
+		line-height: 1.25;
+		color: var(--text);
+		text-wrap: balance;
+	}
+	.post-body :global(ul) {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		padding-left: 20px;
+	}
+	.post-body :global(code) {
+		padding: 2px 6px;
+		border-radius: 6px;
+		background: var(--surface);
+		color: var(--text-soft);
+		font-family: var(--font-mono);
+		font-size: 0.875em;
+		font-variant-ligatures: none;
+		overflow-wrap: anywhere;
+	}
+	.post-body :global(img) {
+		display: block;
+		width: 100%;
+		height: auto;
+		border: 1px solid var(--line);
+		border-radius: var(--radius);
+	}
+	.post-body :global(.post-chart) {
+		display: block;
+		overflow-x: auto;
+		border-radius: var(--radius);
+	}
+	.post-body :global(.post-chart img) {
+		min-width: 640px;
+	}
+</style>

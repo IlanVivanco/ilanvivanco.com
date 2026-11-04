@@ -84,17 +84,6 @@ from = "/portfolio/:slug"
 to = "/portfolio"
 status = 301
 
-# Blog: Fase 2
-[[redirects]]
-from = "/blog"
-to = "/"
-status = 301
-
-[[redirects]]
-from = "/blog/*"
-to = "/"
-status = 301
-
 # Inglés: Fase 2
 [[redirects]]
 from = "/en/about"

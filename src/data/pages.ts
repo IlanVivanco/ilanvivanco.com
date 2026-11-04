@@ -4,6 +4,7 @@
 // `noindex`: se publica y tiene imagen OG, pero no va al sitemap.
 // Las URLs son contrato: cambiar una implica un redirect 301 en netlify.toml.
 
+import { posts } from './posts.ts'
 import { studies } from './projects.ts'
 
 export type PublicPage = {
@@ -39,6 +40,14 @@ export const publicPages: PublicPage[] = [
 		fn: 'portfolio',
 		title: 'Trabajos',
 		subtitle: 'Plataformas y sitios en producción',
+		updated: '2026-11-04',
+	},
+	{
+		path: '/blog',
+		slug: 'blog',
+		fn: 'blog',
+		title: 'Blog',
+		subtitle: 'Lo que aprendí construyendo para la web',
 		updated: '2026-11-04',
 	},
 	{
@@ -78,6 +87,18 @@ publicPages.push(
 		title: p.name,
 		subtitle: p.study!.tagline,
 		updated: '2026-11-04',
+	}))
+)
+
+// Cada post también.
+publicPages.push(
+	...posts.map((p) => ({
+		path: `/blog/${p.slug}`,
+		slug: `blog-${p.slug}`,
+		fn: p.fn,
+		title: p.title,
+		subtitle: p.subtitle,
+		updated: p.updated,
 	}))
 )
 

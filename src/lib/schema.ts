@@ -1,7 +1,8 @@
 // JSON-LD del sitio. Person es la entidad principal: el resto de los nodos apuntan a ella por @id.
 // Sin email: la regla de privacidad de CLAUDE.md también vale para los datos estructurados.
 import { cv } from '../data/cv'
-import { publicPages } from '../data/pages'
+import { ogPath, publicPages } from '../data/pages'
+import type { Post } from '../data/posts'
 import { projects, imageFor } from '../data/projects'
 import { site } from '../data/site'
 
@@ -71,6 +72,19 @@ export const portfolioList = () => ({
 			'creator': { '@id': PERSON_ID },
 		},
 	})),
+})
+
+export const blogPosting = (p: Post) => ({
+	'@type': 'BlogPosting',
+	'headline': p.title,
+	'description': p.description,
+	'url': abs(`/blog/${p.slug}`),
+	'image': abs(ogPath(`/blog/${p.slug}`)),
+	'datePublished': p.date,
+	'dateModified': p.updated,
+	'inLanguage': 'es',
+	'author': { '@id': PERSON_ID },
+	'publisher': { '@id': PERSON_ID },
 })
 
 export const pageSchema = ({
