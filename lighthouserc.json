@@ -8,7 +8,8 @@
 				"http://localhost:8800/portfolio",
 				"http://localhost:8800/contacto",
 				"http://localhost:8800/blog",
-				"http://localhost:8800/blog/dos-decadas-de-wordpress"
+				"http://localhost:8800/blog/dos-decadas-de-wordpress",
+				"http://localhost:8800/portfolio/naropa"
 			],
 			"numberOfRuns": 3,
 			"settings": { "chromeFlags": "--no-sandbox" }
