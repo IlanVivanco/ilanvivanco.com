@@ -102,6 +102,8 @@ const cards = statScreens[0].items.map((_, i) => i)
 				el.textContent = fmt(target, d)
 				return
 			}
+			// Reserva el ancho final: si no, el sufijo se corre con cada dígito nuevo y suma CLS.
+			el.style.minWidth = `${el.offsetWidth}px`
 			el.textContent = fmt(0, d)
 			setTimeout(() => {
 				const t0 = performance.now()
@@ -109,6 +111,7 @@ const cards = statScreens[0].items.map((_, i) => i)
 					const p = Math.min(1, (now - t0) / 1000)
 					el.textContent = fmt(target * (1 - Math.pow(1 - p, 4)), d)
 					if (p < 1) requestAnimationFrame(step)
+					else el.style.minWidth = ''
 				}
 				requestAnimationFrame(step)
 			}, delay)
