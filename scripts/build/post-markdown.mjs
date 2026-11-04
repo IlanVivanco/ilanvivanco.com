@@ -42,7 +42,9 @@ export const postMarkdown = {
 				'sizes',
 				chart ? '(max-width: 800px) 720px, 760px' : '(max-width: 800px) calc(100vw - 40px), 760px'
 			)
-			ctx.setProperty(node, 'loading', 'lazy')
+			// `![alt](src "eager")`: la imagen visible al cargar, que en desktop puede ser el LCP.
+			if (props.title === 'eager') ctx.setProperty(node, 'title', null)
+			else ctx.setProperty(node, 'loading', 'lazy')
 			ctx.setProperty(node, 'decoding', 'async')
 			// Con ancho mínimo y scroll propio, el texto del gráfico se lee también en mobile.
 			if (chart)
