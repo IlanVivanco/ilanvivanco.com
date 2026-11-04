@@ -210,12 +210,8 @@ export async function runStaticChecks(log) {
 		'sin links a /cv/es desde el sitio'
 	)
 
-	// Blog: los metadatos están en posts.ts y el cuerpo, en la collection
-	const bodies = readdirSync('src/content/blog').map((f) => f.replace(/\.md$/, ''))
-	log(
-		bodies.length === posts.length && posts.every((p) => bodies.includes(p.slug)),
-		'cada post de posts.ts tiene su .md, y al revés'
-	)
+	// Blog
+	log(posts.length > 0, `${posts.length} post(s) leídos del front matter`)
 	for (const p of posts) {
 		const html = read(`blog/${p.slug}.html`)
 		const graph = JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)[1])['@graph']
@@ -224,7 +220,8 @@ export async function runStaticChecks(log) {
 			`/blog/${p.slug} BlogPosting con su fecha`
 		)
 		log(!/notion\.(?:com|so)/.test(html), `/blog/${p.slug} sin links de Notion`)
-		const imgs = html.match(/<img\b[^>]*>/g) ?? []
+		log(html.includes('rel="author"') && html.includes('name="author"'), `/blog/${p.slug} con autoría visible`)
+		const imgs = (html.match(/<img\b[^>]*>/g) ?? []).filter((i) => i.includes('/img/blog/'))
 		log(
 			imgs.every(
 				(i) =>
@@ -240,6 +237,10 @@ export async function runStaticChecks(log) {
 	log(
 		posts.every((p) => rss.includes(`<link>${new URL(`/blog/${p.slug}`, site.url).href}</link>`)),
 		'RSS con todos los posts'
+	)
+	log(
+		read('blog.html').includes('type="application/rss+xml"') && !/<a\b[^>]*href="\/rss\.xml"/.test(read('blog.html')),
+		'RSS anunciado en el head, sin link visible'
 	)
 
 	// Redirects

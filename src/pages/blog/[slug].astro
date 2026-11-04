@@ -2,6 +2,7 @@
 import { getEntry, render } from 'astro:content'
 import Base from '../../layouts/Base.astro'
 import Fn from '../../components/Fn.astro'
+import Icon from '../../components/Icon.astro'
 import { formatPostDate, posts, type Post } from '../../data/posts'
 import { blogPosting } from '../../lib/schema'
 
@@ -26,12 +27,29 @@ const { Content } = await render(entry)
 			</a>
 			<Fn name={p.fn} as="p" />
 			<h1 data-reveal>{p.title}</h1>
-			<p class="mono meta" data-reveal data-delay="0.05">
-				<time datetime={p.date}>{formatPostDate(p.date)}</time>
-			</p>
+			<div class="byline" data-reveal data-delay="0.05">
+				<img src="/img/ilan-sq-240.webp" alt="Retrato de Ilán Vivanco" width="40" height="40" decoding="async" />
+				<p>
+					<a class="link author" href="/sobre-mi" rel="author">
+						Ilán Vivanco
+					</a>
+					<span class="mono meta">
+						CTO en EpicDevs · <time datetime={p.date}>{formatPostDate(p.date)}</time>
+					</span>
+				</p>
+			</div>
 			<div class="post-body">
 				<Content />
 			</div>
+			<aside class="post-cta card" data-tilt="off" aria-labelledby="post-cta">
+				<Fn name="contactame" as="p" />
+				<h2 id="post-cta" class="h3">
+					{p.ctaTitle}
+				</h2>
+				<a class="btn btn-primary" href="/contacto">
+					{p.ctaLabel} <Icon name="arrow-up-right" />
+				</a>
+			</aside>
 		</div>
 	</article>
 </Base>
@@ -51,6 +69,50 @@ const { Content } = await render(entry)
 		margin: 0;
 		color: var(--muted);
 		font-size: 0.875rem;
+	}
+	.byline {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+	}
+	.byline img {
+		flex: none;
+		border-radius: 50%;
+	}
+	.byline p {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 2px;
+		margin: 0;
+	}
+	.author {
+		color: var(--text);
+		font-weight: 500;
+	}
+	.post-cta {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 16px;
+		margin-top: 40px;
+		padding: clamp(24px, 4vw, 40px);
+		background: linear-gradient(140deg, var(--surface) 0%, var(--bg-raised) 60%);
+	}
+	.post-cta h2 {
+		margin: 0;
+		text-wrap: balance;
+	}
+	/* El texto es largo: en mobile ocupa el ancho de la tarjeta, y si no entra, baja de línea */
+	@media (max-width: 480px) {
+		.post-cta .btn {
+			justify-content: center;
+			width: 100%;
+			padding-inline: 16px;
+			font-size: 0.9375rem;
+			white-space: normal;
+			text-align: center;
+		}
 	}
 	.back {
 		width: fit-content;
@@ -133,11 +195,5 @@ const { Content } = await render(entry)
 	}
 	.post-body :global(.post-chart img) {
 		min-width: 640px;
-	}
-	.post-body :global(hr) {
-		width: 100%;
-		margin: 24px 0 0;
-		border: 0;
-		border-top: 1px solid var(--line);
 	}
 </style>
