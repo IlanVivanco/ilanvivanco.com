@@ -5,7 +5,16 @@ import Icon from '../components/Icon.astro'
 import WinControls from '../components/WinControls.astro'
 import { portfolioList } from '../lib/schema'
 import { ui } from '../i18n'
-import { projectsFor, imageFor, imageSrcset, imageVariant, shotAlt, shotPath, shotSrcset } from '../data/projects'
+import {
+	projectsFor,
+	studyPath,
+	imageFor,
+	imageSrcset,
+	imageVariant,
+	shotAlt,
+	shotPath,
+	shotSrcset,
+} from '../data/projects'
 
 const lang = Astro.currentLocale
 const projects = projectsFor(lang)
@@ -111,7 +120,7 @@ const range = `${Math.min(...years)}–${Math.max(...years)}`
 									</ul>
 									<div class="row-actions">
 										{p.study && (
-											<a class="btn btn-sm" href={`/portfolio/${p.slug}`}>
+											<a class="btn btn-sm" href={studyPath(p.slug, lang)}>
 												{t.study} <Icon name="arrow-up-right" size={16} />
 											</a>
 										)}

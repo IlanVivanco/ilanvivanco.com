@@ -146,9 +146,20 @@ export const publicPages: PublicPage[] = [
 // La home usa la imagen original; el resto se genera en el build. Sin página propia (404), la original.
 // Cada case study es una página pública más.
 publicPages.push(
+	...studiesFor('en').map((p) => ({
+		path: `/en/portfolio/${p.slug}`,
+		lang: 'en' as const,
+		alternate: `/portfolio/${p.slug}`,
+		slug: `en-portfolio-${p.slug}`,
+		fn: p.slug.replace(/-/g, '_'),
+		title: p.name,
+		subtitle: p.study!.tagline,
+		updated: '2026-11-04',
+	})),
 	...studiesFor('es').map((p) => ({
 		path: `/portfolio/${p.slug}`,
 		lang: 'es' as const,
+		alternate: `/en/portfolio/${p.slug}`,
 		slug: `portfolio-${p.slug}`,
 		fn: p.slug.replace(/-/g, '_'),
 		title: p.name,

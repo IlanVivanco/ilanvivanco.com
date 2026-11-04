@@ -13,7 +13,8 @@
 				"http://localhost:8800/portfolio/naropa",
 				"http://localhost:8800/en",
 				"http://localhost:8800/en/contact",
-				"http://localhost:8800/en/portfolio"
+				"http://localhost:8800/en/portfolio",
+				"http://localhost:8800/en/portfolio/naropa"
 			],
 			"numberOfRuns": 3,
 			"settings": { "chromeFlags": "--no-sandbox" }

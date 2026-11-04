@@ -57,6 +57,14 @@ export const es = {
 		earlier: 'Antes de 2015: diseño, fotografía y los primeros sitios',
 		education: 'Formación e idiomas',
 	},
+	study: {
+		back: 'trabajos',
+		role: 'Mi rol',
+		start: 'El punto de partida',
+		steps: 'Qué hicimos',
+		figures: 'En números',
+		next: 'Siguiente caso',
+	},
 	portfolio: {
 		fullTitle: 'Portfolio de Ilán Vivanco | Plataformas web y WordPress',
 		description:
