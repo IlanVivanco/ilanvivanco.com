@@ -1,6 +1,6 @@
 ---
 import type { Project } from '../data/projects'
-import { formatDate, imageFor, imageSrcset } from '../data/projects'
+import { imageFor, imageSrcset } from '../data/projects'
 import Icon from './Icon.astro'
 
 interface Props {
@@ -8,15 +8,18 @@ interface Props {
 	headingLevel?: 'h2' | 'h3'
 }
 const { project: p, headingLevel: H = 'h3' } = Astro.props
-const Tag = p.url ? 'a' : 'article'
+// Con case study, la tarjeta lleva a su página; si no, al sitio.
+const href = p.study ? `/portfolio/${p.slug}` : p.url
+const external = !p.study && Boolean(p.url)
+const Tag = href ? 'a' : 'article'
 ---
 
 <Tag
 	class="card project"
 	data-tilt
-	href={p.url}
-	target={p.url ? '_blank' : undefined}
-	rel={p.url ? 'noopener' : undefined}
+	href={href}
+	target={external ? '_blank' : undefined}
+	rel={external ? 'noopener' : undefined}
 	data-reveal
 >
 	<div class="shot">
@@ -30,20 +33,19 @@ const Tag = p.url ? 'a' : 'article'
 			width="960"
 			height="600"
 		/>
-		{p.url && (
+		{href && (
 			<span class="shot-cta mono" aria-hidden="true">
-				visitar <Icon name="arrow-up-right" size={16} />
+				{p.study ? 'ver el caso' : 'visitar'} <Icon name="arrow-up-right" size={16} />
 			</span>
 		)}
 	</div>
 	<div class="body">
 		<p class="meta mono">
-			<span>{formatDate(p.date)}</span>
-			{p.client && <span class="client">para {p.client}</span>}
+			<span>{p.period}</span>
 		</p>
 		<H class="name">
 			{p.name}
-			{p.url && <span class="sr-only"> (abre en otra pestaña)</span>}
+			{external && <span class="sr-only"> (abre en otra pestaña)</span>}
 		</H>
 		<p class="desc">{p.description}</p>
 		<ul class="tags" role="list">

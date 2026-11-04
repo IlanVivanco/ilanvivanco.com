@@ -21,7 +21,7 @@ export const publicPages: PublicPage[] = [
 		fn: 'hola_mundo',
 		title: 'Ilán Vivanco',
 		subtitle: 'CTO en EpicDevs',
-		updated: '2026-11-03',
+		updated: '2026-11-04',
 	},
 	{
 		path: '/curriculum',
@@ -37,7 +37,7 @@ export const publicPages: PublicPage[] = [
 		fn: 'portfolio',
 		title: 'Trabajos',
 		subtitle: 'Plataformas y sitios en producción',
-		updated: '2026-11-03',
+		updated: '2026-11-04',
 	},
 	{
 		path: '/sobre-mi',

@@ -4,15 +4,13 @@ import Fn from '../components/Fn.astro'
 import Icon from '../components/Icon.astro'
 import WinControls from '../components/WinControls.astro'
 import { portfolioList } from '../lib/schema'
-import { projects, formatDate, imageFor, imageSrcset, imageVariant } from '../data/projects'
+import { projects, imageFor, imageSrcset, imageVariant, shotAlt, shotPath, shotSrcset } from '../data/projects'
 
 const filters = [
 	{ label: 'todos', tag: '' },
 	{ label: 'migraciones', tag: 'Migración' },
+	{ label: 'integraciones', tag: 'Integración' },
 	{ label: 'plugins', tag: 'WP Plugin' },
-	{ label: 'team-lead', tag: 'Team lead' },
-	{ label: 'rendimiento', tag: 'Rendimiento' },
-	{ label: 'woocommerce', tag: 'WooCommerce' },
 ]
 const years = projects.map((p) => Number(p.date.slice(0, 4)))
 const range = `${Math.min(...years)}–${Math.max(...years)}`
@@ -106,13 +104,7 @@ const range = `${Math.min(...years)}–${Math.max(...years)}`
 								/>
 								<div class="row-info">
 									<p class="mono row-meta">
-										{formatDate(p.date)}
-										{p.client && (
-											<>
-												{' '}
-												· <span class="client">para {p.client}</span>
-											</>
-										)}
+										{p.period} · <span class="client">{p.role}</span>
 									</p>
 									<p class="row-desc">{p.description}</p>
 									<ul class="tags" role="list">
@@ -120,13 +112,37 @@ const range = `${Math.min(...years)}–${Math.max(...years)}`
 											<li class="chip">{t}</li>
 										))}
 									</ul>
-									{p.url && (
-										<a class="btn btn-sm" href={p.url} target="_blank" rel="noopener">
-											Visitar el sitio <Icon name="arrow-up-right" size={16} />
-											<span class="sr-only"> (abre en otra pestaña)</span>
-										</a>
-									)}
+									<div class="row-actions">
+										{p.study && (
+											<a class="btn btn-sm" href={`/portfolio/${p.slug}`}>
+												Ver el caso <Icon name="arrow-up-right" size={16} />
+											</a>
+										)}
+										{p.url && (
+											<a class="btn btn-sm" href={p.url} target="_blank" rel="noopener">
+												{p.urlLabel ?? 'Visitar el sitio'} <Icon name="arrow-up-right" size={16} />
+												<span class="sr-only"> (abre en otra pestaña)</span>
+											</a>
+										)}
+									</div>
 								</div>
+								{p.gallery && (
+									<div class="row-gallery">
+										{p.gallery.map((file) => (
+											<img
+												src={shotPath(p, file)}
+												srcset={shotSrcset(p, file)}
+												sizes="(max-width: 860px) calc(100vw - 40px), 400px"
+												alt={shotAlt(p, file)}
+												loading="lazy"
+												decoding="async"
+												width="1440"
+												height="900"
+											/>
+										))}
+										{p.galleryNote && <p class="mono row-note">{p.galleryNote}</p>}
+									</div>
+								)}
 							</div>
 						</details>
 					</li>
@@ -569,6 +585,23 @@ const range = `${Math.min(...years)}–${Math.max(...years)}`
 	}
 	.client {
 		color: var(--teal-hi);
+	}
+	.row-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+	}
+	.row-gallery {
+		grid-column: 1 / -1;
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+		gap: 12px;
+	}
+	.row-note {
+		grid-column: 1 / -1;
+		margin: 0;
+		font-size: 0.8rem;
+		color: var(--muted);
 	}
 	.row-desc {
 		color: var(--text-soft);

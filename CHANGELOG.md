@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.3.0] - 2026-11-04
+
+### Cambiado
+
+- **Portfolio:** cada proyecto muestra su período y mi rol, y puede sumar capturas extra. Nuevos filtros por migraciones e integraciones.
+- **Skillsoft, Camunda, Construye Mundo y Play2Fund:** textos y capturas nuevas.
+
+### Eliminado
+
+- **Ocho proyectos antiguos del portfolio:** Explo, SumTotal, Explore & Share, Brennan, Engineers Without Borders, Evergage, Boston Standard y Altura.
+
 ## [2.2.1] - 2026-11-04
 
 ### Cambiado
