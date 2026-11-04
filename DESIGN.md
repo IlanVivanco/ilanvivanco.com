@@ -197,7 +197,7 @@ Mono 0.8125rem, borde `--line-hi` y radio 999px. En el CV entran escalonados.
 | `--ease-spring` | `cubic-bezier(0.34, 1.56, 0.64, 1)`, para toggles, dots y micro-rebotes |
 | Resorte del nav | `linear(…)` con overshoot, 0.7s |
 
-- **Revelado**: `[data-reveal]` hace opacity 0→1 y `translate` 14px→0 en 0.7s. Dentro de `[data-reveal-group]`, escalonado cada 70ms. Usa la propiedad `translate`, **no `transform`**, para no pisar la perspectiva de las tarjetas.
+- **Revelado**: `[data-reveal]` hace opacity 0→1 y `translate` 14px→0 en 0.7s. El `.lede` de cabecera no lleva `data-reveal`: en mobile es el LCP y la animación lo retrasa más de 1 s. Dentro de `[data-reveal-group]`, escalonado cada 70ms. Usa la propiedad `translate`, **no `transform`**, para no pisar la perspectiva de las tarjetas.
 - **Transiciones entre páginas**: cross-document View Transitions, sin JS. El header queda fijo, el contenido (`main`, nombre `page`) sale hacia arriba con un poco de blur y entra desde abajo; la pastilla del nav viaja.
 - Duraciones: micro 0.2–0.35s; entradas 0.5–0.7s; nada supera 1.1s, salvo los loops de ambiente.
 - **Contenido que rota solo** (terminal, stats): siempre con una forma de pausar (WCAG 2.2.2) y pausa fuera de pantalla. Terminal: botón. Stats: hover, foco de teclado y, en táctil, elegir un dot.

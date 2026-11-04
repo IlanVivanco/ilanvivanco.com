@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.6.1] - 2026-11-04
+
+### Corregido
+
+- El párrafo de cabecera de `/portfolio`, los case studies, `/curriculum`, `/sobre-mi`, `/contacto` y `/blog` ya no entra con animación: en mobile era el LCP y lo retrasaba más de 1 s.
+
 ## [2.6.0] - 2026-11-04
 
 ### Agregado
