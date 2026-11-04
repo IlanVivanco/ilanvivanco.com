@@ -106,7 +106,7 @@ Este cambio no lo vio ningún cliente, y es de los que más importan. Primero se
 
 Esto también es parte de la respuesta a la pregunta del principio. Nadie compra un flujo de deploy, pero se nota mucho el día que falta.
 
-También hay que admitir que a más de uno le costó horrores sacarse esa manera de trabajar de la cabeza. Hemos tenido largas sesiones internas tratando de descular quién había editado qué, por qué había 4 branches sin mergear e infinidad de cambios en prod que no figuraban en el repo. Lo que a corto plazo parece fácil y rápido, a la larga te trae “merge conflicts” y dolores de cabeza.
+También hay que admitir que a más de uno le costó horrores sacarse esa manera de trabajar de la cabeza. Hemos tenido largas sesiones internas tratando de descular quién había editado qué, por qué había 4 branches sin mergear e infinidad de cambios en prod que no figuraban en el repo. Lo que a corto plazo parece fácil y rápido, a la larga te trae "merge conflicts" y dolores de cabeza.
 
 ![Gráfico en forma de línea de commits, con cómo llega el código a producción. Edición directa en el dashboard: se cambia en producción y no queda rastro. SFTP: los archivos se editan en local y se suben a mano. Control de versiones local más SFTP: hay historial en la máquina, pero el servidor sigue siendo manual. Git: un repositorio compartido, con ramas e historial del equipo. Flujos de Git y CI/CD: main va a producción por PR, dev a su entorno, y el deploy es automático.](/img/blog/dos-decadas-de-wordpress/versionado.webp)
 
@@ -138,7 +138,7 @@ Yo lo vivo también en carne propia. Este mismo sitio lo [hice con agentes](/por
 
 ## Entonces, ¿para qué un developer?
 
-La línea entre un developer profesional y uno amateur se está difuminando, es inevitable. Me parece genial, y me parece peligroso, por lo mismo que decía el tío Ben: “un gran poder conlleva una gran responsabilidad”.
+La línea entre un developer profesional y uno amateur se está difuminando, es inevitable. Me parece genial, y me parece peligroso, por lo mismo que decía el tío Ben: "un gran poder conlleva una gran responsabilidad".
 
 Lo mismo que te permite crear 3 tarjetas te permite romper todo el sitio. Sin una guía clara detrás, se puede generar mucha basura inconsistente, muy rápido.
 
