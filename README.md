@@ -76,7 +76,7 @@ Si el plan gratis de Behold deja de servir, se reemplaza `site.instagramFeed` po
 
 Los cambios de cada versión están en `CHANGELOG.md`.
 
-El sitio anterior estaba hecho en Nuxt 2. `MIGRATION.md` tiene el inventario de lo que se conservó, se migró y se descartó, y el TODO de la Fase 2.
+El sitio anterior estaba hecho en Nuxt 2. El inventario de la migración está en el historial de git: `git log -- MIGRATION.md`.
 
 ## Clones locales
 

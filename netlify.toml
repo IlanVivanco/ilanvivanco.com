@@ -51,7 +51,7 @@ for = "/cv/*"
 [headers.values]
 X-Robots-Tag = "noindex"
 
-# Redirects: las URLs públicas son contrato. Inventario y motivos en MIGRATION.md.
+# Redirects: las URLs públicas son contrato.
 # Solo /aniversario y el subdominio de Netlify llevan force: sin force, un archivo estático siempre gana,
 # /portfolio/:slug no coincide con /portfolio, así que no hay bucle.
 
