@@ -169,7 +169,15 @@ Con la identidad del sitio (banda navy, Space Grotesk y Fira Code, línea de tie
 - No se enlaza desde el sitio: `/curriculum` baja el PDF, sin botón de imprimir.
 
 ### Imágenes OG (`scripts/build/og-images.mjs`)
-Mismo estilo que `public/og.png`, la imagen de la home: logo, `->función();`, título y subtítulo en amarillo. Una por página, generadas desde `src/data/pages.ts`.
+Mismo estilo que `public/og.png`, la imagen de la home: logo, `->función();`, título y subtítulo en amarillo. Una por página, generadas desde `src/data/pages.ts`. Los títulos de más de 30 caracteres van en dos líneas, en 56 px.
+
+### Blog (`pages/blog.astro`, `pages/blog/[slug].astro`)
+- **Listado:** filas con fecha mono en `--muted`, título y descripción, separadas por `--line`. Sin tarjetas ni imágenes.
+- **Post:** una columna de lectura de 760 px como máximo, con párrafos de hasta 70ch. El título baja a `clamp(2rem, 3.6vw, 3rem)`, porque son más largos que los de una página. Sin JS propio: el Markdown se resuelve en el build.
+- **Links del Markdown:** usan `.link`. Los externos abren en otra pestaña, con el aviso `sr-only`. Lo agrega `scripts/build/post-markdown.mjs`, junto con `width`, `height`, `srcset` y `loading` de las imágenes.
+- **Imágenes:** en `public/img/blog/<slug>/`, con `alt` descriptivo en el Markdown. Los gráficos con texto (nombre con `rangos` o `versionado`) van en un contenedor con scroll horizontal y foco, para que en mobile sigan siendo legibles.
+- **Código:** el inline usa fondo `--surface`, texto `--text-soft` y Fira Code, sin colores nuevos. Los bloques todavía no tienen tema: el primer post que los use suma `markdown.syntaxHighlight: 'prism'` y `monokai-cotalpa` solo en el blog, tras subir el comentario (`#6f7e82` sobre `#273136` da unos 3,2:1) y documentarlo en la sección 2.
+- **Datos:** los metadatos van en `src/data/posts.ts` y el cuerpo en `src/content/blog/<slug>.md`, sin frontmatter. Así el sitemap, las imágenes OG y la QA, que corren fuera de Astro, los ven sin duplicarlos.
 
 ### Chips
 Solo para etiquetas de proyectos. El stack de `/curriculum` no usa pastillas, porque parecían links o filtros: arriba, una grilla de íconos de Simple Icons, en un solo color y con `<title>`, y un tooltip con hover, foco o toque que se cierra con Escape; abajo, la lista de texto por categoría, con todo el stack. El PDF usa solo texto.
