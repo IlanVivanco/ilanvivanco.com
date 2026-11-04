@@ -7,7 +7,7 @@ import { encodeMail } from '../lib/mail'
 import Logo from './Logo.astro'
 
 interface Props {
-	lang: 'es'
+	lang: 'es' | 'en'
 }
 const { lang } = Astro.props
 const data = cv[lang]
@@ -233,7 +233,7 @@ const bare = (url: string) => url.replace(/^https:\/\/(www\.)?/, '').replace(/\/
 						<p>
 							<span class="org">
 								{job.org}
-								{job.formerly && ` (antes ${job.formerly})`}
+								{job.formerly && ` (${labels.formerly} ${job.formerly})`}
 							</span>{' '}
 							| {role.place ?? job.location}
 						</p>

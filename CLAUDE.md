@@ -43,7 +43,7 @@ src/
   lib/schema.ts       JSON-LD: Person, WebSite y el tipo de cada página
   layouts/Base.astro  <head>, SEO, speculation rules, header y footer
   components/         Header, Footer, Socials, MailLink, InstagramGrid, WinControls, Logo, Fn, Icon, ProjectCard, Terminal, Stats, Analytics, CvAts
-  pages/              rutas de una línea: /, /curriculum, /portfolio, /portfolio/<slug>, /blog, /blog/<slug>, /contacto, /sobre-mi, /privacidad, /cv, 404, sitemap.xml
+  pages/              rutas de una línea: /, /curriculum, /portfolio, /portfolio/<slug>, /blog, /blog/<slug>, /contacto, /sobre-mi, /privacidad, /cv, /en/cv, 404, sitemap.xml
   views/              cuerpo de cada página: Home, Resume, Portfolio, Study, Blog, Post, Contact, About, Privacy, NotFound
 public/               fonts, img, favicon.svg, og.png, robots.txt (cv/ y og/ se generan, no se versionan)
 scripts/build/        fotos de Instagram, variantes de capturas, CV en PDF e imágenes OG

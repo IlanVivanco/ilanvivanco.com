@@ -6,7 +6,7 @@ import { siteText } from '../data/site'
 import { cv, period, stackIcons, yearPeriod } from '../data/cv'
 
 const lang = Astro.currentLocale === 'en' ? 'en' : 'es'
-const { summary, experience, earlier, stack, education, languages } = cv[lang] ?? cv.es
+const { summary, experience, earlier, stack, education, languages } = cv[lang]
 const { location, cvPdf } = siteText(lang)
 // Cada tecnología con ícono, en el orden del stack. Los ítems "A / B" se separan.
 const techIcons = stack
