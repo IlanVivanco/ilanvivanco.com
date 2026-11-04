@@ -10,6 +10,7 @@
 ### Corregido
 
 - **Construye Mundo** figura como voluntariado en `/curriculum` y en el PDF. La 2.2.1 lo anunciaba, pero el cambio no se había aplicado.
+- **Línea de tiempo de `/curriculum`:** el punto amarillo marca solo los puestos vigentes, igual que en el PDF. Antes salía en el primer puesto de cada empresa.
 
 ## [2.6.3] - 2026-11-04
 

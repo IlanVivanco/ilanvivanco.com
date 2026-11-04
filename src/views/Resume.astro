@@ -64,7 +64,7 @@ const techIcons = stack
 						</div>
 						<ol class="roles" role="list">
 							{job.roles.map((r) => (
-								<li class="role" data-reveal>
+								<li class:list={['role', { now: !r.end }]} data-reveal>
 									<div class="role-head">
 										<h4>{r.title}</h4>
 										<span class="mono period">
@@ -270,7 +270,7 @@ const techIcons = stack
 		background: var(--bg);
 		border: 2px solid var(--teal-hi);
 	}
-	.role:first-child::before {
+	.role.now::before {
 		background: var(--yellow);
 		border-color: var(--yellow);
 	}
