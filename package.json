@@ -8,6 +8,7 @@
 		"preview": "astro preview",
 		"qa": "node scripts/qa/check.mjs",
 		"lighthouse": "node scripts/qa/lighthouse.mjs",
+		"psi": "node --env-file-if-exists=.env scripts/qa/psi.mjs",
 		"cv:pdf": "node scripts/build/cv-pdf.mjs",
 		"og:images": "node scripts/build/og-images.mjs",
 		"format": "prettier --write .",
