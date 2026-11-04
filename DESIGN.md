@@ -156,6 +156,9 @@ Círculo de 32px con borde `--line-strong`. Abierto: fondo amarillo, rota 180° 
 ### Email
 Display grande con `cursor: copy`. El click copia y muestra una pastilla "copiado" que desaparece sola. **No hay botón "copiar"**: la interacción no se explica. El email **nunca está en texto plano en el HTML**: se guarda ofuscado (`data-mail`) y se arma con JS al cargar.
 
+### Footer
+En desktop, una línea: iso, nombre, copyright y frase, privacidad y redes. Hasta 640 px, todo centrado: iso y nombre más grande en `--text`, abajo el copyright y la frase, después privacidad y redes.
+
 ### Fotos de Instagram (`components/InstagramGrid.astro`)
 En "Fuera del código" de `/sobre-mi`: 6 fotos 1:1, en 3 columnas (2 en mobile), desaturadas en reposo y a color con zoom en hover y foco, igual que `ProjectCard`. Debajo, hasta 2 hashtags en mono. Sin carrusel ni JS. Sin fotos, el bloque no se muestra.
 
@@ -172,12 +175,14 @@ Con la identidad del sitio (banda navy, Space Grotesk y Fira Code, línea de tie
 Mismo estilo que `public/og.png`, la imagen de la home: logo, `->función();`, título y subtítulo en amarillo. Una por página, generadas desde `src/data/pages.ts`. Los títulos de más de 30 caracteres van en dos líneas, en 56 px.
 
 ### Blog (`pages/blog.astro`, `pages/blog/[slug].astro`)
-- **Listado:** filas con fecha mono en `--muted`, título y descripción, separadas por `--line`. Sin tarjetas ni imágenes.
+- **Listado:** filas separadas por `--line`, con imagen 16:10 a la izquierda (arriba en mobile), fecha mono en `--muted`, título y descripción. Toda la fila es clickeable. La imagen va desaturada en reposo y a color en hover y foco, igual que `ProjectCard`. El RSS se anuncia solo en el `<head>`.
 - **Post:** una columna de lectura de 760 px como máximo, con párrafos de hasta 70ch. El título baja a `clamp(2rem, 3.6vw, 3rem)`, porque son más largos que los de una página. Sin JS propio: el Markdown se resuelve en el build.
+- **Autoría:** debajo del título, retrato de 40 px, nombre enlazado a `/sobre-mi` con `rel="author"`, cargo y fecha.
+- **CTA final:** `.card` sin perspectiva, como el CTA de la home, con `->contactame();`, la pregunta como `h2` y un `.btn-primary`. El texto va en el front matter de cada post.
 - **Links del Markdown:** usan `.link`. Los externos abren en otra pestaña, con el aviso `sr-only`. Lo agrega `scripts/build/post-markdown.mjs`, junto con `width`, `height`, `srcset` y `loading` de las imágenes.
 - **Imágenes:** en `public/img/blog/<slug>/`, con `alt` descriptivo en el Markdown. Los gráficos con texto (nombre con `rangos` o `versionado`) van en un contenedor con scroll horizontal y foco, para que en mobile sigan siendo legibles.
 - **Código:** el inline usa fondo `--surface`, texto `--text-soft` y Fira Code, sin colores nuevos. Los bloques todavía no tienen tema: el primer post que los use suma `markdown.syntaxHighlight: 'prism'` y `monokai-cotalpa` solo en el blog, tras subir el comentario (`#6f7e82` sobre `#273136` da unos 3,2:1) y documentarlo en la sección 2.
-- **Datos:** los metadatos van en `src/data/posts.ts` y el cuerpo en `src/content/blog/<slug>.md`, sin frontmatter. Así el sitemap, las imágenes OG y la QA, que corren fuera de Astro, los ven sin duplicarlos.
+- **Datos:** un post es un solo archivo, `src/content/blog/<slug>.md`, con front matter de `clave: "valor"`. `src/data/posts.ts` lo lee con `node:fs`, para que el sitemap, las imágenes OG y la QA, que corren fuera de Astro, lo vean sin duplicarlo. La `fn` sale del slug.
 
 ### Chips
 Solo para etiquetas de proyectos. El stack de `/curriculum` no usa pastillas, porque parecían links o filtros: arriba, una grilla de íconos de Simple Icons, en un solo color y con `<title>`, y un tooltip con hover, foco o toque que se cierra con Escape; abajo, la lista de texto por categoría, con todo el stack. El PDF usa solo texto.

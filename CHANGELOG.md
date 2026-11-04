@@ -11,6 +11,7 @@
 
 - **Cómo trabajamos:** la fila del portfolio enlaza al post.
 - **Imágenes OG:** los títulos largos pasan a dos líneas.
+- **Footer en mobile:** centrado, con el iso y el nombre en primer plano.
 
 ### Eliminado
 
