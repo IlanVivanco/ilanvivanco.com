@@ -17,13 +17,14 @@ Sitio personal de Ilán Vivanco: estático, en modo oscuro y sin frameworks en e
 
 ```bash
 npm install
-npx playwright install chromium   # una vez: lo usan el build y el QA
+npx playwright install chromium   # una vez: lo usan el build, el QA y Lighthouse
 npm run dev        # http://localhost:4321
 npm run build      # astro build + CV en PDF + imágenes OG
 npm run cv:pdf     # regenera el PDF sobre el último build
 npm run og:images  # regenera las imágenes OG sobre el último build
 npm run preview    # sirve dist/
 npm run qa         # build + todos los chequeos
+npm run lighthouse # Lighthouse en mobile y desktop sobre el último build; no corre en el CI
 ```
 
 `npm run qa` verifica, en desktop y mobile: axe (WCAG 2.2 AA), scroll horizontal y consola. También comprueba el email ofuscado, el formulario, los redirects, el SEO, el peso de JS, el beacon de analytics y el CV para ATS.
