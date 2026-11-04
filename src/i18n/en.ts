@@ -21,7 +21,7 @@ export const en: typeof es = {
 	},
 	footer: {
 		credit: 'made in Santander with Astro and coffee',
-		privacy: 'Privacy and legal notice (in Spanish)',
+		privacy: 'Privacy (in Spanish)',
 		privacyLang: 'es',
 	},
 	externalNote: ' (opens in a new tab)',

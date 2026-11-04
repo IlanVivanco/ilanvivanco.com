@@ -1,13 +1,13 @@
 ---
-import { pathFor, publicPages } from '../data/pages'
+import { pathFor } from '../data/pages'
 import { siteText } from '../data/site'
 import { ui } from '../i18n'
 import Logo from './Logo.astro'
 import Icon from './Icon.astro'
+import LangSwitch from './LangSwitch.astro'
 import Socials from './Socials.astro'
 
 const t = ui(Astro.currentLocale).header
-const { switcher } = ui(Astro.currentLocale)
 const homePath = pathFor('/', Astro.currentLocale)
 const contactPath = pathFor('/contacto', Astro.currentLocale)
 const { nav } = siteText(Astro.currentLocale)
@@ -16,8 +16,6 @@ const path =
 		.replace(/\.html$/, '')
 		.replace(/\/index$/, '')
 		.replace(/\/$/, '') || '/'
-// Sin versión en el otro idioma, el selector lleva a la home de ese idioma.
-const switchTo = publicPages.find((p) => p.path === path)?.alternate ?? switcher.home
 const isActive = (href: string) => (href === homePath ? path === href : path.startsWith(href))
 ---
 
@@ -45,11 +43,6 @@ const isActive = (href: string) => (href === homePath ? path === href : path.sta
 					))}
 			</ul>
 		</nav>
-
-		<a class="lang-switch mono" href={switchTo} lang={switcher.lang} hreflang={switcher.lang}>
-			{switcher.code}
-			<span class="sr-only">, {switcher.label}</span>
-		</a>
 
 		<a
 			href={contactPath}
@@ -84,7 +77,6 @@ const isActive = (href: string) => (href === homePath ? path === href : path.sta
 				{nav.map((item, i) => (
 					<li style={`--i:${i}`}>
 						<a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
-							<span class="mono idx">0{i + 1}</span>
 							{item.label}
 						</a>
 					</li>
@@ -92,6 +84,7 @@ const isActive = (href: string) => (href === homePath ? path === href : path.sta
 			</ul>
 		</nav>
 		<div class="mobile-socials">
+			<LangSwitch />
 			<Socials />
 		</div>
 	</div>
@@ -213,20 +206,6 @@ const isActive = (href: string) => (href === homePath ? path === href : path.sta
 		view-transition-name: nav-pill;
 	}
 
-	.lang-switch {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		min-width: 44px;
-		min-height: 44px;
-		font-size: 0.8125rem;
-		color: var(--text-soft);
-		text-decoration: none;
-		transition: color 0.2s;
-	}
-	.lang-switch:hover {
-		color: var(--text);
-	}
 	.menu-btn {
 		display: none;
 		width: 44px;
@@ -312,12 +291,6 @@ const isActive = (href: string) => (href === homePath ? path === href : path.sta
 	.mobile-menu li a[aria-current='page'] {
 		color: var(--yellow);
 	}
-	.mobile-menu .idx {
-		font-size: 0.8125rem;
-		color: var(--muted);
-		font-weight: 400;
-		letter-spacing: 0;
-	}
 	.mobile-menu:popover-open li {
 		animation: menu-in 0.5s var(--ease-out) both;
 		animation-delay: calc(var(--i) * 50ms + 80ms);
@@ -329,6 +302,10 @@ const isActive = (href: string) => (href === homePath ? path === href : path.sta
 		}
 	}
 	.mobile-socials {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 16px;
 		margin-top: auto;
 	}
 

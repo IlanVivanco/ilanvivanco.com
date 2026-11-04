@@ -1,5 +1,6 @@
 ---
 import Logo from './Logo.astro'
+import LangSwitch from './LangSwitch.astro'
 import Socials from './Socials.astro'
 import { ui } from '../i18n'
 const t = ui(Astro.currentLocale).footer
@@ -15,9 +16,12 @@ const year = new Date().getFullYear()
 			</span>
 			<span class="foot-note">{`© ${year} · ${t.credit}`}</span>
 		</div>
-		<a href="/privacidad" hreflang={t.privacyLang}>
-			{t.privacy}
-		</a>
+		<div class="foot-links">
+			<a href="/privacidad" hreflang={t.privacyLang}>
+				{t.privacy}
+			</a>
+			<LangSwitch />
+		</div>
 		<Socials />
 	</div>
 </footer>
@@ -36,6 +40,13 @@ const year = new Date().getFullYear()
 		font-family: var(--font-mono);
 		font-size: 0.8125rem;
 		color: var(--muted);
+	}
+	.foot-links {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+		gap: 0 16px;
 	}
 	.foot-brand {
 		display: flex;
