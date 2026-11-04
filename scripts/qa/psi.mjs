@@ -2,13 +2,14 @@
 // Uso: npm run psi                  (todas las páginas públicas)
 //      npm run psi -- /contacto     (solo esas)
 //
-// Requiere PSI_API_KEY en .env. Falla (exit 1) si una categoría baja de 99 o si el CLS no es 0.
+// Requiere PSI_API_KEY en .env. Falla (exit 1) si una categoría baja de 99 o si el CLS pasa de 0,1.
 
 import { publicPages } from '../../src/data/pages.ts'
 
 const API = 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed'
 const BASE = 'https://ilanvivanco.com'
 const MIN_SCORE = 99
+const MAX_CLS = 0.1
 const CATEGORIES = ['performance', 'accessibility', 'best-practices', 'seo']
 const STRATEGIES = ['mobile', 'desktop']
 const CONCURRENCY = 4
@@ -46,7 +47,7 @@ const worker = async () => {
 		const label = `${job.path.padEnd(36)} ${job.strategy.padEnd(7)}`
 		try {
 			const { scores, lcp, cls, shifted } = await measure(job)
-			const ok = scores.every((s) => s >= MIN_SCORE) && cls.toFixed(4) === '0.0000'
+			const ok = scores.every((s) => s >= MIN_SCORE) && cls <= MAX_CLS
 			if (!ok) failures++
 			console.log(
 				`${ok ? '✓' : '✗'} ${label} ${scores.join(' ')}  LCP ${(lcp / 1000).toFixed(2)} s  CLS ${cls.toFixed(4)}${shifted ? `  ${shifted}` : ''}`

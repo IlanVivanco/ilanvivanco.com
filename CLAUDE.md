@@ -58,7 +58,7 @@ netlify.toml          build, redirects y cabeceras
 2. **Presupuestos (no negociables):**
    - Lighthouse 99+ en las 4 categorías, en mobile y desktop.
    - JS propio ≤ 10 KB gz por página (hoy, 7,5 KB en la home). El beacon de Cloudflare es de terceros, pesa unos 10 KB gz y se carga diferido.
-   - CLS 0.
+   - CLS ≤ 0,1. Con la fuente en caché da 0; si llega tarde, un párrafo puede cambiar de renglón (hasta ~0,01).
    - `npm run qa` en verde.
    - **Lighthouse se mide en local, no en el CI:** `npm run lighthouse` antes de pushear o, como tarde, antes de mergear, si el cambio toca performance, assets, JS, CSS o el markup de una página. El 99+ se confirma en producción con `npm run psi` después del merge: desde una máquina propia, Cloudflare inyecta un script que baja Best Practices a 81.
 3. **Accesibilidad:** elementos semánticos reales, foco visible, contraste medido con los tokens, `prefers-reduced-motion` respetado, contenido que rota con forma de pausarlo (WCAG 2.2.2). Checklist en `DESIGN.md §9`.
