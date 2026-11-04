@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.6.0] - 2026-11-06
+
+### Agregado
+
+- **Blog en `/blog`,** con RSS en `/rss.xml`, y su primer post: [20 años de hacer lo mismo de otra forma en WordPress](/blog/dos-decadas-de-wordpress), con imagen OG, `BlogPosting` en el JSON-LD y QA.
+- **"Blog" en el nav.**
+
+### Cambiado
+
+- **Cómo trabajamos:** la fila del portfolio enlaza al post.
+- **Imágenes OG:** los títulos largos pasan a dos líneas.
+
+### Eliminado
+
+- **Los 301 de `/blog` y `/blog/*`.** `/en/blog*` sigue redirigiendo.
+
 ## [2.5.0] - 2026-11-04
 
 ### Agregado
