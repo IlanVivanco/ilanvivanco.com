@@ -24,7 +24,7 @@ const htmlFiles = () => walk().filter((f) => f.endsWith('.html'))
 const isCv = (f) => f === 'cv.html' || f === 'en/cv.html'
 const fileFor = (path) => (path === '/' ? 'index.html' : `${path.slice(1)}.html`)
 
-// Toda URL pública vieja tiene destino. Inventario y motivos en MIGRATION.md.
+// Toda URL pública vieja tiene destino.
 const REDIRECTS = {
 	'/aniversario': 'https://gifrases.ilanvivanco.com/',
 	'/about': '/sobre-mi',

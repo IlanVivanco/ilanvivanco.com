@@ -101,6 +101,17 @@ Muestra de cómo escribe Ilán:
 >
 > Microcopy del sitio, como referencia de humor: "Esta página llegó a producción sin tests." / "O el link es viejo, o alguien hizo deploy un viernes." / "7,5 KB de JavaScript propio en la home (sí, los conté)".
 
+## Voz en inglés
+
+Para editar prosa en inglés con `/humanizer` (se invoca a mano). Estas reglas mandan sobre `.claude/skills/humanizer/SKILL.md`, y la base sigue en la regla 8 y en `DESIGN.md §8`.
+
+- **Registro:** inglés de EE. UU., primera persona (`I`) y contracciones, cercano y con humor técnico. Comillas rectas y sin raya larga.
+- **Alcance:** los mismos límites que en español: modo archivo solo sobre prosa de `.md`; para `src/i18n/en.ts` y `src/data/*.ts`, modo pegado. Quedan fuera el microcopy, los stats, el CV para ATS y los legales.
+- **Permiso y contenido:** los mismos que en "Voz": lo publicado o aprobado se edita solo con OK de Ilán, y solo con los datos, opiniones y anécdotas que ya están en el texto.
+- **Se conservan:** `alt`, texto de links, títulos, citas, listas con sus etiquetas, y remates y guiños según `DESIGN.md §8`.
+
+Todavía no hay una muestra escrita por Ilán en inglés. Hasta entonces, la referencia es el copy que aprobó: "My job is making sure today's technical decisions don't become tomorrow's problems." / "It's aesthetically destroyed, but it works perfectly, so it stays." / "This page shipped to production without tests."
+
 ## Verificación antes de dar algo por terminado
 
 0. `npm run format` (tabs de 3, sin punto y coma, comillas simples, 120 columnas; lo controla el CI).
@@ -121,4 +132,4 @@ Muestra de cómo escribe Ilán:
 
 - **Case studies en inglés:** hoy `/en/portfolio/:slug` redirige a `/en/portfolio`.
 - Tema de Prism `monokai-cotalpa` cuando un post lleve bloques de código.
-- **Humanizer en inglés:** skill aparte, sin mezclarla con `humanizar`. Auditar e instalar `blader/humanizer` como se hizo con esta, y extender "Voz" con una muestra real de Ilán en inglés (hoy no hay). Probarla con el primer texto de la Fase 2.
+- **Muestra de Ilán en inglés:** sumarla a "Voz en inglés" cuando haya un texto suyo que se pueda publicar.
