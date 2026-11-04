@@ -6,6 +6,7 @@
 // Las URLs son contrato: cambiar una implica un redirect 301 en netlify.toml.
 
 import type { Lang } from '../i18n/index.ts'
+import { posts } from './posts.ts'
 import { studies } from './projects.ts'
 
 export type PublicPage = {
@@ -52,6 +53,15 @@ export const publicPages: PublicPage[] = [
 		updated: '2026-11-04',
 	},
 	{
+		path: '/blog',
+		lang: 'es',
+		slug: 'blog',
+		fn: 'blog',
+		title: 'Blog',
+		subtitle: 'Lo que aprendí construyendo para la web',
+		updated: '2026-11-04',
+	},
+	{
 		path: '/sobre-mi',
 		lang: 'es',
 		alternate: '/en/about',
@@ -94,6 +104,19 @@ publicPages.push(
 		title: p.name,
 		subtitle: p.study!.tagline,
 		updated: '2026-11-04',
+	}))
+)
+
+// Cada post también.
+publicPages.push(
+	...posts.map((p) => ({
+		path: `/blog/${p.slug}`,
+		lang: 'es' as const,
+		slug: `blog-${p.slug}`,
+		fn: p.fn,
+		title: p.title,
+		subtitle: p.subtitle,
+		updated: p.updated,
 	}))
 )
 

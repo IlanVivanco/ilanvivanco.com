@@ -1,5 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config'
+import { satteri } from '@astrojs/markdown-satteri'
+import { postMarkdown } from './scripts/build/post-markdown.mjs'
 
 export default defineConfig({
 	site: 'https://ilanvivanco.com',
@@ -15,4 +17,5 @@ export default defineConfig({
 		format: 'file',
 	},
 	compressHTML: true,
+	markdown: { processor: satteri({ hastPlugins: [postMarkdown] }) },
 })

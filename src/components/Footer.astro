@@ -9,8 +9,11 @@ const year = new Date().getFullYear()
 <footer class="site-footer">
 	<div class="container foot">
 		<div class="foot-brand">
-			<Logo size={26} />
-			<span>{`© ${year} Ilán Vivanco · ${t.credit}`}</span>
+			<span class="foot-id">
+				<Logo size={26} />
+				<span class="foot-name">ilán vivanco</span>
+			</span>
+			<span class="foot-note">{`© ${year} · ${t.credit}`}</span>
 		</div>
 		<a href="/privacidad">{t.privacy}</a>
 		<Socials />
@@ -36,6 +39,35 @@ const year = new Date().getFullYear()
 		display: flex;
 		align-items: center;
 		gap: 12px;
+	}
+	.foot-id {
+		display: inline-flex;
+		align-items: center;
+		gap: 12px;
+	}
+	.foot-name {
+		color: var(--text-soft);
+	}
+	@media (max-width: 640px) {
+		.foot {
+			flex-direction: column;
+			justify-content: center;
+			gap: 12px;
+			text-align: center;
+		}
+		.foot-brand {
+			flex-direction: column;
+			gap: 8px;
+		}
+		.foot-note {
+			text-wrap: balance;
+		}
+		.foot-name {
+			color: var(--text);
+			font-family: var(--font-sans);
+			font-size: 1.125rem;
+			font-weight: 600;
+		}
 	}
 	a {
 		display: inline-flex;

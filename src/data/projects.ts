@@ -20,6 +20,7 @@ export type Project = {
 	name: string
 	url?: string
 	urlLabel?: string
+	post?: string // post del blog que amplía el proyecto
 	date: string // YYYY-MM: orden y rango del índice
 	period: string // lo que se muestra
 	role: string
@@ -395,6 +396,7 @@ export const projects: Project[] = [
 		name: 'Cómo trabajamos',
 		url: 'https://github.com/IlanVivanco/wp-deployment-action',
 		urlLabel: 'Ver la GitHub Action',
+		post: '/blog/dos-decadas-de-wordpress',
 		date: '2017-01',
 		period: '2017 a hoy',
 		role: 'Definí los procesos y guié al equipo',

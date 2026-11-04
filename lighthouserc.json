@@ -3,7 +3,13 @@
 		"collect": {
 			"startServerCommand": "npx --yes serve@14 dist -l 8800 -n",
 			"startServerReadyPattern": "Accepting connections",
-			"url": ["http://localhost:8800/", "http://localhost:8800/portfolio", "http://localhost:8800/contacto"],
+			"url": [
+				"http://localhost:8800/",
+				"http://localhost:8800/portfolio",
+				"http://localhost:8800/contacto",
+				"http://localhost:8800/blog",
+				"http://localhost:8800/blog/dos-decadas-de-wordpress"
+			],
 			"numberOfRuns": 3,
 			"settings": { "chromeFlags": "--no-sandbox" }
 		},
