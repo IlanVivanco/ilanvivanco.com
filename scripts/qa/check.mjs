@@ -33,6 +33,10 @@ const PAGES = [
 	'/sobre-mi',
 	'/en',
 	'/en/about',
+	'/en/resume',
+	'/en/portfolio',
+	'/en/contact',
+	'/en/404',
 	'/privacidad',
 	'/404',
 ]

@@ -605,13 +605,173 @@ export const shotAlt = (p: Project, file: string, locale?: string) => {
 }
 
 // En inglés, sin case studies todavía: la tarjeta lleva al sitio del proyecto.
-const enText: Record<string, Pick<Project, 'period' | 'role' | 'description' | 'tags'>> = {
-	tempo: {
+const enText: Record<string, Pick<Project, 'period' | 'role' | 'description' | 'tags'> & Partial<Project>> = {
+	'tempo': {
 		period: 'since 2025',
 		role: 'Tech lead and PM. I planned the project and built the data extraction and the catalog importer.',
 		description:
-			'Content in WordPress, catalog in Craft, and sales in Shopify. We brought them together into one new site, without taking Shopify out of checkout.',
+			'Content in WordPress, catalog in Craft, and sales in Shopify. We brought them together into one new site, without taking Shopify out of sales.',
 		tags: ['WordPress', 'Shopify', 'Migration', 'Integration'],
+	},
+	'naropa': {
+		period: 'since 2022',
+		role: 'CTO / Director of Engineering. Architecture, audits, and technical direction.',
+		description:
+			"A university's website, academic catalog, events, and publications. We took it over from another vendor in 2022 and keep building it alongside their team.",
+		tags: ['WordPress', 'Elementor', 'Migration', 'Integration'],
+	},
+	'harver': {
+		period: '2022 to 2025',
+		role: 'Technical lead and technical contact. Theme foundation and migration plan.',
+		description:
+			'An inherited site, and one more brand with every acquisition. We rebuilt it in phases while the other brands moved into one place.',
+		tags: ['WordPress', 'Elementor', 'Migration'],
+	},
+	'kid-city-guide': {
+		period: 'since 2019',
+		role: 'Technical lead. Architecture, planning, and coordinating the development team.',
+		description:
+			"A network of local guides to things to do with kids, EpicDevs' own project. It started as a single site and now covers 21 cities.",
+		tags: ['WordPress', 'Multisite', 'Migration'],
+	},
+	'skillsoft': {
+		period: '2017 to 2020',
+		role: 'Team lead and main dev. Architect of the importer.',
+		description:
+			'Thousands of courses spread across XML from different teams, turned into a WordPress catalog that took in new data every month without duplicating inventory.',
+		tags: ['WordPress', 'Migration', 'Integration', 'WP Plugin'],
+	},
+	'datos-insights': {
+		period: '2022 to 2025',
+		role: 'Tech lead and architect.',
+		description:
+			'A paid research library, moved from Drupal to WordPress, with subscription access and a Salesforce connection. It launched the same day as the new brand.',
+		tags: ['WordPress', 'Salesforce', 'Migration', 'Integration'],
+	},
+	'tufts-jumbopress': {
+		urlLabel: 'See a site in the network',
+		period: 'since 2025',
+		role: 'Architect and tech lead, author of the audits.',
+		description:
+			"A university's WordPress platform: we audited it end to end, built a block theme for new sites, and kept going with the existing ones.",
+		tags: ['WordPress', 'Gutenberg', 'Multisite'],
+	},
+	'ilanvivanco': {
+		period: 'since 2020',
+		role: 'Everything, for better and for worse.',
+		description:
+			"My lab: this is where I try new things before a client needs them. It's on its second version, and the latest was built with agents from end to end.",
+		tags: ['Astro', 'Own product', 'AI'],
+	},
+	'camunda': {
+		period: '2019 to 2026',
+		role: 'Team lead, architect, and technical contact',
+		description:
+			'Migrated the site from Hugo to WordPress, with a custom importer from Markdown and the blog URLs preserved, so marketing could edit without depending on development. Then several years expanding their ecosystem of sites. In 2026, Camunda moved to another platform.',
+		tags: ['WordPress', 'Migration', 'WP Plugin'],
+	},
+	'como-trabajamos': {
+		name: 'How we work',
+		urlLabel: 'See the GitHub Action',
+		period: '2017 to today',
+		role: 'I defined the processes and guided the team',
+		description:
+			'What sits underneath every project: Git and per-environment workflows, a public GitHub Action for deploys, base themes and plugins at each stage, knowledge in Notion, and an incident protocol.',
+		tags: ['Processes', 'Team', 'CI/CD'],
+	},
+	'lakefs-dvc': {
+		period: '2025 to today',
+		role: 'Architecture and estimation on DVC; account and direction on lakeFS',
+		description:
+			'We migrated dvc.org from Gatsby to WordPress, with a custom content importer and templates for each page type. From the same client we inherited the lakeFS site and got it in shape: redirects, sitemaps, structured data, and modular templates.',
+		tags: ['WordPress', 'Migration'],
+	},
+	'bcbs': {
+		period: '2024 to today',
+		role: 'Tech lead and PM on the web side',
+		description:
+			'We implemented the new site, with courses, faculty, and programs synced from Salesforce to WordPress. We planned the migration of the previous site and added a filterable calendar and search tools.',
+		tags: ['WordPress', 'Salesforce', 'Migration', 'Integration'],
+	},
+	'storyblocks': {
+		period: '2023 to 2026',
+		role: 'Technical lead and development',
+		description:
+			'We built the Resource Center in WordPress, served under /resources on the main domain through a reverse proxy. We planned the migration of the blog and case studies, with redirects to keep the URLs.',
+		tags: ['WordPress', 'Migration'],
+	},
+	'syndigo': {
+		period: '2025 to today',
+		role: 'PM and lead, with development on specific deliverables',
+		description:
+			'We coordinated and implemented the redesign on a custom theme. We planned the new sitemap, added Careers and events, and adapted the site for localization in several languages.',
+		tags: ['WordPress', 'Redesign', 'Localization'],
+	},
+	'womens-power-gap': {
+		period: '2021 to 2023',
+		role: 'Technical lead and author of the dynamic table',
+		description:
+			'I integrated a third-party data API with WordPress through a custom plugin with a caching layer. I built a dynamic, searchable table viewer in Vue that supported new reports as they were published.',
+		tags: ['WordPress', 'Vue', 'Integration', 'WP Plugin'],
+		galleryNote: 'The table is shown with the real plugin and sample data.',
+	},
+	'afc-urgent-care': {
+		period: '2020',
+		role: 'Lead developer of the plugin',
+		description:
+			'My first project with Vue, in the middle of the pandemic: in two weeks I built an appointment system integrated through an API, so patients could choose a location, reason, and time without leaving the site.',
+		tags: ['WordPress', 'Vue', 'Integration', 'WP Plugin'],
+	},
+	'construye-mundo': {
+		period: '2021 to today',
+		role: 'Sole author, as a volunteer',
+		description:
+			"I migrated the NGO's site from Drupal to WordPress, with a full redesign and a new content structure. I've maintained it since launch and I'm still on the team as a volunteer.",
+		tags: ['WordPress', 'Migration', 'Redesign'],
+	},
+	'play2fund': {
+		period: '2020 to 2021, with maintenance afterward',
+		role: 'Team lead',
+		description:
+			'I led the technical team of a platform for funding virtual concerts, planned and launched against the clock during the pandemic. We added split payments with PayPal, event chat, and video integrations.',
+		tags: ['WordPress', 'WP Plugin', 'Integration'],
+	},
+	'mit-sea-grant': {
+		period: '2018 to 2023',
+		role: 'Lead developer',
+		description:
+			"I implemented an institutional site from a third-party design, on MIT's infrastructure. I built the theme and custom fields, planned the bulk import of news and projects, and then took care of maintenance.",
+		tags: ['WordPress', 'Migration'],
+	},
+	'mobius': {
+		period: '2024 to 2025',
+		role: 'Technical lead and PM',
+		description:
+			'The site for Mobius, which provides personalized medical care and medical risk management to family offices, companies, and maritime programs. A simple, clear structure for a high-profile audience, on a custom theme.',
+		tags: ['WordPress', 'Institutional'],
+	},
+	'monokai-cotalpa': {
+		urlLabel: 'See on the Marketplace',
+		period: '2019 to today',
+		role: 'Author and maintainer',
+		description:
+			"My own variant of Monokai for VS Code, which I've maintained since 2019. I recently gave it a thorough review to fix bugs and cover the editor's new colors.",
+		tags: ['VS Code', 'Open source', 'Own product'],
+	},
+	'wp-deployment-action': {
+		urlLabel: 'See on the Marketplace',
+		period: '2024 to today',
+		role: 'Author and maintainer',
+		description:
+			"A public GitHub Action for deploying themes and plugins to WordPress over SSH and rsync. It's simplified for Pressable and WP Engine, but it works on any server with SSH access. We use it on EpicDevs projects so every merge reaches production with no manual steps. I still maintain it, though it has barely needed changes, and that still surprises me.",
+		tags: ['GitHub Actions', 'Open source', 'Own product', 'CI/CD'],
+	},
+	'forant': {
+		period: '2026',
+		role: 'Founder and sole developer',
+		description:
+			"A directory and community for international professionals working remotely from Cantabria. I planned it as my own product, from idea to launch. It's still running today, without active development.",
+		tags: ['Own product', 'TypeScript'],
 	},
 }
 const en: Project[] = es.map((p) => ({ ...p, ...enText[p.slug], study: undefined }))

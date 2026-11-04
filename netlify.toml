@@ -100,34 +100,14 @@ from = "/cv/es"
 to = "/cv"
 status = 301
 
-# Inglés: Fase 2
+# Inglés. Los case studies todavía no están traducidos.
 [[redirects]]
-from = "/en/resume"
-to = "/curriculum"
-status = 301
-
-[[redirects]]
-from = "/en/contact"
-to = "/contacto"
-status = 301
-
-[[redirects]]
-from = "/en/portfolio"
-to = "/portfolio"
-status = 301
-
-[[redirects]]
-from = "/en/portfolio/*"
-to = "/portfolio"
+from = "/en/portfolio/:slug"
+to = "/en/portfolio"
 status = 301
 
 [[redirects]]
 from = "/en/blog/*"
-to = "/"
-status = 301
-
-[[redirects]]
-from = "/en/*"
 to = "/"
 status = 301
 
@@ -156,3 +136,9 @@ status = 301
 from = "/images/favicon.png"
 to = "/favicon.svg"
 status = 301
+
+# Cualquier otra ruta en inglés da el 404 en inglés. Sin force: las páginas que existen ganan.
+[[redirects]]
+from = "/en/*"
+to = "/en/404"
+status = 404
