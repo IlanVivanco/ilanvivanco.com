@@ -107,7 +107,7 @@ Notas para implementar:
 | `components/InstagramFeed.vue` | descartado | Ídem. |
 | Tabla `options` en Supabase (`instagram`, `instagram_last_run`) | conservado | No se toca desde acá. Se puede eliminar tras la Fase 1B. |
 
-**Cómo funcionaba** (para `PLAN-instagram.md`):
+**Cómo funcionaba:**
 
 - `/api/instagram` → `/.netlify/functions/instagram`. Si pasó más de un día desde `instagram_last_run`, pedía `limit=12` a `INSTAGRAM_URL` (NoCodeAPI) y guardaba el resultado en Supabase; si no, devolvía lo cacheado.
 - `InstagramFeed.vue` guardaba la respuesta en `localStorage` **sin vencimiento**, mostraba `media_url`, `permalink`, `timestamp` y hasta 2 hashtags del `caption`, y usaba un placeholder animado mientras cargaba.

@@ -1,4 +1,4 @@
-// Datos globales del sitio. Lo que está entre [corchetes] hay que completarlo.
+// Datos globales del sitio.
 
 export const site = {
 	name: 'Ilán Vivanco',
@@ -13,7 +13,7 @@ export const site = {
 	// Nombre del form en Netlify Forms: si cambia, cambian las notificaciones y el historial de envíos.
 	formName: 'contact-form',
 
-	// Feed JSON de Behold: últimas fotos de Instagram (ver PLAN-instagram.md).
+	// Feed JSON de Behold: últimas fotos de Instagram (ver README.md).
 	instagramFeed: 'https://feeds.behold.so/jZ5SRhL2JJltCujvFFLS',
 
 	// Lo genera `npm run cv:pdf` en cada build.
@@ -66,7 +66,7 @@ export const focus = [
 	},
 ]
 
-// Stats del home: 3 pantallas de 4 tarjetas que rotan juntas.
+// Stats del home: 4 pantallas de 4 tarjetas que rotan juntas.
 // `approx: true` = estimación por orden de magnitud (ajustala cuando quieras).
 // Fuentes: GitHub REST (nov 2026): ~7.750 commits y 211 PRs. Lighthouse/axe/peso: build de este sitio.
 // `display` muestra un texto fijo en lugar de contar (por ejemplo ∞).

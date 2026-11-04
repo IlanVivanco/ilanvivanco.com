@@ -74,7 +74,6 @@ const jsWeight = (file) => {
 export async function runStaticChecks(log) {
 	// Email
 	const email = site.email
-	log(!email.startsWith('['), 'email real en site.ts')
 	const leaks = htmlFiles().filter((f) => read(f).includes(email))
 	log(leaks.length === 0, `email fuera de todo el HTML de dist${leaks.length ? ': ' + leaks.join(', ') : ''}`)
 

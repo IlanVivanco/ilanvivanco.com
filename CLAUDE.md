@@ -91,4 +91,4 @@ netlify.toml          build, redirects y cabeceras
 
 ## Pendientes conocidos
 
-- **Fase 2:** sitio y CV en inglés, y blog.
+- **Fase 2:** sitio y CV en inglés. Tema de Prism `monokai-cotalpa` cuando un post lleve bloques de código.
