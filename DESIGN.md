@@ -131,7 +131,7 @@ Texto, botón al portfolio y un solo proyecto destacado (`featured: true` en `sr
 - En hover: color completo, zoom 1.07 y aparece una pastilla amarilla "visitar ↗".
 - Debajo: meta mono (fecha y "para EpicDevs" en teal), nombre, descripción y chips.
 
-### Índice del portfolio (`pages/portfolio.astro`)
+### Índice del portfolio (`views/Portfolio.astro`)
 - **Filtro en una ventana de consola** (`~/ilan/trabajos`), con opciones rectas y sin bordes. Las filas se animan con FLIP, sin View Transition, para no congelar el nav: `$ ls trabajos --type=<tipo>`. Al tocar un filtro, primero se tipea el argumento y después se reordenan las filas con una View Transition local (`html.vt-local`, que no anima el resto de la página). Muestra el conteo y el rango de años.
 - **Filas**: año · proyecto · stack · toggle `+`. Sin numeración. En hover, el fondo barre de izquierda a derecha **sin radio**, el nombre se desplaza 10px y el año se pone amarillo.
 - **Vista previa flotante** (solo con mouse): ventana con captura y caption `año · nombre`. Sigue al cursor con inercia, rota según la velocidad, la imagen entra desde arriba o abajo según la dirección y hace un zoom lento.

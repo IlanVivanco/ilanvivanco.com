@@ -37,7 +37,7 @@ npm run qa         # build + todos los chequeos
 | Portfolio | `src/data/projects.ts`, con la captura en `public/img/projects/<slug>.webp` |
 | Páginas del sitemap y de las imágenes OG | `src/data/pages.ts` |
 | Redirects y cabeceras | `netlify.toml` |
-| Política de privacidad y aviso legal | `src/pages/privacidad.astro` |
+| Política de privacidad y aviso legal | `src/views/Privacy.astro` |
 | Colores, tipografía y estilos base | `src/styles/global.css` |
 
 El PDF (`public/cv/`) y las imágenes OG (`public/og/`) se generan en cada build y no se versionan.

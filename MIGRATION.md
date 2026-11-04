@@ -41,6 +41,7 @@ Destinos: **conservado** (queda igual), **migrado** (pasa al sitio nuevo con cam
 | `/about` | 404 | 301 → `/sobre-mi` | migrado |
 | `/resume` | 404 | 301 → `/curriculum` | migrado |
 | `/contact`, `/contact-me` | 404 | 301 → `/contacto` | migrado |
+| `/cv/es` | (nueva, Fase 2) | 301 → `/cv` | movida: con `es` como idioma por defecto, Astro la marca como 404 |
 | `/portfolio/*` | 404 | 301 → `/portfolio` | migrado |
 | `/blog`, `/blog/*` | 200 / 404 | 301 → `/` | migrado |
 | `/en` | 200 | 301 → `/` | migrado |
@@ -218,15 +219,3 @@ Quedan fuera de este PR porque son cambios en cuentas externas:
 - **Sitio en inglés:** i18n de Astro, con `es` por defecto sin prefijo y `en` en `/en/…`. Recupera `/en/about`, `/en/resume`, `/en/contact` y `/en/portfolio` (quitando sus 301) y suma `hreflang`.
 - **CV en inglés** con el mismo generador ATS. Base: `git show 979ff14:locales/en/positions.js`.
 - **Blog** con content collections y el tema de Prism `monokai-cotalpa` si hay código. Quita los 301 de `/blog*`.
-- **Portfolio actualizado** con proyectos y clientes actuales de EpicDevs, confirmando qué se puede mostrar públicamente, y capturas nuevas.
-- **Evaluar los proyectos del sitio viejo que no están en el nuevo.** Ninguno tiene descripción en `content/` ni en `locales/`: solo nombre, URL y captura.
-
-| Proyecto | URL | Captura en `979ff14` |
-|---|---|---|
-| ILC | https://www.ilctr.org/ | `assets/images/portfolio/ilc.jpg` |
-| Kid City Guide | https://www.kidcityguide.com/ | `assets/images/portfolio/kidcity.jpg` |
-| Networks That Matter | https://www.ntmatter.com/ | `assets/images/portfolio/ntm.jpg` |
-| Saignite | https://www.saignite.com/ | `assets/images/portfolio/saignite.jpg` |
-| Thomson Place | https://www.thomsonplace.com/ | `assets/images/portfolio/thomson.jpg` |
-| Yesware | https://www.yesware.com/ | `assets/images/portfolio/yesware.jpg` |
-| Zillion | https://www.zillion.com/ | `assets/images/portfolio/zillion.jpg` |
