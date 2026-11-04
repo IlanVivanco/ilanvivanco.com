@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.5.0] - 2026-11-04
+
+### Agregado
+
+- **Case studies en `/portfolio/<slug>`:** Tempo, Naropa, Harver, Kid City Guide, Skillsoft, Datos Insights, Tufts JumboPress e ilanvivanco.com, con sitemap, imagen OG y QA de accesibilidad.
+
+### Cambiado
+
+- **Proyecto destacado de la home:** ahora es Tempo, y su tarjeta lleva al caso.
+- **Portfolio:** filtro por case studies y botón "Ver el caso".
+
 ## [2.4.0] - 2026-11-04
 
 ### Agregado

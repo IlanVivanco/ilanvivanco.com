@@ -11,6 +11,7 @@ import { readFileSync } from 'node:fs'
 import { createRequire } from 'node:module'
 import { chromium } from 'playwright'
 import { site } from '../../src/data/site.ts'
+import { studies } from '../../src/data/projects.ts'
 import { serveDist } from '../lib/serve-dist.mjs'
 import { runAnalyticsChecks } from './analytics.mjs'
 import { runFormChecks, runFormViewportCheck } from './form.mjs'
@@ -20,7 +21,16 @@ import { runStaticChecks } from './static.mjs'
 const require = createRequire(import.meta.url)
 const axeSource = readFileSync(require.resolve('axe-core/axe.min.js'), 'utf8')
 
-const PAGES = ['/', '/curriculum', '/portfolio', '/contacto', '/sobre-mi', '/privacidad', '/404']
+const PAGES = [
+	'/',
+	'/curriculum',
+	'/portfolio',
+	...studies.map((p) => `/portfolio/${p.slug}`),
+	'/contacto',
+	'/sobre-mi',
+	'/privacidad',
+	'/404',
+]
 const VIEWPORTS = [
 	{ name: 'desktop', width: 1440, height: 900, isMobile: false },
 	{ name: 'mobile', width: 390, height: 844, isMobile: true },
