@@ -21,6 +21,7 @@ const walk = (dir = '') =>
 		e.isDirectory() ? walk(join(dir, e.name)) : [join(dir, e.name)]
 	)
 const htmlFiles = () => walk().filter((f) => f.endsWith('.html'))
+const isCv = (f) => f === 'cv.html' || f === 'en/cv.html'
 const fileFor = (path) => (path === '/' ? 'index.html' : `${path.slice(1)}.html`)
 
 // Toda URL pública vieja tiene destino. Inventario y motivos en MIGRATION.md.
@@ -30,6 +31,7 @@ const REDIRECTS = {
 	'/resume': '/curriculum',
 	'/contact': '/contacto',
 	'/contact-me': '/contacto',
+	'/cv/es': '/cv',
 	'/portfolio/:slug': '/portfolio',
 	'/en': '/',
 	'/en/*': '/',
@@ -98,7 +100,7 @@ export async function runStaticChecks(log) {
 
 	// Links externos en otra pestaña
 	const sameTab = htmlFiles()
-		.filter((f) => !f.startsWith('cv/'))
+		.filter((f) => !isCv(f))
 		.flatMap((f) =>
 			[...read(f).matchAll(/<a\b[^>]*\bhref="https?:[^>]*>/g)]
 				.filter((m) => !/target="_blank"/.test(m[0]) || !/rel="noopener"/.test(m[0]))
@@ -140,7 +142,7 @@ export async function runStaticChecks(log) {
 	if (igPhotos.length === 0) console.warn('⚠ /sobre-mi se generó sin fotos de Instagram')
 
 	// Un formateador puede separar un link de su puntuación ("EpicDevs .")
-	const spaced = htmlFiles().filter((f) => !f.startsWith('cv/') && /<\/a>\s+[.,;:]/.test(read(f)))
+	const spaced = htmlFiles().filter((f) => !isCv(f) && /<\/a>\s+[.,;:]/.test(read(f)))
 	log(spaced.length === 0, `links pegados a su puntuación${spaced.length ? ': ' + spaced.join(', ') : ''}`)
 
 	// Voz: sin raya larga en lo que se publica
@@ -166,7 +168,7 @@ export async function runStaticChecks(log) {
 	}
 	log(
 		htmlFiles()
-			.filter((f) => !f.startsWith('cv/'))
+			.filter((f) => !isCv(f))
 			.every((f) => !/<img\b(?![^>]*\bsrcset=)[^>]*\bsrc="\/img\/(?:projects|instagram|blog)\//.test(read(f))),
 		'fotos de proyectos, Instagram y blog con srcset'
 	)
@@ -179,10 +181,11 @@ export async function runStaticChecks(log) {
 			),
 		`/curriculum: ${techItems.length} íconos del stack con title, foco y tooltip`
 	)
-	log(!sitemap.includes('/cv/') && !sitemap.includes('/404'), 'sitemap sin /cv ni 404')
+	log(!sitemap.includes('/cv<') && !sitemap.includes('/404'), 'sitemap sin /cv ni 404')
 	for (const p of publicPages) {
 		const html = read(fileFor(p.path))
 		const canonical = new URL(p.path, site.url).href
+		log(html.includes(`<html lang="${p.lang}"`), `${p.path} con lang="${p.lang}"`)
 		if (p.noindex) log(html.includes('name="robots" content="noindex, follow"'), `${p.path} noindex, follow`)
 		else {
 			log(html.includes(`rel="canonical" href="${canonical}"`), `${p.path} canonical`)
@@ -198,16 +201,16 @@ export async function runStaticChecks(log) {
 	}
 	log(
 		htmlFiles()
-			.filter((f) => f.startsWith('cv/'))
+			.filter(isCv)
 			.every((f) => read(f).includes('name="robots" content="noindex')),
 		'/cv con noindex'
 	)
 	log(
 		!publicPages.some((p) => p.path.startsWith('/cv')) &&
 			htmlFiles()
-				.filter((f) => !f.startsWith('cv/'))
-				.every((f) => !read(f).includes('href="/cv/es"')),
-		'sin links a /cv/es desde el sitio'
+				.filter((f) => !isCv(f))
+				.every((f) => !read(f).includes('href="/cv"')),
+		'sin links a /cv desde el sitio'
 	)
 
 	// Blog
@@ -265,6 +268,7 @@ export async function runStaticChecks(log) {
 		'los destinos de los redirects existen'
 	)
 	log((toml.match(/force = true/g) ?? []).length === 2, 'solo /aniversario y netlify.app usan force')
+	log(/for = "\/cv"[\s\S]*?X-Robots-Tag = "noindex"/.test(toml), '/cv con X-Robots-Tag noindex')
 	log(toml.includes('from = "https://ilanvivanco.netlify.app/*"'), 'netlify.app redirige al dominio principal')
 	for (const header of [
 		'X-Content-Type-Options',
@@ -278,7 +282,7 @@ export async function runStaticChecks(log) {
 	log(/for = "\/_astro\/\*"[\s\S]*?immutable/.test(toml), '/_astro con caché immutable')
 
 	// Presupuesto y stats honestos
-	for (const f of htmlFiles().filter((f) => !f.startsWith('cv/'))) {
+	for (const f of htmlFiles().filter((f) => !isCv(f))) {
 		const kb = jsWeight(f) / 1024
 		log(kb <= JS_BUDGET_KB, `${f} JS propio ${kb.toFixed(1)} KB gz (máx. ${JS_BUDGET_KB})`)
 	}

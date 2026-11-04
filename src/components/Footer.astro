@@ -1,6 +1,8 @@
 ---
 import Logo from './Logo.astro'
 import Socials from './Socials.astro'
+import { ui } from '../i18n'
+const t = ui(Astro.currentLocale).footer
 const year = new Date().getFullYear()
 ---
 
@@ -11,9 +13,9 @@ const year = new Date().getFullYear()
 				<Logo size={26} />
 				<span class="foot-name">ilán vivanco</span>
 			</span>
-			<span class="foot-note">© {year} · hecho en Santander con Astro y café</span>
+			<span class="foot-note">{`© ${year} · ${t.credit}`}</span>
 		</div>
-		<a href="/privacidad">Privacidad y aviso legal</a>
+		<a href="/privacidad">{t.privacy}</a>
 		<Socials />
 	</div>
 </footer>

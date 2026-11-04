@@ -1,0 +1,382 @@
+---
+import Base from '../layouts/Base.astro'
+import Fn from '../components/Fn.astro'
+import Icon from '../components/Icon.astro'
+import Terminal from '../components/Terminal.astro'
+import Stats from '../components/Stats.astro'
+import ProjectCard from '../components/ProjectCard.astro'
+import { focus } from '../data/site'
+import { projects } from '../data/projects'
+
+const featured = projects.find((p) => p.featured) ?? projects[0]
+const focusIcons = { wordpress: 'layers', js: 'code', ai: 'sparkles', api: 'plug', team: 'users' } as const
+---
+
+<Base>
+	<link
+		slot="head"
+		rel="preload"
+		as="image"
+		href="/img/ilan-sq-240.webp"
+		imagesrcset="/img/ilan-sq-240.webp 240w, /img/ilan-sq-480.webp 480w"
+		imagesizes="clamp(96px, 10vw, 136px)"
+		fetchpriority="high"
+	/>
+	<!-- HERO -->
+	<section class="hero">
+		<div class="container hero-grid">
+			<div class="hero-copy stack" style="--gap: 26px">
+				<div class="intro" data-reveal>
+					<figure class="avatar">
+						<img
+							src="/img/ilan-sq-240.webp"
+							srcset="/img/ilan-sq-240.webp 240w, /img/ilan-sq-480.webp 480w"
+							sizes="clamp(96px, 10vw, 136px)"
+							width="240"
+							height="240"
+							alt="Ilán Vivanco sonriendo, con barba y camisa estampada, sobre un fondo gris"
+							fetchpriority="high"
+							decoding="async"
+						/>
+					</figure>
+					<div class="intro-text">
+						<p class="eyebrow">¡Hola! Me llamo</p>
+						<h1 class="display">Ilán Vivanco</h1>
+						<p class="role mono">
+							<span>
+								CTO en{' '}
+								<a class="link" href="https://epicdevs.com" target="_blank" rel="noopener">
+									EpicDevs
+								</a>
+							</span>
+							<span class="where">
+								<span class="live" aria-hidden="true"></span>Santander
+							</span>
+						</p>
+					</div>
+				</div>
+				<p class="lede">
+					Lidero la ingeniería de plataformas web para empresas de tecnología, universidades y ONG. Trabajo con
+					WordPress y JavaScript, y uso IA todos los días con el equipo. Hago sitios desde 2005, cuando todavía se
+					maquetaba con tablas.
+				</p>
+				<div class="ctas" data-reveal data-delay="0.14">
+					<a class="btn btn-primary" href="/contacto">
+						Contactame <Icon name="arrow-up-right" />
+					</a>
+					<a class="btn" href="/curriculum">
+						Ver mi CV <Icon name="arrow-right" />
+					</a>
+				</div>
+			</div>
+
+			<div class="hero-term" data-reveal data-delay="0.12">
+				<Terminal />
+			</div>
+		</div>
+
+		<div class="container">
+			<Stats />
+		</div>
+	</section>
+
+	<!-- QUÉ HAGO -->
+	<section class="section" aria-labelledby="que-hago">
+		<div class="container stack" style="--gap: 40px">
+			<header class="sec-head" data-reveal>
+				<Fn name="qué_hago" id="que-hago" />
+				<p class="lede">
+					Mi trabajo es que las decisiones técnicas de hoy no sean el problema de mañana. En la práctica, se
+					reparte así:
+				</p>
+			</header>
+			<ul class="bento" role="list" data-reveal-group>
+				{focus.map((f, i) => (
+					<li class:list={['card', 'focus', { wide: i === 0 }]} data-tilt data-reveal>
+						<span class="focus-icon">
+							<Icon name={focusIcons[f.tag as keyof typeof focusIcons]} size={22} />
+						</span>
+						<h3 class="h3">{f.title}</h3>
+						<p>{f.text}</p>
+					</li>
+				))}
+			</ul>
+		</div>
+	</section>
+
+	<!-- SOBRE MÍ -->
+	<section class="section" aria-labelledby="sobre-mi">
+		<div class="container about">
+			<Fn name="sobre_mí" id="sobre-mi" class="about-title" />
+			<div class="stack about-body" style="--gap: 18px" data-reveal>
+				<p class="lede">
+					Vengo de la comunicación publicitaria, el diseño y la fotografía. Me enganché con la programación y me
+					quedé.
+				</p>
+				<p>
+					Pasé de Flash a PHP y JavaScript, y WordPress sigue siendo la base de casi todo lo que hago. Llevo más de
+					once años trabajando en remoto, desde Buenos Aires, la Patagonia y ahora Cantabria.
+				</p>
+				<p>Cuando no estoy con código, viajo con mi familia y salgo con la cámara.</p>
+				<a class="link-arrow" href="/sobre-mi">
+					Más sobre mí <Icon name="arrow-right" size={18} />
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- TRABAJOS -->
+	<section class="section" aria-labelledby="trabajos">
+		<div class="container work">
+			<div class="stack work-copy" style="--gap: 20px" data-reveal>
+				<Fn name="trabajos" id="trabajos" />
+				<p class="lede">
+					Plataformas, plugins y migraciones en WordPress, la mayoría con el equipo de EpicDevs. Acá va uno; el
+					resto está en el portfolio.
+				</p>
+				<a class="btn work-cta" href="/portfolio">
+					Ver mis trabajos <Icon name="arrow-right" />
+				</a>
+			</div>
+			<div data-reveal data-delay="0.1">
+				<ProjectCard project={featured} />
+			</div>
+		</div>
+	</section>
+
+	<!-- CTA -->
+	<section class="section cta-sec" aria-labelledby="cta">
+		<div class="container">
+			<div class="cta card" data-reveal>
+				<Fn name="contactame" as="p" />
+				<h2 id="cta" class="h2">
+					¿Qué te parece si hacemos algo juntos?
+				</h2>
+				<div class="ctas">
+					<a class="btn btn-primary" href="/contacto">
+						Escribime <Icon name="arrow-up-right" />
+					</a>
+					<a class="btn" href="https://www.linkedin.com/in/ilanvivanco/" target="_blank" rel="noopener">
+						<Icon name="linkedin" /> LinkedIn
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+</Base>
+
+<style>
+	.hero {
+		padding-block: clamp(40px, 7vw, 88px) clamp(20px, 3vw, 44px);
+		position: relative;
+		overflow-x: clip;
+	}
+	.hero::after {
+		content: '';
+		position: absolute;
+		z-index: -1;
+		pointer-events: none;
+		top: -10%;
+		right: -10%;
+		width: min(720px, 80vw);
+		aspect-ratio: 1;
+		border-radius: 50%;
+		background: radial-gradient(closest-side, rgba(44, 151, 159, 0.16), transparent);
+	}
+	.hero-grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
+		gap: clamp(40px, 5vw, 72px);
+		align-items: center;
+	}
+	.intro {
+		display: flex;
+		align-items: center;
+		gap: clamp(18px, 2.4vw, 28px);
+	}
+	/* Squircle 1:1 (corner-shape donde existe; si no, esquinas muy redondeadas) */
+	.avatar {
+		flex: none;
+		margin: 0;
+		width: clamp(96px, 10vw, 136px);
+		aspect-ratio: 1;
+		border-radius: 30%;
+		overflow: hidden;
+		background: var(--surface);
+		box-shadow:
+			0 20px 40px -20px rgba(0, 0, 0, 0.8),
+			0 0 0 1px var(--line-hi);
+		transition:
+			scale 0.6s var(--ease-spring),
+			rotate 0.6s var(--ease-spring);
+	}
+	@supports (corner-shape: squircle) {
+		.avatar {
+			border-radius: 50%;
+			corner-shape: squircle;
+		}
+	}
+	.avatar:hover {
+		scale: 1.05;
+		rotate: -3deg;
+	}
+	.avatar img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+	.intro-text {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+		min-width: 0;
+	}
+	.intro .display {
+		font-size: clamp(2.125rem, 4vw, 3.25rem);
+	}
+	.role {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 6px 14px;
+		font-size: clamp(0.9375rem, 1.3vw, 1.0625rem);
+		color: var(--text);
+	}
+	.where {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		color: var(--muted);
+	}
+	.live {
+		width: 7px;
+		height: 7px;
+		border-radius: 50%;
+		background: var(--teal-hi);
+		animation: pulse 2.2s infinite;
+	}
+	@keyframes pulse {
+		0% {
+			box-shadow: 0 0 0 0 rgba(85, 201, 209, 0.6);
+		}
+		70%,
+		100% {
+			box-shadow: 0 0 0 7px rgba(85, 201, 209, 0);
+		}
+	}
+	.ctas {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px;
+	}
+	.hero-term {
+		min-width: 0;
+	}
+
+	/* Secciones */
+	.sec-head {
+		display: flex;
+		flex-direction: column;
+		gap: 14px;
+	}
+
+	.work {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+		gap: 32px clamp(32px, 6vw, 96px);
+		align-items: center;
+	}
+	.work-cta {
+		align-self: flex-start;
+	}
+	.bento {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 16px;
+		margin: 0;
+		padding: 0;
+	}
+	.focus {
+		padding: 26px;
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+	.focus.wide {
+		grid-column: span 2;
+	}
+	.focus p {
+		color: var(--text-soft);
+	}
+	.focus-icon {
+		display: inline-flex;
+		width: 44px;
+		height: 44px;
+		align-items: center;
+		justify-content: center;
+		border-radius: 12px;
+		background: var(--surface);
+		border: 1px solid var(--line-hi);
+		color: var(--yellow);
+		margin-bottom: 8px;
+		transition:
+			transform 0.5s var(--ease-spring),
+			color 0.3s;
+	}
+	.focus.is-hover .focus-icon {
+		transform: translateY(-2px) rotate(-6deg);
+		color: var(--yellow-hi);
+	}
+
+	.about {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+		gap: 28px clamp(32px, 6vw, 96px);
+		align-items: start;
+	}
+	.about-body p:not(.lede) {
+		color: var(--text-soft);
+		max-width: 62ch;
+	}
+
+	.cta-sec {
+		border-top: 0 !important;
+		padding-top: 0;
+	}
+	.cta {
+		padding: clamp(32px, 5vw, 64px);
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+		background: linear-gradient(140deg, var(--surface) 0%, var(--bg-raised) 60%);
+	}
+	.cta .h2 {
+		max-width: 18ch;
+	}
+
+	@media (max-width: 960px) {
+		.work {
+			grid-template-columns: minmax(0, 1fr);
+		}
+		.hero-grid {
+			grid-template-columns: minmax(0, 1fr);
+		}
+		.bento {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+		.about {
+			grid-template-columns: minmax(0, 1fr);
+		}
+	}
+	@media (max-width: 640px) {
+		.bento {
+			grid-template-columns: minmax(0, 1fr);
+		}
+		.focus.wide {
+			grid-column: auto;
+		}
+		.ctas .btn {
+			flex: 1 1 auto;
+		}
+	}
+</style>

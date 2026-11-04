@@ -131,7 +131,7 @@ Texto, botón al portfolio y un solo proyecto destacado (`featured: true` en `sr
 - En hover: color completo, zoom 1.07 y aparece una pastilla amarilla "visitar ↗".
 - Debajo: meta mono (fecha y "para EpicDevs" en teal), nombre, descripción y chips.
 
-### Índice del portfolio (`pages/portfolio.astro`)
+### Índice del portfolio (`views/Portfolio.astro`)
 - **Filtro en una ventana de consola** (`~/ilan/trabajos`), con opciones rectas y sin bordes. Las filas se animan con FLIP, sin View Transition, para no congelar el nav: `$ ls trabajos --type=<tipo>`. Al tocar un filtro, primero se tipea el argumento y después se reordenan las filas con una View Transition local (`html.vt-local`, que no anima el resto de la página). Muestra el conteo y el rango de años.
 - **Filas**: año · proyecto · stack · toggle `+`. Sin numeración. En hover, el fondo barre de izquierda a derecha **sin radio**, el nombre se desplaza 10px y el año se pone amarillo.
 - **Vista previa flotante** (solo con mouse): ventana con captura y caption `año · nombre`. Sigue al cursor con inercia, rota según la velocidad, la imagen entra desde arriba o abajo según la dirección y hace un zoom lento.
@@ -174,7 +174,7 @@ Con la identidad del sitio (banda navy, Space Grotesk y Fira Code, línea de tie
 ### Imágenes OG (`scripts/build/og-images.mjs`)
 Mismo estilo que `public/og.png`, la imagen de la home: logo, `->función();`, título y subtítulo en amarillo. Una por página, generadas desde `src/data/pages.ts`. Los títulos de más de 30 caracteres van en dos líneas, en 56 px.
 
-### Blog (`pages/blog.astro`, `pages/blog/[slug].astro`)
+### Blog (`views/Blog.astro`, `views/Post.astro`)
 - **Listado:** filas separadas por `--line`, con imagen 16:10 a la izquierda (arriba en mobile), fecha mono en `--muted`, título y descripción. Toda la fila es clickeable. La imagen va desaturada en reposo y a color en hover y foco, igual que `ProjectCard`. El RSS se anuncia solo en el `<head>`.
 - **Post:** una columna de lectura de 760 px como máximo, con párrafos de hasta 70ch. El título baja a `clamp(2rem, 3.6vw, 3rem)`, porque son más largos que los de una página. Sin JS propio: el Markdown se resuelve en el build.
 - **Autoría:** debajo del título, retrato de 40 px, nombre enlazado a `/sobre-mi` con `rel="author"`, cargo y fecha.

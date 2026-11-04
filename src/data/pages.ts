@@ -2,13 +2,17 @@
 // `updated` (YYYY-MM-DD) es el lastmod del sitemap: se cambia en cada bump de versión, solo en las páginas
 // cuyo contenido cambió. Los rebuilds (por ejemplo, el semanal de Instagram) no cuentan.
 // `noindex`: se publica y tiene imagen OG, pero no va al sitemap.
+// `alternate`: la ruta de la misma página en el otro idioma. `getRelativeLocaleUrl` no traduce slugs: el mapa vive acá.
 // Las URLs son contrato: cambiar una implica un redirect 301 en netlify.toml.
 
+import type { Lang } from '../i18n/index.ts'
 import { posts } from './posts.ts'
 import { studies } from './projects.ts'
 
 export type PublicPage = {
 	path: string
+	lang: Lang
+	alternate?: string
 	slug: string
 	fn: string
 	title: string
@@ -20,6 +24,8 @@ export type PublicPage = {
 export const publicPages: PublicPage[] = [
 	{
 		path: '/',
+		lang: 'es',
+		alternate: '/en',
 		slug: 'home',
 		fn: 'hola_mundo',
 		title: 'Ilán Vivanco',
@@ -28,6 +34,8 @@ export const publicPages: PublicPage[] = [
 	},
 	{
 		path: '/curriculum',
+		lang: 'es',
+		alternate: '/en/resume',
 		slug: 'curriculum',
 		fn: 'mi_historial',
 		title: 'Mi CV',
@@ -36,6 +44,8 @@ export const publicPages: PublicPage[] = [
 	},
 	{
 		path: '/portfolio',
+		lang: 'es',
+		alternate: '/en/portfolio',
 		slug: 'portfolio',
 		fn: 'portfolio',
 		title: 'Trabajos',
@@ -44,6 +54,7 @@ export const publicPages: PublicPage[] = [
 	},
 	{
 		path: '/blog',
+		lang: 'es',
 		slug: 'blog',
 		fn: 'blog',
 		title: 'Blog',
@@ -52,6 +63,8 @@ export const publicPages: PublicPage[] = [
 	},
 	{
 		path: '/sobre-mi',
+		lang: 'es',
+		alternate: '/en/about',
 		slug: 'sobre-mi',
 		fn: 'más_info_sobre_mí',
 		title: 'Más sobre mí',
@@ -60,6 +73,8 @@ export const publicPages: PublicPage[] = [
 	},
 	{
 		path: '/contacto',
+		lang: 'es',
+		alternate: '/en/contact',
 		slug: 'contacto',
 		fn: 'contactame',
 		title: '¿Hacemos algo juntos?',
@@ -68,6 +83,7 @@ export const publicPages: PublicPage[] = [
 	},
 	{
 		path: '/privacidad',
+		lang: 'es',
 		slug: 'privacidad',
 		fn: 'privacidad',
 		title: 'Privacidad y aviso legal',
@@ -82,6 +98,7 @@ export const publicPages: PublicPage[] = [
 publicPages.push(
 	...studies.map((p) => ({
 		path: `/portfolio/${p.slug}`,
+		lang: 'es' as const,
 		slug: `portfolio-${p.slug}`,
 		fn: p.slug.replace(/-/g, '_'),
 		title: p.name,
@@ -94,6 +111,7 @@ publicPages.push(
 publicPages.push(
 	...posts.map((p) => ({
 		path: `/blog/${p.slug}`,
+		lang: 'es' as const,
 		slug: `blog-${p.slug}`,
 		fn: p.fn,
 		title: p.title,

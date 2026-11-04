@@ -1,20 +1,5 @@
 ---
-import Base from '../layouts/Base.astro'
-import Icon from '../components/Icon.astro'
+import NotFound from '../views/NotFound.astro'
 ---
 
-<Base title="Página no encontrada" noindex>
-	<section class="section">
-		<div class="container stack" style="--gap: 24px">
-			<p class="fn">
-				<span class="arrow">-&gt;</span>error<span class="paren">(404)</span>
-				<span class="semi">;</span>
-			</p>
-			<h1 class="display">Esta página llegó a producción sin tests.</h1>
-			<p class="lede">O el link es viejo, o alguien hizo deploy un viernes. En cualquier caso, acá no hay nada.</p>
-			<a class="btn btn-primary" href="/" style="align-self: flex-start">
-				Volver al inicio <Icon name="arrow-right" />
-			</a>
-		</div>
-	</section>
-</Base>
+<NotFound />

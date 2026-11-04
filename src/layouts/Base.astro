@@ -5,6 +5,7 @@ import Footer from '../components/Footer.astro'
 import Analytics from '../components/Analytics.astro'
 import { site } from '../data/site'
 import { ogPath } from '../data/pages'
+import { ui } from '../i18n'
 import { pageSchema, type PageSchemaType } from '../lib/schema'
 
 interface Props {
@@ -26,6 +27,8 @@ const {
 	noindex = false,
 	ogType = 'website',
 } = Astro.props
+const lang = Astro.currentLocale
+const t = ui(lang)
 const pageTitle = fullTitle ?? (title ? `${title} | Ilán Vivanco` : site.title)
 const pathname = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '/') || '/'
 const canonical = new URL(pathname, site.url).href
@@ -33,7 +36,7 @@ const ogImage = new URL(ogPath(pathname), site.url).href
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={lang}>
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -53,7 +56,7 @@ const ogImage = new URL(ogPath(pathname), site.url).href
 		<slot name="head" />
 
 		<meta property="og:type" content={ogType} />
-		<meta property="og:locale" content={site.locale} />
+		<meta property="og:locale" content={t.ogLocale} />
 		<meta property="og:site_name" content="Ilán Vivanco" />
 		<meta property="og:title" content={pageTitle} />
 		<meta property="og:description" content={description} />
@@ -95,7 +98,7 @@ const ogImage = new URL(ogPath(pathname), site.url).href
 	</head>
 	<body>
 		<a class="skip-link" href="#contenido">
-			Saltar al contenido
+			{t.skipLink}
 		</a>
 		<Header />
 		<main id="contenido">

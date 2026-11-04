@@ -37,6 +37,11 @@ Content-Type = "application/manifest+json"
 
 # El CV lleva el email en texto plano: se puede descargar, pero no se indexa
 [[headers]]
+for = "/cv"
+[headers.values]
+X-Robots-Tag = "noindex"
+
+[[headers]]
 for = "/cv/*"
 [headers.values]
 X-Robots-Tag = "noindex"
@@ -82,6 +87,12 @@ status = 301
 [[redirects]]
 from = "/portfolio/:slug"
 to = "/portfolio"
+status = 301
+
+# El CV se movió a /cv: con `es` como idioma por defecto, Astro marca /cv/es como 404
+[[redirects]]
+from = "/cv/es"
+to = "/cv"
 status = 301
 
 # Inglés: Fase 2

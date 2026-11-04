@@ -6,7 +6,6 @@ export const site = {
 	description:
 		'CTO en EpicDevs. Plataformas web, WordPress, JavaScript e IA en el trabajo diario del equipo. Hago sitios desde 2005 y vivo en Santander.',
 	url: 'https://ilanvivanco.com',
-	locale: 'es_ES',
 	location: 'Santander, Cantabria',
 
 	// Contacto

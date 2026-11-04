@@ -1,4 +1,4 @@
-// Genera el CV en PDF desde /cv/<idioma> del build. Uso: npm run cv:pdf [-- es en]
+// Genera el CV en PDF desde /cv o /<idioma>/cv del build. Uso: npm run cv:pdf [-- es en]
 // Sale a public/cv/ (para los próximos builds y `astro dev`) y a dist/cv/ (para este deploy).
 import { copyFile, mkdir } from 'node:fs/promises'
 import { chromium } from 'playwright'
@@ -19,8 +19,9 @@ try {
 	for (const lang of langs) {
 		const file = `ilan-vivanco-cv-${lang}.pdf`
 		const page = await browser.newPage()
-		const res = await page.goto(`${server.url}/cv/${lang}`, { waitUntil: 'networkidle' })
-		if (!res.ok()) throw new Error(`/cv/${lang} respondió ${res.status()}`)
+		const path = lang === 'es' ? '/cv' : `/${lang}/cv`
+		const res = await page.goto(`${server.url}${path}`, { waitUntil: 'networkidle' })
+		if (!res.ok()) throw new Error(`${path} respondió ${res.status()}`)
 		await page.evaluate(() => document.fonts.ready)
 		const title = await page.title()
 		await page.pdf({

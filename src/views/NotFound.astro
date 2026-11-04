@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro'
+import Icon from '../components/Icon.astro'
+import { ui } from '../i18n'
+
+const t = ui(Astro.currentLocale).notFound
+---
+
+<Base title={t.title} noindex>
+	<section class="section">
+		<div class="container stack" style="--gap: 24px">
+			<p class="fn">
+				<span class="arrow">-&gt;</span>error<span class="paren">(404)</span>
+				<span class="semi">;</span>
+			</p>
+			<h1 class="display">{t.heading}</h1>
+			<p class="lede">{t.lede}</p>
+			<a class="btn btn-primary" href="/" style="align-self: flex-start">
+				{t.home} <Icon name="arrow-right" />
+			</a>
+		</div>
+	</section>
+</Base>
