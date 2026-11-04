@@ -588,4 +588,3 @@ export const shotAlt = (p: Project, file: string) => {
 }
 
 export const studies = projects.filter((p) => p.study)
-export const allTags = [...new Set(projects.flatMap((p) => p.tags))]
