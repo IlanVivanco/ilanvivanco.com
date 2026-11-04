@@ -109,7 +109,7 @@ Terminal, formulario y filtro comparten `.win-frame`, `.win-bar`, `.win-title`, 
 
 En pantallas táctiles, al enfocar un campo del formulario, su pregunta sube hasta debajo del header para que el teclado no la tape.
 
-### Terminal del hero (`components/Terminal.astro` + `scripts/terminal.ts`)
+### Terminal del hero (`components/Terminal.astro` + `scripts/terminal.ts`, con las escenas en `scripts/terminal-<idioma>.ts`)
 - Barra estilo Windows Terminal: pestañas (`ilan.ts`, `git log`, `claude`) con barra de progreso a la izquierda, botón de pausa (solo ícono) y controles de ventana a la derecha (`WinControls`, decorativos). Cuerpo de alto fijo (sin CLS). Sin los 3 dots de Mac.
 - **Siempre `~/ilan`** como path.
 - Las escenas se "tipean": los prompts aparecen de una y se tipea solo el comando; las salidas se imprimen línea a línea. Hace auto-scroll como una terminal real.
@@ -219,6 +219,11 @@ Mono 0.8125rem, borde `--line-hi` y radio 999px. En el CV entran escalonados.
 - Español rioplatense con **voseo** ("contame", "escribime", "podés"), en primera persona y con verbos concretos. Sin superlativos vacíos ni "soluciones integrales".
 - Labels técnicos en minúscula y mono (`// en números`, `para EpicDevs`, `visita@ilan: ~/ilan`).
 - El posicionamiento es **CTO / Director of Engineering**: arquitectura, equipos remotos, WordPress como núcleo, JS moderno, IA en el flujo de ingeniería. No "diseñador".
+
+### Inglés
+- **Mismo tono que el español:** cercano, informal pero respetuoso, con humor técnico. La referencia es el copy del sitio, no los mails con clientes.
+- **Inglés de EE. UU.,** en primera persona (`I`, no `we`) y con contracciones. Frases cortas, cifras exactas y el razonamiento a la vista. Admite errores y límites sin vueltas.
+- **Los guiños se traducen.** Si uno no funciona en inglés, se adapta con datos reales. Las reglas del humor valen igual.
 
 ### Reglas del humor
 1. **Los datos son en serio; el humor está en cómo se cuentan.** Toda cifra o anécdota es real. Si es aproximada, se marca (`~`, `+`, `approx`). Nunca inventar datos personales para hacer un chiste.
