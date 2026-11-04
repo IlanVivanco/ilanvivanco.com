@@ -18,7 +18,7 @@ Hago sitios desde 2005 y trabajo con WordPress con regularidad desde al menos 20
 
 Si no sos del palo, vas a entender la mayor parte. El resto es culpa de los shortcodes.
 
-![Gráfico de barras con nueve eras de WordPress y sus años aproximados. Shortcodes y widgets, de 2008 a 2017. Customizer y menús, de 2010 a 2019. ACF fields y templates, de 2011 a 2020. ACF layouts, de 2013 a 2021. Builders con shortcodes, de 2011 a 2020. Builders de arrastrar y soltar, desde 2014. Gutenberg y ACF blocks, desde 2019. Block themes y FSE, desde 2022. Agentes, MCP y Abilities API, desde 2026. Las barras se superponen durante años. Nota al pie: fechas aproximadas, pueden variar según la herramienta, y no todo fue tan lineal.](/img/blog/dos-decadas-de-wordpress/rangos-eras.webp)
+![Gráfico de barras con nueve eras de WordPress y sus años aproximados. Shortcodes y widgets, de 2008 a 2017. Customizer y menús, de 2010 a 2019. ACF fields y templates, de 2011 a 2020. ACF layouts, de 2013 a 2021. Builders con shortcodes, de 2011 a 2020. Builders de arrastrar y soltar, desde 2014. Gutenberg y ACF blocks, desde 2019. Block themes y FSE, desde 2022. Agentes, MCP y Abilities API, desde 2026. Las barras se superponen durante años. Nota al pie: fechas aproximadas, pueden variar según la herramienta, y no todo fue tan lineal.](/img/blog/dos-decadas-de-wordpress/rangos-eras.webp "eager")
 
 ## Acto 1: se lo pedías a alguien
 

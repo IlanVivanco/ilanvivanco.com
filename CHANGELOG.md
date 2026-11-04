@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.6.2] - 2026-11-04
+
+### Corregido
+
+- El título de `/contacto` ya no entra con animación: en mobile era el LCP y lo retrasaba más de 1 s.
+- La primera imagen del post ya no carga con `lazy`: en desktop era el LCP.
+
 ## [2.6.1] - 2026-11-04
 
 ### Corregido

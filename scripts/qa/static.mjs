@@ -226,13 +226,13 @@ export async function runStaticChecks(log) {
 		const imgs = (html.match(/<img\b[^>]*>/g) ?? []).filter((i) => i.includes('/img/blog/'))
 		log(
 			imgs.every(
-				(i) =>
+				(i, n) =>
 					/\balt="[^"]+"/.test(i) &&
 					/\bwidth="\d+"/.test(i) &&
 					/\bheight="\d+"/.test(i) &&
-					/loading="lazy"/.test(i)
+					(n === 0 || /loading="lazy"/.test(i))
 			),
-			`/blog/${p.slug}: ${imgs.length} imágenes con alt, tamaño y lazy`
+			`/blog/${p.slug}: ${imgs.length} imágenes con alt y tamaño, y lazy desde la segunda`
 		)
 	}
 	const rss = read('rss.xml')
