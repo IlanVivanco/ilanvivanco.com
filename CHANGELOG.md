@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.6.4] - 2026-11-04
+
+### Cambiado
+
+- **CV, revisado contra LinkedIn:** el inicio en EpicDevs pasa a junio de 2015 y Freelance figura como remoto.
+- **Stack:** suma JetEngine, Gravity Forms, Yoast, Beaver Builder, Divi, Composer, Craft CMS, Drupal, Hugo, PrestaShop, IA generativa, Claude, Codex, CI/CD, Notion, Slack y herramientas de diseño, además de una categoría de equipo. Es una versión amplia, pendiente de revisión.
+
+### Corregido
+
+- **Construye Mundo** figura como voluntariado en `/curriculum` y en el PDF. La 2.2.1 lo anunciaba, pero el cambio no se había aplicado.
+
 ## [2.6.3] - 2026-11-04
 
 ### Corregido

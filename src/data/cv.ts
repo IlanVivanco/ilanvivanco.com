@@ -74,7 +74,7 @@ const es: Cv = {
 				},
 				{
 					title: 'Full-stack WordPress Developer',
-					start: '2015-08',
+					start: '2015-06',
 					end: '2018-03',
 					place: 'Puerto Madryn, Argentina',
 					highlights: [
@@ -85,8 +85,8 @@ const es: Cv = {
 		},
 		{
 			org: 'Construye Mundo ONGD',
-			meta: 'Freelance · Remoto',
-			location: 'Remoto',
+			meta: 'Voluntariado · Remoto',
+			location: 'Voluntariado · Remoto',
 			roles: [
 				{
 					title: 'WordPress Developer',
@@ -131,8 +131,8 @@ const es: Cv = {
 		},
 		{
 			org: 'Freelance',
-			meta: 'Buenos Aires · Remoto',
-			location: 'Buenos Aires · Remoto',
+			meta: 'Remoto',
+			location: 'Remoto',
 			roles: [
 				{
 					title: 'Full-stack Developer independiente',
@@ -201,7 +201,27 @@ const es: Cv = {
 	stack: [
 		{
 			group: 'Plataforma',
-			items: ['WordPress', 'Multisite', 'WooCommerce', 'Gutenberg', 'Elementor', 'ACF', 'PHP', 'MySQL', 'Laravel'],
+			items: [
+				'WordPress',
+				'Multisite',
+				'WooCommerce',
+				'Gutenberg',
+				'Elementor',
+				'ACF',
+				'JetEngine',
+				'Gravity Forms',
+				'Yoast',
+				'Beaver Builder',
+				'Divi',
+				'PHP',
+				'MySQL',
+				'Laravel',
+				'Composer',
+			],
+		},
+		{
+			group: 'Otros CMS',
+			items: ['Craft CMS', 'Drupal', 'Hugo', 'PrestaShop'],
 		},
 		{
 			group: 'Frontend',
@@ -222,12 +242,24 @@ const es: Cv = {
 			group: 'Backend e integraciones',
 			items: ['Node.js', 'REST APIs', 'n8n', 'Salesforce', 'Shopify', 'Stripe', 'PayPal', 'HubSpot', 'Supabase'],
 		},
-		{ group: 'IA', items: ['Agentes de código', 'MCP', 'QA asistido por IA', 'Automatizaciones'] },
+		{
+			group: 'IA',
+			items: [
+				'IA generativa',
+				'Agentes de código',
+				'Claude',
+				'Codex',
+				'MCP',
+				'QA asistido por IA',
+				'Automatizaciones',
+			],
+		},
 		{
 			group: 'Infra y flujo',
 			items: [
 				'Git',
 				'GitHub Actions',
+				'CI/CD',
 				'Docker',
 				'Bash',
 				'Cloudflare',
@@ -241,6 +273,11 @@ const es: Cv = {
 				'Railway',
 			],
 		},
+		{
+			group: 'Equipo',
+			items: ['Liderazgo de ingeniería', 'Equipos remotos', 'Planificación técnica', 'Notion', 'Slack'],
+		},
+		{ group: 'Diseño', items: ['Photoshop', 'Illustrator', 'InDesign', 'Adobe XD'] },
 	],
 
 	education: [

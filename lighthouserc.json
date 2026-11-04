@@ -6,6 +6,7 @@
 			"url": [
 				"http://localhost:8800/",
 				"http://localhost:8800/portfolio",
+				"http://localhost:8800/curriculum",
 				"http://localhost:8800/contacto",
 				"http://localhost:8800/blog",
 				"http://localhost:8800/blog/dos-decadas-de-wordpress",
