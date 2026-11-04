@@ -120,6 +120,11 @@ const range = `${Math.min(...years)}–${Math.max(...years)}`
 												Ver el caso <Icon name="arrow-up-right" size={16} />
 											</a>
 										)}
+										{p.post && (
+											<a class="btn btn-sm" href={p.post}>
+												Leer el post <Icon name="arrow-up-right" size={16} />
+											</a>
+										)}
 										{p.url && (
 											<a class="btn btn-sm" href={p.url} target="_blank" rel="noopener">
 												{p.urlLabel ?? 'Visitar el sitio'} <Icon name="arrow-up-right" size={16} />

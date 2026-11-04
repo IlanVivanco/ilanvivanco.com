@@ -42,7 +42,7 @@ Destinos: **conservado** (queda igual), **migrado** (pasa al sitio nuevo con cam
 | `/resume` | 404 | 301 → `/curriculum` | migrado |
 | `/contact`, `/contact-me` | 404 | 301 → `/contacto` | migrado |
 | `/portfolio/*` | 404 | 301 → `/portfolio` | migrado |
-| `/blog`, `/blog/*` | 200 / 404 | 301 → `/` | migrado |
+| `/blog`, `/blog/*` | 200 / 404 | 200 / 404 | recuperado |
 | `/en` | 200 | 301 → `/` | migrado |
 | `/en/about` | 200 | 301 → `/sobre-mi` | migrado |
 | `/en/resume` | 200 | 301 → `/curriculum` | migrado |
@@ -217,7 +217,7 @@ Quedan fuera de este PR porque son cambios en cuentas externas:
 
 - **Sitio en inglés:** i18n de Astro, con `es` por defecto sin prefijo y `en` en `/en/…`. Recupera `/en/about`, `/en/resume`, `/en/contact` y `/en/portfolio` (quitando sus 301) y suma `hreflang`.
 - **CV en inglés** con el mismo generador ATS. Base: `git show 979ff14:locales/en/positions.js`.
-- **Blog** con content collections y el tema de Prism `monokai-cotalpa` si hay código. Quita los 301 de `/blog*`.
+- **Tema de Prism `monokai-cotalpa` en el blog,** cuando un post lleve bloques de código.
 - **Portfolio actualizado** con proyectos y clientes actuales de EpicDevs, confirmando qué se puede mostrar públicamente, y capturas nuevas.
 - **Evaluar los proyectos del sitio viejo que no están en el nuevo.** Ninguno tiene descripción en `content/` ni en `locales/`: solo nombre, URL y captura.
 

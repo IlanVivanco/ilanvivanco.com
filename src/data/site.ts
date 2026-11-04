@@ -32,6 +32,7 @@ export const site = {
 		{ label: 'Hola', href: '/' },
 		{ label: 'Mi CV', href: '/curriculum' },
 		{ label: 'Trabajos', href: '/portfolio' },
+		{ label: 'Blog', href: '/blog' },
 		// En desktop lo cubre el botón Hablemos del header.
 		{ label: 'Contacto', href: '/contacto', mobileOnly: true },
 	],
