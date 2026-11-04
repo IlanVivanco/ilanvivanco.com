@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.0] - 2026-11-04
+
+### Agregado
+
+- **Doce proyectos nuevos en el portfolio,** entre ellos lakeFS y DVC, Barre Center for Buddhist Studies, Storyblocks, Syndigo, Women's Power Gap, MIT Sea Grant, Monokai Cotalpa y WordPress Deployment Action.
+- **Cómo trabajamos:** una fila sobre los procesos del equipo.
+
 ## [2.3.0] - 2026-11-04
 
 ### Cambiado
