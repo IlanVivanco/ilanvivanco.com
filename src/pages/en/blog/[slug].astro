@@ -1,0 +1,10 @@
+---
+import Post from '../../../views/Post.astro'
+import { postsFor, type Post as PostData } from '../../../data/posts'
+
+export const getStaticPaths = () => postsFor('en').map((post) => ({ params: { slug: post.slug }, props: { post } }))
+
+const { post } = Astro.props as { post: PostData }
+---
+
+<Post post={post} />

@@ -14,7 +14,9 @@
 				"http://localhost:8800/en",
 				"http://localhost:8800/en/contact",
 				"http://localhost:8800/en/portfolio",
-				"http://localhost:8800/en/portfolio/naropa"
+				"http://localhost:8800/en/portfolio/naropa",
+				"http://localhost:8800/en/blog",
+				"http://localhost:8800/en/blog/two-decades-of-wordpress"
 			],
 			"numberOfRuns": 3,
 			"settings": { "chromeFlags": "--no-sandbox" }

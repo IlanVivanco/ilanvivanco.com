@@ -92,6 +92,13 @@ export const en: typeof es = {
 		figures: 'By the numbers',
 		next: 'Next case',
 	},
+	blog: {
+		description:
+			'What I learned building for the web, mistakes included: WordPress, teams, deploys, and AI in everyday work.',
+		lede: 'What I learned building for the web, mistakes included.',
+		rss: "Ilán Vivanco's blog",
+		portrait: 'Portrait of Ilán Vivanco',
+	},
 	portfolio: {
 		fullTitle: "Ilán Vivanco's portfolio | Web platforms and WordPress",
 		description:

@@ -65,6 +65,13 @@ export const es = {
 		figures: 'En números',
 		next: 'Siguiente caso',
 	},
+	blog: {
+		description:
+			'Lo que aprendí construyendo para la web, con los errores incluidos: WordPress, equipos, deploys e IA en el trabajo de todos los días.',
+		lede: 'Lo que aprendí construyendo para la web, con los errores incluidos.',
+		rss: 'Blog de Ilán Vivanco',
+		portrait: 'Retrato de Ilán Vivanco',
+	},
 	portfolio: {
 		fullTitle: 'Portfolio de Ilán Vivanco | Plataformas web y WordPress',
 		description:

@@ -11,7 +11,7 @@ import { readFileSync } from 'node:fs'
 import { createRequire } from 'node:module'
 import { chromium } from 'playwright'
 import { emailFor } from '../../src/data/site.ts'
-import { posts } from '../../src/data/posts.ts'
+import { posts, postsFor } from '../../src/data/posts.ts'
 import { studiesFor } from '../../src/data/projects.ts'
 import { serveDist } from '../lib/serve-dist.mjs'
 import { runAnalyticsChecks } from './analytics.mjs'
@@ -37,6 +37,8 @@ const PAGES = [
 	'/en/portfolio',
 	'/en/contact',
 	...studiesFor('en').map((p) => `/en/portfolio/${p.slug}`),
+	'/en/blog',
+	...postsFor('en').map((p) => `/en/blog/${p.slug}`),
 	'/en/404',
 	'/privacidad',
 	'/404',

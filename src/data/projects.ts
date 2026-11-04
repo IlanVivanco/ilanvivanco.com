@@ -906,6 +906,7 @@ const enText: Record<string, Pick<Project, 'period' | 'role' | 'description' | '
 	},
 	'como-trabajamos': {
 		name: 'How we work',
+		post: '/en/blog/two-decades-of-wordpress',
 		urlLabel: 'See the GitHub Action',
 		period: '2017 to today',
 		role: 'I defined the processes and guided the team',
