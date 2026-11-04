@@ -25,6 +25,7 @@ npm run og:images  # regenera las imágenes OG sobre el último build
 npm run preview    # sirve dist/
 npm run qa         # build + todos los chequeos
 npm run lighthouse # Lighthouse en mobile y desktop sobre el último build; no corre en el CI
+npm run psi        # PageSpeed Insights sobre producción; requiere PSI_API_KEY en .env
 ```
 
 `npm run qa` verifica, en desktop y mobile: axe (WCAG 2.2 AA), scroll horizontal y consola. También comprueba el email ofuscado, el formulario, los redirects, el SEO, el peso de JS, el beacon de analytics y el CV para ATS.

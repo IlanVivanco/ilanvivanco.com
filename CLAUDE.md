@@ -24,6 +24,7 @@ npm run preview    # sirve dist/
 npm run format     # Prettier: todo el código, con la misma config que el editor
 npm run qa         # build + axe, overflow y consola (desktop y mobile) + email, form, redirects, SEO, peso, analytics y CV
 npm run lighthouse # Lighthouse en mobile y desktop sobre el último build
+npm run psi        # PageSpeed Insights sobre producción (PSI_API_KEY en .env); npm run psi -- /contacto para una página
 npx playwright install chromium   # una vez: lo usan el build, el QA y Lighthouse
 ```
 
@@ -57,9 +58,9 @@ netlify.toml          build, redirects y cabeceras
 2. **Presupuestos (no negociables):**
    - Lighthouse 99+ en las 4 categorías, en mobile y desktop.
    - JS propio ≤ 10 KB gz por página (hoy, 7,5 KB en la home). El beacon de Cloudflare es de terceros, pesa unos 10 KB gz y se carga diferido.
-   - CLS 0.
+   - CLS ≤ 0,1. Con la fuente en caché da 0; si llega tarde, un párrafo puede cambiar de renglón (hasta ~0,01).
    - `npm run qa` en verde.
-   - **Lighthouse se mide en local, no en el CI:** `npm run lighthouse` antes de pushear o, como tarde, antes de mergear, si el cambio toca performance, assets, JS, CSS o el markup de una página. El 99+ se confirma en producción con PageSpeed Insights después del merge: desde una máquina propia, Cloudflare inyecta un script que baja Best Practices a 81.
+   - **Lighthouse se mide en local, no en el CI:** `npm run lighthouse` antes de pushear o, como tarde, antes de mergear, si el cambio toca performance, assets, JS, CSS o el markup de una página. El 99+ se confirma en producción con `npm run psi` después del merge: desde una máquina propia, Cloudflare inyecta un script que baja Best Practices a 81.
 3. **Accesibilidad:** elementos semánticos reales, foco visible, contraste medido con los tokens, `prefers-reduced-motion` respetado, contenido que rota con forma de pausarlo (WCAG 2.2.2). Checklist en `DESIGN.md §9`.
 4. **Animaciones de entrada con la propiedad `translate`**, nunca `transform`, sobre elementos que puedan ser `.card` (la perspectiva usa `transform`).
 5. **Botones:** nunca pisar `.btn` desde estilos locales. En prosa, usar `a:not(.btn)`.
@@ -107,7 +108,7 @@ Muestra de cómo escribe Ilán:
 2. `npm run qa` en verde.
 3. Revisión visual en 1440 px y 390 px, con interacciones: hover de tarjetas, filtro del portfolio, formulario completo por teclado, cambio de página.
 4. Si se tocó JS: medir el peso gz de `dist/_astro/*.js` y del JS inline de la home.
-5. Si se tocó performance, assets, JS, CSS o markup: `npm run lighthouse`, con la página afectada en `lighthouserc.json`. Comprobar en PageSpeed Insights después del merge.
+5. Si se tocó performance, assets, JS, CSS o markup: `npm run lighthouse`, con la página afectada en `lighthouserc.json`. Comprobar con `npm run psi` después del merge.
 
 ## Git
 
