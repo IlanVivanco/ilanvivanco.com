@@ -6,6 +6,7 @@ import { createRequire } from 'node:module'
 import { PDFDocument, PDFName } from 'pdf-lib'
 import { cv, cvLabels, atsPeriod } from '../../src/data/cv.ts'
 import { publicPages, ogPath } from '../../src/data/pages.ts'
+import { posts } from '../../src/data/posts.ts'
 import { site, statScreens } from '../../src/data/site.ts'
 import { parsePost } from '../lib/instagram-post.mjs'
 
@@ -30,8 +31,6 @@ const REDIRECTS = {
 	'/contact': '/contacto',
 	'/contact-me': '/contacto',
 	'/portfolio/:slug': '/portfolio',
-	'/blog': '/',
-	'/blog/*': '/',
 	'/en': '/',
 	'/en/*': '/',
 	'/en/about': '/sobre-mi',
@@ -168,8 +167,8 @@ export async function runStaticChecks(log) {
 	log(
 		htmlFiles()
 			.filter((f) => !f.startsWith('cv/'))
-			.every((f) => !/<img\b(?![^>]*\bsrcset=)[^>]*\bsrc="\/img\/(?:projects|instagram)\//.test(read(f))),
-		'fotos de proyectos e Instagram con srcset'
+			.every((f) => !/<img\b(?![^>]*\bsrcset=)[^>]*\bsrc="\/img\/(?:projects|instagram|blog)\//.test(read(f))),
+		'fotos de proyectos, Instagram y blog con srcset'
 	)
 	const cvPage = read('curriculum.html')
 	const techItems = cvPage.match(/<li[^>]*class="tech-item[^>]*>.*?<\/li>/gs) ?? []
@@ -209,6 +208,38 @@ export async function runStaticChecks(log) {
 				.filter((f) => !f.startsWith('cv/'))
 				.every((f) => !read(f).includes('href="/cv/es"')),
 		'sin links a /cv/es desde el sitio'
+	)
+
+	// Blog: los metadatos están en posts.ts y el cuerpo, en la collection
+	const bodies = readdirSync('src/content/blog').map((f) => f.replace(/\.md$/, ''))
+	log(
+		bodies.length === posts.length && posts.every((p) => bodies.includes(p.slug)),
+		'cada post de posts.ts tiene su .md, y al revés'
+	)
+	for (const p of posts) {
+		const html = read(`blog/${p.slug}.html`)
+		const graph = JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)[1])['@graph']
+		log(
+			graph.some((n) => n.mainEntity?.['@type'] === 'BlogPosting' && n.mainEntity.datePublished === p.date),
+			`/blog/${p.slug} BlogPosting con su fecha`
+		)
+		log(!/notion\.(?:com|so)/.test(html), `/blog/${p.slug} sin links de Notion`)
+		const imgs = html.match(/<img\b[^>]*>/g) ?? []
+		log(
+			imgs.every(
+				(i) =>
+					/\balt="[^"]+"/.test(i) &&
+					/\bwidth="\d+"/.test(i) &&
+					/\bheight="\d+"/.test(i) &&
+					/loading="lazy"/.test(i)
+			),
+			`/blog/${p.slug}: ${imgs.length} imágenes con alt, tamaño y lazy`
+		)
+	}
+	const rss = read('rss.xml')
+	log(
+		posts.every((p) => rss.includes(`<link>${new URL(`/blog/${p.slug}`, site.url).href}</link>`)),
+		'RSS con todos los posts'
 	)
 
 	// Redirects
