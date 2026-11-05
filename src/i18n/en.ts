@@ -87,6 +87,7 @@ export const en: typeof es = {
 	study: {
 		back: 'work',
 		role: 'My role',
+		agency: 'Agency',
 		start: 'The starting point',
 		steps: 'What we did',
 		figures: 'By the numbers',
@@ -120,6 +121,8 @@ export const en: typeof es = {
 		study: 'See the case',
 		post: 'Read the post',
 		visit: 'Visit the site',
+		agencyVia: 'As part of',
+		agency: { epicdevs: 'EpicDevs', ntm: 'Networks That Matter, now EpicDevs' },
 	},
 	contactPage: {
 		title: 'Contact',

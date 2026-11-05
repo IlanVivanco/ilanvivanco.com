@@ -70,7 +70,7 @@ export const publicPages: PublicPage[] = [
 		fn: 'portfolio',
 		title: 'Work',
 		subtitle: 'Web platforms and WordPress',
-		updated: '2026-11-04',
+		updated: '2026-11-05',
 	},
 	{
 		path: '/en/contact',
@@ -110,7 +110,7 @@ export const publicPages: PublicPage[] = [
 		fn: 'portfolio',
 		title: 'Trabajos',
 		subtitle: 'Plataformas y sitios en producción',
-		updated: '2026-11-04',
+		updated: '2026-11-05',
 	},
 	{
 		path: '/blog',
@@ -165,7 +165,7 @@ publicPages.push(
 		fn: p.slug.replace(/-/g, '_'),
 		title: p.name,
 		subtitle: p.study!.tagline,
-		updated: '2026-11-04',
+		updated: '2026-11-05',
 	})),
 	...studiesFor('es').map((p) => ({
 		path: `/portfolio/${p.slug}`,
@@ -175,7 +175,7 @@ publicPages.push(
 		fn: p.slug.replace(/-/g, '_'),
 		title: p.name,
 		subtitle: p.study!.tagline,
-		updated: '2026-11-04',
+		updated: '2026-11-05',
 	}))
 )
 

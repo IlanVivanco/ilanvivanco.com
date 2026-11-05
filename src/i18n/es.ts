@@ -60,6 +60,7 @@ export const es = {
 	study: {
 		back: 'trabajos',
 		role: 'Mi rol',
+		agency: 'Agencia',
 		start: 'El punto de partida',
 		steps: 'Qué hicimos',
 		figures: 'En números',
@@ -93,6 +94,8 @@ export const es = {
 		study: 'Ver el caso',
 		post: 'Leer el post',
 		visit: 'Visitar el sitio',
+		agencyVia: 'Como parte de',
+		agency: { epicdevs: 'EpicDevs', ntm: 'Networks That Matter, hoy EpicDevs' },
 	},
 	contactPage: {
 		title: 'Contacto',

@@ -26,6 +26,7 @@ export type Project = {
 	date: string // YYYY-MM: orden y rango del índice
 	period: string // lo que se muestra
 	role: string
+	agency?: 'epicdevs' | 'ntm' // la agencia por la que lo hice, según cuándo empezó
 	description: string
 	tags: string[]
 	featured?: boolean // el que se destaca en la home
@@ -43,6 +44,7 @@ const es: Project[] = [
 		date: '2025-08',
 		period: 'desde 2025',
 		role: 'Tech lead y PM. Planifiqué el proyecto y armé la extracción de datos y el importador del catálogo.',
+		agency: 'epicdevs',
 		description:
 			'Contenido en WordPress, catálogo en Craft y venta en Shopify. Los unimos en un solo sitio nuevo, sin sacar a Shopify de la venta.',
 		tags: ['Case study', 'WordPress', 'Shopify', 'Migración', 'Integración'],
@@ -91,6 +93,7 @@ const es: Project[] = [
 		date: '2022-04',
 		period: 'desde 2022',
 		role: 'CTO / Director of Engineering. Arquitectura, auditorías y dirección técnica.',
+		agency: 'epicdevs',
 		description:
 			'Sitio, catálogo académico, eventos y publicaciones de una universidad. Lo recibimos de otro proveedor en 2022 y lo seguimos construyendo junto a su equipo.',
 		tags: ['Case study', 'WordPress', 'Elementor', 'Migración', 'Integración'],
@@ -145,6 +148,7 @@ const es: Project[] = [
 		date: '2022-08',
 		period: '2022 a 2025',
 		role: 'Líder técnico y contacto técnico. Base del theme y plan de migración.',
+		agency: 'epicdevs',
 		description:
 			'Un sitio heredado y una marca más por cada adquisición. Lo reconstruimos por fases, mientras las otras marcas pasaban a un solo lugar.',
 		tags: ['Case study', 'WordPress', 'Elementor', 'Migración'],
@@ -180,6 +184,7 @@ const es: Project[] = [
 		date: '2019-10',
 		period: 'desde 2019',
 		role: 'Líder técnico. Arquitectura, planificación y coordinación del equipo de desarrollo.',
+		agency: 'epicdevs',
 		description:
 			'Una red de guías locales de planes para chicos, proyecto propio de EpicDevs. Empezó como un solo sitio y hoy cubre 21 ciudades.',
 		tags: ['Case study', 'WordPress', 'Multisite', 'Migración'],
@@ -220,6 +225,7 @@ const es: Project[] = [
 		date: '2017-11',
 		period: '2017 a 2020',
 		role: 'Team lead y dev principal. Arquitecto del importador.',
+		agency: 'ntm',
 		description:
 			'Miles de cursos repartidos en XML de distintos equipos, convertidos en un catálogo en WordPress que recibía datos nuevos cada mes sin duplicar inventario.',
 		tags: ['Case study', 'WordPress', 'Migración', 'Integración', 'WP Plugin'],
@@ -264,6 +270,7 @@ const es: Project[] = [
 		date: '2022-10',
 		period: '2022 a 2025',
 		role: 'Tech lead y arquitecto.',
+		agency: 'epicdevs',
 		description:
 			'Una biblioteca de research paga, de Drupal a WordPress, con acceso por suscripción y conexión a Salesforce. Salió el mismo día que la marca nueva.',
 		tags: ['Case study', 'WordPress', 'Salesforce', 'Migración', 'Integración'],
@@ -305,6 +312,7 @@ const es: Project[] = [
 		date: '2025-01',
 		period: 'desde 2025',
 		role: 'Arquitecto y tech lead, autor de las auditorías.',
+		agency: 'epicdevs',
 		description:
 			'La plataforma WordPress de una universidad: la auditamos de punta a punta, construimos un block theme para los sitios nuevos y seguimos con los actuales.',
 		tags: ['Case study', 'WordPress', 'Gutenberg', 'Multisite'],
@@ -389,6 +397,7 @@ const es: Project[] = [
 		date: '2019-11',
 		period: '2019 a 2026',
 		role: 'Team lead, arquitecto y contacto técnico',
+		agency: 'ntm',
 		description:
 			'Migración del sitio de Hugo a WordPress, con importador propio desde Markdown y las URLs del blog conservadas, para que marketing pudiera editar sin depender de desarrollo. Después, varios años ampliando su ecosistema de sitios. En 2026, Camunda pasó a otra plataforma.',
 		tags: ['WordPress', 'Migración', 'WP Plugin'],
@@ -402,6 +411,7 @@ const es: Project[] = [
 		date: '2017-01',
 		period: '2017 a hoy',
 		role: 'Definí los procesos y guié al equipo',
+		agency: 'epicdevs',
 		description:
 			'Lo que hay debajo de todos los proyectos: Git y flujos por entorno, una GitHub Action pública para los deploys, themes y plugins base en cada etapa, conocimiento en Notion y un protocolo de incidentes.',
 		tags: ['Procesos', 'Equipo', 'CI/CD'],
@@ -414,6 +424,7 @@ const es: Project[] = [
 		date: '2025-10',
 		period: '2025 a hoy',
 		role: 'Arquitectura y estimación en DVC; cuenta y dirección en lakeFS',
+		agency: 'epicdevs',
 		description:
 			'Migramos dvc.org de Gatsby a WordPress, con un importador de contenido propio y templates para cada tipo de página. Del mismo cliente heredamos el sitio de lakeFS y lo pusimos a punto: redirecciones, sitemaps, datos estructurados y templates modulares.',
 		tags: ['WordPress', 'Migración'],
@@ -426,6 +437,7 @@ const es: Project[] = [
 		date: '2024-02',
 		period: '2024 a hoy',
 		role: 'Tech lead y PM del lado web',
+		agency: 'epicdevs',
 		description:
 			'Implementamos el sitio nuevo, con cursos, docentes y programas sincronizados desde Salesforce hacia WordPress. Planificamos la migración del sitio anterior y sumamos calendario con filtros y buscadores.',
 		tags: ['WordPress', 'Salesforce', 'Migración', 'Integración'],
@@ -438,6 +450,7 @@ const es: Project[] = [
 		date: '2023-12',
 		period: '2023 a 2026',
 		role: 'Lead técnico y desarrollo',
+		agency: 'epicdevs',
 		description:
 			'Construimos el Resource Center en WordPress, servido bajo /resources del dominio principal mediante un proxy reverso. Planificamos la migración del blog y los casos de estudio, con redirecciones para mantener las URLs.',
 		tags: ['WordPress', 'Migración'],
@@ -450,6 +463,7 @@ const es: Project[] = [
 		date: '2025-02',
 		period: '2025 a hoy',
 		role: 'PM y lead, con desarrollo en entregas puntuales',
+		agency: 'epicdevs',
 		description:
 			'Coordinamos e implementamos el rediseño sobre un theme propio. Planificamos el nuevo sitemap, sumamos Careers y eventos, y adaptamos el sitio a la localización en varios idiomas.',
 		tags: ['WordPress', 'Rediseño', 'Localización'],
@@ -462,6 +476,7 @@ const es: Project[] = [
 		date: '2021-02',
 		period: '2021 a 2023',
 		role: 'Líder técnico y autor de la tabla dinámica',
+		agency: 'epicdevs',
 		description:
 			'Integré una API de datos de terceros con WordPress mediante un plugin propio, con una capa de caché. Armé en Vue un visualizador de tablas dinámico, con búsqueda, que acompañó nuevos reportes a medida que se publicaban.',
 		tags: ['WordPress', 'Vue', 'Integración', 'WP Plugin'],
@@ -474,6 +489,7 @@ const es: Project[] = [
 		date: '2020-05',
 		period: '2020',
 		role: 'Developer principal del plugin',
+		agency: 'ntm',
 		description:
 			'Mi primer proyecto con Vue, en plena pandemia: en dos semanas desarrollé un sistema de turnos integrado por API, para que los pacientes eligieran sede, motivo y horario sin salir del sitio.',
 		tags: ['WordPress', 'Vue', 'Integración', 'WP Plugin'],
@@ -497,6 +513,7 @@ const es: Project[] = [
 		date: '2020-03',
 		period: '2020 a 2021, con mantenimiento posterior',
 		role: 'Team lead',
+		agency: 'ntm',
 		description:
 			'Lideré el equipo técnico de una plataforma para financiar conciertos virtuales, planificada y lanzada a contrarreloj durante la pandemia. Sumamos pagos divididos con PayPal, chat en eventos e integraciones de video.',
 		tags: ['WordPress', 'WP Plugin', 'Integración'],
@@ -509,6 +526,7 @@ const es: Project[] = [
 		date: '2018-03',
 		period: '2018 a 2023',
 		role: 'Developer principal',
+		agency: 'ntm',
 		description:
 			'Implementé un sitio institucional a partir de un diseño de terceros, sobre la infraestructura del MIT. Armé el theme y los campos personalizados, planifiqué la importación masiva de noticias y proyectos, y después me ocupé del mantenimiento.',
 		tags: ['WordPress', 'Migración'],
@@ -521,6 +539,7 @@ const es: Project[] = [
 		date: '2024-12',
 		period: '2024 a 2025',
 		role: 'Líder técnico y PM',
+		agency: 'epicdevs',
 		description:
 			'El sitio de Mobius, que brinda atención médica personalizada y gestión de riesgos médicos a family offices, empresas y programas marítimos. Una estructura simple y clara para un público de alto perfil, sobre un theme propio.',
 		tags: ['WordPress', 'Institucional'],

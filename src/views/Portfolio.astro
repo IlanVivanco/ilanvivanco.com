@@ -112,6 +112,15 @@ const range = `${Math.min(...years)}–${Math.max(...years)}`
 									<p class="mono row-meta">
 										{p.period} · <span class="client">{p.role}</span>
 									</p>
+									{p.agency && (
+										<p class="mono row-meta">
+											{t.agencyVia}{' '}
+											<a class="link" href="https://epicdevs.com" target="_blank" rel="noopener">
+												{t.agency[p.agency]}
+												<span class="sr-only">{externalNote}</span>
+											</a>
+										</p>
+									)}
 									<p class="row-desc">{p.description}</p>
 									<ul class="tags" role="list">
 										{p.tags.map((t) => (

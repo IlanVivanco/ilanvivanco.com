@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.10.0] - 2026-11-05
+
+### Agregado
+
+- **Portfolio y case studies:** cada proyecto hecho por agencia lo indica, con EpicDevs o con Networks That Matter, hoy EpicDevs.
+
 ## [2.9.0] - 2026-11-05
 
 ### Agregado

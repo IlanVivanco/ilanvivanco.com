@@ -50,6 +50,17 @@ const fn = p.slug.replace(/-/g, '_')
 					<dt class="mono">{t.role}</dt>
 					<dd>{p.role}</dd>
 				</div>
+				{p.agency && (
+					<div>
+						<dt class="mono">{t.agency}</dt>
+						<dd>
+							<a class="link" href="https://epicdevs.com" target="_blank" rel="noopener">
+								{portfolio.agency[p.agency]}
+								<span class="sr-only">{externalNote}</span>
+							</a>
+						</dd>
+					</div>
+				)}
 				<div>
 					<dt class="mono">Stack</dt>
 					<dd>{s.stack.join(', ')}</dd>
