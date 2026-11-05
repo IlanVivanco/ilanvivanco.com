@@ -50,8 +50,6 @@ const { zoom } = ui(Astro.currentLocale)
 				.catch(() => {})
 			dialog.toggleAttribute('data-single', group.length < 2)
 			count.textContent = group.length > 1 ? `${index + 1} / ${group.length}` : ''
-			// Con scroll horizontal (celular vertical), arranca centrada
-			dialog.scrollLeft = (dialog.scrollWidth - dialog.clientWidth) / 2
 		}
 
 		document.addEventListener('click', (e) => {
@@ -184,15 +182,23 @@ const { zoom } = ui(Astro.currentLocale)
 			bottom: 28px;
 		}
 	}
-	@media (max-width: 860px) and (orientation: portrait) {
+	/* Pantallas bajas (celular horizontal): las flechas a los costados y la imagen a todo el alto */
+	@media (max-height: 500px) {
 		.zoom-dialog {
-			justify-items: start;
-			overflow-x: auto;
+			padding: 12px 72px;
 		}
 		.zoom-dialog img {
-			width: 200vw;
-			max-width: none;
-			max-height: none;
+			max-height: calc(100dvh - 24px);
+		}
+		.zoom-nav {
+			top: 50%;
+			bottom: auto;
+			translate: 0 -50%;
+		}
+		.zoom-count {
+			bottom: 8px;
+			left: 36px;
+			translate: -50% 0;
 		}
 	}
 	@media (prefers-reduced-motion: no-preference) {

@@ -630,9 +630,8 @@ const shotText = {
 		pages: {} as Record<string, string>,
 	},
 }
-// Las capturas extra de una fila: su galería o, en los case studies, las de su página.
-export const galleryFor = (p: Project) =>
-	p.gallery ?? (p.study && [p.study.hero, ...p.study.steps.flatMap((step) => (step.shot ? [step.shot] : []))])
+// Las capturas extra de una fila: su galería o, en los case studies, las de sus pasos (la hero es la portada).
+export const galleryFor = (p: Project) => p.gallery ?? p.study?.steps.flatMap((step) => (step.shot ? [step.shot] : []))
 
 export const shotAlt = (p: Project, file: string, locale?: string) => {
 	const { shot, kinds, pages } = byLang(shotText, locale)

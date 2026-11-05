@@ -6,7 +6,7 @@
 
 - **Portfolio y case studies:** cada proyecto hecho por agencia lo indica, con EpicDevs o con Networks That Matter, hoy EpicDevs.
 - **Capturas ampliables** en el portfolio y en los case studies: se abren en un `<dialog>`, se pasan con las flechas o el teclado y, sin JS, el link lleva a la imagen.
-- **Índice del portfolio:** los case studies muestran todas sus capturas en la fila, no solo la portada.
+- **Índice del portfolio:** los case studies muestran en la fila las capturas de sus pasos, además de la portada.
 
 ## [2.9.0] - 2026-11-05
 
