@@ -8,22 +8,32 @@ const { zoom } = ui(Astro.currentLocale)
 
 <dialog class="zoom-dialog" data-zoom-dialog aria-label={zoom.label}>
 	<img alt="" decoding="async" />
-	<button type="button" class="zoom-close" aria-label={zoom.close}>
+	<button type="button" class="zoom-btn zoom-close" aria-label={zoom.close}>
 		<Icon name="x" size={20} />
 	</button>
+	<button type="button" class="zoom-btn zoom-nav zoom-prev" data-zoom-step="-1" aria-label={zoom.prev}>
+		<Icon name="arrow-right" size={20} />
+	</button>
+	<button type="button" class="zoom-btn zoom-nav zoom-next" data-zoom-step="1" aria-label={zoom.next}>
+		<Icon name="arrow-right" size={20} />
+	</button>
+	<p class="zoom-count mono" aria-live="polite"></p>
 </dialog>
 
 <script>
 	const dialog = document.querySelector<HTMLDialogElement>('[data-zoom-dialog]')
 	const big = dialog?.querySelector('img')
+	const count = dialog?.querySelector<HTMLElement>('.zoom-count')
 
-	if (dialog && big) {
+	if (dialog && big && count) {
 		let token = 0
-		document.addEventListener('click', (e) => {
-			const link = (e.target as Element).closest<HTMLAnchorElement>('a[data-zoom]')
-			const thumb = link?.querySelector('img')
-			if (!link || !thumb || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
-			e.preventDefault()
+		let group: HTMLAnchorElement[] = []
+		let index = 0
+
+		const show = (i: number) => {
+			index = (i + group.length) % group.length
+			const link = group[index]
+			const thumb = link.querySelector('img')!
 			const id = ++token
 			// Primero la miniatura que ya está cargada; cuando llega, la original
 			big.width = Number(thumb.getAttribute('width'))
@@ -38,12 +48,35 @@ const { zoom } = ui(Astro.currentLocale)
 					if (id === token && dialog.open) big.src = link.href
 				})
 				.catch(() => {})
-			dialog.showModal()
+			dialog.toggleAttribute('data-single', group.length < 2)
+			count.textContent = group.length > 1 ? `${index + 1} / ${group.length}` : ''
 			// Con scroll horizontal (celular vertical), arranca centrada
 			dialog.scrollLeft = (dialog.scrollWidth - dialog.clientWidth) / 2
+		}
+
+		document.addEventListener('click', (e) => {
+			const link = (e.target as Element).closest<HTMLAnchorElement>('a[data-zoom]')
+			if (!link?.querySelector('img') || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
+			e.preventDefault()
+			// Las capturas del mismo proyecto (data-zoom-group) o, si no hay grupo, las de la página
+			const scope = link.closest('[data-zoom-group]') ?? document
+			group = [...scope.querySelectorAll<HTMLAnchorElement>('a[data-zoom]')]
+			dialog.showModal()
+			show(group.indexOf(link))
 		})
-		// Cualquier click adentro cierra: la imagen, el fondo o el botón
-		dialog.addEventListener('click', () => dialog.close())
+		dialog.addEventListener('keydown', (e) => {
+			if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return
+			e.preventDefault()
+			show(index + (e.key === 'ArrowRight' ? 1 : -1))
+		})
+		// Las flechas pasan de captura; cualquier otro click cierra: la imagen, el fondo o la ✕
+		dialog.addEventListener('click', (e) => {
+			const step = (e.target as Element).closest<HTMLElement>('[data-zoom-step]')
+			if (step) show(index + Number(step.dataset.zoomStep))
+			else dialog.close()
+		})
+		// Al cerrar, el foco vuelve a la última captura vista, sin mover la página
+		dialog.addEventListener('close', () => group[index]?.focus({ preventScroll: true }))
 	}
 </script>
 
@@ -68,7 +101,8 @@ const { zoom } = ui(Astro.currentLocale)
 		max-width: none;
 		max-height: none;
 		margin: 0;
-		padding: 20px;
+		/* Lugar para la ✕ y el contador (arriba y abajo) y para las flechas (a los costados) */
+		padding: 64px 76px;
 		border: 0;
 		background: transparent;
 		place-items: center;
@@ -85,14 +119,12 @@ const { zoom } = ui(Astro.currentLocale)
 		width: auto;
 		height: auto;
 		max-width: min(100%, 1440px);
-		max-height: calc(100dvh - 40px);
+		max-height: calc(100dvh - 128px);
 		border: 1px solid var(--line-hi);
 		border-radius: 12px;
 	}
-	.zoom-close {
+	.zoom-btn {
 		position: fixed;
-		top: 16px;
-		right: 16px;
 		display: grid;
 		place-items: center;
 		width: 44px;
@@ -103,10 +135,55 @@ const { zoom } = ui(Astro.currentLocale)
 		color: var(--text);
 		cursor: pointer;
 	}
-	.zoom-close:hover {
+	.zoom-btn:hover {
 		border-color: var(--text-soft);
 	}
-	/* En un celular vertical, al doble de ancho y con scroll horizontal: si no, casi no se agranda */
+	.zoom-close {
+		top: 16px;
+		right: 16px;
+	}
+	.zoom-nav {
+		top: 50%;
+		translate: 0 -50%;
+	}
+	.zoom-prev {
+		left: 16px;
+	}
+	.zoom-prev :global(svg) {
+		scale: -1 1;
+	}
+	.zoom-next {
+		right: 16px;
+	}
+	.zoom-dialog[data-single] .zoom-nav {
+		display: none;
+	}
+	.zoom-count {
+		position: fixed;
+		bottom: 16px;
+		left: 50%;
+		translate: -50% 0;
+		margin: 0;
+		font-size: 0.8125rem;
+		color: var(--text-soft);
+	}
+	/* En mobile, las flechas abajo, a los costados del contador */
+	@media (max-width: 860px) {
+		.zoom-dialog {
+			padding: 72px 20px 84px;
+		}
+		.zoom-dialog img {
+			max-height: calc(100dvh - 156px);
+		}
+		.zoom-nav {
+			top: auto;
+			bottom: 16px;
+			translate: none;
+		}
+		.zoom-count {
+			bottom: 28px;
+		}
+	}
 	@media (max-width: 860px) and (orientation: portrait) {
 		.zoom-dialog {
 			justify-items: start;

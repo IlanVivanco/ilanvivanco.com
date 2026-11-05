@@ -23,7 +23,13 @@ export const es = {
 		privacyLang: undefined as string | undefined,
 	},
 	externalNote: ' (abre en otra pestaña)',
-	zoom: { open: ' (ampliar)', close: 'Cerrar', label: 'Captura ampliada' },
+	zoom: {
+		open: ' (ampliar)',
+		close: 'Cerrar',
+		label: 'Captura ampliada',
+		prev: 'Captura anterior',
+		next: 'Captura siguiente',
+	},
 	stats: {
 		heading: 'En números',
 		group: 'Elegir grupo de cifras',

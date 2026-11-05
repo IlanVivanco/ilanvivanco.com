@@ -25,7 +25,13 @@ export const en: typeof es = {
 		privacyLang: 'es',
 	},
 	externalNote: ' (opens in a new tab)',
-	zoom: { open: ' (enlarge)', close: 'Close', label: 'Enlarged screenshot' },
+	zoom: {
+		open: ' (enlarge)',
+		close: 'Close',
+		label: 'Enlarged screenshot',
+		prev: 'Previous screenshot',
+		next: 'Next screenshot',
+	},
 	stats: {
 		heading: 'By the numbers',
 		group: 'Choose a group of numbers',

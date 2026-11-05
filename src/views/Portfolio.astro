@@ -13,6 +13,7 @@ import {
 	imageSrcset,
 	imageVariant,
 	shotAlt,
+	galleryFor,
 	shotPath,
 	shotSrcset,
 } from '../data/projects'
@@ -98,7 +99,7 @@ const range = `${Math.min(...years)}–${Math.max(...years)}`
 									<i></i>
 								</span>
 							</summary>
-							<div class="row-body">
+							<div class="row-body" data-zoom-group>
 								<a class="zoom" href={imageFor(p)} data-zoom>
 									<img
 										src={imageFor(p)}
@@ -150,9 +151,9 @@ const range = `${Math.min(...years)}–${Math.max(...years)}`
 										)}
 									</div>
 								</div>
-								{p.gallery && (
+								{galleryFor(p) && (
 									<div class="row-gallery">
-										{p.gallery.map((file) => (
+										{galleryFor(p)!.map((file) => (
 											<a class="zoom" href={shotPath(p, file)} data-zoom>
 												<img
 													src={shotPath(p, file)}
