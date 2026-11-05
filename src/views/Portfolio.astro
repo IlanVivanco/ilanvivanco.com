@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro'
 import Fn from '../components/Fn.astro'
 import Icon from '../components/Icon.astro'
 import WinControls from '../components/WinControls.astro'
+import Zoom from '../components/Zoom.astro'
 import { portfolioList } from '../lib/schema'
 import { ui } from '../i18n'
 import {
@@ -12,6 +13,7 @@ import {
 	imageSrcset,
 	imageVariant,
 	shotAlt,
+	galleryFor,
 	shotPath,
 	shotSrcset,
 } from '../data/projects'
@@ -20,7 +22,7 @@ const lang = Astro.currentLocale
 const projects = projectsFor(lang)
 const t = ui(lang).portfolio
 const { filters } = t
-const { card, externalNote } = ui(lang)
+const { card, externalNote, zoom } = ui(lang)
 const years = projects.map((p) => Number(p.date.slice(0, 4)))
 const range = `${Math.min(...years)}–${Math.max(...years)}`
 ---
@@ -97,21 +99,33 @@ const range = `${Math.min(...years)}–${Math.max(...years)}`
 									<i></i>
 								</span>
 							</summary>
-							<div class="row-body">
-								<img
-									src={imageFor(p)}
-									srcset={imageSrcset(p)}
-									sizes="(max-width: 860px) calc(100vw - 40px), 560px"
-									alt={`${card.shot} ${p.name}`}
-									loading="lazy"
-									decoding="async"
-									width="960"
-									height="600"
-								/>
+							<div class="row-body" data-zoom-group>
+								<a class="zoom" href={imageFor(p)} data-zoom>
+									<img
+										src={imageFor(p)}
+										srcset={imageSrcset(p)}
+										sizes="(max-width: 860px) calc(100vw - 40px), 560px"
+										alt={`${card.shot} ${p.name}`}
+										loading="lazy"
+										decoding="async"
+										width="960"
+										height="600"
+									/>
+									<span class="sr-only">{zoom.open}</span>
+								</a>
 								<div class="row-info">
 									<p class="mono row-meta">
 										{p.period} · <span class="client">{p.role}</span>
 									</p>
+									{p.agency && (
+										<p class="mono row-meta">
+											{t.agencyVia}{' '}
+											<a class="link" href="https://epicdevs.com" target="_blank" rel="noopener">
+												{t.agency[p.agency]}
+												<span class="sr-only">{externalNote}</span>
+											</a>
+										</p>
+									)}
 									<p class="row-desc">{p.description}</p>
 									<ul class="tags" role="list">
 										{p.tags.map((t) => (
@@ -137,19 +151,22 @@ const range = `${Math.min(...years)}–${Math.max(...years)}`
 										)}
 									</div>
 								</div>
-								{p.gallery && (
+								{galleryFor(p) && (
 									<div class="row-gallery">
-										{p.gallery.map((file) => (
-											<img
-												src={shotPath(p, file)}
-												srcset={shotSrcset(p, file)}
-												sizes="(max-width: 860px) calc(100vw - 40px), 400px"
-												alt={shotAlt(p, file, lang)}
-												loading="lazy"
-												decoding="async"
-												width="1440"
-												height="900"
-											/>
+										{galleryFor(p)!.map((file) => (
+											<a class="zoom" href={shotPath(p, file)} data-zoom>
+												<img
+													src={shotPath(p, file)}
+													srcset={shotSrcset(p, file)}
+													sizes="(max-width: 860px) calc(100vw - 40px), 400px"
+													alt={shotAlt(p, file, lang)}
+													loading="lazy"
+													decoding="async"
+													width="1440"
+													height="900"
+												/>
+												<span class="sr-only">{zoom.open}</span>
+											</a>
 										))}
 										{p.galleryNote && <p class="mono row-note">{p.galleryNote}</p>}
 									</div>
@@ -160,6 +177,8 @@ const range = `${Math.min(...years)}–${Math.max(...years)}`
 				))}
 			</ol>
 		</div>
+
+		<Zoom />
 
 		<!-- Vista previa flotante (solo con mouse) -->
 		<div class="preview" data-preview-box aria-hidden="true">

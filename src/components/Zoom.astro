@@ -1,0 +1,223 @@
+---
+// Capturas ampliables: cada una va en un <a class="zoom" data-zoom href={original}>. Sin JS, el link abre la imagen.
+import Icon from './Icon.astro'
+import { ui } from '../i18n'
+
+const { zoom } = ui(Astro.currentLocale)
+---
+
+<dialog class="zoom-dialog" data-zoom-dialog aria-label={zoom.label}>
+	<img alt="" decoding="async" />
+	<button type="button" class="zoom-btn zoom-close" aria-label={zoom.close}>
+		<Icon name="x" size={20} />
+	</button>
+	<button type="button" class="zoom-btn zoom-nav zoom-prev" data-zoom-step="-1" aria-label={zoom.prev}>
+		<Icon name="arrow-right" size={20} />
+	</button>
+	<button type="button" class="zoom-btn zoom-nav zoom-next" data-zoom-step="1" aria-label={zoom.next}>
+		<Icon name="arrow-right" size={20} />
+	</button>
+	<p class="zoom-count mono" aria-live="polite"></p>
+</dialog>
+
+<script>
+	const dialog = document.querySelector<HTMLDialogElement>('[data-zoom-dialog]')
+	const big = dialog?.querySelector('img')
+	const count = dialog?.querySelector<HTMLElement>('.zoom-count')
+
+	if (dialog && big && count) {
+		let token = 0
+		let group: HTMLAnchorElement[] = []
+		let index = 0
+
+		const show = (i: number) => {
+			index = (i + group.length) % group.length
+			const link = group[index]
+			const thumb = link.querySelector('img')!
+			const id = ++token
+			// Primero la miniatura que ya está cargada; cuando llega, la original
+			big.width = Number(thumb.getAttribute('width'))
+			big.height = Number(thumb.getAttribute('height'))
+			big.src = thumb.currentSrc || thumb.src
+			big.alt = thumb.alt
+			const full = new Image()
+			full.src = link.href
+			full
+				.decode()
+				.then(() => {
+					if (id === token && dialog.open) big.src = link.href
+				})
+				.catch(() => {})
+			dialog.toggleAttribute('data-single', group.length < 2)
+			count.textContent = group.length > 1 ? `${index + 1} / ${group.length}` : ''
+		}
+
+		document.addEventListener('click', (e) => {
+			const link = (e.target as Element).closest<HTMLAnchorElement>('a[data-zoom]')
+			if (!link?.querySelector('img') || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
+			e.preventDefault()
+			// Las capturas del mismo proyecto (data-zoom-group) o, si no hay grupo, las de la página
+			const scope = link.closest('[data-zoom-group]') ?? document
+			group = [...scope.querySelectorAll<HTMLAnchorElement>('a[data-zoom]')]
+			dialog.showModal()
+			show(group.indexOf(link))
+		})
+		dialog.addEventListener('keydown', (e) => {
+			if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return
+			e.preventDefault()
+			show(index + (e.key === 'ArrowRight' ? 1 : -1))
+		})
+		// Las flechas pasan de captura; cualquier otro click cierra: la imagen, el fondo o la ✕
+		dialog.addEventListener('click', (e) => {
+			const step = (e.target as Element).closest<HTMLElement>('[data-zoom-step]')
+			if (step) show(index + Number(step.dataset.zoomStep))
+			else dialog.close()
+		})
+		// Al cerrar, el foco vuelve a la última captura vista, sin mover la página
+		dialog.addEventListener('close', () => group[index]?.focus({ preventScroll: true }))
+	}
+</script>
+
+<style>
+	:global(.zoom) {
+		display: block;
+		border-radius: 12px;
+		cursor: zoom-in;
+	}
+	:global(.zoom img) {
+		transition: filter 0.3s;
+	}
+	:global(.zoom:hover img) {
+		filter: brightness(1.1);
+	}
+	:global(:root:has(.zoom-dialog[open])) {
+		overflow: hidden;
+	}
+	.zoom-dialog {
+		width: 100vw;
+		height: 100dvh;
+		max-width: none;
+		max-height: none;
+		margin: 0;
+		/* Lugar para la ✕ y el contador (arriba y abajo) y para las flechas (a los costados) */
+		padding: 64px 76px;
+		border: 0;
+		background: transparent;
+		place-items: center;
+		cursor: zoom-out;
+	}
+	.zoom-dialog[open] {
+		display: grid;
+	}
+	.zoom-dialog::backdrop {
+		background: rgb(4 8 16 / 0.88);
+		backdrop-filter: blur(6px);
+	}
+	.zoom-dialog img {
+		width: auto;
+		height: auto;
+		max-width: min(100%, 1440px);
+		max-height: calc(100dvh - 128px);
+		border: 1px solid var(--line-hi);
+		border-radius: 12px;
+	}
+	.zoom-btn {
+		position: fixed;
+		display: grid;
+		place-items: center;
+		width: 44px;
+		height: 44px;
+		border: 1px solid var(--line-strong);
+		border-radius: 50%;
+		background: var(--bg-raised);
+		color: var(--text);
+		cursor: pointer;
+	}
+	.zoom-btn:hover {
+		border-color: var(--text-soft);
+	}
+	.zoom-close {
+		top: 16px;
+		right: 16px;
+	}
+	.zoom-nav {
+		top: 50%;
+		translate: 0 -50%;
+	}
+	.zoom-prev {
+		left: 16px;
+	}
+	.zoom-prev :global(svg) {
+		scale: -1 1;
+	}
+	.zoom-next {
+		right: 16px;
+	}
+	.zoom-dialog[data-single] .zoom-nav {
+		display: none;
+	}
+	.zoom-count {
+		position: fixed;
+		bottom: 16px;
+		left: 50%;
+		translate: -50% 0;
+		margin: 0;
+		font-size: 0.8125rem;
+		color: var(--text-soft);
+	}
+	/* En mobile, las flechas abajo, a los costados del contador */
+	@media (max-width: 860px) {
+		.zoom-dialog {
+			padding: 72px 20px 84px;
+		}
+		.zoom-dialog img {
+			max-height: calc(100dvh - 156px);
+		}
+		.zoom-nav {
+			top: auto;
+			bottom: 16px;
+			translate: none;
+		}
+		.zoom-count {
+			bottom: 28px;
+		}
+	}
+	/* Pantallas bajas (celular horizontal): las flechas a los costados y la imagen a todo el alto */
+	@media (max-height: 500px) {
+		.zoom-dialog {
+			padding: 12px 72px;
+		}
+		.zoom-dialog img {
+			max-height: calc(100dvh - 24px);
+		}
+		.zoom-nav {
+			top: 50%;
+			bottom: auto;
+			translate: 0 -50%;
+		}
+		.zoom-count {
+			bottom: 8px;
+			left: 36px;
+			translate: -50% 0;
+		}
+	}
+	@media (prefers-reduced-motion: no-preference) {
+		.zoom-dialog[open] img {
+			animation: zoom-in 0.35s var(--ease-out);
+		}
+		.zoom-dialog[open]::backdrop {
+			animation: zoom-fade 0.3s var(--ease-out);
+		}
+	}
+	@keyframes zoom-in {
+		from {
+			opacity: 0;
+			scale: 0.94;
+		}
+	}
+	@keyframes zoom-fade {
+		from {
+			opacity: 0;
+		}
+	}
+</style>

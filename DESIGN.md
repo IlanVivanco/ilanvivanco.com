@@ -141,6 +141,7 @@ Texto, botón al portfolio y un solo proyecto destacado (`featured: true` en `sr
 - **Filas**: año · proyecto · stack · toggle `+`. Sin numeración. En hover, el fondo barre de izquierda a derecha **sin radio**, el nombre se desplaza 10px y el año se pone amarillo.
 - **Vista previa flotante** (solo con mouse): ventana con captura y caption `año · nombre`. Sigue al cursor con inercia, rota según la velocidad, la imagen entra desde arriba o abajo según la dirección y hace un zoom lento.
 - Las filas son `<details name="trabajos">` (acordeón exclusivo) con apertura animada (`::details-content`).
+- **Capturas ampliables** (`components/Zoom.astro`, también en los case studies): cada imagen va en `<a class="zoom" data-zoom>` hacia la original. Con JS se abre en un `<dialog>` modal, primero con la miniatura y después con la original; con las flechas (en pantalla o `←` `→`) se pasa entre las capturas del proyecto, con contador; cualquier otro click o `Esc` lo cierra. Sin JS, el link abre la imagen.
 
 ### Toggle `+` / `−`
 Círculo de 32px con borde `--line-strong`. Abierto: fondo amarillo, rota 180° y la cruz pasa a `−`. Se usa en el portfolio y en "Antes de 2015" del CV. No usar `→` para expandir.

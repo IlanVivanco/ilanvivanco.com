@@ -23,6 +23,13 @@ export const es = {
 		privacyLang: undefined as string | undefined,
 	},
 	externalNote: ' (abre en otra pestaña)',
+	zoom: {
+		open: ' (ampliar)',
+		close: 'Cerrar',
+		label: 'Captura ampliada',
+		prev: 'Captura anterior',
+		next: 'Captura siguiente',
+	},
 	stats: {
 		heading: 'En números',
 		group: 'Elegir grupo de cifras',
@@ -60,6 +67,7 @@ export const es = {
 	study: {
 		back: 'trabajos',
 		role: 'Mi rol',
+		agency: 'Agencia',
 		start: 'El punto de partida',
 		steps: 'Qué hicimos',
 		figures: 'En números',
@@ -93,6 +101,8 @@ export const es = {
 		study: 'Ver el caso',
 		post: 'Leer el post',
 		visit: 'Visitar el sitio',
+		agencyVia: 'Como parte de',
+		agency: { epicdevs: 'EpicDevs', ntm: 'Networks That Matter, hoy EpicDevs' },
 	},
 	contactPage: {
 		title: 'Contacto',
