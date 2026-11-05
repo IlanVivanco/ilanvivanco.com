@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro'
 import Fn from '../components/Fn.astro'
 import Icon from '../components/Icon.astro'
+import Zoom from '../components/Zoom.astro'
 import { studiesFor, studyPath, shotAlt, shotPath, shotSrcset, imageFor, type Project } from '../data/projects'
 import { pathFor } from '../data/pages'
 import { site } from '../data/site'
@@ -14,7 +15,7 @@ const { project: p } = Astro.props
 const s = p.study!
 const lang = Astro.currentLocale
 const t = ui(lang).study
-const { portfolio, externalNote } = ui(lang)
+const { portfolio, externalNote, zoom } = ui(lang)
 const studies = studiesFor(lang)
 const next = studies[(studies.findIndex((x) => x.slug === p.slug) + 1) % studies.length]
 const fn = p.slug.replace(/-/g, '_')
@@ -74,17 +75,20 @@ const fn = p.slug.replace(/-/g, '_')
 					</a>
 				</div>
 			)}
-			<img
-				class="shot"
-				src={shotPath(p, s.hero)}
-				srcset={shotSrcset(p, s.hero)}
-				sizes="(max-width: 1180px) calc(100vw - 40px), 1120px"
-				alt={shotAlt(p, s.hero, lang)}
-				fetchpriority="high"
-				decoding="async"
-				width="1440"
-				height="900"
-			/>
+			<a class="zoom" href={shotPath(p, s.hero)} data-zoom>
+				<img
+					class="shot"
+					src={shotPath(p, s.hero)}
+					srcset={shotSrcset(p, s.hero)}
+					sizes="(max-width: 1180px) calc(100vw - 40px), 1120px"
+					alt={shotAlt(p, s.hero, lang)}
+					fetchpriority="high"
+					decoding="async"
+					width="1440"
+					height="900"
+				/>
+				<span class="sr-only">{zoom.open}</span>
+			</a>
 
 			<h2 class="title">{t.start}</h2>
 			<p class="text">{s.start}</p>
@@ -95,17 +99,20 @@ const fn = p.slug.replace(/-/g, '_')
 					<h3>{step.title}</h3>
 					<p class="text">{step.text}</p>
 					{step.shot && (
-						<img
-							class="shot"
-							src={shotPath(p, step.shot)}
-							srcset={shotSrcset(p, step.shot)}
-							sizes="(max-width: 1180px) calc(100vw - 40px), 1120px"
-							alt={shotAlt(p, step.shot, lang)}
-							loading="lazy"
-							decoding="async"
-							width="1440"
-							height="900"
-						/>
+						<a class="zoom" href={shotPath(p, step.shot)} data-zoom>
+							<img
+								class="shot"
+								src={shotPath(p, step.shot)}
+								srcset={shotSrcset(p, step.shot)}
+								sizes="(max-width: 1180px) calc(100vw - 40px), 1120px"
+								alt={shotAlt(p, step.shot, lang)}
+								loading="lazy"
+								decoding="async"
+								width="1440"
+								height="900"
+							/>
+							<span class="sr-only">{zoom.open}</span>
+						</a>
 					)}
 				</section>
 			))}
@@ -125,6 +132,7 @@ const fn = p.slug.replace(/-/g, '_')
 			</a>
 		</div>
 	</article>
+	<Zoom />
 </Base>
 
 <style>

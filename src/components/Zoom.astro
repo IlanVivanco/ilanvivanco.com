@@ -1,0 +1,140 @@
+---
+// Capturas ampliables: cada una va en un <a class="zoom" data-zoom href={original}>. Sin JS, el link abre la imagen.
+import Icon from './Icon.astro'
+import { ui } from '../i18n'
+
+const { zoom } = ui(Astro.currentLocale)
+---
+
+<dialog class="zoom-dialog" data-zoom-dialog aria-label={zoom.label}>
+	<img alt="" decoding="async" />
+	<button type="button" class="zoom-close" aria-label={zoom.close}>
+		<Icon name="x" size={20} />
+	</button>
+</dialog>
+
+<script>
+	const dialog = document.querySelector<HTMLDialogElement>('[data-zoom-dialog]')
+	const big = dialog?.querySelector('img')
+
+	if (dialog && big) {
+		let token = 0
+		document.addEventListener('click', (e) => {
+			const link = (e.target as Element).closest<HTMLAnchorElement>('a[data-zoom]')
+			const thumb = link?.querySelector('img')
+			if (!link || !thumb || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
+			e.preventDefault()
+			const id = ++token
+			// Primero la miniatura que ya está cargada; cuando llega, la original
+			big.width = Number(thumb.getAttribute('width'))
+			big.height = Number(thumb.getAttribute('height'))
+			big.src = thumb.currentSrc || thumb.src
+			big.alt = thumb.alt
+			const full = new Image()
+			full.src = link.href
+			full
+				.decode()
+				.then(() => {
+					if (id === token && dialog.open) big.src = link.href
+				})
+				.catch(() => {})
+			dialog.showModal()
+			// Con scroll horizontal (celular vertical), arranca centrada
+			dialog.scrollLeft = (dialog.scrollWidth - dialog.clientWidth) / 2
+		})
+		// Cualquier click adentro cierra: la imagen, el fondo o el botón
+		dialog.addEventListener('click', () => dialog.close())
+	}
+</script>
+
+<style>
+	:global(.zoom) {
+		display: block;
+		border-radius: 12px;
+		cursor: zoom-in;
+	}
+	:global(.zoom img) {
+		transition: filter 0.3s;
+	}
+	:global(.zoom:hover img) {
+		filter: brightness(1.1);
+	}
+	:global(:root:has(.zoom-dialog[open])) {
+		overflow: hidden;
+	}
+	.zoom-dialog {
+		width: 100vw;
+		height: 100dvh;
+		max-width: none;
+		max-height: none;
+		margin: 0;
+		padding: 20px;
+		border: 0;
+		background: transparent;
+		place-items: center;
+		cursor: zoom-out;
+	}
+	.zoom-dialog[open] {
+		display: grid;
+	}
+	.zoom-dialog::backdrop {
+		background: rgb(4 8 16 / 0.88);
+		backdrop-filter: blur(6px);
+	}
+	.zoom-dialog img {
+		width: auto;
+		height: auto;
+		max-width: min(100%, 1440px);
+		max-height: calc(100dvh - 40px);
+		border: 1px solid var(--line-hi);
+		border-radius: 12px;
+	}
+	.zoom-close {
+		position: fixed;
+		top: 16px;
+		right: 16px;
+		display: grid;
+		place-items: center;
+		width: 44px;
+		height: 44px;
+		border: 1px solid var(--line-strong);
+		border-radius: 50%;
+		background: var(--bg-raised);
+		color: var(--text);
+		cursor: pointer;
+	}
+	.zoom-close:hover {
+		border-color: var(--text-soft);
+	}
+	/* En un celular vertical, al doble de ancho y con scroll horizontal: si no, casi no se agranda */
+	@media (max-width: 860px) and (orientation: portrait) {
+		.zoom-dialog {
+			justify-items: start;
+			overflow-x: auto;
+		}
+		.zoom-dialog img {
+			width: 200vw;
+			max-width: none;
+			max-height: none;
+		}
+	}
+	@media (prefers-reduced-motion: no-preference) {
+		.zoom-dialog[open] img {
+			animation: zoom-in 0.35s var(--ease-out);
+		}
+		.zoom-dialog[open]::backdrop {
+			animation: zoom-fade 0.3s var(--ease-out);
+		}
+	}
+	@keyframes zoom-in {
+		from {
+			opacity: 0;
+			scale: 0.94;
+		}
+	}
+	@keyframes zoom-fade {
+		from {
+			opacity: 0;
+		}
+	}
+</style>
