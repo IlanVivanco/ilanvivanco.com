@@ -6,7 +6,6 @@ description: |
   closers, staged openers, forced triads, dashes everywhere, inflated claims, sales
   language, stock AI words, bold labels, or filler. Based on Wikipedia's "Signs of AI writing."
 license: MIT
-disable-model-invocation: true
 metadata:
   version: "3.1.0"
   source: blader/humanizer

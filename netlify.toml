@@ -107,8 +107,8 @@ to = "/en/portfolio"
 status = 301
 
 [[redirects]]
-from = "/en/blog/*"
-to = "/"
+from = "/en/blog/:slug"
+to = "/en/blog"
 status = 301
 
 # Imágenes viejas que pueden seguir en cachés de redes o en buscadores

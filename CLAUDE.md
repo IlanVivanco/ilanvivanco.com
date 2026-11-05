@@ -43,7 +43,7 @@ src/
   lib/schema.ts       JSON-LD: Person, WebSite y el tipo de cada página
   layouts/Base.astro  <head>, SEO, speculation rules, header y footer
   components/         Header, Footer, LangSwitch, Socials, MailLink, InstagramGrid, WinControls, Logo, Fn, Icon, ProjectCard, Terminal, Stats, Analytics, CvAts
-  pages/              rutas de una línea: /, /curriculum, /portfolio, /portfolio/<slug>, /en/portfolio/<slug>, /blog, /blog/<slug>, /contacto, /sobre-mi, /privacidad, /cv, /en/cv, 404, sitemap.xml
+  pages/              rutas de una línea: /, /curriculum, /portfolio, /portfolio/<slug>, /en/portfolio/<slug>, /blog, /blog/<slug>, /en/blog, /en/blog/<slug>, /contacto, /sobre-mi, /privacidad, /cv, /en/cv, 404, sitemap.xml
   views/              cuerpo de cada página: Home, Resume, Portfolio, Study, Blog, Post, Contact, About, Privacy, NotFound
 public/               fonts, img, favicon.svg, og.png, robots.txt (cv/ y og/ se generan, no se versionan)
 scripts/build/        fotos de Instagram, variantes de capturas, CV en PDF e imágenes OG
@@ -78,7 +78,7 @@ netlify.toml          build, redirects y cabeceras
 
 ## Voz
 
-Para editar prosa con `/humanizar` (se invoca a mano). Estas reglas mandan sobre `.claude/skills/humanizar/SKILL.md`, y la base sigue en la regla 8 y en `DESIGN.md §8`.
+Para editar prosa con `/humanizar`, cuando Ilán lo pide. Estas reglas mandan sobre `.claude/skills/humanizar/SKILL.md`, y la base sigue en la regla 8 y en `DESIGN.md §8`.
 
 - **Registro:** rioplatense con voseo, `¿` y `¡`, comillas rectas, sin raya larga. En los correos manda `~/.claude/identity.md`.
 - **Vocabulario:** clichés de marketing afuera; modismos rioplatenses adentro ("manos atadas", "en carne propia").
@@ -103,12 +103,25 @@ Muestra de cómo escribe Ilán:
 
 ## Voz en inglés
 
-Para editar prosa en inglés con `/humanizer` (se invoca a mano). Estas reglas mandan sobre `.claude/skills/humanizer/SKILL.md`, y la base sigue en la regla 8 y en `DESIGN.md §8`.
+Para editar prosa en inglés con `/humanizer`, cuando Ilán lo pide. Estas reglas mandan sobre `.claude/skills/humanizer/SKILL.md`, y la base sigue en la regla 8 y en `DESIGN.md §8`.
 
 - **Registro:** inglés de EE. UU., primera persona (`I`) y contracciones, cercano y con humor técnico. Comillas rectas y sin raya larga.
 - **Alcance:** los mismos límites que en español: modo archivo solo sobre prosa de `.md`; para `src/i18n/en.ts` y `src/data/*.ts`, modo pegado. Quedan fuera el microcopy, los stats, el CV para ATS y los legales.
 - **Permiso y contenido:** los mismos que en "Voz": lo publicado o aprobado se edita solo con OK de Ilán, y solo con los datos, opiniones y anécdotas que ya están en el texto.
 - **Se conservan:** `alt`, texto de links, títulos, citas, listas con sus etiquetas, y remates y guiños según `DESIGN.md §8`.
+
+### Traducir posts del blog
+
+Un post en inglés se reescribe como lo contaría Ilán, sin traducir palabra por palabra. Vive en `src/content/blog-en/<slug-en>.md`, con `source` apuntando al slug en español.
+
+- **Hechos intactos:** los mismos datos, fechas, anécdotas y opiniones, en el mismo orden. Nada de suavizar lo que admite ni de agregar contexto.
+- **Citas:** las que vienen de una fuente en inglés van textuales. Las nuestras (Slack, frases del equipo) se traducen con su registro: que suenen a charla interna.
+- **Ritmo:** frases cortas, verbos concretos y contracciones. Se conservan los remates secos ("Yes, I know.") y las admisiones ("We weren't any braver."), sin explicarlos.
+- **Modismos:** por uno natural con la misma intención, no por uno vistoso. "Manos atadas": "hands tied". "En carne propia": "firsthand". "Volantazo": "swerve", siempre igual, porque es un hilo del post.
+- **Referencias:** las de cultura general quedan (Uncle Ben, the one ring). Las muy locales se adaptan con datos reales.
+- **Terminología:** como la usa WordPress en inglés (dashboard, block theme, customizer, shortcode). "Rehacer": "rebuild".
+- **Links:** internos a su versión en inglés. Externos, los mismos.
+- **Imágenes:** con texto, se regeneran en inglés en `public/img/blog/<slug-en>/`, con su `alt` traducido.
 
 Todavía no hay una muestra escrita por Ilán en inglés. Hasta entonces, la referencia es el copy que aprobó: "My job is making sure today's technical decisions don't become tomorrow's problems." / "It's aesthetically destroyed, but it works perfectly, so it stays." / "This page shipped to production without tests."
 

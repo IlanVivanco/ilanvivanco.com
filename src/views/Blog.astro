@@ -1,22 +1,29 @@
 ---
 import Base from '../layouts/Base.astro'
 import Fn from '../components/Fn.astro'
-import { coverSrcset, formatPostDate, posts } from '../data/posts'
+import { coverSrcset, formatPostDate, postPath, postsFor } from '../data/posts'
+import { ui } from '../i18n'
+
+const lang = Astro.currentLocale
+const t = ui(lang).blog
+const posts = postsFor(lang)
 ---
 
-<Base
-	title="Blog"
-	description="Lo que aprendí construyendo para la web, con los errores incluidos: WordPress, equipos, deploys e IA en el trabajo de todos los días."
-	schemaType="CollectionPage"
->
-	<link slot="head" rel="alternate" type="application/rss+xml" title="Blog de Ilán Vivanco" href="/rss.xml" />
+<Base title="Blog" description={t.description} schemaType="CollectionPage">
+	<link
+		slot="head"
+		rel="alternate"
+		type="application/rss+xml"
+		title={t.rss}
+		href={lang === 'en' ? '/en/rss.xml' : '/rss.xml'}
+	/>
 	<section class="section blog">
 		<div class="container stack" style="--gap: 16px">
 			<Fn name="blog" as="p" />
 			<h1 class="display" data-reveal>
 				Blog
 			</h1>
-			<p class="lede">Lo que aprendí construyendo para la web, con los errores incluidos.</p>
+			<p class="lede">{t.lede}</p>
 			<ul class="posts" role="list" data-reveal data-delay="0.1">
 				{posts.map((p, i) => (
 					<li>
@@ -35,10 +42,10 @@ import { coverSrcset, formatPostDate, posts } from '../data/posts'
 						</div>
 						<div class="info">
 							<time class="mono" datetime={p.date}>
-								{formatPostDate(p.date, Astro.currentLocale)}
+								{formatPostDate(p.date, lang)}
 							</time>
 							<h2 class="h3">
-								<a href={`/blog/${p.slug}`}>{p.title}</a>
+								<a href={postPath(p)}>{p.title}</a>
 							</h2>
 							<p>{p.description}</p>
 						</div>

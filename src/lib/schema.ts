@@ -2,7 +2,7 @@
 // Sin email: la regla de privacidad de CLAUDE.md también vale para los datos estructurados.
 import { cv } from '../data/cv'
 import { ogPath, pathFor, publicPages } from '../data/pages'
-import type { Post } from '../data/posts'
+import { postPath, type Post } from '../data/posts'
 import { projectsFor, imageFor } from '../data/projects'
 import { site, siteText } from '../data/site'
 import { byLang, ui } from '../i18n'
@@ -75,8 +75,8 @@ export const blogPosting = (p: Post, lang?: string) => ({
 	'@type': 'BlogPosting',
 	'headline': p.title,
 	'description': p.description,
-	'url': abs(`/blog/${p.slug}`),
-	'image': abs(ogPath(`/blog/${p.slug}`)),
+	'url': abs(postPath(p)),
+	'image': abs(ogPath(postPath(p))),
 	'datePublished': p.date,
 	'dateModified': p.updated,
 	'inLanguage': lang ?? 'es',

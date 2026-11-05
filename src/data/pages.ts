@@ -6,7 +6,7 @@
 // Las URLs son contrato: cambiar una implica un redirect 301 en netlify.toml.
 
 import type { Lang } from '../i18n/index.ts'
-import { posts } from './posts.ts'
+import { postAlternate, postPath, posts, postsFor } from './posts.ts'
 import { studiesFor } from './projects.ts'
 
 export type PublicPage = {
@@ -41,6 +41,16 @@ export const publicPages: PublicPage[] = [
 		title: 'More about me',
 		subtitle: 'From Buenos Aires to Santander',
 		updated: '2026-11-04',
+	},
+	{
+		path: '/en/blog',
+		lang: 'en',
+		alternate: '/blog',
+		slug: 'en-blog',
+		fn: 'blog',
+		title: 'Blog',
+		subtitle: 'What I learned building for the web',
+		updated: '2026-11-05',
 	},
 	{
 		path: '/en/resume',
@@ -105,6 +115,7 @@ export const publicPages: PublicPage[] = [
 	{
 		path: '/blog',
 		lang: 'es',
+		alternate: '/en/blog',
 		slug: 'blog',
 		fn: 'blog',
 		title: 'Blog',
@@ -170,15 +181,19 @@ publicPages.push(
 
 // Cada post también.
 publicPages.push(
-	...posts.map((p) => ({
-		path: `/blog/${p.slug}`,
-		lang: 'es' as const,
-		slug: `blog-${p.slug}`,
-		fn: p.fn,
-		title: p.title,
-		subtitle: p.subtitle,
-		updated: p.updated,
-	}))
+	...[...posts, ...postsFor('en')].map((p) => {
+		const other = postAlternate(p)
+		return {
+			path: postPath(p),
+			lang: p.lang,
+			alternate: other && postPath(other),
+			slug: `${p.lang === 'en' ? 'en-' : ''}blog-${p.slug}`,
+			fn: p.fn,
+			title: p.title,
+			subtitle: p.subtitle,
+			updated: p.updated,
+		}
+	})
 )
 
 // La ruta de una página en español, en el idioma pedido.

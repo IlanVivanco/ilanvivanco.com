@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.9.0] - 2026-11-05
+
+### Agregado
+
+- **Blog en inglés** en `/en/blog`, con RSS en `/en/rss.xml` y su primer post: [20 years of doing the same thing differently in WordPress](/en/blog/two-decades-of-wordpress), con las ilustraciones en inglés.
+
 ## [2.8.0] - 2026-11-04
 
 ### Agregado

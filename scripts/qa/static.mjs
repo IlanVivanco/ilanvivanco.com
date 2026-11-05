@@ -6,7 +6,7 @@ import { createRequire } from 'node:module'
 import { PDFDocument, PDFName } from 'pdf-lib'
 import { cv, cvLabels, atsPeriod } from '../../src/data/cv.ts'
 import { publicPages, ogPath } from '../../src/data/pages.ts'
-import { posts } from '../../src/data/posts.ts'
+import { postPath, posts, postsFor } from '../../src/data/posts.ts'
 import { allEmails, emailFor, site, statsFor } from '../../src/data/site.ts'
 import { parsePost } from '../lib/instagram-post.mjs'
 
@@ -34,7 +34,7 @@ const REDIRECTS = {
 	'/cv/es': '/cv',
 	'/portfolio/:slug': '/portfolio',
 	'/en/portfolio/:slug': '/en/portfolio',
-	'/en/blog/*': '/',
+	'/en/blog/:slug': '/en/blog',
 	'/images/ilan-vivanco-social-card.png': '/og.png',
 	'/images/ilan-vivanco.jpg': '/img/ilan-800.webp',
 	'/images/ilan-vivanco-square.jpg': '/img/ilan-sq-480.webp',
@@ -258,15 +258,15 @@ export async function runStaticChecks(log) {
 
 	// Blog
 	log(posts.length > 0, `${posts.length} post(s) leídos del front matter`)
-	for (const p of posts) {
-		const html = read(`blog/${p.slug}.html`)
+	for (const p of [...posts, ...postsFor('en')]) {
+		const html = read(`${postPath(p).slice(1)}.html`)
 		const graph = JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)[1])['@graph']
 		log(
 			graph.some((n) => n.mainEntity?.['@type'] === 'BlogPosting' && n.mainEntity.datePublished === p.date),
-			`/blog/${p.slug} BlogPosting con su fecha`
+			`${postPath(p)} BlogPosting con su fecha`
 		)
-		log(!/notion\.(?:com|so)/.test(html), `/blog/${p.slug} sin links de Notion`)
-		log(html.includes('rel="author"') && html.includes('name="author"'), `/blog/${p.slug} con autoría visible`)
+		log(!/notion\.(?:com|so)/.test(html), `${postPath(p)} sin links de Notion`)
+		log(html.includes('rel="author"') && html.includes('name="author"'), `${postPath(p)} con autoría visible`)
 		const imgs = (html.match(/<img\b[^>]*>/g) ?? []).filter((i) => i.includes('/img/blog/'))
 		log(
 			imgs.every(
@@ -276,13 +276,17 @@ export async function runStaticChecks(log) {
 					/\bheight="\d+"/.test(i) &&
 					(n === 0 || /loading="lazy"/.test(i))
 			),
-			`/blog/${p.slug}: ${imgs.length} imágenes con alt y tamaño, y lazy desde la segunda`
+			`${postPath(p)}: ${imgs.length} imágenes con alt y tamaño, y lazy desde la segunda`
 		)
 	}
 	const rss = read('rss.xml')
 	log(
 		posts.every((p) => rss.includes(`<link>${new URL(`/blog/${p.slug}`, site.url).href}</link>`)),
 		'RSS con todos los posts'
+	)
+	log(
+		postsFor('en').every((p) => read('en/rss.xml').includes(`<link>${new URL(postPath(p), site.url).href}</link>`)),
+		'/en/rss.xml con los posts en inglés'
 	)
 	log(
 		read('blog.html').includes('type="application/rss+xml"') && !/<a\b[^>]*href="\/rss\.xml"/.test(read('blog.html')),

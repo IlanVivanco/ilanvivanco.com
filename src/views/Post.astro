@@ -3,44 +3,48 @@ import { getEntry, render } from 'astro:content'
 import Base from '../layouts/Base.astro'
 import Fn from '../components/Fn.astro'
 import Icon from '../components/Icon.astro'
-import { formatPostDate, posts, type Post } from '../data/posts'
+import { formatPostDate, type Post } from '../data/posts'
+import { pathFor } from '../data/pages'
+import { ui } from '../i18n'
 import { blogPosting } from '../lib/schema'
 
 interface Props {
 	post: Post
 }
 const { post: p } = Astro.props
-const entry = await getEntry('blog', p.slug)
-if (!entry) throw new Error(`Falta src/content/blog/${p.slug}.md`)
+const lang = Astro.currentLocale
+const { blog: t, role, contactPage } = ui(lang)
+const entry = await getEntry(p.lang === 'en' ? 'blogEn' : 'blog', p.slug)
+if (!entry) throw new Error(`Falta el post ${p.slug}`)
 const { Content } = await render(entry)
 ---
 
-<Base
-	title={p.title}
-	description={p.description}
-	ogType="article"
-	schemaMainEntity={blogPosting(p, Astro.currentLocale)}
->
+<Base title={p.title} description={p.description} ogType="article" schemaMainEntity={blogPosting(p, lang)}>
 	<Fragment slot="head">
 		<meta property="article:published_time" content={p.date} />
 		<meta property="article:modified_time" content={p.updated} />
-		<link rel="alternate" type="application/rss+xml" title="Blog de Ilán Vivanco" href="/rss.xml" />
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title={t.rss}
+			href={lang === 'en' ? '/en/rss.xml' : '/rss.xml'}
+		/>
 	</Fragment>
 	<article class="section post">
 		<div class="container post-col">
-			<a class="back mono" href="/blog">
+			<a class="back mono" href={pathFor('/blog', lang)}>
 				← blog
 			</a>
 			<Fn name={p.fn} as="p" />
 			<h1 data-reveal>{p.title}</h1>
 			<div class="byline" data-reveal data-delay="0.05">
-				<img src="/img/ilan-sq-240.webp" alt="Retrato de Ilán Vivanco" width="40" height="40" decoding="async" />
+				<img src="/img/ilan-sq-240.webp" alt={t.portrait} width="40" height="40" decoding="async" />
 				<p>
-					<a class="link author" href="/sobre-mi" rel="author">
+					<a class="link author" href={pathFor('/sobre-mi', lang)} rel="author">
 						Ilán Vivanco
 					</a>
 					<span class="mono meta">
-						CTO en EpicDevs · <time datetime={p.date}>{formatPostDate(p.date, Astro.currentLocale)}</time>
+						{role} · <time datetime={p.date}>{formatPostDate(p.date, lang)}</time>
 					</span>
 				</p>
 			</div>
@@ -48,11 +52,11 @@ const { Content } = await render(entry)
 				<Content />
 			</div>
 			<aside class="post-cta card" data-tilt="off" aria-labelledby="post-cta">
-				<Fn name="contactame" as="p" />
+				<Fn name={contactPage.fn} as="p" />
 				<h2 id="post-cta" class="h3">
 					{p.ctaTitle}
 				</h2>
-				<a class="btn btn-primary" href="/contacto">
+				<a class="btn btn-primary" href={pathFor('/contacto', lang)}>
 					{p.ctaLabel} <Icon name="arrow-up-right" />
 				</a>
 			</aside>

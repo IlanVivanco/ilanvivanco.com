@@ -52,8 +52,7 @@ const text = {
 			{ label: 'Hi', href: '/en' },
 			{ label: 'Resume', href: '/en/resume' },
 			{ label: 'Work', href: '/en/portfolio' },
-			// El blog solo está en español.
-			{ label: 'Blog', href: '/blog' },
+			{ label: 'Blog', href: '/en/blog' },
 			{ label: 'Contact', href: '/en/contact', mobileOnly: true },
 		],
 	},
